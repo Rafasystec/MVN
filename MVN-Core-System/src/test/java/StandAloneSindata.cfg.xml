@@ -1,0 +1,46 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">secrel</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/sindata_homo</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<!-- entidades  Declarar as entidades que serao utilizadas no sistema-->
+		<mapping class="br.com.systeconline.tables.basicos.Bairro"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Estado"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Cidade"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Endereco"/>
+		<mapping class="br.com.systeconline.tables.basicos.Empresa"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Loja" />
+		<mapping class="br.com.systeconline.tables.basicos.PessoaJuridica"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Cliente"			/>
+		<mapping class="br.com.systeconline.tables.basicos.PessoaFisica"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Loja"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Usuario"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Avisos"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Caixa"	/>
+		<mapping class="br.com.systeconline.tables.basicos.CaixaAbertura"	/>
+		<mapping class="br.com.systeconline.tables.basicos.CaixaFechamento"	/>
+		<mapping class="br.com.systeconline.tables.backoffice.Produto"		/>
+		<mapping class="br.com.systeconline.tables.backoffice.ProdutoLoja"	/>
+		<mapping class="br.com.systeconline.tables.nota.CupomEletronico"	/>
+		<mapping class="br.com.systeconline.tables.nota.Nota"				/>
+		<mapping class="br.com.systeconline.tables.nota.NotaEletronica"		/>
+		<mapping class="br.com.systeconline.tables.nota.NotaItens"			/>
+		<mapping class="br.com.systeconline.tables.nota.NotaMeioPgto"		/>
+		<mapping class="br.com.systeconline.tables.frontend.MeiosPagamento"	/>
+		<mapping class="br.com.barcadero.tables.audit.web.AuditoriaLog" 	/>
+		<mapping class="br.com.systeconline.tables.financeiro.ContaPagar"	/>
+		
+		
+	</session-factory>
+</hibernate-configuration>
