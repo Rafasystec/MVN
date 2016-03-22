@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<title>Histórico de Lançamentos</title>
+</h:head>
+<h:body>
+	<ui:composition template="/indexSEC.xhtml">
+		<ui:define name="conteudo">
+			<!-- <h:form>  -->
+			<p:panel header="Cadastro de Históricos de Lançamento">
+				<table>
+					<tr >
+						<td>
+							<p:commandButton value="Salvar" action="#{beanHistoricoLancamento.salvar}" update="grid"/>
+						</td>
+						<td>
+							<p:commandButton value="Excluir" action="#{beanHistoricoLancamento.excluir}" update="grid"/>
+						</td>
+						<td>
+							<p:commandButton value="Alterar" action="#{beanHistoricoLancamento.alterar}" update="grid"/>
+						</td>
+					</tr>
+				</table>	
+				<table>	
+					<tr>
+						<td>
+							<p:outputLabel value="Código:" for="txtCodigo"/> 
+							<p:inputText id="txtCodigo" rendered="true" value="#{beanHistoricoLancamento.codExterno}" 
+								requiredMessage="O código deve ser preechido e diferente de zero" size="10"/>
+						</td>
+						<td>
+							<p:outputLabel value="Descrição:" for="txtDescricao"/> 
+							<p:inputText id="txtDescricao" rendered="true" value="#{beanHistoricoLancamento.descricao}" 
+								requiredMessage="Uma descrição deve ser informada." size="50"/>
+						</td>
+					</tr>
+				</table>
+			</p:panel>
+			<p:dataTable id="grid" var="historicos" value="#{beanHistoricoLancamento.historicos}" paginator="true" rows="10">
+				<p:column headerText="Código:">
+					<h:outputText value="#{historicos.codExterno}" />
+				</p:column>
+				<p:column headerText="Descrição:">
+					<h:outputText value="#{historicos.descricao}" />
+				</p:column>
+			</p:dataTable>
+			 <!--  </h:form> -->
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

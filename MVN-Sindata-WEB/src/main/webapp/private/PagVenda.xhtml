@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/index.xhtml">
+		<ui:define name="conteudo">
+			<div>
+			<p:panel header="Venda Rápida ao Consumidor">
+				<div class="div-main-venda">
+					
+					<div class="divesquerda">
+						<div align="center">
+							<h3 style="color: #FFFFFF;">Venda ao consumidor</h3>
+						</div> 
+						
+						
+						<table border="0">
+							<tr >
+								<td colspan="2" ><p:outputLabel value="Código produto:" for="codProduto" /></td>
+								<td><p:outputLabel value="Quantidade:" for="qtde"/></td>
+							</tr>
+							<tr>
+								<td><p:inputText id="codProduto" value="#{vencx.item.codProduto}" maxlength="14" size="14"/></td>
+								<td><p:commandButton icon="/resources/Imagens/lupa30x.png" /></td>
+								<td>
+									<p:inputText id="qtde" value="#{vencx.item.quantidade}" maxlength="10" size="8"> 
+										<p:ajax event="keyup" update="prodGrid" />
+									</p:inputText>
+								</td>
+							</tr>
+						</table>
+					</div>
+				
+					<div class="div-direita">
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Sub Total:"/>
+							<p:inputText readonly="true" value="#{vencx.vlSubTotal}">
+								<f:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="#0.00"/>
+							</p:inputText>
+							<p:outputLabel value="Descontos:"/>
+							<p:inputText readonly="true" value="#{vencx.vlDesconto}">
+								<f:convertNumber pattern="#0.00"/>
+							</p:inputText>
+							<p:outputLabel value="Total:"/>
+							<p:inputText readonly="true" value="#{vencx.vlTotal}">
+								<f:convertNumber pattern="#0.00"/>
+							</p:inputText>
+							<p:outputLabel value="Troco:"/>
+							<p:inputText readonly="true" value="#{vencx.vlTroco}">
+								<f:convertNumber pattern="#0.00"/>
+							</p:inputText>
+						</h:panelGrid>
+					</div>
+				</div>
+				</p:panel>
+				<div class="div-baixo" id="embaixo">
+					<p:outputLabel styleClass="font-produto" value="VASSOURA DE PIASSAVA - 30x 60"/>
+					
+				</div>
+				<div>
+					<p:dataTable id="prodGrid" var="item" value="#{vencx.itens}" paginator="true"
+						rowKey="#{item.codigo}" rows="10" rowsPerPageTemplate="5,10,15" selectionMode="multiple"
+								selection="#{vencx.itensSelecionados}" emptyMessage="Nenhum item para esta venda!"
+					>
+						<f:facet name="header">Produtos comprados</f:facet>
+						<p:column headerText="Item" width="50">
+							<h:outputText value="#{item.nrItem}"/>
+						</p:column>
+						<p:column headerText="Descricao" width="200">
+							<h:outputText value="#{item.descricao}"/>
+						</p:column>
+						<p:column headerText="Qtde" width="60">
+							<h:outputText value="#{item.quantidade}"/>
+						</p:column>
+						<p:column headerText="VL. Unitário" width="80">
+							<h:outputText value="#{item.vlUnidade}"/>
+						</p:column>
+						<p:column headerText="VL. Desconto" width="80">
+							<h:outputText value="#{item.vlDesc}"/>
+						</p:column>
+						<p:column headerText="Total" width="80">
+							<h:outputText value="#{item.vlTotal}"/>
+						</p:column>
+					</p:dataTable>
+				</div>
+				<div>
+					<p:panel header="Formas de Pagamento">
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Dinheiro:"/>
+							<p:inputText id="txtDinheiro"/>
+							<p:outputLabel value="TEF:"/>
+							<p:inputText id="txtTef"/>
+							<p:outputLabel value="Crediário:"/>
+							<p:inputText id="txtCrediario"/>
+						</h:panelGrid>
+					</p:panel>
+				</div>
+				<p:panel header="Ações">
+					<h:panelGrid columns="5">
+						<p:commandButton value="Adicionar Item" ajax="true" update="prodGrid" actionListener="#{vencx.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+						</p:commandButton>
+						<p:commandButton value="Fechar a Venda" action="#{vencx.fecharVenda}" alt="Você será levado para a tela de meios de pagmento."/>
+						<p:commandButton value="Cancelar Item" alt="Selecione um item na grid e depois cancele-o."/>
+					</h:panelGrid>
+				</p:panel>
+			</div>	
+		</ui:define>
+	</ui:composition>
+	
+</h:body>
+</html>

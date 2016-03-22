@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<title>Cadastro de Plano de Contas</title>
+</h:head>
+<h:body>
+	<ui:composition template="/indexSEC.xhtml">
+	<ui:define name="conteudo">
+	
+	<h:form>
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+	<p:panel header="Plano de Contas do Sistema">
+		<p:panelGrid columns="1">
+			<!-- Panel do butoes -->
+			<p:panelGrid columns="6">
+				<p:commandButton value="Salvar" action="#{beanPlanoContas.salvar}" update="grid"/>
+				<p:commandButton value="Consultar" update="grid"/>
+			</p:panelGrid>
+			
+			<!-- Panel do formulario -->
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Código da Conta:" for="txtCodPlanoConta"/>
+				
+				<p:inputMask id="txtCodPlanoConta" mask="999.99.9999" required="true"  value="#{beanPlanoContas.codConta}" 
+					requiredMessage="Código do plano é obrigatório" size="10"/>
+					
+				<p:outputLabel value="Título:" for="txtTitulo"/>
+				<p:inputText id="txtTitulo" required="true" value="#{beanPlanoContas.descricao}" >
+					<f:validateLength maximum="50"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Resultado:" for="cboResultado"/>
+				<p:selectOneMenu id="cboResultado" required="true" value="#{beanPlanoContas.resultP}" >
+					<f:selectItem itemLabel="Sim" itemValue="S" />
+					<f:selectItem itemLabel="Não" itemValue="N"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Resume(Livro Razão):" for="cboResume"/>
+				<p:selectOneMenu value="#{beanPlanoContas.resumeP}" required="true" id="cboResume">
+					<f:selectItem itemLabel="Sim" itemValue="S" />
+					<f:selectItem itemLabel="Não" itemValue="N"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Localização:" for="txtLocalizacao"/>
+				<p:inputText id="txtLocalizacao" required="true" value="#{beanPlanoContas.localP}"/>
+			</p:panelGrid>	
+		</p:panelGrid>
+		<p:dataTable id="grid" var="contas" value="#{beanPlanoContas.contas}" paginator="true" rows="5">
+				<p:column headerText="Nivel 1:">
+					<h:outputText value="#{contas.nivel0}" />
+				</p:column>
+				<p:column headerText="Nível 2">
+					<h:outputText value="#{contas.nivel1}" />
+				</p:column>
+				<p:column headerText="Nível 3">
+					<h:outputText value="#{contas.nivel2}" />
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{contas.descricao}" />
+				</p:column>
+				<p:column headerText="Resume">
+					<h:outputText value="#{contas.resumeP}" />
+				</p:column>
+				<p:column headerText="Resultado">
+					<h:outputText value="#{contas.resumeP}" />
+				</p:column>
+				<!-- 
+				<p:column headerText="Data Cadastro">
+					<h:outputText value="#{contas.dtCadastro.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				 -->
+			</p:dataTable>
+	</p:panel>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

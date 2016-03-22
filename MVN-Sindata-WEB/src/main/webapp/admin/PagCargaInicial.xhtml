@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+ xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Carga Inicial</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/index.xhtml">
+			<ui:define name="conteudo">
+				<h3>Cargas de algumas tabelas</h3>
+				<h:panelGrid columns="1">
+					<p:commandButton value="Carregar tabela Estado" action="#{carga.carregarEstados}"/>
+					<p:commandButton value="Carregar Cidades do Ceara" action="#{carga.carregarCidadesCeara}"/>
+				</h:panelGrid>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

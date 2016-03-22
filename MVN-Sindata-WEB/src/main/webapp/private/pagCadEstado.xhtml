@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<title>Lista de Produtos</title>
+</h:head>
+<h:body>
+	<ui:composition template="/index.xhtml">
+	<ui:define name="conteudo">
+	
+	<h:form>
+	<!-- <p:growl id="msg"></p:growl>  -->
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+	<p:panel header="Lista de Estados cadastrados">
+		<p:panelGrid columns="1">
+			<!-- Panel do butoes -->
+			<p:panelGrid columns="6">
+				<p:commandButton value="Salvar" action="#{beanEstado.inserir}" update="grid"/>
+				<p:commandButton value="Consultar" update="grid"/>
+			</p:panelGrid>
+			
+			<!-- Panel do formulario -->
+			<p:panelGrid columns="4">
+				<p:outputLabel value="Descrição:" for="descricao"/>
+				<p:inputText id="descricao" required="true" value="#{beanEstado.descricao}" requiredMessage="Descrição é obrigatória" >
+					<f:validateLength minimum="3" />
+				</p:inputText>
+				<p:outputLabel value="UF:" for="uf"/>
+				<p:inputText id="uf" required="true" value="#{beanEstado.uf}" size="2">
+					<f:validateLength maximum="2"/>
+				</p:inputText>
+				<p:outputLabel value="Cód. IBGE:" for="ibge"/>
+				<p:inputText id="ibge" required="true" value="#{beanEstado.codIbge}"/>
+			</p:panelGrid>	
+			<p:dataTable id="grid" var="estados" 	value="#{beanEstado.estados}" paginator="true" rows="5">
+				
+				<p:column headerText="Descrição">
+					<h:outputText value="#{estados.descricao}" />
+				</p:column>
+				<p:column headerText="UF">
+					<h:outputText value="#{estados.uf}" />
+				</p:column>
+				<p:column headerText="Cód. IBGE">
+					<h:outputText value="#{estados.codIbge}" />
+				</p:column>
+				<p:column headerText="Data Cadastro">
+					<h:outputText value="#{estados.dtCadastro.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+		</p:panelGrid>
+	</p:panel>
+	</h:form>
+ 
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+ <h:head>
+    <title>Gsind Web Beta 1.0</title>
+  </h:head>
+  <h:body>
+  <f:view>
+    <h:form id="form">
+      <table width="100%" border="0">
+        <tr>
+          <td colspan="2" align="center"> 	
+				<ui:insert name="cabecalho">
+           			<ui:include src="pagMenuHorizontal.xhtml"></ui:include>
+            	</ui:insert>           	
+          </td>
+        </tr>
+        <tr >
+          <td width="300px" valign="top" height="500px">
+            <ui:insert name="menu">
+            	<!-- Menu que fia a esquerda -->
+                <ui:include src="PagMenuVertical.xhtml"></ui:include>
+            </ui:insert>
+          </td>
+          <td >
+            <ui:insert name="conteudo">
+           
+            </ui:insert>
+          </td>
+        </tr>
+      </table>
+    </h:form>
+    </f:view>
+  </h:body>
+</html>

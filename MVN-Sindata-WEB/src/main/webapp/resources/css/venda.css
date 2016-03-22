@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+.divesquerda{
+	max-width: 600px;
+	margin: 0 auto;
+	top: 50px;
+	float: left;
+	height: 200px;
+	background-color: #A9A9A9;
+	border-radius: 10px;
+	color: #0000ff;
+	font-size: large;
+}
+
+.div-direita{
+	max-width: 600px;
+	margin: 0 auto;
+	top: 50px;
+	float: right;
+	height: 200px;
+	background-color: #4169E1;
+	border-radius: 10px;
+	color: #ffffff;
+	font-size: x-large;
+}
+
+#box{
+	 /*definimos a largura do box*/
+    width:300px;
+    /* definimos a altura do box */
+    height:100px;
+    /* definimos a cor de fundo do box */
+    background-color:#B0C4DE;
+    /* definimos o quão arredondado irá ficar nosso box */
+    border-radius: 10px;
+}
+
+.div-baixo{
+  	float:none;
+	background-color: #00008B;
+	width: 90%;
+	border-radius: 6px;
+}
+
+.font-produto{
+	color: #ffffff;
+	font-size: x-large;
+	margin-left: 6px;
+}
+
+.div-main-venda{
+	overflow: auto;
+	width: 90%;
+	background-color: #F5F5F5;
+	border-radius: 10px;
+	color: #FFFAFA;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  background-color: #DDA0DD;
+  width: 100%;
+}

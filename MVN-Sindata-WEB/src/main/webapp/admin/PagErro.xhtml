@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Erro do sistema - Favor avisar à SoftWareHouse.</title>
+</h:head>
+<h:body>
+	<ui:composition template="/indexGsind.xhtml">
+	<ui:define name="conteudo">
+		<h2>Ops! O Sistema se comportou de forma inespera.</h2> <br/>
+		<h4>Por favor nos informe sobre este erro para que possamos corrigí-lo</h4>
+		<p:messages id="msgErro"/>
+		<h:form>
+			Erro da página.
+		</h:form>
+		<p:commandButton value="Enviar por email" title="O erro será enviado por email para a desenvolvedora" action=""/>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

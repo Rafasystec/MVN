@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<f:view>
+	<f:metadata>
+		<f:viewParam name="ParamBairro" value="#{popBairro.codCidade}" />
+	</f:metadata>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</h:head>
+	<h:body>
+		<h:form id="cadBairros">
+			<p:growl id="msg" showDetail="true" sticky="true"></p:growl>
+		<p:panel header="Cadastro de Bairros">
+			<h:panelGrid columns="1">
+				<!-- Panel do butoes -->
+				<h:panelGrid columns="6">
+					<p:commandButton value="Salvar" action="#{popBairro.inserir}" update="grid" />
+				</h:panelGrid>
+				<!-- Panel do formulario -->
+				<h:panelGrid columns="4">
+					<p:outputLabel value="Descrição:" for="descricao"/>
+					<p:inputText id="descricao" required="true" value="#{popBairro.descricao}">
+						<f:validateLength minimum="3" />
+					</p:inputText>
+					<p:outputLabel value="" for="cidades"/>
+					<p:selectOneMenu id="cidades" required="true" value="#{popBairro.codCidade}" >
+						<f:selectItem itemValue="0" itemLabel="Selecione o município"/>
+						<f:selectItems value="#{popBairro.cidades}" var="cidades" itemValue="#{cidades.codigo}" itemLabel="#{cidades.descricao}"/>
+						<p:ajax event="change" update="grid" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Cód. IBGE:" for="ibge"/>
+					<p:inputText id="ibge" required="true" value="#{popBairro.codIbge}"/>
+				</h:panelGrid>	
+				<p:dataTable id="grid" var="bairros" 	value="#{popBairro.bairros}" paginator="true" rows="10">
+					<p:column headerText="Descrição">
+						<h:outputText value="#{bairros.descricao}" />
+					</p:column>
+					<p:column headerText="Cód. IBGE">
+						<h:outputText value="#{bairros.codIbge}" />
+					</p:column>
+					<p:column headerText="Data Cadastro">
+						<h:outputText value="#{bairros.dtCadastro.time}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

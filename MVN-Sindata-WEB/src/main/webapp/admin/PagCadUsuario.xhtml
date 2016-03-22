@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<title>Cadastro de Usuários</title>
+</h:head>
+<h:body>
+	<ui:composition template="/indexSEC.xhtml">
+	<ui:define name="conteudo">
+	
+	<h:form>
+	<!-- <p:growl id="msg"></p:growl>  -->
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+	<p:panel header="Usuários do sistema">
+		<p:panelGrid columns="1">
+			<!-- Panel do butoes -->
+			<p:panelGrid columns="6">
+				<p:commandButton value="Salvar" action="#{beanUsuario.salvar}" update="grid"/>
+				<p:commandButton value="Consultar" update="grid"/>
+			</p:panelGrid>
+			
+			<!-- Panel do formulario -->
+			<p:panelGrid columns="4">
+				<p:outputLabel value="Seu nome:" for="txtNome"/>
+				<p:inputText id="txtNome" required="true" value="#{beanUsuario.nome}" requiredMessage="O nome do usuário é obrigatório" >
+					<f:validateLength minimum="4" maximum="60" />
+				</p:inputText>
+				<p:outputLabel value="Login:" for="txtLogin"/>
+				<p:inputText id="txtLogin" required="true" value="#{beanUsuario.login}" requiredMessage="Um login para o usuário deve ser informado.">
+					<f:validateLength maximum="15"/>
+				</p:inputText>
+				<p:outputLabel value="Senha:" for="txtSenha"/>
+				<p:password id="txtSenha" required="true" value="#{beanUsuario.senha}"/>
+				<p:outputLabel value="Confirme a senha:" for="txtConfirme"/>
+				<p:password id="txtConfirme" required="true" value="#{beanUsuario.confirmeSenha}"/>
+			</p:panelGrid>	
+			<p:dataTable id="grid" var="usuarios" value="#{beanUsuario.usuarios}" paginator="true" rows="5">
+				<p:column headerText="Nome:">
+					<h:outputText value="#{usuarios.nome}" />
+				</p:column>
+				<p:column headerText="Login">
+					<h:outputText value="#{usuarios.login}" />
+				</p:column>
+				<p:column headerText="Data Cadastro">
+					<h:outputText value="#{usuarios.dtCadastro.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+		</p:panelGrid>
+	</p:panel>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>	
+<h:body>	
+		<ui:composition	>
+			<table>
+				<!-- Primeira linha endereco -->
+				<tr>
+					<td>
+						<p:outputLabel value="Logradouro:" for="tpLogradouro"/> <br/>
+						<p:selectOneMenu id="tpLogradouro" required="true" value="#{beanInterfaceEndereco.tpLograd}" requiredMessage="Selecione um tipo de Logradouro">
+							<f:selectItem itemLabel="AVENIDA"  itemValue="AVENIDA" />
+							<f:selectItem itemLabel="RUA"      itemValue="RUA" />
+							<f:selectItem itemLabel="TRAVESSA" itemValue="TRAVESSA" />
+						</p:selectOneMenu>
+					</td>
+					<td colspan="2">
+						<br />
+						<p:inputText id="logradouro" value="#{beanInterfaceEndereco.logradouro}" size="60" />
+					</td>
+				</tr>
+				<!-- Segunda linha do formulario -->
+				<tr>
+					<td>
+						<p:outputLabel value="CEP:" for="cep"/> <br />
+						<p:inputText id="cep" size="10" value="#{beanInterfaceEndereco.cep}"/>
+					</td>
+					<td>
+						<p:outputLabel value="Número:" for="numero"/> <br />
+						<p:inputText id="numero" size="10" value="#{beanInterfaceEndereco.numero}"/>
+					</td>
+					<td>
+						<p:outputLabel value="Complemento:" for="complemento"/> <br />
+						<p:inputText id="complemento" size="30" value="#{beanInterfaceEndereco.complemento}"/>
+					</td>
+				</tr>
+				<!-- Terceira linha  do formulario-->
+				<tr>
+					<td>
+						<p:outputLabel value="Referência:" for="referencia"/> <br />
+						<p:inputText id="referencia" value="#{beanInterfaceEndereco.referencia}" />
+					</td>
+					<td>
+						<p:outputLabel value="Estado - UF:" for="estado"/> <br />
+						<p:selectOneMenu id="estado" >
+							<f:selectItem itemLabel="Selecione o estado" itemValue="0"/>
+						</p:selectOneMenu>
+						<img src="Imagens/AddBtm.bmp" alt="Adicionar Estado" onclick=""/>
+					</td>
+				</tr>
+				<!-- Quarta linha do formulario -->
+				<tr>
+					<td>
+						<p:outputLabel value="Município:" for="cidade"/> <br />
+						<p:selectOneMenu id="cidade">
+							<f:selectItem itemLabel="Selecione o minicípio" itemValue="0"/>
+						</p:selectOneMenu>
+						<img src="Imagens/AddBtm.bmp" alt="Adicionar Município" onclick=""/>
+					</td>
+					<td>
+						<p:outputLabel value="Bairro:" for="bairro"/> <br />
+						<p:selectOneMenu id="bairro" value="#{beanInterfaceEndereco.codBairro}">
+							<f:selectItem itemLabel="Selecione o bairro" itemValue="0"/>
+						</p:selectOneMenu>
+						<img src="Imagens/AddBtm.bmp" alt="Adicionar Bairro" onclick=""/>
+					</td>
+				</tr>
+			</table>
+		</ui:composition>
+</h:body>
+</html>

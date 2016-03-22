@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>	
+<h:body>	
+		<ui:composition	>
+			<p:megaMenu orientation="#{megaMenuView.orientation}" style="margin-top:20px">
+			    <p:submenu label="Cadastros" icon="ui-icon-check">
+			        <p:column>
+			            <p:submenu label="Básicos">
+			                <p:menuitem value="Clientes" url="/private/PagCadCliente.xhtml" />
+			                <p:menuitem value="Meios de Pagamento" url="/private/PagCadModalidadesPgto.xhtml" />
+			            	<p:menuitem value="Empresa" url="/private/PagCadEmpresa.xhtml" />
+			            	<p:menuitem value="Lojas" 	url="/private/PagCadLoja.xhtml" />
+			            </p:submenu>
+			            <p:submenu label="Gerencial">
+			                <p:menuitem value="Produtos" url="/private/PagCadProduto.xhtml" />
+			                <p:menuitem value="Produtos por loja" url="#" />
+			                <p:menuitem value="Avisos para a Loja" url="/admin/PagCadAvisos.xhtml" />
+			                <p:menuitem value="Avisos para a Empresa" url="/admin/PagCadAvisosEmpresa.xhtml" />
+			            </p:submenu>
+			        </p:column>
+			 
+			        <p:column>
+			            <p:submenu label="Financeiro">
+			                <p:menuitem value="Contas a pagar" url="/private/PagContasAPagar.xhtml" />
+			                <p:menuitem value="Contas a receber" url="/private/PagContaAReceber.xhtml" />
+			            </p:submenu>
+			            <p:submenu label="Vendas">
+			                <p:menuitem value="Venda rápida" url="/private/PagVenda.xhtml" />
+			                <p:menuitem value="Pedido de Venda" url="/private/PagPedidoDeVenda.xhtml" />
+			                <p:menuitem value="Faturar Pedido" url="#" />
+			            </p:submenu>
+			        </p:column>
+			 
+			        <p:column>
+			        	<h:graphicImage value="/resources/Imagens/logoBarcadero.png"/>
+			        </p:column>
+			    </p:submenu>
+			 
+			 	 <p:submenu label="Consultas" >
+			        <p:column>
+			            <p:submenu label="Gerais">
+			                <p:menuitem value="Empresa" url="#" />
+			                <p:menuitem value="Lojas"   url="#" />
+			            	<p:menuitem value="Vendas"  url="#" />
+			            </p:submenu>
+			            
+			        </p:column>
+			    </p:submenu>
+			    
+			    <p:submenu label="Admistrativo" icon="ui-icon-document">
+			 
+			        <p:column>
+			            <p:submenu label="Relatórios">
+			                <p:menuitem value="Do Caixa" url="#" />
+			                <p:menuitem value="Gestão" url="#" />
+			            </p:submenu>
+			            <p:submenu label="Controle">
+			                <p:menuitem value="Usuários do Sistema" url="#" />
+			                <p:menuitem value="Conteúdo" url="#" />
+			                <p:menuitem value="Reporta Erros" url="#" />
+			            </p:submenu>
+			        </p:column>
+			    </p:submenu>
+			 
+			    <p:submenu label="Configurações" icon="ui-icon-pencil">
+			        <p:column>
+			            <p:submenu label="Geral">
+			                <p:menuitem value="CF-e-SAT" url="#" />
+			                <p:menuitem value="NFC-e" url="#" />
+			                <p:menuitem value="NF-e" url="#" />
+			            </p:submenu>
+			            <p:submenu label="Avançado">
+			                <p:menuitem value="Parâmetros" url="#" />
+			                <p:menuitem value="Caixa" url="/admin/PagConfigCaixa.xhtml" />
+			            </p:submenu>
+			        </p:column>
+			 
+			    </p:submenu>
+			 
+			    <p:submenu label="Ajuda" icon="ui-icon-contact">
+			        <p:column>
+			            <p:submenu label="On-line">
+			                <p:menuitem value="Documentação" url="/public/PagAjudaOnline.xhtml" />
+			                <p:menuitem value="Chate" url="#" />
+			                <p:menuitem value="Envie uma mensagem" url="#" />
+			            </p:submenu>
+			            <p:submenu label="Presencial">
+			                <p:menuitem value="Telefone: (85) 95666-8989"/>
+			                <p:menuitem value="Ver endereço" url="#" />
+			                
+			            </p:submenu>
+			        </p:column>
+			    </p:submenu> 
+			    <p:menuitem value="Home" url="/index.xhtml" icon="ui-icon-home" />
+			</p:megaMenu>
+		</ui:composition>
+</h:body>
+</html>

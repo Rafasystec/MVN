@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>	
+		<meta charset="UTF-8" />
+		<title>Avisos</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/index.xhtml">
+		<ui:define name="conteudo">
+			<h3>Aviso para esta loja</h3>
+			<h:panelGrid columns="2">
+				
+				<p:outputLabel value="Mostrar a patir de:" for="dtIni"/>
+				<p:calendar id="dtIni" value="#{avisos.aviso.dtExibir}" pattern="dd/MM/yyyy" 
+											required="true" maxlength="10" />
+				
+				<p:outputLabel value="Aparecerá até o dia:" for="dtFim"/>
+				<p:calendar id="dtFim" value="#{avisos.aviso.dtValidade}" pattern="dd/MM/yyyy" 
+											required="true" maxlength="10" />
+				
+				<p:outputLabel value="Tipo de  aviso:" for="tpAviso"/>
+				<p:selectOneMenu value="#{avisos.aviso.flTipo}">
+					<f:selectItems id="tpAviso" value="#{avisos.tipos}" var="tipo" itemLabel="#{tipo.label}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Aviso" for="aviso"/>
+				<p:inputTextarea id="aviso" value="#{avisos.aviso.descricao}"/>
+				
+			</h:panelGrid>
+			<h:panelGrid columns="6">
+				<p:commandButton value="Salvar" action="#{avisos.salvar}" ajax="false"/>
+				<p:commandButton value="Excluir" action="#{avisos.deletar}" ajax="false"/>
+			</h:panelGrid>
+		</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

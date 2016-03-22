@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>	
+<h:body>	
+		<ui:composition	>
+			<!-- <p:panelGrid columns="6"> -->
+			<table>
+				<tr>
+					<td>
+						<p:outputLabel value="DDD:" for="txtDddTel1"/> <br />
+						<p:inputText id="txtDddTel1" value="#{beanContato.dddTel01}" size="5"/>
+					</td>
+					<td>
+						<p:outputLabel value="Telefone 1:" for="txtTel01"/><br />
+						<p:inputText id="txtTel01" value="#{beanContato.tel01}" size="10"/>	
+					</td>
+					<td>
+						<p:outputLabel value="DDD:" for="txtDddTel2"/> <br />
+						<p:inputText id="txtDddTel2" value="#{beanContato.dddTel02}" size="5"/>	
+					</td>
+					<td>
+						<p:outputLabel value="Telefone 2:" for="txtTel02"/> <br />
+						<p:inputText id="txtTel02" value="#{beanContato.tel02}" size="10"/>		
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p:outputLabel value="DDD:" for="txtDddCel01"/> <br />
+						<p:inputText id="txtDddCel01" value="#{beanContato.dddCel01}" size="5"/>
+					</td>
+					<td>
+						<p:outputLabel value="Celular 1:" for="txtCel01"/> <br />
+						<p:inputText id="txtCel01" value="#{beanContato.cel01}" size="10"/>	
+					</td>
+					<td>
+						<p:outputLabel value="DDD:" for="txtDddCel02"/> <br />
+						<p:inputText id="txtDddCel02" value="#{beanContato.dddCel02}" size="5"/>
+					</td>
+					<td>
+						<p:outputLabel value="Celular 2:" for="txtCel01"/> <br />
+						<p:inputText id="txtCel02" value="#{beanContato.cel02}" size="10"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<p:outputLabel value="Email 1:" for="txtEmail01"/> <br />
+						<p:inputText id="txtEmail01" value="#{beanContato.email01}" size="20"/> <br />	
+						<p:outputLabel value="Email 2:" for="txtEmail02"/> <br /> 
+						<p:inputText id="txtEmail02" value="#{beanContato.email02}" size="20"/>
+					</td>
+				</tr>
+			</table>
+			<!-- </p:panelGrid> -->
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Web Page:" for="txtWebPage"/> <br />
+				<p:inputText id="txtWebPage" value="#{beanContato.webPage}" size="25"/>
+				<p:outputLabel value="Pode ser um blog pessoal ou página do facebook."/>
+			</p:panelGrid>
+		</ui:composition>
+</h:body>
+</html>

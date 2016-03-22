@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html
+ xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<f:view>
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Empresa Logada</title>
+	</h:head>
+	<h:body>
+		<div align="center">
+			<p:panel footer="Barcadero Tecnologias - barcadero.com.br" header="Entrar na empresa" >
+				<h:form>
+					<p:messages id="msg" showDetail="true"/>
+					<h:panelGrid columns="1" border="0">
+						<p:selectOneMenu id="emp" value="#{escolherEmp.codEmp}">
+							<f:selectItem itemLabel="Primeiro escolha a empresa" itemValue="0"/>
+							<f:selectItems value="#{escolherEmp.empresa}" var="emp" itemLabel="#{emp.pessoaJuridica.fantasia}" itemValue="#{emp.codigo}"/>
+							<p:ajax update="cboLoja"/>
+						</p:selectOneMenu>
+						<p:selectOneMenu id="cboLoja" value="#{escolherEmp.codLoja}" required="false">
+							<f:selectItem itemLabel="  Depois escolha a loja  " itemValue="0"/>
+							<f:selectItems value="#{escolherEmp.lojas}" var="varloja" itemLabel="#{varloja.pessoaJuridica.fantasia}" itemValue="#{varloja.codigo}"/>
+							<f:convertNumber integerOnly="true"/>
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<h:panelGrid columns="4">
+						<p:commandButton value="Entrar" action="#{escolherEmp.entrar}" ajax="false"/>
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		</div>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	<ui:composition template="/index.xhtml">
+		<ui:define name="conteudo">
+			<div align="center" style="background-color: #F5F5F5">
+				<p:fieldset legend="Informações Gerais">
+					<table>
+						<tr>
+							<td colspan="2" width="70">
+								<p:outputLabel value="Descrição" for="descricao"/>
+								<p:inputText size="60" id="descricao" value="#{produto.produto.descricao}" required="true"/>
+							</td>
+							<td>
+								<p:outputLabel value="Unid. medida" for="unidade"/>
+								<p:selectOneMenu value="#{produto.produto.unidade}">
+									<f:selectItems id="unidade" value="#{produto.medidas}" />
+								</p:selectOneMenu>
+							</td>
+							<td>
+								<p:outputLabel value="Cód. de Barras" for="ean"/>
+								<p:inputText id="ean" value="#{produto.produto.ean}" required="true"/>
+							</td>
+							<td>
+								<p:outputLabel value="NCM" for="ncm"/>
+								<p:inputText id="ncm" value="#{produto.produto.cdNcm}" required="true"/>
+							</td>
+						</tr>	
+						<tr>
+							<td>
+								<p:outputLabel value="Preço Custo" for="pcCusto"/>
+								<p:inputText id="pcCusto" value="#{produto.produto.precoCusto}" required="true"/>
+							</td>
+							<td>
+								<p:outputLabel value="Preço Venda" for="pcVenda"/>
+								<p:inputText id="pcVenda" value="#{produto.produto.precoVenda}" required="true"/>
+							</td>
+							<td>
+								<p:outputLabel value="Preço Promo." for="pcPromo"/>
+								<p:inputText id="pcPromo" value="#{produto.produto.precoPromo}"/>
+							</td>
+							<td>
+								<p:outputLabel value="Dt. Ini. Promo." for="dtIniPromo"/>
+								<p:calendar id="dtIniPromo" value="#{produto.produto.dtInicioPromo}" pattern="dd/MM/yyyy" 
+											required="true" maxlength="10" />
+							</td>
+							<td>
+								<p:outputLabel value="Dt. Term. Promo." for="dtTermPromo"/>
+								<p:calendar id="dtTermPromo" value="#{produto.produto.dtTerminPromo}" pattern="dd/MM/yyyy" 
+											required="true" maxlength="10" />
+							</td>
+							<td></td>
+						</tr>
+					</table>
+				</p:fieldset>					
+				<p:fieldset legend="Tributação">
+					
+					<table>
+						<tr>
+							<td>
+								<div align="left">
+									<fieldset>
+										<legend>ICMS</legend>
+										<table>
+											<tr>
+												<td>
+													<p:outputLabel value="Origem" for="origem"/>
+													<p:selectOneMenu style="width:" value="#{produto.produto.origemIcms}">
+														<f:selectItems id="origem" value="#{produto.origensIcms}" var="origem" itemLabel="#{origem.label}" />
+													</p:selectOneMenu>
+												</td>
+												<td>
+													<p:outputLabel value="CST ICMS" for="cstIcms"/>
+													<p:selectOneMenu value="#{produto.produto.cstIcms}">
+														<f:selectItems id="cstIcms" value="#{produto.cstIcms}" var="cst" itemLabel="#{cst.label}" />
+													</p:selectOneMenu>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</div>
+							</td>
+							<td>
+								<div align="right">
+									<fieldset>
+										<legend>IPI</legend>
+										<table>
+											<tr>
+												<td>
+													<p:outputLabel value="CST IPI" for="cstIpi"/>
+													<p:selectOneMenu value="#{produto.produto.cstIpi}">
+														<f:selectItems id="cstIpi" value="#{produto.cstIpi}" var="cst" itemLabel="#{cst.label}" 
+															itemValue="#{cst.cst}"
+														/>
+													</p:selectOneMenu>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h:panelGrid columns="8">
+									<p:outputLabel value="Aliquota ICMS" for="aliquota"/>
+									<p:inputText id="aliquota" value="#{produto.produto.aliquota}" size="5" maxlength="5" required="true"/>
+									<p:outputLabel value="Aliquota ISSQN" for="aliquotaISSQN"/>
+									<p:inputText id="aliquotaISSQN" value="#{produto.produto.aliqISSQN}" size="5" maxlength="5" required="true"/>
+									<p:outputLabel value="CST PIS:" for="cstPis" />
+									<p:selectOneMenu value="#{produto.produto.cstIpi}" title="CST PIS"  label="CST PIS">
+										<f:selectItems id="cstPis" value="#{produto.cstPis}" var="cst" itemLabel="#{cst.label}" 
+											itemValue="#{cst.cst}"
+										/>
+									</p:selectOneMenu>
+								</h:panelGrid>
+							</td>
+						</tr>
+					</table>
+				</p:fieldset>
+			</div>
+			<div>
+				<p:dataTable id="produtos" var="prod" value="#{produto.produtos}" paginator="true" 
+					rowKey="#{prod.codigo}" rows="10" rowsPerPageTemplate="5,10,15" selectionMode="multiple"
+					selection="#{produto.produtosSelecionados}" >
+				<f:facet name="header">Produtos cadastrados hoje</f:facet>
+				<p:column headerText="Código" width="50px">
+					<h:outputText value="#{prod.codigo}"/>
+				</p:column>
+				<p:column headerText="Descricao" width="120px">
+					<h:outputText value="#{prod.descricao}"/>
+				</p:column>
+				<p:column headerText="Unidade" width="50px">
+					<h:outputText value="#{prod.unidade}"/>
+				</p:column>
+			</p:dataTable>
+			</div>
+			<div>
+				<h:panelGrid columns="4">
+					<p:commandButton value="Salvar" action="#{produto.salvar}" ajax="false"/>
+					<p:commandButton value="Excluir" action="#{produto.excluir}" ajax="false"/>
+				</h:panelGrid>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

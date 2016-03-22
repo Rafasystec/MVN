@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true" >
+	<!-- 
+	<Resource name="jdbc/sindata"
+	auth="Container"
+	type="javax.sql.DataSource"
+	maxActive="100"
+	maxIdle="30"
+	maxWait="10000"
+	user="barcade"
+	password="rafa1>r@afa2"
+	driverClassName="org.postgresql.Driver"
+	url="jdbc:postgresql://localhost:5432/sindata"
+	>
+	</Resource>
+	 -->
+	 <ResourceLink name="jdbc/sindata"
+	 				global="jdbc/sindata"
+	 				auth="Container"
+	 				type="javax.sql.DataSource" />
+</Context>

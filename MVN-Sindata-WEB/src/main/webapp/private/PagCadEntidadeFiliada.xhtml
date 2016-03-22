@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<title>Lista de Produtos</title>
+</h:head>
+<h:body>
+	<ui:composition template="/index.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+		<!-- <p:growl id="msg"></p:growl>  -->
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+		<p:panel header="Cadastro de Filiados">
+			<p:panelGrid columns="6">
+				<p:commandButton value="Salvar" action="#{beanEstado.inserir}" update=""/>
+				<p:commandButton value="Consultar" update=""/>
+			</p:panelGrid>
+			<p:tabView id="tabFiliado">  
+				<!-- Tab da informações gerais do Filiado -->  
+			    <p:tab id="tabDadosGerais" title="Dados Gerais">  
+						<table border="0">
+							<!-- Primeira linha do formulario -->
+							<tr>
+								<td>
+									<p:outputLabel value="Código:" for="codigo"/> <br />
+									<p:inputText id="codigo" required="false"  value="#{beanFiliado.nome}"  size="10" />
+								</td>
+								
+								<td>
+									<p:outputLabel value="Sigla:" for="sigla"/> <br/>			
+									<p:inputText id="sigla" required="true" value="#{beanFiliado.cpf}" size="11" requiredMessage="Sigla é obrigatória">
+										<f:validateLength maximum="35"/>
+									</p:inputText>
+								</td>
+								
+								<td colspan="2">
+									<p:outputLabel value="Nome:" for="nome"/> <br />		
+									<p:inputText id="nome" required="true" value="#{beanFiliado.nome}" requiredMessage="O nome do filiado é necessário." size="50">
+										<f:validateLength minimum="10" maximum="60" />
+									</p:inputText>
+								</td>
+							</tr>
+							<!-- Segunda linha do formulario -->  
+							<tr>
+								<td>
+									<p:outputLabel value="Situação:" for="situacao"/> <br />
+									<p:selectOneMenu id="situacao" value="#{beanEntidadeFiliada.situacao}">
+										<f:selectItem itemLabel="ATIVO"  itemValue="AT"/>
+										<f:selectItem itemLabel="INADIMPLENTE"  itemValue="ID"/>
+										<f:selectItem itemLabel="INATIVO"  itemValue="IN"/>
+									</p:selectOneMenu>
+								</td>
+								
+								<td>
+									<p:outputLabel value="Dt.Fundação:" for="dtFundacao"/>	<br />
+									<p:inputText id="dtFundacao" required="true" value="#{beanEntidadeFiliada.dtFundacao}" requiredMessage="Informe a data de Fundação." size="10">
+										<f:validateLength minimum="10" maximum="10"/>
+									</p:inputText>
+								</td>
+								<td>
+									<p:outputLabel value="Dt. Filiacao:" for="dtFiliacao"/>	<br />
+									<p:inputText id="dtFiliacao" required="true" value="#{beanEntidadeFiliada.dtFiliacao}" requiredMessage="Informe a data de Filiacao." size="10">
+										<f:validateLength minimum="10" maximum="10"/>
+									</p:inputText>
+								</td>
+								<td>
+									<p:outputLabel value="Dt. Aprov. Filiação:" for="dtAprovFiliacao"/>	<br />
+									<p:inputText id="dtAprovFiliacao" required="false" value="#{beanEntidadeFiliada.dtAprovFiliacao}" size="10">
+										<f:validateLength minimum="10" maximum="10"/>
+									</p:inputText>
+								</td>
+							</tr>
+							<!-- Terceira linha do formulário -->
+							<tr>
+								<td>
+									<p:outputLabel value="Região Metropolitâna:" for="regiaoMetropolitana"/>	<br/>
+									<p:selectOneMenu id="regiaoMetropolitana" value="#{beanEntidadeFiliada.situacao}">
+										<f:selectItem itemLabel="Selecione a região"  itemValue="0"/>
+									</p:selectOneMenu>
+								</td>
+								<td>
+									<p:outputLabel value="CNPJ:" for="cnpj"/>	<br />
+									<p:inputText id="cnpj" value="cnpj" size="10">
+										<f:validateLength minimum="12" maximum="12"/>
+									</p:inputText>
+								</td>
+								<td>
+									<p:outputLabel value="Código Sindical:" for="codSindical"/>	<br />
+									<p:inputText id="codSindical" value="#{beanEntidadeFiliada.codSindical}" size="14">
+										<f:validateLength minimum="12" maximum="12"/>
+									</p:inputText>
+								</td>
+								<td>
+									<p:outputLabel value="Tipo:" for="tpEntidade"/>	<br/>
+									<p:selectOneRadio id="tpEntidade" value="#{beanEntidadeFiliada.tpEntidade}">
+										<f:selectItem itemLabel="Federação" id="tipoFerder"   itemValue="Federacao"/>
+										<f:selectItem itemLabel="Sindicato" id="tipoConfeder" itemValue="Sindicato"/>
+									</p:selectOneRadio>
+								</td>
+							</tr>		
+						</table>	
+			    </p:tab>  
+			  	<!-- Fim da aba de dados gerais do filiado -->
+			  	<!-- Inicio da Aba de endereco -->
+			    <p:tab id="tabEndereco" title="Endereço">  
+			    	<ui:insert name="endereco">
+           				<ui:include src="PagEndereco.xhtml" />
+            		</ui:insert>      
+			    </p:tab>  
+			    <!-- Fim da Tab de endereco -->
+			    <!-- Inicio da Aba de Contato -->
+			    <p:tab id="tabContatos" title="Dados para contato">  
+			        <ui:insert name="contato">
+           				<ui:include src="PagContatos.xhtml" />
+            		</ui:insert>
+			    </p:tab>
+			    <!-- Fim da Aba de  Contatos-->
+			    <p:tab id="tabAdministrativo" title="Dados Administrativos">  
+			        <fieldset >
+			        <legend>Taxas</legend>
+			        	<table>
+			        		<tr>
+			        			<td>
+			        				<p:outputLabel value="Taxa Assistencial:" for="txtAssitencial"/>
+			        			</td>
+			        			<td>
+			        				<p:inputText id="txtAssitencial" value="#{beanEntidadeFiliada.txtAssistencial}"/>
+			        			</td>
+			        			<td>
+			        				<p:outputLabel value="Mês do desconto:" for="txtMesAssitencial"/>
+			        			</td>
+			        			<td>
+			        				<p:inputText id="txtMesAssitencial" value="#{beanEntidadeFiliada.mesDescTxAssitencial}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td>
+			        				<p:outputLabel value="Taxa Confederacao:" for="txtConfederacao"/>
+			        			</td>
+			        			<td>
+			        				<p:inputText id="txtConfederacao" value="#{beanEntidadeFiliada.txtConfederacao}"/>
+			        			</td>
+			        			<td>
+			        				<p:outputLabel value="Mês do desconto:"/>
+			        			</td>
+			        			<td>
+			        				<p:inputText id="mesConfederacao" value="#{beanEntidadeFiliada.mesDescTxConfer}"/>
+			        			</td>
+			        		</tr>
+			        		
+			        		<tr>
+			        			<td>
+			        				<p:outputLabel value="Imposto sindical:"/>
+			        			</td>
+			        			<td>
+			        				<p:inputText id="impSindical" value="#{beanEntidadeFiliada.txtsindical}"/>
+			        			</td>
+			        			<td>
+			        				<p:outputLabel value="Mês do desconto:" for=""/>
+			        			</td>
+			        			<td>
+			        				<p:inputText id="mesSindical" value="#{beanEntidadeFiliada.mesDescTxSindical}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Outras taxas:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtTxOutras" value="#{beanEntidadeFiliada.txtOutras}"/>
+			        			</td>
+			        			
+			        		</tr>
+			        	</table>
+			        </fieldset> 
+			        
+			        <fieldset>
+			        	<legend>Dados Adicionais</legend>
+			        	<table>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Federação ou Confederação pertencente:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtFederConfeder" value="#{beanEntidadeFiliada.federacao}"/>
+			        			</td>
+			        		</tr>
+			        	</table>
+			        </fieldset>
+			        
+			        <fieldset>
+			        	<legend>Outros dados</legend>
+			        	<table>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Base:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtBase" value="#{beanEntidadeFiliada.vlBase}"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Qtd. Base:" for="txtQtdtBase"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtQtdtBase" value="#{beanEntidadeFiliada.qtdBase}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Sócios:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtSocios" value="#{beanEntidadeFiliada.qtdSocios}"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Mês:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtMes" value="#{beanEntidadeFiliada.mes}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Sócios quites:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtSociosQuites" value="#{beanEntidadeFiliada.qtdSociosQuites}"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Salário médio:" />
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtSalarioMedio" value="#{beanEntidadeFiliada.salarioMedio}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Sócios Aposentados:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtSocAposentados" value="#{beanEntidadeFiliada.qtdSociosAposent}"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Percentual Desconto:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtPercDesconto" value="#{beanEntidadeFiliada.percDesconto}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Sóc. Afatastados:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtSocAfastados" value="#{beanEntidadeFiliada.qtdsociosAfast}"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Período de Pagamento:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtPeriodo" value="#{beanEntidadeFiliada.periodoPgto}"/>
+			        			</td>
+			        		</tr>
+			        		<tr>
+			        			<td colspan="1">
+			        				<p:outputLabel value="Receita mensal:"/>
+			        			</td>
+			        			<td colspan="1">
+			        				<p:inputText id="txtReceitaMensal" value="#{beanEntidadeFiliada.receitaMensal}"/>
+			        			</td>
+			        		</tr>
+			        	</table>
+			        </fieldset> 
+			    </p:tab>  
+			</p:tabView>  
+		</p:panel>
+		</h:form> 	
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

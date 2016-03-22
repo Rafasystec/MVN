@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:body>
+	<ui:composition	>
+		<h1>Menu Vertical</h1> 
+		<p:menu>
+	        <p:submenu label="Principal">
+	            <p:menuitem value="Venda Rápida" url="/private/PagVenda.xhtml" icon="ui-icon-disk" />
+	            <p:menuitem value="Cadastros Básicos" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+	        </p:submenu>
+	        <p:submenu label="Sobre">
+	            <p:menuitem value="Delete" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
+	        </p:submenu>
+	        <p:submenu label="Navegação">
+	            <p:menuitem value="Documentação" url="http://www.primefaces.org" icon="ui-icon-home"/>
+	            <p:menuitem value="Help On-line" icon="ui-icon-star"/>
+	        </p:submenu>
+    	</p:menu>
+ 
+	</ui:composition>
+</h:body>
+</html>

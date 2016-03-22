@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<title>Lista de Produtos</title>
+</h:head>
+<h:body>
+	<ui:composition template="/index.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+		<!-- <p:growl id="msg"></p:growl>  -->
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+		<p:panel header="Cadastro de Filiados">
+			<p:panelGrid columns="6">
+				<p:commandButton value="Salvar" action="#{beanEstado.inserir}" update=""/>
+				<p:commandButton value="Consultar" update=""/>
+			</p:panelGrid>
+			<p:tabView id="tabFiliado">  
+				<!-- Tab da informações gerais do Filiado -->  
+			    <p:tab id="tabDadosGerais" title="Dados Gerais">  
+					<!-- <p:panelGrid columns="6">  -->
+						<table border="1">
+							<tr>
+								<td>
+									<p:outputLabel value="Nome:" for="nome"/>		
+								</td>
+								<td>
+									<p:inputText id="nome" required="true" value="#{beanFiliado.nome}" requiredMessage="O nome do filiado é necessário." size="50">
+										<f:validateLength minimum="10" maximum="60" />
+									</p:inputText>			
+								</td>
+								<td>
+									<p:outputLabel value="CPF:" for="cpf"/>			
+								</td>
+								<td>
+									<p:inputText id="cpf" required="true" value="#{beanFiliado.cpf}" size="11">
+										<f:validateLength maximum="11"/>
+									</p:inputText>			
+								</td>
+								<td>
+									<p:outputLabel value="Dt. Nasc:" for="dtNascimento"/>	
+								</td>
+								<td>
+									<p:inputText id="dtNascimento" required="true" value="#{beanFiliado.dtNascimento}" requiredMessage="Informe a data de nascimento." >
+										<f:validateLength minimum="10" maximum="10"/>
+									</p:inputText>
+								</td>
+							</tr>
+						</table>
+						
+						
+						
+						
+						<p:outputLabel value="Nm_mae" for="nmMae"/>
+						<p:inputText id="nmMae" required="true" value="#{beanFiliado.nmMae}"/>
+						
+						<p:inputText id="nome00" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome0"/>
+						<p:inputText id="nome0" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome1"/>
+						<p:inputText id="nome1" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome2"/>
+						<p:inputText id="nome2" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome3"/>
+						<p:inputText id="nome3" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome4"/>
+						<p:inputText id="nome4" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome5"/>
+						<p:inputText id="nome5" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome6"/>
+						<p:inputText id="nome6" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome7"/>
+						<p:inputText id="nome7" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome8"/>
+						<p:inputText id="nome8" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome9"/>
+						<p:inputText id="nome9" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome10"/>
+						<p:inputText id="nome10" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+						<p:outputLabel value="Por a descricao" for="nome11"/>
+						<p:inputText id="nome11" required="true" value="#{beanFiliado.nome}" requiredMessage="Menssagem" >
+							<f:validateLength minimum="3" maximum="60"/>
+						</p:inputText>
+					<!-- </p:panelGrid> -->	
+			    </p:tab>  
+			  	<!-- Fim da aba de dados gerais do filiado -->
+			  	<!-- Aba de endereco -->
+			    <p:tab id="tabEndereco" title="Endereço">  
+			        <h:panelGrid columns="2" cellpadding="10">  
+			            <p:graphicImage id="tab2Img" value="/images/godfather/godfather2.jpg" />  
+			            <h:outputText id="tab2Text" value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.  
+			            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,  
+			            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows."/>  
+			        </h:panelGrid>  
+			    </p:tab>  
+			    <p:tab id="tab3" title="Godfather Part III">  
+			        <h:panelGrid columns="2" cellpadding="10">  
+			            <p:graphicImage id="tab3Img" value="/images/godfather/godfather3.jpg" />  
+			            <h:outputText id="tab3Text" value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.  
+			                Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate."/>  
+			        </h:panelGrid>  
+			    </p:tab>  
+			</p:tabView>  
+		</p:panel>
+		</h:form> 	
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

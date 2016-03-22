@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<ui:composition template="/index.xhtml">
+			<ui:define name="conteudo">
+				
+					<h2>Meios de Pagamento</h2>
+					<div>
+											
+						<h:panelGrid columns="5">
+							<h:panelGroup>
+								<fieldset >
+								<legend>Tipo de pagamento</legend>
+									<p:selectOneRadio value="#{meioPgto.meio.tpMeio}">
+										<f:selectItems value="#{meioPgto.tipoMeiosPgto}"/>
+									</p:selectOneRadio>
+								</fieldset>
+							</h:panelGroup>
+							<p:outputLabel value="Descrição:" for="desc"/>
+							<p:inputText value="#{meioPgto.meio.descricao}" id="desc" required="true"
+								requiredMessage="Descrição é obrigatória"
+							/>
+							<p:selectBooleanCheckbox value="#{meioPgto.usaTEF}" id="usaTef"/>
+							<p:outputLabel value="Usa TEF:" for="usaTef"/>
+						</h:panelGrid>
+					</div>
+					<div>
+						<p:dataTable id="meiosGrid" var="meio" value="#{meioPgto.meios}" paginator="true" 
+								rowKey="#{meio.codigo}" rows="10" rowsPerPageTemplate="5,10,15" selectionMode="multiple"
+								selection="#{meioPgto.meiosSelecionados}" >
+							<f:facet name="header">Meios Pagamentos</f:facet>
+							<p:column headerText="Código">
+								<h:outputText value="#{meio.codigo}"/>
+							</p:column>
+							<p:column headerText="Descricao">
+								<h:outputText value="#{meio.descricao}"/>
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{meio.tpMeio}"/>
+							</p:column>
+							<p:column width="80">
+								<div align="center"><img alt="Excluir" src="#{meio.imgSrc}" /></div>	 
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div align="left">
+						<p:commandButton value="Salvar" action="#{meioPgto.salvar}" ajax="false"/>
+						<p:commandButton value="Alterar" action="#{meioPgto.alterar}" ajax="false"/>
+						<p:commandButton value="Novo" action="#{meioPgto.novo}" ajax="false"/>
+						<div align="right">
+							<p:commandButton value="Excluir" action="#{meioPgto.deletar}" ajax="false"/>
+						</div>
+					</div>
+			</ui:define>
+		</ui:composition>
+	</h:form>
+</h:body>
+</html>

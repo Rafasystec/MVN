@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+ xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Insert title here</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/index.xhtml">
+			<ui:define name="conteudo">
+				<p:panel header="Configurações do Caixa">
+					<h:panelGrid columns="4">
+						<p:outputLabel value="Número Caixa:" for="cdCaixa"/>
+						<p:inputText id="cdCaixa" value="#{configCaixa.caixa.cdCaixa}" required="true"/>
+						<p:outputLabel value="Tipo de Nota:" for="tpNota"/>
+						<p:selectOneMenu value="#{configCaixa.caixa.tipoNota}" id="tpNota">
+							<f:selectItems value="#{configCaixa.tiposNota}" var="tpNota" itemLabel="#{tpNota.label}"/>
+						</p:selectOneMenu>
+					</h:panelGrid>
+					<h:panelGrid>
+						<p:commandButton value="Salvar" action="#{configCaixa.salvar}" />
+					</h:panelGrid>
+					<div style="float: right;">
+						<p:commandButton value="Excluir"/>
+					</div>
+				</p:panel>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
