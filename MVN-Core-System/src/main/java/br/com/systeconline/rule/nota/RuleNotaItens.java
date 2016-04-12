@@ -107,14 +107,15 @@ public class RuleNotaItens extends RuleModelo {
 	 * @return
 	 * @throws Exception
 	 */
-	public String saveItemNotaFromProduto(Nota nota, NotaItens pItem) throws Exception {
+	public NotaItens saveItemNotaFromProduto(Nota nota, NotaItens pItem) throws Exception {
 		ArrayList<NotaItens> itens = new ArrayList<NotaItens>();
 		NotaItens item = getItemFromProduto(pItem.getCodProduto(), nota);
 		item.setFlCompoeTotNota(EnumCompeTotalNota.S);
 		item.setQuantidade(pItem.getQuantidade());
 		itens.add(item);
 		nota.setItens(itens);
-		return ruleNota.insert(nota);
+		System.out.println("Salvar item na nota: >>> " + ruleNota.insert(nota));
+		return item;
 	}
 
 }

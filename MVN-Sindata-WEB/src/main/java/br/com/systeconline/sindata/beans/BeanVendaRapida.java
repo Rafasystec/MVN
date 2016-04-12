@@ -186,7 +186,12 @@ public class BeanVendaRapida extends SuperBean {
 		if(nota == null){
 			nota	= createNota();
 		}
-		ruleItens.saveItemNotaFromProduto(nota, item);
+		item = ruleItens.saveItemNotaFromProduto(nota, item);
+		totalizarSubTotal(item);
+	}
+	
+	private void totalizarSubTotal(NotaItens item) {
+		setVlSubTotal(getVlSubTotal().add(item.getVlTotal()));
 	}
 
 

@@ -45,19 +45,19 @@
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Sub Total:"/>
 							<p:inputText readonly="true" value="#{vencx.vlSubTotal}">
-								<f:convertNumber minFractionDigits="2" maxFractionDigits="2" pattern="#0.00"/>
+								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 							<p:outputLabel value="Descontos:"/>
 							<p:inputText readonly="true" value="#{vencx.vlDesconto}">
-								<f:convertNumber pattern="#0.00"/>
+								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 							<p:outputLabel value="Total:"/>
 							<p:inputText readonly="true" value="#{vencx.vlTotal}">
-								<f:convertNumber pattern="#0.00"/>
+								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 							<p:outputLabel value="Troco:"/>
 							<p:inputText readonly="true" value="#{vencx.vlTroco}">
-								<f:convertNumber pattern="#0.00"/>
+								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 						</h:panelGrid>
 					</div>
@@ -83,13 +83,17 @@
 							<h:outputText value="#{item.quantidade}"/>
 						</p:column>
 						<p:column headerText="VL. Unitário" width="80">
-							<h:outputText value="#{item.vlUnidade}"/>
+							<h:outputText value="#{item.vlUnidade}" >
+								<f:convertNumber currencySymbol="R$" type="currency" />
+							</h:outputText>
 						</p:column>
 						<p:column headerText="VL. Desconto" width="80">
 							<h:outputText value="#{item.vlDesc}"/>
 						</p:column>
 						<p:column headerText="Total" width="80">
-							<h:outputText value="#{item.vlTotal}"/>
+							<h:outputText value="#{item.vlTotal}" >
+								<f:convertNumber currencySymbol="R$" type="currency"/>
+							</h:outputText>
 						</p:column>
 					</p:dataTable>
 				</div>
