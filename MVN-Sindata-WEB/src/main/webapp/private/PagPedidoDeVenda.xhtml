@@ -13,8 +13,25 @@
 	<h:body>
 		<ui:composition template="/index.xhtml">
 			<ui:define name="conteudo">
-				<h3>Pedido de Venda</h3>
-				<h2>Em Desenvolvimento</h2>
+			
+				<p:panel header="Pedido de venda">
+				<h:panelGrid columns="2">
+					<p:outputLabel id="lblPed" value="Número do pedido:"/>
+					<p:outputLabel id="lblNrPedido" value="89000"/>
+				</h:panelGrid>
+				<h:panelGrid columns="3">
+					<p:outputLabel id="lblNumCli" value="Cliente:"/>
+					<p:inputText id="txtNumCli" value="#{pedido.pedido.cdCliente}"/>
+					<p:outputLabel id="txNomeCli" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:outputLabel id="lblVendedor" value="Vendedor:"/>
+					<p:inputText id="txtVendedor" value="#{pedido.pedido.}"/>
+					<p:outputLabel id="lblPagamento" value="Forma Pagto:"/>
+					<p:inputText id="txtFormaPagamento" value="#{}"/>
+				</h:panelGrid>
+				
+				</p:panel>
 			</ui:define>
 		</ui:composition>
 	</h:body>

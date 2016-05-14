@@ -7,10 +7,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.systeconline.core.enums.EnumFormPgtoPedido;
 import br.com.systeconline.tables.basicos.EntidadeLoja;
 import br.com.systeconline.tables.basicos.Loja;
 import br.com.systeconline.tables.basicos.Usuario;
@@ -46,6 +49,9 @@ public final class Pedido extends EntidadeLoja {
 	private String observacao     = "";
 	@Column(name="CD_EMDER_ENTREGA", nullable=false)
 	private long cdEnderEntrega   = 0L;
+	@Column(name="CD_FORMA_PGTO", nullable=false)
+	@Enumerated(EnumType.ORDINAL)
+	private EnumFormPgtoPedido formaPgtoPedido = EnumFormPgtoPedido.A_VISTA;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.EAGER,targetEntity=Pedido.class)
 	private List<PedidoItens> itens;
@@ -147,5 +153,13 @@ public final class Pedido extends EntidadeLoja {
 
 	public void setItens(List<PedidoItens> itens) {
 		this.itens = itens;
+	}
+
+	public EnumFormPgtoPedido getFormaPgtoPedido() {
+		return formaPgtoPedido;
+	}
+
+	public void setFormaPgtoPedido(EnumFormPgtoPedido formaPgtoPedido) {
+		this.formaPgtoPedido = formaPgtoPedido;
 	}
 }
