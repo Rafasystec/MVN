@@ -22,6 +22,7 @@
 		<mapping class="br.com.systeconline.tables.basicos.PessoaJuridica"	/>
 		<mapping class="br.com.systeconline.tables.basicos.Cliente"			/>
 		<mapping class="br.com.systeconline.tables.basicos.PessoaFisica"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Funcionario"	/>
 		<mapping class="br.com.systeconline.tables.basicos.Loja"	/>
 		<mapping class="br.com.systeconline.tables.basicos.Usuario"	/>
 		<mapping class="br.com.systeconline.tables.basicos.Avisos"	/>

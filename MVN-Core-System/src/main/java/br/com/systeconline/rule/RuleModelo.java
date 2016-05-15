@@ -19,20 +19,21 @@ public abstract class RuleModelo implements RuleEntityInterface{
 	public Session getSession() {
 		return session;
 	}
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public Entidade find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public String delete(long codigo) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public Entidade find(long codigo) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

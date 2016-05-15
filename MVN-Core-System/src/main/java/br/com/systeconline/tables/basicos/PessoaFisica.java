@@ -8,7 +8,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import br.com.systeconline.core.enums.EnumAtivo;
 import br.com.systeconline.core.enums.EnumEstadoCivil;
+import br.com.systeconline.core.enums.EnumSexo;
 import br.com.systeconline.core.enums.EnumUF;
 
 @Entity
@@ -29,7 +31,7 @@ public class PessoaFisica extends Pessoa{
 	}
 	@Column(name="email",nullable=false)
 	private String email = "";
-	@Column(nullable=false)
+	@Column(name="matricula", nullable=false)
 	private long matricula = 0;
 	@Column(name="tipo",length=2,nullable=false)
 	private String tipo = "";
@@ -40,16 +42,17 @@ public class PessoaFisica extends Pessoa{
 	@Column(nullable=false)
 	private int zona = 0;
 	@Column(name="observacao",length=200,nullable=false)
-	private String observacao;
+	private String observacao = "";
 	@Column(length=40,nullable=false)
 	private String profissao = "";
 	@Column(length=50,nullable=false)
 	private String instrucao = "";
 	@Column(name="estado_civil",length=20,nullable=false)
 	@Enumerated(EnumType.ORDINAL)
-	private EnumEstadoCivil estCivil;
+	private EnumEstadoCivil estCivil = EnumEstadoCivil.SOLTEIRO;
 	@Column(name="sexo",length=1,nullable=false)
-	private String sexo = "I";
+	@Enumerated(EnumType.STRING)
+	private EnumSexo sexo = EnumSexo.M;
 	@Column(length=30)
 	private String ocupacao = "";
 	@Column(length=15,nullable=false)
@@ -70,22 +73,19 @@ public class PessoaFisica extends Pessoa{
 	private String naturalidade = "";
 	@Column(name="dt_nascimento",nullable=false)
 	private Date dtNascimento;
+	
 	@Column(name="fl_status",length=3,nullable=false)
-	private String flStatus="";
-	@Column(length=14,nullable=false)
-	private String inss = "0";
-	@Column(name="ctps",length=15,nullable=false)
-	private String ctps = "0";
+	@Enumerated(EnumType.STRING)
+	private EnumAtivo flStatus= EnumAtivo.S;
+	
 	@Column(name="telefone",nullable=false)
 	private String telefone = "0";
 	@Column(name="celular",nullable=false)
 	private String celular = "0";
 	@Column(name="uf_natural",nullable=false)
 	@Enumerated(EnumType.STRING)
-	private EnumUF ufNatural;
-//	
-//	@OneToMany(mappedBy="pessoa")
-//	private List<Endereco> enderecos;
+	private EnumUF ufNatural = EnumUF.AC;
+
 	
 	public long getMatricula() {
 		return matricula;
@@ -141,10 +141,10 @@ public class PessoaFisica extends Pessoa{
 	public void setEstCivil(EnumEstadoCivil estCivil) {
 		this.estCivil = estCivil;
 	}
-	public String getSexo() {
+	public EnumSexo getSexo() {
 		return sexo;
 	}
-	public void setSexo(String sexo) {
+	public void setSexo(EnumSexo sexo) {
 		this.sexo = sexo;
 	}
 	public String getOcupacao() {
@@ -207,24 +207,14 @@ public class PessoaFisica extends Pessoa{
 	public void setDtNascimento(Date dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
-	public String getFlStatus() {
+	public EnumAtivo getFlStatus() {
 		return flStatus;
 	}
-	public void setFlStatus(String flStatus) {
+	
+	public void setFlStatus(EnumAtivo flStatus) {
 		this.flStatus = flStatus;
 	}
-	public String getInss() {
-		return inss;
-	}
-	public void setInss(String inss) {
-		this.inss = inss;
-	}
-	public String getCtps() {
-		return ctps;
-	}
-	public void setCtps(String ctps) {
-		this.ctps = ctps;
-	}
+	
 	public String getEmail() {
 		return email;
 	}

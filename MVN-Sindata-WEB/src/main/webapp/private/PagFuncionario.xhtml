@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+ xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Cadastro de Funcionários</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/index.xhtml">
+			<ui:define name="conteudo">
+				<p:panel	header="Funcionários">
+				
+					<fieldset>
+						<legend>Dados Pessoais</legend>
+						<h:panelGrid columns="2">
+							<p:outputLabel id="lblNome" value="Nome:" for="txtNome"/>
+							<p:inputText id="txtNome" value="#{funcionario.funcionario.pessoaFisica.nome}" required="true"
+								requiredMessage="Informe o Nome"/>
+							<p:outputLabel id="lblNomeConjuge" value="Nome Conjuge:" for="txtNomeConj"/>
+							<p:inputText id="txtNomeConj" value="#{funcionario.funcionario.nomeConjuge}" required="false"/>
+							<p:outputLabel id="lblNomePai" value="Nome do Pai:"/>
+							<p:inputText id="txtNomePai" value="#{funcionario.funcionario.nomePai}"/>
+							<p:outputLabel id="lblNomeMae" value="Nome da Mãe:"/>
+							<p:inputText id="txtNomeMae" value="#{funcionario.funcionario.nomeMae}"/>
+							<p:outputLabel value="Dt. Nascimento:" for="dtNascimento"/>
+							<p:calendar id="dtNascimento" value="#{funcionario.funcionario.pessoaFisica.dtNascimento}" 
+								pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10"
+								required="true" requiredMessage="Informe a data de Nascimento"
+							/>
+							<p:outputLabel id="lblEmail" value="E-mail:"/>
+							<p:inputText id="txtEmail" value="#{funcionario.funcionario.pessoaFisica.email}"/>
+							<p:outputLabel id="lblCelular" value="Celular:"/>
+							<p:inputMask mask="(99)99999-9999" value="#{funcionario.funcionario.pessoaFisica.celular}"/>
+							<p:outputLabel id="lblRg" value="R.G:"/>
+							<p:inputText id="txtRg" value="#{funcionario.funcionario.pessoaFisica.rg}"/>
+							<p:outputLabel value="CPF:" for="cpf" />
+							<p:inputMask id="cpf" mask="999.999.999-99" label="CPF do cliente" alt="Informe o CPF" value="#{funcionario.funcionario.pessoaFisica.cpf}" 
+								size="11" maxlength="11" required="true" requiredMessage="CPF é obrigatório"
+							/>
+						</h:panelGrid>
+					</fieldset>
+					<fieldset>
+    					<legend>Dados Profissionais</legend>
+						<p:outputLabel id="lblPis" value="PIS/COFINS"/>
+						<p:inputText id="txtPis" value="#{funcionario.funcionario.pis}"/>
+						<p:outputLabel value="Dt. Admissão:" for="dtAdmissao"/>
+							<p:calendar id="dtAdmissao" value="#{funcionario.funcionario.dtAdmissao}" 
+								pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10"
+								required="true" requiredMessage="Informe a data de Nascimento"
+							/>
+						<p:outputLabel id="lblSalario" value="Salário inicial"/>
+						<p:inputText id="txtSalario" value="#{funcionario.funcionario.salarioInicial}"/>
+					</fieldset>
+					<fieldset>
+    					<legend>Observações</legend>
+    					<p:inputTextarea id="txtObservacoes" value="#{funcionario.funcionario.observacoes}"/>
+    				</fieldset>
+				</p:panel>
+				<p:panel>
+					<h:panelGrid columns="1">
+						<p:commandButton value="Salvar" action="#{funcionario.salvar}"/>
+					</h:panelGrid>
+				</p:panel>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
