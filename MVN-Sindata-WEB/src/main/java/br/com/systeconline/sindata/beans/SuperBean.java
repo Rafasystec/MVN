@@ -11,6 +11,8 @@ import org.hibernate.Session;
 
 import br.com.systeconline.controller.SessionContext;
 import br.com.systeconline.core.db.util.HibernateHelper;
+import br.com.systeconline.tables.basicos.Loja;
+import br.com.systeconline.tables.basicos.Usuario;
 import br.com.systeconline.web.attributes.Attributs;
 
 public abstract class SuperBean  implements Serializable{
@@ -72,6 +74,14 @@ public abstract class SuperBean  implements Serializable{
 	
 	protected Session getDBSessionForViewScope() {
 		return HibernateHelper.getSession();
+	}
+	
+	protected Loja getLojaLogada() {
+		return getSession().getLojaLogada();
+	}
+	
+	protected Usuario getUsuarioLogado() {
+		return getSession().getUsuarioLogado();
 	}
 	
 }

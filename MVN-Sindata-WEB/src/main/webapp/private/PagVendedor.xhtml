@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+ xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Cadastro vendedor</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/index.xhtml">
+			<ui:define name="conteudo">
+				<p:panel header="Vendedores">
+					<h:panelGrid columns="2">
+						<p:outputLabel id="lblApelido" value="Apelido:"/>
+						<p:inputText id="txtApelido" value="#{vendedor.vendedor.apelido}"/>
+						<p:outputLabel id="lblPercentualComissao" value="Percentual Comissão:"/>
+						<p:inputText id="txtComissao" value="#{vendedor.vendedor.percentComissao}"/>
+						
+						<p:outputLabel id="lblAtivo" value="Ativo:"/>
+						<p:selectOneMenu id="cboAtivo" value="#{vendedor.vendedor.flAtivo}">
+							<f:selectItems value="#{vendedor.ativos}"/>
+						</p:selectOneMenu>
+						<p:outputLabel id="lblCodFuncionario" value="Código Funcionário"/>
+						<p:inputText id="txtCodFuncionario" value="#{vendedor.codFuncionario}" />
+						
+					</h:panelGrid>
+				</p:panel>
+				<p:panel header="Ações">
+					<h:panelGrid columns="5">
+						<p:commandButton value="Salvar" action="#{vendedor.salvar}"/>
+					</h:panelGrid>
+				</p:panel>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

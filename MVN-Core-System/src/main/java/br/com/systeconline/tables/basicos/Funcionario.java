@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,9 +19,17 @@ import javax.persistence.TemporalType;
  * @author Rafael Rocha
  * @since Gsind 1.0 Beta 24/09/2013 as 06:38
  */
+
+@NamedQueries({
+	@NamedQuery(name=Funcionario.FIND_BY_CODE,query="FROM Funcionario f WHERE codigo = :codigo")
+})
+
 @Entity
 @Table(name="FUNCIONARIO")
 public class Funcionario extends Entidade{
+	
+	public final static String FIND_BY_CODE = "funcionario.findByCode";
+	
 	public Funcionario() {
 		// TODO Auto-generated constructor stub
 	}
