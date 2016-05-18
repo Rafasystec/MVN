@@ -70,7 +70,7 @@ public class Funcionario extends Entidade{
 	private Empresa empresa;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cod_pessoa", referencedColumnName="codigo")
+	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
 	private PessoaFisica pessoaFisica = new PessoaFisica();
 	
 	public long getCodInterno() {
