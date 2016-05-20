@@ -1,48 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
- <h:head >
- 	<title>SindataPDV 1.0</title>
-    <h:outputStylesheet name="main.css" library="css" />
-    <h:outputStylesheet name="venda.css" library="css" />
-  </h:head>
-  
-  <h:body>
-	  <f:view>	  
-	  	 <h:form id="form">
-			  <div>
-		  		<ui:insert name="cabecalho">
-	          			<ui:include src="/private/pagMenuHorizontal.xhtml"></ui:include>
-	           	</ui:insert>        
-			  </div>
-			  <div align="center" style="position:absolute; width: 80% ; left:10%; top: 10%">
-			      <p:growl id="messages" showDetail="false"/>
-		       	  <p:messages id="msgForm" />				          	
-		          <ui:insert name="conteudo">
-		         		<!-- Inserir a pagina somente aqui -->
-		         		
-		         		<h2>Avisos</h2>
-  						<p:dataTable emptyMessage="Nenhum Aviso para ser exibido!" id="avisosGrid" var="aviso" value="#{avisos.avisos}" paginator="true" 
-							rowKey="#{aviso.codigo}" rows="10" rowsPerPageTemplate="5,10,15"
-						>
-							<f:facet name="header">Avisos</f:facet>
-							<p:column headerText="Aviso" width="160" style="background-color: #{aviso.htmlColor}">
-								<h:outputText value="#{aviso.descricao}"/>
-							</p:column>
-							<p:column width="40" style="background-color: #{aviso.htmlColor}">
-								<div align="center"><h:graphicImage alt="Icone" value="#{aviso.imgSrc}" /></div>	 
-							</p:column>
-						</p:dataTable>
-		         		
-		         		
-		          </ui:insert>
-			   </div>
-		   </h:form>
-	 
-	    </f:view>
-  </h:body>
+<html>
+<head>
+<meta http-equiv="refresh" content="0;url=pages/index.php" />
+<title>Barcadero - Redirecionando</title>
+<script language="javascript">
+    window.location.href = "private/index.xhtml"
+</script>
+</head>
+<body>
+Go to <a href="priavte/index.xhtml">/pages/index.html</a>
+</body>
 </html>

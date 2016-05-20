@@ -36,7 +36,7 @@ import br.com.systeconline.tables.basicos.Usuario;
  * @author Rafael Rocha
  * @since 1.0 - dia 14/02/2016 as 19:31
  */
-@ManagedBean(name="empresa")
+@ManagedBean(name="beanEmpresa")
 @RequestScoped
 public class BeanEmpresa extends SuperBean {
 

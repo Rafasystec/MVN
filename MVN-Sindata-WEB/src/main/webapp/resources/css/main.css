@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url("#{resource['fonts/glyphicons-halflings-regular.eot']}");
+    src: url("#{resource['fonts/glyphicons-halflings-regular.eot']}?#iefix") format('embedded-opentype'),
+            url("#{resource['fonts/glyphicons-halflings-regular.woff']}") format('woff'),
+            url("#{resource['fonts/glyphicons-halflings-regular.ttf']}") format('truetype'),
+            url("#{resource['fonts/glyphicons-halflings-regular.svg']}#glyphicons-halflingsregular") format('svg');
+}
 
 /* Properties that both side lists have in common */
 div.link-list {
@@ -45,3 +53,13 @@ h3{
 	font-family: fantasy sans-serif cursive;
 }
 
+ 
+#block-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+    color: #555555;
+    font: 14px/20px 'PT Sans',Arial,Helvetica,sans-serif;
+    min-height: 810px;
+    padding: 20px 0px;
+}

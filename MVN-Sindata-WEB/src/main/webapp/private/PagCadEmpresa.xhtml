@@ -11,80 +11,80 @@
 		<title>Insert title here</title>
 	</h:head>
 	<h:body>
-		<ui:composition template="/index.xhtml">
+		<ui:composition template="index.xhtml">
 			<ui:define name="conteudo">
 				<h3>Empresas</h3>
 				<h:panelGrid columns="2">
 					
 					<p:outputLabel value="Fantasia:" for="fantasia"/>
-					<p:inputText value="#{empresa.pj.fantasia}" id="fantasia"
+					<p:inputText value="#{beanEmpresa.pj.fantasia}" id="fantasia"
 						required="true" requiredMessage="Fantasia é obrigatório."
 						maxlength="60" size="60"
 					/>
 					
 					<p:outputLabel value="Razão Social:" for="rsocial"/>
-					<p:inputText value="#{empresa.pj.razaoSocial}" id="rsocial"
+					<p:inputText value="#{beanEmpresa.pj.razaoSocial}" id="rsocial"
 						required="true" requiredMessage="Razão Social deve ser preenchida."
 						maxlength="60" size="60"
 					/>
 					
 					<p:outputLabel value="Insc. Estadual:" for="ie"/>
-					<p:inputText value="#{empresa.pj.ie}" id="ie"
+					<p:inputText value="#{beanEmpresa.pj.ie}" id="ie"
 						required="true" requiredMessage="Inscrição Estadual é necessária."
 						maxlength="15" size="15"
 					/>
 					
 					<p:outputLabel value="CNPJ:" for="cnpj"	/>
-					<p:inputMask  value="#{empresa.pj.cnpj}" id="cnpj"
+					<p:inputMask  value="#{beanEmpresa.pj.cnpj}" id="cnpj"
 						required="true" requiredMessage="Informe o CNPJ - Somente números."
 						mask="99.999.999/9999-99" />
 					
 					<p:outputLabel value="I.E. subst. tributária:" for="ietrib"/>
-					<p:inputText value="#{empresa.pj.ieSubsTributaria}" id="ietrib" maxlength="15" size="15"/>
+					<p:inputText value="#{beanEmpresa.pj.ieSubsTributaria}" id="ietrib" maxlength="15" size="15"/>
 					
 					<p:outputLabel value="Insc. Municipal:" for="im"/>
-					<p:inputText value="#{empresa.pj.im}" id="im" maxlength="15" size="15"/>
+					<p:inputText value="#{beanEmpresa.pj.im}" id="im" maxlength="15" size="15"/>
 					
 					<p:outputLabel value="Regime Tributário:" for="regime"/>
-					<p:selectOneMenu id="regime" value="#{empresa.pj.codRegTribut}"
+					<p:selectOneMenu id="regime" value="#{beanEmpresa.pj.codRegTribut}"
 						required="true" requiredMessage="Regime tributário é obrigatório."
 					>
-						<f:selectItems value="#{empresa.regime}"/>
+						<f:selectItems value="#{beanEmpresa.regime}"/>
 					</p:selectOneMenu>
 					
 					<p:outputLabel value="Contato:" for="contato"/>
-					<p:inputMask value="#{empresa.pj.fone}" id="contato" mask="(999)99999-9999"
+					<p:inputMask value="#{beanEmpresa.pj.fone}" id="contato" mask="(999)99999-9999"
 						required="true" requiredMessage="Informe um contato por favor."
 					/>
 					
 					
 					<p:outputLabel value="UF:" for="uf"/>
-					<p:selectOneMenu value="#{empresa.pj.uf}" id="uf" maxlength="4">
-						<f:selectItems value="#{empresa.uf}"/>
+					<p:selectOneMenu value="#{beanEmpresa.pj.uf}" id="uf" maxlength="4">
+						<f:selectItems value="#{beanEmpresa.uf}"/>
 					</p:selectOneMenu>
 				
 					
 					<p:outputLabel value="E-mail" for="email"/>
-					<p:inputText value="#{empresa.pj.email}" id="email"
+					<p:inputText value="#{beanEmpresa.pj.email}" id="email"
 						required="true" requiredMessage="E-mail é obrigatório."
 						maxlength="35" size="35"
 					/>
 					
 					<p:outputLabel value="Web Site: www." for="site"/>
-					<p:inputText value="#{empresa.pj.webSite}" id="site"/>
+					<p:inputText value="#{beanEmpresa.pj.webSite}" id="site"/>
 					
 					<p:outputLabel value="Logo marca"/>
-					<p:fileUpload value="#{empresa.fileUpload}" auto="true" mode="simple" skinSimple="true" label="Arquivo"/>
+					<p:fileUpload value="#{beanEmpresa.fileUpload}" auto="true" mode="simple" skinSimple="true" label="Arquivo"/>
 					
 				</h:panelGrid>
 				<p:fieldset legend="Dados gerais">
 					<h:panelGrid columns="2">
 						<p:outputLabel value="Atividade Principal" for="atividade"/>
-						<p:selectOneMenu value="#{empresa.emp.atividade}" id="atividade" maxlength="25">
-							<f:selectItems value="#{empresa.atividade}"/>
+						<p:selectOneMenu value="#{beanEmpresa.emp.atividade}" id="atividade" maxlength="25">
+							<f:selectItems value="#{beanEmpresa.atividade}"/>
 						</p:selectOneMenu>
 						<p:outputLabel value="Data Fundação:" for="dtFundacao"/>
-						<p:calendar id="dtFundacao" value="#{empresa.emp.dtFundacao}" pattern="dd/MM/yyyy" maxlength="10" 
+						<p:calendar id="dtFundacao" value="#{beanEmpresa.emp.dtFundacao}" pattern="dd/MM/yyyy" maxlength="10" 
 						mask="99/99/9999" size="10"
 						/>
 					</h:panelGrid>
@@ -93,57 +93,57 @@
 				<p:fieldset legend="Endereço">
 					<h:panelGrid columns="4" cellpadding="0">
 						<p:outputLabel value="CEP:" for="cep"/>
-						<p:inputMask id="cep" mask="99999-999" value="#{empresa.ender.cep}" size="9"/>
+						<p:inputMask id="cep" mask="99999-999" value="#{beanEmpresa.ender.cep}" size="9"/>
 						<p:outputLabel value="Número:" for="numero"/>
-						<p:inputText id="numero" value="#{empresa.ender.numero}" maxlength="15" size="10"/>
+						<p:inputText id="numero" value="#{beanEmpresa.ender.numero}" maxlength="15" size="10"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="4" cellpadding="0">
 					   	<p:outputLabel> tipo Logradouro:</p:outputLabel>
-					   	<p:selectOneMenu value="#{empresa.ender.tpLogradouro}" >
+					   	<p:selectOneMenu value="#{beanEmpresa.ender.tpLogradouro}" >
 					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-							<f:selectItems value="#{empresa.tpLogradouros}" var="log"
+							<f:selectItems value="#{beanEmpresa.tpLogradouros}" var="log"
 								itemValue="#{log.value}" itemLabel="#{log.lable}"
 						/>
 						</p:selectOneMenu>
 						<p:outputLabel value="Logradouro:" for="lograd"/>
-					   	<p:inputText id="lograd" value="#{empresa.ender.logradouro}" ></p:inputText>
+					   	<p:inputText id="lograd" value="#{beanEmpresa.ender.logradouro}" ></p:inputText>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="7">
 						<!-- Para o combo de estado -->
 						<p:outputLabel value="Estado:" for="estado"/>
-					   	<p:selectOneMenu id="estado" value="#{empresa.codEstado}">
+					   	<p:selectOneMenu id="estado" value="#{beanEmpresa.codEstado}">
 					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{empresa.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
-					   		<p:ajax update="cidade" listener="#{empresa.obterCidades}"/>
+					   		<f:selectItems value="#{beanEmpresa.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
+					   		<p:ajax update="cidade" listener="#{beanEmpresa.obterCidades}"/>
 					   	</p:selectOneMenu>
 					   	<!-- Para o combo de cidade -->
 						<p:outputLabel value="Cidade:" for="cidade" />
-					   	<p:selectOneMenu id="cidade" value="#{empresa.codCidade}">
+					   	<p:selectOneMenu id="cidade" value="#{beanEmpresa.codCidade}">
 					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{empresa.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
-					   		<p:ajax update="bairro" listener="#{empresa.obterBairros}"/>
+					   		<f:selectItems value="#{beanEmpresa.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
+					   		<p:ajax update="bairro" listener="#{beanEmpresa.obterBairros}"/>
 					   	</p:selectOneMenu>
-					   	<p:commandButton immediate="true" value="+" actionListener="#{empresa.openCadCidade}" update="cidade">
-					        <p:ajax event="dialogReturn"  update="cidade" listener="#{empresa.hendleReturnCidades}" />
+					   	<p:commandButton immediate="true" value="+" actionListener="#{beanEmpresa.openCadCidade}" update="cidade">
+					        <p:ajax event="dialogReturn"  update="cidade" listener="#{beanEmpresa.hendleReturnCidades}" />
 					    </p:commandButton>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="6" >		   	
 						<!-- Para o combo de bairro -->
 					   	<p:outputLabel value="Bairro:" for="bairro"/>
-					   	<p:selectOneMenu id="bairro" value="#{empresa.ender.codBairro}" >
+					   	<p:selectOneMenu id="bairro" value="#{beanEmpresa.ender.codBairro}" >
 					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{empresa.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
+					   		<f:selectItems value="#{beanEmpresa.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
 					   	</p:selectOneMenu>
-					    <p:commandButton immediate="true" value="+" actionListener="#{empresa.openCadBairro}">
-					        <p:ajax event="dialogReturn" listener="#{empresa.hendleReturnBairros}" update="bairro" />
+					    <p:commandButton immediate="true" value="+" actionListener="#{beanEmpresa.openCadBairro}">
+					        <p:ajax event="dialogReturn" listener="#{beanEmpresa.hendleReturnBairros}" update="bairro" />
 					    </p:commandButton>
 			   		</h:panelGrid>
 				</p:fieldset>
 				<h:panelGrid columns="6">
-					<p:commandButton value="Salvar" action="#{empresa.salvar}" ajax="false"/>
+					<p:commandButton value="Salvar" action="#{beanEmpresa.salvar}" ajax="false"/>
 				</h:panelGrid>
 			</ui:define>
 		</ui:composition>
