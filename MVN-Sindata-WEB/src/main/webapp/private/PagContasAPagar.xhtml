@@ -11,46 +11,104 @@
 		<title>Contas a pagar</title>
 	</h:head>
 	<h:body>
-		<ui:composition template="/index.xhtml">
+		<ui:composition template="index.xhtml">
 			<ui:define name="conteudo">
-				<h3>Contas a pagar</h3>
-				<h:panelGrid columns="2">
-					<p:outputLabel value="Dt. Vencimento" for="dtVenc"/>
-					<p:calendar id="dtVenc" value="#{contaPagar.contaPagar.dtVencimento}" 
-						pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10"
-						required="true" requiredMessage="Informe o vencimento"
-					/>
-					
-					<p:outputLabel value="Dt. Emissão Documento:" for="dtEmissao"/>
-					<p:calendar id="dtEmissao" value="#{contaPagar.contaPagar.dtEmissao}" 
+				<div class="form-group ">
+					<label class="control-label " for="dtVenc">
+			   			Data Vencimento
+			  		</label>
+					<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span> 
+				    	</div>
+				    	 
+						<p:calendar id="dtVenc" value="#{contaPagar.contaPagar.dtVencimento}" 
+							pattern="dd/MM/yyyy"  mask="99/99/9999" size="10" required="true"
+							requiredMessage="Informe a data de vencimento"
+						/>
+						 
+						 
+					</div>
+					<label class="control-label " for="dtEmissao">
+			   			Data Emissão
+			  		</label>
+					<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span> 
+				    	</div>
+						<p:calendar id="dtEmissao" value="#{contaPagar.contaPagar.dtEmissao}" 
 						pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10"
 						required="true" requiredMessage="Informe a data de Emissão do documento"
-					/>
+						/>
+					</div>
+					<label class="control-label " for="valor">
+			   			Valor
+			  		</label>
+					<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-usd"></span> 
+				    	</div>
+						<p:inputText id="valor" value="#{contaPagar.contaPagar.total}"
+							required="true" requiredMessage="Informe o valor do documento"
+						/>
+					</div>
 					
-					<p:outputLabel value="Valor" for="valor"/>
-					<p:inputText id="valor" value="#{contaPagar.contaPagar.total}"
-						required="true" requiredMessage="Informe o valor do documento"
-					/>
 					
-					<p:outputLabel value="Tipo" for="tipo"/>
-					<p:selectOneMenu id="tipo" value="#{contaPagar.contaPagar.tipo}"
-						required="true" requiredMessage="Informe o tipo de conta"
-					>
-						<f:selectItems value="#{contaPagar.tipoConta}"/>
-					</p:selectOneMenu>
 					
-					<p:outputLabel value="Qtde. dias para avisar:" for="qtdeDias"/>
-					<p:inputText id="qtdeDias" alt="Quantidade de dias antes do vencimento para avisar que vai vencer." value="#{contaPagar.contaPagar.qtdDiasVenc}"/>
+			   		<label class="control-label " for="tipo">
+		   				Tipo
+		  			</label>
+		  			<div class="input-group">
+				   		<!-- 
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-usd"></span> 
+				    	</div>
+				    	 -->
+						<p:selectOneMenu id="tipo" value="#{contaPagar.contaPagar.tipo}"
+							required="true" requiredMessage="Informe o tipo de conta"
+							>
+							<f:selectItems value="#{contaPagar.tipoConta}"/>
+						</p:selectOneMenu>
+					</div>
 					
-					<p:outputLabel value="Mora:" for="mora"/>
-					<p:inputText id="mora" alt="Valor a ser acrescentado em caso de atraso" value="#{contaPagar.contaPagar.mora}"/>
+					<label class="control-label " for="valor">
+			   			Qtde dias Avisar
+			  		</label>
+					<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-bullhorn"></span> 
+				    	</div>
+						<p:inputText id="qtdeDias" alt="Quantidade de dias antes do vencimento para avisar que vai vencer." value="#{contaPagar.contaPagar.qtdDiasVenc}"/>
+					</div>
 					
-					<p:outputLabel value="Nosso Número:" for="nossoNumero"/>
-					<p:inputText id="nossoNumero" alt="Nosso número" value="#{contaPagar.contaPagar.nossoNumero}" maxlength="15"/>
+					<label class="control-label " for="mora">
+			   			Mora
+			  		</label>
+					<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-usd"></span> 
+				    	</div>
+						<p:inputText id="mora" alt="Valor a ser acrescentado em caso de atraso" value="#{contaPagar.contaPagar.mora}"/>
+					</div>
 					
-					<p:outputLabel value="Observações:" for="nossoNumero"/>
+					<label class="control-label " for="nosso">
+			   			Nosso Número
+			  		</label>
+					<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-barcode"></span> 
+				    	</div>
+						<p:inputText id="nossoNumero" alt="Nosso número" value="#{contaPagar.contaPagar.nossoNumero}" maxlength="15"/>
+					</div>
+					<label class="control-label " for="observacao">
+			   			Observação
+			  		</label>
+					<div class="input-group">
+				   		
 					<p:inputTextarea value="#{contaPagar.contaPagar.observacao}"/>
-				</h:panelGrid>
+					</div>
+					
+				</div>			
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" action="#{contaPagar.salvar}"/>
 					<p:commandButton value="Novo" action="#{contaPagar.novo}"/>
