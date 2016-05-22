@@ -10,11 +10,24 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.systeconline.core.enums.EnumTipoPlanoConta;
+import br.com.systeconline.tables.basicos.Empresa;
+import br.com.systeconline.tables.basicos.Entidade;
 import br.com.systeconline.tables.basicos.EntidadeEmpresa;
+import br.com.systeconline.tables.basicos.Usuario;
 
 @Entity
 @Table(name="PLANO_CONTA")
 public class PlanoConta extends EntidadeEmpresa{
+	
+	public PlanoConta() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public PlanoConta(Empresa empresa, Usuario usuario) {
+		// TODO Auto-generated constructor stub
+		super(empresa, usuario);
+		
+	}
 	
 	@Transient
 	private static final long serialVersionUID = -103609002772493508L;
@@ -37,7 +50,6 @@ public class PlanoConta extends EntidadeEmpresa{
 	private BigDecimal saldoAtual = new BigDecimal(0);
 	@Column(name="saldo_anterior",nullable=false)
 	private BigDecimal saldoAnterior = new BigDecimal(0);;
-	
 	
 	
 	public int getNivel1() {
@@ -94,4 +106,5 @@ public class PlanoConta extends EntidadeEmpresa{
 	public void setTpConta(EnumTipoPlanoConta tpConta) {
 		this.tpConta = tpConta;
 	}
+
 }

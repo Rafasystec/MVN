@@ -39,7 +39,7 @@ public class Cliente extends EntidadeEmpresa{
 	private String nomeMae;
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cod_pessoa", referencedColumnName="codigo")
+	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
 	private PessoaFisica pessoaFisica;
 
 	public String getNomePai() {

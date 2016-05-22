@@ -26,6 +26,10 @@ public class NotaEletronica extends EntidadeLoja {
 
 	private static final long serialVersionUID = -1522782328874457579L;
 
+	public NotaEletronica() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public NotaEletronica(Loja loja, Usuario usuario) {
 		super(loja, usuario);
 		// TODO Auto-generated constructor stub
