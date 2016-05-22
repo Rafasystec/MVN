@@ -1,68 +1,45 @@
 package br.com.systeconline.tables.financeiro;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import br.com.systeconline.core.enums.EnumTipoPlanoConta;
+import br.com.systeconline.tables.basicos.EntidadeEmpresa;
 
 @Entity
-public class PlanoConta {
+@Table(name="PLANO_CONTA")
+public class PlanoConta extends EntidadeEmpresa{
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
-	@Column(name="codigo",nullable=false)
-	private long codigo;
-	@Column(name="cod_emp",nullable=false)
-	private long codEmp;
-	@Column(name="nivel0",nullable=false)
-	private int nivel0;
+	@Transient
+	private static final long serialVersionUID = -103609002772493508L;
 	@Column(name="nivel1",nullable=false)
-	private int nivel1;
+	private int nivel1 = 0;
 	@Column(name="nivel2",nullable=false)
-	private int nivel2;
+	private int nivel2 = 0;
+	@Column(name="nivel3",nullable=false)
+	private int nivel3 = 0;
+	@Column(name="nivel4",nullable=false)
+	private int nivel4 = 0;
+	@Column(name="nivel5",nullable=false)
+	private int nivel5 = 0;
 	@Column(name="descricao",nullable=false)
 	private String descricao;
 	@Column(name="tp_conta",nullable=false)
-	private String tpConta;
-	@Column(name="local_p",nullable=false)
-	private String localP;
-	@Column(name="result_p",nullable=false)
-	private String resultP;
+	@Enumerated(EnumType.ORDINAL)
+	private EnumTipoPlanoConta tpConta = EnumTipoPlanoConta.DESPESA;
 	@Column(name="saldo_atual",nullable=false)
-	private double saldoAtual;
+	private BigDecimal saldoAtual = new BigDecimal(0);
 	@Column(name="saldo_anterior",nullable=false)
-	private double saldoAnterior;
-	@Column(name="taxa_p",nullable=false)
-	private double taxaP;
-	@Column(name="resume_p",nullable=false)
-	private String resumeP;
-	@Column(name="mesmov_p",nullable=false)
-	private int mesmov;
-	@Column(name="destaque_p",nullable=false)
-	private String destaqueP;
-	@Column(name="dt_cadastro",nullable=false)
-	private Date dtCadatro;
+	private BigDecimal saldoAnterior = new BigDecimal(0);;
 	
-	public Date getDtCadatro() {
-		return dtCadatro;
-	}
-	public void setDtCadatro(Date dtCadatro) {
-		this.dtCadatro = dtCadatro;
-	}
-	public long getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
-	}
-	public long getCodEmp() {
-		return codEmp;
-	}
-	public void setCodEmp(long codEmp) {
-		this.codEmp = codEmp;
-	}
+	
+	
 	public int getNivel1() {
 		return nivel1;
 	}
@@ -75,70 +52,46 @@ public class PlanoConta {
 	public void setNivel2(int nivel2) {
 		this.nivel2 = nivel2;
 	}
-	public int getNivel0() {
-		return nivel0;
-	}
-	public void setNivel0(int nivel0) {
-		this.nivel0 = nivel0;
-	}
 	public String getDescricao() {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public String getTpConta() {
-		return tpConta;
+	public int getNivel3() {
+		return nivel3;
 	}
-	public void setTpConta(String tpConta) {
-		this.tpConta = tpConta;
+	public void setNivel3(int nivel3) {
+		this.nivel3 = nivel3;
 	}
-	public String getLocalP() {
-		return localP;
+	public int getNivel4() {
+		return nivel4;
 	}
-	public void setLocalP(String localP) {
-		this.localP = localP;
+	public void setNivel4(int nivel4) {
+		this.nivel4 = nivel4;
 	}
-	public String getResultP() {
-		return resultP;
+	public int getNivel5() {
+		return nivel5;
 	}
-	public void setResultP(String resultP) {
-		this.resultP = resultP;
+	public void setNivel5(int nivel5) {
+		this.nivel5 = nivel5;
 	}
-	public double getSaldoAtual() {
+	public BigDecimal getSaldoAtual() {
 		return saldoAtual;
 	}
-	public void setSaldoAtual(double saldoAtual) {
+	public void setSaldoAtual(BigDecimal saldoAtual) {
 		this.saldoAtual = saldoAtual;
 	}
-	public double getSaldoAnterior() {
+	public BigDecimal getSaldoAnterior() {
 		return saldoAnterior;
 	}
-	public void setSaldoAnterior(double saldoAnterior) {
+	public void setSaldoAnterior(BigDecimal saldoAnterior) {
 		this.saldoAnterior = saldoAnterior;
 	}
-	public double getTaxaP() {
-		return taxaP;
+	public EnumTipoPlanoConta getTpConta() {
+		return tpConta;
 	}
-	public void setTaxaP(double taxaP) {
-		this.taxaP = taxaP;
-	}
-	public String getResumeP() {
-		return resumeP;
-	}
-	public void setResumeP(String resumeP) {
-		this.resumeP = resumeP;
-	}
-	public int getMesmov() {
-		return mesmov;
-	}
-	public void setMesmov(int mesmov) {
-		this.mesmov = mesmov;
-	}
-	public String getDestaqueP() {
-		return destaqueP;
-	}
-	public void setDestaqueP(String destaqueP) {
-		this.destaqueP = destaqueP;
+	public void setTpConta(EnumTipoPlanoConta tpConta) {
+		this.tpConta = tpConta;
 	}
 }

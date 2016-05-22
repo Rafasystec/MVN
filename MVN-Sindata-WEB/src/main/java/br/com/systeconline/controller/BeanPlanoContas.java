@@ -162,28 +162,7 @@ public class BeanPlanoContas extends BeanSuperClass {
 		String target		= null;
 		PlanoConta conta	= null;
 		try {
-			conta = new PlanoConta();
-			conta.setCodEmp(0);
-			conta.setDescricao(getDescricao());
-			conta.setLocalP("0");
-			conta.setResultP(getResultP());
-			conta.setResumeP(getResumeP());
-			conta.setDestaqueP("");
-			conta.setSaldoAnterior(0.00);
-			conta.setSaldoAtual(0.00);
-			conta.setTaxaP(0.00);
-			conta.setDtCadatro(new Date());
-			retorno += getNiveis(); 
-			if(retorno.equals("") ){
-				conta.setNivel0(getNivel0());
-				conta.setNivel1(getNivel1());
-				conta.setNivel2(getNivel2());
-				conta.setTpConta(getTpConta());
-			}else{
-				exibirMensagem(retorno);
-				return target;
-			}
-			retorno += fcPlanoConta.salvar(conta);
+			
 			exibirMensagem(retorno);
 		} catch (Exception e) {
 			// TODO: handle exception
