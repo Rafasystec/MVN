@@ -2,7 +2,7 @@ package br.com.barcadero.web.beans;
 
 import javax.faces.bean.ManagedBean;
 
-import com.sun.glass.ui.GestureSupport;
+//import com.sun.glass.ui.GestureSupport;
 
 import br.com.barcadero.core.util.cargainicial.HandleCargaCidadesCE;
 import br.com.systeconline.rule.FacadeEstado;

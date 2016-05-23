@@ -78,6 +78,7 @@ public class TestRuleCaixa {
 			caixa.setFlStCaixa(EnumStatusCaixa.ABERTO);
 			System.out.println(ruleCaixa.insert(caixa));
 		}else{
+			testInsert();
 			fail("Nao foi encontrado caixa com o codigo >> " + lastCodeCaixa);
 		}
 	}

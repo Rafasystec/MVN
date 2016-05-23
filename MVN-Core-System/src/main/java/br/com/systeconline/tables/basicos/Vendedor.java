@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.systeconline.core.enums.EnumAtivo;
+import br.com.systeconline.core.enums.EnumSimNao;
 /**
  * Classe para persistir o vendedor
  * @author Rafael Rocha
@@ -29,6 +30,8 @@ public class Vendedor extends EntidadeLoja{
 	private BigDecimal percentComissao = new BigDecimal(0);
 	@Column(name="FL_ATIVO", nullable=false)
 	private EnumAtivo flAtivo = EnumAtivo.S;
+	@Column(name="CANCELA_VENDA")
+	private EnumSimNao candelaVenda = EnumSimNao.SIM;
 	
 	public Vendedor(Loja loja, Usuario usuario) {
 		// TODO Auto-generated constructor stub
@@ -78,6 +81,14 @@ public class Vendedor extends EntidadeLoja{
 
 	public void setFlAtivo(EnumAtivo flAtivo) {
 		this.flAtivo = flAtivo;
+	}
+
+	public EnumSimNao getCandelaVenda() {
+		return candelaVenda;
+	}
+
+	public void setCandelaVenda(EnumSimNao candelaVenda) {
+		this.candelaVenda = candelaVenda;
 	}
 	
 }
