@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:h="http://java.sun.com/jsf/html"
@@ -29,6 +28,21 @@
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
+                        <ui:repeat value="#{menuHorizontal.mensagens}" var="mensagem">
+                        	 <li>
+	                            <a href="#">
+	                                <div>
+	                                    <strong>Rafael Rocha</strong>
+	                                    <span class="pull-right text-muted">
+	                                        <em>Yesterday</em>
+	                                    </span>
+	                                </div>
+	                                <div>#{mensagem.mensagem}</div>
+	                            </a>
+                        </li>
+                         <li class="divider"></li>
+                        </ui:repeat>
+                        
                         <li>
                             <a href="#">
                                 <div>
@@ -68,6 +82,13 @@
                         <li>
                             <a class="text-center" href="#">
                                 <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="../private/PagUserMensagens.xhtml">
+                                <strong>Enviar Mensagem</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>

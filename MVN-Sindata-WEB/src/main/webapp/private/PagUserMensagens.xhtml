@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+ xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Mensagens de Usuário</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="index.xhtml">
+			<ui:define name="conteudo">
+				<p:panel header="Mensagens de Usuários">
+					<label class="control-label " for="usuario">
+				   		Usuário
+				  	</label>
+				  	<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-user"></span> 
+				    	</div>
+				   		<p:inputText id="usuario" label="Nome" value="#{userMessage.message.cdUserReceive}" maxlength="60" 
+							required="true" requiredMessage="Informe o Usuário de destino" styleClass="form-control" placeholder="User"
+						/>
+				  	</div>
+				  	<label class="control-label " for="usuario">
+				   		Mensagem
+				  	</label>
+				  	<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-user"></span> 
+				    	</div>
+				   		<p:inputTextarea id="mensagem" value="#{userMessage.message.mensagem}" maxlength="180" 
+							required="true" requiredMessage="Corpo da mensagem é obrigatório" styleClass="form-control" placeholder="Mensagem"
+						/>
+				  	</div>
+				  	<div>
+				  		<h:commandButton action="#{userMessage.salvar}" value="Enviar"/>
+				  	</div>
+				  </p:panel>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

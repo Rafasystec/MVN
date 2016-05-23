@@ -13,21 +13,22 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<!-- entidades  Declarar as entidades que serao utilizadas no sistema-->
-		<mapping class="br.com.systeconline.tables.basicos.Bairro"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Estado"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Cidade"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Endereco"/>
-		<mapping class="br.com.systeconline.tables.basicos.Empresa"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Loja" />
+		<mapping class="br.com.systeconline.tables.basicos.Bairro"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Estado"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Cidade"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Endereco"		/>
+		<mapping class="br.com.systeconline.tables.basicos.Empresa"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Loja" 			/>
 		<mapping class="br.com.systeconline.tables.basicos.PessoaJuridica"	/>
 		<mapping class="br.com.systeconline.tables.basicos.Cliente"			/>
 		<mapping class="br.com.systeconline.tables.basicos.PessoaFisica"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Funcionario"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Vendedor"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Loja"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Usuario"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Avisos"	/>
-		<mapping class="br.com.systeconline.tables.basicos.Caixa"	/>
+		<mapping class="br.com.systeconline.tables.basicos.Funcionario"		/>
+		<mapping class="br.com.systeconline.tables.basicos.Vendedor"		/>
+		<mapping class="br.com.systeconline.tables.basicos.Loja"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Usuario"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Avisos"			/>
+		<mapping class="br.com.systeconline.tables.basicos.Caixa"			/>
+		<mapping class="br.com.systeconline.tables.basicos.UserMensagens"	/>
 		<mapping class="br.com.systeconline.tables.basicos.CaixaFechamento"	/>
 		<mapping class="br.com.systeconline.tables.basicos.CaixaAbertura"	/>
 		<mapping class="br.com.systeconline.tables.backoffice.Produto"		/>
@@ -41,7 +42,6 @@
 		<mapping class="br.com.barcadero.tables.audit.web.AuditoriaLog" 	/>
 		<mapping class="br.com.systeconline.tables.financeiro.ContaPagar"	/>
 		<mapping class="br.com.systeconline.tables.financeiro.PlanoConta"	/>
-		
 		
 	</session-factory>
 </hibernate-configuration>

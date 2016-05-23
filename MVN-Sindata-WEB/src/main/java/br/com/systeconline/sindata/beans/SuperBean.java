@@ -11,6 +11,7 @@ import org.hibernate.Session;
 
 import br.com.systeconline.controller.SessionContext;
 import br.com.systeconline.core.db.util.HibernateHelper;
+import br.com.systeconline.tables.basicos.Empresa;
 import br.com.systeconline.tables.basicos.Loja;
 import br.com.systeconline.tables.basicos.Usuario;
 import br.com.systeconline.web.attributes.Attributs;
@@ -82,6 +83,10 @@ public abstract class SuperBean  implements Serializable{
 	
 	protected Usuario getUsuarioLogado() {
 		return getSession().getUsuarioLogado();
+	}
+	
+	protected Empresa getEmpresaLogada() {
+		return getSession().getEmpresaLogada();
 	}
 	
 }

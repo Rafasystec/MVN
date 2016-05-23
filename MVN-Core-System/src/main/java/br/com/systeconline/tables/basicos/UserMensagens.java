@@ -16,11 +16,18 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name="USER_MENSAGENS")
-public class UserMensagens extends Entidade {
+public class UserMensagens extends EntidadeEmpresa {
 
 	@Transient
 	private static final long serialVersionUID = 6224039031201562857L;
+	public UserMensagens() {
+		// TODO Auto-generated constructor stub
+	}
 	
+	public UserMensagens(Empresa empresa,Usuario usuario){
+		super(empresa,usuario);
+	}
+		
 	@Column(name="MENSAGEM",nullable=false)
 	private String mensagem 	= "";
 	@Column(name="DT_MENSAGEM",nullable=false)
