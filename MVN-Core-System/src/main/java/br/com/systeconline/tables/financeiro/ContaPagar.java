@@ -3,10 +3,14 @@ package br.com.systeconline.tables.financeiro;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -72,6 +76,10 @@ public class ContaPagar extends EntidadeLoja {
 	private String nossoNumero = "000000000000000";
 	@Column(name="observacao",nullable=false,length=80)
 	private String observacao = "";
+	
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@JoinColumn(name="cd_plano",referencedColumnName="codigo")
+	private PlanoConta planoConta;
 		
 	public Date getDtVencimento() {
 		return dtVencimento;
@@ -151,6 +159,12 @@ public class ContaPagar extends EntidadeLoja {
 	}
 	public String getObservacao() {
 		return observacao;
+	}
+	public PlanoConta getPlanoConta() {
+		return planoConta;
+	}
+	public void setPlanoConta(PlanoConta planoConta) {
+		this.planoConta = planoConta;
 	}
 	
 }
