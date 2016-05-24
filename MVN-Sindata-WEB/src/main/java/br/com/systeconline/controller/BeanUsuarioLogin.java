@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import br.com.systeconline.rule.FacadeUsuario;
 import br.com.systeconline.sindata.beans.SuperBean;
+import br.com.systeconline.tables.basicos.Entidade;
 import br.com.systeconline.tables.basicos.Usuario;
 import br.com.systeconline.tables.financeiro.Usuarios;
 import br.com.systeconline.web.attributes.Attributs;
@@ -51,7 +52,7 @@ public class BeanUsuarioLogin extends SuperBean{
 		}
 	}
 			
-	public List<Usuarios> getUsuarios() throws Exception{
+	public List<Entidade> getUsuarios() throws Exception{
 		try {
 			return facadeUsuario.findAll();
 		} catch (Exception e) {

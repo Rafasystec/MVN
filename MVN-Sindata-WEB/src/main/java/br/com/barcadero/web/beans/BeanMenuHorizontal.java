@@ -1,15 +1,11 @@
 package br.com.barcadero.web.beans;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-
 import br.com.barcadero.rule.backoffice.RuleUserMensagem;
 import br.com.systeconline.sindata.beans.SuperBean;
 import br.com.systeconline.tables.basicos.TmpUserMessage;
-import br.com.systeconline.tables.basicos.UserMensagens;
 
 @ManagedBean(name="menuHorizontal")
 @RequestScoped
@@ -20,8 +16,6 @@ public class BeanMenuHorizontal extends SuperBean {
 	public BeanMenuHorizontal() {
 		// TODO Auto-generated constructor stub
 		ruleMensagem = new RuleUserMensagem(getDataBaseSession());
-		
-		
 	}
 
 	@Override

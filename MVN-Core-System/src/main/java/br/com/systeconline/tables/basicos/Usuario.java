@@ -21,9 +21,11 @@ import br.com.systeconline.core.enums.EnumTipoUser;
  */
 @NamedQueries(
 		{
-			@NamedQuery(name=Usuario.FIND_ALL,query="FROM Usuario"),
-			@NamedQuery(name=Usuario.FIND_BY_CODE,query="FROM Usuario u WHERE u.codigo = :codigo"),
-			@NamedQuery(name=Usuario.FIND_BY_LOGIN,query="FROM Usuario u WHERE u.email = :email AND u.passWord = :senha")
+			@NamedQuery(name=Usuario.FIND_ALL		,query="FROM Usuario"),
+			@NamedQuery(name=Usuario.FIND_BY_CODE	,query="FROM Usuario u WHERE u.codigo = :codigo"),
+			@NamedQuery(name=Usuario.FIND_BY_LOGIN	,query="FROM Usuario u WHERE u.email = :email AND u.passWord = :senha"),
+			@NamedQuery(name=Usuario.FIND_BY		,query="FROM Usuario u WHERE  u.nome LIKE :nome OR u.email LIKE :email "),
+			@NamedQuery(name=Usuario.FIND_BY_EMAIL	,query="FROM Usuario u WHERE u.email = :email")
 		}
 )
 
@@ -46,9 +48,13 @@ public class Usuario extends Entidade{
 	public static final String FIND_ALL 	= "Usuario.findAll";
 	public static final String FIND_BY_CODE = "Usuario.findByCodigo";
 	public static final String FIND_BY_LOGIN= "Usuario.findByLogin";
+	public static final String FIND_BY		= "Usuario.findBy";
+	public static final String FIND_BY_EMAIL= "Usuario.findByEmail";
 	public static final String PARA_CODIGO 	= "codigo";
 	public static final String PARA_USUARIO = "email";
+	public static final String PARA_EMAIL	= "email";
 	public static final String PARA_PWD 	= "senha";
+	public static final String PARA_NOME 	= "nome";
 	
 	@Column(name="cod_permissoes",nullable=false)
 	private long codPermissoes;

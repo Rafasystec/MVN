@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+ 	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Consulta de Usuários</title>
+</h:head>
+<h:body>
+
+	<h:form id="cadPopUsuario">
+			<p:growl id="msg" showDetail="true" sticky="true"></p:growl>
+		<p:panel header="Consulta de Usuários">
+		
+			<p:dataTable id="grid" var="usuario" 	value="#{popUsuario.usuarios}" paginator="true" rows="10">
+				<p:column headerText="Código">
+					<h:outputText value="#{usuario.codIbge}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{usuario.nome}" />
+				</p:column>
+				<p:column headerText="E-mail">
+					<h:outputText value="#{usuario.email}" />
+				</p:column>
+				<!-- 
+				<p:column headerText="Data Cadastro">
+					<h:outputText value="#{cidades.dtCadastro.time}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				 -->
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>

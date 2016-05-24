@@ -54,10 +54,9 @@ public class FacadeUsuario extends RuleModelo{
 		}
 	}
 	
-	public List<Usuarios> findAll() throws Exception{
+	public List<Entidade> findAll() throws Exception{
 		try {
-			return null;
-			//return (List<Usuarios>)daoUsuario.findAll();
+			return daoUsuario.findAll();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception();
@@ -94,6 +93,11 @@ public class FacadeUsuario extends RuleModelo{
 		return daoUsuario.find(codigo);
 	}
 	
+	public List<Usuario> find(String param) throws Exception {
+		// TODO Auto-generated method stub
+		return daoUsuario.find(param);
+	}
+
 	/**
 	 * Inseri o usuario de homologacao caso ele nao exista, caso exista ele usara o usuario de codigo 1
 	 * @return
@@ -113,5 +117,15 @@ public class FacadeUsuario extends RuleModelo{
 		}else{
 			return "Usuario padrao ja existe!";
 		}
+	}
+	
+	/**
+	 * Consultar usuario por email.
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
+	public Usuario findByEmail(String email) throws Exception {
+		return daoUsuario.findByEmail(email);
 	}
 }

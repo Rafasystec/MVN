@@ -8,16 +8,21 @@ import org.hibernate.Session;
 
 import br.com.barcadero.dao.backoffice.DaoUserMensagem;
 import br.com.systeconline.core.handles.HandleDateHour;
+import br.com.systeconline.dao.basicos.DaoUsuario;
 import br.com.systeconline.rule.RuleModelo;
 import br.com.systeconline.tables.basicos.Entidade;
 import br.com.systeconline.tables.basicos.TmpUserMessage;
+import br.com.systeconline.tables.basicos.Usuario;
 
 public class RuleUserMensagem extends RuleModelo {
 
 	private DaoUserMensagem daoMensagem;
+	private DaoUsuario daoUsuario;
+	
 	public RuleUserMensagem(Session session) {
 		super(session);
 		daoMensagem = new DaoUserMensagem(session);
+		daoUsuario	= new DaoUsuario(session);	
 	}
 
 	@Override
@@ -67,6 +72,24 @@ public class RuleUserMensagem extends RuleModelo {
 			}
 		}
 		return mensagens;
+	}
+	
+	/**
+	 * Obtem nome e e-mail para o autocomplete 
+	 * @param parametro
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> getNomeEmail(String parametro) throws Exception {
+		List<String> list 	= new ArrayList<String>(); 
+		List<Usuario> users = daoUsuario.find(parametro);
+		if(users != null){
+			for (Usuario usuario : users) {
+				String nomeEmail = usuario.getNome() + " - " + usuario.getEmail();
+				list.add(nomeEmail);
+			}
+		}
+		return list;
 	}
 
 

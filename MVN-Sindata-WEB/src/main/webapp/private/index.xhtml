@@ -42,8 +42,9 @@
 	          			<ui:include src="PagMenuVerticalResp.xhtml"></ui:include>
 	           	</ui:insert>        
 			  </div>
+			   <div id="page-wrapper">
 		 <h:form id="form">
-			  <div id="page-wrapper">
+			<!--  <div id="page-wrapper"> --> 
 			      <p:growl id="messages" showDetail="false"/>
 		       	  <p:messages id="msgForm" />				          	
 		          <ui:insert name="conteudo">
@@ -62,11 +63,12 @@
 		         		
 		         		
 		          </ui:insert>
-			   </div>
+			  <!--   </div> --> 
 		   </h:form>
-	 
+	 		</div>
 	    </f:view>
    
+  
     <!-- Bootstrap Core JavaScript -->
     <h:outputScript name="bootstrap.min.js" library="js"/>
     <!-- Metis Menu Plugin JavaScript -->
@@ -75,5 +77,6 @@
     <h:outputScript name="raphael-min.js" library="js"/>
     <!-- Custom Theme JavaScript -->
     <h:outputScript name="sb-admin-2.js" library="js"/>
+ 
   </h:body>
 </html>

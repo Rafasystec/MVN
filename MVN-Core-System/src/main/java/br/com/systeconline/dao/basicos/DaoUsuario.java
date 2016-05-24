@@ -108,6 +108,32 @@ public class DaoUsuario extends DaoModelo{
 	}
 	
 	/**
+	 * 
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Usuario> find(String param) throws Exception {
+		Query qry = null;
+		qry 	  = this.session.getNamedQuery(Usuario.FIND_BY);
+		qry.setParameter(Usuario.PARA_NOME, param+"%");
+		qry.setParameter(Usuario.PARA_EMAIL, param+"%");
+		return (List<Usuario>)qry.list();
+	}
+	/**
+	 * Procurar usuario por email
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
+	public Usuario findByEmail(String email) throws Exception {
+		Query qry = null;
+		qry 	  = this.session.getNamedQuery(Usuario.FIND_BY_EMAIL);
+		qry.setParameter(Usuario.PARA_EMAIL, email);
+		return (Usuario) qry.uniqueResult();
+	}
+	
+	/**
 	 * Metodo criado para verificar se o usuario possui permissao para acessar o sistema
 	 * @param login : login do usuario
 	 * @param pwd : senha do usuario
@@ -126,10 +152,13 @@ public class DaoUsuario extends DaoModelo{
 			throw new Exception("Erro ao tentar verificar o usuario: " + e.getMessage());
 		}
 	}
-	@Override
+	/**
+	 * Consultar todos os usuarios
+	 */
 	public List<Entidade> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Query qry = null;
+		qry = this.session.getNamedQuery(Usuario.FIND_ALL);
+		return qry.list();
 	}
 
 }
