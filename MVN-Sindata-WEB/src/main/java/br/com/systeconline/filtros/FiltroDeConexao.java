@@ -34,7 +34,6 @@ public class FiltroDeConexao implements Filter{
 		Session session = HibernateHelper.getSessionFactory().openSession();
 		try{
 			//Realizado no inicio
-			System.out.println("Inicio do Filtro de conexao");
 			session.getTransaction().begin();
 			request.setAttribute(Attributs.ATT_SESSION_DB, session);
 			//------------------------------------------------------------------------------
