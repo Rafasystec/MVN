@@ -30,14 +30,18 @@
 				  	</label>
 				  	<div class="input-group">
 				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-user"></span> 
+							<span class="glyphicon glyphicon-pencil"></span> 
 				    	</div>
 				   		<p:inputTextarea id="mensagem" value="#{userMessage.message.mensagem}" maxlength="180" 
 							required="true" requiredMessage="Corpo da mensagem é obrigatório" styleClass="form-control" placeholder="Mensagem"
 						/>
 				  	</div>
 				  	<div>
-				  		<h:commandButton action="#{userMessage.salvar}" value="Enviar"/>
+				  		<div>
+					  		<h:commandButton action="#{userMessage.salvar}" value="Enviar" styleClass="btn btn-info">
+					  			 <span class="glyphicon glyphicon-send"></span>
+					  		</h:commandButton>
+				  		</div>
 				  	</div>
 				  </p:panel>
 			</ui:define>
