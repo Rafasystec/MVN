@@ -17,12 +17,12 @@
 				<h:form>
 					<p:messages id="msg" showDetail="true"/>
 					<h:panelGrid columns="1" border="0">
-						<p:selectOneMenu id="emp" value="#{escolherEmp.codEmp}">
+						<p:selectOneMenu id="emp" value="#{escolherEmp.codEmp}" required="true">
 							<f:selectItem itemLabel="Primeiro escolha a empresa" itemValue="0"/>
 							<f:selectItems value="#{escolherEmp.empresa}" var="emp" itemLabel="#{emp.pessoaJuridica.fantasia}" itemValue="#{emp.codigo}"/>
 							<p:ajax update="cboLoja"/>
 						</p:selectOneMenu>
-						<p:selectOneMenu id="cboLoja" value="#{escolherEmp.codLoja}" required="false">
+						<p:selectOneMenu id="cboLoja" value="#{escolherEmp.codLoja}" required="true">
 							<f:selectItem itemLabel="  Depois escolha a loja  " itemValue="0"/>
 							<f:selectItems value="#{escolherEmp.lojas}" var="varloja" itemLabel="#{varloja.pessoaJuridica.fantasia}" itemValue="#{varloja.codigo}"/>
 							<f:convertNumber integerOnly="true"/>

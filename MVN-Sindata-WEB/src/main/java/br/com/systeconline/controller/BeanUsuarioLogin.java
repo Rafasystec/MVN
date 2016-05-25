@@ -104,7 +104,7 @@ public class BeanUsuarioLogin extends SuperBean{
 	public String logOut(){
 		try {
 			getSession().encerrarSessao();
-			return "PagLogin";
+			return "../public/PagLogin";
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

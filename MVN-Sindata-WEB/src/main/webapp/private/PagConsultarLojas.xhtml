@@ -10,11 +10,46 @@
 		<meta http-equiv="X-UA-Compatible" content="IE-edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Consulta de Lojas</title>
-		<link href="../resources/css/bootstrap.min.css" rel="stylesheet"/>
 		
 	</h:head>
 	<h:body>
-		<script src="../js/jquery-1.12.3.min.js" />
-		
+		<ui:composition template="index.xhtml">
+			<ui:define name="conteudo">
+				<label class="control-label " for="usuario">
+				   		Empresa
+				  	</label>
+				  	<div class="input-group">
+				   		<div class="input-group-addon">
+							<span class="glyphicon glyphicon-user"></span> 
+				    	</div>
+						<div>
+							<p:selectOneMenu id="emp" value="#{loja.codEmpresa}" required="true">
+								<f:selectItem itemLabel="Primeiro escolha a empresa" itemValue="0"/>
+								<f:selectItems value="#{escolherEmp.empresa}" var="emp" itemLabel="#{emp.pessoaJuridica.fantasia}" itemValue="#{emp.codigo}"/>
+								<p:ajax update="cboLoja"/>
+							</p:selectOneMenu>
+						</div>
+				  	</div>
+				<p:panel header="Lojas por Empresa">
+					<h3>Em Desenvolvimento</h3>
+					<p:dataTable id="grdLoja" var="loja" 	value="#{loja}" paginator="true" rows="5">
+						<p:column headerText="Descrição">
+							<h:outputText value="#{estados.descricao}" />
+						</p:column>
+						<p:column headerText="UF">
+							<h:outputText value="#{estados.uf}" />
+						</p:column>
+						<p:column headerText="Cód. IBGE">
+							<h:outputText value="#{estados.codIbge}" />
+						</p:column>
+						<p:column headerText="Data Cadastro">
+							<h:outputText value="#{estados.dtCadastro.time}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+				</p:panel>
+			</ui:define>
+		</ui:composition>
 	</h:body>
 </html>

@@ -1,5 +1,6 @@
 package br.com.barcadero.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -43,7 +44,11 @@ public class BeanMenuHorizontal extends SuperBean {
 	}
 	
 	public List<TmpUserMessage> getMensagens() throws Exception {
-		return ruleMensagem.getMensagens();
+		if(getUsuarioLogado() != null){
+			return ruleMensagem.getMensagens(getUsuarioLogado());
+		}else{
+			return new ArrayList<TmpUserMessage>();
+		}
 	}
 
 }

@@ -89,6 +89,9 @@ public class RuleEmpresa extends RuleModelo {
 		pj.setWebSite("www.meusite.com.br");
 		pj.setEnderecos(new ArrayList<Endereco>());
 		empresa.setPessoaJuridica(pj);
+		List<Usuario> users = new ArrayList<Usuario>();
+		users.add(usuario);
+		empresa.setUsuarios(users);
 		insert(empresa);
 		List<Empresa> listEmp = new ArrayList<Empresa>();
 		listEmp.add(empresa);

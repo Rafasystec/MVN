@@ -25,6 +25,7 @@ public class BeanLoja extends SuperBean {
 	private Loja loja;
 	private EnumRegimeTributario[] regime;
 	private EnumUF[] uf;
+	private long codEmpresa;
 	
 	public BeanLoja() {
 		Usuario userLogado = getSession().getUsuarioLogado();
@@ -112,6 +113,14 @@ public class BeanLoja extends SuperBean {
 	public String novo() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public long getCodEmpresa() {
+		return codEmpresa;
+	}
+
+	public void setCodEmpresa(long codEmpresa) {
+		this.codEmpresa = codEmpresa;
 	}
 
 }

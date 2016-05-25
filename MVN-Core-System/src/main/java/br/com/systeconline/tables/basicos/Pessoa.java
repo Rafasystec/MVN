@@ -1,5 +1,6 @@
 package br.com.systeconline.tables.basicos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ public class Pessoa extends Entidade {
 	}
 
 	@OneToMany(mappedBy="pessoa",cascade=CascadeType.ALL)
-	private List<Endereco> enderecos;
+	private List<Endereco> enderecos = new ArrayList<Endereco>();
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;

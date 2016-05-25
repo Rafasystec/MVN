@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import br.com.systeconline.dao.basicos.DaoModelo;
 import br.com.systeconline.tables.basicos.Entidade;
+import br.com.systeconline.tables.basicos.Usuario;
 
 public class DaoUserMensagem extends DaoModelo {
 
@@ -27,11 +28,12 @@ public class DaoUserMensagem extends DaoModelo {
 		return null;
 	}
 	
-	public List consultarMensagens() {
+	public List consultarMensagens(Usuario usuario) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u.nome, um.mensagem, um.dtMensagem, um.hrMensagem FROM UserMensagens um "); 
 		query.append("inner join Usuario u on u.codigo = um.usuario.codigo");
-		Query qry = getSession().createQuery(query.toString());
+		query.append(" WHERE um.cdUserReceive = :codigo");
+		Query qry = getSession().createQuery(query.toString()).setLong("codigo", usuario.getCodigo());
 		return qry.list();
 	}
 

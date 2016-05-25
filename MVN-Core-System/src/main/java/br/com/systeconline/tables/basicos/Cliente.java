@@ -34,9 +34,9 @@ public class Cliente extends EntidadeEmpresa{
 
 	
 	@Column(name="NOME_PAI",nullable=false)
-	private String nomePai;
+	private String nomePai = "";
 	@Column(name="NOME_MAE",nullable=false)
-	private String nomeMae;
+	private String nomeMae = "";
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")

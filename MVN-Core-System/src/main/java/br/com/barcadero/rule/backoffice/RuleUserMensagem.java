@@ -49,12 +49,12 @@ public class RuleUserMensagem extends RuleModelo {
 		return null;
 	}
 	
-	public List consultarMensagens() {
-		return daoMensagem.consultarMensagens();
+	public List consultarMensagens(Usuario usuario) {
+		return daoMensagem.consultarMensagens(usuario);
 	}
 	
-	public List<TmpUserMessage> getMensagens() throws Exception{
-		List<Object[]> list = consultarMensagens();
+	public List<TmpUserMessage> getMensagens(Usuario usuario) throws Exception{
+		List<Object[]> list = consultarMensagens(usuario);
 		List<TmpUserMessage> mensagens = new ArrayList<TmpUserMessage>();
 		if(list != null){
 			HandleDateHour datHour = new HandleDateHour();
