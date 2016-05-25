@@ -105,16 +105,18 @@ public class RuleLoja extends RuleModelo {
 		pJuridica.setWebSite(pj.getWebSite());
 		pJuridica.setEnderecos(listEnder);
 		pJuridica.setIeSubsTributaria(pj.getIeSubsTributaria());
-		for (Endereco endereco : pj.getEnderecos()) {
-			Endereco ender = new Endereco(usuario);
-			ender.setCep(endereco.getCep());
-			ender.setCodBairro(endereco.getCodBairro());
-			ender.setLogradouro(endereco.getLogradouro());
-			ender.setNumero(endereco.getNumero());
-			ender.setPessoa(pJuridica);
-			ender.setTipo(endereco.getTipo());
-			ender.setTpLogradouro(endereco.getTpLogradouro());
-			listEnder.add(ender);
+		if(pj.getEnderecos() != null && pj.getEnderecos().size() > 0){
+			for (Endereco endereco : pj.getEnderecos()) {
+				Endereco ender = new Endereco(usuario);
+				ender.setCep(endereco.getCep());
+				ender.setCodBairro(endereco.getCodBairro());
+				ender.setLogradouro(endereco.getLogradouro());
+				ender.setNumero(endereco.getNumero());
+				ender.setPessoa(pJuridica);
+				ender.setTipo(endereco.getTipo());
+				ender.setTpLogradouro(endereco.getTpLogradouro());
+				listEnder.add(ender);
+			}
 		}
 		loja.setDtInauguracao(empresa.getDtFundacao());
 		loja.setEmpresa(empresa);

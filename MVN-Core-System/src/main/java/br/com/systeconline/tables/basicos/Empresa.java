@@ -46,7 +46,7 @@ public class Empresa extends Entidade {
 	
 	@Column(name="atividade", nullable=false)
 	@Enumerated(EnumType.ORDINAL)
-	private EnumAtividadeEmp atividade;
+	private EnumAtividadeEmp atividade = EnumAtividadeEmp.COMERCIO;
 	@Column(name="img_logo", nullable=false)
 	private String imgLogo = "";
 	@Column(name="dt_fundacao", nullable=false)
@@ -60,7 +60,7 @@ public class Empresa extends Entidade {
 	
 	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="empresa_usuario",joinColumns={
-		@JoinColumn(name="empresa_id",nullable=false,updatable=false)
+		@JoinColumn(name="empresa_id",nullable=false, updatable=false)
 	}, inverseJoinColumns = {@JoinColumn(name="user_id",nullable=false, updatable=false)})
 	private List<Usuario> usuarios;
 	
