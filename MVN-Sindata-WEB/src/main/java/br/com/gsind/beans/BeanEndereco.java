@@ -1,7 +1,12 @@
 package br.com.gsind.beans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
+import br.com.systeconline.core.enums.EnumUF;
+import br.com.systeconline.tables.basicos.Estado;
 
 @ManagedBean
 @RequestScoped
@@ -82,5 +87,10 @@ public class BeanEndereco {
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	public EnumUF[] getEstados() throws Exception {
+		return EnumUF.values();
+	}
+
 	
 }

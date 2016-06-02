@@ -15,13 +15,14 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 	para uso no nosso composite component
 	 -->			
 	<composite:interface>
-	    <composite:attribute name="beanCEP"	 	 shortDescription="Atributo do bean que ira receber o CEP"/>
+	    <composite:attribute name="beanCEP"	 	 shortDescription="Atributo do bean que ira receber o CEP"					/>
 	    <composite:attribute name="beanNumero" 	 shortDescription="Atributo do bean que ira receber o Numero"				/>
 	    <composite:attribute name="beanTipoLog"  shortDescription="Atributo do bean que ira receber o tipo de logradouro"	/>
 	    <composite:attribute name="beanLog"	 	 shortDescription="Atributo do bean que ira receber o tipo de logradouro"	/>
-	    <composite:attribute name="readonly" shortDescription="Indica se o componente sera do tipo so leitura" 	type="java.lang.Boolean" default="Boolean.FALSE" />
-	    <composite:attribute name="required" shortDescription="Indica se o campo sera obrigatorio" 				type="java.lang.Boolean" default="Boolean.FALSE" />
-		<composite:attribute name="requiredMessage"	 shortDescription="Mensagem a ser exibida quando o campo for obrigatorio" required="false"/>		
+	    <composite:attribute name="beanUF" 		 shortDescription="Atributo do bean que ira receber a UF"  					/>
+	    <composite:attribute name="beanCidade" 	 shortDescription="Atributo do bean que ira receber a Cidade" 				/>
+		<composite:attribute name="beanBairro"	 shortDescription="Atributo do bean que ira receber o Bairro" 				/>
+		<composite:attribute name="beanComplemento"	 shortDescription="Atributo do bean que ira receber o Complemento"		/>		
 	</composite:interface>
 	
 	<composite:implementation>
@@ -45,31 +46,22 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<p:outputLabel value="Logradouro:" for="lograd"/>
 					   	<p:inputText id="lograd" value="#{cc.attrs.beanLog}" ></p:inputText>
 					
-						<p:outputLabel value="Estado:" for="estado"/>
-					   	<p:selectOneMenu id="estado" value="#{beanEmpresa.codEstado}">
+						<p:outputLabel value="Estado:" for="txtEstado"/>
+					   	<p:selectOneMenu id="txtEstado" value="#{cc.attrs.beanUF}">
 					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{beanEmpresa.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
-					   		<p:ajax update="cidade" listener="#{beanEmpresa.obterCidades}"/>
-					   	</p:selectOneMenu>
-					   	<!-- Para o combo de cidade -->
-						
-						<p:outputLabel value="Cidade:" for="cidade" />
-					   	<p:selectOneMenu id="cidade" value="#{beanEmpresa.codCidade}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{beanEmpresa.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
-					   		<p:ajax update="bairro" listener="#{beanEmpresa.obterBairros}"/>
+					   		<f:selectItems value="#{beanEndereco.estados}" var="estado" />
 					   	</p:selectOneMenu>
 					   	
-					
-					
+						<p:outputLabel value="Cidade:" for="txtCidade" />
+					   	<p:inputText id="txtCidade" value="#{cc.attrs.beanCidade}"/>
+					   	
 							   	
 						<!-- Para o combo de bairro -->
-					   	<p:outputLabel value="Bairro:" for="bairro"/>
-					   	<p:selectOneMenu id="bairro" value="#{beanEmpresa.ender.codBairro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{beanEmpresa.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
-					   	</p:selectOneMenu>
-					    
+					   	<p:outputLabel value="Bairro:" for="txtBairro"/>
+					   	<p:inputText id="txtBairro" value="#{cc.attrs.beanBairro}" />
+					   		
+					    <p:outputLabel value="Complemeto:" for="txtComplemento"/>
+					   	<p:inputText id="txtComplemento" value="#{cc.attrs.beanComplemento}" />
 			   		
 				</p:panel>
 	</composite:implementation>
