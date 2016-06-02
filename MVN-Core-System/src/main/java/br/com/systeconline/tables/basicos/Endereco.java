@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import br.com.systeconline.core.enums.EnumTipoLograd;
+import br.com.systeconline.core.enums.EnumUF;
 
 @Entity
 public class Endereco extends Entidade{
@@ -41,6 +42,18 @@ public class Endereco extends Entidade{
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_pessoa")
 	private Pessoa pessoa;
+	@Column(name="UF",nullable=false)
+	@Enumerated(EnumType.STRING)
+	private EnumUF uf = EnumUF.AC;
+	@Column(name="CIDADE",nullable=false)
+	private String cidade = "";
+	@Column(name="BAIRRO",nullable=false)
+	private String bairro = "";
+	@Column(name="COMPLEMENTO",nullable=false)
+	private String complemento = "";
+	@Column(name="REFERENCIA",nullable=false)
+	private String referencia = "";
+	
 	//------------------------------------------------
 	//Methods Getters and Setters
 	//------------------------------------------------
@@ -87,6 +100,36 @@ public class Endereco extends Entidade{
 	}
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+	public EnumUF getUf() {
+		return uf;
+	}
+	public void setUf(EnumUF uf) {
+		this.uf = uf;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getComplemento() {
+		return complemento;
+	}
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+	public String getReferencia() {
+		return referencia;
+	}
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 		
 }

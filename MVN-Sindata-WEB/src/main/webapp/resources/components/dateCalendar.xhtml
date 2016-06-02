@@ -1,0 +1,79 @@
+<!-- 
+DateCalendar
+Criado dia 30/05/2016 as 22:12
+Motivacao: Criar um componente de data que seja reutilizavel e responsivo
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:p="http://primefaces.org/ui"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:composite="http://java.sun.com/jsf/composite"
+      			xmlns:f="http://java.sun.com/jsf/core"
+  				xmlns:h="http://java.sun.com/jsf/html">
+  		
+  	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->			
+	<composite:interface>
+	    <composite:attribute name="id" 		 shortDescription="Identificacao unica do elemento no formulario"/>
+	    <composite:attribute name="title" 	 shortDescription="Sera exibido ao passar o mouse"				/>
+	    <composite:attribute name="value" 	 shortDescription="Campo do Bean que o compnente sera vinculado" 	type="java.util.Date"/>
+	    <composite:attribute name="label"	 shortDescription="Lable do Componente"/>
+	    <composite:attribute name="readonly" shortDescription="Indica se o componente sera do tipo so leitura" 	type="java.lang.Boolean" default="Boolean.FALSE" />
+	    <composite:attribute name="required" shortDescription="Indica se o campo sera obrigatorio" 				type="java.lang.Boolean" default="Boolean.FALSE" />
+		<composite:attribute name="requiredMessage"	 shortDescription="Mensagem a ser exibida quando o campo for obrigatorio" required="false"/>		
+		<composite:attribute name="alt"	 	shortDescription="Messagem a ser mostrada quando componente estiver quebrado"/>
+	</composite:interface>
+	
+	<composite:implementation>
+			   		
+			   	<p:outputLabel for="#{cc.attrs.id}" value="#{cc.attrs.label}" />
+			   	
+			  	<div class="input-group">
+			   		<div class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span> 
+			    </div>
+			   		<p:calendar 
+			   			id="#{cc.attrs.id}" 
+			   			alt="#{cc.attrs.alt}" 
+			   			value="#{cc.attrs.value}" 
+			   			pattern="dd/MM/yyyy" 
+			   			maxlength="10" 
+						mask="true" 
+						title="#{cc.attrs.title}"
+						label="#{cc.attrs.label}"
+						size="10" 
+						readonly="#{cc.attrs.readonly}"
+						readonlyInput="#{cc.attrs.readonly}"
+						showOn="#{cc.attrs.readonly ? 'none' : 'focus'}"
+						required="#{cc.attrs.required}"
+						requiredMessage="#{cc.attrs.requiredMessage}"
+					/>
+			  	</div>
+	    <!--
+	    <div class="ui-grid-col-3" style="width:20%">
+   			<div class="ui-grid-row">
+		        <p:outputLabel for="#{cc.attrs.id}" value="#{cc.attrs.label}" />
+		    </div>
+   			<div class="ui-grid-row">
+   				<div class="inputTextGroup">
+					<p:calendar id="#{cc.attrs.id}"
+						style="width:100%;"
+						title="#{cc.attrs.title}"
+						label="#{cc.attrs.label}"
+						value="#{cc.attrs.value}"
+						readonly="#{cc.attrs.readonly}"
+						readonlyInput="#{cc.attrs.readonly}"
+						showOn="#{cc.attrs.readonly ? 'none' : 'focus'}"
+						required="#{cc.attrs.required}"
+						requiredMessage="#{cc.attrs.requiredMessage}"
+						pattern="dd/MM/yyyy"
+						mask="true" />
+					<i style="display:#{cc.attrs.readonly ?'none':'block'}" class="fa fa-calendar"></i>
+		     	</div>
+		     	<p:tooltip for="#{cc.attrs.id}" trackMouse="true" />
+   			</div>
+   		</div>
+   		-->
+	</composite:implementation>
+</ui:composition>

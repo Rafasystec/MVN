@@ -1,0 +1,76 @@
+<!-- 
+DateCalendar
+Criado dia 30/05/2016 as 22:12
+Motivacao: Criar um componente de data que seja reutilizavel e responsivo
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:p="http://primefaces.org/ui"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:composite="http://java.sun.com/jsf/composite"
+      			xmlns:f="http://java.sun.com/jsf/core"
+  				xmlns:h="http://java.sun.com/jsf/html">
+  		
+  	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->			
+	<composite:interface>
+	    <composite:attribute name="beanCEP"	 	 shortDescription="Atributo do bean que ira receber o CEP"/>
+	    <composite:attribute name="beanNumero" 	 shortDescription="Atributo do bean que ira receber o Numero"				/>
+	    <composite:attribute name="beanTipoLog"  shortDescription="Atributo do bean que ira receber o tipo de logradouro"	/>
+	    <composite:attribute name="beanLog"	 	 shortDescription="Atributo do bean que ira receber o tipo de logradouro"	/>
+	    <composite:attribute name="readonly" shortDescription="Indica se o componente sera do tipo so leitura" 	type="java.lang.Boolean" default="Boolean.FALSE" />
+	    <composite:attribute name="required" shortDescription="Indica se o campo sera obrigatorio" 				type="java.lang.Boolean" default="Boolean.FALSE" />
+		<composite:attribute name="requiredMessage"	 shortDescription="Mensagem a ser exibida quando o campo for obrigatorio" required="false"/>		
+	</composite:interface>
+	
+	<composite:implementation>
+	    <p:panel header="Endereco">
+					
+						<p:outputLabel value="CEP:" for="cep"/>
+						<p:inputMask id="cep" mask="99999-999" value="#{cc.attrs.beanCEP}" size="9"/>
+						<p:outputLabel value="Número:" for="numero"/>
+						<p:inputText id="numero" value="#{cc.attrs.beanNumero}" maxlength="15" size="10"/>
+					
+					
+					
+					   	<p:outputLabel> tipo Logradouro:</p:outputLabel>
+					   	<p:selectOneMenu value="#{cc.attrs.beanTipoLog}" >
+					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
+							<f:selectItems value="#{endereco.tpLogradouros}" var="log"
+								itemValue="#{log.value}" itemLabel="#{log.lable}"
+						/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Logradouro:" for="lograd"/>
+					   	<p:inputText id="lograd" value="#{cc.attrs.beanLog}" ></p:inputText>
+					
+						<p:outputLabel value="Estado:" for="estado"/>
+					   	<p:selectOneMenu id="estado" value="#{beanEmpresa.codEstado}">
+					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
+					   		<f:selectItems value="#{beanEmpresa.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
+					   		<p:ajax update="cidade" listener="#{beanEmpresa.obterCidades}"/>
+					   	</p:selectOneMenu>
+					   	<!-- Para o combo de cidade -->
+						
+						<p:outputLabel value="Cidade:" for="cidade" />
+					   	<p:selectOneMenu id="cidade" value="#{beanEmpresa.codCidade}">
+					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
+					   		<f:selectItems value="#{beanEmpresa.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
+					   		<p:ajax update="bairro" listener="#{beanEmpresa.obterBairros}"/>
+					   	</p:selectOneMenu>
+					   	
+					
+					
+							   	
+						<!-- Para o combo de bairro -->
+					   	<p:outputLabel value="Bairro:" for="bairro"/>
+					   	<p:selectOneMenu id="bairro" value="#{beanEmpresa.ender.codBairro}" >
+					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
+					   		<f:selectItems value="#{beanEmpresa.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
+					   	</p:selectOneMenu>
+					    
+			   		
+				</p:panel>
+	</composite:implementation>
+</ui:composition>

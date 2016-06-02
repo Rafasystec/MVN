@@ -34,7 +34,7 @@ public class TestNotaProcess {
 	private static RuleNotaItens ruleItens;
 	private static long lastCodeNota;
 	
-	@BeforeClass
+//	@BeforeClass
 	public static void init() {
 		System.out.println(TestNotaProcess.class + " Init");
 		session 		= HibernateHelper.getSession();
@@ -44,7 +44,7 @@ public class TestNotaProcess {
 		ruleItens		= new RuleNotaItens(session);
 	}
 	
-	@AfterClass
+//	@AfterClass
 	public static void destroy() {
 		if(session != null){
 			session.getTransaction().commit();
@@ -52,7 +52,7 @@ public class TestNotaProcess {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void salvar() throws Exception {
 		
 		System.out.println("Iniciando Teste do processo de NOTA");
@@ -131,7 +131,7 @@ public class TestNotaProcess {
 		
 	}
 	
-	@Test
+//	@Test
 	public void inserirMeioPgto() throws Exception {
 		System.out.println("Inserir meio de pagamento na nota");		
 		MeiosPagamento meioPgto = (MeiosPagamento) ruleMeioPgto.find(1L); 
@@ -156,7 +156,7 @@ public class TestNotaProcess {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void inserirItem()throws Exception {
 		
 		NotaItens item = new NotaItens(null, null);

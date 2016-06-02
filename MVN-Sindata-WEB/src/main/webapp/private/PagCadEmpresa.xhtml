@@ -5,6 +5,7 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:clx="http://java.sun.com/jsf/composite/components"
 >
 	<h:head>
 		<meta charset="UTF-8" />
@@ -13,84 +14,188 @@
 	<h:body>
 		<ui:composition template="index.xhtml">
 			<ui:define name="conteudo">
-				<h3>Empresas</h3>
-				<h:panelGrid columns="2">
+				<p:panel header="Cadastro de Empresas" >
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Fantasia:" for="fantasia"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.fantasia}" id="fantasia"
+										required="true" requiredMessage="Fantasia é obrigatório."
+										maxlength="60" size="60"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
 					
-					<p:outputLabel value="Fantasia:" for="fantasia"/>
-					<p:inputText value="#{beanEmpresa.pj.fantasia}" id="fantasia"
-						required="true" requiredMessage="Fantasia é obrigatório."
-						maxlength="60" size="60"
-					/>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Razão Social:" for="rsocial"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.razaoSocial}" id="rsocial"
+										required="true" requiredMessage="Razão Social deve ser preenchida."
+										maxlength="60" size="60"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Insc. Estadual:" for="ie"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.ie}" id="ie"
+									required="true" requiredMessage="Inscrição Estadual é necessária."
+									maxlength="15" size="15"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="CNPJ:" for="cnpj"	/>
+								</div>
+								<div class="ui-grid-row">	
+									<p:inputMask  value="#{beanEmpresa.pj.cnpj}" id="cnpj"
+										required="true" requiredMessage="Informe o CNPJ - Somente números."
+										mask="99.999.999/9999-99" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="I.E. subst. tributária:" for="ietrib"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.ieSubsTributaria}" id="ietrib" maxlength="15" size="15"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Insc. Municipal:" for="im"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.im}" id="im" maxlength="15" size="15"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Regime Tributário:" for="regime"/>
+								</div>
+								<div class="ui-grid-row">	
+									<p:selectOneMenu id="regime" value="#{beanEmpresa.pj.codRegTribut}"
+									required="true" requiredMessage="Regime tributário é obrigatório.">
+										<f:selectItems value="#{beanEmpresa.regime}"/>
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Contato:" for="contato"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputMask value="#{beanEmpresa.pj.fone}" id="contato" mask="(999)99999-9999"
+										required="true" requiredMessage="Informe um contato por favor."
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
 					
-					<p:outputLabel value="Razão Social:" for="rsocial"/>
-					<p:inputText value="#{beanEmpresa.pj.razaoSocial}" id="rsocial"
-						required="true" requiredMessage="Razão Social deve ser preenchida."
-						maxlength="60" size="60"
-					/>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="UF:" for="uf"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:selectOneMenu value="#{beanEmpresa.pj.uf}" id="uf" maxlength="4">
+										<f:selectItems value="#{beanEmpresa.uf}"/>
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</div>
 					
-					<p:outputLabel value="Insc. Estadual:" for="ie"/>
-					<p:inputText value="#{beanEmpresa.pj.ie}" id="ie"
-						required="true" requiredMessage="Inscrição Estadual é necessária."
-						maxlength="15" size="15"
-					/>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="E-mail" for="email"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.email}" id="email"
+										required="true" requiredMessage="E-mail é obrigatório."
+										maxlength="35" size="35"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					    		<div class="ui-grid-row">
+									<p:outputLabel value="Web Site: www." for="site"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:inputText value="#{beanEmpresa.pj.webSite}" id="site"/>
+								</div>
+							</div>
+						</div>
+					</div>
 					
-					<p:outputLabel value="CNPJ:" for="cnpj"	/>
-					<p:inputMask  value="#{beanEmpresa.pj.cnpj}" id="cnpj"
-						required="true" requiredMessage="Informe o CNPJ - Somente números."
-						mask="99.999.999/9999-99" />
-					
-					<p:outputLabel value="I.E. subst. tributária:" for="ietrib"/>
-					<p:inputText value="#{beanEmpresa.pj.ieSubsTributaria}" id="ietrib" maxlength="15" size="15"/>
-					
-					<p:outputLabel value="Insc. Municipal:" for="im"/>
-					<p:inputText value="#{beanEmpresa.pj.im}" id="im" maxlength="15" size="15"/>
-					
-					<p:outputLabel value="Regime Tributário:" for="regime"/>
-					<p:selectOneMenu id="regime" value="#{beanEmpresa.pj.codRegTribut}"
-						required="true" requiredMessage="Regime tributário é obrigatório."
-					>
-						<f:selectItems value="#{beanEmpresa.regime}"/>
-					</p:selectOneMenu>
-					
-					<p:outputLabel value="Contato:" for="contato"/>
-					<p:inputMask value="#{beanEmpresa.pj.fone}" id="contato" mask="(999)99999-9999"
-						required="true" requiredMessage="Informe um contato por favor."
-					/>
-					
-					
-					<p:outputLabel value="UF:" for="uf"/>
-					<p:selectOneMenu value="#{beanEmpresa.pj.uf}" id="uf" maxlength="4">
-						<f:selectItems value="#{beanEmpresa.uf}"/>
-					</p:selectOneMenu>
+				</p:panel>	
+				<p:panel header="Dados gerais">
+					<div class="ui-grid ui-grid-responsive">
+			   			<div class="ui-grid-row ui-grid-row-custom">
+				   			<div class="ui-grid-col-9" style="width:80%">
+					   			<div class="ui-grid-row">
+									<p:outputLabel value="Atividade Principal" for="atividade"/>
+								</div>
+								<div class="ui-grid-row">
+									<p:selectOneMenu value="#{beanEmpresa.emp.atividade}" id="atividade" maxlength="25">
+										<f:selectItems value="#{beanEmpresa.atividade}"/>
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</div>
+						
+						
+						<clx:dateCalendar id="dtFund" title="Titulo" value="#{beanEmpresa.emp.dtFundacao}"
+	    				label="Data Fund." readonly="false" required="true" />	
+				</p:panel>
 				
-					
-					<p:outputLabel value="E-mail" for="email"/>
-					<p:inputText value="#{beanEmpresa.pj.email}" id="email"
-						required="true" requiredMessage="E-mail é obrigatório."
-						maxlength="35" size="35"
-					/>
-					
-					<p:outputLabel value="Web Site: www." for="site"/>
-					<p:inputText value="#{beanEmpresa.pj.webSite}" id="site"/>
-					<!-- 
-					<p:outputLabel value="Logo marca"/>
-					<p:fileUpload value="#{beanEmpresa.fileUpload}" auto="true" mode="simple" skinSimple="true" label="Arquivo"/>
-					 -->
-				</h:panelGrid>
-				<p:fieldset legend="Dados gerais">
-					<h:panelGrid columns="2">
-						<p:outputLabel value="Atividade Principal" for="atividade"/>
-						<p:selectOneMenu value="#{beanEmpresa.emp.atividade}" id="atividade" maxlength="25">
-							<f:selectItems value="#{beanEmpresa.atividade}"/>
-						</p:selectOneMenu>
-						<p:outputLabel value="Data Fundação:" for="dtFundacao"/>
-						<p:calendar id="dtFundacao" value="#{beanEmpresa.emp.dtFundacao}" pattern="dd/MM/yyyy" maxlength="10" 
-						mask="99/99/9999" size="10"
-						/>
-					</h:panelGrid>
-				</p:fieldset>
-				<!-- ********** Para o endereco. Copiar e colar em outras telas **************  -->
-				<p:fieldset legend="Endereço">
+			
+				<p:panel header="Endereco">
 					<h:panelGrid columns="4" cellpadding="0">
 						<p:outputLabel value="CEP:" for="cep"/>
 						<p:inputMask id="cep" mask="99999-999" value="#{beanEmpresa.ender.cep}" size="9"/>
@@ -141,10 +246,12 @@
 					        <p:ajax event="dialogReturn" listener="#{beanEmpresa.hendleReturnBairros}" update="bairro" />
 					    </p:commandButton>
 			   		</h:panelGrid>
-				</p:fieldset>
+				</p:panel>
 				<h:panelGrid columns="6">
 					<p:commandButton value="Salvar" action="#{beanEmpresa.salvar}" ajax="false"/>
 				</h:panelGrid>
+				
+				
 			</ui:define>
 		</ui:composition>
 	</h:body>

@@ -13,7 +13,7 @@ public class TestFacadeUsuario {
 	private static Session session ;
 	private static FacadeUsuario fcdUsuario;
 	
-	@BeforeClass
+	//@BeforeClass
 	public static void init() {
 		System.out.println("Init JUnit case for Usuario process");
 		System.out.println(TestRuleCaixa.class + " Init");
@@ -22,7 +22,7 @@ public class TestFacadeUsuario {
 		fcdUsuario	= new FacadeUsuario(session);
 	}
 	
-	@AfterClass
+	//@AfterClass
 	public static void destroy() {
 		System.out.println("After class destroy invoked " + TestFacadeUsuario.class);
 		if(session != null){
@@ -31,7 +31,7 @@ public class TestFacadeUsuario {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void inserirUsuarioPadrao() {
 		try {
 			fcdUsuario.inserirUsuarioHomo();

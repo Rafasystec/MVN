@@ -10,7 +10,7 @@ import br.com.systeconline.tables.basicos.Empresa;
 public class TestEmpresa extends TesteSuperClass{
 	
 	
-	@Test
+	//@Test
 	public void insert() throws Exception {
 		RuleEmpresa RuleEmpresa = new RuleEmpresa(getSession());
 		Empresa empresa = HandleEmpresaHomo.getEmpresaHomo();

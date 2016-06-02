@@ -16,14 +16,13 @@ public class TesteFinanceiro extends TesteSuperClass{
 		// TODO Auto-generated constructor stub
 		super();
 	}
-	
-	@BeforeClass
+
 	public static void init() {
 		planoContas = new RulePlanoContas(getSession());
 		usuario = HandleUsuarioPadrao.getUsuarioHomologacao();
 	}
 	
-	@Test
+
 	public void cargaInicial() throws Exception {
 		planoContas.cargaInicial(HandleEmpresaHomo.getEmpresaHomo(),usuario);
 	}
