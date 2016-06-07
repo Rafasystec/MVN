@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelCFeSAT8CabecalhoLogo" language="groovy" pageWidth="207" pageHeight="838" whenNoDataType="NoDataSection" columnWidth="207" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.4522712143931304"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\felipelaborda\\Desktop\\Secrel\\iReport\\src\\CFeSAT\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PATH" class="java.lang.String"/>
+	<parameter name="FANTASIA_EMIT" class="java.lang.String"/>
+	<parameter name="RAZAO_EMIT" class="java.lang.String"/>
+	<parameter name="ENDERECO_EMIT" class="java.lang.String"/>
+	<parameter name="CNPJ_EMIT" class="java.lang.String"/>
+	<parameter name="IE_EMIT" class="java.lang.String"/>
+	<parameter name="IM_EMIT" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="PATH_IMAGE" class="java.lang.String">
+		<variableExpression><![CDATA[$P{PATH}+"/Images/"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<noData>
+		<band height="61">
+			<frame>
+				<reportElement x="0" y="0" width="207" height="35"/>
+				<image scaleImage="FillFrame">
+					<reportElement x="5" y="8" width="61" height="27"/>
+					<imageExpression><![CDATA[$P{PATH}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="77" y="8" width="130" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{FANTASIA_EMIT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="77" y="17" width="130" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{RAZAO_EMIT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="77" y="26" width="130" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ENDERECO_EMIT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="35" width="207" height="26"/>
+				<box>
+					<bottomPen lineWidth="0.0" lineStyle="Dashed"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="9" width="207" height="9"/>
+					<box>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CNPJ " + $P{CNPJ_EMIT}.substring(0,2)
+        + "." + $P{CNPJ_EMIT}.substring(2,5)
+        + "." + $P{CNPJ_EMIT}.substring(5,8)
+        + "/" + $P{CNPJ_EMIT}.substring(8,12)
+        + "-" + $P{CNPJ_EMIT}.substring(12,14)
+
++ "   " +
+
+"IE " + $P{IE_EMIT}.substring(0,3)
+      + "." + $P{IE_EMIT}.substring(3,6)
+      + "." + $P{IE_EMIT}.substring(6,9)
+      + "." + $P{IE_EMIT}.substring(9,12)
+
++ "  " +
+
+"IM " + $P{IM_EMIT}.substring(0,3)
+      + "." + $P{IM_EMIT}.substring(3,6)
+      + "." + $P{IM_EMIT}.substring(6,9)
+      + "." + $P{IM_EMIT}.substring(9,12)]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="21" width="207" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+	</noData>
+</jasperReport>

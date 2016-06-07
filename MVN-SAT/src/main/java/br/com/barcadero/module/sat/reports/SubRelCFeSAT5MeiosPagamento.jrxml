@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubRelCFeSAT5MeiosPagamentos" language="groovy" pageWidth="139" pageHeight="802" columnWidth="139" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.138428376721006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select C.QTD_PARCELAS as qtdParcela
+	  ,V.DS_MVE as descricao
+            ,C.VL_TOT as valorTotal
+	  ,C.VL_MCX as vMP_pgto
+	  ,V.TP_MVE as cMP_pgto
+	  ,''       as cAdmC_pgto
+from DSMCX C (noLock), DSMVE V (noLock)
+where C.CD_EMP  = 'FV'
+  and C.CD_LOJA = 1
+  and C.TP_DOC  = 'VEN'
+  and C.NR_DOC  = 1166
+  and C.CD_CX   = 99
+  and V.CD_MVE  = C.CD_MVE
+  and V.CD_EMP  = C.CD_EMP]]>
+	</queryString>
+	<field name="qtdParcela" class="java.lang.Short"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="vMP_pgto" class="java.math.BigDecimal"/>
+	<field name="cMP_pgto" class="java.lang.String"/>
+	<variable name="S_VALOR" class="java.lang.Long" resetType="Group" resetGroup="NumDoc" calculation="Sum">
+		<variableExpression><![CDATA[$F{vMP_pgto}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<group name="NumDoc">
+		<groupFooter>
+			<band height="9">
+				<printWhenExpression><![CDATA[$F{cMP_pgto}.equalsIgnoreCase("T")]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<staticText>
+						<reportElement x="0" y="0" width="62" height="9"/>
+						<textElement>
+							<font fontName="Tahoma" size="7" isBold="false" isPdfEmbedded="true"/>
+						</textElement>
+						<text><![CDATA[Troco R$]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="62" y="0" width="77" height="9"/>
+						<textElement textAlignment="Right">
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(new java.text.DecimalFormat("###,##0.00").format($F{vMP_pgto}))]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="9" splitType="Stretch">
+			<printWhenExpression><![CDATA[!$F{cMP_pgto}.equalsIgnoreCase("T")]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="139" height="9"/>
+				<textField>
+					<reportElement x="0" y="0" width="62" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cMP_pgto}.equalsIgnoreCase("D")
+? "Dinheiro"
+: $F{cMP_pgto}.equalsIgnoreCase("H")
+  ? "Cheque"
+  : $F{cMP_pgto}.equalsIgnoreCase("C")
+	? "Cartão de Crédito"
+	: $F{cMP_pgto}.equalsIgnoreCase("B")
+      ? "Cartão de Débito"
+	  :	$F{cMP_pgto}.equalsIgnoreCase("R")
+        ? "Crédito Loja"
+		: "Outros"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="62" y="0" width="77" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{qtdParcela} > 1
+? $F{qtdParcela}
+  + " X "
+  +(new java.text.DecimalFormat("###,##0.00").format($F{vMP_pgto}))
+: (new java.text.DecimalFormat("###,##0.00").format($F{vMP_pgto}))]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

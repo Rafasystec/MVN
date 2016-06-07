@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelCFeSAT5Cancelamento" language="groovy" pageWidth="156" pageHeight="850" columnWidth="139" leftMargin="0" rightMargin="17" topMargin="14" bottomMargin="14">
+	<property name="ireport.zoom" value="2.593742460100035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="467"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\felipelaborda\\Desktop\\Secrel\\iReport\\src\\CFeSAT\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PATH" class="java.lang.String"/>
+	<parameter name="SUBREPORT_ITENS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUBREPORT_MEIOS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="URL_SATCFE" class="java.lang.String"/>
+	<parameter name="USA_LOGO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QRCODE_VENDA" class="java.lang.String"/>
+	<parameter name="QRCODE_CANCELAMENTO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+
+'0.02'	as versaoDadosEnt_infCFe,
+
+DSEPG.NR_CNPJ_SOFTWAREHOUSE		as CNPJ_ide,
+DSEPG.NR_ASSINATURA_SAT			as signAC_ide,
+DNOTA.CD_CX         			as numeroCaixa_ide,
+
+TLOJA.NM_LOJA		as razao_emit,
+TLOJA.NM_LOJA		as fantasia_emit,
+TLOJA.TP_LOGRAD		as tipoLogradouro_emit,
+TLOJA.DS_END		as endereco_emit,
+TLOJA.NR_DDDTEL		as dddTelefone_emit,
+TLOJA.NR_TELEF		as numTelefone_emit,
+TLOJA.NR_CEP		as cep_emit,
+TLOJA.NR_END		as numEnd_emit,
+TLOJA.DS_COMPL		as complEnd_emit,
+TBAI_LOJA.NM_BAI	as bairro_emit,
+TCID_LOJA.NM_CID	as cidade_emit,
+TLOJA.CD_UF			as uf_emit,
+
+CFE.CODIGO_CFE       as codigoCfe,
+CFE.DT_AUT_NFE       as dataEmissaoCfe,
+CFE.HR_AUT_NFE       as horaEmissaoCfe,
+CFE.DT_CANC_NFE      as dataCancCfe,
+CFE.HR_CANC_NFE      as horaCancCfe,
+CFE.NR_SAT           as numSatCfe,
+CFE.CHAVE_ACESSO_NFE as chaveAcesso,
+
+03240156000138   	as CNPJ_emit,
+TLOJA.NR_CGF 		as IE_enderEmit,
+TLOJA.NR_INSMUN		as IM_enderEmit,
+''					as cRegTribISSQN_enderEmit,
+'N'					as indRatISSQN_enderEmit,
+
+23463961000138	as CNPJ_dest,
+0	as CPF_dest,
+DSPES.NM_PES 		as xNome_dest,
+
+DSPES.TP_LOGRAD + '. ' + DSPES.DS_END	as xLgr_entrega,
+DSPES.NR_END        as nro_entrega,
+DSPES.DS_COMPEND    as xCpl_entrega,
+TBAI.NM_BAI     	as xBairro_entrega,
+TCID.NM_CID     	as xMun_entrega,
+DSPES.CD_UF         as UF_entrega,
+
+case when TLOJA.CD_REGTRIB = 1 or TLOJA.CD_REGTRIB = 2 then
+	0
+else
+	(select sum ( (DMOVI.VL_ICMS * DMOVI.PC_ICM / 100)
+	             + (DMOVI.VL_PIS * DMOVI.PC_PIS / 100)
+	             + (DMOVI.VL_COFINS * DMOVI.PC_COFINS / 100) )
+	  from DMOVI
+	  where DMOVI.TP_ENTSAI = DNOTA.TP_ENTSAI
+        and DMOVI.CD_EMP    = DNOTA.CD_EMP
+        and DMOVI.CD_LOJA   = DNOTA.CD_LOJA
+        and DMOVI.NR_DOCF   = DNOTA.NR_DOCF
+        and DMOVI.SR_DOCF   = DNOTA.SR_DOCF
+        and	DMOVI.CD_CRED   = DNOTA.CD_CRED)
+end as vCfeLei12741_total,
+
+DNOTA.VL_PCDESC + DNOTA.VL_DESC + DNOTA.VL_PCDESC_FEC + DNOTA.VL_DESC1 as vDescSubtot_total,
+0                   as vAcresSubtot_total
+
+from DNOTA (noLock)
+
+inner join TLOJA (noLock) on TLOJA.CD_EMP  = DNOTA.CD_EMP
+                          and TLOJA.CD_LOJA = DNOTA.CD_LOJA
+
+left join DSPES (noLock) on DSPES.CD_PES = DNOTA.CD_PES
+
+left join TCID (noLock) on TCID.CD_UF  = DSPES.CD_UF
+                        and TCID.CD_CID = DSPES.CD_CID
+
+left join TBAI (noLock) on TBAI.CD_UF  = DSPES.CD_UF
+                        and TBAI.CD_CID = DSPES.CD_CID
+			            and TBAI.CD_BAI = DSPES.CD_BAI
+
+left join TCID TCID_LOJA (noLock) on TCID_LOJA.CD_UF  = TLOJA.CD_UF
+                                  and TCID_LOJA.CD_CID = TLOJA.CD_CID
+
+left join TBAI TBAI_LOJA (noLock) on TBAI_LOJA.CD_UF  = TLOJA.CD_UF
+                                  and TBAI_LOJA.CD_CID = TLOJA.CD_CID
+			                      and TBAI_LOJA.CD_BAI = TLOJA.CD_BAI
+
+inner join DSEPG (noLock) on DSEPG.CODI_EM = DNOTA.CD_EMP
+
+left join CF_ELETRONICO CFE (noLock) on CFE.CD_EMP = DNOTA.CD_EMP
+                                     and CFE.CD_LOJA = DNOTA.CD_LOJA
+                                     and CFE.SR_DOCF = DNOTA.SR_DOCF
+                                     and CFE.NR_DOCF = DNOTA.NR_DOCF
+
+where DNOTA.CD_EMP    = 'FV'
+  and DNOTA.CD_LOJA   = 1
+  and DNOTA.TP_ENTSAI = 'S'
+  and DNOTA.NR_DOCF   = 1166
+  --and DNOTA.SR_DOCF   = ?(srDocf)
+  and DNOTA.CD_CRED   = '']]>
+	</queryString>
+	<field name="versaoDadosEnt_infCFe" class="java.lang.String"/>
+	<field name="CNPJ_ide" class="java.lang.String"/>
+	<field name="signAC_ide" class="java.lang.String"/>
+	<field name="numeroCaixa_ide" class="java.lang.Short"/>
+	<field name="razao_emit" class="java.lang.String"/>
+	<field name="fantasia_emit" class="java.lang.String"/>
+	<field name="tipoLogradouro_emit" class="java.lang.String"/>
+	<field name="endereco_emit" class="java.lang.String"/>
+	<field name="dddTelefone_emit" class="java.lang.Short"/>
+	<field name="numTelefone_emit" class="java.lang.Integer"/>
+	<field name="cep_emit" class="java.lang.Integer"/>
+	<field name="numEnd_emit" class="java.lang.Integer"/>
+	<field name="complEnd_emit" class="java.lang.String"/>
+	<field name="bairro_emit" class="java.lang.String"/>
+	<field name="cidade_emit" class="java.lang.String"/>
+	<field name="uf_emit" class="java.lang.String"/>
+	<field name="codigoCfe" class="java.math.BigDecimal"/>
+	<field name="dataEmissaoCfe" class="java.lang.Integer"/>
+	<field name="horaEmissaoCfe" class="java.lang.Integer"/>
+	<field name="dataCancCfe" class="java.lang.Integer"/>
+	<field name="horaCancCfe" class="java.lang.Integer"/>
+	<field name="numSatCfe" class="java.math.BigDecimal"/>
+	<field name="chaveAcesso" class="java.lang.String"/>
+	<field name="chaveAcessoCanc" class="java.lang.String"/>
+	<field name="CNPJ_emit" class="java.lang.String"/>
+	<field name="IE_emit" class="java.lang.String"/>
+	<field name="IM_emit" class="java.lang.String"/>
+	<field name="cRegTribISSQN_emit" class="java.lang.String"/>
+	<field name="indRatISSQN_emit" class="java.lang.String"/>
+	<field name="CNPJ_dest" class="java.lang.String"/>
+	<field name="CPF_dest" class="java.lang.String"/>
+	<field name="xNome_dest" class="java.lang.String"/>
+	<field name="xLgr_entrega" class="java.lang.String"/>
+	<field name="nro_entrega" class="java.lang.String"/>
+	<field name="xCpl_entrega" class="java.lang.String"/>
+	<field name="xBairro_entrega" class="java.lang.String"/>
+	<field name="xMun_entrega" class="java.lang.String"/>
+	<field name="UF_entrega" class="java.lang.String"/>
+	<field name="vCfeLei12741_total" class="java.math.BigDecimal"/>
+	<field name="vDescSubtot_total" class="java.math.BigDecimal"/>
+	<field name="vAcresSubtot_total" class="java.lang.Integer"/>
+	<field name="flagHomologacao" class="java.lang.String"/>
+	<variable name="ENDERECO_EMIT" class="java.lang.String">
+		<initialValueExpression><![CDATA[( ( $F{tipoLogradouro_emit} != null && !$F{tipoLogradouro_emit}.trim().isEmpty() ) ? $F{tipoLogradouro_emit}.trim() + ". " : "")
++ ( ( $F{endereco_emit} != null && !$F{endereco_emit}.trim().isEmpty() ) ? $F{endereco_emit}.trim() : "")
++ ( ( $F{numEnd_emit} != null && $F{numEnd_emit} > 0 ) ? ", "  + $F{numEnd_emit} : "")
++ ( ( $F{complEnd_emit} != null && !$F{complEnd_emit}.trim().isEmpty() ) ? " - " + $F{complEnd_emit}.trim() : "")
++ ( ( $F{bairro_emit} != null && !$F{bairro_emit}.trim().isEmpty() ) ? " - " + $F{bairro_emit}.trim() : "")
++ ( ( $F{cidade_emit} != null && !$F{cidade_emit}.trim().isEmpty() ) ? " - " + $F{cidade_emit}.trim() : "")
++ ( ( $F{uf_emit} != null && !$F{uf_emit}.trim().isEmpty() ) ? " - " + $F{uf_emit}.trim() : "")]]></initialValueExpression>
+	</variable>
+	<variable name="CPF_DEST" class="java.lang.String">
+		<initialValueExpression><![CDATA[!$F{CPF_dest}.isEmpty() && !$F{CPF_dest}.equals("0")
+? String.format("%011d", new Long($F{CPF_dest}))
+: ""]]></initialValueExpression>
+	</variable>
+	<variable name="CNPJ_DEST" class="java.lang.String">
+		<initialValueExpression><![CDATA[!$F{CNPJ_dest}.isEmpty() && !$F{CNPJ_dest}.equals("0")
+? String.format("%014d", new Long($F{CNPJ_dest}))
+: ""]]></initialValueExpression>
+	</variable>
+	<variable name="CNPJ_EMIT" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{CNPJ_emit}]]></initialValueExpression>
+	</variable>
+	<variable name="IE_EMIT" class="java.lang.String">
+		<initialValueExpression><![CDATA[String.format("%012d", ( $F{IE_emit} == null || $F{IE_emit}.equals("")
+                         ? 0
+                         : new Long($F{IE_emit}) ) )]]></initialValueExpression>
+	</variable>
+	<variable name="IM_EMIT" class="java.lang.String">
+		<initialValueExpression><![CDATA[String.format("%012d", ( $F{IM_emit} == null || $F{IM_emit}.equals("")
+                         ? 0
+                         : new Long($F{IM_emit}) ) )]]></initialValueExpression>
+	</variable>
+	<variable name="PATH_IMAGE" class="java.lang.String">
+		<variableExpression><![CDATA[$P{PATH}+"/Images/"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="DATA_VENDA" class="java.util.Date">
+		<variableExpression><![CDATA[new SimpleDateFormat("yyyyMMddHHmmss").parse($F{dataEmissaoCfe}.toString()+String.format("%06d", $F{horaEmissaoCfe}))]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="NUM_SAT" class="java.lang.String">
+		<variableExpression><![CDATA[$F{numSatCfe} != null
+? String.format("%09d",$F{numSatCfe}.longValue())
+: ""]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="CHAVE_ACESSO" class="java.lang.String">
+		<variableExpression><![CDATA[$F{chaveAcesso} != null
+? $F{chaveAcesso}.substring(0,4)
++ "  " + $F{chaveAcesso}.substring(4,8)
++ "  " + $F{chaveAcesso}.substring(8,12)
++ "  " + $F{chaveAcesso}.substring(12,16)
++ "  " + $F{chaveAcesso}.substring(16,20)
++ "  " + $F{chaveAcesso}.substring(20,24)
++ "  " + $F{chaveAcesso}.substring(24,28)
++ "  " + $F{chaveAcesso}.substring(28,32)
++ "  " + $F{chaveAcesso}.substring(32,36)
++ "  " + $F{chaveAcesso}.substring(36,40)
++ "  " + $F{chaveAcesso}.substring(40,44)
+: ""]]></variableExpression>
+	</variable>
+	<variable name="F_NUM_SAT" class="java.lang.String">
+		<variableExpression><![CDATA[$V{NUM_SAT} != null
+? $V{NUM_SAT}.substring(0,3)
+  +"."+$V{NUM_SAT}.substring(3,6)
+  +"."+$V{NUM_SAT}.substring(6,9)
+: ""]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="CHAVE_ACESSO_CANC" class="java.lang.String">
+		<variableExpression><![CDATA[$F{chaveAcessoCanc} != null
+? $F{chaveAcessoCanc}.substring(0,4)
++ "  " + $F{chaveAcessoCanc}.substring(4,8)
++ "  " + $F{chaveAcessoCanc}.substring(8,12)
++ "  " + $F{chaveAcessoCanc}.substring(12,16)
++ "  " + $F{chaveAcessoCanc}.substring(16,20)
++ "  " + $F{chaveAcessoCanc}.substring(20,24)
++ "  " + $F{chaveAcessoCanc}.substring(24,28)
++ "  " + $F{chaveAcessoCanc}.substring(28,32)
++ "  " + $F{chaveAcessoCanc}.substring(32,36)
++ "  " + $F{chaveAcessoCanc}.substring(36,40)
++ "  " + $F{chaveAcessoCanc}.substring(40,44)
+: ""]]></variableExpression>
+	</variable>
+	<variable name="DATA_CANC" class="java.util.Date">
+		<variableExpression><![CDATA[new SimpleDateFormat("yyyyMMddHHmmss").parse($F{dataCancCfe}.toString()+String.format("%06d", $F{horaCancCfe}))]]></variableExpression>
+	</variable>
+	<group name="CPF_CNPJ_CONS">
+		<groupHeader>
+			<band height="9">
+				<printWhenExpression><![CDATA[(!$V{CNPJ_DEST}.isEmpty() && !$V{CNPJ_DEST}.equals("0") && $V{CNPJ_DEST} != null)
+|| (!$V{CPF_DEST}.isEmpty() && !$V{CPF_DEST}.equals("0") && $V{CPF_DEST}  != null)]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CPF/CNPJ do Consumidor: "
++ ( !$V{CNPJ_DEST}.isEmpty() && !$V{CNPJ_DEST}.equals("0")
+    ? $V{CNPJ_DEST}.substring(0,2)
+      + "." + $V{CNPJ_DEST}.substring(2,5)
+      + "." + $V{CNPJ_DEST}.substring(5,8)
+      + "/" + $V{CNPJ_DEST}.substring(8,12)
+      + "-" + $V{CNPJ_DEST}.substring(12,14)
+    : !$V{CPF_DEST}.isEmpty() && !$V{CPF_DEST}.equals("0")
+        ? $V{CPF_DEST}.substring(0,3)
+          + "." + $V{CPF_DEST}.substring(3,6)
+          + "." + $V{CPF_DEST}.substring(6,9)
+          + "-" + $V{CPF_DEST}.substring(9,11)
+        : "" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<columnHeader>
+		<band height="185" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="139" height="71"/>
+				<subreport>
+					<reportElement x="0" y="0" width="139" height="71">
+						<printWhenExpression><![CDATA[$P{USA_LOGO} != null]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="FANTASIA_EMIT">
+						<subreportParameterExpression><![CDATA[$F{fantasia_emit}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RAZAO_EMIT">
+						<subreportParameterExpression><![CDATA[$F{razao_emit}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="IM_EMIT">
+						<subreportParameterExpression><![CDATA[$V{IM_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ENDERECO_EMIT">
+						<subreportParameterExpression><![CDATA[$V{ENDERECO_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PATH">
+						<subreportParameterExpression><![CDATA[$P{USA_LOGO}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="IE_EMIT">
+						<subreportParameterExpression><![CDATA[$V{IE_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="CNPJ_EMIT">
+						<subreportParameterExpression><![CDATA[$V{CNPJ_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression><![CDATA[$P{PATH}+"/WEB-INF/classes/RelCFeSAT5CabecalhoLogo.jasper"]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="0" width="139" height="71" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{USA_LOGO} == null]]></printWhenExpression>
+					</reportElement>
+					<subreportParameter name="FANTASIA_EMIT">
+						<subreportParameterExpression><![CDATA[$F{fantasia_emit}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="RAZAO_EMIT">
+						<subreportParameterExpression><![CDATA[$F{razao_emit}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="IM_EMIT">
+						<subreportParameterExpression><![CDATA[$V{IM_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ENDERECO_EMIT">
+						<subreportParameterExpression><![CDATA[$V{ENDERECO_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="IE_EMIT">
+						<subreportParameterExpression><![CDATA[$V{IE_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="CNPJ_EMIT">
+						<subreportParameterExpression><![CDATA[$V{CNPJ_EMIT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportExpression><![CDATA[$P{PATH}+"/WEB-INF/classes/RelCFeSAT5Cabecalho.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="71" width="139" height="27"/>
+				<textField>
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Extrato No. " + ($F{flagHomologacao} == "S"?"000000":$F{codigoCfe})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="9" width="139" height="18"/>
+					<textElement textAlignment="Center">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[CUPOM FISCAL ELETRÔNICO - SAT CANCELAMENTO]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="99" width="139" height="55" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{flagHomologacao} == "S"]]></printWhenExpression>
+				</reportElement>
+				<staticText>
+					<reportElement x="0" y="0" width="139" height="55" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Center">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[
+=  T E S T E  =
+
+>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="155" width="140" height="30"/>
+				<line>
+					<reportElement x="0" y="0" width="140" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="0" y="4" width="140" height="18"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[DADOS DO CUPOM FISCAL ELETRÔNICO CANCELADO]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="9" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="139" height="9"/>
+				<subreportParameter name="vAcresSubtot_total">
+					<subreportParameterExpression><![CDATA[$F{vAcresSubtot_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vDescSubtot_total">
+					<subreportParameterExpression><![CDATA[$F{vDescSubtot_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{SUBREPORT_ITENS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{PATH} + "/WEB-INF/classes/SubRelCFeSAT5CancelamentoItens.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="562">
+			<frame>
+				<reportElement x="0" y="0" width="155" height="120"/>
+				<staticText>
+					<reportElement x="0" y="9" width="56" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[SAT No. ]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy - HH:mm:ss">
+					<reportElement x="0" y="18" width="139" height="9"/>
+					<textElement textAlignment="Center">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DATA_VENDA}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="56" y="9" width="83" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{F_NUM_SAT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="5" y="36" width="132" height="18"/>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{CHAVE_ACESSO}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="63" width="139" height="21"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128C" drawText="false" checksumRequired="false" barWidth="0" barHeight="21">
+						<jr:codeExpression><![CDATA[$F{chaveAcesso}.substring(0, 22)]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="0" y="89" width="139" height="21"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128C" drawText="false" checksumRequired="false" barWidth="0" barHeight="21">
+						<jr:codeExpression><![CDATA[$F{chaveAcesso}.substring(22)]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="0" y="120" width="155" height="152"/>
+				<image scaleImage="FillFrame">
+					<reportElement x="5" y="0" width="143" height="143"/>
+					<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.qrcode.QRCodeWriter().encode($P{URL_SATCFE}+$P{QRCODE_VENDA},com.google.zxing.BarcodeFormat.QR_CODE,350,350))]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement x="0" y="272" width="155" height="147"/>
+				<line>
+					<reportElement x="0" y="4" width="139" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="0" y="8" width="140" height="18"/>
+					<textElement>
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[DADOS DO CUPOM FISCAL ELETRÔNICO DE CANCELAMENTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="35" width="56" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[SAT No. ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="56" y="35" width="83" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{F_NUM_SAT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy - HH:mm:ss">
+					<reportElement x="0" y="44" width="139" height="9"/>
+					<textElement textAlignment="Center">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{DATA_CANC}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="5" y="62" width="132" height="18"/>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Tahoma" size="7" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{CHAVE_ACESSO_CANC}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="89" width="139" height="21"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128C" drawText="false" checksumRequired="false" barWidth="0" barHeight="21">
+						<jr:codeExpression><![CDATA[$F{chaveAcessoCanc}.substring(0, 22)]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="0" y="115" width="139" height="21"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128C" drawText="false" checksumRequired="false" barWidth="0" barHeight="21">
+						<jr:codeExpression><![CDATA[$F{chaveAcessoCanc}.substring(22)]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="0" y="419" width="155" height="143"/>
+				<image scaleImage="FillFrame">
+					<reportElement x="5" y="0" width="143" height="143"/>
+					<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.qrcode.QRCodeWriter().encode($P{URL_SATCFE}+$P{QRCODE_CANCELAMENTO},com.google.zxing.BarcodeFormat.QR_CODE,350,350))]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

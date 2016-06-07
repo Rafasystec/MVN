@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubRelCFeSAT5Itens" language="groovy" pageWidth="139" pageHeight="802" columnWidth="139" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.822369650268889"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="vDescSubtot_total" class="java.math.BigDecimal"/>
+	<parameter name="vAcresSubtot_total" class="java.math.BigDecimal"/>
+	<parameter name="vDescontosItens" class="java.math.BigDecimal"/>
+	<parameter name="flagExtratoResumido" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+
+DMOVI.NR_ITEM               as nrItem_det,
+
+case when DMOVI.CD_BARRA = ' ' then
+	DMOVI.CD_REF
+else
+	DMOVI.CD_BARRA
+end as cProd_prod,
+
+case when DMOVI.CD_BARRA = ' ' then
+	''
+else
+	DMOVI.CD_BARRA
+end as cEAN_prod,
+
+case when (DSPUO.VL_PAR ='R') then
+	CREFE.DS_RESU
+	+
+	case when DMOVI.QT_MOV > 1 and TP_GRADE in('S','D') then
+		' - Diversos Detalhes'
+	else
+		isnull ( ' - ' + DET1.DS_VDET,' ') + isnull ( ' | ' + DET2.DS_VDET,' ')
+	end
+else
+	CREFE.DS_REF
+	+
+	case when DMOVI.QT_MOV > 1 and TP_GRADE in('S','D') then
+		' - Diversos Detalhes'
+	else
+		isnull (' - ' + DET1.DS_VDET,' ') + isnull ( ' | ' + DET2.DS_VDET,' ')
+	end
+end as xProd_prod,
+
+12345678				    as NCM_prod,
+DMOVI.CD_CFO 				as CFOP_prod,
+CREFE.CD_UND 				as uCom_prod,
+DMOVI.QT_MOV 				as qCom_prod,
+DMOVI.VL_MOV /DMOVI.QT_MOV 	as vUnCom_prod,
+'A' 				        as indRegra_prod,
+(DMOVI.PC_DESC1*DMOVI.VL_MOV/100) + DMOVI.VL_DESC_RATEADO 	as vDesc_prod,
+isnull ((DMOVI.VL_MOV * DNOTB.VL_FRETE)/DNOTA.VL_TOT, 0) as vOutro_prod,
+
+case when TLOJA.CD_REGTRIB = 1 or TLOJA.CD_REGTRIB = 2 then
+	0
+else
+	(DMOVI.VL_ICMS * DMOVI.PC_ICM / 100)
+	+ (DMOVI.VL_PIS * DMOVI.PC_PIS / 100)
+	+ (DMOVI.VL_COFINS * DMOVI.PC_COFINS / 100)
+end as vItem12741_imposto,
+
+CREFE.TP_ORIGEM 			as orig_icms,
+
+case when DMOVI.CD_CST = ' ' then
+	( case when DMOVI.TP_ICM = 'D' then
+		'51'
+	  when DMOVI.TP_ICM = 'S' then
+		'00'
+	  when DMOVI.TP_ICM = 'I' then
+		'40'
+	  when DMOVI.TP_ICM = 'N' then
+		'41'
+	  when DMOVI.TP_ICM = 'R' then
+		'20'
+	  when DMOVI.TP_ICM = 'F' and isnull ( DNOTA.FL_SUBSTRIB, 'N' ) = 'S' then
+		'10'
+	  when DMOVI.TP_ICM = 'F' and isnull ( DNOTA.FL_SUBSTRIB, 'N' ) = 'N' then
+		'60'
+	  else
+		'90'
+	  end )
+else
+	DMOVI.CD_CST
+end			                as cst_icms,
+
+DMOVI.CD_CST                as csosn_icms,
+
+case when DNOTA.CD_EVECTB = 'GNFCF' and DNOTA.FL_DESTAQ_ICMS = 'S' then
+	DMOVI.PC_ICM_DEST
+else
+	DMOVI.PC_ICM
+end		                    as pICMS,
+
+case when DNOTA.CD_EVECTB = 'GNFCF' and DNOTA.FL_DESTAQ_ICMS = 'S' then
+	DMOVI.VL_ICMS_DEST
+else
+	DMOVI.VL_ICMS
+end		                    as vICMS,
+
+DMOVI.CD_CST_PIS            as cst_pis,
+DMOVI.VL_BASE_PIS           as vBC_pis,
+DMOVI.PC_PIS                as pPIS,
+DMOVI.QT_MOV                as qBCProd_pis,
+DMOVI.VL_PIS                as vAliqProd_pis,
+
+DMOVI.CD_CST_COFINS         as cst_cofins,
+DMOVI.VL_BASE_COFINS        as vBC_cofins,
+DMOVI.PC_COFINS             as pCOFINS,
+DMOVI.QT_MOV                as qBCProd_confins,
+DMOVI.VL_COFINS             as vAliqProd_confins,
+
+DMOVI.CD_CST                as cst,
+
+case when isnull (DSPUORefForn.VL_PAR, 'N') = 'S' then
+	isnull ( 'NF: ' + DSRFO.CD_RFOR, '')
+else
+	''
+end   as infAdProd_det
+
+from DNOTA
+
+inner join DMOVI on DMOVI.TP_ENTSAI = DNOTA.TP_ENTSAI
+                and DMOVI.CD_EMP    = DNOTA.CD_EMP
+				and DMOVI.CD_LOJA   = DNOTA.CD_LOJA
+				and DMOVI.NR_DOCF   = DNOTA.NR_DOCF
+				and DMOVI.SR_DOCF   = DNOTA.SR_DOCF
+				and	DMOVI.CD_CRED   = DNOTA.CD_CRED
+
+inner join TLOJA (noLock) on TLOJA.CD_EMP  = DNOTA.CD_EMP
+                          and TLOJA.CD_LOJA = DNOTA.CD_LOJA
+
+left join DMOVE on DMOVE.CD_EMP  = DMOVI.CD_EMP
+               and DMOVE.CD_LOJA = DMOVI.CD_LOJA
+			   and DMOVE.NR_DOCF = DMOVI.NR_DOCF
+			   and DMOVE.SR_DOCF = DMOVI.SR_DOCF
+			   and DMOVE.CD_CRED = DMOVI.CD_CRED
+			   and DMOVE.NR_ITEM = DMOVI.NR_ITEM
+
+left join DNOTB on DNOTB.TP_ENTSAI = DNOTA.TP_ENTSAI
+               and DNOTB.CD_EMP    = DNOTA.CD_EMP
+			   and DNOTB.CD_LOJA   = DNOTA.CD_LOJA
+			   and DNOTB.SR_DOCF   = DNOTA.SR_DOCF
+			   and DNOTB.NR_DOCF   = DNOTA.NR_DOCF
+			   and DNOTB.CD_CRED   = DNOTA.CD_CRED
+
+inner join CREFE on CREFE.CD_EMP = DMOVI.CD_EMP
+                and CREFE.CD_REF = DMOVI.CD_REF
+
+left join DSRFO on DSRFO.CD_EMP  = CREFE.CD_EMP
+               and DSRFO.CD_REF  = CREFE.CD_REF
+			   and DSRFO.CD_CRED = CREFE.CD_CRED
+
+inner join TBCFO on TBCFO.CD_CFO = DNOTA.CD_CFO
+
+left join DSPUO on DSPUO.CD_EMP = DNOTA.CD_EMP
+               and DSPUO.IS_PAR = 91
+
+left join DSPUO DSPUORefForn on DSPUORefForn.CD_EMP = DNOTA.CD_EMP
+                            and DSPUORefForn.IS_PAR = 879
+
+left join TVDET DET1 on DET1.CD_EMP  = DMOVE.CD_EMP
+                    and DET1.CD_DET  = DMOVE.CD_DET1
+					and DET1.CD_VDET = DMOVE.CD_VDET1
+
+left join TVDET DET2 on DET2.CD_EMP  = DMOVE.CD_EMP
+                    and DET2.CD_DET  = DMOVE.CD_DET2
+					and DET2.CD_VDET = DMOVE.CD_VDET2
+
+where DNOTA.CD_EMP    = 'FV'
+  and DNOTA.CD_LOJA   = 1
+  and DNOTA.TP_ENTSAI = 'S'
+  and DNOTA.NR_DOCF   = 1166
+  --and DNOTA.SR_DOCF   = ?(srDocf)
+  and DNOTA.CD_CRED   = ''
+
+order by DMOVI.NR_ITEM]]>
+	</queryString>
+	<field name="nrItem_det" class="java.lang.Integer"/>
+	<field name="cProd_prod" class="java.lang.String"/>
+	<field name="cEAN_prod" class="java.lang.String"/>
+	<field name="xProd_prod" class="java.lang.String"/>
+	<field name="NCM_prod" class="java.lang.Integer"/>
+	<field name="CFOP_prod" class="java.lang.Short"/>
+	<field name="uCom_prod" class="java.lang.String"/>
+	<field name="qCom_prod" class="java.math.BigDecimal"/>
+	<field name="vUnCom_prod" class="java.math.BigDecimal"/>
+	<field name="indRegra_prod" class="java.lang.String"/>
+	<field name="vDesc_prod" class="java.math.BigDecimal"/>
+	<field name="vOutro_prod" class="java.math.BigDecimal"/>
+	<field name="vItem12741_imposto" class="java.math.BigDecimal"/>
+	<field name="orig_icms" class="java.lang.String"/>
+	<field name="cst_icms" class="java.lang.String"/>
+	<field name="csosn_icms" class="java.lang.String"/>
+	<field name="pICMS" class="java.math.BigDecimal"/>
+	<field name="vICMS" class="java.math.BigDecimal"/>
+	<field name="cst_pis" class="java.lang.Short"/>
+	<field name="vBC_pis" class="java.math.BigDecimal"/>
+	<field name="pPIS" class="java.math.BigDecimal"/>
+	<field name="qBCProd_pis" class="java.math.BigDecimal"/>
+	<field name="vAliqProd_pis" class="java.math.BigDecimal"/>
+	<field name="cst_cofins" class="java.lang.Short"/>
+	<field name="vBC_cofins" class="java.math.BigDecimal"/>
+	<field name="pCOFINS" class="java.math.BigDecimal"/>
+	<field name="qBCProd_confins" class="java.math.BigDecimal"/>
+	<field name="vAliqProd_confins" class="java.math.BigDecimal"/>
+	<field name="cst" class="java.lang.String"/>
+	<field name="infAdProd_det" class="java.lang.String"/>
+	<field name="vAcrescimo_prod_rat" class="java.math.BigDecimal"/>
+	<field name="vDesc_prod_rat" class="java.math.BigDecimal"/>
+	<variable name="ITEM_TOTAL" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{qCom_prod}*$F{vUnCom_prod}]]></variableExpression>
+	</variable>
+	<variable name="ITEM_DESC" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{ITEM_TOTAL}.subtract($F{vDesc_prod})]]></variableExpression>
+	</variable>
+	<variable name="ITEM_ACRE" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{ITEM_TOTAL}.add($F{vOutro_prod})]]></variableExpression>
+	</variable>
+	<variable name="SUBTOTAL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{ITEM_TOTAL}.subtract($F{vDesc_prod})]]></variableExpression>
+	</variable>
+	<variable name="TOTAL" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$V{SUBTOTAL}.add($P{vAcresSubtot_total}).subtract($P{vDescSubtot_total})]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_BRUTO_ITENS" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$V{ITEM_TOTAL}]]></variableExpression>
+	</variable>
+	<group name="TOTAL">
+		<groupFooter>
+			<band height="16">
+				<frame>
+					<reportElement positionType="Float" x="0" y="0" width="139" height="9"/>
+					<staticText>
+						<reportElement x="0" y="0" width="65" height="9"/>
+						<textElement>
+							<font fontName="Tahoma" size="7" isBold="true" isPdfEmbedded="true"/>
+						</textElement>
+						<text><![CDATA[TOTAL R$]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="65" y="0" width="73" height="9"/>
+						<textElement textAlignment="Right">
+							<font fontName="Tahoma" size="7" isBold="true" isPdfEmbedded="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(new java.text.DecimalFormat("###,##0.00").format($V{TOTAL}))]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="ACRECIMOS">
+		<groupFooter>
+			<band height="9">
+				<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S" && $P{vAcresSubtot_total}.floatValue() > 0.0]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="139" height="9" isRemoveLineWhenBlank="true"/>
+					<staticText>
+						<reportElement x="0" y="0" width="88" height="9"/>
+						<textElement>
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<text><![CDATA[Acrécimo sobre subtotal]]></text>
+					</staticText>
+					<textField pattern="">
+						<reportElement x="88" y="0" width="50" height="9"/>
+						<textElement textAlignment="Right">
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(new java.text.DecimalFormat("+###,##0.00").format($P{vAcresSubtot_total}))]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="DESCONTOS">
+		<groupFooter>
+			<band height="9">
+				<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S" && $P{vDescSubtot_total}.floatValue() > 0.0]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<staticText>
+						<reportElement x="0" y="0" width="88" height="9"/>
+						<textElement>
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<text><![CDATA[Desconto sobre subtotal]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="88" y="0" width="50" height="9"/>
+						<textElement textAlignment="Right">
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(new java.text.DecimalFormat("-###,##0.00").format($P{vDescSubtot_total}))]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="DESCONTOS_ITENS">
+		<groupFooter>
+			<band height="9">
+				<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S" && $P{vDescontosItens}.floatValue() > 0.0]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<staticText>
+						<reportElement x="0" y="0" width="88" height="9"/>
+						<textElement>
+							<font fontName="Tahoma" size="6" isPdfEmbedded="true"/>
+						</textElement>
+						<text><![CDATA[Total de descontos sobre item]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="88" y="0" width="50" height="9"/>
+						<textElement textAlignment="Right">
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(new java.text.DecimalFormat("-###,##0.00").format($P{vDescontosItens}))]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="SUBTOTAL">
+		<groupFooter>
+			<band height="9">
+				<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S"]]></printWhenExpression>
+				<frame>
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<staticText>
+						<reportElement x="0" y="0" width="65" height="9"/>
+						<textElement>
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<text><![CDATA[Total bruto de itens]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="88" y="0" width="50" height="9"/>
+						<textElement textAlignment="Right">
+							<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[(new java.text.DecimalFormat("###,##0.00").format($V{TOTAL_BRUTO_ITENS}))]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="139" height="26" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S"]]></printWhenExpression>
+				</reportElement>
+				<line>
+					<reportElement x="0" y="1" width="139" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="3" width="138" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="6" isBold="false" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[# | COD | QTD | UN | VL UN R$ | (VL TR R$)*]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="23" width="139" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="12" width="138" height="9"/>
+					<textElement>
+						<font fontName="Tahoma" size="6" isBold="false" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[DESC | VL ITEM R$]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S"]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="139" height="19"/>
+				<textField>
+					<reportElement x="0" y="0" width="139" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[String.format("%03d", $F{nrItem_det})
++ " " + $F{cProd_prod}
++ " " + new BigDecimal($F{qCom_prod})
++ " " + $F{uCom_prod}
++ " X " + (new java.text.DecimalFormat("###,##0.00").format($F{vUnCom_prod}))
++ " ("
++ (new java.text.DecimalFormat("###,##0.00").format($F{vItem12741_imposto}))
++ ")"]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="99" y="9" width="40" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(new java.text.DecimalFormat("###,##0.00").format($V{ITEM_TOTAL}))]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="9" width="99" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{xProd_prod}.trim()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="9">
+			<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S" && $F{vDesc_prod}.floatValue() > 0.0]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="139" height="9"/>
+				<staticText>
+					<reportElement x="0" y="0" width="99" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="6" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[desconto sobre item]]></text>
+				</staticText>
+				<textField pattern="">
+					<reportElement x="99" y="0" width="40" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(new java.text.DecimalFormat("-###,##0.00").format($F{vDesc_prod}))]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="9">
+			<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S" && $F{vDesc_prod_rat}.floatValue() > 0.0]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="139" height="9"/>
+				<staticText>
+					<reportElement x="0" y="0" width="99" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="6" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[rateio de desconto sobre subtotal]]></text>
+				</staticText>
+				<textField pattern="">
+					<reportElement x="99" y="0" width="40" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(new java.text.DecimalFormat("-###,##0.00").format($F{vDesc_prod_rat}))]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="9">
+			<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S" && $F{vAcrescimo_prod_rat}.floatValue() > 0.0]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="139" height="9"/>
+				<staticText>
+					<reportElement x="0" y="0" width="99" height="9"/>
+					<textElement markup="none">
+						<font fontName="Tahoma" size="6" isPdfEmbedded="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[rateio de acréscimo sobre subtotal]]></text>
+				</staticText>
+				<textField pattern="">
+					<reportElement x="99" y="0" width="40" height="9"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="7" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(new java.text.DecimalFormat("+###,##0.00").format($F{vAcrescimo_prod_rat}))]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="9">
+			<printWhenExpression><![CDATA[$P{flagExtratoResumido} != "S"]]></printWhenExpression>
+		</band>
+	</detail>
+</jasperReport>
