@@ -6,6 +6,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumEAN;
+import br.com.barcadero.module.sat.enums.EnumIndRegra;
+
 @XmlRootElement(name="prod")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Prod
@@ -13,11 +16,13 @@ public class Prod
 	@XmlElement(required=true)
 	private String cProd;
 	@XmlElement
-	private String cEAN;
+	private EnumEAN cEAN;
 	@XmlElement(required=true)
 	private String xProd;
 	@XmlElement
 	private String NCM;
+	@XmlElement(name="CEST",required=false)
+	private String cEST;
 	@XmlElement(required=true)
 	private String CFOP;
 	@XmlElement(required=true)
@@ -27,7 +32,7 @@ public class Prod
 	@XmlElement(required=true)
 	private String vUnCom;
 	@XmlElement(required=true)
-	private String indRegra;
+	private EnumIndRegra indRegra;
 	@XmlElement
 	private String vDesc;
 	@XmlElement
@@ -49,12 +54,18 @@ public class Prod
 		this.cProd = cProd;
 	}
 
-	public String getCEAN()
+	public EnumEAN getCEAN()
 	{
 		return this.cEAN;
 	}
-
-	public void setCEAN(String cEAN)
+	/**
+	 * GTIN (Global	Trade Item	Number) do produto, antigo 
+	codigo EAN ou codigo de barras Preencher com o código GTIN-8,
+	GTIN-12, GTIN-13 ou GTIN-14 (antigos códigos EAN, UPC e DUN-14),
+	nao informar o conteudo da TAG em caso de o produto não possuir este codigo.
+	 * @param cEAN
+	 */
+	public void setCEAN(EnumEAN cEAN)
 	{
 		this.cEAN = cEAN;
 	}
@@ -83,7 +94,12 @@ public class Prod
 	{
 		return this.CFOP;
 	}
-
+	/**
+	 * Codigo Fiscal de Operacoes e Prestacoes 
+	 * CFOPs validos para operacoes  cobertas pelo CF-e
+	 * Faixa de 5000
+	 * @param cfop
+	 */
 	public void setCFOP(String cfop)
 	{
 		this.CFOP = cfop;
@@ -94,6 +110,13 @@ public class Prod
 		return this.uCom;
 	}
 
+	/**
+	 * nformar a unidade de comercialização do produto. No
+ 	 * caso de combustíveis, utilizar a unidade de medida da
+	 * codificacao de produtos do Sistema de Informacoes de
+  	 * Movimentacao de produtos - SIMP (http://www.anp.gov.br/simp).
+	 * @param uCom
+	 */
 	public void setUCom(String uCom)
 	{
 		this.uCom = uCom;
@@ -119,12 +142,12 @@ public class Prod
 		this.vUnCom = vUnCom;
 	}
 
-	public String getIndRegra()
+	public EnumIndRegra getIndRegra()
 	{
 		return this.indRegra;
 	}
 
-	public void setIndRegra(String indRegra)
+	public void setIndRegra(EnumIndRegra indRegra)
 	{
 		this.indRegra = indRegra;
 	}
@@ -157,5 +180,19 @@ public class Prod
 	public void setObsFiscoDets(List<ObsFiscoDet> obsFiscoDets)
 	{
 		this.obsFiscoDets = obsFiscoDets;
+	}
+
+	public String getcEST() {
+		return cEST;
+	}
+	/**
+	 * Codigo CEST que identifica a mercadoria sujeita aos regimes
+	de substituicao tributaria e de antecipacao do recolhimento do
+    imposto. As alteracoes serao incorporadas na versao 0.08 do leiaute 
+    do CF-e-SAT.
+	 * @param cEST
+	 */
+	public void setcEST(String cEST) {
+		this.cEST = cEST;
 	}
 }

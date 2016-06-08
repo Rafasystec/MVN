@@ -29,6 +29,14 @@ public class Imposto
 		return this.vItem12741;
 	}
 
+	/**
+	 * Valor aproximado dos tributos do produto ou servico, declarado
+	pelo emitente, conforme Lei 12741/2012. Valor deve ser maior ou igual a
+	zero. Campo de preenchimento:- opcional, caso o contribuinte opte por informar o valor em
+	painel afixado no estabelecimento, conforme artigo 2o, §2o da referida lei.- obrigatorio, 
+	caso o contribuinte não opte por informar o valor em
+	 * @param item12741
+	 */
 	public void setVItem12741(String item12741)
 	{
 		this.vItem12741 = item12741;

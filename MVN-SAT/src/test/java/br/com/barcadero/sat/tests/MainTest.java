@@ -3,7 +3,10 @@ package br.com.barcadero.sat.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.barcadero.module.sat.enums.EnumEAN;
 import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
+import br.com.barcadero.module.sat.enums.EnumIndRegra;
+import br.com.barcadero.module.sat.enums.EnumOrigICMS;
 import br.com.barcadero.module.sat.enums.EnumRegimeTributarioISSQN;
 import br.com.barcadero.module.sat.enums.EnumUF;
 import br.com.barcadero.module.sat.xml.envio.CFe;
@@ -11,6 +14,8 @@ import br.com.barcadero.module.sat.xml.envio.Dest;
 import br.com.barcadero.module.sat.xml.envio.Det;
 import br.com.barcadero.module.sat.xml.envio.Emit;
 import br.com.barcadero.module.sat.xml.envio.Entrega;
+import br.com.barcadero.module.sat.xml.envio.ICMS;
+import br.com.barcadero.module.sat.xml.envio.ICMS00;
 import br.com.barcadero.module.sat.xml.envio.Ide;
 import br.com.barcadero.module.sat.xml.envio.Imposto;
 import br.com.barcadero.module.sat.xml.envio.InfCFe;
@@ -63,12 +68,32 @@ public class MainTest {
 		det.setInfAdProd("Informacao adicional");
 		Prod prod = new Prod();
 		prod.setCProd("0090980");
-		det.setProd(prod );
+		prod.setCEAN(EnumEAN.NENHUN);
+		prod.setXProd("PROD HOMOLOG");
+		prod.setNCM("89098909");
+		prod.setcEST("90987");
+		prod.setCFOP("5012"); // Faixa de 5000
+		prod.setUCom("UN");
+		prod.setVUnCom("10.99");
+		prod.setIndRegra(EnumIndRegra.ARREDONDAMENTO);
+		det.setProd(prod);
+		//Tributos incidentes no Produto ou servico
 		Imposto imposto = new Imposto();
+		imposto.setVItem12741("2.50");
+		//ICMS Normal e ST
+		ICMS icms 		= new ICMS();
+		ICMS00 icms00 	= new ICMS00();
+		icms00.setOrig(EnumOrigICMS.NACIONAL);
+		icms.setiCMS(icms00);
+		imposto.setICMS(icms );
+		//N - ICMS Normal e ST
+		
 		det.setImposto(imposto );
 		
 		
-		infCFe.setDets(dets );
+		
+		dets.add(det);
+		infCFe.setDets(dets);
 		
 		cfe.setInfCFe(infCFe);
 	}
