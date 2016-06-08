@@ -3,6 +3,7 @@ package br.com.barcadero.sat.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
 import br.com.barcadero.module.sat.enums.EnumEAN;
 import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
 import br.com.barcadero.module.sat.enums.EnumIndRegra;
@@ -84,6 +85,8 @@ public class MainTest {
 		ICMS icms 		= new ICMS();
 		ICMS00 icms00 	= new ICMS00();
 		icms00.setOrig(EnumOrigICMS.NACIONAL);
+		icms00.setCST(EnumCSTICMS00.TRIBUTADO_INTEGRALMENTE);
+		icms00.setPICMS("5.33");
 		icms.setiCMS(icms00);
 		imposto.setICMS(icms );
 		//N - ICMS Normal e ST

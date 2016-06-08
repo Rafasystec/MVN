@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
 import br.com.barcadero.module.sat.enums.EnumOrigICMS;
 
 @XmlRootElement(name="ICMS00")
@@ -14,7 +15,7 @@ public class ICMS00
 	@XmlElement(required=true)
 	private EnumOrigICMS Orig;
 	@XmlElement(required=true)
-	private String CST;
+	private EnumCSTICMS00 CST;
 	@XmlElement(required=true)
 	private String pICMS;
 
@@ -28,12 +29,12 @@ public class ICMS00
 		this.Orig = orig;
 	}
 
-	public String getCST()
+	public EnumCSTICMS00 getCST()
 	{
 		return this.CST;
 	}
 
-	public void setCST(String cst)
+	public void setCST(EnumCSTICMS00 cst)
 	{
 		this.CST = cst;
 	}
@@ -43,6 +44,10 @@ public class ICMS00
 		return this.pICMS;
 	}
 
+	/**
+	 * Alíquota efetiva do imposto
+	 * @param pICMS
+	 */
 	public void setPICMS(String pICMS)
 	{
 		this.pICMS = pICMS;
