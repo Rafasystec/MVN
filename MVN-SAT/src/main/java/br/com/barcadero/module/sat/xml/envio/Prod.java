@@ -40,6 +40,10 @@ public class Prod
 		return this.cProd;
 	}
 
+	/**
+	 * Codigo do produto ou servico. Interno do contribuinte
+	 * @param cProd
+	 */
 	public void setCProd(String cProd)
 	{
 		this.cProd = cProd;

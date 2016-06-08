@@ -1,0 +1,12 @@
+package br.com.barcadero.module.sat.enums;
+
+public enum EnumRegimeTributarioISSQN {
+	
+	INDEFINIDO,
+	MIRCOEMPRESA_MUNICIPAL,
+	ESTIMATIVA,
+	SOCIEDADE_DE_PROFISSIONAIS,
+	COOPERATIVA,
+	MICROEMPRESARIO_INDIVIDUAL,
+
+}

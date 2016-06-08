@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
+import br.com.barcadero.module.sat.enums.EnumRegimeTributarioISSQN;
+
 @XmlRootElement(name="emit")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Emit
@@ -16,9 +19,9 @@ public class Emit
 	@XmlElement
 	private String IM;
 	@XmlElement
-	private String cRegTribISSQN;
+	private EnumRegimeTributarioISSQN cRegTribISSQN;
 	@XmlElement(required=true)
-	private String indRatISSQN;
+	private EnumIndRatISSQN indRatISSQN;
 	
 	public String getCNPJ()
 	{
@@ -50,22 +53,22 @@ public class Emit
 		this.IM = im;
 	}
 	
-	public String getCRegTribISSQN()
+	public EnumRegimeTributarioISSQN getCRegTribISSQN()
 	{
 		return this.cRegTribISSQN;
 	}
 	
-	public void setCRegTribISSQN(String regTribISSQN)
+	public void setCRegTribISSQN(EnumRegimeTributarioISSQN regTribISSQN)
 	{
 		this.cRegTribISSQN = regTribISSQN;
 	}
 	
-	public String getIndRatISSQN()
+	public EnumIndRatISSQN getIndRatISSQN()
 	{
 		return this.indRatISSQN;
 	}
 	
-	public void setIndRatISSQN(String indRatISSQN)
+	public void setIndRatISSQN(EnumIndRatISSQN indRatISSQN)
 	{
 		this.indRatISSQN = indRatISSQN;
 	}

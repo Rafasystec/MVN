@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumUF;
+
 @XmlRootElement(name="entrega")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Entrega
@@ -20,7 +22,7 @@ public class Entrega
 	@XmlElement(required=true)
 	private String xMun;
 	@XmlElement(required=true)
-	private String UF;
+	private EnumUF UF;
 
 	public String getXLgr()
 	{
@@ -72,12 +74,12 @@ public class Entrega
 		this.xMun = xMun;
 	}
 
-	public String getUF()
+	public EnumUF getUF()
 	{
 		return this.UF;
 	}
 
-	public void setUF(String uf)
+	public void setUF(EnumUF uf)
 	{
 		this.UF = uf;
 	}
