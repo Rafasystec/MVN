@@ -74,19 +74,11 @@ public static String getPatternPipe() {
  * Construtor padrao para a RulHelperSat
  */
 public HandleSAT() {
-	/*
-	---------------------------------------------------------------
-	Aqui iremos instanciar qual o MFe utilizado e a sua porta.
-	Isso sera definido posteriromente em um arquivo de propiredades
-	---------------------------------------------------------------
-	*/
 	try {
-		//Logfactory.adicionar("Instanciando RulHelperSat.");
 		initialize();
 	} catch (Exception e) {
 		// TODO: handle exception
 		e.printStackTrace();
-		//Logfactory.adicionar(e);
 	}
 }
 
@@ -155,11 +147,11 @@ public String ativarSat(int subComando, String cnpj, int cUF) throws Exception, 
 
 
 /**
- * Esta fun��o faz parte do processo de envio dos dados de venda do AC para o Equipamento
+ * Esta função faz parte do processo de envio dos dados de venda do AC para o Equipamento
  * SAT.
  * @param dadosVenda :
  * <p>Os campos obrigat�rios, bem como os tamanhos e formatos de cada um, devem seguir a</p>
- * <p>especifica��o do leiaute do arquivo de venda <strong>(vide Cap�tulo 4)</strong>. O AC dever� enviar os</p>
+ * <p>especificação do leiaute do arquivo de venda <strong>(vide Cap�tulo 4)</strong>. O AC deverão enviar os</p>
  * <p>dados em formato XML com suas respectivas tags.</p>
  * @return
  * @throws Exception
@@ -173,15 +165,8 @@ public String enviarDadosVenda(String dadosVenda) throws Exception
 	Thread thread	 = null;
 	String codAtivacao="";
 	try {
-		//Logfactory.adicionar("****************************** Enviar dados da Venda ********************************");
-		//Logfactory.adicionar("Enviando dados da venda.");
-		//Logfactory.adicionar("XML recebindo :");
-		//Logfactory.adicionar(dadosVenda);
 		numeroSessao = getNumeroSessao();	
-		//Logfactory.adicionar("Numero de sessao gerado: " + numeroSessao);
-		//Logfactory.adicionar("Codigo de Ativacao: " + ConfigSat.codAtivacao);
 		while (retry <= numberOfRetry) {
-			//Logfactory.adicionar("Tentativa : " + retry);
 			thread 		 = iniciarTimeout(2000);
 			retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, codAtivacao, dadosVenda);
 			if (!verificarTimeout(thread)) {
@@ -194,27 +179,40 @@ public String enviarDadosVenda(String dadosVenda) throws Exception
 					}					
 					retry++;
 					numeroSessao = getNumeroSessao();
-					//Logfactory.adicionar("Novo numero de sessao gerado: " + numeroSessao);
 				}						
 			} else {
 				break;
 			}
 		}
 		verificarRetorno(retorno, thread);
-		//Logfactory.adicionar("Retorno do Modulo: " + retorno);
 		retorno = tratarRetornoCaracteresEspeciais(retorno);
-		//Logfactory.adicionar("Retorno tratado para UTF-8: " + retorno);
-		//Logfactory.adicionar("------------------ Fim do envio da venda. Preparando para enviar o retorno. --------------");
 		return retorno;
 	} catch (Exception e) {
-		// TODO: handle exception
-		//Logfactory.adicionar(e);
+		
 		throw e;
 	}
 	
 }
 
-
+/**
+ * Enviar dados da venda para o SAT
+ * @param dadosVenda
+ * @param codigoAtivacao
+ * @return
+ * @throws Exception
+ */
+public String enviarDadosVenda(String dadosVenda, String codigoAtivacao) throws Exception{
+	String retorno	 = "";
+	int numeroSessao = 0;
+	Thread thread	 = null;
+	numeroSessao = getNumeroSessao();
+	thread 		 = iniciarTimeout(2000);
+	retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, codigoAtivacao, dadosVenda);	
+	verificarRetorno(retorno, thread);
+	retorno = tratarRetornoCaracteresEspeciais(retorno);	
+	return retorno;
+	
+}
 
 
 
@@ -1025,16 +1023,8 @@ public String cancelarUltimaVendaMonitor(String chave, String dadosCancelamento)
 public void initialize() throws Exception{
 	String classSat	= "";
 	String portSat	= "";
-//	ConfigSat conf	= null;
 	try {
-		//Logfactory.adicionar("Obtendo as configuracoes.");
-//		conf	 				= new ConfigSat();
-//		classSat 				= conf.getClassSat();
-//		portSat	 				= conf.getPort();
-//		ConfigSat.codAtivacao	= conf.getCodAtivacao();
-		//Logfactory.adicionar("Classe SAT selecionada: " + classSat);
-		//Logfactory.adicionar("Porta SAT configurada: "  + portSat);
-		definirSatPorClasse(classSat, portSat);
+		definirSatByClasse(classSat, portSat);
 	} catch (Exception e) {
 		// TODO: handle exception
 		throw e;
@@ -1048,7 +1038,7 @@ public void initialize() throws Exception{
  * @throws Exception
  * @author Rafael Rocha
  */
-public void definirSatPorClasse(String classe, String porta) throws Exception{
+public void definirSatByClasse(String classe, String porta) throws Exception{
 	try {
 		classe = classe.trim();
 		if(classe.equalsIgnoreCase(EnumModulosSAT.COMPSIS.getClassName())){

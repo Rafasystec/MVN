@@ -127,6 +127,10 @@ public class Prod
 		return this.qCom;
 	}
 
+	/**
+	 * Com 4 casa decimais , entao 1 unidade sera 1.0000 pois o ponto separa as decimais
+	 * @param qCom
+	 */
 	public void setQCom(String qCom)
 	{
 		this.qCom = qCom;

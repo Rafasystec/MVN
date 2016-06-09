@@ -18,7 +18,7 @@ public class SATTanca extends AbstractSATSuperClass {
 			initialize();
 			detectOS();
 			verifyLibrary();
-			library = (Functions)Native.loadLibrary(getLibraryPath() + getLibraryName(), Functions.class);
+			library = (Functions)Native.loadLibrary(getLibraryName(), Functions.class);
 			setLibrary(library);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -114,7 +114,8 @@ public class SATTanca extends AbstractSATSuperClass {
 //		return super.TesteFimAFim(numeroSessao, codigoDeAtivacao, dadosVenda);
 //	}
 	private void initialize() throws Exception {
-		String libPath = HendleFile.obterCaminhoRaiz() + "lib" + File.separator + "tanca" + File.separator;
+		//String libPath = HendleFile.obterCaminhoRaiz() + "lib" + File.separator + "tanca" + File.separator;
+		String libPath = "";
 		setLibraryNameLinux("sat");
 		setLibraryNameWindows("SAT");
 		setLibraryPath(libPath);
