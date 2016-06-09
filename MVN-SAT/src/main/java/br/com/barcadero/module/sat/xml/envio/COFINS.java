@@ -3,70 +3,89 @@ package br.com.barcadero.module.sat.xml.envio;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="COFINS")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class COFINS
 {
-	@XmlElement
-	private COFINSAliq COFINSAliq;
-	@XmlElement
-	private COFINSQtde COFINSQtde;
-	@XmlElement
-	private COFINSNT COFINSNT;
-	@XmlElement
-	private COFINSSN COFINSSN;
-	@XmlElement
-	private COFINSOutr COFINSOutr;
+	@XmlElements({
+		@XmlElement(name="COFINSAliq"	,type=COFINSAliq.class),
+		@XmlElement(name="COFINSQtde"	,type=COFINSQtde.class),
+		@XmlElement(name="COFINSNT"		,type=COFINSNT.class),
+		@XmlElement(name="COFINSSN"		,type=COFINSSN.class),
+		@XmlElement(name="COFINSOutr"	,type=COFINSOutr.class)
+	})
+	private SuperCOFINS cofins;
 
-	public COFINSAliq getCOFINSAliq()
-	{
-		return this.COFINSAliq;
+	public SuperCOFINS getCofins() {
+		return cofins;
 	}
 
-	public void setCOFINSAliq(COFINSAliq aliq)
-	{
-		this.COFINSAliq = aliq;
+	public void setCofins(SuperCOFINS cofins) {
+		this.cofins = cofins;
 	}
+	
+	
+//	@XmlElement
+//	private COFINSAliq COFINSAliq;
+//	@XmlElement
+//	private COFINSQtde COFINSQtde;
+//	@XmlElement
+//	private COFINSNT COFINSNT;
+//	@XmlElement
+//	private COFINSSN COFINSSN;
+//	@XmlElement
+//	private COFINSOutr COFINSOutr;
 
-	public COFINSQtde getCOFINSQtde()
-	{
-		return this.COFINSQtde;
-	}
-
-	public void setCOFINSQtde(COFINSQtde qtde)
-	{
-		this.COFINSQtde = qtde;
-	}
-
-	public COFINSNT getCOFINSNT()
-	{
-		return this.COFINSNT;
-	}
-
-	public void setCOFINSNT(COFINSNT cofinsnt)
-	{
-		this.COFINSNT = cofinsnt;
-	}
-
-	public COFINSSN getCOFINSSN()
-	{
-		return this.COFINSSN;
-	}
-
-	public void setCOFINSSN(COFINSSN cofinssn)
-	{
-		this.COFINSSN = cofinssn;
-	}
-
-	public COFINSOutr getCOFINSOutr()
-	{
-		return this.COFINSOutr;
-	}
-
-	public void setCOFINSOutr(COFINSOutr outr)
-	{
-		this.COFINSOutr = outr;
-	}
+//	public COFINSAliq getCOFINSAliq()
+//	{
+//		return this.COFINSAliq;
+//	}
+//
+//	public void setCOFINSAliq(COFINSAliq aliq)
+//	{
+//		this.COFINSAliq = aliq;
+//	}
+//
+//	public COFINSQtde getCOFINSQtde()
+//	{
+//		return this.COFINSQtde;
+//	}
+//
+//	public void setCOFINSQtde(COFINSQtde qtde)
+//	{
+//		this.COFINSQtde = qtde;
+//	}
+//
+//	public COFINSNT getCOFINSNT()
+//	{
+//		return this.COFINSNT;
+//	}
+//
+//	public void setCOFINSNT(COFINSNT cofinsnt)
+//	{
+//		this.COFINSNT = cofinsnt;
+//	}
+//
+//	public COFINSSN getCOFINSSN()
+//	{
+//		return this.COFINSSN;
+//	}
+//
+//	public void setCOFINSSN(COFINSSN cofinssn)
+//	{
+//		this.COFINSSN = cofinssn;
+//	}
+//
+//	public COFINSOutr getCOFINSOutr()
+//	{
+//		return this.COFINSOutr;
+//	}
+//
+//	public void setCOFINSOutr(COFINSOutr outr)
+//	{
+//		this.COFINSOutr = outr;
+//	}
 }

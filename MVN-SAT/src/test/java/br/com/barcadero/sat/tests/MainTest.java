@@ -2,15 +2,18 @@ package br.com.barcadero.sat.tests;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
 import br.com.barcadero.module.sat.enums.EnumEAN;
 import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
 import br.com.barcadero.module.sat.enums.EnumIndRegra;
+import br.com.barcadero.module.sat.enums.EnumMeioPagamento;
 import br.com.barcadero.module.sat.enums.EnumOrigICMS;
 import br.com.barcadero.module.sat.enums.EnumRegimeTributarioISSQN;
 import br.com.barcadero.module.sat.enums.EnumUF;
 import br.com.barcadero.module.sat.xml.envio.CFe;
+import br.com.barcadero.module.sat.xml.envio.COFINS;
+import br.com.barcadero.module.sat.xml.envio.COFINSAliq;
 import br.com.barcadero.module.sat.xml.envio.Dest;
 import br.com.barcadero.module.sat.xml.envio.Det;
 import br.com.barcadero.module.sat.xml.envio.Emit;
@@ -20,7 +23,12 @@ import br.com.barcadero.module.sat.xml.envio.ICMS00;
 import br.com.barcadero.module.sat.xml.envio.Ide;
 import br.com.barcadero.module.sat.xml.envio.Imposto;
 import br.com.barcadero.module.sat.xml.envio.InfCFe;
+import br.com.barcadero.module.sat.xml.envio.MP;
+import br.com.barcadero.module.sat.xml.envio.PIS;
+import br.com.barcadero.module.sat.xml.envio.PISAliq;
+import br.com.barcadero.module.sat.xml.envio.Pgto;
 import br.com.barcadero.module.sat.xml.envio.Prod;
+import br.com.barcadero.module.sat.xml.envio.Total;
 import br.com.barcadero.module.sat.xml.util.CNPJ;
 
 public class MainTest {
@@ -89,15 +97,38 @@ public class MainTest {
 		icms00.setPICMS("5.33");
 		icms.setiCMS(icms00);
 		imposto.setICMS(icms );
-		//N - ICMS Normal e ST
-		
+		//PIS
+		PIS pis 		= new PIS();
+		PISAliq aliq	= new PISAliq();
+		aliq.setCST("01");
+		aliq.setPPIS("0,0065");
+		aliq.setVBC("10.99");
+		pis.setPISAliq(aliq);
+		imposto.setPIS(pis );
+		//Cofins
+		COFINS cofins 			= new COFINS();
+		COFINSAliq cofinsAliq 	= new COFINSAliq();
+		cofinsAliq.setCST(EnumCSTCOFINSAliq.OPER_TRIBUT_NORMAL);
+		cofinsAliq.setPCOFINS("0,0065");
+		cofinsAliq.setVBC("10.99");
+		cofins.setCofins(cofinsAliq);
+		imposto.setCOFINS(cofins );
 		det.setImposto(imposto );
-		
-		
-		
 		dets.add(det);
 		infCFe.setDets(dets);
-		
+		//------------------------
+		Total total = new Total(); 
+		total.setVCFeLei12741("Valor aproximado dos tributos");
+		infCFe.setTotal(total);
+		//WA - Informacoes sobre Pagamento
+		Pgto pgto = new Pgto();
+		List<MP> mps = new ArrayList<MP>();
+		MP mp = new MP();
+		mp.setCMP(EnumMeioPagamento.DINHEIRO);
+		mp.setVMP("10.99");
+		mps.add(mp);
+		pgto.setMPs(mps );
+		infCFe.setPgto(pgto);
 		cfe.setInfCFe(infCFe);
 	}
 

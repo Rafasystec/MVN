@@ -5,31 +5,34 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumCSOSN102;
+import br.com.barcadero.module.sat.enums.EnumOrigICMS;
+
 @XmlRootElement(name="ICMSSN102")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ICMSSN102
 {
 	@XmlElement(required=true)
-	private String Orig;
+	private EnumOrigICMS Orig;
 	@XmlElement(required=true)
-	private String CSOSN;
+	private EnumCSOSN102 CSOSN;
 
-	public String getOrig()
+	public EnumOrigICMS getOrig()
 	{
 		return this.Orig;
 	}
 
-	public void setOrig(String orig)
+	public void setOrig(EnumOrigICMS orig)
 	{
 		this.Orig = orig;
 	}
 
-	public String getCSOSN()
+	public EnumCSOSN102 getCSOSN()
 	{
 		return this.CSOSN;
 	}
 
-	public void setCSOSN(String csosn)
+	public void setCSOSN(EnumCSOSN102 csosn)
 	{
 		this.CSOSN = csosn;
 	}

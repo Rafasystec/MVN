@@ -41,6 +41,11 @@ public class PISAliq
 		return this.pPIS;
 	}
 
+	/**
+	 * Alíquota do PIS (em percentual) 
+	 * Ex. Se a alíquota for 0,65% informar 0,0065
+	 * @param pPIS
+	 */
 	public void setPPIS(String pPIS)
 	{
 		this.pPIS = pPIS;

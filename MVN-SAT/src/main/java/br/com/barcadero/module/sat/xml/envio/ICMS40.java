@@ -5,31 +5,34 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumCSTICMS40;
+import br.com.barcadero.module.sat.enums.EnumOrigICMS;
+
 @XmlRootElement(name="ICMS40")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ICMS40
 {
 	@XmlElement(required=true)
-	private String Orig;
+	private EnumOrigICMS Orig;
 	@XmlElement(required=true)
-	private String CST;
+	private EnumCSTICMS40 CST;
 
-	public String getOrig()
+	public EnumOrigICMS getOrig()
 	{
 		return this.Orig;
 	}
 
-	public void setOrig(String orig)
+	public void setOrig(EnumOrigICMS orig)
 	{
 		this.Orig = orig;
 	}
 
-	public String getCST()
+	public EnumCSTICMS40 getCST()
 	{
 		return this.CST;
 	}
 
-	public void setCST(String cst)
+	public void setCST(EnumCSTICMS40 cst)
 	{
 		this.CST = cst;
 	}

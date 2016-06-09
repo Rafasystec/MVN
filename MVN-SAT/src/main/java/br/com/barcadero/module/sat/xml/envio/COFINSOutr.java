@@ -5,12 +5,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSOutr;
+
 @XmlRootElement(name="COFINSOutr")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class COFINSOutr
+public class COFINSOutr extends SuperCOFINS
 {
 	@XmlElement(required=true)
-	private String CST;
+	private EnumCSTCOFINSOutr CST;
 	@XmlElement
 	private String vBC;
 	@XmlElement
@@ -20,12 +22,12 @@ public class COFINSOutr
 	@XmlElement
 	private String vAliqProd;
 
-	public String getCST()
+	public EnumCSTCOFINSOutr getCST()
 	{
 		return this.CST;
 	}
 
-	public void setCST(String cst)
+	public void setCST(EnumCSTCOFINSOutr cst)
 	{
 		this.CST = cst;
 	}

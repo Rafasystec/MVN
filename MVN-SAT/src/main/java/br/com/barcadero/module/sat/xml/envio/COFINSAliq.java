@@ -5,23 +5,25 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
+
 @XmlRootElement(name="COFINSAliq")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class COFINSAliq
+public class COFINSAliq extends SuperCOFINS
 {
 	@XmlElement(required=true)
-	private String CST;
+	private EnumCSTCOFINSAliq CST;
 	@XmlElement(required=true)
 	private String vBC;
 	@XmlElement(required=true)
 	private String pCOFINS;
 
-	public String getCST()
+	public EnumCSTCOFINSAliq getCST()
 	{
 		return this.CST;
 	}
 
-	public void setCST(String cst)
+	public void setCST(EnumCSTCOFINSAliq cst)
 	{
 		this.CST = cst;
 	}
@@ -41,6 +43,10 @@ public class COFINSAliq
 		return this.pCOFINS;
 	}
 
+	/**
+	 * Ex. Se a alíquota for 0,65% informar 0,0065
+	 * @param pCOFINS
+	 */
 	public void setPCOFINS(String pCOFINS)
 	{
 		this.pCOFINS = pCOFINS;

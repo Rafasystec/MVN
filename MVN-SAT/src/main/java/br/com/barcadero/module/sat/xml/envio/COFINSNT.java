@@ -5,19 +5,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSNT;
+
 @XmlRootElement(name="COFINSNT")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class COFINSNT
+public class COFINSNT extends SuperCOFINS
 {
 	@XmlElement(required=true)
-	private String CST;
+	private EnumCSTCOFINSNT CST;
 
-	public String getCST()
+	public EnumCSTCOFINSNT getCST()
 	{
 		return this.CST;
 	}
 
-	public void setCST(String cst)
+	public void setCST(EnumCSTCOFINSNT cst)
 	{
 		this.CST = cst;
 	}

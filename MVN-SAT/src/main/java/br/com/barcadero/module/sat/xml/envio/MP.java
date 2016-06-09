@@ -5,23 +5,25 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import br.com.barcadero.module.sat.enums.EnumMeioPagamento;
+
 @XmlRootElement(name="MP")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MP
 {
 	@XmlElement(required=true)
-	private String cMP;
+	private EnumMeioPagamento cMP;
 	@XmlElement(required=true)
 	private String vMP;
 	@XmlElement
 	private String cAdmC;
 
-	public String getCMP()
+	public EnumMeioPagamento getCMP()
 	{
 		return this.cMP;
 	}
 
-	public void setCMP(String cMP)
+	public void setCMP(EnumMeioPagamento cMP)
 	{
 		this.cMP = cMP;
 	}

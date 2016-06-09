@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="COFINSST")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class COFINSST
+public class COFINSST extends SuperCOFINS
 {
 	@XmlElement
 	private String vBC;
