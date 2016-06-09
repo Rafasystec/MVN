@@ -1,13 +1,8 @@
-package br.com.systeconline.core.handles;
+package br.com.barcadero.commons.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-/**
- * Utilizar a classe do pacote br.com.barcadero.commons
- * @author antoniorafael
- *
- */
-@Deprecated
+
 public class HandleDateHour {
 	
 	public static void main(String[] args) {

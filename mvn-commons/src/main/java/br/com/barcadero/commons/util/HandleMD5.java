@@ -1,14 +1,9 @@
-package br.com.systeconline.core.handles;
+package br.com.barcadero.commons.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-/**
- * Utilizar a classe do pacote br.com.barcadero.commons
- * @author antoniorafael
- *
- */
-@Deprecated
+
 public class HandleMD5 {
 	
 	public static final String MD5_ALGORITHM = "MD5";
