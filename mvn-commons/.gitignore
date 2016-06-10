@@ -1,5 +1,7 @@
 /target
 /bin/
+/logs/
+/XML/
 /.settings/
 *.class
 *.log
