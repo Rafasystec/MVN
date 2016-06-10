@@ -6,9 +6,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.barcadero.commons.xml.HandleXML;
+import sun.misc.BASE64Decoder;
 /**
  * Manipular os arquivos da aplicação.
  * @author Rafael Rocha
@@ -47,7 +51,7 @@ public class HandleFiles {
 	 * @param skipLine: caso true sera feito um salto de linha, quando false sere scrito na mesma linha
 	 * @throws IOException
 	 */
-	public void wrietFile(String fileName, String filePath, String value, boolean skipLine) throws IOException {
+	public void writFile(String fileName, String filePath, String value, boolean skipLine) throws IOException {
 		File file		= new File(filePath);
 		if(!file.exists()){
 			file.mkdirs();
@@ -75,4 +79,54 @@ public class HandleFiles {
 		}
 	}
 
+	/**
+	 * Grava um arquivo em base 64
+	 * @param fileBase64
+	 * @param filePath
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public static void writFileBase64(String fileBase64, String filePath, String fileName) throws Exception
+	{	
+		String arquivo 				= "";
+		FileWriter fileWriter 		= null;
+		try
+		{
+			arquivo = new String(new BASE64Decoder().decodeBuffer(fileBase64), "UTF-8");	
+			try	{			
+				File file = new File(filePath);
+				if (!file.exists())	{
+					file.mkdirs();
+				}
+				fileWriter = new FileWriter(filePath + fileName);		
+				fileWriter.write(HandleXML.normalize(arquivo));
+			}finally{		
+				if (fileWriter != null)	{
+					fileWriter.close();
+				}
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 
+	 * @param valueBase64
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static String decodeBase64(String valueBase64) throws UnsupportedEncodingException, IOException {
+		return  normalize(new String(new BASE64Decoder().decodeBuffer(valueBase64), "UTF-8"));	
+	}
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static String normalize(String value) {		
+		return Normalizer.normalize(value, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").replaceAll("&amp;quot;", "&quot;").replaceAll("&amp;#39;", "&#39;");
+	}
 }

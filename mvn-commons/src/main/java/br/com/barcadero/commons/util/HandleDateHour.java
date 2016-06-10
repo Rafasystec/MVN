@@ -12,7 +12,6 @@ public class HandleDateHour {
 	public String format(Date date, String outputFormat) {
 		SimpleDateFormat dfo = new SimpleDateFormat(outputFormat);
 		String dtFormat = dfo.format(date);
-		System.out.println(dtFormat);
 		return dtFormat;
 	}
 

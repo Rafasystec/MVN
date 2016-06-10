@@ -3,6 +3,8 @@ package br.com.barcadero.commons.xml;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.StringReader;
+import java.text.Normalizer;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -101,4 +103,12 @@ public class HandleXML {
 		}
 	}
 	
+	/**
+	 * Normalizar XML
+	 * @param xml
+	 * @return
+	 */
+	public static String normalize(String xml) {		
+		return Normalizer.normalize(xml, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "").replaceAll("&amp;quot;", "&quot;").replaceAll("&amp;#39;", "&#39;");
+	}
 }

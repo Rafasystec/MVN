@@ -1,9 +1,13 @@
 package br.com.barcadero.module.sat.handle;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
+import br.com.barcadero.commons.loggin.LoggerFile;
 import br.com.barcadero.module.sat.devices.bematech.SATBematech;
 import br.com.barcadero.module.sat.devices.compsis.MFeCompsis;
 import br.com.barcadero.module.sat.devices.dimep.SATDimep;
@@ -57,6 +61,7 @@ public class HandleSAT
 	//---------------------------------------------------
 	public static final String SAT					= "SAT";
 	public static final String MFE					= "MFE";
+	static Logger log = LoggerFile.getLogForSAT(HandleSAT.class);
 
 public static String getCharSeparator() {
 	return charSeparator;
@@ -1052,17 +1057,15 @@ public void definirSatByClasse(String classe, String porta) throws Exception{
 		}else if(classe.equalsIgnoreCase(EnumModulosSAT.BEMATECH.getClassName())){
 			configurarBematechRB1000(porta);
 		}else{
-			//Logfactory.adicionar("Nï¿½o existe modulo definido para a classe: " + classe);
+			log.info("Opção de classe inválida >>> " + classe);
 		}
-		//Logfactory.adicionar("Detalhes :");
 		if(this.iSatMfe != null){
-			//Logfactory.adicionar(this.iSatMfe.toString());
+			log.info(this.iSatMfe.toString());
 		}else{
-			//Logfactory.adicionar("Nï¿½o foi possï¿½vel carregar a lib para a Classe: " + classe);
+			log.info("Não foi possível Classe: " + classe);
 		}
 		
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
