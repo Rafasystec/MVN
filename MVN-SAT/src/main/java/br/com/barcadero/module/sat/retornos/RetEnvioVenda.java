@@ -1,7 +1,5 @@
 package br.com.barcadero.module.sat.retornos;
 
-import br.com.barcadero.module.sat.handle.HandleSAT;
-
 public class RetEnvioVenda extends SuperSATRetorno {
 
 	/*Exemplo de retorno de venda
@@ -64,6 +62,7 @@ public class RetEnvioVenda extends SuperSATRetorno {
 		RetEnvioVenda retVen 	= new RetEnvioVenda();
 		String[] listValues 	= toArray(retornoSAT); 
 		if(listValues != null){
+			//Note: aqui atenderemos tanto o retorno da venda como o do cancelamento
 			retVen = (RetEnvioVenda) getDefault(retVen, listValues);
 			if(retVen.getCodigoRetSAT().equals("06000")){
 				retVen.setCodigoAlerta(listValues[2]);
