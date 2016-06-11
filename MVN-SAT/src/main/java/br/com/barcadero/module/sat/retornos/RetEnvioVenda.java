@@ -61,21 +61,19 @@ public class RetEnvioVenda extends SuperSATRetorno {
 	}
 	
 	public static RetEnvioVenda getRetorno(String retornoSAT) {
-		RetEnvioVenda retVen = new RetEnvioVenda();
-		String[] listValues = retornoSAT.split(HandleSAT.getPatternPipe());
+		RetEnvioVenda retVen 	= new RetEnvioVenda();
+		String[] listValues 	= toArray(retornoSAT); 
 		if(listValues != null){
-			retVen.setNumeroSessao(listValues[0]);
-			retVen.setCodigoRetSAT(listValues[1]);
-			retVen.setCodigoAlerta(listValues[2]);
-			retVen.setMsgModulo(listValues[3]);
-			retVen.setCodigoSEFAZ(listValues[4]);
-			retVen.setMsgSEFAZ(listValues[5]);
-			retVen.setArquivoBase64(listValues[6]);
-			retVen.setDataHoraTransm(listValues[7]);
-			retVen.setChaveConsulta(listValues[8]);
-			retVen.setValorTotal(listValues[9]);
-			retVen.setCpfCnpjValue(listValues[10]);
-			retVen.setAssinaturaQRCode(listValues[11]);
+			retVen = (RetEnvioVenda) getDefault(retVen, listValues);
+			if(retVen.getCodigoRetSAT().equals("06000")){
+				retVen.setCodigoAlerta(listValues[2]);
+				retVen.setArquivoBase64(listValues[6]);
+				retVen.setDataHoraTransm(listValues[7]);
+				retVen.setChaveConsulta(listValues[8]);
+				retVen.setValorTotal(listValues[9]);
+				retVen.setCpfCnpjValue(listValues[10]);
+				retVen.setAssinaturaQRCode(listValues[11]);
+			}
 		}
 		return retVen;
 	}

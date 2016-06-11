@@ -1,5 +1,11 @@
 package br.com.barcadero.module.sat.retornos;
 
+import br.com.barcadero.module.sat.handle.HandleSAT;
+
+/**
+ * Classe de apoio para o Retorno
+ * @author Rafael Rocha
+ */
 public abstract class SuperSATRetorno {
 	
 	private String numeroSessao;
@@ -36,6 +42,32 @@ public abstract class SuperSATRetorno {
 	}
 	public void setMsgSEFAZ(String msgSEFAZ) {
 		this.msgSEFAZ = msgSEFAZ;
+	}
+	
+	public static String[] toArray(String retorno) {
+		return retorno.split(HandleSAT.getPatternPipe());
+	}
+	
+	/**
+	 * Obtem os campos padrões de retorno, que são os retornados em caso de erro ou de sucesso
+	 * @param superRet
+	 * @param listValues
+	 * @return
+	 */
+	public static SuperSATRetorno getDefault(SuperSATRetorno superRet, String[] listValues) {
+		superRet.setNumeroSessao(listValues[0]);
+		if(superRet instanceof RetEnvioVenda){
+			superRet.setCodigoRetSAT(listValues[1]);
+			superRet.setMsgModulo(listValues[3]);
+			superRet.setCodigoSEFAZ(listValues[4]);
+			superRet.setMsgSEFAZ(listValues[5]);
+		}else{
+			superRet.setCodigoRetSAT(listValues[1]);
+			superRet.setMsgModulo(listValues[2]);
+			superRet.setCodigoSEFAZ(listValues[3]);
+			superRet.setMsgSEFAZ(listValues[4]);
+		}
+		return superRet;
 	}
 	@Override
 	public int hashCode() {
