@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 import br.com.barcadero.commons.loggin.LoggerFile;
+import br.com.barcadero.commons.util.HandleFiles;
 import br.com.barcadero.module.sat.devices.bematech.SATBematech;
 import br.com.barcadero.module.sat.devices.compsis.MFeCompsis;
 import br.com.barcadero.module.sat.devices.dimep.SATDimep;
@@ -18,7 +19,7 @@ import br.com.barcadero.module.sat.devices.tanca.ts1000.SATTanca;
 import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.exceptions.SATException;
 //import br.com.secrel.sat.util.FileHelper;
-import sun.misc.BASE64Decoder;
+
 
 
 /**
@@ -82,7 +83,6 @@ public HandleSAT() {
 	try {
 		initialize();
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 }
@@ -107,7 +107,6 @@ public int openPort(int canal) throws Exception
 	try {
 		return this.iSatMfe.openPort(canal);
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -145,7 +144,6 @@ public String ativarSat(int subComando, String cnpj, int cUF) throws Exception, 
 		verificarRetorno(retorno, thread);
 		return retorno;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}	
 }
@@ -162,6 +160,7 @@ public String ativarSat(int subComando, String cnpj, int cUF) throws Exception, 
  * @throws Exception
  * @author Rafael Rocha
  */
+@Deprecated
 public String enviarDadosVenda(String dadosVenda) throws Exception
 {
 	String retorno	 = "";
@@ -234,16 +233,12 @@ public String atualizarSoftware() throws Exception
 	Thread thread		= null;  
 	String codAtivacao  = "";
 	try {
-		//Logfactory.adicionar("****************** Funcao atualizarSoftware ***************************");
 		numeroSessao = getNumeroSessao();
-		//Logfactory.adicionar("Numero de sessao Gerado: " + numeroSessao);
-		//Logfactory.adicionar("Tempo para timeout em ms: 1802000");
 		thread 		 = iniciarTimeout(1802000);		
 		retorno 	 = this.iSatMfe.AtualizarSoftwareSAT(numeroSessao, codAtivacao);
 		verificarRetorno(retorno, thread);
 		return retorno;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 	
@@ -251,8 +246,8 @@ public String atualizarSoftware() throws Exception
 
  
 /**
- * O Aplicativo Comercial poder� extrair os arquivos de registro do Equipamento SAT por meio
- * da fun��o ExtrairLogs.
+ * O Aplicativo Comercial poderá extrair os arquivos de registro do Equipamento SAT por meio
+ * da função ExtrairLogs.
  * @return
  * @throws Exception
  * @author Rafael Rocha
@@ -263,18 +258,13 @@ public String extrairLogs() throws Exception {
 	 String retorno		= "";
 	 Thread thread		= null;
 	 try {
-		//Logfactory.adicionar("***************Funcao extrair logs**********************");
 		numeroSessao	= getNumeroSessao();
 		codAtivacao		= "";
-		//Logfactory.adicionar("Numero de sessao : " + numeroSessao);
-		//Logfactory.adicionar("Codigo de ativacao: " + codAtivacao);
-		//Logfactory.adicionar("Tempo de timeout em ms 22000");
 		thread 			= iniciarTimeout(22000); // 20s + 2s de guarda	
 	 	retorno 		= this.iSatMfe.ExtrairLogs(numeroSessao, codAtivacao);
 	 	verificarRetorno(retorno, thread);
 	 	return retorno;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
  	
@@ -294,31 +284,24 @@ public String extrairLogs() throws Exception {
 	String retorno			= "";
  	Thread thread 			= null;
  	try {
- 		//Logfactory.adicionar("****************************Funcao ConsultarStatusOperacional*********************");
  		numeroSessao 	= getNumeroSessao();
- 		//codAtivacao 	= ConfigSat.codAtivacao;
- 		//Logfactory.adicionar("Numero de sessao: " + numeroSessao);
- 		//Logfactory.adicionar("Codigo de ativacao: " + codAtivacao);
- 		//Logfactory.adicionar("Tempo para timeout em ms: 4000");
  		thread 			= iniciarTimeout(4000);
  		retorno 		= this.iSatMfe.ConsultarStatusOperacional(numeroSessao, codAtivacao);
  		verificarRetorno(retorno, thread);
  		return retorno;
- 	}catch (SATException e) {
- 		// TODO: handle exception	
+ 	}catch (SATException e) {	
  		throw e;
  	} catch (Exception e) {
- 		// TODO: handle exception
  		throw e;
  	}
  }
 
 
 /**
- * Esta fun��o consiste em um teste de comunica��o entre o AC, o Equipamento SAT e a
+ * Esta funcao consiste em um teste de comunicacao entre o AC, o Equipamento SAT e a
  * SEFAZ.
- * @param dadosVenda : Os campos obrigat�rios, bem como os tamanhos e formatos de cada um, devem seguir a
- * especifica��o do leiaute do arquivo de venda
+ * @param dadosVenda : Os campos obrigatorios, bem como os tamanhos e formatos de cada um, devem seguir a
+ * especificaçãoo do leiaute do arquivo de venda
  * @return
  * @throws Exception
  * @throws SATException
@@ -330,29 +313,21 @@ public String extrairLogs() throws Exception {
 	 	String retorno		= "";
 		Thread thread 		= null;
 		try {
-			//Logfactory.adicionar("***************** Funcao TesteFimAFim ***********************");
 			numeroSessao	= getNumeroSessao();
-			//codAtivacao		= ConfigSat.codAtivacao;
-			//Logfactory.adicionar("Numero de Sessao: " + numeroSessao);
-			//Logfactory.adicionar("Codigo de ativacao: " + codAtivacao);
-			//Logfactory.adicionar("Dados venda: " + dadosVenda);
-			//Logfactory.adicionar("timeout em 22000 ms");
 			thread 			= iniciarTimeout(22000);
 			retorno 		= this.iSatMfe.TesteFimAFim(numeroSessao, codAtivacao, dadosVenda);
 			verificarRetorno(retorno, thread);
 			return retorno;
 		} catch (SATException e) {
-			// TODO: handle exception
 			throw e;
 		} catch (Exception e) {
-			// TODO: handle exception
 			throw e;
 		}
 		
 	}
 
 /**
- * Esta fun��o � usada para testes de comunica��o entre o AC e o Equipamento SAT.
+ * Esta funcao é usada para testes de comunicacao entre o AC e o Equipamento SAT.
  * @param numeroSessaoVenda
  * @return
  * @throws Exception
@@ -364,27 +339,23 @@ public String consultarSAT() throws Exception, SATException {
 	String retorno 	 = "";
 	Thread thread	 = null;
 	try {
-		//Logfactory.adicionar("******************* Funcoes consultarSAT ******************");
 		numeroSessao = getNumeroSessao();
-		//Logfactory.adicionar("Numero de sessao: " + numeroSessao);
 		thread 		 = iniciarTimeout(4000);
 		retorno 	 = this.iSatMfe.ConsultarSAT(numeroSessao);	
 		verificarRetorno(retorno, thread);
 		return retorno;
 	} catch (SATException e) {
-		// TODO: handle exception
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
 
 
 /**
- * <p>O AC poder� verificar se a �ltima sess�o requisitada foi processada em caso de n�o
- * recebimento do retorno da opera��o. O equipamento SAT-CF-e retornar� exatamente o
- * resultado da sess�o consultada.</p>
+ * <p>O AC poderá verificar se a última sessão requisitada foi processada em caso de não
+ * recebimento do retorno da operação. O equipamento SAT-CF-e retornará exatamente o
+ * resultado da sessão consultada.</p>
  * @param cNumeroDeSessao
  * @return
  * @throws Exception
@@ -396,22 +367,14 @@ public String consultarNumeroSessao() throws Exception{
 	String retorno 		= "";
 	Thread thread 		= null;
 	try {
-		//Logfactory.adicionar("*****************************Consultar numero de Sessao*****************");
-//		ultNumeroSessao = (int) obterUltimaSessaoGravadaInt();
 		numeroSessao 	= getNumeroSessao();
-//		codiAtivacao 	= ConfigSat.codAtivacao;
-		//Logfactory.adicionar("Numero de Sessao: ".concat(numeroSessao+"") );
-		//Logfactory.adicionar("Codigo de ativacao : " + codiAtivacao);
-		//Logfactory.adicionar("Numero da ultima sessao a ser consultada: " + ultNumeroSessao);
 		thread 		 	= iniciarTimeout(2200);
 		retorno 	 	= this.iSatMfe.ConsultarNumeroSessao(numeroSessao, codiAtivacao, ultNumeroSessao);
 		verificarRetorno(retorno, thread);
 		return retorno;
 	}catch (SATException e) {
-		// TODO: handle exception
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -430,21 +393,14 @@ public String bloquearSAT() throws Exception, SATException{
 	String retorno			= "";
 	Thread thread			= null;
 	try {
-		//Logfactory.adicionar("****************** Funcao bloquearSAT **********************");
 		numeroSessao = getNumeroSessao();
-//		codAtivacao	 = ConfigSat.codAtivacao;
-		//Logfactory.adicionar("Numero de sesssao: " + numeroSessao);
-		//Logfactory.adicionar("Codigo de ativacao: " + codAtivacao);
-		//Logfactory.adicionar("Timeout 302000 ms");
 		thread  	 = iniciarTimeout(302000);
 		retorno = this.iSatMfe.BloquearSAT(numeroSessao, codAtivacao);
 		verificarRetorno(retorno, thread);
 		return retorno;
 	} catch (SATException e) {
-		// TODO: handle exception
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 	
@@ -464,21 +420,14 @@ public String desbloquearSAT() throws Exception, SATException {
 	String retorno 		= "";
 	Thread thread		= null;
 	try {
-		//Logfactory.adicionar("***************** Funcao desbloquearSAT ***********************");
 		numeroSessao	= getNumeroSessao();
-//		codAtivacao		= ConfigSat.codAtivacao;
-		//Logfactory.adicionar("Numero de sessao: " + numeroSessao);
-		//Logfactory.adicionar("Codigo de ativacao: " + codAtivacao);
-		//Logfactory.adicionar("Timeout 22000");
 		thread 			= iniciarTimeout(22000);
 		retorno			= this.iSatMfe.DesbloquearSAT(numeroSessao, codAtivacao);
 		verificarRetorno(retorno, thread);
 		return retorno;
 	} catch (SATException e) {
-		// TODO: handle exception
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 	
@@ -486,13 +435,13 @@ public String desbloquearSAT() throws Exception, SATException {
 
 
 /**
- * O Aplicativo Comercial ou outro software fornecido pelo Fabricante poder� realizar a troca
- * do c�digo de ativa��o a qualquer momento.
- * @param opcao :<p> Refere-se a op��o do conte�do do par�metro �codigoDeAtivacao�</p>
+ * O Aplicativo Comercial ou outro software fornecido pelo Fabricante poderá realizar a troca
+ * do código de ativação a qualquer momento.
+ * @param opcao :<p> Refere-se a opção do conteúdo do parâmetro 'codigoDeAtivacao'</p>
  * <p>sendo:</p>
  * <ul>
- * 		<li>1 � C�digo de Ativa��o</li>
- * 		<li>2 � C�digo de Ativa��o de Emerg�ncia </li>
+ * 		<li>1 - Código de Ativação</li>
+ * 		<li>2 - Código de Ativação de Emergência </li>
  * </ul>
  * @param novoCodigo 		: Novo codigo de Ativacao
  * @param confNovoCodigo	: Confirmacao do novo codigo de ativacao
@@ -507,42 +456,17 @@ public String trocarCodigoDeAtivacao(int opcao, String novoCodigo, String confNo
 	String retorno		= "";
 	Thread thread		= null; 
 	try {
-		//Logfactory.adicionar("***************** Funcao TrocarCodigoDeAtivacao *******************");
 		numeroSessao = getNumeroSessao();
-		//Primeiro devemos pegar o codigo de ativacao antigo
-//		codAtivacao	 = ConfigSat.codAtivacao;
-//		atualizarCodAtivacaoNoArquivo(novoCodigo);
-		//Logfactory.adicionar("Numero de sessao: " + numeroSessao);
-		//Logfactory.adicionar("Codigo de Ativacao: " + codAtivacao);
-		//Logfactory.adicionar("Timeou 22000");
 		thread  	 = iniciarTimeout(22000);
 		retorno 	 = this.iSatMfe.TrocarCodigoDeAtivacao(numeroSessao, codAtivacao, opcao, novoCodigo, confNovoCodigo);
 		verificarRetorno(retorno, thread);
 		return retorno;
 	} catch (SATException e) {
-		// TODO: handle exception
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
-
-///**
-// * Troca o codigo de ativacao no arquivo de propriedades.
-// * @param value
-// * @throws Exception
-// */
-//private void atualizarCodAtivacaoNoArquivo(String value) throws Exception{
-//	ConfigSat conf = null;
-//	try {
-//		conf = new ConfigSat();
-//		conf.atualizarCodAtivacao(value);
-//	} catch (Exception e) {
-//		// TODO: handle exception
-//		throw e;
-//	}
-//}
 
 /**
  * Trata o retorno vindo do modulo SAT-MFe
@@ -563,7 +487,6 @@ public static HandleRetornoSAT tratarRetornoAtivacaoSat(String pRetorno) throws 
 		}	
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -591,7 +514,6 @@ public static HandleRetornoSAT tratarRetornoTesteFimAFim(String pRetorno) throws
 		}	
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -614,16 +536,17 @@ public static HandleRetornoSAT tratarRetornoExtracaoLogs(String pRetorno) throws
 				//--------------------------------------------------------------------------------------------------------------------
 				// Arquivo de log em base64:
 				// datahora|processo|erro/info|detalhamento
-				// - datahora: � o carimbo de tempo no formato: AAAAMMDDhhmmss
-				// - processo: � o autor ou os autores do processo, podendo ser: AC-SAT / SAT /  SAT-AC / SAT-SEFAZ / SEFAZ-SAT
-				// - erro/info: � o tipo de log: "erro" significa erro de processo e "info" significa informa��o sobre o processo;
-				// - detalhamento: � a descri��o detalhada da ocorr�ncia do processo.
+				// - datahora:  o carimbo de tempo no formato: AAAAMMDDhhmmss
+				// - processo:  o autor ou os autores do processo, podendo ser: AC-SAT / SAT /  SAT-AC / SAT-SEFAZ / SEFAZ-SAT
+				// - erro/info:  o tipo de log: "erro" significa erro de processo e "info" significa informa��o sobre o processo;
+				// - detalhamento:  a descrição detalhada da ocorrência do processo.
 				// - Exemplo: AAAAMMDDhhmmss|SAT-SEFAZ|erro|erro ao tentar transmitir lote para a SEFAZ
 				//--------------------------------------------------------------------------------------------------------------------
 				HandleLogSAT logSatVO 				= new HandleLogSAT();
 				ArrayList<HandleLogSAT> logsSatVO 	= new ArrayList<HandleLogSAT>();
-				String arquivoLog64 			= ajustarCampoRetorno(camposRetorno, 5);
-				String arquivoLog 				= new String(new BASE64Decoder().decodeBuffer(arquivoLog64), "UTF-8");
+				String arquivoLog64 				= ajustarCampoRetorno(camposRetorno, 5);
+				//String arquivoLog 				= new String(new BASE64Decoder().decodeBuffer(arquivoLog64), "UTF-8");
+				String arquivoLog 					= HandleFiles.decodeBase64(arquivoLog64);
 				String linhaArquivoLogSplitted[]= null;
 				for (String linhaArquivoLog : arquivoLog.split("\n"))
 				{
@@ -644,7 +567,6 @@ public static HandleRetornoSAT tratarRetornoExtracaoLogs(String pRetorno) throws
 		}	
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -682,7 +604,6 @@ public static HandleRetornoSAT tratarRetornoVenda(String pRetorno) throws Except
 		}
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -730,7 +651,6 @@ public static HandleRetornoSAT tratarRetornoStatusOperacional(String pRetorno) t
 		}	
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -753,7 +673,6 @@ public static HandleRetornoSAT tratarRetornoConsultaSat(String pRetorno) throws 
 		}	
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -776,7 +695,6 @@ private static HandleRetornoSAT tratarRetornoSat(String[] pCamposRetorno) throws
 		retornoSatVO.setMensagemSEFAZ(ajustarCampoRetorno(pCamposRetorno, 4));
 		return retornoSatVO;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -837,7 +755,6 @@ private static Thread iniciarTimeout(final Integer pTimeOut) throws SATException
 		        }catch (InterruptedException e) {
 		        	
 		        }catch (RuntimeException e) {
-					// TODO: handle exception
 		        	throw e;
 				}
 		    }
@@ -847,7 +764,6 @@ private static Thread iniciarTimeout(final Integer pTimeOut) throws SATException
 		System.out.println("Lancar exce��o de tempo esgotado.");
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 	return t;
@@ -872,7 +788,6 @@ private static boolean verificarTimeout(Thread t)
 			return false;
 		}
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 	return true;
@@ -895,67 +810,9 @@ public Integer getNumeroSessao()throws Exception{
 		//guardarNumeroSessao(numeroAleatorio);
 		return numeroAleatorio;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
-
-///**
-// * Obtem a ultima sessao SAT gravada no arquivo txt.
-// * @return
-// * @throws Exception
-// */
-//public String obterUltimaSessaoGravada() throws Exception{
-//	FileHelper fileHelper	= null;
-//	try {
-//		fileHelper = new FileHelper();
-//		return fileHelper.obterUltimaSessaoGravada();
-//	} catch (Exception e) {
-//		// TODO: handle exception
-//		throw e;
-//	}
-//}
-
-///**
-// * Obtem o numero da ultima sessao gravada no arquivo txt no formato inteiro.
-// * @return
-// * @throws Exception
-// */
-//public long obterUltimaSessaoGravadaInt() throws Exception{
-//	String numSessao  = "";
-//	long intNumSessao = 0;
-//	try {
-//		numSessao = obterUltimaSessaoGravada();
-//		if(numSessao.trim().equals("")){
-//			//Logfactory.adicionar("Ops!!! A ultima sessao do arquivo nao pode ser obtida. Favor verifique.");
-//		}else{
-//			intNumSessao = Long.parseLong(numSessao);
-//		}
-//		return intNumSessao;
-//	} catch (Exception e) {
-//		// TODO: handle exception
-//		throw e;
-//	}
-//}
-
-///**
-// * Gravar numero de sessao no arquivo.
-// * @param numSessao
-// * @throws Exception
-// */
-//private void guardarNumeroSessao(long numSessao) throws Exception{
-//	FileHelper fileHelper	= null;
-//	try {
-//		fileHelper = new FileHelper();
-//		fileHelper.gravarUltimaSessao(numSessao);
-//	} catch (Exception e) {
-//		// TODO: handle exception
-//		throw e;
-//	}
-//}
-
-
-
 
 /**
  * Cancela o ultimo cupom transmitido desde que o tempo de sua emissao n�o tenha ultrapassado 30 minutos.
@@ -973,15 +830,8 @@ public String cancelarUltimaVendaMonitor(String chave, String dadosCancelamento)
 	String codAtivacao	= "";
 	int retry      		= 1;
 	try {
-		//Logfactory.adicionar("**************** Cancelar ultima venda ***********************");
-		//Logfactory.adicionar("Chave: " + chave);
-		//Logfactory.adicionar("Xml: " + dadosCancelamento);
-//		codAtivacao		 = ConfigSat.codAtivacao;
-		//Logfactory.adicionar("Codigo de Ativacao: " + codAtivacao);
 		while (retry <= numberOfRetry) {
 			numeroSessao = getNumeroSessao();
-			//Logfactory.adicionar("Numero de Sessao: " + numeroSessao);
-			//Logfactory.adicionar("Tentativa : " + retry);
 			thread  = iniciarTimeout(3000);
 			retorno = this.iSatMfe.CancelarUltimaVenda(numeroSessao, codAtivacao, chave, dadosCancelamento);
 			if (!verificarTimeout(thread)) {
@@ -996,24 +846,15 @@ public String cancelarUltimaVendaMonitor(String chave, String dadosCancelamento)
 					}					
 					retry++;
 					numeroSessao = getNumeroSessao();
-					//Logfactory.adicionar("Numero de Sessao: " + numeroSessao);
 				}						
 			} else {
 				break;
 			}
 		}
 		verificarRetorno(retorno, thread);
-		//Logfactory.adicionar("Retorno sem formatacao: " + retorno);
 		retorno = ajustarRetornoSatMfe(retorno);
-		//Logfactory.adicionar("Retorno formatado: " + retorno);
-		//Logfactory.adicionar("----------------- Fim do cancelamento da venda. Preparando para enviar o retorno. ---------");
 		return retorno;
 	} catch (Exception e) {
-		// TODO: handle exception
-		//Logfactory.adicionar(e);
-		//Logfactory.adicionar("----- Dados do cancelamento da ultima venda -------");
-		//Logfactory.adicionar("CHAVE: " + chave);
-		//Logfactory.adicionar("XML  : " + dadosCancelamento);
 		e.printStackTrace();
 		throw e;
 	}	
@@ -1031,7 +872,6 @@ public void initialize() throws Exception{
 	try {
 		definirSatByClasse(classSat, portSat);
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -1057,12 +897,12 @@ public void definirSatByClasse(String classe, String porta) throws Exception{
 		}else if(classe.equalsIgnoreCase(EnumModulosSAT.BEMATECH.getClassName())){
 			configurarBematechRB1000(porta);
 		}else{
-			log.info("Op��o de classe inv�lida >>> " + classe);
+			log.info("Opção de classe inválida >>> " + classe);
 		}
 		if(this.iSatMfe != null){
 			log.info(this.iSatMfe.toString());
 		}else{
-			log.info("N�o foi poss�vel Classe: " + classe);
+			log.info("Não foi possível Classe: " + classe);
 		}
 		
 	} catch (Exception e) {
@@ -1078,12 +918,9 @@ public void definirSatByClasse(String classe, String porta) throws Exception{
 private void configurarCompsis(String porta) throws Exception{
 	MFeCompsis satCompsis = null;
 	try {
-		//Logfactory.adicionar("OK. Compsis selecionado.");
 		satCompsis	 = new MFeCompsis(porta);
 		this.iSatMfe = satCompsis;
-//		this.aSatMfe = satCompsis;
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 }
@@ -1097,11 +934,9 @@ private void configurarDimep(String porta) throws Exception{
 	SATDimep satDimep = null;
 	try {
 		satDimep = new SATDimep("");
-		//Logfactory.adicionar("OK. Modulo DIMEP D-SAT selecionado.");
 		this.iSatMfe = satDimep;
 		this.aSatMfe = satDimep;
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 }
@@ -1114,12 +949,10 @@ private void configurarDimep(String porta) throws Exception{
 private void configurarEmulador(String porta) throws Exception{
 	SATEmulador satEmulador = null;
 	try {
-		//Logfactory.adicionar("OK. Emulador selecionado.");
 		satEmulador	 = new SATEmulador("");
 		this.iSatMfe = satEmulador;
 		this.aSatMfe = satEmulador;
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 }
@@ -1132,12 +965,10 @@ private void configurarEmulador(String porta) throws Exception{
 private void configurarTancaTs1000(String porta) throws Exception{
 	SATTanca satTanca = null;
 	try {
-		//Logfactory.adicionar("Modulo Tanca TS-1000 Selecionado.");
 		satTanca 	 = new SATTanca(porta);
 		this.iSatMfe = satTanca;
 		this.aSatMfe = satTanca;
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 }
@@ -1146,12 +977,10 @@ private void configurarTancaTs1000(String porta) throws Exception{
 private void configurarBematechRB1000(String porta) throws Exception{
 	SATBematech satBema = null;
 	try {
-		//Logfactory.adicionar("Modulo Bematech RB-1000 Fi Selecionado.");
 		satBema 	 = new SATBematech(porta);
 		this.iSatMfe = satBema;
 		this.aSatMfe = satBema;
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 }
@@ -1187,27 +1016,9 @@ public String getModuleNameByCodigo(String codigo) throws Exception{
 		}
 		return moduleName;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
-
-///**
-// * Retorno o codigo de ativacao presente no arquivo de propriedades
-// * @return
-// * @throws Exception
-// */
-//public String getCodigoAtivacao() throws Exception {
-//	ConfigSat confSat = null;
-//	try {
-//		confSat = new ConfigSat();
-//		return confSat.getProperty(ConfigSat.COD_ATIVACAO);
-//		//return ConfigSat.codAtivacao;
-//	} catch (Exception e) {
-//		// TODO: handle exception
-//		throw e;
-//	}
-//}
 
 /**
  * Obtem o tipo de modulo que esta em operacao, se e SAT ou MFe
@@ -1220,7 +1031,6 @@ public String getTipoDeModuloEmOperacao() {
 			retorno = this.iSatMfe.TipoDoModulo();
 		}
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
 	return retorno;
@@ -1234,7 +1044,6 @@ public String getVersaoXML(){
 	String tpModulo = "";
 	String retorno	= "";
 	try {
-		//Logfactory.adicionar("Obtendo versao do XML.");
 		tpModulo	= getTipoDeModuloEmOperacao();
 		if(tpModulo.equalsIgnoreCase(MFE)){
 			retorno = "0.02";
@@ -1242,10 +1051,8 @@ public String getVersaoXML(){
 			retorno = "0.06";
 		}
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 	}
-	//Logfactory.adicionar("Versao: " + retorno);
 	return retorno;
 }
 
@@ -1261,7 +1068,6 @@ private String tratarRetornoCaracteresEspeciais(String value) {
 		flHelper = new HendleFile();
 		retorno = flHelper.transformarCaracteresEspeciais(value);
 	} catch (Exception e) {
-		// TODO: handle exception
 		e.printStackTrace();
 		retorno = value;
 	}
@@ -1278,7 +1084,6 @@ private String ajustarRetornoSatMfe(String paraAjustar) {
 	try {
 		return helper.transformarCaracteresEspeciais(paraAjustar);
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return paraAjustar;
 	}
@@ -1293,20 +1098,15 @@ private String ajustarRetornoSatMfe(String paraAjustar) {
  */
 private String verificarRetorno(String retorno, Thread timeout) throws SATException{
 	String[] campos = null;
-	try {
-		if (!verificarTimeout(timeout)){
-			throw new SATException(this.aSatMfe.getMsgDefaulTimout());
-		}
-		if (retorno.isEmpty()) {
-			throw new SATException(this.aSatMfe.getMsgNaoResponde());
-		}
-		campos = retorno.split(getPatternPipe());
-		if(campos == null || campos.length == 1){
-			throw new SATException("Erro: " + retorno);
-		}
-	} catch (Exception e) {
-		// TODO: handle exception
-		//e.printStackTrace();
+	if (!verificarTimeout(timeout)){
+		throw new SATException(this.aSatMfe.getMsgDefaulTimout());
+	}
+	if (retorno.isEmpty()) {
+		throw new SATException(this.aSatMfe.getMsgNaoResponde());
+	}
+	campos = retorno.split(getPatternPipe());
+	if(campos == null || campos.length == 1){
+		throw new SATException("Erro: " + retorno);
 	}
 	return retorno;
 }
@@ -1331,7 +1131,6 @@ public String tratarMFeException(SATException mfeException) throws Exception{
 		}
 		return retorno.toString();
 	} catch (Exception e) {
-		// TODO: handle exception
 		return e.getMessage();
 	}
 }
@@ -1356,7 +1155,6 @@ public String verificarSeVendaFoiOK()throws Exception {
 		}
 		return "";
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }
@@ -1374,31 +1172,18 @@ public String reEnviarDadosVenda(String dadosVenda) throws Exception
 	int retry        = 1;
 	Thread thread	 = null;
 	try {
-		//Logfactory.adicionar("****************************** Reenviando dados da Venda ********************************");
-		//Logfactory.adicionar("Reenviando dados da venda.");
-		//Logfactory.adicionar("XML recebindo :");
-		//Logfactory.adicionar(dadosVenda);
+		
 		while (retry <= numberOfRetry) {
-			//Logfactory.adicionar("Tentativa : " + retry);
-			//Logfactory.adicionar("Se opera��o anterior foi venda e se deu certo.");
 			try{
 				String retVerificacao = verificarSeVendaFoiOK();
 				if(retVerificacao.trim().equals("") == false){
-					//Logfactory.adicionar("Ultima venda realizada com sucesso!");
-					//Logfactory.adicionar(retVerificacao);
 					retVerificacao = tratarRetornoCaracteresEspeciais(retVerificacao);
-					//Logfactory.adicionar("Retorno reenvio tratado" + retVerificacao);
 					return retVerificacao;
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
-				//Logfactory.adicionar("Erro ao verificar se a ultima venda deu certo.");
-				//Logfactory.adicionar(e);
 			}
 			numeroSessao = getNumeroSessao();	
-			//Logfactory.adicionar("Numero de sessao gerado: " + numeroSessao);
-			//Logfactory.adicionar("Codigo de Ativacao: " + ConfigSat.codAtivacao);
 			thread 		 = iniciarTimeout(2000);
 			retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, "", dadosVenda);
 			if (!verificarTimeout(thread)) {
@@ -1407,25 +1192,19 @@ public String reEnviarDadosVenda(String dadosVenda) throws Exception
 					break;
 				} catch (SATException mfe) {								
 					if (retry == numberOfRetry) {
-						throw new SATException("N�mero de tentativas excedido - M�dulo n�o Responde");
+						throw new SATException("Número de tentativas excedido - Módulo não Responde");
 					}					
 					retry++;
 					numeroSessao = getNumeroSessao();
-					//Logfactory.adicionar("Novo numero de sessao gerado: " + numeroSessao);
 				}						
 			} else {
 				break;
 			}
 		}
 		verificarRetorno(retorno, thread);
-		//Logfactory.adicionar("Retorno do Modulo: " + retorno);
 		retorno = tratarRetornoCaracteresEspeciais(retorno);
-		//Logfactory.adicionar("Retorno tratado para UTF-8: " + retorno);
-		//Logfactory.adicionar("------------------ Fim do envio da venda. Preparando para enviar o retorno. --------------");
 		return retorno;
 	} catch (Exception e) {
-		// TODO: handle exception
-		//Logfactory.adicionar(e);
 		throw e;
 	}	
 }
@@ -1448,28 +1227,17 @@ public String associarAssinatura(String cnpjSoftwareHouse, String cnpjContribuin
 	String cnpjValue	= "";
 	Thread thread		= null; 
 	try {
-		//Logfactory.adicionar("***************** Funcao Associar assinatura *******************");
 		numeroSessao = getNumeroSessao();
-		//Primeiro devemos pegar o codigo de ativacao antigo
-//		codAtivacao	 = ConfigSat.codAtivacao;
-		//Logfactory.adicionar("Numero de sessao: " 	+ numeroSessao);
-		//Logfactory.adicionar("Codigo de Ativacao: " + codAtivacao);
-		//Logfactory.adicionar("Timeou 22000");
-		//Logfactory.adicionar("CNPJ Software house: " + cnpjSoftwareHouse);
-		//Logfactory.adicionar("CNPJ contribuinte:   " + cnpjContribuinte);
 		cnpjContribuinte  = cnpjContribuinte.replace(".", "").replace("-", "").replace("/", "");
 		cnpjSoftwareHouse = cnpjSoftwareHouse.replace(".", "").replace("-", "").replace("/", "");
 		cnpjValue = cnpjSoftwareHouse + cnpjContribuinte;
 		thread  	 = iniciarTimeout(22000);
 		retorno 	 = this.aSatMfe.AssociarAssinatura(numeroSessao, codAtivacao, cnpjValue, assinaturaSat);
 		verificarRetorno(retorno, thread);
-		//Logfactory.adicionar("Retorno do Modulo: " + retorno);
 		return retorno;
 	} catch (SATException e) {
-		// TODO: handle exception
 		throw e;
 	} catch (Exception e) {
-		// TODO: handle exception
 		throw e;
 	}
 }

@@ -10,8 +10,8 @@ public abstract class AbstractSATSuperClass implements InterfaceSAT{
 	private String osName				= System.getProperty("os.name");
 	private String realLibNameWindows	= "";
 	private String realLibNameLinux		= "";
-	private String msgDefaulTimout		= "Time out - Modulo nao Responde.";
-	private String msgNaoResponde		= "Modulo nao responde.";
+	private String msgDefaulTimout		= "Time out - Módulo não Responde.";
+	private String msgNaoResponde		= "Módulo não está respondendo.";
 	
 	private InterfaceGeneralSAT library	= null;
 	

@@ -3,7 +3,9 @@ package br.com.barcadero.module.sat.retornos;
 import br.com.barcadero.module.sat.handle.HandleSAT;
 
 /**
- * Classe de apoio para o Retorno
+ * Classe de apoio para o Retorno.
+ * Toda vez que esta classe ou suas filhas sofrerem adicao de novos campos, 
+ * por favor gerar os metodos equals() e hashCode()
  * @author Rafael Rocha
  */
 public abstract class SuperSATRetorno {
