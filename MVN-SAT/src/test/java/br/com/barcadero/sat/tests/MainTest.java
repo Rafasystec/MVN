@@ -2,6 +2,7 @@ package br.com.barcadero.sat.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ import br.com.barcadero.module.sat.xml.util.CNPJ;
 
 public class MainTest {
 	public static void main(String[] args) {
-		//gerarXMLSAT();
+		new MainTest().gerarXMLSAT();
 		//decode();
 		//retornoVenda();
 	}
@@ -167,7 +168,7 @@ public class MainTest {
 			String xml = HandleXML.getXMLFromObject(cfe);
 			//System.out.println(xml);
 			assertEquals("O XML gerado nao foi igual ao esperado",getXMLVendaEmperado(),xml);
-			//transmitirTanca(xml);
+			transmitirTanca(xml);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());

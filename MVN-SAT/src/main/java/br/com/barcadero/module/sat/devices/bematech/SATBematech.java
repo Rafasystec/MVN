@@ -34,14 +34,9 @@ public class SATBematech extends AbstractSATSuperClass{
 			initialize();
 			detectOS();
 			try {
-				//Logfactory.adicionar("Preparando-se para carregar a dll do SAT da Bematech");
-				//Logfactory.adicionar("Local para carregar: " + getLibraryPath() + getLibraryName());
 				library = (Functions)Native.loadLibrary(getLibraryPath() + getLibraryName(), Functions.class);
-				//Logfactory.adicionar("OK, dll ou so foi carregada.");
 			} catch (Exception e) {
-				// TODO: handle exception
-				//Logfactory.adicionar("Erro ao tentar carregar a dll. Path: " + getLibraryPath() + " - Nome lib " + getLibraryName());
-				//Logfactory.adicionar(e);
+				
 			}
 			setLibrary(library);
 		} catch (Exception e) {
@@ -87,86 +82,10 @@ public class SATBematech extends AbstractSATSuperClass{
 		return "SAT - Bematech RB - 1000 Fi";
 	}
 	
-	private void initialize() throws Exception {
-		copiarLibsParaSistemaOperacional();
-		//Logfactory.adicionar("Inicializando as variaveis.");
-//		if(SwingHelper.getArchitecture() == SwingHelper.ARC_JRE_32){
-//			//Logfactory.adicionar("JRE de 32 bits");
-//			setLibraryNameWindows("BemaSAT32");
-//			setRealLibNameWindows("BemaSAT32.dll");
-//			setLibraryPath("");
-//		}else{
-//			//Logfactory.adicionar("JRE de 64 bits");
-//			setLibraryNameWindows("BemaSAT64");
-//			setRealLibNameWindows("BemaSAT64.dll");
-//			setLibraryPath("");
-//		}
-		
+	private void initialize() throws Exception {		
 		setLibraryNameLinux("satprotocol");
 		setRealLibNameLinux("libsatprotocol.so");	
 	}
-	
-	@Override
-	public String CancelarUltimaVenda(int numeroSessao,	String codigoDeAtivacao, String chave, String dadosCancelamento)throws Exception {
-		return super.CancelarUltimaVenda(numeroSessao, codigoDeAtivacao, "CFe" + chave, dadosCancelamento);
-	}
-	
-	/**
-	 * Copia os arquivos necessarios para o bom funcionamento 
-	 */
-	private void copiarLibsParaSistemaOperacional() {
-		//Logfactory.adicionar("Inciando a verificacao do arquivos necessarios");
-//		if(SwingHelper.getArchitecture() == SwingHelper.ARC_JRE_32){
-//			if(new File(PATH_WIND_SYSWOW).exists()){
-//				if(new File(PATH_WIND_SYSWOW + getRealLibraryName()).exists() == false){
-//					copiarArquivos(LIB_PATH_WIN32 + getRealLibraryName(), PATH_WIND_SYSWOW);
-//					copiarArquivos(LIB_PATH_WIN32 + BEMASAT_XML, PATH_WIND_SYSWOW);
-//				}else{
-//					//Logfactory.adicionar("Arquivo " + PATH_WIND_SYSWOW + getRealLibraryName());
-//				}
-//			}else{
-//				if(new File(PATH_WIND_SYS_32 + getRealLibraryName()).exists() == false){
-//					copiarArquivos(LIB_PATH_WIN32 + getRealLibraryName(), PATH_WIND_SYS_32);
-//					copiarArquivos(LIB_PATH_WIN32 + BEMASAT_XML, PATH_WIND_SYS_32);
-//				}else{
-//					//Logfactory.adicionar(PATH_WIND_SYS_32 + getRealLibraryName() + " ja existe.");
-//				}
-//			}
-//		}else{
-//			copiarArquivos(LIB_PATH_WIN64  + getRealLibraryName(), PATH_WIND_SYS_32);
-//			copiarArquivos(LIB_PATH_WIN64  + BEMASAT_XML, PATH_WIND_SYS_32);
-//		}
-	}
-	
-	/**
-	 * Copia os arquivos conforme ele nao vao sendo encontrados em suas pastas.
-	 * @param origem: Caminho completo do arquivo de origem
-	 * @param destino: Caminho completo do arquivo de destino
-	 */
-	private void copiarArquivos(String origem, String destino) {
-		File fileOrigem		= null;
-		File fileDestino	= null;	
-		try {
-			//Logfactory.adicionar("Iniciando copia de arquivos");
-			fileOrigem 	= new File(origem);
-			fileDestino	= new File(destino);
-			if(fileOrigem.exists()){
-				//Logfactory.adicionar("O arquivo de origem: " + origem + " foi encontrado.");
-				if(fileDestino.exists()){
-					//Logfactory.adicionar("O arquivo de destino : " + destino + " j� existe, n�o ser� copiado.");
-				}else{
-					//Logfactory.adicionar("Realizando a copia de arquivos ");
-					//Logfactory.adicionar("Origem: " + origem);
-					//Logfactory.adicionar("Destino: " + destino);
-					//new StringHelper().copiarArquivo(origem, destino);
-				}
-			}else{
-				//Logfactory.adicionar("O arquivo de origem: " + origem + " n�o foi encontrado. Imposs�vel realizar a c�pia.");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			//Logfactory.adicionar(e);
-		}
-	}
+
 
 }

@@ -104,10 +104,10 @@ public class SATTanca extends AbstractSATSuperClass {
 		// TODO Auto-generated method stub
 	}
 	
-	@Override
-	public String CancelarUltimaVenda(int numeroSessao,	String codigoDeAtivacao, String chave, String dadosCancelamento)throws Exception {
-		return super.CancelarUltimaVenda(numeroSessao, codigoDeAtivacao, "CFe" + chave, dadosCancelamento);
-	}
+//	@Override
+//	public String CancelarUltimaVenda(int numeroSessao,	String codigoDeAtivacao, String chave, String dadosCancelamento)throws Exception {
+//		return super.CancelarUltimaVenda(numeroSessao, codigoDeAtivacao, "CFe" + chave, dadosCancelamento);
+//	}
 //	@Override
 //	public String TesteFimAFim(int numeroSessao, String codigoDeAtivacao, String dadosVenda) throws Exception {
 //		dadosVenda = "<CFe><infCFe versaoDadosEnt=\"0.06\"><ide><CNPJ>16716114000172</CNPJ><signAC>SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT</signAC><numeroCaixa>062</numeroCaixa></ide><emit><CNPJ>08723218000186</CNPJ><IE>149626224113</IE><IM>021522</IM><indRatISSQN>N</indRatISSQN></emit><dest><CPF></CPF></dest><det nItem=\"1\"><prod><cProd>000001</cProd><xProd>PRODUTO MARCO</xProd><NCM>01012100</NCM><CFOP>5102</CFOP><uCom>und</uCom><qCom>1.0000</qCom><vUnCom>11.00</vUnCom><indRegra>A</indRegra></prod><imposto><vItem12741>2.33</vItem12741><ICMS><ICMS00><Orig>0</Orig><CST>00</CST><pICMS>12.00</pICMS></ICMS00></ICMS><PIS><PISAliq><CST>01</CST><vBC>11.00</vBC><pPIS>0.1700</pPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>11.00</vBC><pCOFINS>0.0900</pCOFINS></COFINSAliq></COFINS></imposto></det><total><vCFeLei12741>2.33</vCFeLei12741></total><pgto><MP><cMP>01</cMP><vMP>11.00</vMP></MP></pgto><infAdic><infCpl>Vendedor :ANTONIOJOSE DOS SANTOS,Cond. Pgto.:VENDA A VISTA .</infCpl></infAdic></infCFe></CFe>";

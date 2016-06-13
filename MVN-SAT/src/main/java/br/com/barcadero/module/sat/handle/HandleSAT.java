@@ -822,26 +822,24 @@ public Integer getNumeroSessao()throws Exception{
  * @throws Exception
  * @author Rafael Rocha
  */
-public String cancelarUltimaVendaMonitor(String chave, String dadosCancelamento) throws Exception
+public String cancelarUltimaVenda(String chave, String codigoAtivacao, String dadosCancelamento) throws Exception
 {
 	int numeroSessao	= 0;
 	Thread thread  		= null;	
 	String retorno		= "";
-	String codAtivacao	= "";
 	int retry      		= 1;
 	try {
 		while (retry <= numberOfRetry) {
 			numeroSessao = getNumeroSessao();
 			thread  = iniciarTimeout(3000);
-			retorno = this.iSatMfe.CancelarUltimaVenda(numeroSessao, codAtivacao, chave, dadosCancelamento);
+			retorno = this.iSatMfe.CancelarUltimaVenda(numeroSessao, codigoAtivacao, chave, dadosCancelamento);
 			if (!verificarTimeout(thread)) {
 				try {					
 					consultarNumeroSessao();
 					break;
 				} catch (SATException mfe) {								
 					if (retry == numberOfRetry) {
-						String msg = "N�mero de tentativas excedido - M�dulo n�o Responde";
-						//Logfactory.adicionar(msg);
+						String msg = "Número de tentativas excedido - Módulo não Responde";
 						throw new SATException(msg);
 					}					
 					retry++;

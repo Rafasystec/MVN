@@ -157,8 +157,8 @@ public class SATDimep extends AbstractSATSuperClass{
 		setRealLibNameWindows("dllsat.dll");
 	}
 	
-	@Override
-	public String CancelarUltimaVenda(int numeroSessao,	String codigoDeAtivacao, String chave, String dadosCancelamento)throws Exception {
-		return super.CancelarUltimaVenda(numeroSessao, codigoDeAtivacao, "CFe" + chave, dadosCancelamento);
-	}
+//	@Override
+//	public String CancelarUltimaVenda(int numeroSessao,	String codigoDeAtivacao, String chave, String dadosCancelamento)throws Exception {
+//		return super.CancelarUltimaVenda(numeroSessao, codigoDeAtivacao, "CFe" + chave, dadosCancelamento);
+//	}
 }
