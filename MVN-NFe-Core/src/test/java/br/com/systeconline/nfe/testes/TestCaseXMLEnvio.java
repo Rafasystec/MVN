@@ -13,16 +13,16 @@ import javax.xml.soap.SOAPMessage;
 
 import org.junit.Test;
 
-import br.com.systeconline.core.exeptions.ServiceException;
-import br.com.systeconline.core.exeptions.XMLException;
-import br.com.systeconline.core.handles.xml.HandleXML;
-import br.com.systeconline.core.handles.xml.HandleXMLSignature;
+import br.com.barcadero.core.exeptions.ServiceException;
+import br.com.barcadero.core.exeptions.XMLException;
+import br.com.barcadero.core.handles.xml.HandleXML;
+import br.com.barcadero.core.handles.xml.HandleXMLSignature;
+import br.com.barcadero.core.util.xml.XMLRetornoGeralNFe;
+import br.com.barcadero.core.webservice.SOAPDados;
+import br.com.barcadero.core.webservice.soap.SOAPFactory;
 import br.com.systeconline.core.nfe.servicos.IGeneralService;
 import br.com.systeconline.core.nfe.servicos.NFeCoreSender;
 import br.com.systeconline.core.nfe.servicos.ufs.producao.ServicesCE;
-import br.com.systeconline.core.util.xml.XMLRetornoGeralNFe;
-import br.com.systeconline.core.webservice.SOAPDados;
-import br.com.systeconline.core.webservice.soap.SOAPFactory;
 import br.com.systeconline.nfe.core.util.enumarations.ECodigoUFIBGE;
 import br.com.systeconline.nfe.core.util.enumarations.EFinalidadeNFe;
 import br.com.systeconline.nfe.core.util.enumarations.EFormaEmissaoNFe;

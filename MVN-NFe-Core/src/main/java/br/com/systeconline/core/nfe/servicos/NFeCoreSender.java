@@ -3,11 +3,11 @@ package br.com.systeconline.core.nfe.servicos;
 import javax.xml.bind.JAXBContext;
 import javax.xml.soap.SOAPMessage;
 
-import br.com.systeconline.core.handles.xml.HandleXML;
+import br.com.barcadero.core.handles.xml.HandleXML;
+import br.com.barcadero.core.util.xml.XMLRetornoGeralNFe;
+import br.com.barcadero.core.webservice.SOAPDados;
+import br.com.barcadero.core.webservice.soap.SOAPFactory;
 import br.com.systeconline.core.nfe.servicos.ufs.producao.ServicesCE;
-import br.com.systeconline.core.util.xml.XMLRetornoGeralNFe;
-import br.com.systeconline.core.webservice.SOAPDados;
-import br.com.systeconline.core.webservice.soap.SOAPFactory;
 import br.com.systeconline.nfe.xml.consulta.ConSitNFe;
 import br.com.systeconline.nfe.xml.consulta.servico.ConsStatServ;
 

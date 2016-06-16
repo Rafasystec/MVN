@@ -3,7 +3,7 @@ package br.com.systeconline.core.nfe.servicos;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import br.com.systeconline.core.exeptions.ServiceException;
+import br.com.barcadero.core.exeptions.ServiceException;
 
 public interface IGeneralService {
 	/**

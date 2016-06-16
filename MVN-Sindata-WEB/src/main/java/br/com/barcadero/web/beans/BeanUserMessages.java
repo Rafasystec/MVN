@@ -5,11 +5,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
-import br.com.barcadero.rule.backoffice.RuleUserMensagem;
-import br.com.systeconline.rule.FacadeUsuario;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.UserMensagens;
-import br.com.systeconline.tables.basicos.Usuario;
+
+import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUserMensagem;
+import br.com.barcadero.tables.UserMensagens;
+import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="userMessage")
 @RequestScoped

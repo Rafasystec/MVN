@@ -3,7 +3,7 @@ package br.com.systeconline.core.nfe.servicos.ufs.producao;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import br.com.systeconline.core.exeptions.ServiceException;
+import br.com.barcadero.core.exeptions.ServiceException;
 import br.com.systeconline.core.nfe.servicos.AGeneralService;
 import br.com.systeconline.nfe.core.util.enumarations.ECodigoUFIBGE;
 

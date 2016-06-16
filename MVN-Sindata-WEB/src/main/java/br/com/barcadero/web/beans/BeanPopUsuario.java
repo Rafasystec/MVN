@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import br.com.systeconline.rule.FacadeUsuario;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Entidade;
+
+import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.tables.Entidade;
 /**
  * Para controlar a popup de usuario
  * @author Rafael Rocha

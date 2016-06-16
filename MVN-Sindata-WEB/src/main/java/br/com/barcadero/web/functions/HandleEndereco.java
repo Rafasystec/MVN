@@ -8,16 +8,16 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
 
-import br.com.systeconline.core.enums.EnumTipoLograd;
-import br.com.systeconline.core.enums.EnumUF;
-import br.com.systeconline.rule.FacadeBairro;
-import br.com.systeconline.rule.FacadeCidade;
-import br.com.systeconline.rule.FacadeEstado;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Bairro;
-import br.com.systeconline.tables.basicos.Cidade;
-import br.com.systeconline.tables.basicos.Endereco;
-import br.com.systeconline.tables.basicos.Estado;
+import br.com.barcadero.core.enums.EnumTipoLograd;
+import br.com.barcadero.core.enums.EnumUF;
+import br.com.barcadero.rule.FacadeBairro;
+import br.com.barcadero.rule.FacadeCidade;
+import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.tables.Bairro;
+import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Endereco;
+import br.com.barcadero.tables.Estado;
+import br.com.barcadero.web.beans.SuperBean;
 
 @ManagedBean(name="endereco")
 @RequestScoped	

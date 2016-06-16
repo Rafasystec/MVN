@@ -3,8 +3,7 @@ package br.com.barcadero.web.beans;
 import javax.faces.bean.ManagedBean;
 
 import br.com.barcadero.rule.RuleCaixa;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Caixa;
+import br.com.barcadero.tables.Caixa;
 
 @ManagedBean(name="caixa")
 public class BeanCaixa extends SuperBean {

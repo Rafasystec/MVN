@@ -7,12 +7,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleLoja;
-import br.com.systeconline.controller.SessionContext;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Empresa;
-import br.com.systeconline.tables.basicos.Loja;
-import br.com.systeconline.tables.basicos.PessoaJuridica;
-import br.com.systeconline.tables.basicos.Usuario;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
+import br.com.barcadero.tables.PessoaJuridica;
+import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="escolherEmp")
 @RequestScoped

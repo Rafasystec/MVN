@@ -3,9 +3,8 @@ package br.com.barcadero.web.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.barcadero.rule.backoffice.RuleFuncionario;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Funcionario;
+import br.com.barcadero.rule.RuleFuncionario;
+import br.com.barcadero.tables.Funcionario;
 
 @ManagedBean(name="funcionario")
 @RequestScoped

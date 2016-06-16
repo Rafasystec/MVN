@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import br.com.barcadero.rule.backoffice.RuleUserMensagem;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.TmpUserMessage;
+
+import br.com.barcadero.rule.RuleUserMensagem;
+import br.com.barcadero.tables.TmpUserMessage;
 
 @ManagedBean(name="menuHorizontal")
 @RequestScoped

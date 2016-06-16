@@ -2,10 +2,9 @@ package br.com.barcadero.web.beans;
 
 import javax.faces.bean.ManagedBean;
 
-import br.com.barcadero.rule.financeiro.RuleContaPagar;
-import br.com.systeconline.core.enums.EnumTipoContaPagar;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.financeiro.ContaPagar;
+import br.com.barcadero.core.enums.EnumTipoContaPagar;
+import br.com.barcadero.rule.RuleContaPagar;
+import br.com.barcadero.tables.ContaPagar;
 /**
  * Bean para as contas a pagar
  * @author Rafael Rocha

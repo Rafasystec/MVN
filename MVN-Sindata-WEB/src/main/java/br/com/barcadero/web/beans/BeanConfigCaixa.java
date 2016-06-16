@@ -4,10 +4,9 @@ package br.com.barcadero.web.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.rule.RuleCaixa;
-import br.com.systeconline.core.enums.EnumModeloNota;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Caixa;
+import br.com.barcadero.tables.Caixa;
 
 /**
  * Para a configuracao do caixa

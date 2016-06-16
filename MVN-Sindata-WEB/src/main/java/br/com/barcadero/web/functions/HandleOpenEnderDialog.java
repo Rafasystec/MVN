@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.collections4.map.HashedMap;
 
-import br.com.systeconline.web.attributes.Attributs;
+import br.com.barcadero.web.attributes.Attributs;
 
 public class HandleOpenEnderDialog extends SuperHandle{
 	

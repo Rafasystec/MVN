@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.com.systeconline.core.exeptions.XMLException;
+import br.com.barcadero.core.exeptions.XMLException;
 import br.com.systeconline.nfe.xml.CNAEFiscal;
 import br.com.systeconline.nfe.xml.CNPJ;
 import br.com.systeconline.nfe.xml.CPF;

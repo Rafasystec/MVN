@@ -8,8 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.hibernate.Session;
 
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.frontend.Pedido;
+import br.com.barcadero.tables.Pedido;
 
 @ManagedBean(name="pedido")
 @ViewScoped

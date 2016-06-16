@@ -6,14 +6,13 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import br.com.barcadero.core.enums.EnumRegimeTributario;
+import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.rule.RuleLoja;
-import br.com.systeconline.core.enums.EnumRegimeTributario;
-import br.com.systeconline.core.enums.EnumUF;
-import br.com.systeconline.sindata.beans.SuperBean;
-import br.com.systeconline.tables.basicos.Endereco;
-import br.com.systeconline.tables.basicos.Loja;
-import br.com.systeconline.tables.basicos.PessoaJuridica;
-import br.com.systeconline.tables.basicos.Usuario;
+import br.com.barcadero.tables.Endereco;
+import br.com.barcadero.tables.Loja;
+import br.com.barcadero.tables.PessoaJuridica;
+import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="loja")
 public class BeanLoja extends SuperBean {

@@ -5,8 +5,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
-import br.com.systeconline.controller.SessionContext;
-import br.com.systeconline.tables.basicos.Usuario;
+import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="index")
 public class BeanIndex implements Serializable{
