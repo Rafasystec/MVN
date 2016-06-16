@@ -2,10 +2,11 @@ package br.com.barcadero.frameworks.test;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import br.com.barcadero.rule.financeiro.RulePlanoContas;
-import br.com.systeconline.core.handles.HandleEmpresaHomo;
-import br.com.systeconline.core.handles.HandleUsuarioPadrao;
-import br.com.systeconline.tables.basicos.Usuario;
+
+import br.com.barcadero.core.handles.HandleEmpresaHomo;
+import br.com.barcadero.core.handles.HandleUsuarioPadrao;
+import br.com.barcadero.rule.RulePlanoContas;
+import br.com.barcadero.tables.Usuario;
 
 public class TesteFinanceiro extends TesteSuperClass{
 	

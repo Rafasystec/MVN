@@ -1,12 +1,11 @@
 package br.com.barcadero.frameworks.test.rules;
 
 import static org.junit.Assert.fail;
+
 import org.hibernate.Session;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import br.com.systeconline.rule.FacadeUsuario;
-import br.com.systeconline.test.db.HibernateHelper;
+
+import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.test.db.HibernateHelper;
 
 public class TestFacadeUsuario {
 	

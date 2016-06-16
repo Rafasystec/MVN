@@ -10,16 +10,17 @@ import org.hibernate.Session;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import br.com.barcadero.core.enums.EnumModeloNota;
+import br.com.barcadero.core.enums.EnumStatusCaixa;
+import br.com.barcadero.core.enums.EnumTipoNota;
+import br.com.barcadero.core.enums.EnumTpOperacaoCaixa;
 import br.com.barcadero.rule.RuleCaixa;
-import br.com.systeconline.core.enums.EnumModeloNota;
-import br.com.systeconline.core.enums.EnumStatusCaixa;
-import br.com.systeconline.core.enums.EnumTipoNota;
-import br.com.systeconline.core.enums.EnumTpOperacaoCaixa;
-import br.com.systeconline.tables.basicos.Caixa;
-import br.com.systeconline.tables.basicos.CaixaAbertura;
-import br.com.systeconline.tables.basicos.CaixaFechamento;
-import br.com.systeconline.tables.basicos.CaixaOperacoes;
-import br.com.systeconline.test.db.HibernateHelper;
+import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.tables.CaixaFechamento;
+import br.com.barcadero.tables.CaixaOperacoes;
+import br.com.barcadero.test.db.HibernateHelper;
 
 public class TestRuleCaixa {
 

@@ -1,13 +1,11 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
-
 import org.hibernate.Session;
-
 import br.com.barcadero.dao.DaoAvisos;
-import br.com.systeconline.rule.RuleModelo;
-import br.com.systeconline.tables.basicos.Avisos;
-import br.com.systeconline.tables.basicos.Entidade;
+import br.com.barcadero.tables.Avisos;
+import br.com.barcadero.tables.Entidade;
+
 
 public class RuleAvisos extends RuleModelo {
 

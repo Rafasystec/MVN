@@ -3,9 +3,8 @@ package br.com.barcadero.rule;
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoPessoaJuridica;
-import br.com.systeconline.rule.RuleModelo;
-import br.com.systeconline.tables.basicos.Entidade;
-import br.com.systeconline.tables.basicos.PessoaJuridica;
+import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.PessoaJuridica;
 
 public class RulePessoaJuridica extends RuleModelo {
 

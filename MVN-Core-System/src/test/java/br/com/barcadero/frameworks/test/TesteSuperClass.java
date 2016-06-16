@@ -4,8 +4,8 @@ import org.hibernate.Session;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import br.com.systeconline.test.db.HibernateHelper;
-import br.com.systeconline.test.nota.TestNotaProcess;
+import br.com.barcadero.test.db.HibernateHelper;
+import br.com.barcadero.test.nota.TestNotaProcess;
 
 public class TesteSuperClass {
 	private static Session session;

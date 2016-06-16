@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.systeconline.dao.basicos.DaoEndereco;
-import br.com.systeconline.dao.basicos.DaoModelo;
-import br.com.systeconline.tables.basicos.Empresa;
-import br.com.systeconline.tables.basicos.Endereco;
-import br.com.systeconline.tables.basicos.Entidade;
-import br.com.systeconline.tables.basicos.PessoaJuridica;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Endereco;
+import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.PessoaJuridica;
 
 public class DaoEmpresa extends DaoModelo {
 

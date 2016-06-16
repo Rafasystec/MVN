@@ -5,9 +5,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import br.com.systeconline.dao.basicos.DaoModelo;
-import br.com.systeconline.tables.basicos.Caixa;
-import br.com.systeconline.tables.basicos.Entidade;
+import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.tables.Entidade;
 
 public class DaoCaixa extends DaoModelo {
 

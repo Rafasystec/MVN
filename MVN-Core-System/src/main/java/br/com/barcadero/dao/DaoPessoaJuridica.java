@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.systeconline.dao.basicos.DaoModelo;
-import br.com.systeconline.tables.basicos.Entidade;
+import br.com.barcadero.tables.Entidade;
 
 public class DaoPessoaJuridica extends DaoModelo {
 

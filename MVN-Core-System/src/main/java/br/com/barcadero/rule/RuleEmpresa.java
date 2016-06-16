@@ -6,16 +6,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.dao.DaoEmpresa;
-import br.com.systeconline.core.enums.EnumAtividadeEmp;
-import br.com.systeconline.core.enums.EnumRegimeTributario;
-import br.com.systeconline.core.enums.EnumUF;
-import br.com.systeconline.rule.RuleModelo;
-import br.com.systeconline.tables.basicos.Empresa;
-import br.com.systeconline.tables.basicos.Endereco;
-import br.com.systeconline.tables.basicos.Entidade;
-import br.com.systeconline.tables.basicos.PessoaJuridica;
-import br.com.systeconline.tables.basicos.Usuario;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Endereco;
+import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.PessoaJuridica;
+import br.com.barcadero.tables.Usuario;
 
 public class RuleEmpresa extends RuleModelo {
 

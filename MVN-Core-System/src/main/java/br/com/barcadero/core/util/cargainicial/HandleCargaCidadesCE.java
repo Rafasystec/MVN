@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.systeconline.dao.basicos.DaoCidade;
-import br.com.systeconline.dao.basicos.DaoEstado;
-import br.com.systeconline.tables.basicos.Bairro;
-import br.com.systeconline.tables.basicos.Cidade;
-import br.com.systeconline.tables.basicos.Estado;
-import br.com.systeconline.tables.basicos.Usuario;
+import br.com.barcadero.dao.DaoCidade;
+import br.com.barcadero.dao.DaoEstado;
+import br.com.barcadero.tables.Bairro;
+import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Estado;
+import br.com.barcadero.tables.Usuario;
 
 public class HandleCargaCidadesCE {
 

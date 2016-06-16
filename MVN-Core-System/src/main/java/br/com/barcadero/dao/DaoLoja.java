@@ -6,9 +6,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.com.barcadero.core.util.GlobalNameParam;
-import br.com.systeconline.dao.basicos.DaoModelo;
-import br.com.systeconline.tables.basicos.Entidade;
-import br.com.systeconline.tables.basicos.Loja;
+import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 public class DaoLoja extends DaoModelo {
 
