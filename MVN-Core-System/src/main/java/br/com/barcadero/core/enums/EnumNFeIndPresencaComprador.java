@@ -1,4 +1,4 @@
-package br.com.barcadero.core.enums.nfe;
+package br.com.barcadero.core.enums;
 
 /**
  Indicador de presença do comprador no estabelecimento comercial no momento da oepração

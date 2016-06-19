@@ -1,4 +1,4 @@
-package br.com.barcadero.core.enums.nfe;
+package br.com.barcadero.core.enums;
 
 /**
  * Processo de emissão utilizado com a seguinte codificação:

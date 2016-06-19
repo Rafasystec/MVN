@@ -1,4 +1,4 @@
-package br.com.barcadero.core.handles.xml;
+package br.com.barcadero.core.handles;
 
 import java.io.StringReader;
 import java.net.URL;

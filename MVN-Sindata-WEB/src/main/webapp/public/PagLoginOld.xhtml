@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login do Sistema</title>
+</h:head>
+<h:body>
+ <h:form id="frmLogin">
+	<p:messages showDetail="true"/>
+			<div style="float: none; top:30px;" align="center">
+				<table>
+					<tr>
+						<td>
+							<p:outputLabel value="E-mail:" for="txtUsuario"/>
+						</td>
+						<td>
+							<p:inputText id="txtUsuario" value="#{usuario.login}"/>
+						</td>
+						<td rowspan="2">
+							<img src="../resources/Imagens/cadeado.bmp" alt="Figura de login" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p:outputLabel value="Senha:" for="txtSenha"/>
+						</td>
+						<td>
+							<p:password id="txtSenha" value="#{usuario.senha}"/>
+						</td>
+					</tr>
+					<tr >
+						<td colspan="2">
+							<p:commandButton id="btnLogin" value="Logar" action="#{usuario.logar}" ajax="false"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div style="float: right;">
+				<a href="PagCadUsuario.xhtml">Quero me cadastrar.</a>
+			</div>
+			<div align="center">
+				<a href="http://barcadero.com.br"><img alt="Home page Barcadero" src="../resources/Imagens/logoBarcadero.png" /></a>
+			</div>
+		 </h:form>
+</h:body>
+</html>

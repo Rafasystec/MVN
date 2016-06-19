@@ -1,6 +1,6 @@
-package br.com.barcadero.core.util.xml;
+package br.com.barcadero.core.util;
 
-import br.com.barcadero.core.webservice.soap.SOAPFaultObject;
+import br.com.barcadero.core.handles.SOAPFaultObject;
 
 public class XMLRetornoGeralNFe {
 

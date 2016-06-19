@@ -1,4 +1,4 @@
-package br.com.barcadero.core.util.cargainicial;
+package br.com.barcadero.core.util;
 
 import java.util.ArrayList;
 import java.util.List;

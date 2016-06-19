@@ -1,4 +1,4 @@
-package br.com.barcadero.core.webservice.soap;
+package br.com.barcadero.core.handles;
 
 public class SOAPFaultObject {
 	

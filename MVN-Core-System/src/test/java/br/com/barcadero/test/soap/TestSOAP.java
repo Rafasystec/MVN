@@ -3,8 +3,8 @@ package br.com.barcadero.test.soap;
 import javax.xml.soap.SOAPMessage;
 
 import br.com.barcadero.core.exeptions.SOAPException;
-import br.com.barcadero.core.webservice.SOAPDados;
-import br.com.barcadero.core.webservice.soap.SOAPFactory;
+import br.com.barcadero.core.handles.SOAPFactory;
+import br.com.barcadero.core.util.SOAPDados;
 
 public class TestSOAP {
 	

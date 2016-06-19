@@ -1,4 +1,4 @@
-package br.com.barcadero.core.webservice.soap;
+package br.com.barcadero.core.handles;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
@@ -28,7 +28,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 import br.com.barcadero.core.exeptions.SOAPException;
-import br.com.barcadero.core.webservice.SOAPDados;
+import br.com.barcadero.core.util.SOAPDados;
 
 public class SOAPFactory {
 	

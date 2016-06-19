@@ -1,4 +1,4 @@
-package br.com.barcadero.core.webservice;
+package br.com.barcadero.core.util;
 
 public class SOAPDados {
 	

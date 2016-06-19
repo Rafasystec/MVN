@@ -1,4 +1,4 @@
-package br.com.barcadero.core.securety.xml;
+package br.com.barcadero.core.handles;
 
 import java.security.KeyException;
 import java.security.PublicKey;

@@ -1,4 +1,4 @@
-package br.com.barcadero.core.enums.nfe;
+package br.com.barcadero.core.enums;
 /**
  * Forma de emissão da NF-e
  *	1 - Normal;

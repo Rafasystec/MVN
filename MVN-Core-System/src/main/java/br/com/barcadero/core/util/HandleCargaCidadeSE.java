@@ -1,4 +1,4 @@
-package br.com.barcadero.core.util.cargainicial;
+package br.com.barcadero.core.util;
 
 public class HandleCargaCidadeSE {
 

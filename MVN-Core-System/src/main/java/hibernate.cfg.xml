@@ -10,7 +10,7 @@
         <property name="hibernate.connection.datasource">java:comp/env/jdbc/sindata</property>
         <property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<property name="show_sql">true</property>
+		<property name="show_sql">false</property>
 		<property name="format_sql">true</property>
 		<!-- entidades  Declarar as entidades que serao utilizadas no sistema-->
 		<mapping class="br.com.barcadero.tables.Bairro"			/>

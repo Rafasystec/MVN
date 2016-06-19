@@ -1,4 +1,4 @@
-package br.com.barcadero.core.handles.xml;
+package br.com.barcadero.core.handles;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,9 +18,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import br.com.barcadero.core.exeptions.XMLException;
-import br.com.barcadero.core.util.xml.XMLRetornoGeralNFe;
-import br.com.barcadero.core.webservice.soap.HandleSOAP;
-import br.com.barcadero.core.webservice.soap.SOAPFaultObject;
+import br.com.barcadero.core.util.XMLRetornoGeralNFe;
 
 public class HandleXML {
 	

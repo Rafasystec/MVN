@@ -1,4 +1,4 @@
-package br.com.barcadero.core.enums.nfe;
+package br.com.barcadero.core.enums;
 
 /**
   * @author Rafael Rocha

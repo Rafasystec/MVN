@@ -1,4 +1,4 @@
-package br.com.barcadero.core.handles.xml;
+package br.com.barcadero.core.handles;
 
 import java.io.BufferedReader;  
 import java.io.ByteArrayInputStream;  
@@ -46,7 +46,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;  
 import org.xml.sax.SAXException;  
   
-public class HandleXMLSignature {  
+public class HandleNFeXMLSignature {  
     private static final String INFINUT = "infInut";  
     private static final String INFCANC = "infCanc";  
     private static final String NFE 	= "NFe";  
@@ -60,7 +60,7 @@ public class HandleXMLSignature {
         try {  
             String caminhoDoCertificadoDoCliente 	= new File("src/resource/07221070v2016.pfx").getAbsolutePath();  
             String senhaDoCertificadoDoCliente 		= "_cert@gbo";  
-            HandleXMLSignature assinarXMLsCertfificadoA1 = new HandleXMLSignature();  
+            HandleNFeXMLSignature assinarXMLsCertfificadoA1 = new HandleNFeXMLSignature();  
   
             /** 
              * Assinando o XML de Lote da NF-e 

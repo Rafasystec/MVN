@@ -1,4 +1,4 @@
-package br.com.barcadero.core.securety.xml;
+package br.com.barcadero.core.handles;
 
 import java.io.FileInputStream;
 import java.io.OutputStream;
