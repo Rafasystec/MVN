@@ -69,11 +69,12 @@ public class NFeBuildAllCacerts {
             get("homologacao.sefaz.mt.gov.br", 443, ks);  
             get("nfehomolog.sefaz.pe.gov.br", 443, ks);  
             //get("homologacao.nfe2.fazenda.pr.gov.br", 443, ks);  
-            get("homologacao.nfe.sefaz.rs.gov.br", 443, ks);  
+           // get("homologacao.nfe.sefaz.rs.gov.br", 443, ks);  
             get("homologacao.nfe.fazenda.sp.gov.br", 443, ks);  
             get("hom.nfe.fazenda.gov.br", 443, ks);  
             get("hom.sefazvirtual.fazenda.gov.br", 443, ks);  
-            get("homologacao.nfe.sefazvirtual.rs.gov.br", 443, ks);  
+            //get("homologacao.nfe.sefazvirtual.rs.gov.br", 443, ks);  
+            get("cte.svrs.rs.gov.br", 443, ks);
   
             File cafile = new File(JSSECACERTS);  
             OutputStream out = new FileOutputStream(cafile);  
