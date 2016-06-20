@@ -38,7 +38,7 @@
          UserDatabaseRealm to authenticate users
     -->
     <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/> 
- 	<Resource auth="Container" driverClassName="org.postgresql.Driver" global="jdbc/sindata" maxActive="100" maxIdle="20" maxWait="10000" minIdle="5" name="jdbc/sindata" password="secrel" type="javax.sql.DataSource" url="jdbc:postgresql://localhost:5432/sindata?user=postgres" username="postgres"/>
+ 	<Resource auth="Container" driverClassName="org.postgresql.Driver" global="jdbc/nautilus" maxActive="100" maxIdle="20" maxWait="10000" minIdle="5" name="jdbc/nautilus" password="postgres" type="javax.sql.DataSource" url="jdbc:postgresql://localhost:5460/Nautilus?user=postgres" username="postgres"/>
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share

@@ -128,7 +128,7 @@
 						<webModule>
 							<groupId>br.com.barcadero</groupId>
 							<artifactId>Sindata-WEB</artifactId>
-							<contextRoot>/sindata</contextRoot>
+							<contextRoot>/Nautilus</contextRoot>
 						</webModule>
 					</modules>
 				</configuration>
