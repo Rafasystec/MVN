@@ -27,7 +27,8 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 	
 	<composite:implementation>
 	    <p:panel header="Endereco">
-					
+			<div class="ui-fluid">
+    			<p:panelGrid   columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">	
 						<p:outputLabel value="CEP:" for="cep"/>
 						<p:inputMask id="cep" mask="99999-999" value="#{cc.attrs.beanCEP}" size="9"/>
 						<p:outputLabel value="Número:" for="numero"/>
@@ -38,7 +39,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 					   	<p:outputLabel> tipo Logradouro:</p:outputLabel>
 					   	<p:selectOneMenu value="#{cc.attrs.beanTipoLog}" >
 					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-							<f:selectItems value="#{endereco.tpLogradouros}" var="log"
+							<f:selectItems value="#{beanEndereco.tipoLogradouro}" var="log"
 								itemValue="#{log.value}" itemLabel="#{log.lable}"
 						/>
 						</p:selectOneMenu>
@@ -55,14 +56,13 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<p:outputLabel value="Cidade:" for="txtCidade" />
 					   	<p:inputText id="txtCidade" value="#{cc.attrs.beanCidade}"/>
 					   	
-							   	
-						<!-- Para o combo de bairro -->
 					   	<p:outputLabel value="Bairro:" for="txtBairro"/>
 					   	<p:inputText id="txtBairro" value="#{cc.attrs.beanBairro}" />
 					   		
 					    <p:outputLabel value="Complemeto:" for="txtComplemento"/>
 					   	<p:inputText id="txtComplemento" value="#{cc.attrs.beanComplemento}" />
-			   		
-				</p:panel>
+			   	</p:panelGrid>
+			</div>	
+		</p:panel>
 	</composite:implementation>
 </ui:composition>

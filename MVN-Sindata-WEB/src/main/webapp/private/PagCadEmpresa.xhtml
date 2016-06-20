@@ -193,60 +193,19 @@
 						<clx:dateCalendar id="dtFund" title="Titulo" value="#{beanEmpresa.emp.dtFundacao}"
 	    				label="Data Fund." readonly="false" required="true" />	
 				</p:panel>
+				<clx:address beanCEP="#{beanEmpresa.ender.cep}" 
+							 beanNumero="#{beanEmpresa.ender.numero}"
+							 beanTipoLog="#{beanEmpresa.ender.tpLogradouro}"
+							 beanLog="#{beanEmpresa.ender.logradouro}"
+							 beanUF="#{beanEmpresa.ender.uf}"
+							 beanCidade="#{beanEmpresa.ender.cidade}"
+							 beanBairro="#{beanEmpresa.ender.bairro}"
+							 beanComplemento="#{beanEmpresa.ender.complemento}"
+							>
 				
+				</clx:address>
 			
-				<p:panel header="Endereco">
-					<h:panelGrid columns="4" cellpadding="0">
-						<p:outputLabel value="CEP:" for="cep"/>
-						<p:inputMask id="cep" mask="99999-999" value="#{beanEmpresa.ender.cep}" size="9"/>
-						<p:outputLabel value="Número:" for="numero"/>
-						<p:inputText id="numero" value="#{beanEmpresa.ender.numero}" maxlength="15" size="10"/>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="4" cellpadding="0">
-					   	<p:outputLabel> tipo Logradouro:</p:outputLabel>
-					   	<p:selectOneMenu value="#{beanEmpresa.ender.tpLogradouro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-							<f:selectItems value="#{beanEmpresa.tpLogradouros}" var="log"
-								itemValue="#{log.value}" itemLabel="#{log.lable}"
-						/>
-						</p:selectOneMenu>
-						<p:outputLabel value="Logradouro:" for="lograd"/>
-					   	<p:inputText id="lograd" value="#{beanEmpresa.ender.logradouro}" ></p:inputText>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="7">
-						<!-- Para o combo de estado -->
-						<p:outputLabel value="Estado:" for="estado"/>
-					   	<p:selectOneMenu id="estado" value="#{beanEmpresa.codEstado}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{beanEmpresa.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
-					   		<p:ajax update="cidade" listener="#{beanEmpresa.obterCidades}"/>
-					   	</p:selectOneMenu>
-					   	<!-- Para o combo de cidade -->
-						<p:outputLabel value="Cidade:" for="cidade" />
-					   	<p:selectOneMenu id="cidade" value="#{beanEmpresa.codCidade}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{beanEmpresa.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
-					   		<p:ajax update="bairro" listener="#{beanEmpresa.obterBairros}"/>
-					   	</p:selectOneMenu>
-					   	<p:commandButton immediate="true" value="+" actionListener="#{beanEmpresa.openCadCidade}" update="cidade">
-					        <p:ajax event="dialogReturn"  update="cidade" listener="#{beanEmpresa.hendleReturnCidades}" />
-					    </p:commandButton>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="6" >		   	
-						<!-- Para o combo de bairro -->
-					   	<p:outputLabel value="Bairro:" for="bairro"/>
-					   	<p:selectOneMenu id="bairro" value="#{beanEmpresa.ender.codBairro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{beanEmpresa.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
-					   	</p:selectOneMenu>
-					    <p:commandButton immediate="true" value="+" actionListener="#{beanEmpresa.openCadBairro}">
-					        <p:ajax event="dialogReturn" listener="#{beanEmpresa.hendleReturnBairros}" update="bairro" />
-					    </p:commandButton>
-			   		</h:panelGrid>
-				</p:panel>
+				
 				<h:panelGrid columns="6">
 					<p:commandButton value="Salvar" action="#{beanEmpresa.salvar}" ajax="false"/>
 				</h:panelGrid>
