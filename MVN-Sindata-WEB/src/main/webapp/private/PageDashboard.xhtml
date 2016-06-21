@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+		          
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+	                xmlns:h="http://java.sun.com/jsf/html"  
+	                xmlns:f="http://java.sun.com/jsf/core"  
+	                xmlns:ui="http://java.sun.com/jsf/facelets"	                
+	                xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
+	   	
+	   	<ui:param name="activeDashboard" value="active" />
+	   	<ui:param name="pageIcon" value="tachometer" />
+	   	<ui:param name="pageTitle" value="DASHBOARD" />
+	   	
+	   	<ui:define name="header">
+	   	   				   		
+   		</ui:define>
+	   	
+	   	<ui:define name="body">
+	   		
+	   		<div style="width:100%">   		
+		    	<p:chart type="pie" model="#{dashboardView.pieModel}" style="width:400px;height:400px" responsive="true" />
+			</div>
+		    	   		
+	   	</ui:define>
+	   	   	
+	  	<ui:define name="footer">
+	  						   		
+		</ui:define>
+		
+		<ui:define name="dialog">
+							    
+		</ui:define>
+	   		   		    
+	</ui:composition> 
+		
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+ 
+    <ui:composition>
+        <div class="navbar" role="navigation">            
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>	            
+	        </div>
+	        <div class="navbar-collapse collapse">	 
+	        	<ul class="nav navbar-nav nav-pills navbar-left">
+				  <li role="presentation"><a href="#"><i class="fa fa-bell" style="color:#656D78;"></i><span class="badge badge-info">0</span></a></li>
+				  <li role="presentation"><a href="#"><i class="fa fa-exclamation-triangle" style="color:#656D78;"></i><span class="badge badge-warning">0</span></a></li>
+				  <li role="presentation"><a href="#"><i class="fa fa-ban" style="color:#656D78;"></i><span class="badge badge-danger">0</span></a></li>
+				</ul>        
+	            <ul class="nav navbar-nav navbar-right menu-top">
+	                <li>
+	                	<a class="#{activeDashboard}" href="#{request.contextPath}/dashboard.jsf"><i class="fa fa-tachometer"></i>DASHBOARD</a>
+	                </li>
+	                <li>
+	                	<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    	<i class="fa fa-user"></i><h:outputText value="#{authenticator.usuario}" />
+						    	<span class="caret"></span>
+						  	</button>
+						  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    	<li><a href="usuarios.jsf"><i class="fa fa-user-plus" aria-hidden="true"></i>USUÁRIOS</a></li>						    	
+						    	<li role="separator" class="divider"></li>
+						    	<li><p:commandLink action="#{authenticator.logout}">
+			                			<i class="fa fa-sign-out"></i>
+			                			SAIR
+			                		</p:commandLink>
+			                	</li>
+						  	</ul>
+						</div>
+	                	
+	                </li>
+	                <li style="border-left-color:#E6E9ED;border-left-style:solid;border-left-width:1px;">
+	                	<p:commandLink id="lnk-sair"
+	                		title="Sair?"
+	                		action="#{authenticator.logout}">
+	                		<i class="fa fa-sign-out"></i>
+	                	</p:commandLink>
+	                	<p:tooltip for="lnk-sair" trackMouse="true" />
+	                </li>
+	            </ul>
+	      	 </div>
+        </div>
+    </ui:composition>
+    
+</html>

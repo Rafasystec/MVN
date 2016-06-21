@@ -1,0 +1,14 @@
+body {
+	font-family: 'Open Sans', sans-serif !important;
+	background: #26C281;
+}
+.panelLogin .ui-panel-content {
+	margin: 55px 20px 20px 20px !important;
+}
+.pace-custom {
+	width: 100%;
+    z-index: 2000;
+    height: 100%;
+    display: block;
+    background-color: rgba(67, 74, 84, 0.5);
+}
