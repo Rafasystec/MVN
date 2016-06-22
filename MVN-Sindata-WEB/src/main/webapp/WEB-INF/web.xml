@@ -68,11 +68,12 @@
         <extension>ico</extension>
         <mime-type>image/x-icon</mime-type>
     </mime-mapping>
-    
+    <!-- 
     <context-param>
 		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	 -->
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>

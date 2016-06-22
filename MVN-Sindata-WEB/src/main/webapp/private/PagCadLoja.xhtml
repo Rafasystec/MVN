@@ -1,144 +1,103 @@
-<html
- xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-	<h:head>
-		<meta charset="UTF-8" />
-		<title>Insert title here</title>
-	</h:head>
-	<h:body>
-		<ui:composition template="index.xhtml">
-			<ui:define name="conteudo">
-				<h3>Loja</h3>
-				<h:panelGrid columns="2">
-					
-					<p:outputLabel value="Fantasia:" for="fantasia"/>
-					<p:inputText value="#{loja.pj.fantasia}" id="fantasia"
-						required="true" requiredMessage="Fantasia é obrigatório."
-						maxlength="60" size="60"
-					/>
-					
-					<p:outputLabel value="Razão Social:" for="rsocial"/>
-					<p:inputText value="#{loja.pj.razaoSocial}" id="rsocial"
-						required="true" requiredMessage="Razão Social deve ser preenchida."
-						maxlength="60" size="60"
-					/>
-					
-					<p:outputLabel value="Insc. Estadual:" for="ie"/>
-					<p:inputText value="#{loja.pj.ie}" id="ie"
-						required="true" requiredMessage="Inscrição Estadual é necessária."
-						maxlength="15" size="15"
-					/>
-					
-					<p:outputLabel value="CNPJ:" for="cnpj"	/>
-					<p:inputMask  value="#{loja.pj.cnpj}" id="cnpj"
-						required="true" requiredMessage="Informe o CNPJ - Somente números."
-						mask="99.999.999/9999-99" />
-					
-					<p:outputLabel value="I.E. subst. tributária:" for="ietrib"/>
-					<p:inputText value="#{loja.pj.ieSubsTributaria}" id="ietrib" maxlength="15" size="15"/>
-					
-					<p:outputLabel value="Insc. Municipal:" for="im"/>
-					<p:inputText value="#{loja.pj.im}" id="im" maxlength="15" size="15"/>
-					
-					<p:outputLabel value="Regime Tributário:" for="regime"/>
-					<p:selectOneMenu id="regime" value="#{loja.pj.codRegTribut}"
-						required="true" requiredMessage="Regime tributário é obrigatório."
-					>
-						<f:selectItems value="#{loja.regime}"/>
-					</p:selectOneMenu>
-					
-					<p:outputLabel value="Contato:" for="contato"/>
-					<p:inputMask value="#{loja.pj.fone}" id="contato" mask="(999)99999-9999"
-						required="true" requiredMessage="Informe um contato por favor."
-					/>
-					
-					
-					<p:outputLabel value="UF:" for="uf"/>
-					<p:selectOneMenu value="#{loja.pj.uf}" id="uf" maxlength="4">
-						<f:selectItems value="#{loja.uf}"/>
-					</p:selectOneMenu>
-				
-					
-					<p:outputLabel value="E-mail" for="email"/>
-					<p:inputText value="#{loja.pj.email}" id="email"
-						required="true" requiredMessage="E-mail é obrigatório."
-						maxlength="35" size="35"
-					/>
-					
-					<p:outputLabel value="Web Site: www." for="site"/>
-					<p:inputText value="#{loja.pj.webSite}" id="site"/>
-					
-				</h:panelGrid>
-				<p:fieldset legend="Dados gerais">
-					<h:panelGrid columns="2">
-					
-						<p:outputLabel value="Data de Inauguração:" for="dtFundacao"/>
-						<p:calendar id="dtFundacao" value="#{loja.loja.dtInauguracao}" pattern="dd/MM/yyyy" maxlength="10" 
-						mask="99/99/9999" size="10"
-						/>
-					</h:panelGrid>
-				</p:fieldset>
-				<!-- ********** Para o endereco. Copiar e colar em outras telas **************  -->
-				<p:fieldset legend="Endereço">
-					<h:panelGrid columns="4" cellpadding="0">
-						<p:outputLabel value="CEP:" for="cep"/>
-						<p:inputMask id="cep" mask="99999-999" value="#{loja.ender.cep}" size="9"/>
-						<p:outputLabel value="Número:" for="numero"/>
-						<p:inputText id="numero" value="#{loja.ender.numero}" maxlength="15" size="10"/>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="4" cellpadding="0">
-					   	<p:outputLabel> tipo Logradouro:</p:outputLabel>
-					   	<p:selectOneMenu value="#{loja.ender.tpLogradouro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-							<f:selectItems value="#{endereco.tpLogradouros}" var="log"
-								itemValue="#{log.value}" itemLabel="#{log.lable}"
-						/>
-						</p:selectOneMenu>
-						<p:outputLabel value="Logradouro:" for="lograd"/>
-					   	<p:inputText id="lograd" value="#{loja.ender.logradouro}" ></p:inputText>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="7">
-						<!-- Para o combo de estado -->
-						<p:outputLabel value="Estado:" for="estado"/>
-					   	<p:selectOneMenu id="estado" value="#{endereco.codEstado}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{endereco.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
-					   		<p:ajax update="cidade" listener="#{endereco.obterCidades}"/>
-					   	</p:selectOneMenu>
-					   	<!-- Para o combo de cidade -->
-						<p:outputLabel value="Cidade:" for="cidade" />
-					   	<p:selectOneMenu id="cidade" value="#{endereco.codCidade}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{endereco.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
-					   		<p:ajax update="bairro" listener="#{endereco.obterBairros}"/>
-					   	</p:selectOneMenu>
-					   	<p:commandButton immediate="true" value="+" actionListener="#{endereco.openCadCidade}" update="cidade">
-					        <p:ajax event="dialogReturn"  update="cidade" listener="#{endereco.hendleReturnCidades}" />
-					    </p:commandButton>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="6" >		   	
-						<!-- Para o combo de bairro -->
-					   	<p:outputLabel value="Bairro:" for="bairro"/>
-					   	<p:selectOneMenu id="bairro" value="#{loja.ender.codBairro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{endereco.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
-					   	</p:selectOneMenu>
-					    <p:commandButton immediate="true" value="+" actionListener="#{endereco.openCadBairro}">
-					        <p:ajax event="dialogReturn" listener="#{endereco.hendleReturnBairros}" update="bairro" />
-					    </p:commandButton>
-			   		</h:panelGrid>
-				</p:fieldset>
-				<h:panelGrid columns="6">
-					<p:commandButton value="Salvar" action="#{loja.salvar}" ajax="false"/>
-				</h:panelGrid>
-			</ui:define>
-		</ui:composition>
-	</h:body>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui" template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="tachometer" />
+	<ui:param name="pageTitle" value="Lojas" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" actionSave="#{loja.salvar}" />
+		
+		
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Salvar Tool tip" action="#{loja.salvar}" ajax="false"/>
+			</f:facet>
+		</p:toolbar>
+		
+		<p:panel header="Cadastro de lojas">
+			<h:panelGrid columns="2">
+
+				<p:outputLabel value="Fantasia:" for="fantasia" />
+				<p:inputText value="#{loja.pj.fantasia}" id="fantasia"
+					required="true" requiredMessage="Fantasia é obrigatório."
+					maxlength="60" size="60" />
+
+				<p:outputLabel value="Razão Social:" for="rsocial" />
+				<p:inputText value="#{loja.pj.razaoSocial}" id="rsocial"
+					required="true" requiredMessage="Razão Social deve ser preenchida."
+					maxlength="60" size="60" />
+
+				<p:outputLabel value="Insc. Estadual:" for="ie" />
+				<p:inputText value="#{loja.pj.ie}" id="ie" required="true"
+					requiredMessage="Inscrição Estadual é necessária." maxlength="15"
+					size="15" />
+
+				<p:outputLabel value="CNPJ:" for="cnpj" />
+				<p:inputMask value="#{loja.pj.cnpj}" id="cnpj" required="true"
+					requiredMessage="Informe o CNPJ - Somente números."
+					mask="99.999.999/9999-99" />
+
+				<p:outputLabel value="I.E. subst. tributária:" for="ietrib" />
+				<p:inputText value="#{loja.pj.ieSubsTributaria}" id="ietrib"
+					maxlength="15" size="15" />
+
+				<p:outputLabel value="Insc. Municipal:" for="im" />
+				<p:inputText value="#{loja.pj.im}" id="im" maxlength="15" size="15" />
+
+				<p:outputLabel value="Regime Tributário:" for="regime" />
+				<p:selectOneMenu id="regime" value="#{loja.pj.codRegTribut}"
+					required="true" requiredMessage="Regime tributário é obrigatório.">
+					<f:selectItems value="#{loja.regime}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Contato:" for="contato" />
+				<p:inputMask value="#{loja.pj.fone}" id="contato"
+					mask="(999)99999-9999" required="true"
+					requiredMessage="Informe um contato por favor." />
+
+
+				<p:outputLabel value="UF:" for="uf" />
+				<p:selectOneMenu value="#{loja.pj.uf}" id="uf" maxlength="4">
+					<f:selectItems value="#{loja.uf}" />
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText value="#{loja.pj.email}" id="email" required="true"
+					requiredMessage="E-mail é obrigatório." maxlength="35" size="35" />
+
+				<p:outputLabel value="Web Site: www." for="site" />
+				<p:inputText value="#{loja.pj.webSite}" id="site" />
+
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Dados gerais">
+			<h:panelGrid columns="2">
+
+				<p:outputLabel value="Data de Inauguração:" for="dtFundacao" />
+				<p:calendar id="dtFundacao" value="#{loja.loja.dtInauguracao}"
+					pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10" />
+			</h:panelGrid>
+		</p:panel>
+
+		<clx:address beanCEP="#{loja.ender.cep}"
+			beanNumero="#{loja.ender.numero}"
+			beanTipoLog="#{loja.ender.tpLogradouro}"
+			beanLog="#{cliente.endereco.logradouro}" beanUF="#{loja.ender.uf}"
+			beanCidade="#{loja.ender.cidade}" beanBairro="#{loja.ender.bairro}"
+			beanComplemento="#{loja.ender.complemento}">
+		</clx:address>
+
+		<clx:buttonsCrud id="btnsFooter" actionSave="#{loja.salvar}"/>
+	</ui:define>
+</ui:composition>
 </html>

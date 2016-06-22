@@ -1,110 +1,129 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-     >
-       
-    <ui:composition>
-    	<div id="sidebar-wrapper">
-    		<ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#"><img alt="Nautilus" src="#{request.contextPath}/resources/Imagens/logoNautilus.png"></img></a>
-                </li>  
-                
-                <li>
-		      		<a class="tree-toggle nav-header" href="#">
-		      			<span>
-		      				<i class="fa fa fa-cubes"></i>CADASTROS<i class="fa fa-plus"></i>
-		      			</span>
-		      		</a>
-		        	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/private/PagCadCliente.xhtml"> <i class="fa fa-users"></i>CLIENTES</a>
-		            	</li>
-		           	</ul>
-		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/private/PagCadEmpresa.xhtml"> <i class="fa fa-industry"></i>EMPRESA</a>
-		            	</li>
-		           	</ul>
-		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-shopping-cart"></i>LOJAS</a>
-		            	</li>
-		           	</ul>
-		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-users"></i>VENDEDORES</a>
-		            	</li>
-		           	</ul>
-		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-shopping-basket"></i>PRODUTOS</a>
-		            	</li>
-		           	</ul>
-		      	</li>       
-		      	       
-    			<li>
-    				<a class="tree-toggle nav-header" href="#">
-		      			<span>
-		      				<i class="fa fa-usd"></i>FINANCEIRO<i class="fa fa-plus"></i>
-		      			</span>
-		      		</a>
-    				<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-cog"></i>CONFIGURAÇÕES</a>
-		            	</li>
-		           	</ul>
-    				<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-hand-o-left"></i>A PAGAR</a>
-		            	</li>
-		           	</ul>
-		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"><i class="fa fa-hand-o-right"></i>A RECEBER</a>
-		            	</li>
-		           	</ul>
-    			</li>
-    			
-		        <li>
-		            
-		            	<a class="#{activeColaboradores}" href="#{request.contextPath}/colaboradores.jsf"><i class="fa fa-user"></i>COLABORADORES</a>
-		            
-		      	</li>
-		        <li>
-		        	
-		            	<a class="#{activeServicos}" href="#{request.contextPath}/servicos.jsf"><i class="fa fa-cog"></i>SERVIÇOS</a>
-		        	    	
-	            </li>
-	            <li>
-	            	
-		            	<a class="#{activeSolicitacaoOSE}" href="#{request.contextPath}/solicitacao-ose.jsf"><i class="fa fa-arrow-circle-up"></i>SOLICITAÇÃO DE OSE</a>
-		        	
-				</li>		      	
-		      	<li>
-		      		
-		            	<a class="#{activeRecebimentoOSE}" href="#{request.contextPath}/recebimento-ose.jsf"><i class="fa fa-arrow-circle-down"></i>RECEBIMENTO DE OSE</a>
-		            
-		      	</li>
-		      	<li>
-		      		
-		            	<a class="#{activePagamentoOSE}" href="#{request.contextPath}/pagamento-ose.jsf"><i class="fa fa-usd"></i>PAGAMENTO DE OSE</a>
-		            
-		      	</li>
-		      	<li>
-		      		<a class="tree-toggle nav-header" href="#">
-		      			<span>
-		      				<i class="fa fa-file-text"></i>RELATÓRIOS<i class="fa fa-plus"></i>
-		      			</span>
-		      		</a>
-		        	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
-		            	<li>
-		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf">OSE</a>
-		            	</li>
-		           	</ul>
-		      	</li>
-	        </ul>	        
-        </div>        
-    </ui:composition>
-    
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition>
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand"><a href="#"><img alt="Nautilus"
+					src="#{request.contextPath}/resources/Imagens/logoNautilus.png"></img></a>
+			</li>
+
+			<li><a class="tree-toggle nav-header" href="#"> <span>
+						<i class="fa fa fa-cubes"></i>CADASTROS<i class="fa fa-plus"></i>
+				</span>
+			</a>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D; display: none}">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagCadCliente.xhtml"> <i
+							class="fa fa-users"></i>CLIENTES
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagCadEmpresa.xhtml"> <i
+							class="fa fa-industry"></i>EMPRESA
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagCadLoja.xhtml"> <i
+							class="fa fa-shopping-cart"></i>LOJAS
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i
+							class="fa fa-users"></i>VENDEDORES
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i
+							class="fa fa-shopping-basket"></i>PRODUTOS
+					</a></li>
+				</ul></li>
+
+			<li><a class="tree-toggle nav-header" href="#"> <span>
+						<i class="fa fa-usd"></i>FINANCEIRO<i class="fa fa-plus"></i>
+				</span>
+			</a>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D; display:">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i
+							class="fa fa-cog"></i>CONFIGURAÇÕES
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i
+							class="fa fa-hand-o-left"></i>A PAGAR
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"><i
+							class="fa fa-hand-o-right"></i>A RECEBER</a></li>
+				</ul></li>
+
+			<li><a class="#{activeColaboradores}"
+				href="#{request.contextPath}/colaboradores.jsf"><i
+					class="fa fa-user"></i>COLABORADORES</a></li>
+			<li><a class="#{activeServicos}"
+				href="#{request.contextPath}/servicos.jsf"><i class="fa fa-cog"></i>SERVIÇOS</a>
+
+			</li>
+			
+			<li><a class="tree-toggle nav-header" href="#"> <span>
+						<i class="fa fa-usd"></i>CONSULTAS<i class="fa fa-plus"></i>
+				</span>
+			</a>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D; ">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagConsultarLojas.xhtml"> <i
+							class="fa fa-cog"></i>LOJAS
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i
+							class="fa fa-hand-o-left"></i>CLIENTES
+					</a></li>
+				</ul>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"><i
+							class="fa fa-hand-o-right"></i>PRODUTOS</a></li>
+				</ul>
+			</li>
+			
+			<li><a class="#{activeRecebimentoOSE}"
+				href="#{request.contextPath}/recebimento-ose.jsf"><i class="fa fa-arrow-circle-down"></i>RECEBIMENTO DE OSE</a></li>
+			<li><a class="#{activePagamentoOSE}" href="#{request.contextPath}/pagamento-ose.jsf"><i
+					class="fa fa-usd"></i>PAGAMENTO DE OSE</a></li>
+			<li><a class="tree-toggle nav-header" href="#"> <span>
+						<i class="fa fa-file-text"></i>RELATÓRIOS<i class="fa fa-plus"></i>
+				</span>
+			</a>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D;">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf">OSE</a>
+					</li>
+				</ul></li>
+		</ul>
+	</div>
+</ui:composition>
+
 </html>

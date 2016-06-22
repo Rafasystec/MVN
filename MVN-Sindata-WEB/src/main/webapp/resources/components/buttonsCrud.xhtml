@@ -4,14 +4,9 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-
-	<!-- 
-	Essa tag serve para declarar todos os atributos que poderão ser passados 
-	para uso no nosso composite component
-	 -->
 	<composite:interface>
 		<composite:attribute name="actionSave"
-			shortDescription="Ação de salvar" default="#" />
+			shortDescription="Ação de salvar" default="#" displayName="Salvar" />
 		<composite:attribute name="actionNew"
 			shortDescription="Ação do bean que ira preparar o forma para um novo registro"
 			default="#" />
@@ -30,28 +25,39 @@
 		<composite:attribute name="actionFind"
 			shortDescription="Procurar pelo registro"
 			default="#" />
+		<composite:attribute name="id"
+			shortDescription="ID para o componente" default="id" />
 	</composite:interface>
 
 	<composite:implementation>
+	<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Salvar Tool tip compo" action="#{loja.salvar}" ajax="false"/>
+			</f:facet>
+		</p:toolbar>
 		<p:toolbar>
 			<f:facet name="left">
-				<p:commandButton type="button" action="#{cc.attrs.actionNew}" value="Novo" title="Novo registro" icon="ui-icon-document" />
-				<p:commandButton type="button" action="#{cc.attrs.actionSave}" value="Salvar" title="Salvar registro" icon="ui-icon-folder-open" />
-
+				<p:commandButton id="#{cc.attrs.id}-new"  action="#{cc.attrs.actionNew}" value="Novo" title="Novo registro" icon="ui-icon-document" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-new" trackMouse="true" />
+				<p:commandButton id="#{cc.attrs.id}-save" action="#{cc.attrs.actionSave}" value="Salvar" title="Salvar registro" icon="ui-icon-folder-open" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-save" trackMouse="true" />
 				<span class="ui-separator"> <span
 					class="ui-icon ui-icon-grip-dotted-vertical" />
 				</span>
 
-				<p:commandButton type="button" action="#{cc.attrs.actionExclude}" title="Excluir" icon="ui-icon-trash" />
-				<p:commandButton type="button" action="#{cc.attrs.actionPrint}" title="Imprimir" icon="ui-icon-print" />
+				<p:commandButton id="#{cc.attrs.id}-trash"  action="#{cc.attrs.actionExclude}" title="Excluir registro corrente" icon="ui-icon-trash" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-trash" trackMouse="true" />
+				<p:commandButton id="#{cc.attrs.id}-print" action="#{cc.attrs.actionPrint}" title="Imprimir" icon="ui-icon-print" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-print" trackMouse="true" />
 			</f:facet>
 			
 			<f:facet name="right">
-				<p:menuButton value="Opções">
+				<p:menuButton title="Mais opções" id="#{cc.attrs.id}-options" value="Opções">
 					<p:menuitem value="Cancelar"  actionListener="#{cc.attrs.actionCancel}" icon="ui-icon-close" />
 					<p:menuitem value="Voltar" 	  actionListener="#{cc.attrs.actionBack}" icon="ui-icon-arrowrefresh-1-w" />
 					<p:menuitem value="Consultar" actionListener="#{cc.attrs.actionFind}" ajax="false" icon="ui-icon-close" />
 				</p:menuButton>
+				<p:tooltip for="#{cc.attrs.id}-options" trackMouse="true" />
 			</f:facet>
 		</p:toolbar>
 	</composite:implementation>
