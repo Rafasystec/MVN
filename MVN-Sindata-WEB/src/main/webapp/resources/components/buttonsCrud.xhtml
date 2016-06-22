@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->
+	<composite:interface>
+		<composite:attribute name="actionSave"
+			shortDescription="Ação de salvar" default="#" />
+		<composite:attribute name="actionNew"
+			shortDescription="Ação do bean que ira preparar o forma para um novo registro"
+			default="#" />
+		<composite:attribute name="actionExclude"
+			shortDescription="Ação do bean que ira excluir o registro selecionado"
+			default="#" />
+		<composite:attribute name="actionPrint"
+			shortDescription="Comandar impressão dos dados do forme caso existam"
+			default="#" />
+		<composite:attribute name="actionCancel"
+			shortDescription="Cancelar ação"
+			default="#" />
+		<composite:attribute name="actionBack"
+			shortDescription="Ação de voltar para a página anterior"
+			default="#" />
+		<composite:attribute name="actionFind"
+			shortDescription="Procurar pelo registro"
+			default="#" />
+	</composite:interface>
+
+	<composite:implementation>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton type="button" action="#{cc.attrs.actionNew}" value="Novo" title="Novo registro" icon="ui-icon-document" />
+				<p:commandButton type="button" action="#{cc.attrs.actionSave}" value="Salvar" title="Salvar registro" icon="ui-icon-folder-open" />
+
+				<span class="ui-separator"> <span
+					class="ui-icon ui-icon-grip-dotted-vertical" />
+				</span>
+
+				<p:commandButton type="button" action="#{cc.attrs.actionExclude}" title="Excluir" icon="ui-icon-trash" />
+				<p:commandButton type="button" action="#{cc.attrs.actionPrint}" title="Imprimir" icon="ui-icon-print" />
+			</f:facet>
+			
+			<f:facet name="right">
+				<p:menuButton value="Opções">
+					<p:menuitem value="Cancelar"  actionListener="#{cc.attrs.actionCancel}" icon="ui-icon-close" />
+					<p:menuitem value="Voltar" 	  actionListener="#{cc.attrs.actionBack}" icon="ui-icon-arrowrefresh-1-w" />
+					<p:menuitem value="Consultar" actionListener="#{cc.attrs.actionFind}" ajax="false" icon="ui-icon-close" />
+				</p:menuButton>
+			</f:facet>
+		</p:toolbar>
+	</composite:implementation>
+</ui:composition>
+
+
+

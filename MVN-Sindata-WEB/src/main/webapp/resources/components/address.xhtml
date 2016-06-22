@@ -28,7 +28,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 	<composite:implementation>
 	    <p:panel header="Endereco">
 			<div class="ui-fluid">
-    			<p:panelGrid   columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">	
+    			<p:panelGrid   columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid">	
 						<p:outputLabel value="CEP:" for="cep"/>
 						<p:inputMask id="cep" mask="99999-999" value="#{cc.attrs.beanCEP}" size="9"/>
 						<p:outputLabel value="Número:" for="numero"/>

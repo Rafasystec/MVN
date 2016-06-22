@@ -7,13 +7,65 @@
     	<div id="sidebar-wrapper">
     		<ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#"><img alt="SCOSE" src="#{request.contextPath}/resources/imagens/brand.svg"></img></a>
-                </li>                
+                    <a href="#"><img alt="Nautilus" src="#{request.contextPath}/resources/Imagens/logoNautilus.png"></img></a>
+                </li>  
+                
+                <li>
+		      		<a class="tree-toggle nav-header" href="#">
+		      			<span>
+		      				<i class="fa fa fa-cubes"></i>CADASTROS<i class="fa fa-plus"></i>
+		      			</span>
+		      		</a>
+		        	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/private/PagCadCliente.xhtml"> <i class="fa fa-users"></i>CLIENTES</a>
+		            	</li>
+		           	</ul>
+		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/private/PagCadEmpresa.xhtml"> <i class="fa fa-industry"></i>EMPRESA</a>
+		            	</li>
+		           	</ul>
+		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-shopping-cart"></i>LOJAS</a>
+		            	</li>
+		           	</ul>
+		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-users"></i>VENDEDORES</a>
+		            	</li>
+		           	</ul>
+		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-shopping-basket"></i>PRODUTOS</a>
+		            	</li>
+		           	</ul>
+		      	</li>       
+		      	       
     			<li>
-    				<sec:authorize access="hasRole('ADMIN') and isAuthenticated()">
-    					<a class="#{activeClientes}" href="#{request.contextPath}/clientes.jsf"><i class="fa fa-briefcase"></i>CLIENTES</a>
-    				</sec:authorize>
+    				<a class="tree-toggle nav-header" href="#">
+		      			<span>
+		      				<i class="fa fa-usd"></i>FINANCEIRO<i class="fa fa-plus"></i>
+		      			</span>
+		      		</a>
+    				<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-cog"></i>CONFIGURAÇÕES</a>
+		            	</li>
+		           	</ul>
+    				<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i class="fa fa-hand-o-left"></i>A PAGAR</a>
+		            	</li>
+		           	</ul>
+		           	<ul class="nav nav-list tree" style="background-color:#4E4D4D;display:#{activeRelatorio?'block':'none'};">
+		            	<li>
+		            		<a class="#{activeRelatorioOSE}" href="#{request.contextPath}/relatorios/ose-relatorio.jsf"><i class="fa fa-hand-o-right"></i>A RECEBER</a>
+		            	</li>
+		           	</ul>
     			</li>
+    			
 		        <li>
 		            <sec:authorize access="hasRole('ADMIN') and isAuthenticated()">
 		            	<a class="#{activeColaboradores}" href="#{request.contextPath}/colaboradores.jsf"><i class="fa fa-user"></i>COLABORADORES</a>

@@ -1,190 +1,129 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
-</h:head>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui" template="../templates/main.xhtml">
 
-<h:body>
-<h:form>
-	<ui:composition template="index.xhtml">
-		<ui:define name="conteudo">
-			<p:panel header="Cadastro de Clientes">
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="tachometer" />
+	<ui:param name="pageTitle" value="Clientes" />
+
+	<ui:define name="body">
+
+		<clx:buttonsCrud></clx:buttonsCrud>
+		<p:panel header="Cadastro de Clientes">
 			<div class="form-group ">
-				<label class="control-label " for="email">
-			   		Nome
-			  	</label>
-			  	<div class="input-group">
-			   		<div class="input-group-addon">
-						<span class="glyphicon glyphicon-user"></span> 
-			    	</div>
-			   		<p:inputText id="nome" label="Nome" value="#{cliente.pFisica.nome}" maxlength="60" 
-						required="true" requiredMessage="Nome é obrigatório" placeholder="Nome"
-					/>
-			  	</div>
-			
-				<label class="control-label " for="email">
-			   		E-mail
-			  	</label>
-			  	<div class="input-group">
-			   		<div class="input-group-addon">
-					<span class="glyphicon glyphicon-envelope"></span> 
-			    </div>
-			   		<p:inputText id="email" label="Email" value="#{cliente.pFisica.email}" maxlength="60" 
-						required="true" requiredMessage="E-mail é obrigatório" placeholder="E-mail"
-					/>
-			  	</div>
-			  	
-			  	<label class="control-label " for="email">
-			   		CPF
-			  	</label>
-			  	<div class="input-group">
-			   		<div class="input-group-addon">
-						<span class="glyphicon glyphicon-info-sign"></span> 
-			    	</div>
-			   		<p:inputMask id="cpf" mask="999.999.999-99" label="CPF do cliente" alt="Informe o CPF" value="#{cliente.pFisica.cpf}" 
-						size="11" maxlength="11" required="true" requiredMessage="CPF é obrigatório" placeholder="CPF"
-					/>
-			  	</div>
-			  	
-			  	<label class="control-label " for="email">
-			   		Data Nascimento
-			  	</label>
-			  	<div class="input-group">
-			   		<div class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span> 
-			    </div>
-			   		<p:calendar id="dtNascimento" alt="A data de nascimento no formato DD/MM/AAAA" value="#{cliente.pFisica.dtNascimento}" pattern="dd/MM/yyyy" maxlength="10" 
-						mask="99/99/9999" size="10" equired="true" requiredMessage="Dt. Nasc é obrigatório"
-					/>
-			  	</div>
-			  	
-			  	<label class="control-label " for="email">
-			   		Estado Civil
-			  	</label>
-			  	<div class="input-group">
-			   		<p:selectOneMenu id="estadoCivil" value="#{cliente.pFisica.estCivil}">
-						<f:selectItem itemLabel="selecione" itemValue="0"/>
-						<f:selectItems value="#{cliente.estadoCivil}"/>
-					</p:selectOneMenu>				
-			  	</div>
-			  	
-			  	<div class="input-group">
-			   		<h:selectOneRadio id="sexo" label="Sexo:" value="#{cliente.pFisica.sexo}" >
-						<f:selectItem itemValue="M" itemLabel="Masculino"/>
-						<f:selectItem itemValue="F" itemLabel="Feminino"/>
-					</h:selectOneRadio>
-			  	</div>
-			  	
-			  	<label class="control-label " for="email">
-			   		UF Nascimento
-			  	</label>
-			  	<div class="input-group">
-			   		<p:selectOneMenu id="UFNat" title="UF de onde nasceu" value="#{cliente.pFisica.ufNatural}">
-						<f:selectItem itemValue="0" itemLabel="Selecione" />
-						<f:selectItems value="#{endereco.uf}"/>
+				<label class="control-label " for="email"> Nome </label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-user"></span>
+					</div>
+					<p:inputText id="nome" label="Nome" value="#{cliente.pFisica.nome}"
+						maxlength="60" required="true"
+						requiredMessage="Nome é obrigatório" placeholder="Nome" />
+				</div>
+
+				<label class="control-label " for="email"> E-mail </label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-envelope"></span>
+					</div>
+					<p:inputText id="email" label="Email"
+						value="#{cliente.pFisica.email}" maxlength="60" required="true"
+						requiredMessage="E-mail é obrigatório" placeholder="E-mail" />
+				</div>
+
+				<label class="control-label " for="email"> CPF </label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-info-sign"></span>
+					</div>
+					<p:inputMask id="cpf" mask="999.999.999-99" label="CPF do cliente"
+						alt="Informe o CPF" value="#{cliente.pFisica.cpf}" size="11"
+						maxlength="11" required="true" requiredMessage="CPF é obrigatório"
+						placeholder="CPF" />
+				</div>
+
+				<label class="control-label " for="email"> Data Nascimento </label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</div>
+					<p:calendar id="dtNascimento"
+						alt="A data de nascimento no formato DD/MM/AAAA"
+						value="#{cliente.pFisica.dtNascimento}" pattern="dd/MM/yyyy"
+						maxlength="10" mask="99/99/9999" size="10" equired="true"
+						requiredMessage="Dt. Nasc é obrigatório" />
+				</div>
+
+				<label class="control-label " for="email"> Estado Civil </label>
+				<div class="input-group">
+					<p:selectOneMenu id="estadoCivil"
+						value="#{cliente.pFisica.estCivil}">
+						<f:selectItem itemLabel="selecione" itemValue="0" />
+						<f:selectItems value="#{cliente.estadoCivil}" />
 					</p:selectOneMenu>
-			  	</div>
-			  	<label class="control-label " for="email">
-			   		Telefone
-			  	</label>
-			  	<div class="input-group">
-			   		<div class="input-group-addon">
-						<span class="glyphicon glyphicon-phone-alt"></span> 
-			    	</div>
-			   		<p:inputMask mask="(999)9999-9999" id="telefone" value="#{cliente.pFisica.telefone}" />
-			  	</div>
-			  	<label class="control-label " for="email">
-			   		Celular
-			  	</label>
-			  	<div class="input-group">
-			   		<div class="input-group-addon">
-						<span class="glyphicon glyphicon-phone-alt"></span> 
-			    	</div>
-			   		<p:inputMask mask="(999)99999-9999" id="celular" value="#{cliente.pFisica.celular}" />
-			  	</div>
-			  	<label class="control-label " for="email">
-			   		Observações
-			  	</label>
-			  	<div class="input-group">
-			   		<p:inputTextarea id="obs" maxlength="180" title="Anote uma observação deste cliete com no máximo 180 caracteres" 
-			   					value="#{cliente.pFisica.observacao}" cols="40"/>
-			   
-			  	</div>
-			</div>	
-		</p:panel>	
-										
-			
-			  
-			   
-			  	<!-- ********** Para o endereco. Copiar e colar em outras telas **************  -->
-				<p:fieldset legend="Endereço">
-					<h:panelGrid columns="4" cellpadding="0">
-						<p:outputLabel value="CEP:" for="cep"/>
-						<p:inputMask id="cep" mask="99999-999" value="#{cliente.endereco.cep}" size="9"/>
-						<p:outputLabel value="Número:" for="numero"/>
-						<p:inputText id="numero" value="#{cliente.endereco.numero}" maxlength="15" size="10"/>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="4" cellpadding="0">
-					   	<p:outputLabel> tipo Logradouro:</p:outputLabel>
-					   	<p:selectOneMenu value="#{cliente.endereco.tpLogradouro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-							<f:selectItems value="#{cliente.tpLogradouros}" var="log"
-								itemValue="#{log.value}" itemLabel="#{log.lable}"
-						/>
-						</p:selectOneMenu>
-						<p:outputLabel value="Logradouro:" for="lograd"/>
-					   	<p:inputText id="lograd" value="#{cliente.endereco.logradouro}" ></p:inputText>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="7">
-						<!-- Para o combo de estado -->
-						<p:outputLabel value="Estado:" for="estado"/>
-					   	<p:selectOneMenu id="estado" value="#{endereco.codEstado}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{endereco.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}"/>
-					   		<p:ajax update="cidade" listener="#{endereco.obterCidades}"/>
-					   	</p:selectOneMenu>
-					   	<!-- Para o combo de cidade -->
-						<p:outputLabel value="Cidade:" for="cidade" />
-					   	<p:selectOneMenu id="cidade" value="#{endereco.codCidade}">
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{endereco.cidades}" var="cidade" itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}"/>
-					   		<p:ajax update="bairro" listener="#{endereco.obterBairros}"/>
-					   	</p:selectOneMenu>
-					   	<p:commandButton immediate="true" value="+" actionListener="#{endereco.openCadCidade}" update="cidade">
-					        <p:ajax event="dialogReturn"  update="cidade" listener="#{endereco.hendleReturnCidades}" />
-					    </p:commandButton>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="6" >		   	
-						<!-- Para o combo de bairro -->
-					   	<p:outputLabel value="Bairro:" for="bairro"/>
-					   	<p:selectOneMenu id="bairro" value="#{cliente.endereco.codBairro}" >
-					   		<f:selectItem itemLabel="Selecione" itemValue="0"/>
-					   		<f:selectItems value="#{endereco.bairros}" var="bairro" itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}"/>
-					   	</p:selectOneMenu>
-					    <p:commandButton immediate="true" value="+" actionListener="#{endereco.openCadBairro}">
-					        <p:ajax event="dialogReturn" listener="#{endereco.hendleReturnBairros}" update="bairro" />
-					    </p:commandButton>
-			   		</h:panelGrid>
-				</p:fieldset>
-			   
-			   <p:panel style="border:0">
-			        <p:commandButton action="#{cliente.salvar}" value="Salvar" ajax="false"/>
-               		<p:commandButton value="Novo" action="#{cliente.salvar}" ajax="false"/>
-				</p:panel>
-			</ui:define>
-		</ui:composition>
-</h:form>
-</h:body>
+				</div>
+
+				<div class="input-group">
+					<h:selectOneRadio id="sexo" label="Sexo:"
+						value="#{cliente.pFisica.sexo}">
+						<f:selectItem itemValue="M" itemLabel="Masculino" />
+						<f:selectItem itemValue="F" itemLabel="Feminino" />
+					</h:selectOneRadio>
+				</div>
+
+				<label class="control-label " for="email"> UF Nascimento </label>
+				<div class="input-group">
+					<p:selectOneMenu id="UFNat" title="UF de onde nasceu"
+						value="#{cliente.pFisica.ufNatural}">
+						<f:selectItem itemValue="0" itemLabel="Selecione" />
+						<f:selectItems value="#{endereco.uf}" />
+					</p:selectOneMenu>
+				</div>
+				<label class="control-label " for="email"> Telefone </label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-phone-alt"></span>
+					</div>
+					<p:inputMask mask="(999)9999-9999" id="telefone"
+						value="#{cliente.pFisica.telefone}" />
+				</div>
+				<label class="control-label " for="email"> Celular </label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-phone-alt"></span>
+					</div>
+					<p:inputMask mask="(999)99999-9999" id="celular"
+						value="#{cliente.pFisica.celular}" />
+				</div>
+				<label class="control-label " for="email"> Observações </label>
+				<div class="input-group">
+					<p:inputTextarea id="obs" maxlength="180"
+						title="Anote uma observação deste cliete com no máximo 180 caracteres"
+						value="#{cliente.pFisica.observacao}" cols="40" />
+
+				</div>
+			</div>
+		</p:panel>
+
+		<clx:address beanCEP="#{cliente.endereco.cep}"
+			beanNumero="#{cliente.endereco.numero}"
+			beanTipoLog="#{cliente.endereco.tpLogradouro}"
+			beanLog="#{cliente.endereco.logradouro}"
+			beanUF="#{cliente.endereco.uf}"
+			beanCidade="#{cliente.endereco.cidade}"
+			beanBairro="#{cliente.endereco.bairro}"
+			beanComplemento="#{cliente.endereco.complemento}">
+		</clx:address>
+
+		<clx:buttonsCrud></clx:buttonsCrud>
+	</ui:define>
+</ui:composition>
+
 </html>
