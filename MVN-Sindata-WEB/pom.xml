@@ -128,7 +128,6 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.0.3.RELEASE</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>
