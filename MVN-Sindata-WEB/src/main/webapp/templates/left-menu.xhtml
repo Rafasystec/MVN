@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:sec="http://www.springframework.org/security/tags">
+     >
        
     <ui:composition>
     	<div id="sidebar-wrapper">
@@ -67,29 +67,29 @@
     			</li>
     			
 		        <li>
-		            <sec:authorize access="hasRole('ADMIN') and isAuthenticated()">
+		            
 		            	<a class="#{activeColaboradores}" href="#{request.contextPath}/colaboradores.jsf"><i class="fa fa-user"></i>COLABORADORES</a>
-		            </sec:authorize>
+		            
 		      	</li>
 		        <li>
-		        	<sec:authorize access="hasRole('ADMIN') and isAuthenticated()">
+		        	
 		            	<a class="#{activeServicos}" href="#{request.contextPath}/servicos.jsf"><i class="fa fa-cog"></i>SERVIÇOS</a>
-		        	</sec:authorize>    	
+		        	    	
 	            </li>
 	            <li>
-	            	<sec:authorize access="hasRole('ADMIN') or hasRole('COLAB') and isAuthenticated()">
+	            	
 		            	<a class="#{activeSolicitacaoOSE}" href="#{request.contextPath}/solicitacao-ose.jsf"><i class="fa fa-arrow-circle-up"></i>SOLICITAÇÃO DE OSE</a>
-		        	</sec:authorize>
+		        	
 				</li>		      	
 		      	<li>
-		      		<sec:authorize access="hasRole('ADMIN') and isAuthenticated()">
+		      		
 		            	<a class="#{activeRecebimentoOSE}" href="#{request.contextPath}/recebimento-ose.jsf"><i class="fa fa-arrow-circle-down"></i>RECEBIMENTO DE OSE</a>
-		            </sec:authorize>
+		            
 		      	</li>
 		      	<li>
-		      		<sec:authorize access="hasRole('ADMIN') or hasRole('FINAN') and isAuthenticated()">
+		      		
 		            	<a class="#{activePagamentoOSE}" href="#{request.contextPath}/pagamento-ose.jsf"><i class="fa fa-usd"></i>PAGAMENTO DE OSE</a>
-		            </sec:authorize>
+		            
 		      	</li>
 		      	<li>
 		      		<a class="tree-toggle nav-header" href="#">

@@ -33,7 +33,7 @@
 						  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    	<li><a href="usuarios.jsf"><i class="fa fa-user-plus" aria-hidden="true"></i>USUÁRIOS</a></li>						    	
 						    	<li role="separator" class="divider"></li>
-						    	<li><p:commandLink action="#{authenticator.logout}">
+						    	<li><p:commandLink action="#">
 			                			<i class="fa fa-sign-out"></i>
 			                			SAIR
 			                		</p:commandLink>
@@ -45,7 +45,7 @@
 	                <li style="border-left-color:#E6E9ED;border-left-style:solid;border-left-width:1px;">
 	                	<p:commandLink id="lnk-sair"
 	                		title="Sair?"
-	                		action="#{authenticator.logout}">
+	                		action="#">
 	                		<i class="fa fa-sign-out"></i>
 	                	</p:commandLink>
 	                	<p:tooltip for="lnk-sair" trackMouse="true" />

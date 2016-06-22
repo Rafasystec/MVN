@@ -68,10 +68,10 @@
 }
 .menu-top li > a:hover,
 .menu-top li > a:focus {
-	color: #26C281;
+	color: #C26E26;
 }
 .menu-top li > a.active {
-	color: #26C281;
+	color: #C26E26;
 }
 /*
 .menu-top li > a.active:before {
