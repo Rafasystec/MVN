@@ -170,4 +170,9 @@ public class BeanPopBairro extends SuperBean{
 		}
 		this.params = params;
 	}
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -96,5 +96,11 @@ public class BeanCliente extends SuperBean {
 		System.out.println("Metodo teste");
 		return null;
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

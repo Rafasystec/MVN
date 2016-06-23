@@ -14,15 +14,7 @@
 	<ui:param name="pageTitle" value="Lojas" />
 
 	<ui:define name="body">
-		<clx:buttonsCrud id="btnsUp" actionSave="#{loja.salvar}" />
-		
-		
-		<p:toolbar>
-			<f:facet name="left">
-				<p:commandButton value="Salvar Tool tip" action="#{loja.salvar}" ajax="false"/>
-			</f:facet>
-		</p:toolbar>
-		
+		<clx:buttonsCrud id="btnsUp" bean="#{loja}" />
 		<p:panel header="Cadastro de lojas">
 			<h:panelGrid columns="2">
 

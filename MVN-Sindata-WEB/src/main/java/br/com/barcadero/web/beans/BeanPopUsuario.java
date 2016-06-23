@@ -63,4 +63,10 @@ public class BeanPopUsuario extends SuperBean {
 		this.fcdUsuario = fcdUsuario;
 	}
 
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

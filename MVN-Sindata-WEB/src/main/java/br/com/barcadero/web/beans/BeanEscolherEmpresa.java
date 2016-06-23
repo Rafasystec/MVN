@@ -150,6 +150,12 @@ public class BeanEscolherEmpresa extends SuperBean {
 	public void setCodLoja(long codLoja) {
 		this.codLoja = codLoja;
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

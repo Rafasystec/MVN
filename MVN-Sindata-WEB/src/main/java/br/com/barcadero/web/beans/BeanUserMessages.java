@@ -93,4 +93,10 @@ public class BeanUserMessages extends SuperBean {
 		this.paramEmail = paramConsultar;
 	}
 
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

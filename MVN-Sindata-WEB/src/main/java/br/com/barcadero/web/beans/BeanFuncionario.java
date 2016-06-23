@@ -56,4 +56,11 @@ public class BeanFuncionario extends SuperBean {
 		this.funcionario = funcionario;
 	}
 
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -15,7 +15,7 @@ import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.attributes.Attributs;
 
-public abstract class SuperBean  implements Serializable{
+public abstract class SuperBean  implements Serializable, IBeanClass{
 	
 	private static final long serialVersionUID = -7940750516142819573L;
 	

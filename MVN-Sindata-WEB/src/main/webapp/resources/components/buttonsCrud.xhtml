@@ -5,49 +5,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 	<composite:interface>
-		<composite:attribute name="actionSave"
-			shortDescription="Ação de salvar" default="#" displayName="Salvar" />
-		<composite:attribute name="actionNew"
-			shortDescription="Ação do bean que ira preparar o forma para um novo registro"
-			default="#" />
-		<composite:attribute name="actionExclude"
-			shortDescription="Ação do bean que ira excluir o registro selecionado"
-			default="#" />
-		<composite:attribute name="actionPrint"
-			shortDescription="Comandar impressão dos dados do forme caso existam"
-			default="#" />
-		<composite:attribute name="actionCancel"
-			shortDescription="Cancelar ação"
-			default="#" />
-		<composite:attribute name="actionBack"
-			shortDescription="Ação de voltar para a página anterior"
-			default="#" />
-		<composite:attribute name="actionFind"
-			shortDescription="Procurar pelo registro"
-			default="#" />
+	
+		<composite:attribute name="bean"
+			shortDescription="Bean para ser passado" type="br.com.barcadero.web.beans.IBeanClass"  displayName="Passar o componente bean" />
 		<composite:attribute name="id"
 			shortDescription="ID para o componente" default="id" />
 	</composite:interface>
-
 	<composite:implementation>
-	<p:toolbar>
-			<f:facet name="left">
-				<p:commandButton value="Salvar Tool tip compo" action="#{loja.salvar}" ajax="false"/>
-			</f:facet>
-		</p:toolbar>
 		<p:toolbar>
 			<f:facet name="left">
-				<p:commandButton id="#{cc.attrs.id}-new"  action="#{cc.attrs.actionNew}" value="Novo" title="Novo registro" icon="ui-icon-document" ajax="false"/>
+				<p:commandButton id="#{cc.attrs.id}-new"  action="#{cc.attrs.bean.novo}" value="Novo" title="Novo registro" icon="ui-icon-document" ajax="false"/>
 				<p:tooltip for="#{cc.attrs.id}-new" trackMouse="true" />
-				<p:commandButton id="#{cc.attrs.id}-save" action="#{cc.attrs.actionSave}" value="Salvar" title="Salvar registro" icon="ui-icon-folder-open" ajax="false"/>
+				<p:commandButton id="#{cc.attrs.id}-save" action="#{cc.attrs.bean.salvar}" value="Salvar" title="Salvar registro" icon="ui-icon-folder-open" ajax="false"/>
 				<p:tooltip for="#{cc.attrs.id}-save" trackMouse="true" />
 				<span class="ui-separator"> <span
 					class="ui-icon ui-icon-grip-dotted-vertical" />
 				</span>
 
-				<p:commandButton id="#{cc.attrs.id}-trash"  action="#{cc.attrs.actionExclude}" title="Excluir registro corrente" icon="ui-icon-trash" ajax="false"/>
+				<p:commandButton id="#{cc.attrs.id}-trash"  action="#{cc.attrs.bean.deletar}" title="Excluir registro corrente" icon="ui-icon-trash" ajax="false"/>
 				<p:tooltip for="#{cc.attrs.id}-trash" trackMouse="true" />
-				<p:commandButton id="#{cc.attrs.id}-print" action="#{cc.attrs.actionPrint}" title="Imprimir" icon="ui-icon-print" ajax="false"/>
+				<p:commandButton id="#{cc.attrs.id}-print" action="#{cc.attrs.bean.imprimir}" title="Imprimir" icon="ui-icon-print" ajax="false"/>
 				<p:tooltip for="#{cc.attrs.id}-print" trackMouse="true" />
 			</f:facet>
 			

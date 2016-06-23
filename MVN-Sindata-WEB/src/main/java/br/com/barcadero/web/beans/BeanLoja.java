@@ -127,4 +127,10 @@ public class BeanLoja extends SuperBean {
 		return ruleLoja.getLojasDaEmpresa(getCodEmpresa());
 	}
 
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

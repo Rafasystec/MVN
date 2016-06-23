@@ -51,4 +51,10 @@ public class BeanMenuHorizontal extends SuperBean {
 		}
 	}
 
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

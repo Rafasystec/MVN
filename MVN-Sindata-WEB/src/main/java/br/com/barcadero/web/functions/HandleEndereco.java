@@ -174,5 +174,11 @@ public class HandleEndereco extends SuperBean{
 		HandleOpenEnderDialog.openCadBairro(String.valueOf(getCodCidade()));
 		System.out.println("open popup bairro");
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

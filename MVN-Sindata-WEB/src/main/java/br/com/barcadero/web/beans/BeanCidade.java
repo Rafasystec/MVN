@@ -160,4 +160,10 @@ public class BeanCidade extends SuperBean{
 	public List<Estado> getEstados() throws Exception {
 		return facadeEstado.findAllEstados();
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
