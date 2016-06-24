@@ -23,6 +23,11 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 	abstract public String alterar()throws Exception;
 	abstract public String deletar()throws Exception;
 	abstract public String novo()throws Exception;
+	
+	public String validar() {
+		return "";
+	}
+	
 	private SessionContext session;
 	@SuppressWarnings("unused")
 	private HttpSession httpSession;
@@ -86,6 +91,10 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 	
 	protected Empresa getEmpresaLogada() {
 		return getSession().getEmpresaLogada();
+	}
+	
+	protected void mensagemInfor(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 	}
 	
 }

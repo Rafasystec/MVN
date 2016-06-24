@@ -59,6 +59,10 @@ Pace.on("done", function() {
 	lightbox.removeClass("ui-widget-overlay");
 	lightbox.addClass("ui-lightbox ui-widget ui-helper-hidden ui-corner-all ui-shadow");
 });
+/* For tooltip presantation */
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
 
 /*
 //patch to fix a problem that the context menu disappears after update

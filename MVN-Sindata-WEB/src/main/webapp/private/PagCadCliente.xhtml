@@ -10,12 +10,12 @@
 	xmlns:p="http://primefaces.org/ui" template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
-	<ui:param name="pageIcon" value="tachometer" />
-	<ui:param name="pageTitle" value="Clientes" />
+	<ui:param name="pageIcon" 		 value="tachometer" />
+	<ui:param name="pageTitle" 		 value="Clientes" />
 
 	<ui:define name="body">
 
-		<clx:buttonsCrud></clx:buttonsCrud>
+		<clx:buttonsCrud id="btnsUp" bean="#{cliente}"></clx:buttonsCrud>
 		<p:panel header="Cadastro de Clientes">
 			<div class="form-group ">
 				<label class="control-label " for="email"> Nome </label>
@@ -112,17 +112,10 @@
 			</div>
 		</p:panel>
 
-		<clx:address beanCEP="#{cliente.endereco.cep}"
-			beanNumero="#{cliente.endereco.numero}"
-			beanTipoLog="#{cliente.endereco.tpLogradouro}"
-			beanLog="#{cliente.endereco.logradouro}"
-			beanUF="#{cliente.endereco.uf}"
-			beanCidade="#{cliente.endereco.cidade}"
-			beanBairro="#{cliente.endereco.bairro}"
-			beanComplemento="#{cliente.endereco.complemento}">
+		<clx:address endereco="#{cliente.endereco}"	 >
 		</clx:address>
 
-		<clx:buttonsCrud></clx:buttonsCrud>
+		<clx:buttonsCrud id="btnsButtom" bean="#{cliente}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>
 

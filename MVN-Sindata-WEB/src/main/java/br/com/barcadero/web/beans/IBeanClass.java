@@ -7,4 +7,5 @@ public interface IBeanClass {
 	abstract public String deletar()throws Exception;
 	abstract public String novo()throws Exception;
 	abstract public String imprimir()throws Exception;
+	abstract public String validar()throws Exception;
 }
