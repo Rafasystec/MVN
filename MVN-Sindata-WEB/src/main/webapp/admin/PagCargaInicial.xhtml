@@ -11,8 +11,8 @@
 		<title>Carga Inicial</title>
 	</h:head>
 	<h:body>
-		<ui:composition template="/index.xhtml">
-			<ui:define name="conteudo">
+		<ui:composition template="../templates/main.xhtml">
+			<ui:define name="body">
 				<h3>Cargas de algumas tabelas</h3>
 				<h:panelGrid columns="1">
 					<p:commandButton value="Carregar tabela Estado" action="#{carga.carregarEstados}"/>

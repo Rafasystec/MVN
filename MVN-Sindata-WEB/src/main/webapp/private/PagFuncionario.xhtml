@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"	
+>
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:clx="http://java.sun.com/jsf/composite/components"
-	xmlns:p="http://primefaces.org/ui" template="../templates/main.xhtml">
+	 template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
 	<ui:param name="pageIcon" 		 value="tachometer" />
@@ -16,7 +18,7 @@
 	<ui:define name="body">
 		<clx:buttonsCrud id="btnsUp" bean="#{funcionario}"></clx:buttonsCrud>
 		<p:panel header="Funcionários">
-			<h:panelGrid columns="2">
+			<p:panelGrid styleClass="noBorder" columns="2">
 				<p:outputLabel id="lblNome" value="Nome:" for="txtNome" />
 				<p:inputText id="txtNome"
 					value="#{funcionario.funcionario.pessoaFisica.nome}"
@@ -50,10 +52,10 @@
 					alt="Informe o CPF"
 					value="#{funcionario.funcionario.pessoaFisica.cpf}" size="11"
 					maxlength="11" required="true" requiredMessage="CPF é obrigatório" />
-			</h:panelGrid>
+			</p:panelGrid>
 			<br />
 			<fieldset>
-				<h:panelGrid columns="2">
+				<p:panelGrid styleClass="noBorder" columns="2">
 					<p:outputLabel id="lblPis" value="PIS/COFINS" />
 					<p:inputText id="txtPis" value="#{funcionario.funcionario.pis}" />
 					<p:outputLabel value="Dt. Admissão:" for="dtAdmissao" />
@@ -66,14 +68,14 @@
 					<p:outputLabel id="lblSalario" value="Salário inicial" />
 					<p:inputText id="txtSalario"
 						value="#{funcionario.funcionario.salarioInicial}" />
-				</h:panelGrid>
+					
+					<p:outputLabel id="lblObs" value="Observações:" />	
+					<p:inputTextarea id="txtObservacoes"
+					value="#{funcionario.funcionario.observacoes}" placeholder="Observações para este Funcionário"/>
+				</p:panelGrid>
 			</fieldset>
 			<br />
-			<fieldset>
-				<legend>Observações</legend>
-				<p:inputTextarea id="txtObservacoes"
-					value="#{funcionario.funcionario.observacoes}" />
-			</fieldset>
+			
 		</p:panel>
 		<clx:address endereco="#{funcionario.endereco}"	 />
 		<clx:buttonsCrud id="btnsButtoms" bean="#{funcionario}"></clx:buttonsCrud>
