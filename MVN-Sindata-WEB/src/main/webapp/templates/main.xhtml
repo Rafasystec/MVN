@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+ 
+    <h:head>
+        <f:facet name="first">            
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        	<meta name="viewport" content="width=device-width, initial-scale=1" />
+        	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/Imagens/faviconNautilus.png"/>
+        	<title>Nautilus - #{pageTitle}</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="css/normalize.css" />
+			<h:outputStylesheet name="css/bootstrap.css" />
+			<h:outputStylesheet name="css/bootflat.min.css" />
+			<h:outputStylesheet name="css/pace-theme.css" />
+			<h:outputStylesheet name="css/simple-sidebar.css" />
+			<h:outputStylesheet name="css/default.css" />
+            <h:outputStylesheet name="css/main.css" />
+                        
+            <!--<h:outputScript name="js/jquery-2.1.4.min.js" target="body" />-->
+			<h:outputScript name="js/bootstrap.min.js" target="body" />
+			<h:outputScript name="js/autoNumeric.min.js" target="body" />			
+        </f:facet>
+        
+        <f:facet name="last">
+			<h:outputScript name="js/pace.min.js" />
+        	<h:outputScript name="js/scose.js" />
+        	<ui:insert name="js" />
+        	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css"></link>
+ 			<h:outputStylesheet name="css/font-awesome.css" /> 			
+        </f:facet>
+        	    
+    </h:head>
+              
+    <h:body>
+    	
+    	<p:lightBox width="100%" height="100%" widgetVar="lightbox" />
+    	
+    	<div id="lightbox" class="ui-widget-overlay" style="width:100%;height:100%;z-index:1001;"></div>
+    	
+    	<div id="wrapper">
+	    	<ui:include src="left-menu.xhtml" /> 
+		   	<div id="page-content-wrapper">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                    	<div class="row">
+		        				<ui:include src="header.xhtml" />
+		        				<ui:include src="content.xhtml" />
+		        			</div>
+		        		</div>        	        
+			   		</div>
+		   		</div>
+		   	</div>
+		</div>
+				
+    </h:body>
+</html>

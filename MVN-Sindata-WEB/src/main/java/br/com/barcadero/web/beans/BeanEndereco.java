@@ -5,6 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Estado;
 
@@ -92,5 +93,8 @@ public class BeanEndereco {
 		return EnumUF.values();
 	}
 
+	public EnumTipoLograd[] getTipoLogradouro() {
+		return EnumTipoLograd.values();
+	}
 	
 }

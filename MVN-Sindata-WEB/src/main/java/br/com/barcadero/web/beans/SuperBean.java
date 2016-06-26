@@ -15,7 +15,7 @@ import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.attributes.Attributs;
 
-public abstract class SuperBean  implements Serializable{
+public abstract class SuperBean  implements Serializable, IBeanClass{
 	
 	private static final long serialVersionUID = -7940750516142819573L;
 	
@@ -23,6 +23,11 @@ public abstract class SuperBean  implements Serializable{
 	abstract public String alterar()throws Exception;
 	abstract public String deletar()throws Exception;
 	abstract public String novo()throws Exception;
+	
+	public String validar() {
+		return "";
+	}
+	
 	private SessionContext session;
 	@SuppressWarnings("unused")
 	private HttpSession httpSession;
@@ -86,6 +91,10 @@ public abstract class SuperBean  implements Serializable{
 	
 	protected Empresa getEmpresaLogada() {
 		return getSession().getEmpresaLogada();
+	}
+	
+	protected void mensagemInfor(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 	}
 	
 }

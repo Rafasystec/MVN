@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context reloadable="true" >
-		 <ResourceLink name="jdbc/sindata"
-	 				global="jdbc/sindata"
+		 <ResourceLink name="jdbc/nautilus"
+	 				global="jdbc/nautilus"
 	 				auth="Container"
 	 				type="javax.sql.DataSource" />
 </Context>

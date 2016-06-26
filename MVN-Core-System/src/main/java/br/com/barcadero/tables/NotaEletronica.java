@@ -8,14 +8,14 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import br.com.barcadero.core.enums.nfe.EnumNFeFinalidadeEmissao;
-import br.com.barcadero.core.enums.nfe.EnumNFeIdDestino;
-import br.com.barcadero.core.enums.nfe.EnumNFeIndPresencaComprador;
-import br.com.barcadero.core.enums.nfe.EnumNFeTipoNota;
-import br.com.barcadero.core.enums.nfe.EnumNFeTpAmbiente;
-import br.com.barcadero.core.enums.nfe.EnumNFeTpDANFE;
-import br.com.barcadero.core.enums.nfe.EnumNFeTpEmissao;
-import br.com.barcadero.core.enums.nfe.EnumNFeTpProcessoEmissao;
+import br.com.barcadero.core.enums.EnumNFeFinalidadeEmissao;
+import br.com.barcadero.core.enums.EnumNFeIdDestino;
+import br.com.barcadero.core.enums.EnumNFeIndPresencaComprador;
+import br.com.barcadero.core.enums.EnumNFeTipoNota;
+import br.com.barcadero.core.enums.EnumNFeTpAmbiente;
+import br.com.barcadero.core.enums.EnumNFeTpDANFE;
+import br.com.barcadero.core.enums.EnumNFeTpEmissao;
+import br.com.barcadero.core.enums.EnumNFeTpProcessoEmissao;
 
 @Entity
 @Table(name="NOTA_ELETRONICA")

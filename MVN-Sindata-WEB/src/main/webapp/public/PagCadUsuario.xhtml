@@ -1,76 +1,79 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
- <h:head >
- 	<title>SindataPDV - Usuários</title>
- 	<meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="Rafael Rocha - Baseado em um templete do BootStrap" />
-    <h:outputStylesheet name="main.css" library="css" />
-    <h:outputStylesheet name="venda.css" library="css" />
-    <!-- Bootstrap Core CSS -->
-    <h:outputStylesheet name="bootstrap.min.css" library="css" />
-    <!-- MetisMenu CSS -->
-    <h:outputStylesheet name="metisMenu.min.css" library="css" />
-    <!-- Timeline CSS -->
-    <h:outputStylesheet name="timeline.css" library="css" />
-    <!-- Custom CSS -->
-    <h:outputStylesheet name="sb-admin-2.css" library="css" />
-    <!-- Morris Charts CSS -->
-    <h:outputStylesheet name="morris.css" library="css" />
-    <!-- Custom Fonts -->
-    <h:outputStylesheet name="font-awesome.min.css" library="css" />
-    
-  </h:head>
-  
-  <h:body>
-	  <f:view>	  
-	    <div>
-	    	<div class="row">
-	    	
-			<p:panel header="Novo Usuário">	  
-  				<div class="col-md-4">
-					 <h:form id="form">
-						<h:panelGrid columns="2">
-							<p:outputLabel value="Nome:" for="nome" />
-							<p:inputText id="nome" value="#{cadUsuario.usuario.nome}"/>
-							<p:outputLabel value="E-mail:" for="email" />
-							<p:inputText id="email" value="#{cadUsuario.usuario.email}"/>
-							<p:outputLabel value="Senha" for="senha" />
-							<p:password id="senha" value="#{cadUsuario.usuario.passWord}"/>
-							<p:outputLabel value="Confirme" for="confirme" />
-							<p:password id="confirme" value="#{cadUsuario.confirm}"/>
-						</h:panelGrid>
-						 <i class="divider"></i>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="input-group">
-									<p:commandLink action="#{cadUsuario.salvar}" styleClass="btn btn-info" >
-										<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> 
-										<b>Salvar</b>
-									</p:commandLink>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>SindataPDV - Usuários</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author"
+		content="Rafael Rocha - Baseado em um templete do BootStrap" />
+	<f:facet name="middle">
+		<h:outputStylesheet name="css/normalize.css" />
+		<h:outputStylesheet name="css/bootstrap.css" />
+		<h:outputStylesheet name="css/bootflat.min.css" />
+		<h:outputStylesheet name="css/pace-theme.css" />
+		<h:outputStylesheet name="css/simple-sidebar.css" />
+		<h:outputStylesheet name="css/default.css" />
+		<h:outputStylesheet name="css/main.css" />
+
+		<!--<h:outputScript name="js/jquery-2.1.4.min.js" target="body" />-->
+		<h:outputScript name="js/bootstrap.min.js" target="body" />
+		<h:outputScript name="js/autoNumeric.min.js" target="body" />
+	</f:facet>
+
+</h:head>
+
+<h:body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title">Novo usuário MASTER</h2>
+					</div>
+					<div class="panel-body">
+						<h:form id="frmCadUser">
+							 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+							
+							<h:panelGrid columns="2">
+								<p:outputLabel value="Nome:" for="nome" />
+								<p:inputText id="nome" value="#{cadUsuario.usuario.nome}"
+									required="true" requiredMessage="Informe o nome para o Usuário" />
+								<p:outputLabel value="E-mail:" for="email" />
+								<p:inputText id="email" value="#{cadUsuario.usuario.email}"
+									required="true" requiredMessage="Informe uma conta de e-mail" />
+								<p:outputLabel value="Senha:" for="senha" />
+								<p:password id="senha" value="#{cadUsuario.usuario.passWord}"
+									required="true" requiredMessage="Informe a senha" />
+								<p:outputLabel value="Confirme:" for="confirme" />
+								<p:password id="confirme" value="#{cadUsuario.confirm}"
+									required="true" requiredMessage="Informe o nome para o Usuário" />
+							</h:panelGrid>
+							<i class="divider"></i>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="input-group">
+										
+										<br />
+										<p:commandLink action="#{cadUsuario.salvar}"
+											styleClass="btn btn-info">
+											<i class="fa fa-user-plus" aria-hidden="true"></i>
+											<b>Salvar</b>
+										</p:commandLink>
+										
+									</div>
 								</div>
 							</div>
-						</div>
-					</h:form>
+						</h:form>
+					</div>
 				</div>
-				</p:panel>
 			</div>
 		</div>
-		</f:view>
-	</h:body>
-	 <!-- Bootstrap Core JavaScript -->
-    <h:outputScript name="bootstrap.min.js" library="js"/>
-    <!-- Metis Menu Plugin JavaScript -->
-    <h:outputScript name="metisMenu.min.js" library="js"/>
-    <!-- Morris Charts JavaScript -->
-    <h:outputScript name="raphael-min.js" library="js"/>
-    <!-- Custom Theme JavaScript -->
-    <h:outputScript name="sb-admin-2.js" library="js"/>
+	</div>
+</h:body>
 </html>

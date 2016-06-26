@@ -1,35 +1,49 @@
 <!DOCTYPE html>
-<html
- xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-	<h:head>
-		<meta charset="UTF-8" />
-		<title>Insert title here</title>
-	</h:head>
-	<h:body>
-		<ui:composition template="/index.xhtml">
-			<ui:define name="conteudo">
-				<p:panel header="Configurações do Caixa">
-					<h:panelGrid columns="4">
-						<p:outputLabel value="Número Caixa:" for="cdCaixa"/>
-						<p:inputText id="cdCaixa" value="#{configCaixa.caixa.cdCaixa}" required="true"/>
-						<p:outputLabel value="Tipo de Nota:" for="tpNota"/>
-						<p:selectOneMenu value="#{configCaixa.caixa.tipoNota}" id="tpNota">
-							<f:selectItems value="#{configCaixa.tiposNota}" var="tpNota" itemLabel="#{tpNota.label}"/>
-						</p:selectOneMenu>
-					</h:panelGrid>
-					<h:panelGrid>
-						<p:commandButton value="Salvar" action="#{configCaixa.salvar}" />
-					</h:panelGrid>
-					<div style="float: right;">
-						<p:commandButton value="Excluir"/>
-					</div>
-				</p:panel>
-			</ui:define>
-		</ui:composition>
-	</h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<!-- http://localhost:8082/Nautilus/admin/PagConfigCaixa.xhtml -->
+<ui:composition template="../templates/main.xhtml">
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="tachometer" />
+	<ui:param name="pageTitle" value="Caixa" />
+
+
+	<ui:define name="body">
+		<p:panel header="Configurações do Caixa">
+			<p:panelGrid columns="2" cellpadding="5" style="border:0">
+				<p:outputLabel value="Número Caixa:" for="cdCaixa" />
+				<p:inputText id="cdCaixa" value="#{configCaixa.caixa.cdCaixa}"
+					required="true" />
+				<p:outputLabel value="Tipo de Nota:" for="tpNota" />
+				<p:selectOneMenu value="#{configCaixa.caixa.tipoNota}" id="tpNota">
+					<f:selectItems value="#{configCaixa.tiposNota}" var="tpNota"
+						itemLabel="#{tpNota.label}" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+		</p:panel>
+		<p:panel header="Configurações para o CF-e">
+
+			<p:panelGrid columns="2" id="matchGrid" cellpadding="5">
+				<p:outputLabel id="lblCodAtivacao" value="Código de Ativação:"
+					for="txtCodAtivacao" />
+				<p:password id="txtCodAtivacao" value="#" match="txtConfAtivacao"
+					label="Password 1" required="true"
+					requiredMessage="Código de ativação deve ser informado!" />
+
+				<h:outputLabel for="txtConfAtivacao" value="Confirme Cód. Ativação:" />
+				<p:password id="txtConfAtivacao" value="#" label="Password 2"
+					required="true" requiredMessage="Confirme o codigo de ativação!" />
+				<h:outputLabel for="cboModulo" value="Módulo:" />
+				<p:selectOneMenu>
+					<f:selectItem>Ola</f:selectItem>
+				</p:selectOneMenu>
+			</p:panelGrid>
+
+		</p:panel>
+	</ui:define>
+</ui:composition>
 </html>

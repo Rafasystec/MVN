@@ -116,7 +116,8 @@ public class BeanEscolherEmpresa extends SuperBean {
 	public String entrar() throws Exception{
 		
 		System.out.println("Entrar no sistema pela empresa!");
-		Empresa emp = null;
+		Empresa emp 	= null;
+		Loja lojaLog	= null;
 		for (Empresa empresa : getEmpresa()) {
 			if(empresa.getCodigo() == getCodEmp()){
 				emp = empresa;
@@ -125,6 +126,19 @@ public class BeanEscolherEmpresa extends SuperBean {
 		if(emp == null){
 			return null;
 		}
+		
+		for (Loja loja : getLojas()) {
+			if(loja.getCodigo() == getCodLoja()){
+				lojaLog = loja;
+				continue;
+			}
+		}
+		
+		if(lojaLog == null){
+			return null;
+		}
+		
+		getSession().setLojaLogada(lojaLog);
 		getSession().setEmpresa(emp);
 		return "index";
 	}
@@ -135,6 +149,12 @@ public class BeanEscolherEmpresa extends SuperBean {
 
 	public void setCodLoja(long codLoja) {
 		this.codLoja = codLoja;
+	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

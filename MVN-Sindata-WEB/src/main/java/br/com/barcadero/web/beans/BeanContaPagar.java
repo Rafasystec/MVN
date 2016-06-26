@@ -63,6 +63,12 @@ public class BeanContaPagar extends SuperBean {
 	public void setTipoConta(EnumTipoContaPagar[] tipoConta) {
 		this.tipoConta = tipoConta;
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

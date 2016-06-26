@@ -269,5 +269,11 @@ public class BeanEmpresa extends SuperBean {
 	private void incluirLojaMatriz(PessoaJuridica pj, Empresa empresa) throws Exception{
 		ruleLoja.inserirLojaMatriz(getSession().getUsuarioLogado(), pj,empresa);
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

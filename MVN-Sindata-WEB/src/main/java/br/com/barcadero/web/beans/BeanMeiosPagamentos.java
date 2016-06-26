@@ -104,5 +104,11 @@ public class BeanMeiosPagamentos extends SuperBean {
 		this.meiosSelecionados = meiosSelecionados;
 	}
 
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

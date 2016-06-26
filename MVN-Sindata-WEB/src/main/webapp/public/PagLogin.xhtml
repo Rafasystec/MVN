@@ -6,47 +6,83 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 >
+
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Login do Sistema</title>
+    <meta charset="utf-8" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>WEB E.R.P</title>
+
+ 	<h:outputStylesheet name="main.css" library="css" />
+    <h:outputStylesheet name="venda.css" library="css" />
+    <!-- Bootstrap Core CSS -->
+    <h:outputStylesheet name="bootstrap.min.css" library="css" />
+    <!-- MetisMenu CSS -->
+    <h:outputStylesheet name="metisMenu.min.css" library="css" />
+    <!-- Timeline CSS -->
+    <h:outputStylesheet name="timeline.css" library="css" />
+    <!-- Custom CSS -->
+    <h:outputStylesheet name="sb-admin-2.css" library="css" />
+    <!-- Morris Charts CSS -->
+    <h:outputStylesheet name="morris.css" library="css" />
+    <!-- Custom Fonts -->
+    <h:outputStylesheet name="font-awesome.min.css" library="css" />
+
 </h:head>
+
 <h:body>
- <h:form id="frmLogin">
-	<p:messages showDetail="true"/>
-			<div style="float: none; top:30px;" align="center">
-				<table>
-					<tr>
-						<td>
-							<p:outputLabel value="E-mail:" for="txtUsuario"/>
-						</td>
-						<td>
-							<p:inputText id="txtUsuario" value="#{usuario.login}"/>
-						</td>
-						<td rowspan="2">
-							<img src="../resources/Imagens/cadeado.bmp" alt="Figura de login" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p:outputLabel value="Senha:" for="txtSenha"/>
-						</td>
-						<td>
-							<p:password id="txtSenha" value="#{usuario.senha}"/>
-						</td>
-					</tr>
-					<tr >
-						<td colspan="2">
-							<p:commandButton id="btnLogin" value="Logar" action="#{usuario.logar}" ajax="false"/>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div style="float: right;">
-				<a href="PagCadUsuario.xhtml">Quero me cadastrar.</a>
-			</div>
-			<div align="center">
-				<a href="http://barcadero.com.br"><img alt="Home page Barcadero" src="../resources/Imagens/logoBarcadero.png" /></a>
-			</div>
-		 </h:form>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Por favor se identifique</h2>
+                    </div>
+                    <div class="panel-body">
+                        <h:form id="frmLogin">
+                        <p:messages showDetail="true"/>
+                            <fieldset>
+                                <div class="form-group">
+                                	<p:inputText id="txtUsuario" styleClass="form-control" name="email" type="email" value="#{usuario.login}" placeholder="E-mail"/>
+                                </div>
+                                <div class="form-group">
+                                	<p:password id="txtSenha" styleClass="form-control" placeholder="Password" value="#{usuario.senha}"/>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me" >Mantenha-me logado</input>
+                                    </label>
+                                </div>
+                             
+                                <!-- Change this to a button or input when using this as a form -->
+                                <p:commandButton styleClass="btn btn-lg btn-success btn-block" id="btnLogin" value="Acessar" action="#{usuario.logar}" ajax="false"/>
+                            </fieldset>
+                             	<br />
+                             	<div class="form-group">
+         						 	<p:commandButton styleClass="btn btn-md btn-primary btn-block" id="btnExperimentar" value="Experimentar o sistema" action="cadUsuario" ajax="false"/>
+         						</div>
+         					
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+   <!-- Bootstrap Core JavaScript -->
+    <h:outputScript name="bootstrap.min.js" library="js"/>
+    <!-- Metis Menu Plugin JavaScript -->
+    <h:outputScript name="metisMenu.min.js" library="js"/>
+    <!-- Morris Charts JavaScript -->
+    <h:outputScript name="raphael-min.js" library="js"/>
+    <!-- Custom Theme JavaScript -->
+    <h:outputScript name="sb-admin-2.js" library="js"/>
+
 </h:body>
+
 </html>

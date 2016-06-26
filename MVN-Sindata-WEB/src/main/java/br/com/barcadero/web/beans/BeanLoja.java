@@ -79,6 +79,7 @@ public class BeanLoja extends SuperBean {
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub
 		try {
+			System.out.println("Salvar method involked");
 			pj.setDtUltAlteracao(new Date());
 			ender.setPessoa(pj);
 			List<Endereco> listEnder = new ArrayList<Endereco>();
@@ -120,6 +121,16 @@ public class BeanLoja extends SuperBean {
 
 	public void setCodEmpresa(long codEmpresa) {
 		this.codEmpresa = codEmpresa;
+	}
+	
+	public List<Loja> getLojasPorEmpresa() throws Exception {
+		return ruleLoja.getLojasDaEmpresa(getCodEmpresa());
+	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

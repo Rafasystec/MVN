@@ -1,60 +1,68 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Cadastro de Cidades</title>
-</h:head>
-<h:body>
-	<ui:composition template="/index.xhtml">
-	<ui:define name="conteudo">
-		<h:form id="cadCidades">
-			<p:growl id="msg" showDetail="true" sticky="true"></p:growl>
-		<p:panel header="Cadastro de Municípios">
-			<p:panelGrid columns="1">
-				<!-- Panel do butoes -->
-				<p:panelGrid columns="6">
-					<p:commandButton value="Salvar" action="#{beanCidade.inserir}" update="grid" />
-					<p:commandButton value="Consultar" update="grid"/>
-				</p:panelGrid>
-				
-				<!-- Panel do formulario -->
-				<p:panelGrid columns="4">
-					<p:outputLabel value="Descrição:" for="descricao"/>
-					<p:inputText id="descricao" required="true" value="#{beanCidade.descricao}">
-						<f:validateLength minimum="3" />
-					</p:inputText>
-					<p:outputLabel value="Selecione a UF:" for="uf"/>
-					<p:selectOneMenu id="uf" required="true" value="#{beanCidade.codEstado}" >
-						<f:selectItem itemValue="0" itemLabel="Selecione uma UF"/>
-						<f:selectItems value="#{beanCidade.estados}" var="estados" itemValue="#{estados.codigo}" itemLabel="#{estados.descricao}"/>
-						<p:ajax event="change" update="grid" />
-					</p:selectOneMenu>
-					<p:outputLabel value="Cód. IBGE:" for="ibge"/>
-					<p:inputText id="ibge" required="true" value="#{beanCidade.codIbge}"/>
-				</p:panelGrid>	
-				<p:dataTable id="grid" var="cidades" 	value="#{beanCidade.cidades}" paginator="true" rows="10">
-					<p:column headerText="Descrição">
-						<h:outputText value="#{cidades.descricao}" />
-					</p:column>
-					<p:column headerText="Cód. IBGE">
-						<h:outputText value="#{cidades.codIbge}" />
-					</p:column>
-					<p:column headerText="Data Cadastro">
-						<h:outputText value="#{cidades.dtCadastro.time}" >
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:outputText>
-					</p:column>
-				</p:dataTable>
-			</p:panelGrid>
-			</p:panel>
-		</h:form>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="/templates/dialog.xhtml">
+
+	<ui:param name="pageTitle" value="CIDADES" />
+
+	<ui:define name="jsDialog">
+		<h:outputScript name="js/usuario.js" />
 	</ui:define>
-	</ui:composition></h:body>
+
+	<ui:define name="bodyDialog">
+	
+			<p:growl id="msg" showDetail="true" sticky="true"></p:growl>
+			<p:panel header="Cadastro de Municípios">
+				<p:panelGrid columns="1">
+					<!-- Panel do butoes -->
+					<p:panelGrid columns="6">
+						<p:commandButton value="Salvar" action="#{beanCidade.inserir}"
+							update="grid" />
+						<p:commandButton value="Consultar" update="grid" />
+					</p:panelGrid>
+
+					<!-- Panel do formulario -->
+					<p:panelGrid columns="4">
+						<p:outputLabel value="Descrição:" for="descricao" />
+						<p:inputText id="descricao" required="true"
+							value="#{beanCidade.descricao}">
+							<f:validateLength minimum="3" />
+						</p:inputText>
+						<p:outputLabel value="Selecione a UF:" for="uf" />
+						<p:selectOneMenu id="uf" required="true"
+							value="#{beanCidade.codEstado}">
+							<f:selectItem itemValue="0" itemLabel="Selecione uma UF" />
+							<f:selectItems value="#{beanCidade.estados}" var="estados"
+								itemValue="#{estados.codigo}" itemLabel="#{estados.descricao}" />
+							<p:ajax event="change" update="grid" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Cód. IBGE:" for="ibge" />
+						<p:inputText id="ibge" required="true"
+							value="#{beanCidade.codIbge}" />
+					</p:panelGrid>
+					<p:dataTable id="grid" var="cidades" value="#{beanCidade.cidades}"
+						paginator="true" rows="10">
+						<p:column headerText="Descrição">
+							<h:outputText value="#{cidades.descricao}" />
+						</p:column>
+						<p:column headerText="Cód. IBGE">
+							<h:outputText value="#{cidades.codIbge}" />
+						</p:column>
+						<p:column headerText="Data Cadastro">
+							<h:outputText value="#{cidades.dtCadastro.time}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</p:panelGrid>
+			</p:panel>
+	</ui:define>
+</ui:composition>
+</h:body>
 </html>

@@ -18,8 +18,8 @@ public class BeanAvisos extends SuperBean {
 	private EnumTipoAviso[] tipos;
 	private RuleAvisos rulAvisos;
 	public BeanAvisos() {
-		rulAvisos = new RuleAvisos(getDataBaseSession());
-		aviso = new Avisos(getSession().getLojaLogada(), getSession().getUsuarioLogado());
+		rulAvisos 	= new RuleAvisos(getDataBaseSession());
+		aviso 		= new Avisos(getSession().getLojaLogada(), getSession().getUsuarioLogado());
 	}
 	
 	public Avisos getAviso() {
@@ -66,6 +66,12 @@ public class BeanAvisos extends SuperBean {
 
 	@Override
 	public String novo() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

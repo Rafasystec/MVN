@@ -72,6 +72,12 @@ public class BeanConfigCaixa extends SuperBean {
 	public void setTiposNota(EnumModeloNota[] tiposNota) {
 		this.tiposNota = tiposNota;
 	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

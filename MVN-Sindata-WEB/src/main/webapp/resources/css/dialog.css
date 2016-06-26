@@ -1,0 +1,41 @@
+html, body, form {
+	height: 100%;
+	width: 100% !important;
+}
+.ui-dialog.ui-widget-content .ui-dialog-title {
+	font-size: 30px;
+    font-weight: 600;
+    color: #383838;
+}
+.ui-widget {
+	font-family: 'Open Sans', sans-serif !important;
+}
+.ui-layout-unit {
+	border-radius: 0;
+	border: none;	
+}
+.ui-layout-center {
+	/*height: 100% !important;*/
+	width: 100% !important;
+	/*padding: 0 15px !important;*/
+	padding: 0 !important;
+	background: rgb(241, 242, 246) !important;
+}
+.ui-layout-center .ui-layout-unit-content {
+	background: rgb(241, 242, 246) !important;
+	padding: 15px !important;
+}
+.ui-layout-unit-content {
+	height: 100% !important;
+	width: 100% !important;
+}
+.ui-layout-south {
+	border: 1px solid #dddddd;
+	/*padding: 0 15px !important;*/
+}
+.ui-layout-south .ui-layout-unit-content {
+	text-align: right !important;
+}
+.ui-dialog-custom .ui-dialog-content {
+	padding: 0 !important;
+}

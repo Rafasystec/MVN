@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+ 	 	
+    <ui:composition>
+        <!--
+        <button id="button-enviar" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalEnviar">
+             <span class="fa fa-floppy-o"></span>
+             SALVAR
+        </button>
+        
+        <button id="button-enviar" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#modalEnviar">
+             <span class="fa fa-pencil"></span>
+             ATUALIZAR
+        </button>
+        <button id="button-enviar" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalEnviar">
+             <span class="fa fa-trash"></span>
+             EXCLUIR
+        </button>
+        <button id="button-enviar" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEnviar">
+             <span class="fa fa-eraser"></span>
+             LIMPAR
+        </button>
+        -->
+        <p:commandButton id="btn-salvar" value="SALVAR" styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o" actionListener="#{bean[method]}" />
+                
+    </ui:composition>
+    
+</html>

@@ -130,4 +130,9 @@ public class BeanEstado extends SuperBean{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

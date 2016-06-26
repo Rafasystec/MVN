@@ -1,55 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-	<h:head>
-		<meta http-equiv="X-UA-Compatible" content="IE-edge"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Consulta de Lojas</title>
-		
-	</h:head>
-	<h:body>
-		<ui:composition template="index.xhtml">
-			<ui:define name="conteudo">
-				<label class="control-label " for="usuario">
-				   		Empresa
-				  	</label>
-				  	<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-user"></span> 
-				    	</div>
-						<div>
-							<p:selectOneMenu id="emp" value="#{loja.codEmpresa}" required="true">
-								<f:selectItem itemLabel="Primeiro escolha a empresa" itemValue="0"/>
-								<f:selectItems value="#{escolherEmp.empresa}" var="emp" itemLabel="#{emp.pessoaJuridica.fantasia}" itemValue="#{emp.codigo}"/>
-								<p:ajax update="cboLoja"/>
-							</p:selectOneMenu>
-						</div>
-				  	</div>
-				<p:panel header="Lojas por Empresa">
-					<h3>Em Desenvolvimento</h3>
-					<p:dataTable id="grdLoja" var="loja" 	value="#{loja}" paginator="true" rows="5">
-						<p:column headerText="Descrição">
-							<h:outputText value="#{estados.descricao}" />
-						</p:column>
-						<p:column headerText="UF">
-							<h:outputText value="#{estados.uf}" />
-						</p:column>
-						<p:column headerText="Cód. IBGE">
-							<h:outputText value="#{estados.codIbge}" />
-						</p:column>
-						<p:column headerText="Data Cadastro">
-							<h:outputText value="#{estados.dtCadastro.time}" >
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui" template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="tachometer" />
+	<ui:param name="pageTitle" value="Consultar Clientes" />
+
+	<ui:define name="body">
+		<label class="control-label " for="usuario"> Empresa </label>
+		<div class="input-group">
+			<div class="input-group-addon">
+				<span class="glyphicon glyphicon-user"></span>
+			</div>
+			<div>
+				<p:selectOneMenu id="emp" value="#{loja.codEmpresa}" required="true">
+					<f:selectItem itemLabel="Primeiro escolha a empresa" itemValue="0" />
+					<f:selectItems value="#{escolherEmp.empresa}" var="emp"
+						itemLabel="#{emp.pessoaJuridica.fantasia}"
+						itemValue="#{emp.codigo}" />
+						<p:ajax update="grdLoja"/>
+				</p:selectOneMenu>
+			</div>
+		</div>
+		<p:panel header="Lojas por Empresa">
+			<p:dataTable id="grdLoja" var="lj" value="#{loja.lojasPorEmpresa}" paginator="true"
+				rows="5">
+				<p:column headerText="UF">
+					<h:outputText value="#{lj.pessoaJuridica.uf}" />
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{lj.pessoaJuridica.fantasia}" />
+				</p:column>
+				<p:column headerText="Razão Social">
+					<h:outputText value="#{lj.pessoaJuridica.razaoSocial}" />
 				</p:column>
 			</p:dataTable>
-				</p:panel>
-			</ui:define>
-		</ui:composition>
-	</h:body>
+		</p:panel>
+	</ui:define>
+</ui:composition>
 </html>

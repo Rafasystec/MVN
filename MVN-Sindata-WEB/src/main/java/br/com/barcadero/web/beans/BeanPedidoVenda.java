@@ -1,7 +1,5 @@
 package br.com.barcadero.web.beans;
 
-import java.net.UnknownHostException;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -14,6 +12,8 @@ import br.com.barcadero.tables.Pedido;
 @ViewScoped
 public class BeanPedidoVenda extends SuperBean{
 
+
+	private static final long serialVersionUID = -1991283788493039890L;
 	private Pedido pedido;
 	public Pedido getPedido() {
 		return pedido;
@@ -59,6 +59,12 @@ public class BeanPedidoVenda extends SuperBean{
 	}
 	@Override
 	public String novo() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
