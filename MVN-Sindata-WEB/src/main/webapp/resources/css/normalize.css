@@ -422,3 +422,8 @@ td,
 th {
   padding: 0;
 }
+
+.noBorder tr, .noBorder td {
+	border: none !important;
+}
+
