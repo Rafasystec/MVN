@@ -42,6 +42,6 @@
 		<mapping class="br.com.barcadero.tables.AuditoriaLog" 	/>
 		<mapping class="br.com.barcadero.tables.ContaPagar"	/>
 		<mapping class="br.com.barcadero.tables.PlanoConta"	/>
-		
+		<mapping class="br.com.barcadero.tables.ParametrosSistema"	/>
 	</session-factory>
 </hibernate-configuration>

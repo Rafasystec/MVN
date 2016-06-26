@@ -41,5 +41,30 @@ public abstract class EntidadeEmpresa extends Entidade {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EntidadeEmpresa other = (EntidadeEmpresa) obj;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
+		return true;
+	}
 	
 }

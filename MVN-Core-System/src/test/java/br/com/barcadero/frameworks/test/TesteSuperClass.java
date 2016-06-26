@@ -14,7 +14,7 @@ public class TesteSuperClass {
 		
 	}
 
-	//@BeforeClass
+//	@BeforeClass
 	public static void initialize() {
 		System.out.println(TestNotaProcess.class + " Init");
 		session 		= HibernateHelper.getSession();
@@ -29,7 +29,7 @@ public class TesteSuperClass {
 		TesteSuperClass.session = session;
 	}
 	
-	//@AfterClass
+//	@AfterClass
 	public static void commitAndClose() {
 		if(session != null){
 			session.getTransaction().commit();
