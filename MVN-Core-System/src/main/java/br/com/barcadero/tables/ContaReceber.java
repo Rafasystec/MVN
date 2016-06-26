@@ -9,8 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CONTA_RECEBER")
-public class ContaReceber extends Entidade {
+public class ContaReceber extends EntidadeEmpresa {
 
+	public ContaReceber() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ContaReceber(Empresa empresa, Usuario usuario) {
+		super(empresa,usuario);
+	}
+	
 	private static final long serialVersionUID = -3229007342790706377L;
 	@Column(name="DT_PREVISAO")
 	private Date dtPrevisao;

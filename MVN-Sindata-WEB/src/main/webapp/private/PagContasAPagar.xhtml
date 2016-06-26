@@ -1,119 +1,97 @@
 <!DOCTYPE html>
-<html
- xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-	<h:head>
-		<meta charset="UTF-8" />
-		<title>Contas a pagar</title>
-	</h:head>
-	<h:body>
-		<ui:composition template="index.xhtml">
-			<ui:define name="conteudo">
-				<div class="form-group ">
-					<label class="control-label " for="dtVenc">
-			   			Data Vencimento
-			  		</label>
-					<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span> 
-				    	</div>
-				    	 
-						<p:calendar id="dtVenc" value="#{contaPagar.contaPagar.dtVencimento}" 
-							pattern="dd/MM/yyyy"  mask="99/99/9999" size="10" required="true"
-							requiredMessage="Informe a data de vencimento"
-						/>
-						 
-						 
-					</div>
-					<label class="control-label " for="dtEmissao">
-			   			Data Emissão
-			  		</label>
-					<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span> 
-				    	</div>
-						<p:calendar id="dtEmissao" value="#{contaPagar.contaPagar.dtEmissao}" 
-						pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10"
-						required="true" requiredMessage="Informe a data de Emissão do documento"
-						/>
-					</div>
-					<label class="control-label " for="valor">
-			   			Valor
-			  		</label>
-					<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-usd"></span> 
-				    	</div>
-						<p:inputText id="valor" value="#{contaPagar.contaPagar.total}"
-							required="true" requiredMessage="Informe o valor do documento"
-						/>
-					</div>
-					
-					
-					
-			   		<label class="control-label " for="tipo">
-		   				Tipo
-		  			</label>
-		  			<div class="input-group">
-				   		<!-- 
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-usd"></span> 
-				    	</div>
-				    	 -->
-						<p:selectOneMenu id="tipo" value="#{contaPagar.contaPagar.tipo}"
-							required="true" requiredMessage="Informe o tipo de conta"
-							>
-							<f:selectItems value="#{contaPagar.tipoConta}"/>
-						</p:selectOneMenu>
-					</div>
-					
-					<label class="control-label " for="valor">
-			   			Qtde dias Avisar
-			  		</label>
-					<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-bullhorn"></span> 
-				    	</div>
-						<p:inputText id="qtdeDias" alt="Quantidade de dias antes do vencimento para avisar que vai vencer." value="#{contaPagar.contaPagar.qtdDiasVenc}"/>
-					</div>
-					
-					<label class="control-label " for="mora">
-			   			Mora
-			  		</label>
-					<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-usd"></span> 
-				    	</div>
-						<p:inputText id="mora" alt="Valor a ser acrescentado em caso de atraso" value="#{contaPagar.contaPagar.mora}"/>
-					</div>
-					
-					<label class="control-label " for="nosso">
-			   			Nosso Número
-			  		</label>
-					<div class="input-group">
-				   		<div class="input-group-addon">
-							<span class="glyphicon glyphicon-barcode"></span> 
-				    	</div>
-						<p:inputText id="nossoNumero" alt="Nosso número" value="#{contaPagar.contaPagar.nossoNumero}" maxlength="15"/>
-					</div>
-					<label class="control-label " for="observacao">
-			   			Observação
-			  		</label>
-					<div class="input-group">
-				   		
-					<p:inputTextarea value="#{contaPagar.contaPagar.observacao}"/>
-					</div>
-					
-				</div>			
-				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" action="#{contaPagar.salvar}"/>
-					<p:commandButton value="Novo" action="#{contaPagar.novo}"/>
-				</h:panelGrid>
-			</ui:define>
-		</ui:composition>
-	</h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-left" />
+	<ui:param name="pageTitle" value="Contas a Pagar" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{contaPagar}"></clx:buttonsCrud>
+		<div class="form-group ">
+			<label class="control-label " for="dtVenc"> Data Vencimento </label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</div>
+
+				<p:calendar id="dtVenc"
+					value="#{contaPagar.contaPagar.dtVencimento}" pattern="dd/MM/yyyy"
+					mask="99/99/9999" size="10" required="true"
+					requiredMessage="Informe a data de vencimento" />
+
+
+			</div>
+			<label class="control-label " for="dtEmissao"> Data Emissão </label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</div>
+				<p:calendar id="dtEmissao"
+					value="#{contaPagar.contaPagar.dtEmissao}" pattern="dd/MM/yyyy"
+					maxlength="10" mask="99/99/9999" size="10" required="true"
+					requiredMessage="Informe a data de Emissão do documento" />
+			</div>
+			<label class="control-label " for="valor"> Valor </label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-usd"></span>
+				</div>
+				<p:inputText id="valor" value="#{contaPagar.contaPagar.total}"
+					required="true" requiredMessage="Informe o valor do documento" />
+			</div>
+
+
+
+			<label class="control-label " for="tipo"> Tipo </label>
+			<div class="input-group">
+				<p:selectOneMenu id="tipo" value="#{contaPagar.contaPagar.tipo}"
+					required="true" requiredMessage="Informe o tipo de conta">
+					<f:selectItems value="#{contaPagar.tipoConta}" />
+				</p:selectOneMenu>
+			</div>
+
+			<label class="control-label " for="valor"> Qtde dias Avisar </label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-bullhorn"></span>
+				</div>
+				<p:inputText id="qtdeDias"
+					alt="Quantidade de dias antes do vencimento para avisar que vai vencer."
+					value="#{contaPagar.contaPagar.qtdDiasVenc}" />
+			</div>
+
+			<label class="control-label " for="mora"> Mora </label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-usd"></span>
+				</div>
+				<p:inputText id="mora"
+					alt="Valor a ser acrescentado em caso de atraso"
+					value="#{contaPagar.contaPagar.mora}" />
+			</div>
+
+			<label class="control-label " for="nosso"> Nosso Número </label>
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-barcode"></span>
+				</div>
+				<p:inputText id="nossoNumero" alt="Nosso número"
+					value="#{contaPagar.contaPagar.nossoNumero}" maxlength="15" />
+			</div>
+			<label class="control-label " for="observacao"> Observação </label>
+			<div class="input-group">
+
+				<p:inputTextarea value="#{contaPagar.contaPagar.observacao}" />
+			</div>
+
+		</div>
+		<clx:buttonsCrud id="btnsBuutom" bean="#{contaPagar}"></clx:buttonsCrud>
+	</ui:define>
+</ui:composition>
 </html>
