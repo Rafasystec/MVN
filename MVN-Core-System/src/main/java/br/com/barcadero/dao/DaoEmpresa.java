@@ -9,7 +9,7 @@ import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.PessoaJuridica;
 
-public class DaoEmpresa extends DaoModelo {
+public class DaoEmpresa extends DaoModelo<Empresa> {
 
 	private DaoPessoaJuridica daoPJ;
 	private DaoEndereco daoEndereco;
@@ -20,13 +20,13 @@ public class DaoEmpresa extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Empresa find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return find(codigo);
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Empresa> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return findAll();
 	}

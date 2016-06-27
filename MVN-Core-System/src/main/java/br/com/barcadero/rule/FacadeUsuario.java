@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.commons.util.HandleMD5;
 import br.com.barcadero.core.enums.EnumTipoUser;
-import br.com.barcadero.core.handles.HandleMD5;
 import br.com.barcadero.dao.DaoUsuario;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Usuario;
-import br.com.barcadero.tables.Usuarios;
 
 public class FacadeUsuario extends RuleModelo{
 	
@@ -54,7 +53,7 @@ public class FacadeUsuario extends RuleModelo{
 		}
 	}
 	
-	public List<Entidade> findAll() throws Exception{
+	public List<Usuario> findAll() throws Exception{
 		try {
 			return daoUsuario.findAll();
 		} catch (Exception e) {

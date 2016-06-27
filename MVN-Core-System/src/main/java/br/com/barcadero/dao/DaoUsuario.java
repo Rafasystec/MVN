@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Usuario;
 
 /**
@@ -13,89 +12,66 @@ import br.com.barcadero.tables.Usuario;
  * @author Rafael Rocha
  * @since Gsind 1.0 Beta dia 25/10/2013 as 11:05
  */
-public class DaoUsuario extends DaoModelo{
-	private final String MSG_SUCESS_SAVE = "Registro salvo com sucesso!";
-	private final String MSG_SUCESS_DEL  = "Registro excluido!";
-	private final String MSG_SUCESS_UPD  = "Registro atualizado com sucesso!";
-	private final String MSG_ERRO_SAVE	 = "Erro ao tentar salvar o registro.";
-	private final String MSG_ERRO_DEL	 = "Erro ao tentar excluir o registro.";
-	private final String MSG_NOT_FOUND	 = "Registro não encontrado.";
+public class DaoUsuario extends DaoModelo<Usuario> {
+	
 	private Session	session = null;
-	public String getMSG_SUCESS_SAVE() {
-		return MSG_SUCESS_SAVE;
-	}
-	public String getMSG_SUCESS_DEL() {
-		return MSG_SUCESS_DEL;
-	}
-	public String getMSG_SUCESS_UPD() {
-		return MSG_SUCESS_UPD;
-	}
-	public String getMSG_ERRO_SAVE() {
-		return MSG_ERRO_SAVE;
-	}
-	public String getMSG_ERRO_DEL() {
-		return MSG_ERRO_DEL;
-	}
-	public String getMSG_NOT_FOUND() {
-		return MSG_NOT_FOUND;
-	}
-
+	
 	public DaoUsuario(Session session) {
 		super(session);
 		this.session = session;
 	}
 	
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		
-		try{
-			if(entidade != null){
-				session.save(entidade);
-				return getMSG_SUCESS_SAVE();
-			}else{
-				return getMSG_ERRO_SAVE();
-			}
-		}catch(Exception e){
-			return getMSG_ERRO_SAVE() + e.getMessage();
-		}
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		
+//		try{
+//			if(entidade != null){
+//				session.save(entidade);
+//				return getMSG_SUCESS_SAVE();
+//			}else{
+//				return getMSG_ERRO_SAVE();
+//			}
+//		}catch(Exception e){
+//			return getMSG_ERRO_SAVE() + e.getMessage();
+//		}
+//	}
+//
+//	@Override
+//	public String delete(long codigo) throws Exception {
+//		// TODO Auto-generated method stub
+//		Usuario usuario = null;
+//		try {
+//			usuario	= (Usuario)find(codigo);
+//			if(usuario != null){
+//				session.delete(usuario);
+//			}else{
+//				return getMSG_NOT_FOUND();
+//			}
+//			return getMSG_SUCESS_SAVE();
+//		}catch (Exception e) {
+//			throw new Exception(e.getMessage());
+//		}
+//	}
+//
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		Usuario usuario = null;
+//		try {
+//			if(entidade != null){
+//				usuario = (Usuario)entidade;
+//				this.session.update(usuario);
+//			}else{
+//				return getMSG_NOT_FOUND();
+//			}
+//			return getMSG_SUCESS_SAVE();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			return "Erro ao atualizar:" + e.getMessage();
+//		}
+//	}
 
 	@Override
-	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		Usuario usuario = null;
-		try {
-			usuario	= (Usuario)find(codigo);
-			if(usuario != null){
-				session.delete(usuario);
-			}else{
-				return getMSG_NOT_FOUND();
-			}
-			return getMSG_SUCESS_SAVE();
-		}catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		Usuario usuario = null;
-		try {
-			if(entidade != null){
-				usuario = (Usuario)entidade;
-				this.session.update(usuario);
-			}else{
-				return getMSG_NOT_FOUND();
-			}
-			return getMSG_SUCESS_SAVE();
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "Erro ao atualizar:" + e.getMessage();
-		}
-	}
-
-	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Usuario find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = null;
 		try {
@@ -155,7 +131,7 @@ public class DaoUsuario extends DaoModelo{
 	/**
 	 * Consultar todos os usuarios
 	 */
-	public List<Entidade> findAll() throws Exception {
+	public List<Usuario> findAll() throws Exception {
 		Query qry = null;
 		qry = this.session.getNamedQuery(Usuario.FIND_ALL);
 		return qry.list();

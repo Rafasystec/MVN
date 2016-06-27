@@ -6,9 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-
 import br.com.barcadero.rule.FacadeEstado;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 
 @ManagedBean
@@ -16,7 +14,7 @@ import br.com.barcadero.tables.Estado;
 public class BeanEstado extends SuperBean{
 
 	private static final long serialVersionUID = 1469646686201259743L;
-	List<Entidade> estados ;
+	List<Estado> estados ;
 	private long codigo;
 	private String descricao;
 	private String uf;
@@ -68,10 +66,9 @@ public class BeanEstado extends SuperBean{
 		this.dtCadastro = dtCadastro;
 	}
 
-	public List<Entidade> getEstados() {
+	public List<Estado> getEstados() {
 		try {
-			this.estados = this.facadeEstado.findAll();
-			return this.estados;
+			return this.facadeEstado.findAll();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -88,7 +85,7 @@ public class BeanEstado extends SuperBean{
 		}
 	}
 
-	public void setEstados(List<Entidade> estados) {
+	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
 	}
 	

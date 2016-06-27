@@ -50,7 +50,7 @@ public class BeanUsuarioLogin extends SuperBean{
 		}
 	}
 			
-	public List<Entidade> getUsuarios() throws Exception{
+	public List<Usuario> getUsuarios() throws Exception{
 		try {
 			return facadeUsuario.findAll();
 		} catch (Exception e) {

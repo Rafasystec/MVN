@@ -5,23 +5,22 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Funcionario;
 
-public class DaoFuncionario extends DaoModelo {
+public class DaoFuncionario extends DaoModelo<Funcionario> {
 
 	public DaoFuncionario(Session session) {
 		super(session);
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Funcionario find(long codigo) throws Exception {
 		Query qry = getSession().getNamedQuery(Funcionario.FIND_BY_CODE).setLong("codigo", codigo);
-		return (Entidade) qry.uniqueResult();
+		return (Funcionario) qry.uniqueResult();
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Funcionario> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

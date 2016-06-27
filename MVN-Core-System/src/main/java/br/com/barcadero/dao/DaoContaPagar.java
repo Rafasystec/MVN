@@ -6,9 +6,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.ContaPagar;
-import br.com.barcadero.tables.Entidade;
 
-public class DaoContaPagar extends DaoModelo {
+public class DaoContaPagar extends DaoModelo <ContaPagar>{
 
 	public DaoContaPagar(Session session) {
 		super(session);
@@ -16,16 +15,16 @@ public class DaoContaPagar extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public ContaPagar find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(ContaPagar.FIND_BY_CODE);
 		qry.setParameter(ContaPagar.PARAM_CODIGO, codigo);
-		return (Entidade) qry.uniqueResult();
+		return (ContaPagar) qry.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<ContaPagar> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(ContaPagar.FIND_ALL);
 		return qry.list();

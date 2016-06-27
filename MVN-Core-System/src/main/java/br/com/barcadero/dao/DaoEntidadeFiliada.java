@@ -2,14 +2,11 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Bairro;
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.EntidadeFiliada;
 
-public class DaoEntidadeFiliada extends DaoModelo {
+public class DaoEntidadeFiliada extends DaoModelo<EntidadeFiliada> {
 	//private EntityManager manager;
 	
 	public DaoEntidadeFiliada(Session session) {
@@ -18,15 +15,16 @@ public class DaoEntidadeFiliada extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public List<EntidadeFiliada> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public EntidadeFiliada find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

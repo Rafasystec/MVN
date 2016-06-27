@@ -47,7 +47,7 @@ public class FacadeEstado extends RuleModelo implements RuleEntityInterface{
 		return daoEstado.find(codigo);
 	}
 	
-	public List<Entidade> findAll() throws Exception{
+	public List<Estado> findAll() throws Exception{
 		try {
 			return this.daoEstado.findAll();
 		} catch (Exception e) {

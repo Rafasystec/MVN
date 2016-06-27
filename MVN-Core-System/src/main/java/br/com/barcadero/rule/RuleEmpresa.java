@@ -69,7 +69,7 @@ public class RuleEmpresa extends RuleModelo {
 		Empresa empresa 	= new Empresa(usuario);
 		PessoaJuridica pj	= new PessoaJuridica(usuario);
 		empresa.setImgLogo("");
-		empresa.setObservacoes("EMPRESA CRIADA JUNCO COM O USUARIO, ALTERE OS DADOS PARA OS DA SUA EMPRESA");
+		empresa.setObservacoes("EMPRESA CRIADA JUNTO COM O USUARIO, ALTERE OS DADOS PARA OS DA SUA EMPRESA");
 		//NOTE: Dados da pessoa juridica
 		pj.setCnaeFiscal("");
 		pj.setCnpj("00000000000000");

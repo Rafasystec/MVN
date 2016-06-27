@@ -13,7 +13,7 @@ import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 
-public class DaoCidade extends DaoModelo implements DaoInterface{
+public class DaoCidade extends DaoModelo<Cidade>{
 
 	private DaoEstado daoEstado;
 	public DaoCidade(Session session) {
@@ -22,7 +22,7 @@ public class DaoCidade extends DaoModelo implements DaoInterface{
 	}	
 	
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Cidade find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(Cidade.FIND_BY_CODE);
 		qry.setLong("codigo", codigo);
@@ -79,8 +79,8 @@ public class DaoCidade extends DaoModelo implements DaoInterface{
 		}
 	}
 	@SuppressWarnings("unchecked")
-	public List<Entidade> findAll() throws Exception{
-		List<Entidade> cidades	= null;
+	public List<Cidade> findAll() throws Exception{
+		List<Cidade> cidades	= null;
 		Query qry	= null;
 		try {
 			qry		= getSession().getNamedQuery("Cidade.findAll");

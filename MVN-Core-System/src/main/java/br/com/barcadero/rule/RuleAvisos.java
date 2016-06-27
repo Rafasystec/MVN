@@ -40,7 +40,7 @@ public class RuleAvisos extends RuleModelo {
 		return null;
 	}
 	
-	public List<Entidade> findAll() throws Exception{
+	public List<Avisos> findAll() throws Exception{
 		return daoAvisos.findAll();
 	}
 

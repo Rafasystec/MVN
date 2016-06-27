@@ -4,22 +4,22 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Cliente;
 
-public class DaoCliente extends DaoModelo {
+public class DaoCliente extends DaoModelo<Cliente> {
 
 	public DaoCliente(Session session) {
 		super(session);
 	}
 	
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Cliente find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Cliente> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,10 +5,10 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
 
-public class DaoUserMensagem extends DaoModelo {
+public class DaoUserMensagem extends DaoModelo <UserMensagens>{
 
 	public DaoUserMensagem(Session session) {
 		super(session);
@@ -16,13 +16,13 @@ public class DaoUserMensagem extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public UserMensagens find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<UserMensagens> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

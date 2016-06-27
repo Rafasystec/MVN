@@ -30,7 +30,7 @@ public class BeanAvisos extends SuperBean {
 		this.aviso = aviso;
 	}
 
-	public List<Entidade> getAvisos() throws Exception {
+	public List<Avisos> getAvisos() throws Exception {
 		return rulAvisos.findAll();
 	}
 

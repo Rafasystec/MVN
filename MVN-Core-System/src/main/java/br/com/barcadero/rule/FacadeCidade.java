@@ -64,7 +64,7 @@ public class FacadeCidade extends RuleModelo implements RuleEntityInterface {
 		}
 	}
 	
-	public List<Entidade> findAll() throws Exception{
+	public List<Cidade> findAll() throws Exception{
 		return daoCidade.findAll();
 	}
 	

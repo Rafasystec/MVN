@@ -1,15 +1,12 @@
 package br.com.barcadero.dao;
 
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
-
 import br.com.barcadero.core.util.GlobalNameParam;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
-public class DaoLoja extends DaoModelo {
+public class DaoLoja extends DaoModelo<Loja> {
 
 	public DaoLoja(Session session) {
 		super(session);
@@ -17,13 +14,13 @@ public class DaoLoja extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Loja find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Loja> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(Loja.FIND_ALL);
 		return qry.list();

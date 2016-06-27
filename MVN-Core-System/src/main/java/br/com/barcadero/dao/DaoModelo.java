@@ -1,11 +1,10 @@
 package br.com.barcadero.dao;
 
-import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.Entidade;
 
-public abstract class DaoModelo implements DaoInterface {
+public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_SUCESS_SAVE = "Registro salvo com sucesso!";
 	private final String MSG_SUCESS_DEL  = "Registro excluido!";
 	private final String MSG_SUCESS_UPD  = "Registro atualizado com sucesso!";
@@ -61,7 +60,7 @@ public abstract class DaoModelo implements DaoInterface {
 			if(codigo <= 0){
 				throw new Exception("Codigo teve ter seu valor maior que 0 - Codigo recebido: " + codigo);
 			}
-			Entidade entidade = this.find(codigo);
+			T entidade = this.find(codigo);
 			if(entidade != null){
 				getSession().delete(entidade);
 			}
@@ -94,7 +93,7 @@ public abstract class DaoModelo implements DaoInterface {
 	}
 
 	
-	public abstract Entidade find(long codigo) throws Exception;
-	public abstract List<Entidade> findAll() throws Exception;
+	public abstract T find(long codigo) throws Exception;
+	//public abstract List<Entidade> findAll() throws Exception;
 
 }

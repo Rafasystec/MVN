@@ -9,7 +9,7 @@ import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 
-public final class DaoNota extends DaoModelo {
+public final class DaoNota extends DaoModelo<Nota> {
 
 	public DaoNota(Session session) {
 		super(session);
@@ -17,13 +17,13 @@ public final class DaoNota extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Nota find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Nota> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

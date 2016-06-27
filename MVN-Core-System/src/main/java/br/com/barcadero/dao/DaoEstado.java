@@ -10,7 +10,7 @@ import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Usuario;
 
-public class DaoEstado extends DaoModelo{
+public class DaoEstado extends DaoModelo<Estado>{
 	
 	public DaoEstado(Session session) {
 		super(session);
@@ -30,7 +30,7 @@ public class DaoEstado extends DaoModelo{
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Estado find(long codigo) throws Exception {
 		try {
 			return (Estado)getSession().getNamedQuery(Estado.FIND_BY_CODE).setLong("codigo", codigo).uniqueResult();
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class DaoEstado extends DaoModelo{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Estado> findAll() throws Exception {
 		try {
 			return getSession().getNamedQuery(Estado.FIND).list();
 		} catch (Exception e) {

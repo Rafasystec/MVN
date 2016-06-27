@@ -7,6 +7,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.FacadeUsuario;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Usuario;
 /**
  * Para controlar a popup de usuario
  * @author Rafael Rocha
@@ -47,13 +48,13 @@ public class BeanPopUsuario extends SuperBean {
 		return null;
 	}
 	
-	public List<Entidade> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		try {
 			return fcdUsuario.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new ArrayList<Entidade>();
+			return new ArrayList<Usuario>();
 		}
 	}
 	public FacadeUsuario getFcdUsuario() {

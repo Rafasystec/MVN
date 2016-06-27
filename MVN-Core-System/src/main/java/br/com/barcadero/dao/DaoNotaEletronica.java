@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.NotaEletronica;
 
 /**
  * Para a nota eletronica NF-e
  * @author root
  *
  */
-public final class DaoNotaEletronica extends DaoModelo {
+public final class DaoNotaEletronica extends DaoModelo<NotaEletronica> {
 
 	public DaoNotaEletronica(Session session) {
 		super(session);
@@ -19,15 +19,17 @@ public final class DaoNotaEletronica extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public List<NotaEletronica> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public NotaEletronica find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

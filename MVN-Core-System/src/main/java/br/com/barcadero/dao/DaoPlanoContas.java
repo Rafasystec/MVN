@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.PlanoConta;
 
-public class DaoPlanoContas extends DaoModelo {
+public class DaoPlanoContas extends DaoModelo<PlanoConta> {
 
 	public DaoPlanoContas(Session session) {
 		super(session);
@@ -14,13 +14,13 @@ public class DaoPlanoContas extends DaoModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public PlanoConta find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<PlanoConta> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

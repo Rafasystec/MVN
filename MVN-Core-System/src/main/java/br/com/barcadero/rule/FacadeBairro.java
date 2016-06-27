@@ -46,7 +46,7 @@ public class FacadeBairro extends RuleModelo implements RuleEntityInterface {
 		return null;
 	}
 	
-	public List<Entidade> findAll() throws Exception{
+	public List<Bairro> findAll() throws Exception{
 		try {
 			return this.daoBairro.findAll();
 		} catch (Exception e) {

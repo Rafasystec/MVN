@@ -8,28 +8,25 @@ import org.hibernate.Session;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Entidade;
 
-public class DaoCaixa extends DaoModelo {
+public class DaoCaixa extends DaoModelo<Caixa> {
 
 	public DaoCaixa(Session session) {
 		super(session);
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Caixa find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(Caixa.FIND_BY_CODE).setParameter(Caixa.PARAM_CODE, codigo);
-		return (Entidade) qry.uniqueResult();
+		return (Caixa) qry.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Deprecated
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<Caixa> findAll() throws Exception {
 		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL);
 		return qry.list();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Caixa> findAll(long cdEmp) {
 		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL);
 		qry.setParameter("cdEmp", cdEmp);
