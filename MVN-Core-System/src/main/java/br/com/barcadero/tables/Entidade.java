@@ -84,6 +84,44 @@ public abstract class Entidade implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + ((dtCadastro == null) ? 0 : dtCadastro.hashCode());
+		result = prime * result + ((hrCadastro == null) ? 0 : hrCadastro.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Entidade other = (Entidade) obj;
+		if (codigo != other.codigo)
+			return false;
+		if (dtCadastro == null) {
+			if (other.dtCadastro != null)
+				return false;
+		} else if (!dtCadastro.equals(other.dtCadastro))
+			return false;
+		if (hrCadastro == null) {
+			if (other.hrCadastro != null)
+				return false;
+		} else if (!hrCadastro.equals(other.hrCadastro))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
 	
 	
 }

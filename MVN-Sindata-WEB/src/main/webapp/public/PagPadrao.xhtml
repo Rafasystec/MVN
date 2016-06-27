@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html
- xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-	<h:head>
-		<meta charset="UTF-8" />
-		<title>Insert title here</title>
-	</h:head>
-	<h:body>
-		<ui:composition template="/index.xhtml">
-			<ui:define name="conteudo">
-			
-			</ui:define>
-		</ui:composition>
-	</h:body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Titulo da pagina" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanDestaTela}"></clx:buttonsCrud>
+		<p:panel header="Funcao Principal da tela">
+			<clx:dateCalendar  id="txtDtPrevisa" value="#{beanDestaTela.dtPrevisao}" />
+		</p:panel>
+	</ui:define>
+</ui:composition>
 </html>

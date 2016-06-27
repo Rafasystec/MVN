@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="cog" />
+	<ui:param name="pageTitle" value="Parâmetros do Sistema" />
+
+	<ui:define name="body">
+	
+		<!-- 
+		<clx:buttonsCrud id="btnsUp" bean="#{beanParametroSistema}"></clx:buttonsCrud>
+		 -->
+		<p:panel header="Parâmetros do Sistema">
+
+
+
+			<p:dataTable id="cars1" var="param"
+				value="#{beanParametroSistema.allParametros}" paginator="true"
+				rows="10" editable="true" style="margin-bottom:20px">
+				<f:facet name="header">
+		           Tabela Editável
+		        </f:facet>
+				<!-- 
+				<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+					update=":form:msgs" />
+				<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"
+					update=":form:msgs" />
+				-->
+				<p:column headerText="Descrição">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{param.descricao}"  />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{param.descricao}" style="width:100%"
+								 />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Detalhe">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{param.detalhe}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{param.detalhe}" style="width:100%"
+								 />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

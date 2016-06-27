@@ -107,4 +107,55 @@ public class Usuario extends Entidade{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (codPermissoes ^ (codPermissoes >>> 32));
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((empresas == null) ? 0 : empresas.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((passWord == null) ? 0 : passWord.hashCode());
+		result = prime * result + ((tipoUser == null) ? 0 : tipoUser.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (codPermissoes != other.codPermissoes)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (empresas == null) {
+			if (other.empresas != null)
+				return false;
+		} else if (!empresas.equals(other.empresas))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (passWord == null) {
+			if (other.passWord != null)
+				return false;
+		} else if (!passWord.equals(other.passWord))
+			return false;
+		if (tipoUser != other.tipoUser)
+			return false;
+		return true;
+	}
+	
+	
 }

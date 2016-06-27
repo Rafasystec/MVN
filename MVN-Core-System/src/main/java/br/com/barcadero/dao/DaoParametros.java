@@ -2,8 +2,8 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
-
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.ParametrosSistema;
 import br.com.barcadero.tables.ParametrosValores;
@@ -25,6 +25,12 @@ public class DaoParametros extends DaoModelo {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<ParametrosSistema> findAll(boolean usarClasse) throws Exception {
+		Query qry =  getSession().getNamedQuery(ParametrosSistema.FIND_ALL);
+		return (List<ParametrosSistema>)qry.list();
+	}
+	
 	
 	/**
 	 * Inserir um parametro do sistema

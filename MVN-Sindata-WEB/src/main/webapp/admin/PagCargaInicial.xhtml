@@ -15,6 +15,7 @@
 			<ui:define name="body">
 				<h3>Cargas de algumas tabelas</h3>
 				<h:panelGrid columns="1">
+					<p:commandButton value="Carregar Parâmetros" action="#{carga.carregarParametros}"/>
 					<p:commandButton value="Carregar tabela Estado" action="#{carga.carregarEstados}"/>
 					<p:commandButton value="Carregar Cidades do Ceara" action="#{carga.carregarCidadesCeara}"/>
 				</h:panelGrid>

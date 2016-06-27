@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.barcadero.core.util.HandleCargaCidadesCE;
 import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.rule.RuleParametros;
 /**
  * Para realizar a carga de algumas tabelas quando necessario.
  * @author Rafael Rocha
@@ -15,10 +16,12 @@ public class BeanCargaInicial extends SuperBean {
 	private static final long serialVersionUID = 1L;
 	private FacadeEstado fcdEstado;
 	private HandleCargaCidadesCE cargaCidCE;
+	private RuleParametros	ruleParam;
 	public BeanCargaInicial() {
 		// TODO Auto-generated constructor stub
-		fcdEstado = new FacadeEstado(getDataBaseSession());
-		cargaCidCE = new HandleCargaCidadesCE(getDataBaseSession(), getSession().getUsuarioLogado());
+		fcdEstado 	= new FacadeEstado(getDataBaseSession());
+		cargaCidCE 	= new HandleCargaCidadesCE(getDataBaseSession(), getSession().getUsuarioLogado());
+		ruleParam	= new RuleParametros(getDataBaseSession()); 
 	}
 	
 	public String carregarEstados() throws Exception {
@@ -30,6 +33,17 @@ public class BeanCargaInicial extends SuperBean {
 		System.out.println("Execuntando a carga na tabela de Cidades do Ceara");
 		cargaCidCE.loadCeara();
 		System.out.println("Fim da carga");
+		return null;
+	}
+	
+	public String carregarParametros() {
+		System.out.println("Iniciando a carga dos parametros");
+		try {
+			ruleParam.cargaDeParametros();
+		} catch (Exception e) {
+			System.out.println("Problema oa realizar a carga inicial dos parametros");
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

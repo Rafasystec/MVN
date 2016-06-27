@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.core.enums.EnumSimNao;
 import br.com.barcadero.dao.DaoParametros;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.ParametrosSistema;
@@ -71,11 +72,11 @@ public class RuleParametros extends RuleModelo {
 		sistema.setNumero(1);
 		
 		String[] parametros = {
-			"DESATIVAR AGENDAMENTO AUTOMATICO|1|",
-			"CONTROLAR FOLHAS DE CHEQUE|2|",
-			"CRITICAR CONCILIAÇÃO FINANCEIRA|3|",
-			"GERAR CODIGO DE BARRAS PARA PRODUTOS|4|",
-			"CRITICAR ESTOQUE NEGATIVO|5|"
+			"DESATIVAR AGENDAMENTO AUTOMATICO|1||S",
+			"CONTROLAR FOLHAS DE CHEQUE|2||N",
+			"CRITICAR CONCILIAÇÃO FINANCEIRA|3||N",
+			"GERAR CODIGO DE BARRAS PARA PRODUTOS|4||N",
+			"CRITICAR ESTOQUE NEGATIVO|5||N"
 		};
 		
 		List<ParametrosSistema> list = getParametros(parametros);
@@ -103,9 +104,28 @@ public class RuleParametros extends RuleModelo {
 			}catch(ArrayIndexOutOfBoundsException e){
 				param.setDetalhe("");
 			}
+			try {
+				String value = valores[3] == null ? "": valores[3];
+				if(value.trim().equalsIgnoreCase("S")){
+					param.setValor(EnumSimNao.SIM);
+				}else{
+					param.setValor(EnumSimNao.NAO);
+				}
+			} catch (Exception e) {
+				param.setValor(EnumSimNao.NAO);
+			}
 			list.add(param);
 		}
 		return list;
+	}
+	/**
+	 * Procurar todos os registros e retornar uma lista com ParametrosSistema
+	 * @param usarClasse
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ParametrosSistema> findAll(boolean usarClasse) throws Exception {
+		return daoParametros.findAll(true);
 	}
 
 }
