@@ -1,12 +1,16 @@
 package br.com.barcadero.tables;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedQueries(
@@ -41,6 +45,9 @@ public class Cliente extends EntidadeEmpresa{
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
 	private PessoaFisica pessoaFisica;
+	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="cliente", targetEntity=OrdemServico.class)
+	private List<OrdemServico> ordensServicos;
 
 	public String getNomePai() {
 		return nomePai;
@@ -60,5 +67,13 @@ public class Cliente extends EntidadeEmpresa{
 	}
 	public void setPessoaFisica(PessoaFisica pessoaFisica) {
 		this.pessoaFisica = pessoaFisica;
+	}
+
+	public List<OrdemServico> getOrdensServicos() {
+		return ordensServicos;
+	}
+
+	public void setOrdensServicos(List<OrdemServico> ordensServicos) {
+		this.ordensServicos = ordensServicos;
 	}
 }

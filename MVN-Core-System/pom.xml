@@ -7,6 +7,9 @@
 	<name>Core-System</name>
 	<packaging>jar</packaging>
 	<description>Nucleo do projeto Sindata</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
