@@ -14,6 +14,13 @@ public abstract class EntidadeLoja extends Entidade {
 	public EntidadeLoja() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public EntidadeLoja(Empresa empresa, Loja loja, Usuario usuario) {
+		super(usuario);
+		this.setLoja(loja);
+		this.setEmpresa(empresa);
+	}
+	
 	public EntidadeLoja(Loja loja, Usuario usuario) {
 		super(usuario);
 		this.setLoja(loja);
@@ -27,6 +34,9 @@ public abstract class EntidadeLoja extends Entidade {
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name="cd_loja",referencedColumnName="codigo")
 	private Loja loja;
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY,targetEntity=Empresa.class)
+	@JoinColumn(name="cod_empresa",referencedColumnName="codigo")
+	private Empresa empresa;
 
 	public Loja getLoja() {
 		return loja;
@@ -34,6 +44,12 @@ public abstract class EntidadeLoja extends Entidade {
 
 	public void setLoja(Loja loja) {
 		this.loja = loja;
+	}
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 	
 }

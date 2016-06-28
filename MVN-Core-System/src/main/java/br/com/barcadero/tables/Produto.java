@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 
 import br.com.barcadero.core.enums.EnumCSTICMS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
+import br.com.barcadero.core.enums.EnumTipoProduto;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 
 @NamedQueries({
@@ -27,9 +28,6 @@ import br.com.barcadero.core.enums.EnumUnidadeMedida;
 @Table(name="PRODUTO")
 public class Produto extends EntidadeEmpresa {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6081109651552318379L;
 	public Produto() {
 		// TODO Auto-generated constructor stub
@@ -95,8 +93,12 @@ public class Produto extends EntidadeEmpresa {
 	private BigDecimal aliqISSQN = new BigDecimal(0.00);
 	@Column(name="natureza_operacao_issqn", nullable=false)
 	private int naturezaOperacaoIssqn = 0;
-	
+	@Column(name="MSG_PROMOCIONAL")
 	private String msgPromocional;
+	@Column(name="TIPO_PRODUTO")
+	@Enumerated(EnumType.STRING)
+	private EnumTipoProduto tipoProduto;
+	
 	public String getCdProd() {
 		return cdProd;
 	}

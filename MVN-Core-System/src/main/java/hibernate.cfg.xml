@@ -43,5 +43,9 @@
 		<mapping class="br.com.barcadero.tables.ContaPagar"	/>
 		<mapping class="br.com.barcadero.tables.PlanoConta"	/>
 		<mapping class="br.com.barcadero.tables.ParametrosSistema"	/>
+		<mapping class="br.com.barcadero.tables.Medicos"	/>
+		<mapping class="br.com.barcadero.tables.OrdemServico"	/>
+		<mapping class="br.com.barcadero.tables.OrdemServicoDioptria"	/>
+		<mapping class="br.com.barcadero.tables.OrdemServicoItens"	/>
 	</session-factory>
 </hibernate-configuration>
