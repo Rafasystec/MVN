@@ -10,7 +10,8 @@ import br.com.barcadero.web.attributes.Attributs;
 public class HandleOpenEnderDialog extends SuperHandle{
 	
 	public static void openCadCidade() throws Exception {
-		openDialog("cadCidade");
+		//openDialog("cadCidade");
+		HandleDialog.openDialog("PopCidade", "500", "500");
 	}
 
 	public static void openCadBairro() throws Exception {

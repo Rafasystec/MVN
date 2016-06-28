@@ -1,13 +1,10 @@
 package br.com.barcadero.web.beans;
 
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.core.enums.EnumUF;
-import br.com.barcadero.tables.Estado;
 
 @ManagedBean
 @RequestScoped

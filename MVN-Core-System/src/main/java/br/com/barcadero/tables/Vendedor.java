@@ -21,6 +21,10 @@ import br.com.barcadero.core.enums.EnumSimNao;
 @Table(name="VENDEDOR")
 public class Vendedor extends EntidadeLoja{
 
+	public Vendedor() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private static final long serialVersionUID = -7368157567275782914L;
 	@Transient
 	private Usuario usuario;

@@ -19,7 +19,7 @@ import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.web.beans.SuperBean;
 
-@ManagedBean(name="endereco")
+@ManagedBean(name="ender")
 @RequestScoped	
 public class HandleEndereco extends SuperBean{
 
