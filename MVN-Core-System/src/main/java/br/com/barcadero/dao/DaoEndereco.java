@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
+import br.com.barcadero.tables.Loja;
 
 public class DaoEndereco extends DaoModelo<Endereco> {
 
-	public DaoEndereco(Session session) {
-		super(session);
+	
+
+	public DaoEndereco(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

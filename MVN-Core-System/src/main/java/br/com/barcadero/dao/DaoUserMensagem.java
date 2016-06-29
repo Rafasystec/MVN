@@ -5,13 +5,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
 
 public class DaoUserMensagem extends DaoModelo <UserMensagens>{
 
-	public DaoUserMensagem(Session session) {
-		super(session);
+	public DaoUserMensagem(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

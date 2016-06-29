@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Marcas" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanMarcas}"></clx:buttonsCrud>
+		<p:panel header="Cadastro de Marcas">
+			<p:panelGrid columns="2" styleClass="noBorder">
+				<p:outputLabel value="Descrição:"/>
+				<p:inputText value="#{beanMarcas.marcas.descricao}"/>
+				<p:outputLabel value="Tipo:"/>
+				<p:selectOneMenu id="cboTipoMarca" value="#{beanMarcas.marcas.tipoMarca}">
+					<f:selectItems value="#{beanMarcas.tipoMarcas}" var="marcas" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

@@ -44,7 +44,6 @@ public class DaoBairro extends DaoModelo<Bairro>{
 		Query qry = getSession().getNamedQuery(Bairro.FIND_BY_CID)
 				.setParameter("codCidade", codCidade);
 		return (List<Bairro>)qry.list();
-	}
-	
+	}	
 	
 }

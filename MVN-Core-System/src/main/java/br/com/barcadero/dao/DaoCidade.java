@@ -10,16 +10,24 @@ import org.hibernate.Session;
 
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
+import br.com.barcadero.tables.Loja;
 
 public class DaoCidade extends DaoModelo<Cidade>{
 
+	public DaoCidade(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
+	}
+
 	private DaoEstado daoEstado;
-	public DaoCidade(Session session) {
-		super(session);
-		daoEstado = new DaoEstado(session);
-	}	
+	
+//	public DaoCidade(Session session) {
+//		super(session);
+//		daoEstado = new DaoEstado(session);
+//	}	
 	
 	@Override
 	public Cidade find(long codigo) throws Exception {

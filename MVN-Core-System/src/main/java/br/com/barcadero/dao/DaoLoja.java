@@ -4,12 +4,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import br.com.barcadero.core.util.GlobalNameParam;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 
 public class DaoLoja extends DaoModelo<Loja> {
 
-	public DaoLoja(Session session) {
-		super(session);
+	public DaoLoja(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

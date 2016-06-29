@@ -5,13 +5,17 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.Cliente;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 
 public class DaoCliente extends DaoModelo<Cliente> {
 
-	public DaoCliente(Session session) {
-		super(session);
-	}
 	
+	public DaoCliente(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public Cliente find(long codigo) throws Exception {
 		// TODO Auto-generated method stub

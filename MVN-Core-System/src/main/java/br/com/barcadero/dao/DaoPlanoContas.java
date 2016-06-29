@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PlanoConta;
 
 public class DaoPlanoContas extends DaoModelo<PlanoConta> {
 
-	public DaoPlanoContas(Session session) {
-		super(session);
+
+	public DaoPlanoContas(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

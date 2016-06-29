@@ -5,33 +5,36 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.MeiosPagamento;
 
-public class DaoMeioPgto extends DaoModelo {
+public class DaoMeioPgto extends DaoModelo<MeiosPagamento> {
 
-	public DaoMeioPgto(Session session) {
-		super(session);
+
+	public DaoMeioPgto(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public MeiosPagamento find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(MeiosPagamento.FIND_BY_CODE);
 		qry.setParameter("codigo", codigo);
 		return (MeiosPagamento)qry.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Entidade> findAll() throws Exception {
+	public List<MeiosPagamento> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = getSession().getNamedQuery(MeiosPagamento.FIND_ALL);
 		qry.setMaxResults(100);
-		return (List<Entidade>)qry.list();
+		return (List<MeiosPagamento>)qry.list();
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<MeiosPagamento> getAll() {
 		Query qry = getSession().getNamedQuery(MeiosPagamento.FIND_ALL);
 		qry.setMaxResults(100);

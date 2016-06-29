@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Vendedor;
 
 public class DaoVendedor extends DaoModelo <Vendedor>{
 
-	public DaoVendedor(Session session) {
-		super(session);
+	public DaoVendedor(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

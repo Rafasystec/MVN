@@ -6,16 +6,21 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.com.barcadero.core.enums.EnumUF;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
 public class DaoEstado extends DaoModelo<Estado>{
 	
-	public DaoEstado(Session session) {
-		super(session);
-	}
 	
+	
+	public DaoEstado(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String insert(Entidade entidade) throws Exception {
 		String result = "";

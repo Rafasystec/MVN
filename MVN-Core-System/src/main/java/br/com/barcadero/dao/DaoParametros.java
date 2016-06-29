@@ -5,13 +5,16 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.ParametrosSistema;
 import br.com.barcadero.tables.ParametrosValores;
 
 public class DaoParametros extends DaoModelo<ParametrosSistema> {
 
-	public DaoParametros(Session session) {
-		super(session);
+	public DaoParametros(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

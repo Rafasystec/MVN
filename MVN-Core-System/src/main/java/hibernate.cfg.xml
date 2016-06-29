@@ -47,5 +47,6 @@
 		<mapping class="br.com.barcadero.tables.OrdemServico"	/>
 		<mapping class="br.com.barcadero.tables.OrdemServicoDioptria"	/>
 		<mapping class="br.com.barcadero.tables.OrdemServicoItens"	/>
+		<mapping class="br.com.barcadero.tables.Marcas"	/>
 	</session-factory>
 </hibernate-configuration>

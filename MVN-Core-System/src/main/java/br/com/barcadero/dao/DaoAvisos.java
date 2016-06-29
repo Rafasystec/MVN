@@ -25,5 +25,6 @@ public class DaoAvisos extends DaoModelo<Avisos> {
 		qry.setParameter(Avisos.PARAM_DT_EXIBIR, new Date());
 		return qry.list();
 	}
+
 	
 }

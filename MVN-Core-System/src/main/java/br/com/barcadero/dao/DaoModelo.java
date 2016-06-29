@@ -2,7 +2,9 @@ package br.com.barcadero.dao;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_SUCESS_SAVE = "Registro salvo com sucesso!";
@@ -12,10 +14,28 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_ERRO_DEL	 = "Erro ao tentar excluir o registro.";
 	private final String MSG_NOT_FOUND	 = "Registro não encontrado.";
 	private final Session	session;
+	protected final Empresa empresa;
+	protected final Loja loja;
 
+	/**
+	 * Construtor da DaoModelo
+	 * @param empresa: empresa logada
+	 * @param loja: loja logada
+	 * @param session
+	 */
+	public DaoModelo(Empresa empresa, Loja loja, Session session) {
+		// TODO Auto-generated constructor stub
+		this.session 	= session;
+		this.loja 		= loja;
+		this.empresa 	= empresa;
+	}
+	
+	@Deprecated
 	public DaoModelo(Session session){
 		//session = FacadeSessionFactory.getSession();
 		this.session = session;
+		loja 	= null;
+		empresa	= null;
 	}
 	
 	public String getMSG_NOT_FOUND() {

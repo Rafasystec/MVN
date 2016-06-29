@@ -11,5 +11,7 @@ public interface DaoInterface<T> {
 	public T find(long codigo) throws Exception;
 	//Novos metodos
 	public List<T> findAll() throws Exception;
+	//public List<T> findAll(long codEmp) throws Exception;
+	
 
 }

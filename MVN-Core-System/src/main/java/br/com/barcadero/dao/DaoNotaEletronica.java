@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.NotaEletronica;
 
 /**
@@ -13,8 +15,9 @@ import br.com.barcadero.tables.NotaEletronica;
  */
 public final class DaoNotaEletronica extends DaoModelo<NotaEletronica> {
 
-	public DaoNotaEletronica(Session session) {
-		super(session);
+
+	public DaoNotaEletronica(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

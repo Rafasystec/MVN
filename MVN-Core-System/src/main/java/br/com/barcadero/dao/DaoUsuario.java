@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
 /**
@@ -14,62 +16,17 @@ import br.com.barcadero.tables.Usuario;
  */
 public class DaoUsuario extends DaoModelo<Usuario> {
 	
-	private Session	session = null;
-	
-	public DaoUsuario(Session session) {
-		super(session);
+	public DaoUsuario(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		this.session = session;
 	}
+	private Session	session = null;
 	
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		
-//		try{
-//			if(entidade != null){
-//				session.save(entidade);
-//				return getMSG_SUCESS_SAVE();
-//			}else{
-//				return getMSG_ERRO_SAVE();
-//			}
-//		}catch(Exception e){
-//			return getMSG_ERRO_SAVE() + e.getMessage();
-//		}
+//	public DaoUsuario(Session session) {
+//		super(session);
+//		this.session = session;
 //	}
-//
-//	@Override
-//	public String delete(long codigo) throws Exception {
-//		// TODO Auto-generated method stub
-//		Usuario usuario = null;
-//		try {
-//			usuario	= (Usuario)find(codigo);
-//			if(usuario != null){
-//				session.delete(usuario);
-//			}else{
-//				return getMSG_NOT_FOUND();
-//			}
-//			return getMSG_SUCESS_SAVE();
-//		}catch (Exception e) {
-//			throw new Exception(e.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		Usuario usuario = null;
-//		try {
-//			if(entidade != null){
-//				usuario = (Usuario)entidade;
-//				this.session.update(usuario);
-//			}else{
-//				return getMSG_NOT_FOUND();
-//			}
-//			return getMSG_SUCESS_SAVE();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			return "Erro ao atualizar:" + e.getMessage();
-//		}
-//	}
-
+	
 	@Override
 	public Usuario find(long codigo) throws Exception {
 		// TODO Auto-generated method stub

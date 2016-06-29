@@ -6,12 +6,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
 public class DaoProduto extends DaoModelo <Produto>{
 
-	public DaoProduto(Session session) {
-		super(session);
+	public DaoProduto(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

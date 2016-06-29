@@ -1,12 +1,14 @@
 package br.com.barcadero.rule;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoCliente;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Entidade;
 
-public class FacadeCliente extends RuleModelo {
+public class FacadeCliente extends RuleModelo<Cliente> {
 
 	private final DaoCliente daoCliente;
 	
@@ -38,9 +40,15 @@ public class FacadeCliente extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public List<Cliente> findAll() throws Exception {
 		// TODO Auto-generated method stub
-		return daoCliente.find(codigo);
+		return null;
+	}
+
+	@Override
+	public Cliente find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

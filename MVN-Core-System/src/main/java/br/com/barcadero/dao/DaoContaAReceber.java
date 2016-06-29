@@ -5,7 +5,8 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.ContaReceber;
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 
 /**
  * Para as Contas a pagar
@@ -14,8 +15,11 @@ import br.com.barcadero.tables.Entidade;
  */
 public class DaoContaAReceber extends DaoModelo <ContaReceber>{
 
-	public DaoContaAReceber(Session session) {
-		super(session);
+
+	
+
+	public DaoContaAReceber(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

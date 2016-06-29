@@ -4,14 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumTipoMarca;
+
+@NamedQueries({
+	@NamedQuery(name=Marcas.FIND_ALL,query="FROM Marcas WHERE cd_emp = :cdEmp"),
+	@NamedQuery(name=Marcas.FIND_BY_TIPO,query="FROM Marcas WHERE cd_emp = :cdEmp AND tipoMarca = :tipoMarca ")
+})
 
 @Entity
 @Table(name="MARCAS")
 public class Marcas extends EntidadeEmpresa {
 
+	public static final String FIND_ALL 	= "Marcas.findAll";
+	public static final String FIND_BY_TIPO = "Marcas.findByTipo";
 	public Marcas() {
 		// TODO Auto-generated constructor stub
 	}
@@ -35,6 +44,14 @@ public class Marcas extends EntidadeEmpresa {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public EnumTipoMarca getTipoMarca() {
+		return tipoMarca;
+	}
+
+	public void setTipoMarca(EnumTipoMarca tipoMarca) {
+		this.tipoMarca = tipoMarca;
 	}
 	
 }

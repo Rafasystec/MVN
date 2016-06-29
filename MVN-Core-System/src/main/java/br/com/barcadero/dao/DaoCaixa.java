@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-
 import br.com.barcadero.tables.Caixa;
-import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 
 public class DaoCaixa extends DaoModelo<Caixa> {
 
-	public DaoCaixa(Session session) {
-		super(session);
+	
+
+	public DaoCaixa(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

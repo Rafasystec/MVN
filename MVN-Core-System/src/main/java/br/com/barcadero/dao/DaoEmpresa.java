@@ -5,19 +5,26 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Endereco;
-import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.PessoaJuridica;
+import br.com.barcadero.tables.Loja;
 
 public class DaoEmpresa extends DaoModelo<Empresa> {
 
+	
+
 	private DaoPessoaJuridica daoPJ;
 	private DaoEndereco daoEndereco;
-	public DaoEmpresa(Session session) {
-		super(session);
+	
+	public DaoEmpresa(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		daoPJ 		= new DaoPessoaJuridica(session);
 		daoEndereco = new DaoEndereco(session);
 	}
+	
+//	public DaoEmpresa(Session session) {
+//		super(session);
+//		daoPJ 		= new DaoPessoaJuridica(session);
+//		daoEndereco = new DaoEndereco(session);
+//	}
 
 	@Override
 	public Empresa find(long codigo) throws Exception {

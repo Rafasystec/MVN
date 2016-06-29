@@ -6,11 +6,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.ContaPagar;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 
 public class DaoContaPagar extends DaoModelo <ContaPagar>{
 
-	public DaoContaPagar(Session session) {
-		super(session);
+	
+
+	public DaoContaPagar(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub
 	}
 

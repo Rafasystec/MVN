@@ -9,7 +9,7 @@ import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Usuario;
 
-public class FacadeEstado extends RuleModelo implements RuleEntityInterface{
+public class FacadeEstado extends RuleModelo {
 
 	private DaoEstado daoEstado ;
 	
