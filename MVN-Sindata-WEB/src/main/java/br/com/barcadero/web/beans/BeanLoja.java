@@ -31,7 +31,7 @@ public class BeanLoja extends SuperBean {
 		pj 		= new PessoaJuridica(userLogado);
 		ender	= new Endereco(userLogado);
 		loja	= new Loja(userLogado);
-		ruleLoja = new RuleLoja(getDataBaseSession());
+		ruleLoja = new RuleLoja(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		System.out.println("BeanLoja was created!");
 	}
 	

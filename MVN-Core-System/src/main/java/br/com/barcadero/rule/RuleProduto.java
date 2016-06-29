@@ -7,16 +7,18 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoProduto;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
 
-public class RuleProduto extends RuleModelo {
+public class RuleProduto extends RuleModelo<Produto> {
 
 	private final DaoProduto daoProduto;
-	public RuleProduto(Session session) {
-		super(session);
-		daoProduto = new DaoProduto(session);
+	public RuleProduto(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoProduto = new DaoProduto(empresa, loja, session);
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class RuleProduto extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Produto find(long codigo) throws Exception {
 		return daoProduto.find(codigo);
 	}
 	
@@ -46,7 +48,6 @@ public class RuleProduto extends RuleModelo {
 		return daoProduto.findByDataCadastro(date);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Produto> findAll() {
 		Query qry = getSession().getNamedQuery(Produto.FIND_ALL);
 		return (List<Produto>)qry.list();

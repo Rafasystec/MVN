@@ -7,18 +7,20 @@ import org.hibernate.Session;
 import br.com.barcadero.commons.util.HandleMD5;
 import br.com.barcadero.core.enums.EnumTipoUser;
 import br.com.barcadero.dao.DaoUsuario;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
-public class FacadeUsuario extends RuleModelo{
+public class FacadeUsuario extends RuleModelo<Usuario>{
 	
 	
 
-	private DaoUsuario daoUsuario;	
+	private final DaoUsuario daoUsuario;	
 	
-	public FacadeUsuario(Session session) {
-		super(session);
-		daoUsuario = new DaoUsuario(session);
+	public FacadeUsuario(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoUsuario = new DaoUsuario(empresa, loja, session);
 	}
 
 	public Usuario login(String login, String pwd) throws Exception{
@@ -87,7 +89,7 @@ public class FacadeUsuario extends RuleModelo{
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Usuario find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoUsuario.find(codigo);
 	}

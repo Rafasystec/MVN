@@ -21,7 +21,7 @@ public class BeanPopUsuario extends SuperBean {
 	private static final long serialVersionUID = 736684237610838273L;
 
 	public BeanPopUsuario() {
-		fcdUsuario = new FacadeUsuario(getDataBaseSession());
+		fcdUsuario = new FacadeUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override

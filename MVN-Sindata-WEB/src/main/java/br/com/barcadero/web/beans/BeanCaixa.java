@@ -29,7 +29,7 @@ public class BeanCaixa extends SuperBean {
 	}
 
 	public BeanCaixa() {
-		ruleCaixa = new RuleCaixa(getDataBaseSession());
+		ruleCaixa = new RuleCaixa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 	}
 	
 	@Override

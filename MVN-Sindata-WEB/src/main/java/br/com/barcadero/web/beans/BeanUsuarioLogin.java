@@ -43,7 +43,7 @@ public class BeanUsuarioLogin extends SuperBean{
 	}
 	public BeanUsuarioLogin(){
 		try{
-			facadeUsuario = new FacadeUsuario(getDataBaseSession());
+			facadeUsuario = new FacadeUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 			user	= new Usuario(null);
 		}catch(Exception e){
 			e.printStackTrace();

@@ -18,14 +18,5 @@ public class TesteFinanceiro extends TesteSuperClass{
 		super();
 	}
 
-	public static void init() {
-		planoContas = new RulePlanoContas(getSession());
-		usuario = HandleUsuarioPadrao.getUsuarioHomologacao();
-	}
-	
-
-	public void cargaInicial() throws Exception {
-		planoContas.cargaInicial(HandleEmpresaHomo.getEmpresaHomo(),usuario);
-	}
 
 }

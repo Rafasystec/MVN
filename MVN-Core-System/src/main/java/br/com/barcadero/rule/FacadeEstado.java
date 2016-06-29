@@ -5,17 +5,18 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoEstado;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
-public class FacadeEstado extends RuleModelo {
+public class FacadeEstado extends RuleModelo<Estado> {
 
-	private DaoEstado daoEstado ;
-	
-	public  FacadeEstado(Session session) {
-		super(session);
-		this.daoEstado = new DaoEstado(session);
+	private final DaoEstado daoEstado ;
+	public FacadeEstado(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		this.daoEstado = new DaoEstado(empresa, loja, session);
 	}
 	
 	@Override
@@ -42,7 +43,7 @@ public class FacadeEstado extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Estado find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoEstado.find(codigo);
 	}

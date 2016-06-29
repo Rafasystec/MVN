@@ -35,8 +35,8 @@ public class BeanPopBairro extends SuperBean{
 	private List<String> params;
 	
 	public BeanPopBairro(){
-		this.facadeCidade	= new FacadeCidade(getDataBaseSession());
-		this.facadeBairro	= new FacadeBairro(getDataBaseSession());
+		this.facadeCidade	= new FacadeCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		this.facadeBairro	= new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		getParametros();
 	}
 	public List<Cidade> getCidades() {

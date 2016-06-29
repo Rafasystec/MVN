@@ -26,7 +26,7 @@ public class BeanConfigCaixa extends SuperBean {
 	public BeanConfigCaixa() {
 		// TODO Auto-generated constructor stub
 		caixa 		= new Caixa(getSession().getLojaLogada(),getSession().getUsuarioLogado());
-		ruleCaixa	= new RuleCaixa(getDataBaseSession());
+		ruleCaixa	= new RuleCaixa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		System.out.println(BeanConfigCaixa.class + " was created!");
 	}
 	

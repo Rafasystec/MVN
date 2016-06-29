@@ -17,7 +17,7 @@ public class BeanContaReceber extends SuperBean {
 	
 	public BeanContaReceber(){
 		conta 	= new ContaReceber(getEmpresaLogada(),getUsuarioLogado());
-		rule	= new RuleContaAReceber(getDataBaseSession());
+		rule	= new RuleContaAReceber(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 	}
 	
 	@Override

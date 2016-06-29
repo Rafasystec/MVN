@@ -39,9 +39,9 @@ public class TestNotaProcess {
 		System.out.println(TestNotaProcess.class + " Init");
 		session 		= HibernateHelper.getSession();
 		session.beginTransaction();
-		ruleMeioPgto 	= new RuleMeioPgto(session);
-		ruleNota	 	= new RuleNota(session);
-		ruleItens		= new RuleNotaItens(session);
+		ruleMeioPgto 	= new RuleMeioPgto(null,null,session);
+		ruleNota	 	= new RuleNota(null,null,session);
+		ruleItens		= new RuleNotaItens(null,null,session);
 	}
 	
 //	@AfterClass

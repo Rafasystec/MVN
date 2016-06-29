@@ -35,9 +35,9 @@ public class HandleEndereco extends SuperBean{
 	private static List<Bairro> bairros;
 	
 	public HandleEndereco() {
-		fcdEstado = new FacadeEstado(getDataBaseSession());
-		fcdCidade = new FacadeCidade(getDataBaseSession());
-		fcdBairro = new FacadeBairro(getDataBaseSession());
+		fcdEstado = new FacadeEstado(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdCidade = new FacadeCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdBairro = new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public Endereco getEnder() {

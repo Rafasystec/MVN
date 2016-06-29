@@ -1,17 +1,12 @@
 package br.com.barcadero.test.db;
 
-import org.hibernate.Session;
-
 import br.com.barcadero.dao.DaoCliente;
-import br.com.barcadero.dao.DaoEndereco;
-import br.com.barcadero.tables.Cliente;
-import br.com.barcadero.tables.Endereco;
 
 public class TestDaoCliente {
 
 	private DaoCliente dao;
 	public TestDaoCliente() {
-		dao = new DaoCliente(HibernateHelper.getSession());
+		dao = new DaoCliente(null,null,HibernateHelper.getSession());
 	}
 	
 	public static void main(String[] args) {

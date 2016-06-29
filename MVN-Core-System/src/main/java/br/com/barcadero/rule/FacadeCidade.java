@@ -7,15 +7,18 @@ import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
-public class FacadeCidade extends RuleModelo implements RuleEntityInterface {
+public class FacadeCidade extends RuleModelo<Cidade> {
 
+	
 	private DaoCidade daoCidade	;
 	
-	public FacadeCidade(Session session){
-		super(session);
-		this.daoCidade	= new DaoCidade(session);
+	public FacadeCidade(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		this.daoCidade	= new DaoCidade(empresa, loja, session);
 	}
 	
 	@Override
@@ -49,7 +52,7 @@ public class FacadeCidade extends RuleModelo implements RuleEntityInterface {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Cidade find(long codigo) throws Exception {
 		System.out.println("Procurando cidade pelo codigo: " + codigo);
 		return this.daoCidade.find(codigo);
 	}

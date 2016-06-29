@@ -17,7 +17,7 @@ public class TestRuleParametros extends TesteSuperClass{
 	
 	@BeforeClass
 	public static void init() {
-		rule = new RuleParametros(null);
+		rule = new RuleParametros(null,null,null);
 	}
 	
 	@AfterClass

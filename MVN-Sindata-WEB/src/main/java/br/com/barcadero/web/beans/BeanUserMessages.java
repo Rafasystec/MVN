@@ -24,8 +24,8 @@ public class BeanUserMessages extends SuperBean {
 	public BeanUserMessages() {
 		// TODO Auto-generated constructor stub
 		message 	 = new UserMensagens(getEmpresaLogada(),getUsuarioLogado());
-		ruleMensagem = new RuleUserMensagem(getDataBaseSession());
-		fcdUsuario	 = new FacadeUsuario(getDataBaseSession());
+		ruleMensagem = new RuleUserMensagem(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdUsuario	 = new FacadeUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override

@@ -30,8 +30,8 @@ public class BeanCidade extends SuperBean{
 	
 
 	public BeanCidade() {
-		facadeCidade = new FacadeCidade(getDataBaseSession());
-		facadeEstado = new FacadeEstado(getDataBaseSession()); 
+		facadeCidade = new FacadeCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		facadeEstado = new FacadeEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
 	}
 	
 	public long getCodigo() {

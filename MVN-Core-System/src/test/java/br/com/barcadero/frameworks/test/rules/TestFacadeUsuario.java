@@ -18,7 +18,7 @@ public class TestFacadeUsuario {
 		System.out.println(TestRuleCaixa.class + " Init");
 		session 		= HibernateHelper.getSession();
 		session.beginTransaction();
-		fcdUsuario	= new FacadeUsuario(session);
+		fcdUsuario	= new FacadeUsuario(null,null,session);
 	}
 	
 	//@AfterClass

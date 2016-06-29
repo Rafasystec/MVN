@@ -1,16 +1,21 @@
 package br.com.barcadero.rule;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoPessoaJuridica;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 
-public class RulePessoaJuridica extends RuleModelo {
+public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
 
+	
 	private DaoPessoaJuridica daoPessoa;
-	public RulePessoaJuridica(Session session) {
-		super(session);
+	public RulePessoaJuridica(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
 		daoPessoa = new DaoPessoaJuridica(session);
 	}
 
@@ -37,7 +42,13 @@ public class RulePessoaJuridica extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public PessoaJuridica find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PessoaJuridica> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

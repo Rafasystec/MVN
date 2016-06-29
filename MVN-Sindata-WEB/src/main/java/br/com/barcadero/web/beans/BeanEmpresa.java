@@ -70,11 +70,11 @@ public class BeanEmpresa extends SuperBean {
 		emp 	= new Empresa(userLogado);
 		pj 		= new PessoaJuridica(userLogado);
 		ender 	= new Endereco(userLogado);
-		ruleEmpresa = new RuleEmpresa(getDataBaseSession());
-		fcdEstado	= new FacadeEstado(getDataBaseSession());
-		fcdCidade	= new FacadeCidade(getDataBaseSession());
-		fcdBairro	= new FacadeBairro(getDataBaseSession());
-		ruleLoja	= new RuleLoja(getDataBaseSession());
+		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdEstado	= new FacadeEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdCidade	= new FacadeCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdBairro	= new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		ruleLoja	= new RuleLoja(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		System.out.println("Bean Empresa was created.");
 	}
 	

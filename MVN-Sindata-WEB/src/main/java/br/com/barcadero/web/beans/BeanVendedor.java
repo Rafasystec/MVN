@@ -22,8 +22,8 @@ public class BeanVendedor extends SuperBean {
 	public BeanVendedor() {
 		// TODO Auto-generated constructor stub
 		vendedor 		= new Vendedor(getLojaLogada(), getUsuarioLogado());
-		ruleVendedor 	= new RuleVendedor(getDataBaseSession());
-		ruleFuncionario = new RuleFuncionario(getDataBaseSession());
+		ruleVendedor 	= new RuleVendedor(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		ruleFuncionario = new RuleFuncionario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override

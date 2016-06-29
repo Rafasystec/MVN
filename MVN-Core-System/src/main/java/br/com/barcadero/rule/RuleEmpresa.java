@@ -11,17 +11,21 @@ import br.com.barcadero.dao.DaoEmpresa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
-public class RuleEmpresa extends RuleModelo {
+public class RuleEmpresa extends RuleModelo<Empresa> {
+
+	
 
 	private DaoEmpresa daoEmpresa;
 	private RuleLoja ruleLoja;
-	public RuleEmpresa(Session session) {
-		super(session);
-		daoEmpresa  = new DaoEmpresa(session);
-		ruleLoja	= new RuleLoja(session);
+	
+	public RuleEmpresa(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoEmpresa  = new DaoEmpresa(empresa, loja, session);
+		ruleLoja	= new RuleLoja(empresa, loja, session);
 	}
 
 	@Override
@@ -40,12 +44,6 @@ public class RuleEmpresa extends RuleModelo {
 
 	@Override
 	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Entidade find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -95,6 +93,18 @@ public class RuleEmpresa extends RuleModelo {
 		usuario.setEmpresas(listEmp);
 		//NOTE: Inserir a loja Matriz
 		ruleLoja.inserirLojaMatriz(usuario, pj, empresa);
+	}
+
+	@Override
+	public Empresa find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Empresa> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

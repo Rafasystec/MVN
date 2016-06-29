@@ -41,8 +41,8 @@ public class BeanVendaRapida extends SuperBean {
 	public BeanVendaRapida() {
 		System.out.println("BeanVendaRapida was created!");
 		this.session = getDBSessionForViewScope();
-		ruleNota = new RuleNota(this.session);
-		ruleItens= new RuleNotaItens(this.session);
+		ruleNota = new RuleNota(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		ruleItens= new RuleNotaItens(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		itens	 = new ArrayList<NotaItens>();
 		item	 = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
 		itensSelecionados = new ArrayList<NotaItens>();

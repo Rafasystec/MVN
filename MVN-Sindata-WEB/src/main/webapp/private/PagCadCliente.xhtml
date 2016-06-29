@@ -114,7 +114,18 @@
 
 		<clx:address endereco="#{cliente.endereco}"	 >
 		</clx:address>
-
+		
+		<p:accordionPanel>
+	        <p:tab title="Consultar" closable="true">
+	        	<p:panel header="Consulta">
+		            <h:panelGrid columns="2" cellpadding="10">
+		              
+		                <h:outputText
+		                    value="The story begins as Don Vito Corleone..." />
+		            </h:panelGrid>
+	            </p:panel>
+	        </p:tab>
+    	</p:accordionPanel>
 		<clx:buttonsCrud id="btnsButtom" bean="#{cliente}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>

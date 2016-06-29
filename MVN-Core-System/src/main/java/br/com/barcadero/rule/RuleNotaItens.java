@@ -1,12 +1,16 @@
 package br.com.barcadero.rule;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumItemCancelado;
 import br.com.barcadero.dao.DaoProduto;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.Produto;
@@ -16,16 +20,25 @@ import br.com.barcadero.tables.Produto;
  * @author Rafael Rocha
  * @since versao 1.0 dia 23/02/2016 as 20:13
  */
-public class RuleNotaItens extends RuleModelo {
+public class RuleNotaItens extends RuleModelo<Produto> {
 
+	
 	private DaoProduto daoProduto; 
 	private RuleNota ruleNota;
-	public RuleNotaItens(Session session) {
-		// TODO Auto-generated constructor stub
-		super(session);
-		daoProduto  = new DaoProduto(session);
-		ruleNota	= new RuleNota(session);
+	
+	public RuleNotaItens(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoProduto  = new DaoProduto(empresa, loja, session);
+		ruleNota	= new RuleNota(empresa, loja, session);
 	}
+	
+//	public RuleNotaItens(Session session) {
+//	
+//		// TODO Auto-generated constructor stub
+//		super(session);
+//		daoProduto  = new DaoProduto(session);
+//		ruleNota	= new RuleNota(session);
+//	}
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {
@@ -46,7 +59,7 @@ public class RuleNotaItens extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Produto find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -117,6 +130,12 @@ public class RuleNotaItens extends RuleModelo {
 		nota.setItens(itens);
 		System.out.println("Salvar item na nota: >>> " + ruleNota.insert(nota));
 		return item;
+	}
+
+	@Override
+	public List<Produto> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

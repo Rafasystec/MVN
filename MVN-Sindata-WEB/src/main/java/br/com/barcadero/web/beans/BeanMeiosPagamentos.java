@@ -30,7 +30,7 @@ public class BeanMeiosPagamentos extends SuperBean {
 
 	public BeanMeiosPagamentos() throws Exception {
 		// TODO Auto-generated constructor stub
-		rulMeio = new RuleMeioPgto(getDataBaseSession());
+		rulMeio = new RuleMeioPgto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		novo();
 	}
 	

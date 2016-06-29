@@ -20,7 +20,7 @@ public class BeanContaPagar extends SuperBean {
 	public BeanContaPagar() {
 		// TODO Auto-generated constructor stub
 		contaPagar 		= new ContaPagar(getSession().getLojaLogada(),getSession().getUsuarioLogado());
-		ruleContaPagar 	= new RuleContaPagar(getDataBaseSession());
+		ruleContaPagar 	= new RuleContaPagar(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 	}
 	
 	@Override

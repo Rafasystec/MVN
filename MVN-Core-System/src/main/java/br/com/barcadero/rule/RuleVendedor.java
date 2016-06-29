@@ -16,11 +16,7 @@ public class RuleVendedor extends RuleModelo<Vendedor> {
 	
 
 	private DaoVendedor daoVendedor;
-//	public RuleVendedor(Session session) {
-//		super(session);
-//		daoVendedor = new DaoVendedor(session);
-//	}
-	
+
 	public RuleVendedor(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		// TODO Auto-generated constructor stub

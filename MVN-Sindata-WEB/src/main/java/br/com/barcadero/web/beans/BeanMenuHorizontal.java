@@ -16,7 +16,7 @@ public class BeanMenuHorizontal extends SuperBean {
 	private RuleUserMensagem ruleMensagem;
 	public BeanMenuHorizontal() {
 		// TODO Auto-generated constructor stub
-		ruleMensagem = new RuleUserMensagem(getDataBaseSession());
+		ruleMensagem = new RuleUserMensagem(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 
 	@Override

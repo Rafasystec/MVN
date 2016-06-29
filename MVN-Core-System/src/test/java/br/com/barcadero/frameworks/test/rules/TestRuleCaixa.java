@@ -34,7 +34,7 @@ public class TestRuleCaixa {
 		System.out.println(TestRuleCaixa.class + " Init");
 		session 		= HibernateHelper.getSession();
 		session.beginTransaction();
-		ruleCaixa		= new RuleCaixa(session);
+		ruleCaixa		= new RuleCaixa(null,null,session);
 	}
 	
 	//@AfterClass

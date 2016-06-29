@@ -1,18 +1,22 @@
 package br.com.barcadero.rule;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoContaPagar;
 import br.com.barcadero.tables.ContaPagar;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 
-public class RuleContaPagar extends RuleModelo {
+public class RuleContaPagar extends RuleModelo<ContaPagar> {
 
 	DaoContaPagar daoContaPagar;
-	public RuleContaPagar(Session session) {
-		super(session);
-		daoContaPagar = new DaoContaPagar(session);
+	public RuleContaPagar(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoContaPagar = new DaoContaPagar(empresa, loja, session);
 	}
 
 	@Override
@@ -35,9 +39,16 @@ public class RuleContaPagar extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public ContaPagar find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoContaPagar.find(codigo);
+	}
+
+
+	@Override
+	public List<ContaPagar> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

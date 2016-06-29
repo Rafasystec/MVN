@@ -19,9 +19,9 @@ public class BeanCargaInicial extends SuperBean {
 	private RuleParametros	ruleParam;
 	public BeanCargaInicial() {
 		// TODO Auto-generated constructor stub
-		fcdEstado 	= new FacadeEstado(getDataBaseSession());
-		cargaCidCE 	= new HandleCargaCidadesCE(getDataBaseSession(), getSession().getUsuarioLogado());
-		ruleParam	= new RuleParametros(getDataBaseSession()); 
+		fcdEstado 	= new FacadeEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		cargaCidCE 	= new HandleCargaCidadesCE(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(), getUsuarioLogado());
+		ruleParam	= new RuleParametros(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
 	}
 	
 	public String carregarEstados() throws Exception {

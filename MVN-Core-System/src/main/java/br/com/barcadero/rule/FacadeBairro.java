@@ -4,15 +4,18 @@ import java.util.List;
 import org.hibernate.Session;
 import br.com.barcadero.dao.DaoBairro;
 import br.com.barcadero.tables.Bairro;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-public class FacadeBairro extends RuleModelo implements RuleEntityInterface {
+import br.com.barcadero.tables.Loja;
+public class FacadeBairro extends RuleModelo<Bairro> {
+	
 	
 	private DaoBairro daoBairro	;
-	
-	public FacadeBairro(Session session){
-		super(session);
-		this.daoBairro	= new DaoBairro(session);
+	public FacadeBairro(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		this.daoBairro	= new DaoBairro(empresa, loja, session);
 	}
+	
 	@Override
 	public String insert(Entidade entidade) throws Exception {
 		try{
@@ -41,7 +44,7 @@ public class FacadeBairro extends RuleModelo implements RuleEntityInterface {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Bairro find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

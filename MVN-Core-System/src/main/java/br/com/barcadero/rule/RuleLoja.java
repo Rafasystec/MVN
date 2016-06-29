@@ -14,12 +14,14 @@ import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
 
-public class RuleLoja extends RuleModelo {
+public class RuleLoja extends RuleModelo<Loja> {
+
+	
 
 	private DaoLoja daoLoja;
-	public RuleLoja(Session session) {
-		super(session);
-		daoLoja = new DaoLoja(session);
+	public RuleLoja(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoLoja = new DaoLoja(empresa, loja, session);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class RuleLoja extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Loja find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return (Loja)daoLoja.find(codigo);
 	}
@@ -123,10 +125,10 @@ public class RuleLoja extends RuleModelo {
 		loja.setPessoaJuridica(pJuridica);
 		return daoLoja.insert(loja);
 	}
-	
-	public String insertLojaHomo() throws Exception {
-		Loja loja = (Loja) daoLoja.find(1L);
-		
+
+	@Override
+	public List<Loja> findAll() throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

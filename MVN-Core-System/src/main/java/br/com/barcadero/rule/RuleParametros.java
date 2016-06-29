@@ -8,18 +8,25 @@ import org.hibernate.Session;
 
 import br.com.barcadero.core.enums.EnumSimNao;
 import br.com.barcadero.dao.DaoParametros;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.ParametrosSistema;
 import br.com.barcadero.tables.ParametrosValores;
 
-public class RuleParametros extends RuleModelo {
+public class RuleParametros extends RuleModelo<ParametrosSistema> {
 
-	DaoParametros daoParametros;
 	
-	public RuleParametros(Session session) {
-		super(session);
-		daoParametros	= new DaoParametros(session);
+	DaoParametros daoParametros;
+	public RuleParametros(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoParametros	= new DaoParametros(empresa, loja, session);
 	}
+	
+//	public RuleParametros(Session session) {
+//		super(session);
+//		daoParametros	= new DaoParametros(session);
+//	}
 
 	
 	/**
@@ -42,12 +49,6 @@ public class RuleParametros extends RuleModelo {
 
 	@Override
 	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Entidade find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -125,7 +126,19 @@ public class RuleParametros extends RuleModelo {
 	 * @throws Exception
 	 */
 	public List<ParametrosSistema> findAll(boolean usarClasse) throws Exception {
-		return daoParametros.findAll(true);
+		return daoParametros.findAll();
+	}
+
+	@Override
+	public ParametrosSistema find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ParametrosSistema> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

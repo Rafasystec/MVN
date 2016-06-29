@@ -4,17 +4,20 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import br.com.barcadero.tables.Bairro;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 /**
  * DAO para a tabela de bairro.
  * @author Rafael Rocha
  *
  */
 public class DaoBairro extends DaoModelo<Bairro>{
-	//private EntityManager manager;
-	public DaoBairro(Session session) {
-		super(session);
-	}	
 	
+	
+	public DaoBairro(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+	}
+
 	@Override
 	public Bairro find(long codigo) throws Exception{
 		Query qry = getSession().getNamedQuery(Bairro.FIND_BY_CODE).setLong("codigo", codigo);

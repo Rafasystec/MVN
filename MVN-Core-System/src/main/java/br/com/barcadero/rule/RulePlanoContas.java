@@ -1,25 +1,28 @@
 package br.com.barcadero.rule;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.core.enums.EnumTipoPlanoConta;
 import br.com.barcadero.dao.DaoPlanoContas;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PlanoConta;
 import br.com.barcadero.tables.Usuario;
 
 
-public class RulePlanoContas extends RuleModelo{
+public class RulePlanoContas extends RuleModelo<PlanoConta>{
 	
-	public RulePlanoContas(Session session) {
-		super(session);
-		// TODO Auto-generated constructor stub
+
+	DaoPlanoContas dao;
+	public RulePlanoContas(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		dao = new DaoPlanoContas(empresa, loja, session);
 	}
 
 	public void cargaInicial(Empresa empresa, Usuario usuario) throws Exception {
-		
-		DaoPlanoContas dao = new DaoPlanoContas(getSession());
 		
 		PlanoConta contaAtivo = new PlanoConta(empresa,usuario);
 		contaAtivo.setDescricao("ATIVO");
@@ -185,7 +188,13 @@ public class RulePlanoContas extends RuleModelo{
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public PlanoConta find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PlanoConta> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

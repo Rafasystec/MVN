@@ -24,7 +24,7 @@ public class BeanEscolherEmpresa extends SuperBean {
 	
 	public BeanEscolherEmpresa() {
 		// TODO Auto-generated constructor stub
-		ruleLoja = new RuleLoja(getDataBaseSession());
+		ruleLoja = new RuleLoja(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		System.out.println("Instanciou o bean: " + BeanEscolherEmpresa.class.getName());
 		
 	}

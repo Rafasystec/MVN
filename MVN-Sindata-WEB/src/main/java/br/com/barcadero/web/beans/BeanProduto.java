@@ -29,7 +29,7 @@ public class BeanProduto extends SuperBean {
 	private RuleProduto ruleProduto;
 	
 	public BeanProduto() {
-		ruleProduto = new RuleProduto(getDataBaseSession());
+		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		produto		= new Produto(getSession().getEmpresaLogada(), null);
 	}
 	

@@ -3,26 +3,28 @@ package br.com.barcadero.rule;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Session;
-
-import br.com.barcadero.core.handles.HandleDateHour;
+import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.dao.DaoUserMensagem;
 import br.com.barcadero.dao.DaoUsuario;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.TmpUserMessage;
+import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
 
 
-public class RuleUserMensagem extends RuleModelo {
+public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 
+	
 	private DaoUserMensagem daoMensagem;
 	private DaoUsuario daoUsuario;
 	
-	public RuleUserMensagem(Session session) {
-		super(session);
-		daoMensagem = new DaoUserMensagem(session);
-		daoUsuario	= new DaoUsuario(session);	
+	public RuleUserMensagem(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoMensagem = new DaoUserMensagem(empresa, loja, session);
+		daoUsuario	= new DaoUsuario(empresa, loja, session);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class RuleUserMensagem extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public UserMensagens find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -90,6 +92,12 @@ public class RuleUserMensagem extends RuleModelo {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<UserMensagens> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

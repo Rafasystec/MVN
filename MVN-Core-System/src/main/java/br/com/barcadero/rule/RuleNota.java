@@ -12,6 +12,7 @@ import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.dao.DaoNota;
 import br.com.barcadero.dao.DaoNotaItens;
 import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.MeiosPagamento;
@@ -21,18 +22,19 @@ import br.com.barcadero.tables.NotaMeioPgto;
 import br.com.barcadero.tables.Usuario;
 
 
-public class RuleNota extends RuleModelo {
+public class RuleNota extends RuleModelo<Nota> {
 
 	private final DaoNota daoNota;
 	private final DaoMeioPgto daoMeio;
 	private final DaoNotaItens daoItens;
 	private final RuleCaixa ruleCaixa;
-	public RuleNota(Session session) {
-		super(session);
-		daoNota = new DaoNota(session);
-		daoMeio = new DaoMeioPgto(session);
-		daoItens= new DaoNotaItens(session);
-		ruleCaixa= new RuleCaixa(session); 
+	
+	public RuleNota(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoNota = new DaoNota(empresa, loja, session);
+		daoMeio = new DaoMeioPgto(empresa, loja, session);
+		daoItens= new DaoNotaItens(empresa, loja, session);
+		ruleCaixa= new RuleCaixa(empresa, loja, session);
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class RuleNota extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Nota find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return (Nota)daoNota.find(codigo);
 	}
@@ -147,6 +149,12 @@ public class RuleNota extends RuleModelo {
 	 */
 	public String getSerieNota() {
 		return "01S"; //Por valor provisorio
+	}
+
+	@Override
+	public List<Nota> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

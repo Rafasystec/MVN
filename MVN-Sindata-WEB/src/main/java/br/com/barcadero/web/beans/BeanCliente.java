@@ -26,7 +26,7 @@ public class BeanCliente extends SuperBean {
 
 	public BeanCliente() {
 		// TODO Auto-generated constructor stub
-		fcdCliente  = new FacadeCliente(getDataBaseSession());
+		fcdCliente  = new FacadeCliente(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		cliente		= new Cliente(getSession().getEmpresaLogada(), getSession().getUsuarioLogado());
 		endereco	= new Endereco(getSession().getUsuarioLogado());
 		pFisica		= new PessoaFisica(getSession().getUsuarioLogado());

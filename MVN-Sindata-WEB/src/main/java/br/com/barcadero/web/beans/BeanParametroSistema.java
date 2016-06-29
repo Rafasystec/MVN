@@ -16,7 +16,7 @@ public class BeanParametroSistema extends SuperBean {
 	private RuleParametros rulePar;
 	
 	public BeanParametroSistema() {
-		rulePar = new RuleParametros(getDataBaseSession());
+		rulePar = new RuleParametros(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	

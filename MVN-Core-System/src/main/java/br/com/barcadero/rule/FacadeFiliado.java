@@ -1,12 +1,16 @@
 package br.com.barcadero.rule;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoFiliado;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Filiado;
 
-public class FacadeFiliado extends RuleModelo implements RuleEntityInterface{
+public class FacadeFiliado extends RuleModelo<Filiado>{
+	
+	
 	private DaoFiliado daoFiliado	= null;
 	public FacadeFiliado(Session session) {
 		super(session);
@@ -46,7 +50,7 @@ public class FacadeFiliado extends RuleModelo implements RuleEntityInterface{
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Filiado find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			return null;
@@ -55,5 +59,11 @@ public class FacadeFiliado extends RuleModelo implements RuleEntityInterface{
 			throw new Exception("Erro na camada Facade de Filiados: " + e.getMessage());
 		}
 	}
+	@Override
+	public List<Filiado> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

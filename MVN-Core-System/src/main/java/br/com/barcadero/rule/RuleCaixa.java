@@ -8,15 +8,17 @@ import org.hibernate.Session;
 import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 
-public class RuleCaixa extends RuleModelo {
+public class RuleCaixa extends RuleModelo<Caixa> {
 
 	private DaoCaixa daoCaixa;
-	public RuleCaixa(Session session) {
-		super(session);
-		daoCaixa = new DaoCaixa(session);
+	public RuleCaixa(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoCaixa = new DaoCaixa(empresa, loja, session);
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class RuleCaixa extends RuleModelo {
 	}
 
 	@Override
-	public Entidade find(long codigo) throws Exception {
+	public Caixa find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoCaixa.find(codigo);
 	}

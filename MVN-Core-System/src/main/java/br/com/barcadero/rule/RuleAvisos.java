@@ -7,7 +7,7 @@ import br.com.barcadero.tables.Avisos;
 import br.com.barcadero.tables.Entidade;
 
 
-public class RuleAvisos extends RuleModelo {
+public class RuleAvisos extends RuleModelo<Avisos> {
 
 	private DaoAvisos daoAvisos;
 	public RuleAvisos(Session session) {
@@ -35,7 +35,7 @@ public class RuleAvisos extends RuleModelo {
 		return daoAvisos.update(entidade);
 	}
 
-	public Entidade find(long codigo) throws Exception {
+	public Avisos find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

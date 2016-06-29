@@ -22,7 +22,7 @@ public class BeanFuncionario extends SuperBean {
 	public BeanFuncionario() {
 		// TODO Auto-generated constructor stub
 		funcionario 	= new Funcionario();
-		ruleFuncionario = new RuleFuncionario(getDataBaseSession());
+		ruleFuncionario = new RuleFuncionario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		endereco		= new Endereco(getUsuarioLogado());
 	}
 	

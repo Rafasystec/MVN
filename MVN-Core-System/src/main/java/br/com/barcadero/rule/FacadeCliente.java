@@ -6,15 +6,19 @@ import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoCliente;
 import br.com.barcadero.tables.Cliente;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 public class FacadeCliente extends RuleModelo<Cliente> {
 
+	
+
 	private final DaoCliente daoCliente;
 	
-	public FacadeCliente(Session session) {
-		super(session);
-		daoCliente = new DaoCliente(session);
+	public FacadeCliente(Empresa empresa, Loja loja, Session session) {
+		super(empresa, loja, session);
+		daoCliente = new DaoCliente(empresa, loja, session);
 	}
 	
 	@Override

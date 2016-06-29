@@ -2,29 +2,29 @@ package br.com.barcadero.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
-
 import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.dao.DaoEstado;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Estado;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
 public class HandleCargaCidadesCE {
 
 	private DaoEstado daoEstado;
 	private DaoCidade daoCidade;
-	private Estado ceara   = null; 
-	private Usuario usuario= null;
-	public HandleCargaCidadesCE(Session session, Usuario usuario) {
-		// TODO Auto-generated constructor stub
-		daoEstado 	 = new DaoEstado(session);
-		daoCidade	 = new DaoCidade(session);
+	private Estado ceara   	= null; 
+	private Usuario usuario	= null;
+	
+	public HandleCargaCidadesCE(Empresa empresa, Loja loja, Session session, Usuario usuario) {
+		daoEstado 	 = new DaoEstado(empresa, loja, session);
+		daoCidade	 = new DaoCidade(empresa, loja, session);
 		this.usuario = usuario;
 	}
-	
+
 	public void loadCeara() throws Exception {
 		ceara = daoEstado.findByCodeIBGE("23");
 		if(ceara != null){
