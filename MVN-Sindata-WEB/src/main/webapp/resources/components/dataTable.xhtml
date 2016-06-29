@@ -1,0 +1,28 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition>
+
+	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->
+	<composite:interface>
+		<composite:attribute name="bean" shortDescription="Bean para ser passado para a grud" type="br.com.barcadero.web.beans.IBeanClass" />
+	</composite:interface>
+	
+	<p:dataTable id="objets" var="obj" value="#{bean.find}" filteredValue="#{bean.filteredValues}">                    
+        <p:columns value="#{bean.columns}" var="column" columnIndexVar="colIndex" sortBy="#{obj[column.property]}" filterBy="#{obj[column.property]}">
+            <f:facet name="header">
+                <h:outputText value="#{column.header}" />
+            </f:facet>
+            <h:outputText value="#{obj[column.property]}" />
+        </p:columns>
+    </p:dataTable>
+	
+</ui:composition>
+</html>
