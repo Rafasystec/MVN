@@ -165,10 +165,16 @@ public class HandleEndereco extends SuperBean{
 		return  HandleEndereco.bairros;
 	}
 	
-	public void openCadCidade(ActionEvent event) throws Exception {
+	public void openCadCidade() throws Exception {
 		HandleOpenEnderDialog.openCadCidade();
 		System.out.println("cad cidade");
 	}
+	
+	public void getOpen() {
+		System.out.println("Openned");
+	}
+	
+	
 	
 	public void openCadBairro(ActionEvent event) throws Exception {
 		HandleOpenEnderDialog.openCadBairro(String.valueOf(getCodCidade()));

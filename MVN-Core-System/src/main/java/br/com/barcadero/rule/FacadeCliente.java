@@ -46,7 +46,7 @@ public class FacadeCliente extends RuleModelo<Cliente> {
 	@Override
 	public List<Cliente> findAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return daoCliente.findAll();
 	}
 
 	@Override

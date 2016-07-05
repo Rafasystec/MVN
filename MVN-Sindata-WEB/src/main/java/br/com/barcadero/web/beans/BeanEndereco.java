@@ -6,11 +6,18 @@ import javax.faces.bean.RequestScoped;
 import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.core.enums.EnumUF;
 
+/**
+ * Usar a classe HandleEndereco
+ * @author antoniorafael
+ *
+ */
 @ManagedBean
 @RequestScoped
+@Deprecated
 public class BeanEndereco {
 	private long codBairro;
 	private long codPessoa;
+	private long codCidade;
 	private String tipo; 
 	private String numero;
 	private String cep;
@@ -18,7 +25,8 @@ public class BeanEndereco {
 	private String tpLograd;
 	private String complemento;
 	private String referencia;
-	//Getters and Setters
+	private String uf;
+	
 	public long getCodBairro() {
 		return codBairro;
 	}
@@ -92,6 +100,18 @@ public class BeanEndereco {
 
 	public EnumTipoLograd[] getTipoLogradouro() {
 		return EnumTipoLograd.values();
+	}
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+	public long getCodCidade() {
+		return codCidade;
+	}
+	public void setCodCidade(long codCidade) {
+		this.codCidade = codCidade;
 	}
 	
 }

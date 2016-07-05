@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:clx="http://java.sun.com/jsf/composite/components"
-	xmlns:p="http://primefaces.org/ui" template="../templates/main.xhtml">
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	 template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
 	<ui:param name="pageIcon" 		 value="users" />
@@ -16,7 +17,7 @@
 	<ui:define name="body">
 
 		<clx:buttonsCrud id="btnsUp" bean="#{cliente}"></clx:buttonsCrud>
-		<p:panel header="Cadastro de Clientes">
+		<p:panel id="pnlDadosCliente" header="Cadastro de Clientes">
 			<div class="form-group ">
 				<label class="control-label " for="email"> Nome </label>
 				<div class="input-group">
@@ -78,12 +79,12 @@
 					</h:selectOneRadio>
 				</div>
 
-				<label class="control-label " for="email"> UF Nascimento </label>
+				<label class="control-label " for="UFNat"> UF Nascimento </label>
 				<div class="input-group">
 					<p:selectOneMenu id="UFNat" title="UF de onde nasceu"
 						value="#{cliente.pFisica.ufNatural}">
 						<f:selectItem itemValue="0" itemLabel="Selecione" />
-						<f:selectItems value="#{endereco.uf}" />
+						<f:selectItems var="" value="#{ender.uf}" />
 					</p:selectOneMenu>
 				</div>
 				<label class="control-label " for="email"> Telefone </label>
@@ -114,18 +115,40 @@
 
 		<clx:address endereco="#{cliente.endereco}"	 >
 		</clx:address>
-		
+
 		<p:accordionPanel>
-	        <p:tab title="Consultar" closable="true">
-	        	<p:panel header="Consulta">
-		            <h:panelGrid columns="2" cellpadding="10">
-		              
-		                <h:outputText
-		                    value="The story begins as Don Vito Corleone..." />
-		            </h:panelGrid>
-	            </p:panel>
-	        </p:tab>
-    	</p:accordionPanel>
+			<p:tab title="Consultar" closable="true">
+				<p:panel header="Consulta">
+					<p:dataTable id="clientes" var="cli" value="#{cliente.clientes}" resizableColumns="true" style="margin-bottom:20px" 
+					selectionMode="single" selection="#{cliente.selectedClie}"  rowKey="#{cli.codigo}">
+					<!-- 
+					<p:ajax event="rowSelect" listener="#{cliente.onRowSelect}" update="@form" />
+					 -->	
+						<f:facet name="header">
+            				Clientes do Sistema
+        				</f:facet>
+						<p:column headerText="Código">
+							<h:outputText value="#{cli.codigo}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{cli.pessoaFisica.nome}" />
+						</p:column>
+						<p:column headerText="E-mail">
+							<h:outputText value="#{cli.pessoaFisica.email}" />
+						</p:column>
+						<p:column headerText="Celular">
+							<h:outputText value="#{cli.pessoaFisica.celular}" />
+						</p:column>
+						<p:column style="width:60px;text-align: center" headerText="Mais">
+				             <p:commandButton  icon="ui-icon-search" title="Detalhes do cliente">
+				                <f:setPropertyActionListener value="#{cli}" target="#{cliente.cliente}" />
+				            </p:commandButton>
+				        </p:column>
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+		</p:accordionPanel>
+		
 		<clx:buttonsCrud id="btnsButtom" bean="#{cliente}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>

@@ -4,8 +4,11 @@ package br.com.barcadero.web.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
+import org.primefaces.event.SelectEvent;
 
 import br.com.barcadero.core.enums.EnumEstadoCivil;
 import br.com.barcadero.core.enums.EnumTipoLograd;
@@ -19,10 +22,12 @@ import br.com.barcadero.tables.PessoaFisica;
 public class BeanCliente extends SuperBean {
 
 	private static final long serialVersionUID = 5470117896075103063L;
-	private Cliente	cliente		= null;
-	private PessoaFisica pFisica= null;
+	private Cliente	cliente			= null;
+	private List<Cliente> clientes 	= null;
+	private PessoaFisica pFisica	= null;
 	private FacadeCliente fcdCliente;
-	private Endereco endereco	= null;
+	private Endereco endereco		= null;
+	private Cliente selectedClie	= null;
 
 	public BeanCliente() {
 		// TODO Auto-generated constructor stub
@@ -31,6 +36,17 @@ public class BeanCliente extends SuperBean {
 		endereco	= new Endereco(getSession().getUsuarioLogado());
 		pFisica		= new PessoaFisica(getSession().getUsuarioLogado());
 		System.out.println("Bean cliente was created.");
+	}
+	
+	@PostConstruct
+	public void init() {
+		try {
+			clientes = fcdCliente.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			clientes = new ArrayList<Cliente>();
+		}
 	}
 	
 	public EnumTipoLograd[] getTpLogradouros() {
@@ -101,6 +117,27 @@ public class BeanCliente extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+       long codigo = ((Cliente)event.getObject()).getCodigo();
+       System.out.println("Codigo do cliente selecionado " + codigo);
+    }
+
+	public Cliente getSelectedClie() {
+		return selectedClie;
+	}
+
+	public void setSelectedClie(Cliente selectedClie) {
+		this.selectedClie = selectedClie;
 	}
 	
 }

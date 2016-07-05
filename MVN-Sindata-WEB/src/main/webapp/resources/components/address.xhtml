@@ -36,7 +36,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 					<p:outputLabel> tipo Logradouro:</p:outputLabel>
 					<p:selectOneMenu value="#{cc.attrs.endereco.tpLogradouro}">
 						<f:selectItem itemLabel="Selecione" itemValue="0" />
-						<f:selectItems value="#{endereco.tpLogradouros}" var="log"
+						<f:selectItems value="#{ender.tpLogradouros}" var="log"
 							itemValue="#{log.value}" itemLabel="#{log.lable}" />
 					</p:selectOneMenu>
 
@@ -44,20 +44,20 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 					<p:inputText id="lograd" value="#{cc.attrs.endereco.logradouro}"></p:inputText>
 
 					<p:outputLabel value="Estado:" for="estado" />
-					<p:selectOneMenu id="estado" value="#{endereco.codEstado}">
+					<p:selectOneMenu id="estado" value="#{ender.codEstado}">
 						<f:selectItem itemLabel="Selecione" itemValue="0" />
-						<f:selectItems value="#{endereco.estados}" var="estado"
+						<f:selectItems value="#{ender.estados}" var="estado"
 							itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}" />
-						<p:ajax update="cidade" listener="#{endereco.obterCidades}" />
+						<p:ajax update="cidade" listener="#{ender.obterCidades}" />
 					</p:selectOneMenu>
 			</p:panelGrid>
 			<p:panelGrid styleClass="noBorder" columns="3">
 					<p:outputLabel value="Cidade:" for="cidade" />
-					<p:selectOneMenu id="cidade" value="#{endereco.codCidade}">
+					<p:selectOneMenu id="cidade" value="#{ender.codCidade}">
 						<f:selectItem itemLabel="Selecione" itemValue="0" />
-						<f:selectItems value="#{endereco.cidades}" var="cidade"
+						<f:selectItems value="#{ender.cidades}" var="cidade"
 							itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}" />
-						<p:ajax update="bairro" listener="#{endereco.obterBairros}" />
+						<p:ajax update="bairro" listener="#{ender.obterBairros}" />
 					</p:selectOneMenu>
 			
 					<p:commandButton actionListener="#{ender.openCadCidade}" value="+" id="btnAddCidade" title="Adicionar uma nova Cidade" >
@@ -66,20 +66,14 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 					<p:outputLabel value="Bairro:" for="bairro" />
 					<p:selectOneMenu id="bairro" value="#{cc.attrs.endereco.codBairro}">
 						<f:selectItem itemLabel="Selecione" itemValue="0" />
-						<f:selectItems value="#{endereco.bairros}" var="bairro"
+						<f:selectItems value="#{ender.bairros}" var="bairro"
 							itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}" />
 					</p:selectOneMenu>
 					
 					
-					<p:commandButton   value="+" actionListener="#{buttonView.openCadBairro}" type="button" id="btnAddBairro" update="bairro" title="Adicionar um novo Bairro para a Cidade selecionada" >
-						<f:param name="productId" value="40" />
-					
+					<p:commandButton ajax="true"   value="+" actionListener="#{ender.openCadBairro}" type="button" id="btnAddBairro" update="bairro" title="Adicionar um novo Bairro para a Cidade selecionada" >
 					</p:commandButton>
-
 				</p:panelGrid>
-				<p:commandButton value="View" icon="ui-icon-extlink" actionListener="#{dfView.viewCars}" />
-    			<p:commandButton value="Options" icon="ui-icon-extlink" actionListener="#{dfView.viewCarsCustomized}" />
-				
 			</div>
 		</p:panel>
 	</composite:implementation>
