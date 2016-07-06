@@ -44,10 +44,10 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 					<p:inputText id="lograd" value="#{cc.attrs.endereco.logradouro}"></p:inputText>
 
 					<p:outputLabel value="Estado:" for="estado" />
-					<p:selectOneMenu id="estado" value="#{ender.codEstado}">
+					<p:selectOneMenu id="estado" value="#{ender.ufSelected}">
 						<f:selectItem itemLabel="Selecione" itemValue="0" />
 						<f:selectItems value="#{ender.estados}" var="estado"
-							itemLabel="#{estado.descricao}" itemValue="#{estado.codigo}" />
+							itemLabel="#{estado.descricao}" itemValue="#{estado.uf}" />
 						<p:ajax update="cidade" listener="#{ender.obterCidades}" />
 					</p:selectOneMenu>
 			</p:panelGrid>

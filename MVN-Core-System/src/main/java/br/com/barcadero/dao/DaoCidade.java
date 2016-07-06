@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Empresa;
@@ -17,12 +18,14 @@ import br.com.barcadero.tables.Loja;
 
 public class DaoCidade extends DaoModelo<Cidade>{
 
+	
+	private DaoEstado daoEstado;
 	public DaoCidade(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+		daoEstado = new DaoEstado(empresa, loja, session);
 	}
 
-	private DaoEstado daoEstado;
+	
 	
 //	public DaoCidade(Session session) {
 //		super(session);
@@ -50,7 +53,13 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		return super.insert(entidade);
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Utilizar a obtencao das cidades pela UF
+	 * @param codEstado
+	 * @return
+	 * @throws Exception
+	 */
+	@Deprecated
 	public List<Cidade> getCidadesByCodEstado(long codEstado) throws Exception{
 		List<Cidade> cidades	= null;
 		Query qry				= null;
@@ -59,6 +68,46 @@ public class DaoCidade extends DaoModelo<Cidade>{
 			qry.setParameter("codEstado", codEstado);
 			cidades	= qry.list();
 			return cidades;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Obter as cidades por UF
+	 * @param uf
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Cidade> getCidadesByUF(EnumUF uf) throws Exception{
+		List<Cidade> cidades	= null;
+		Query qry				= null;
+		try {
+			qry	= getSession().getNamedQuery(Cidade.FIND_BY_UF);
+			qry.setParameter("uf", String.valueOf(uf));
+			cidades	= qry.list();
+			return cidades;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 
+	 * @param descricao
+	 * @param uf
+	 * @return
+	 * @throws Exception
+	 */
+	public Cidade findByDescricaoEUF(String descricao, EnumUF uf) throws Exception{
+		Query qry				= null;
+		try {
+			qry	= getSession().getNamedQuery(Cidade.FIND_BY_DESC_AND_UF);
+			qry.setParameter("uf", String.valueOf(uf));
+			qry.setParameter("descricao", descricao);
+			return (Cidade) qry.uniqueResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
@@ -133,8 +182,8 @@ public class DaoCidade extends DaoModelo<Cidade>{
 	public int deleteCidadesByEstado(String codeIBGEEstado) {
 		Estado estado = daoEstado.findByCodeIBGE(codeIBGEEstado); 
 		if(estado != null){
-			String query = "DELETE FROM Cidade WHERE cod_estado = :codEstado";
-			Query qry = getSession().createQuery(query).setLong("codEstado", estado.getCodigo());
+			String query = "DELETE FROM Cidade WHERE uf = :uf";
+			Query qry = getSession().createQuery(query).setParameter("uf", String.valueOf(estado.getUf())) ;
 			System.out.println("Executando query: " + qry.getQueryString());
 			int rows = qry.executeUpdate();
 			System.out.println("Quantidade de registros afetados: " + rows);

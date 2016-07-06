@@ -1,29 +1,58 @@
 package br.com.barcadero.web.beans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.FacadeBairro;
+import br.com.barcadero.rule.FacadeCidade;
 import br.com.barcadero.tables.Bairro;
+import br.com.barcadero.tables.Cidade;
 
 @ManagedBean
+@RequestScoped
 public class BeanBairro extends SuperBean {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5859355521669947983L;
 	private Bairro bairro;
 	private FacadeBairro fcdBairro;
+	private FacadeCidade fcdCidade;
+	private long codCidade;
+	private List<Cidade> cidades;
+	private List<Bairro> bairros;
+	private long codEstado;
 	
 	public BeanBairro() {
-		// TODO Auto-generated constructor stub
 		bairro 		= new Bairro(getUsuarioLogado());
 		fcdBairro	= new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdCidade	= new FacadeCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	}
+	
+	public List<Cidade> getCidades() {
+		try{
+			this.cidades = fcdCidade.getCidadesByCodEstado(getCodEstado());
+			return cidades;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Bairro> getBairros() {
+		try{
+			if(getCodCidade() != 0 ){
+				this.bairros = this.fcdBairro.getBairrosByCodCidade(getCodCidade());
+			}
+			return bairros;
+		}catch(Exception e){
+			e.printStackTrace();
+			return bairros;
+		}
 	}
 	
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
 		String ret = fcdBairro.insert(bairro);
 		System.out.println(ret);
 		return null;
@@ -45,7 +74,7 @@ public class BeanBairro extends SuperBean {
 
 	@Override
 	public String novo() throws Exception {
-		// TODO Auto-generated method stub
+		// TODO Preparar o forme para um novo registro
 		bairro = new Bairro(getUsuarioLogado());
 		return null;
 	}
@@ -62,6 +91,30 @@ public class BeanBairro extends SuperBean {
 
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
+	}
+
+	public long getCodCidade() {
+		return codCidade;
+	}
+
+	public void setCodCidade(long codCidade) {
+		this.codCidade = codCidade;
+	}
+
+	public long getCodEstado() {
+		return codEstado;
+	}
+
+	public void setCodEstado(long codEstado) {
+		this.codEstado = codEstado;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
+	public void setBairros(List<Bairro> bairros) {
+		this.bairros = bairros;
 	}
 
 }

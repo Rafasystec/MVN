@@ -28,7 +28,10 @@ a anotação @NamedQueries quando queremos definir várias consultas.
 			@NamedQuery(name=Cidade.FIND_ALL,query="FROM Cidade"),
 			@NamedQuery(name=Cidade.FIND_BY_CODE_ESTADO,query="FROM Cidade WHERE cod_estado = :codEstado"),
 			@NamedQuery(name=Cidade.FIND_BY_CODE,query="FROM Cidade WHERE codigo = :codigo"),
-			@NamedQuery(name=Cidade.FIND_BY_DT_CADASTRO,query="FROM Cidade WHERE dtCadastro = :dtCadastro")
+			@NamedQuery(name=Cidade.FIND_BY_DT_CADASTRO,query="FROM Cidade WHERE dtCadastro = :dtCadastro"),
+			@NamedQuery(name=Cidade.FIND_BY_UF,query="FROM Cidade WHERE uf = :uf"),
+			@NamedQuery(name=Cidade.FIND_BY_DESC_AND_UF,query="FROM Cidade WHERE uf = :uf AND descricao = :descricao")
+			
 		}
 )
 @Entity
@@ -46,8 +49,11 @@ public class Cidade extends Entidade{
 	}
 	public static final String FIND_BY_CODE = "Cidade.findByCode";
 	public static final String FIND_ALL 	= "Cidade.findAll";
+	public static final String FIND_BY_UF 	= "Cidade.findByUF";
 	public static final String FIND_BY_CODE_ESTADO 	= "Cidade.findByCodEstado";
 	public static final String FIND_BY_DT_CADASTRO 	= "Cidade.findByDtCadastro";
+	public static final String FIND_BY_DESC_AND_UF 	= "Cidade.findByDescAndUF";
+	
 	@Column(name="descricao",length=100)
 	private String descricao;
 	@Column(name="cod_ibge",length=14)
@@ -57,7 +63,7 @@ public class Cidade extends Entidade{
 	private List<Bairro> bairros = new ArrayList<Bairro>();
 	
 	@ManyToOne
-	@JoinColumn(name="cod_estado", referencedColumnName="codigo")
+	@JoinColumn(name="uf", referencedColumnName="uf")
 	private Estado estado ;
 	
 	public Estado getEstado() {
@@ -84,12 +90,4 @@ public class Cidade extends Entidade{
 	public void setCodIbge(String codIbge) {
 		this.codIbge = codIbge;
 	}
-	
-//	public long getCodEstado() {
-//		return codEstado;
-//	}
-//	public void setCodEstado(long codEstado) {
-//		this.codEstado = codEstado;
-//	}
-	
 }

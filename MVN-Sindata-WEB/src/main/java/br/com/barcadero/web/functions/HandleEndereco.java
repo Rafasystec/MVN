@@ -26,6 +26,7 @@ public class HandleEndereco extends SuperBean{
 	private static final long serialVersionUID = -2770111081253143663L;
 	private Endereco ender;
 	private EnumUF[] uf;
+	private EnumUF ufSelected;
 	private FacadeEstado fcdEstado;
 	private FacadeCidade fcdCidade;
 	private FacadeBairro fcdBairro;
@@ -146,12 +147,12 @@ public class HandleEndereco extends SuperBean{
 	}
 	
 	public List<Cidade> obterCidades() throws Exception {
-		HandleEndereco.cidades = fcdCidade.getCidadesByCodEstado(getCodEstado()); 
+		HandleEndereco.cidades = fcdCidade.getCidadesByUF(getUfSelected()); 
 		return HandleEndereco.cidades; 
 	}
 	
 	public void hendleReturnCidades(SelectEvent event) throws Exception {
-		HandleEndereco.cidades = fcdCidade.getCidadesByCodEstado(getCodEstado()); 
+		HandleEndereco.cidades = fcdCidade.getCidadesByUF(getUfSelected()); 
 		System.out.println("hendleReturnCidades Evento event: " + event); 
 	}
 	
@@ -185,6 +186,14 @@ public class HandleEndereco extends SuperBean{
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public EnumUF getUfSelected() {
+		return ufSelected;
+	}
+
+	public void setUfSelected(EnumUF ufSelected) {
+		this.ufSelected = ufSelected;
 	}
 	
 }

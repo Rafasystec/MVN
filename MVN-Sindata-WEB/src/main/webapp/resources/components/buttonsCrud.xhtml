@@ -28,17 +28,11 @@
 				<p:tooltip for="#{cc.attrs.id}-print" trackMouse="true" />
 			</f:facet>
 			
-			<f:facet name="right">
-				<p:menuButton title="Mais opções" id="#{cc.attrs.id}-options" value="Opções">
-					<p:menuitem value="Cancelar"  actionListener="#{cc.attrs.actionCancel}" icon="ui-icon-close" />
-					<p:menuitem value="Voltar" 	  actionListener="#{cc.attrs.actionBack}" icon="ui-icon-arrowrefresh-1-w" />
-					<p:menuitem value="Consultar" actionListener="#{cc.attrs.actionFind}" ajax="false" icon="ui-icon-close" />
-				</p:menuButton>
-				<p:tooltip for="#{cc.attrs.id}-options" trackMouse="true" />
-			</f:facet>
+			
 		</p:toolbar>
 	</composite:implementation>
 </ui:composition>
+
 
 
 

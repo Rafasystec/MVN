@@ -12,7 +12,7 @@ import javax.persistence.Table;
 		{
 			@NamedQuery(name=Bairro.FIND		,query="FROM Bairro b"),
 			@NamedQuery(name=Bairro.FIND_BY_CODE,query="FROM Bairro b WHERE b.codigo 	 = :codigo"),
-			@NamedQuery(name=Bairro.FIND_BY_CID ,query="FROM Bairro WHERE cod_cidade = :codCidade")
+			@NamedQuery(name=Bairro.FIND_BY_CID ,query="FROM Bairro WHERE cod_cidade = :codCidade"),
 		}
 )
 @Entity

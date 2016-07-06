@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Empresa;
@@ -56,7 +57,14 @@ public class FacadeCidade extends RuleModelo<Cidade> {
 		System.out.println("Procurando cidade pelo codigo: " + codigo);
 		return this.daoCidade.find(codigo);
 	}
-		
+	
+	/**
+	 * Utilize a busca por UF
+	 * @param codEstado
+	 * @return
+	 * @throws Exception
+	 */
+	@Deprecated	
 	public List<Cidade> getCidadesByCodEstado(long codEstado) throws Exception{
 		try {
 			System.out.println("Procurando cidades do estado de codigo: " +codEstado);
@@ -88,6 +96,16 @@ public class FacadeCidade extends RuleModelo<Cidade> {
 	 */
 	public List<Entidade> findAllByDtCadastro(Date date) throws Exception{
 		return daoCidade.findAllByDtCadastro(date);
+	}
+	
+	/**
+	 * 
+	 * @param uf
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Cidade> getCidadesByUF(EnumUF uf) throws Exception{
+		return daoCidade.getCidadesByUF(uf);
 	}
 
 }
