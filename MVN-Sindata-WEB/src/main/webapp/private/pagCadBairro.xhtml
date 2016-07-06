@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html 
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Cadastro de Cidades</title>
-</h:head>
-<h:body>
-	<ui:composition template="/index.xhtml">
-	<ui:define name="conteudo">
-		<h:form id="cadBairros">
-			<p:growl id="msg" showDetail="true" sticky="true"></p:growl>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	 template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" 		 value="users" />
+	<ui:param name="pageTitle" 		 value="Clientes" />
+
+	<ui:define name="body">
 		<p:panel header="Cadastro de Bairros">
 			<p:panelGrid columns="1">
-				<!-- Panel do butoes -->
-				<p:panelGrid columns="6">
-					<p:commandButton value="Salvar" action="#{beanBairro.inserir}" update="grid" />
-					<p:commandButton value="Consultar" update="grid"/>
-				</p:panelGrid>
-				
 				<!-- Panel do formulario -->
 				<p:panelGrid columns="4">
 					<p:outputLabel value="Descrição:" for="descricao"/>
-					<p:inputText id="descricao" required="true" value="#{beanBairro.descricao}">
+					<p:inputText id="descricao" required="true" value="#{beanBairro.bairro.descricao}">
 						<f:validateLength minimum="3" />
 					</p:inputText>
 					<p:outputLabel value="Selecione o Minicípio:" for="cidades"/>
-					<p:selectOneMenu id="cidades" required="true" value="#{beanBairro.codCidade}" >
+					<p:selectOneMenu id="cidades" required="true" value="#{beanBairro.bairro.c}" >
 						<f:selectItem itemValue="0" itemLabel="Selecione o município"/>
 						<f:selectItems value="#{beanBairro.cidades}" var="cidades" itemValue="#{cidades.codigo}" itemLabel="#{cidades.descricao}"/>
 						<p:ajax event="change" update="grid" />
