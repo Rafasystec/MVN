@@ -48,5 +48,9 @@
 		<mapping class="br.com.barcadero.tables.OrdemServicoDioptria"	/>
 		<mapping class="br.com.barcadero.tables.OrdemServicoItens"	/>
 		<mapping class="br.com.barcadero.tables.Marcas"	/>
+		<mapping class="br.com.barcadero.tables.Estoque"/>
+		<mapping class="br.com.barcadero.tables.EstoqueDetalhe"/>
+		<mapping class="br.com.barcadero.tables.EstoqueBaixa"/>
+		
 	</session-factory>
 </hibernate-configuration>

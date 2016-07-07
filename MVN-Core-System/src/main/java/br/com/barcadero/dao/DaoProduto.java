@@ -35,5 +35,24 @@ public class DaoProduto extends DaoModelo <Produto>{
 		qry.setParameter("date", date);
 		return qry.list();
 	}
+	
+	/**
+	 * rocura o produto pelo codigo ou pela descricao
+	 * @param codigoOrDesc
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Produto> findByCodOrDesc(String codigoOrDesc) throws Exception{
+		Query qry  = getSession().getNamedQuery(Produto.FIND_BY_COD_OR_DESC);
+		long codigo = 0;
+		try {
+			codigo = Long.parseLong(codigoOrDesc);
+		} catch (Exception e) {
+			codigo = 0;
+		}
+		qry.setParameter("codigo"	, codigo);
+		qry.setParameter("descricao", "%"+codigoOrDesc+"%");
+		return qry.list();
+	}
 
 }

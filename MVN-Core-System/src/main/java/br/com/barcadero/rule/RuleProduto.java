@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,5 +54,29 @@ public class RuleProduto extends RuleModelo<Produto> {
 		return (List<Produto>)qry.list();
 	}
 	
-
+	/**
+	 * Procura pelo codigo ou pela descricao
+	 * @param codigoOrDesc
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Produto> findByCodOrDesc(String codigoOrDesc) throws Exception{
+		return daoProduto.findByCodOrDesc(codigoOrDesc);
+	}
+	
+	/**
+	 * 
+	 * @param codigoOrDesc
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> getAutoComplete(String codigoOrDesc) throws Exception{
+		List<Produto> produtos 	= daoProduto.findByCodOrDesc(codigoOrDesc);
+		List<String> list 		= new ArrayList<String>();
+		for (Produto produto : produtos) {
+			String description = produto.getCodigo() + " - " + produto.getDescricao();
+			list.add(description);
+		}
+		return list;
+	}
 }

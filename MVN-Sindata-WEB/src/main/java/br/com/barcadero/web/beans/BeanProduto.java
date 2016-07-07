@@ -2,9 +2,7 @@ package br.com.barcadero.web.beans;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
-
 import br.com.barcadero.core.enums.EnumCSTICMS;
 import br.com.barcadero.core.enums.EnumCSTPIS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;

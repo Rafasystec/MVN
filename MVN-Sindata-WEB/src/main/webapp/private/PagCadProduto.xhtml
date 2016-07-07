@@ -43,17 +43,17 @@ xmlns:h="http://java.sun.com/jsf/html"
 					
 						<p:outputLabel value="Dt. Ini. Promo." for="dtIniPromo"/>
 						<p:calendar id="dtIniPromo" value="#{produto.produto.dtInicioPromo}" pattern="dd/MM/yyyy" 
-									required="true" maxlength="10" />
+									required="false" maxlength="10" />
 					
 						<p:outputLabel value="Dt. Term. Promo." for="dtTermPromo"/>
 						<p:calendar id="dtTermPromo" value="#{produto.produto.dtTerminPromo}" pattern="dd/MM/yyyy" 
-									required="true" maxlength="10" />
+									required="false" maxlength="10" />
 					</p:panelGrid>		
 				</p:panel>					
 				<p:panel header="Tributação">
 					<p:panelGrid columns="1" styleClass="noBorder">
 						<p:outputLabel value="Origem" for="origem"/>
-						<p:selectOneMenu style="width:200em" value="#{produto.produto.origemIcms}" >
+						<p:selectOneMenu style="width:200px" value="#{produto.produto.origemIcms}" >
 							<f:selectItems id="origem" value="#{produto.origensIcms}" var="origem" itemLabel="#{origem.label}" />
 						</p:selectOneMenu>
 					

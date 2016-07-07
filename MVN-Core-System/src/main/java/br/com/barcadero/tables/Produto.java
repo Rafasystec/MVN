@@ -2,26 +2,28 @@ package br.com.barcadero.tables;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import br.com.barcadero.core.enums.EnumCSTICMS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
 import br.com.barcadero.core.enums.EnumTipoProduto;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 
 @NamedQueries({
-	@NamedQuery(name=Produto.FIND_ALL		,query="FROM Produto"),
-	@NamedQuery(name=Produto.FIND_BY_CODE	,query="FROM Produto WHERE codigo = :codigo"),
-	@NamedQuery(name=Produto.FIND_BY_DATE	,query="FROM Produto WHERE dt_cadastro = :date")
+	@NamedQuery(name=Produto.FIND_ALL			,query="FROM Produto"),
+	@NamedQuery(name=Produto.FIND_BY_CODE		,query="FROM Produto WHERE codigo = :codigo"),
+	@NamedQuery(name=Produto.FIND_BY_DATE		,query="FROM Produto WHERE dt_cadastro = :date"),
+	@NamedQuery(name=Produto.FIND_BY_COD_OR_DESC,query="FROM Produto WHERE codigo = :codigo OR descricao Like :descricao")
+	
 })
 
 @Entity
@@ -36,9 +38,10 @@ public class Produto extends EntidadeEmpresa {
 		super(empresa, usuario);
 		// TODO Auto-generated constructor stub
 	}
-	public static final String FIND_ALL		= "Produto.findAll";
-	public static final String FIND_BY_CODE = "Produto.findByCode";
-	public static final String FIND_BY_DATE = "Produto.findByDate";
+	public static final String FIND_ALL				= "Produto.findAll";
+	public static final String FIND_BY_CODE 		= "Produto.findByCode";
+	public static final String FIND_BY_DATE 		= "Produto.findByDate";
+	public static final String FIND_BY_COD_OR_DESC 	= "Produto.findByCodOrDesc";
 	
 	@Column(name="descricao", nullable=false)
 	private String descricao = "";
@@ -79,10 +82,10 @@ public class Produto extends EntidadeEmpresa {
 	private BigDecimal precoVenda = new BigDecimal(0.00);
 	@Column(name="preco_promocao", nullable=false)
 	private BigDecimal precoPromo = new BigDecimal(0.00);
-	@Column(name="dt_inicio_promo", nullable=false)
+	@Column(name="dt_inicio_promo", nullable=true)
 	@Temporal(TemporalType.DATE)
 	private Date dtInicioPromo;
-	@Column(name="dt_termino_promo", nullable=false)
+	@Column(name="dt_termino_promo", nullable=true)
 	@Temporal(TemporalType.DATE)
 	private Date dtTerminPromo;
 	@Column(name="obs_fisco", nullable=false)
@@ -98,6 +101,9 @@ public class Produto extends EntidadeEmpresa {
 	@Column(name="TIPO_PRODUTO")
 	@Enumerated(EnumType.STRING)
 	private EnumTipoProduto tipoProduto;
+	
+	@OneToMany(mappedBy="produto", targetEntity=Estoque.class)
+	private List<Estoque> estoques;
 	
 	public String getCdProd() {
 		return cdProd;
@@ -229,6 +235,9 @@ public class Produto extends EntidadeEmpresa {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
+		if(descricao != null){
+			descricao = descricao.toUpperCase();
+		}
 		this.descricao = descricao;
 	}
 	public String getObsFisco() {
