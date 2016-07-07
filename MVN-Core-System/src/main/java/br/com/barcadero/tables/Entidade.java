@@ -17,7 +17,12 @@ import javax.persistence.TemporalType;
 @MappedSuperclass
 public abstract class Entidade implements Serializable {
 	
-	private static final long serialVersionUID = -4937210358058008264L;
+	//private static final long serialVersionUID = -4937210358058008264L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8535860641291662663L;
 
 	public Entidade() {
 		// TODO Auto-generated constructor stub

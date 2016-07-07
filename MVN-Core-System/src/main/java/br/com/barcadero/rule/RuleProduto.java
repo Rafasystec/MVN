@@ -74,9 +74,28 @@ public class RuleProduto extends RuleModelo<Produto> {
 		List<Produto> produtos 	= daoProduto.findByCodOrDesc(codigoOrDesc);
 		List<String> list 		= new ArrayList<String>();
 		for (Produto produto : produtos) {
-			String description = produto.getCodigo() + " - " + produto.getDescricao();
+			String description = produto.getCodigo() + " -|- " + produto.getDescricao();
 			list.add(description);
 		}
 		return list;
+	}
+	/**
+	 * Extrair o codigo do produto quando gerado pelo metodo getAutoComplete(String codigoOrDesc)
+	 * @param selected
+	 * @return
+	 */
+	public long extrairCodigo(String selected) {
+		if(selected != null && !selected.isEmpty()){
+			String[] parts = selected.split(" -|- ");
+			if(parts != null && parts.length > 1){
+				try {
+					return Long.parseLong(parts[0]);
+				} catch (Exception e) {
+					// TODO: handle exception
+					return 0;
+				}
+			}
+		}
+		return 0;
 	}
 }
