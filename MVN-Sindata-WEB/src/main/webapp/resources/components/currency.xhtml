@@ -1,0 +1,37 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition>
+	<composite:interface>
+		<composite:attribute name="id" shortDescription="ID do componente" />
+		<composite:attribute name="title"
+			shortDescription="Titula que aparecera ao passar o mouse"
+			type="java.lang.String" />
+		<composite:attribute name="value"
+			shortDescription="Valor do Managed bean" />
+		<composite:attribute name="required"
+			shortDescription="Indica se o campo é obrigatório" required="false"
+			type="java.lang.Boolean" default="Boolean.FALSE" />
+		<composite:attribute name="requiredMessage" required="false"
+			shortDescription="Mensagem a ser exibida caso o campo seja obrigario e nao seja informado"
+			type="java.lang.String" />
+		<composite:attribute name="lable" shortDescription="Rotulo do campo"
+			type="java.lang.String" />
+	</composite:interface>
+	<composite:implementation>
+		<p:outputLabel id="#{cc.attrs.id}" for="#{cc.attrs.id}"
+			value="#{cc.attrs.lable}" />
+		<p:inputText id="#{cc.attrs.id}" 
+			styleClass="autoNumber"
+			style="width:100%;margin-right:4px;" title="#{cc.attrs.title}"
+			value="#{cc.attrs.value}" required="#{cc.attrs.riquired}"
+			requiredMessage="#{cc.attrs.requiredMessage}">
+			<f:converter converterId="bigDecimalConverter" />
+		</p:inputText>
+	</composite:implementation>
+</ui:composition>
+</html>

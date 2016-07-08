@@ -24,28 +24,18 @@
 				</p:autoComplete>
 
 				<p:outputLabel value="Quantidade" />
-				<p:inputText value="#{beanEstoque.estoque.quantidade}"/>
+				<p:inputText id="txtQtde" value="#{beanEstoque.estoque.quantidade}"/>
 				
 				<p:outputLabel value="Estoque Máximo"/>
-				<p:inputText value="#{beanEstoque.estoque.estoqMax}"/>
+				<p:inputText id="txtQtdeMax" value="#{beanEstoque.estoque.estoqMax}"/>
 				
 				<p:outputLabel value="Estoque Mínimo" />
-				<p:inputText value="#{beanEstoque.estoque.estoqMin}"/>
+				<p:inputText id="txtQtdeMin" value="#{beanEstoque.estoque.estoqMin}"/>
 				
-				<p:outputLabel value="Estqoue implantação"/>
-				<p:inputText value="#{beanEstoque.estoque.estoqAnterior}">
+				<p:outputLabel value="Estoque implantação"/>
+				<p:inputText id="txtQtdeAnt" value="#{beanEstoque.estoque.estoqAnterior}">
 				</p:inputText>
-				
-				<p:inputText id="salario"
-								styleClass="autoNumber"
-								style="width:100%;margin-right:4px;"
-			             		title="Salário do Colaborador (Ex.: 1.199,99)"
-			             		label="Salário"
-								value="#{colaboradorDialog.colaborador.salario}" 
-								required="true">
-								<f:converter converterId="bigDecimalConverter" />
-							</p:inputText>
-				
+					
 			</p:panelGrid>
 		</p:panel>
 		<clx:buttonsCrud id="btnsDown" bean="#{beanEstoque}"></clx:buttonsCrud>
