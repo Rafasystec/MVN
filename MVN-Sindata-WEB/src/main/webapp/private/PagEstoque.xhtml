@@ -33,7 +33,18 @@
 				<p:inputText value="#{beanEstoque.estoque.estoqMin}"/>
 				
 				<p:outputLabel value="Estqoue implantação"/>
-				<p:inputText value="#{beanEstoque.estoque.estoqAnterior}"/>
+				<p:inputText value="#{beanEstoque.estoque.estoqAnterior}">
+				</p:inputText>
+				
+				<p:inputText id="salario"
+								styleClass="autoNumber"
+								style="width:100%;margin-right:4px;"
+			             		title="Salário do Colaborador (Ex.: 1.199,99)"
+			             		label="Salário"
+								value="#{colaboradorDialog.colaborador.salario}" 
+								required="true">
+								<f:converter converterId="bigDecimalConverter" />
+							</p:inputText>
 				
 			</p:panelGrid>
 		</p:panel>
