@@ -23,11 +23,11 @@ public class BigDecimalCoverter implements Converter {
 			if (value == null || value.isEmpty()) {
 				return value;
 			}
-						
+			value = value.replace(".","").replace(",", ".");			
 			df = new DecimalFormat("#,##0.00");
 			df.setParseBigDecimal(true);
-	        
-			return (BigDecimal) df.parse(value);
+	        BigDecimal decimal = (BigDecimal) df.parse(value);
+			return decimal;
 	        
 		} catch (Exception e) {
 			throw new ConverterException(HandleMessage.converterError(e.getMessage()));

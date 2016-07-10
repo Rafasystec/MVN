@@ -1,0 +1,66 @@
+package br.com.barcadero.web.beans;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+import br.com.barcadero.rule.RuleCaixaAbertura;
+import br.com.barcadero.tables.CaixaAbertura;
+
+@ManagedBean
+@RequestScoped
+public class BeanAbrirCaixa extends SuperBean {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7436825363700179568L;
+	private CaixaAbertura caixaAbertura 		= null;
+	private RuleCaixaAbertura ruleCaixaAbertura = null;
+	
+	public BeanAbrirCaixa() {
+		// TODO Auto-generated constructor stub
+		caixaAbertura 		= new CaixaAbertura(getLojaLogada(), getUsuarioLogado());
+		ruleCaixaAbertura	= new RuleCaixaAbertura(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	}
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String salvar() throws Exception {
+		String ret = ruleCaixaAbertura.insert(caixaAbertura);
+		System.out.println(ret);
+		caixaAbertura = new CaixaAbertura(getLojaLogada(), getUsuarioLogado());
+		return null;
+	}
+
+	@Override
+	public String alterar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deletar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String novo() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CaixaAbertura getCaixaAbertura() {
+		return caixaAbertura;
+	}
+
+	public void setCaixaAbertura(CaixaAbertura caixaAbertura) {
+		this.caixaAbertura = caixaAbertura;
+	}
+
+}

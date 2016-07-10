@@ -1,7 +1,5 @@
 package br.com.barcadero.tables;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,10 +26,10 @@ public class EstoqueBaixa extends EntidadeEmpresa {
 	}
 	
 	private static final long serialVersionUID = 6712079919654584412L;
-	@Column(name="QTD_ANTERIOR",precision=3,length=12)
-	private BigDecimal qtdAnterior;
-	@Column(name="QTD_BAIXA",precision=3,length=12)
-	private BigDecimal qtdBaixa;
+	@Column(name="QTD_ANTERIOR",length=12)
+	private int qtdAnterior;
+	@Column(name="QTD_BAIXA",length=12)
+	private int qtdBaixa;
 	
 	@ManyToOne
 	@JoinColumn(name="estoque", referencedColumnName="codigo")
@@ -41,19 +39,19 @@ public class EstoqueBaixa extends EntidadeEmpresa {
 	@PrimaryKeyJoinColumn
 	private Produto produto;
 
-	public BigDecimal getQtdAnterior() {
+	public int getQtdAnterior() {
 		return qtdAnterior;
 	}
 
-	public void setQtdAnterior(BigDecimal qtdAnterior) {
+	public void setQtdAnterior(int qtdAnterior) {
 		this.qtdAnterior = qtdAnterior;
 	}
 
-	public BigDecimal getQtdBaixa() {
+	public int getQtdBaixa() {
 		return qtdBaixa;
 	}
 
-	public void setQtdBaixa(BigDecimal qtdBaixa) {
+	public void setQtdBaixa(int qtdBaixa) {
 		this.qtdBaixa = qtdBaixa;
 	}
 
@@ -79,8 +77,8 @@ public class EstoqueBaixa extends EntidadeEmpresa {
 		int result = super.hashCode();
 		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
-		result = prime * result + ((qtdAnterior == null) ? 0 : qtdAnterior.hashCode());
-		result = prime * result + ((qtdBaixa == null) ? 0 : qtdBaixa.hashCode());
+		result = prime * result + qtdAnterior;
+		result = prime * result + qtdBaixa;
 		return result;
 	}
 
@@ -103,15 +101,9 @@ public class EstoqueBaixa extends EntidadeEmpresa {
 				return false;
 		} else if (!produto.equals(other.produto))
 			return false;
-		if (qtdAnterior == null) {
-			if (other.qtdAnterior != null)
-				return false;
-		} else if (!qtdAnterior.equals(other.qtdAnterior))
+		if (qtdAnterior != other.qtdAnterior)
 			return false;
-		if (qtdBaixa == null) {
-			if (other.qtdBaixa != null)
-				return false;
-		} else if (!qtdBaixa.equals(other.qtdBaixa))
+		if (qtdBaixa != other.qtdBaixa)
 			return false;
 		return true;
 	}

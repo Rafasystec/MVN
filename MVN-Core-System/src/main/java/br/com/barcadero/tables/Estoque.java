@@ -32,14 +32,14 @@ public class Estoque extends EntidadeEmpresa {
 		super(empresa, usuario);
 	}
 	
-	@Column(name="QUANTIDADE",precision=3,length=12)
-	private BigDecimal quantidade;
-	@Column(name="ESTOQ_MAX",precision=3,length=12)
-	private BigDecimal estoqMax;
-	@Column(name="ESTOQ_MIN",precision=3,length=12)
-	private BigDecimal estoqMin;
-	@Column(name="ESTOQ_ANTERIOR",precision=3,length=12)
-	private BigDecimal estoqAnterior;
+	@Column(name="QUANTIDADE",length=12)
+	private int quantidade = 0;
+	@Column(name="ESTOQ_MAX",length=12)
+	private int estoqMax = 0;
+	@Column(name="ESTOQ_MIN",length=12)
+	private int estoqMin= 0;
+	@Column(name="ESTOQ_ANTERIOR",length=12)
+	private int estoqAnterior= 0 ;
 	
 	@ManyToOne
 	@JoinColumn(name="produto", referencedColumnName="codigo")
@@ -48,81 +48,6 @@ public class Estoque extends EntidadeEmpresa {
 	@OneToMany(mappedBy="estoque", targetEntity=EstoqueBaixa.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<EstoqueBaixa> baixas;
 	
-	public BigDecimal getQuantidade() {
-		return quantidade;
-	}
-	public void setQuantidade(BigDecimal quantidade) {
-		this.quantidade = quantidade;
-	}
-	public BigDecimal getEstoqMax() {
-		return estoqMax;
-	}
-	public void setEstoqMax(BigDecimal estoqMax) {
-		this.estoqMax = estoqMax;
-	}
-	public BigDecimal getEstoqMin() {
-		return estoqMin;
-	}
-	public void setEstoqMin(BigDecimal estoqMin) {
-		this.estoqMin = estoqMin;
-	}
-	public BigDecimal getEstoqAnterior() {
-		return estoqAnterior;
-	}
-	public void setEstoqAnterior(BigDecimal estoqAnterior) {
-		this.estoqAnterior = estoqAnterior;
-	}
-	
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((estoqAnterior == null) ? 0 : estoqAnterior.hashCode());
-		result = prime * result + ((estoqMax == null) ? 0 : estoqMax.hashCode());
-		result = prime * result + ((estoqMin == null) ? 0 : estoqMin.hashCode());
-		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
-		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Estoque other = (Estoque) obj;
-		if (estoqAnterior == null) {
-			if (other.estoqAnterior != null)
-				return false;
-		} else if (!estoqAnterior.equals(other.estoqAnterior))
-			return false;
-		if (estoqMax == null) {
-			if (other.estoqMax != null)
-				return false;
-		} else if (!estoqMax.equals(other.estoqMax))
-			return false;
-		if (estoqMin == null) {
-			if (other.estoqMin != null)
-				return false;
-		} else if (!estoqMin.equals(other.estoqMin))
-			return false;
-		if (produto == null) {
-			if (other.produto != null)
-				return false;
-		} else if (!produto.equals(other.produto))
-			return false;
-		if (quantidade == null) {
-			if (other.quantidade != null)
-				return false;
-		} else if (!quantidade.equals(other.quantidade))
-			return false;
-		return true;
-	}
-
 	public Produto getProduto() {
 		return produto;
 	}
@@ -137,6 +62,81 @@ public class Estoque extends EntidadeEmpresa {
 
 	public void setBaixas(List<EstoqueBaixa> baixas) {
 		this.baixas = baixas;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public int getEstoqMax() {
+		return estoqMax;
+	}
+
+	public void setEstoqMax(int estoqMax) {
+		this.estoqMax = estoqMax;
+	}
+
+	public int getEstoqMin() {
+		return estoqMin;
+	}
+
+	public void setEstoqMin(int estoqMin) {
+		this.estoqMin = estoqMin;
+	}
+
+	public int getEstoqAnterior() {
+		return estoqAnterior;
+	}
+
+	public void setEstoqAnterior(int estoqAnterior) {
+		this.estoqAnterior = estoqAnterior;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((baixas == null) ? 0 : baixas.hashCode());
+		result = prime * result + estoqAnterior;
+		result = prime * result + estoqMax;
+		result = prime * result + estoqMin;
+		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
+		result = prime * result + quantidade;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estoque other = (Estoque) obj;
+		if (baixas == null) {
+			if (other.baixas != null)
+				return false;
+		} else if (!baixas.equals(other.baixas))
+			return false;
+		if (estoqAnterior != other.estoqAnterior)
+			return false;
+		if (estoqMax != other.estoqMax)
+			return false;
+		if (estoqMin != other.estoqMin)
+			return false;
+		if (produto == null) {
+			if (other.produto != null)
+				return false;
+		} else if (!produto.equals(other.produto))
+			return false;
+		if (quantidade != other.quantidade)
+			return false;
+		return true;
 	}
 	
 }

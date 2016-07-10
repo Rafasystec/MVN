@@ -1,5 +1,8 @@
 package br.com.barcadero.tables;
 
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +25,8 @@ public class CaixaAbertura extends EntidadeLoja {
 		super(loja,usuario);
 	}
 	
+	@Column(name="SUPRIMENTO")
+	private BigDecimal suprimento;
 	@ManyToOne
 	@JoinColumn(name="codigo_caixa", referencedColumnName="codigo")
 	private Caixa caixa;
@@ -31,6 +36,14 @@ public class CaixaAbertura extends EntidadeLoja {
 
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
+	}
+
+	public BigDecimal getSuprimento() {
+		return suprimento;
+	}
+
+	public void setSuprimento(BigDecimal suprimento) {
+		this.suprimento = suprimento;
 	}
 	
 	

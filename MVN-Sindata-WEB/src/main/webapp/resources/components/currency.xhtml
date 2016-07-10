@@ -19,12 +19,12 @@
 		<composite:attribute name="requiredMessage" required="false"
 			shortDescription="Mensagem a ser exibida caso o campo seja obrigario e nao seja informado"
 			type="java.lang.String" />
-		<composite:attribute name="lable" shortDescription="Rotulo do campo"
+		<composite:attribute name="label" shortDescription="Rotulo do campo"
 			type="java.lang.String" />
 	</composite:interface>
 	<composite:implementation>
-		<p:outputLabel id="#{cc.attrs.id}" for="#{cc.attrs.id}"
-			value="#{cc.attrs.lable}" />
+		<p:outputLabel id="#{cc.attrs.id}lbl" for="#{cc.attrs.id}"
+			value="#{cc.attrs.label}" />
 		<p:inputText id="#{cc.attrs.id}" 
 			styleClass="autoNumber"
 			style="width:100%;margin-right:4px;" title="#{cc.attrs.title}"
