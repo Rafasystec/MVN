@@ -59,6 +59,9 @@ public class Caixa extends EntidadeLoja {
 	private String codAtivCfe = "";
 	@Column(name="cod_ativ_cfe_emergen",nullable=false)
 	private String codAtivCfeEmergen = "";
+	@Column(name="STATUS_CAIXA")
+	@Enumerated(EnumType.STRING)
+	private EnumStatusCaixa statusCaixa;
 	@OneToMany(mappedBy="caixa", targetEntity=CaixaAbertura.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<CaixaAbertura> aberturas = new ArrayList<CaixaAbertura>();
 	@OneToMany(mappedBy="caixa", targetEntity=CaixaFechamento.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -111,6 +114,12 @@ public class Caixa extends EntidadeLoja {
 	}
 	public void setFechamentos(List<CaixaFechamento> fechamentos) {
 		this.fechamentos = fechamentos;
+	}
+	public EnumStatusCaixa getStatusCaixa() {
+		return statusCaixa;
+	}
+	public void setStatusCaixa(EnumStatusCaixa statusCaixa) {
+		this.statusCaixa = statusCaixa;
 	}
 	
 }

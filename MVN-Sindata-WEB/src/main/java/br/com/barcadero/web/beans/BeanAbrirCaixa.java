@@ -5,6 +5,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleCaixaAbertura;
 import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @RequestScoped
@@ -33,6 +34,7 @@ public class BeanAbrirCaixa extends SuperBean {
 	public String salvar() throws Exception {
 		String ret = ruleCaixaAbertura.insert(caixaAbertura);
 		System.out.println(ret);
+		HandleMessage.info("Caixa aberto com sucesso!");
 		caixaAbertura = new CaixaAbertura(getLojaLogada(), getUsuarioLogado());
 		return null;
 	}

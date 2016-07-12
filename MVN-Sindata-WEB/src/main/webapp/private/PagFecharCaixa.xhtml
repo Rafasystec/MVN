@@ -8,20 +8,17 @@
 <ui:composition template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
-	<ui:param name="pageIcon" value="retweet" />
-	<ui:param name="pageTitle" value="Abrir Caixa" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Fechar Caixa" />
 
 	<ui:define name="body">
-		
-		<p:panel header="Abertura de Caixa">
-		<p:hotkey bind="F1" action="#{beanAbrirCaixa.salvar}"/>
+		<p:panel header="Fechar Caixa">
+			<p:hotkey bind="F1"  action="abrirCaixa"/>
 			<p:panelGrid columns="2" styleClass="noBorder">
-				<clx:currency id="txtSuprimento" title="Valor do suprimento do Caixa" value="#{beanAbrirCaixa.caixaAbertura.suprimento}" label="Valor Suprimento" />
 				<clx:currency id="txtSangria" title="Valor da Sangria do caixa" value="#{beanAbrirCaixa.caixaAbertura.suprimento}" label="Valor Sangria" />
 			</p:panelGrid>
 			<p:panelGrid columns="2" styleClass="noBorder">
-				<p:commandButton value="Abrir Caixa - F1" action="#{beanAbrirCaixa.salvar}"/>
-				<p:commandButton value="Fechar Caixa - F2" action="#{beanAbrirCaixa.salvar}"/>
+				<p:commandButton value="Fechar Caixa - F1" action="#{beanAbrirCaixa.salvar}"/>
 			</p:panelGrid>
 		</p:panel>
 	</ui:define>
