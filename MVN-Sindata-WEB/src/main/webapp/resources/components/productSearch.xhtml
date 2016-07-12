@@ -1,0 +1,26 @@
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition>
+	<composite:interface>
+		<composite:attribute name="id" shortDescription="ID do componente" />
+	</composite:interface>
+
+
+
+		<p:autoComplete id="usuario" maxResults="8"
+			value="#{beanEstoque.paramProd}"
+			completeMethod="#{beanEst.completeText}" effect="fade"
+			placeholder="Produto">
+
+
+			</p:inputText>
+			</p:autoComplete>
+			</composite:implementation>
+</ui:composition>
+</html>

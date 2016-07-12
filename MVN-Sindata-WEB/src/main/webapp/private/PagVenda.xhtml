@@ -21,7 +21,13 @@
 							<h3 style="color: #FFFFFF;">Venda ao consumidor</h3>
 						</div> 
 						
-						
+						<p:outputLabel value="Produto"/>
+				<p:autoComplete id="usuario" maxResults="8"
+					value="#{beanEstoque.paramProd}"
+					completeMethod="#{beanEstoque.completeText}" effect="fade"
+					placeholder="Produto">
+					
+				</p:autoComplete>
 						<table border="0">
 							<tr >
 								<td colspan="2" ><p:outputLabel value="Código produto:" for="codProduto" /></td>

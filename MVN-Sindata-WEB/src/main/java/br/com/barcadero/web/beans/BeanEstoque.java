@@ -1,10 +1,8 @@
 package br.com.barcadero.web.beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 import br.com.barcadero.rule.RuleEstoque;
 import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Estoque;
@@ -70,28 +68,6 @@ public class BeanEstoque extends SuperBean {
 		this.paramProd = paramProd;
 	}
 	
-	/**
-	 * Retornar a descricao dos produtos em banco de dados
-	 * @param query
-	 * @return
-	 */
-	public List<String> completeText(String query)  {
-		try {
-			return ruleProduto.getAutoComplete(query);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return new ArrayList<String>();
-		}
-		
-	}
-	
-//	public void onItemSelect(SelectEvent event) {
-//		String selected = event.getObject().toString();
-//		System.out.println( selected);
-//		codProduto = ruleProduto.extrairCodigo(selected);
-//	}
-
 	public Estoque getEstoque() {
 		return estoque;
 	}
