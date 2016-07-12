@@ -23,10 +23,12 @@
 	   		<div style="width:100%">   	
 	   			<p:panel header="Funções do Sistema">
 	   				 <p:hotkey bind="F1"  action="abrirCaixa"/>
+	   				 <p:hotkey bind="F2"  action="venda"/>
+	   				 <p:hotkey bind="F3"  action="pedido"/>
 	   				<p:panelGrid columns="2" styleClass="noBorder">
 	   					<p:panelGrid columns="2" styleClass="noBorder">
 	   						<p:commandLink action="abrirCaixa" styleClass="btn btn-lg btn-success btn-block" value="Abrir Caixa-F1"/>
-			   				<p:commandLink actionListener="#" styleClass="btn btn-lg btn-success btn-block" value="Venda Rápida-F2"/>
+			   				<p:commandLink action="venda" styleClass="btn btn-lg btn-success btn-block" value="Venda Rápida-F2"/>
 			   				<p:commandLink actionListener="#" styleClass="btn btn-lg btn-success btn-block" value="Pedido de venda-F3"/>
 			   				<p:commandLink actionListener="#" styleClass="btn btn-lg btn-success btn-block" value="Posição Estoque-F4"/>
 	   					</p:panelGrid>

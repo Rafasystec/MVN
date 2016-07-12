@@ -35,4 +35,18 @@
 			<to-view-id>/private/PagAbrirCaixa.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/private/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>venda</from-outcome>
+			<to-view-id>/private/PagVenda.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/private/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>pedido</from-outcome>
+			<to-view-id>/private/PagPedidoDeVenda.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

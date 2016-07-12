@@ -35,7 +35,8 @@ public class BeanConfigCaixa extends SuperBean {
 		// TODO Auto-generated method stub
 		System.out.println("Salvar caixa");
 		caixa.setIp(getSession().getIpAddress());
-		return ruleCaixa.insert(caixa);
+		System.out.println("Retorno: " + ruleCaixa.insert(caixa)); 
+		return null;
 	}
 
 	@Override

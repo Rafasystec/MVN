@@ -3,6 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <!-- http://localhost:8082/Nautilus/admin/PagConfigCaixa.xhtml -->
@@ -13,8 +14,9 @@
 
 
 	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{configCaixa}"></clx:buttonsCrud>
 		<p:panel header="Configurações do Caixa">
-			<p:panelGrid columns="2" cellpadding="5" style="border:0">
+			<p:panelGrid columns="2" cellpadding="5" style="border:0" styleClass="noBorder">
 				<p:outputLabel value="Número Caixa:" for="cdCaixa" />
 				<p:inputText id="cdCaixa" value="#{configCaixa.caixa.cdCaixa}"
 					required="true" />
@@ -27,7 +29,7 @@
 		</p:panel>
 		<p:panel header="Configurações para o CF-e">
 
-			<p:panelGrid columns="2" id="matchGrid" cellpadding="5">
+			<p:panelGrid columns="2" id="matchGrid" cellpadding="5" styleClass="noBorder">
 				<p:outputLabel id="lblCodAtivacao" value="Código de Ativação:"
 					for="txtCodAtivacao" />
 				<p:password id="txtCodAtivacao" value="#" match="txtConfAtivacao"
@@ -38,12 +40,12 @@
 				<p:password id="txtConfAtivacao" value="#" label="Password 2"
 					required="true" requiredMessage="Confirme o codigo de ativação!" />
 				<h:outputLabel for="cboModulo" value="Módulo:" />
-				<p:selectOneMenu>
+				<p:selectOneMenu id="cboModulo">
 					<f:selectItem>Ola</f:selectItem>
 				</p:selectOneMenu>
 			</p:panelGrid>
-
 		</p:panel>
+		<clx:buttonsCrud id="btnsDowns" bean="#{configCaixa}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>
 </html>
