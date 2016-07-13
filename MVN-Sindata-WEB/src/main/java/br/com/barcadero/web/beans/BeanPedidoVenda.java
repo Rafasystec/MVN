@@ -15,6 +15,7 @@ public class BeanPedidoVenda extends SuperBean{
 
 	private static final long serialVersionUID = -1991283788493039890L;
 	private Pedido pedido;
+	private String vededor;
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -67,5 +68,13 @@ public class BeanPedidoVenda extends SuperBean{
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getVededor() {
+		return vededor;
+	}
+
+	public void setVededor(String vededor) {
+		this.vededor = vededor;
 	}
 }

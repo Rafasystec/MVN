@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @NamedQueries(
 		{
-			@NamedQuery(name=Cliente.FIND		 ,query="FROM Cliente"),
+			@NamedQuery(name=Cliente.FIND		 ,query="FROM Cliente WHERE empresa = :empresa"),
 			@NamedQuery(name=Cliente.FIND_BY_CODE,query="FROM Cliente WHERE codigo = :codigo")
 		}
 )

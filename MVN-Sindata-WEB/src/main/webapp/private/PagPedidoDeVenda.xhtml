@@ -1,38 +1,23 @@
 <!DOCTYPE html>
-<html
- xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
->
-	<h:head>
-		<meta charset="UTF-8" />
-		<title>Pedido de Venda</title>
-	</h:head>
-	<h:body>
-		<ui:composition template="/index.xhtml">
-			<ui:define name="conteudo">
-			
-				<p:panel header="Pedido de venda">
-				<h:panelGrid columns="2">
-					<p:outputLabel id="lblPed" value="Número do pedido:"/>
-					<p:outputLabel id="lblNrPedido" value="89000"/>
-				</h:panelGrid>
-				<h:panelGrid columns="3">
-					<p:outputLabel id="lblNumCli" value="Cliente:"/>
-					<p:inputText id="txtNumCli" value="#{pedido.pedido.cdCliente}"/>
-					<p:outputLabel id="txNomeCli" />
-				</h:panelGrid>
-				<h:panelGrid columns="2">
-					<p:outputLabel id="lblVendedor" value="Vendedor:"/>
-					<p:inputText id="txtVendedor" value="#{pedido.pedido.}"/>
-					<p:outputLabel id="lblPagamento" value="Forma Pagto:"/>
-					<p:inputText id="txtFormaPagamento" value="#{}"/>
-				</h:panelGrid>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Pedido de Venda" />
+
+	<ui:define name="body">
+		<p:panel header="Pedido de venda">
+			<h:panelGrid columns="2">
+				<clx:vendedorSearch id="vendedor" value="#{pedido.vededor}"/>
 				
-				</p:panel>
-			</ui:define>
-		</ui:composition>
-	</h:body>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
 </html>

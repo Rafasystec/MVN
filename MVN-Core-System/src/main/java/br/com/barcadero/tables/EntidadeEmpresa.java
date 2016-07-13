@@ -31,7 +31,7 @@ public abstract class EntidadeEmpresa extends Entidade {
 	}
 
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
-	@JoinColumn(name="cd_emp",referencedColumnName="codigo")
+	@JoinColumn(name="empresa",referencedColumnName="codigo")
 	private Empresa empresa;
 
 	public Empresa getEmpresa() {

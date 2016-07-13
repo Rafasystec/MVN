@@ -7,11 +7,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import br.com.barcadero.core.enums.EnumAtivo;
 import br.com.barcadero.core.enums.EnumSimNao;
+
+@NamedQueries({
+	
+	@NamedQuery(name=Vendedor.FIND_ALL				,query="FROM Vendedor WHERE empresa = :empresa"),
+	@NamedQuery(name=Vendedor.FIND_BY_CODE			,query="FROM Vendedor WHERE empresa = :empresa AND codigo = :codigo"),
+	@NamedQuery(name=Vendedor.FIND_BY_COD_OR_DESC	,query="FROM Vendedor WHERE codigo = :codigo OR apelido LIKE :apelido")
+})
+
 /**
  * Classe para persistir o vendedor
  * @author Rafael Rocha
@@ -19,15 +27,18 @@ import br.com.barcadero.core.enums.EnumSimNao;
  */
 @Entity
 @Table(name="VENDEDOR")
-public class Vendedor extends EntidadeLoja{
+public class Vendedor extends EntidadeEmpresa{
 
+	public final static String FIND_ALL 			= "Vendedor.findAll";
+	public final static String FIND_BY_CODE 		= "Vendedor.findByCode";
+	public final static String FIND_BY_COD_OR_DESC 	= "Vendedor.findByCodOrDesc";
+	
 	public Vendedor() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	private static final long serialVersionUID = -7368157567275782914L;
-	@Transient
-	private Usuario usuario;
+	
 	@Column(name="APELIDO", nullable=false)
 	private String apelido = "";
 	@Column(name="PERCENT_COMISSAO", nullable=false)
@@ -37,23 +48,25 @@ public class Vendedor extends EntidadeLoja{
 	@Column(name="CANCELA_VENDA")
 	private EnumSimNao candelaVenda = EnumSimNao.SIM;
 	
-	public Vendedor(Loja loja, Usuario usuario) {
-		// TODO Auto-generated constructor stub
-		super(loja, usuario);
-		setUsuario(usuario);
+	public Vendedor(Empresa empresa, Usuario usuario) {
+		super(empresa, usuario);
 	}
 		
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_funcionario", referencedColumnName="codigo")
 	private Funcionario funcionario = new Funcionario(getUsuario());
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	@JoinColumn(name="usuario", referencedColumnName="codigo")
+//	private Usuario usuario;
+	
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
 
 	public Funcionario getFuncionario() {
 		return funcionario;

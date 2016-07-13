@@ -21,7 +21,7 @@ public class BeanVendedor extends SuperBean {
 	
 	public BeanVendedor() {
 		// TODO Auto-generated constructor stub
-		vendedor 		= new Vendedor(getLojaLogada(), getUsuarioLogado());
+		vendedor 		= new Vendedor(getEmpresaLogada(), getUsuarioLogado());
 		ruleVendedor 	= new RuleVendedor(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		ruleFuncionario = new RuleFuncionario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
@@ -31,7 +31,7 @@ public class BeanVendedor extends SuperBean {
 		// TODO Auto-generated method stub
 		vendedor.setFuncionario((Funcionario)ruleFuncionario.find(codFuncionario));
 		ruleVendedor.insert(vendedor);
-		vendedor = new Vendedor(getLojaLogada(), getUsuarioLogado());
+		vendedor = new Vendedor(getEmpresaLogada(), getUsuarioLogado());
 		return null;
 	}
 

@@ -2,6 +2,7 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.com.barcadero.tables.Empresa;
@@ -17,14 +18,26 @@ public class DaoVendedor extends DaoModelo <Vendedor>{
 
 	@Override
 	public List<Vendedor> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Query qry = getSession().getNamedQuery(Vendedor.FIND_ALL)
+				.setLong(Empresa.EMPRESA, empresa.getCodigo());
+		
+		return qry.list();
 	}
 
 	@Override
 	public Vendedor find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Query qry = getSession().getNamedQuery(Vendedor.FIND_BY_CODE)
+				.setLong(Empresa.EMPRESA, empresa.getCodigo())
+				.setLong("codigo", codigo);
+		return (Vendedor) qry.uniqueResult();
+	}
+	
+	public List<Vendedor> getByCodeOrApelido(long codigo, String apelido) {
+		Query qry = getSession().getNamedQuery(Vendedor.FIND_BY_COD_OR_DESC)
+				.setLong(Empresa.EMPRESA, empresa.getCodigo());
+		qry.setLong("codigo", codigo)
+		   .setString("apelido", apelido);
+		return qry.list();
 	}
 
 }

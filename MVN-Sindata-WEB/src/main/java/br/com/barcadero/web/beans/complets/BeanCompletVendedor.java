@@ -1,4 +1,4 @@
-package br.com.barcadero.web.beans;
+package br.com.barcadero.web.beans.complets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,16 +6,19 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.barcadero.rule.RuleProduto;
+import br.com.barcadero.rule.RuleVendedor;
+import br.com.barcadero.web.beans.SuperBean;
 
 @ManagedBean
 @RequestScoped
-public class BeanProdutoComplet extends SuperBean {
+public class BeanCompletVendedor extends SuperBean {
 
-	private RuleProduto ruleProduto;
-	public BeanProdutoComplet() {
-		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	private RuleVendedor ruleVendedor;
+	
+	public BeanCompletVendedor() {
+		ruleVendedor = new RuleVendedor(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
+	
 	@Override
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
@@ -46,14 +49,9 @@ public class BeanProdutoComplet extends SuperBean {
 		return null;
 	}
 	
-	/**
-	 * Retornar a descricao dos produtos em banco de dados
-	 * @param query
-	 * @return
-	 */
 	public List<String> completeText(String query)  {
 		try {
-			return ruleProduto.getAutoComplete(query);
+			return ruleVendedor.getAutoComplet(query);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

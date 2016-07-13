@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition>
+	<composite:interface>
+		<composite:attribute name="id" shortDescription="ID do componente" />
+		<composite:attribute name="label" shortDescription="Label do campo" />
+		<composite:attribute name="value" shortDescription="ID do componente" />
+	</composite:interface>
+		<p:outputLabel value="label"/>
+		<p:autoComplete id="#{cc.attrs.id}" maxResults="8"
+			value="#{cc.attrs.value}"
+			completeMethod="#{beanCompletVendedor.completeText}" effect="fade"
+			placeholder="Vendedor">
+		</p:autoComplete>
+	</composite:implementation>
+</ui:composition>
+</html>

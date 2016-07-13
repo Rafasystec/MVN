@@ -30,7 +30,7 @@ import br.com.barcadero.core.enums.EnumAtividadeEmp;
 
 @Entity
 public class Empresa extends Entidade {
-	
+	public static final String EMPRESA = "empresa";
 	private static final long serialVersionUID = 6135467736845199870L;
 
 	public Empresa() {

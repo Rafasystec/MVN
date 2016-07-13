@@ -10,30 +10,30 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumFormPgtoPedido;
+import br.com.barcadero.core.enums.EnumTipoPedido;
 
 @Entity
 @Table(name="PEDIDO")
 public final class Pedido extends EntidadeLoja {
 
 	public Pedido() {
-		// TODO Auto-generated constructor stub
 	}
+	
 	private static final long serialVersionUID = -6452091706343711475L;
 	public Pedido(Loja loja, Usuario usuario) {
-		// TODO Auto-generated constructor stub
 		super(loja, usuario);
 	}
 
 	@Column(name="FL_ST_PED", nullable=false, length=1)
 	private String flStPed        = "";
 	@Column(name="TP_PEDIDO", nullable=false, length=1)
-	private String tpPedido       = "";
-	@Column(name="CD_CLIENTE", nullable=false)
-	private String cdCliente      = "";
+	private EnumTipoPedido tpPedido       = EnumTipoPedido.PEDIDO;
 	@Column(name="ENDERECO_ENT", nullable=false,length=250)
 	private String enderecoEnt    = "";
 	@Column(name="DT_ENTREGA", nullable=false)
@@ -44,14 +44,21 @@ public final class Pedido extends EntidadeLoja {
 	private BigDecimal vlTotal    = new BigDecimal(0);
 	@Column(name="OBSERVACAO", nullable=false, length=250)
 	private String observacao     = "";
-	@Column(name="CD_EMDER_ENTREGA", nullable=false)
-	private long cdEnderEntrega   = 0L;
+
 	@Column(name="CD_FORMA_PGTO", nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumFormPgtoPedido formaPgtoPedido = EnumFormPgtoPedido.A_VISTA;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.EAGER,targetEntity=Pedido.class)
 	private List<PedidoItens> itens;
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,targetEntity=Endereco.class)
+	private List<Endereco> enderecos;
+	
+	@ManyToOne
+	@JoinColumn(name="cliente", referencedColumnName="codigo")
+	private Cliente cliente;
+
 	/**
 	 * Status do pedido: A
 	 * @return
@@ -67,27 +74,17 @@ public final class Pedido extends EntidadeLoja {
 	public void setFlStPed(String flStPed) {
 		this.flStPed = flStPed;
 	}
-	public String getTpPedido() {
+	public EnumTipoPedido getTpPedido() {
 		return tpPedido;
 	}
 	/**
 	 * Tipo de pedido: O - Orcamento; P - Pedido de Venda
 	 * @param tpPedido
 	 */
-	public void setTpPedido(String tpPedido) {
+	public void setTpPedido(EnumTipoPedido tpPedido) {
 		this.tpPedido = tpPedido;
 	}
-	public String getCdCliente() {
-		return cdCliente;
-	}
 	
-	/**
-	 * Codigo do cliente que esta fazendo o pedido
-	 * @param cdCliente
-	 */
-	public void setCdCliente(String cdCliente) {
-		this.cdCliente = cdCliente;
-	}
 	public Date getDtEntrega() {
 		return dtEntrega;
 	}
@@ -120,16 +117,6 @@ public final class Pedido extends EntidadeLoja {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	public long getCdEnderEntrega() {
-		return cdEnderEntrega;
-	}
-	/**
-	 * Codigo do endereco de entrega
-	 * @param cdEnderEntrega
-	 */
-	public void setCdEnderEntrega(long cdEnderEntrega) {
-		this.cdEnderEntrega = cdEnderEntrega;
-	}
 	
 	public String getEnderecoEnt() {
 		return enderecoEnt;
@@ -158,5 +145,21 @@ public final class Pedido extends EntidadeLoja {
 
 	public void setFormaPgtoPedido(EnumFormPgtoPedido formaPgtoPedido) {
 		this.formaPgtoPedido = formaPgtoPedido;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 }
