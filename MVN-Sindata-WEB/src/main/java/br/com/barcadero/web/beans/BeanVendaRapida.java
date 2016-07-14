@@ -15,7 +15,7 @@ import br.com.barcadero.rule.RuleNotaItens;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 
-@ManagedBean(name="vencx")
+@ManagedBean
 @ViewScoped
 public class BeanVendaRapida extends SuperBean {
 
@@ -26,6 +26,7 @@ public class BeanVendaRapida extends SuperBean {
 	private List<NotaItens> itensSelecionados;
 	private NotaItens notaItem;
 	private Nota nota;
+	private String codigoProduto;
 	//Rules e facades utilizados
 	private RuleNota ruleNota;
 	private RuleNotaItens ruleItens;
@@ -235,6 +236,14 @@ public class BeanVendaRapida extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getCodigoProduto() {
+		return codigoProduto;
+	}
+
+	public void setCodigoProduto(String codigoProduto) {
+		this.codigoProduto = codigoProduto;
 	}
 	
 }

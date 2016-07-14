@@ -7,7 +7,7 @@ package br.com.barcadero.core.util;
  */
 public class GlobalNameParam {
 	
-	public static final String PARAM_COD_EMP = "cdEmp";
-	public static final String PARAM_COD_LOJA= "cdLoja";
+	public static final String PARAM_COD_EMP  = "empresa";
+	public static final String PARAM_COD_LOJA = "loja";
 
 }

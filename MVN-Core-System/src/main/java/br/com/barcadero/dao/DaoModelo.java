@@ -116,4 +116,12 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 	public abstract T find(long codigo) throws Exception;
 	//public abstract List<Entidade> findAll() throws Exception;
 
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public Loja getLoja() {
+		return loja;
+	}
+
 }

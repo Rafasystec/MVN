@@ -1,7 +1,6 @@
 package br.com.barcadero.tables;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +13,8 @@ public class Usuarios extends Entidade{
 
 	public Usuarios(Usuario usuario) {
 		super(usuario);
-		// TODO Auto-generated constructor stub
 	}
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private long codigo;
 	@Column(name="cod_grupo",nullable=false)
@@ -30,15 +29,7 @@ public class Usuarios extends Entidade{
 	private Date dtCadastro;
 	@Column(name="nome",nullable=false)
 	private String nome;
-	@Column(name="cd_emp",nullable=false)
-	private long cdEmp;
 	
-	public long getCdEmp() {
-		return cdEmp;
-	}
-	public void setCdEmp(long cdEmp) {
-		this.cdEmp = cdEmp;
-	}
 	public String getNome() {
 		return nome;
 	}

@@ -1,6 +1,5 @@
 package br.com.barcadero.tables;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,8 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @NamedQueries({
-	@NamedQuery(name=Estoque.FIND_ALL,query="FROM Estoque")
+	@NamedQuery(name=Estoque.FIND_ALL	,query="FROM Estoque WHERE empresa = :empresa"),
+	@NamedQuery(name=Estoque.FIND_BY_COD,query="FROM Estoque WHERE empresa = :empresa AND codigo = :codigo")
 })
+
 @Entity
 @Table(name="ESTOQUE")
 public class Estoque extends EntidadeEmpresa {
@@ -24,8 +25,9 @@ public class Estoque extends EntidadeEmpresa {
 	
 	private static final long serialVersionUID = -4543165285278201085L;
 	public static final String FIND_ALL		= "Estoque.findAll";
+	public static final String FIND_BY_COD	= "Estoque.findAllByCode";
 	public Estoque() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public Estoque(Empresa empresa,Usuario usuario){

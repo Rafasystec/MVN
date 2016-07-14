@@ -56,18 +56,6 @@ public class Vendedor extends EntidadeEmpresa{
 	@JoinColumn(name="cod_funcionario", referencedColumnName="codigo")
 	private Funcionario funcionario = new Funcionario(getUsuario());
 
-//	@ManyToOne(cascade=CascadeType.ALL)
-//	@JoinColumn(name="usuario", referencedColumnName="codigo")
-//	private Usuario usuario;
-	
-//	public Usuario getUsuario() {
-//		return usuario;
-//	}
-//
-//	public void setUsuario(Usuario usuario) {
-//		this.usuario = usuario;
-//	}
-
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}

@@ -8,8 +8,8 @@
 <ui:composition template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
-	<ui:param name="pageIcon" value="hand-o-right" />
-	<ui:param name="pageTitle" value="Titulo da pagina" />
+	<ui:param name="pageIcon" value="cart-plus" />
+	<ui:param name="pageTitle" value="Venda Rápida" />
 
 	<ui:define name="body">
 			<div>
@@ -17,53 +17,31 @@
 				<div class="div-main-venda">
 					
 					<div class="divesquerda">
-						<div align="center">
-							<h3 style="color: #FFFFFF;">Venda ao consumidor</h3>
-						</div> 
-						
-						<p:outputLabel value="Produto"/>
-				<p:autoComplete id="usuario" maxResults="8"
-					value="#{beanEstoque.paramProd}"
-					completeMethod="#{beanEstoque.completeText}" effect="fade"
-					placeholder="Produto">
-					
-				</p:autoComplete>
-						<table border="0">
-							<tr >
-								<td colspan="2" ><p:outputLabel value="Código produto:" for="codProduto" /></td>
-								<td><p:outputLabel value="Quantidade:" for="qtde"/></td>
-							</tr>
-							<tr>
-								<td><p:inputText id="codProduto" value="#{vencx.item.codProduto}" maxlength="14" size="14"/></td>
-								<td><p:commandButton icon="/resources/Imagens/lupa30x.png" /></td>
-								<td>
-									<p:inputText id="qtde" value="#{vencx.item.quantidade}" maxlength="10" size="8"> 
-										<p:ajax event="keyup" update="prodGrid" />
-									</p:inputText>
-								</td>
-								<td>
-									<p:inputText id="txtDescItem" maxlength="13" size="8" />
-								</td>
-							</tr>
-						</table>
+						<p:panelGrid columns="3" styleClass="noBorder">
+							<clx:productSearch  id="cboProduto" value="#{beanVendaRapida.codigoProduto}"/>
+							<p:outputLabel value="Quantidade:" for="qtde"/>
+							<p:inputText id="qtde" value="#{beanVendaRapida.item.quantidade}" maxlength="10" size="8"> 
+								<p:ajax event="keyup" update="prodGrid" />
+							</p:inputText>
+						</p:panelGrid>
 					</div>
 				
 					<div class="div-direita">
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Sub Total:"/>
-							<p:inputText id="txtSubTotal" readonly="true" value="#{vencx.vlSubTotal}">
+							<p:inputText id="txtSubTotal" readonly="true" value="#{beanVendaRapida.vlSubTotal}">
 								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 							<p:outputLabel value="Descontos:"/>
-							<p:inputText readonly="true" value="#{vencx.vlDesconto}">
+							<p:inputText readonly="true" value="#{beanVendaRapida.vlDesconto}">
 								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 							<p:outputLabel value="Total:"/>
-							<p:inputText readonly="true" value="#{vencx.vlTotal}">
+							<p:inputText readonly="true" value="#{beanVendaRapida.vlTotal}">
 								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 							<p:outputLabel value="Troco:"/>
-							<p:inputText readonly="true" value="#{vencx.vlTroco}">
+							<p:inputText readonly="true" value="#{beanVendaRapida.vlTroco}">
 								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
 						</h:panelGrid>
@@ -75,9 +53,9 @@
 					
 				</div>
 				<div>
-					<p:dataTable id="prodGrid" var="item" value="#{vencx.itens}" paginator="true"
+					<p:dataTable id="prodGrid" var="item" value="#{beanVendaRapida.itens}" paginator="true"
 						rowKey="#{item.codigo}" rows="10" rowsPerPageTemplate="5,10,15" selectionMode="multiple"
-								selection="#{vencx.itensSelecionados}" emptyMessage="Nenhum item para esta venda!"
+								selection="#{beanVendaRapida.itensSelecionados}" emptyMessage="Nenhum item para esta venda!"
 					>
 						<f:facet name="header">Produtos comprados</f:facet>
 						<p:column headerText="Item" width="50">
@@ -118,9 +96,9 @@
 				</div>
 				<p:panel header="Ações">
 					<h:panelGrid columns="5">
-						<p:commandButton value="Adicionar Item" ajax="true" update="prodGrid,txtSubTotal" actionListener="#{vencx.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+						<p:commandButton value="Adicionar Item" ajax="true" update="prodGrid,txtSubTotal" actionListener="#{beanVendaRapida.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 						</p:commandButton>
-						<p:commandButton value="Fechar a Venda" action="#{vencx.fecharVenda}" alt="Você será levado para a tela de meios de pagmento."/>
+						<p:commandButton value="Fechar a Venda" action="#{beanVendaRapida.fecharVenda}" alt="Você será levado para a tela de meios de pagmento."/>
 						<p:commandButton value="Cancelar Item" alt="Selecione um item na grid e depois cancele-o."/>
 					</h:panelGrid>
 				</p:panel>

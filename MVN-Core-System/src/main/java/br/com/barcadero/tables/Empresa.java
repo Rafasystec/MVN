@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import br.com.barcadero.core.enums.EnumAtividadeEmp;
 /**
@@ -25,7 +26,7 @@ import br.com.barcadero.core.enums.EnumAtividadeEmp;
 
 @NamedQueries({
 	@NamedQuery(name=Empresa.FIND_ALL		,query="FROM Empresa"),
-	@NamedQuery(name=Empresa.FIND_BY_CODE	,query="FROM Empresa e WHERE e.codigo = :codEmp")
+	@NamedQuery(name=Empresa.FIND_BY_CODE	,query="FROM Empresa e WHERE e.codigo = :empresa")
 })
 
 @Entity
@@ -34,12 +35,10 @@ public class Empresa extends Entidade {
 	private static final long serialVersionUID = 6135467736845199870L;
 
 	public Empresa() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Empresa(Usuario usuario) {
 		super(usuario);
-		// TODO Auto-generated constructor stub
 	}
 	public final static String FIND_ALL 	= "Empresa.FindAll";
 	public final static String FIND_BY_CODE	= "Empresa.findByCode";
@@ -63,6 +62,8 @@ public class Empresa extends Entidade {
 		@JoinColumn(name="empresa_id",nullable=false, updatable=false)
 	}, inverseJoinColumns = {@JoinColumn(name="user_id",nullable=false, updatable=false)})
 	private List<Usuario> usuarios;
+	@OneToMany(mappedBy="empresa", targetEntity=Loja.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Loja> lojas;
 	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
@@ -99,6 +100,14 @@ public class Empresa extends Entidade {
 	}
 	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
 		this.pessoaJuridica = pessoaJuridica;
+	}
+
+	public List<Loja> getLojas() {
+		return lojas;
+	}
+
+	public void setLojas(List<Loja> lojas) {
+		this.lojas = lojas;
 	}
 
 }

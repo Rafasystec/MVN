@@ -8,21 +8,15 @@
 <ui:composition template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
-	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageIcon" value="trello" />
 	<ui:param name="pageTitle" value="Estoque" />
 
 	<ui:define name="body">
 		<clx:buttonsCrud id="btnsUp" bean="#{beanEstoque}"></clx:buttonsCrud>
 		<p:panel header="Entrada Estoque">
 			<p:panelGrid columns="1" styleClass="noBorder">
-				<p:outputLabel value="Produto"/>
-				<p:autoComplete id="usuario" maxResults="8"
-					value="#{beanEstoque.paramProd}"
-					completeMethod="#{beanEstoque.completeText}" effect="fade"
-					placeholder="Produto">
-					
-				</p:autoComplete>
-
+				<clx:productSearch  id="cboProduto" value="#{beanEstoque.paramProd}"/>
+				 
 				<p:outputLabel value="Quantidade" />
 				<p:inputText id="txtQtde" value="#{beanEstoque.estoque.quantidade}"/>
 				
@@ -38,6 +32,37 @@
 		
 			</p:panelGrid>
 		</p:panel>
+		<p:accordionPanel>
+			<p:tab title="Consultar" closable="true">
+				<p:panel header="Consulta">
+					<p:dataTable id="estoqGrid" var="est" value="#{beanEstoque.estoques}" resizableColumns="true" style="margin-bottom:20px" 
+					selectionMode="single" selection="#{beanEstoque.selectedEstoque}"  rowKey="#{est.codigo}">
+					<!-- 
+					<p:ajax event="rowSelect" listener="#{cliente.onRowSelect}" update="@form" />
+					 -->	
+						<f:facet name="header">
+            				Estoques Cadastrados
+        				</f:facet>
+						<p:column headerText="Código" style="max-width:35px">
+							<h:outputText value="#{est.codigo}" />
+						</p:column>
+						<p:column headerText="Produto">
+							<h:outputText value="#{est.produto.descricao}" />
+						</p:column>
+						<p:column headerText="Quantidade">
+							<h:outputText value="#{est.quantidade}" />
+						</p:column>
+						<p:column headerText="Est. Máximo">
+							<h:outputText value="#{est.estoqMax}" />
+						</p:column>
+						<p:column headerText="Est. Mínimo">
+							<h:outputText value="#{est.estoqMin}" />
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+		</p:accordionPanel>
 		<clx:buttonsCrud id="btnsDown" bean="#{beanEstoque}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>

@@ -97,4 +97,12 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 	}
 	
+	protected void autorizarLogin(Usuario usuario) {
+		getSession().setAttribute("autorizado", true);
+		getSession().setAttribute(Attributs.USER_NOME,   usuario.getNome());
+		getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
+		getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
+		getSession().setAttribute(Attributs.USER, usuario);
+	}
+	
 }

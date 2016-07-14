@@ -33,12 +33,12 @@ public class RuleEstoque extends RuleModelo<Estoque> {
 
 	@Override
 	public Estoque find(long codigo) throws Exception {
-		return null;
+		return daoEstoque.find(codigo);
 	}
 
 	@Override
 	public List<Estoque> findAll() throws Exception {
-		return null;
+		return daoEstoque.findAll();
 	}
 
 }

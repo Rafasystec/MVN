@@ -1,5 +1,7 @@
 package br.com.barcadero.web.beans;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -15,6 +17,8 @@ public class BeanEstoque extends SuperBean {
 	private static final long serialVersionUID = 2638846429735720878L;
 	private String paramProd;
 	private RuleProduto ruleProduto;
+	private List<Estoque> estoques;
+	private Estoque selectedEstoque;
 	private RuleEstoque ruleEstoque;
 	private Estoque estoque;
 	private Produto produto;
@@ -90,5 +94,21 @@ public class BeanEstoque extends SuperBean {
 
 	public void setCodProduto(long codProduto) {
 		this.codProduto = codProduto;
+	}
+
+	public List<Estoque> getEstoques() throws Exception {
+		return ruleEstoque.findAll();
+	}
+
+	public void setEstoques(List<Estoque> estoques) {
+		this.estoques = estoques;
+	}
+
+	public Estoque getSelectedEstoque() {
+		return selectedEstoque;
+	}
+
+	public void setSelectedEstoque(Estoque selectedEstoque) {
+		this.selectedEstoque = selectedEstoque;
 	}
 }

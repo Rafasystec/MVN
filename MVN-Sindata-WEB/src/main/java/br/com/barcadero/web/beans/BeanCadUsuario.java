@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.barcadero.rule.FacadeUsuario;
 import br.com.barcadero.rule.RuleEmpresa;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Usuario;
 
 
@@ -37,7 +38,11 @@ public class BeanCadUsuario extends SuperBean {
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub
 		fcdUser.salvar(usuario);
-		ruleEmpresa.inserirEmpresaPadrao(usuario);
+		Empresa empresa = ruleEmpresa.inserirEmpresaPadrao(usuario);
+		
+		getSession().setLojaLogada(empresa.getLojas().get(0));
+		getSession().setEmpresa(empresa);
+		autorizarLogin(usuario);
 		return "sucesso";
 	}
 

@@ -28,7 +28,6 @@ public class BeanUsuarioLogin extends SuperBean{
 	private static final long serialVersionUID = 6123392904973257391L;
 	private FacadeUsuario facadeUsuario;
 	private boolean autorizado;
-	//private HttpSession session;
 	@ManagedProperty(value="#{user}")
 	private Usuario user;
 	private String login;
@@ -72,13 +71,14 @@ public class BeanUsuarioLogin extends SuperBean{
 		try {	
 			usuario = facadeUsuario.login(getLogin(), getSenha());
 			if(usuario != null){
-				autorizado = true;
-				getSession().setAttribute("autorizado", autorizado);
-				getSession().setAttribute(Attributs.USER_NOME,   usuario.getNome());
-				getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
-				getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
-				getSession().setAttribute(Attributs.USER, usuario);
+//				autorizado = true;
+//				getSession().setAttribute("autorizado", autorizado);
+//				getSession().setAttribute(Attributs.USER_NOME,   usuario.getNome());
+//				getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
+//				getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
+//				getSession().setAttribute(Attributs.USER, usuario);
 	            //return "/index.xhtml?faces-redirect=true";
+				autorizarLogin(usuario);
 				//NOTE: Redirecionar para escolher a empresa para se logar
 				return "/private/PagEscolherEmpresa.xhtml?faces-redirect=true";
 			}else{

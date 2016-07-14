@@ -87,7 +87,7 @@ public class RuleLoja extends RuleModelo<Loja> {
 	 * @return
 	 * @throws Exception
 	 */
-	public String inserirLojaMatriz(Usuario usuario,PessoaJuridica pj, Empresa empresa) throws Exception{
+	public Loja inserirLojaMatriz(Usuario usuario,PessoaJuridica pj, Empresa empresa) throws Exception{
 		PessoaJuridica pJuridica = new PessoaJuridica(usuario);
 		List<Endereco> listEnder = new ArrayList<Endereco>();
 	
@@ -123,13 +123,15 @@ public class RuleLoja extends RuleModelo<Loja> {
 		loja.setDtInauguracao(empresa.getDtFundacao());
 		loja.setEmpresa(empresa);
 		loja.setPessoaJuridica(pJuridica);
-		return daoLoja.insert(loja);
+		System.out.println("Inserção de loja: " + daoLoja.insert(loja));
+		return loja;
 	}
 
-	@Override
+	/**
+	 * Tras todas as lojas da empresa
+	 */
 	public List<Loja> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoLoja.findAll();
 	}
 
 }

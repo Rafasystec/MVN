@@ -63,7 +63,7 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 	 * @param usuario
 	 * @throws Exception 
 	 */
-	public void inserirEmpresaPadrao(Usuario usuario) throws Exception {
+	public Empresa inserirEmpresaPadrao(Usuario usuario) throws Exception {
 		Empresa empresa 	= new Empresa(usuario);
 		PessoaJuridica pj	= new PessoaJuridica(usuario);
 		empresa.setImgLogo("");
@@ -91,8 +91,14 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 		List<Empresa> listEmp = new ArrayList<Empresa>();
 		listEmp.add(empresa);
 		usuario.setEmpresas(listEmp);
+		//--------------------------------------------------------
 		//NOTE: Inserir a loja Matriz
-		ruleLoja.inserirLojaMatriz(usuario, pj, empresa);
+		//--------------------------------------------------------
+		Loja loja = ruleLoja.inserirLojaMatriz(usuario, pj, empresa);
+		List<Loja> lojas = new ArrayList<>();
+		lojas.add(loja);
+		empresa.setLojas(lojas);
+		return empresa;
 	}
 
 	@Override
