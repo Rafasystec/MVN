@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import br.com.barcadero.core.enums.EnumTipoMarca;
 
 @NamedQueries({
-	@NamedQuery(name=Marcas.FIND_ALL,query="FROM Marcas WHERE cd_emp = :cdEmp"),
-	@NamedQuery(name=Marcas.FIND_BY_TIPO,query="FROM Marcas WHERE cd_emp = :cdEmp AND tipoMarca = :tipoMarca ")
+	@NamedQuery(name=Marcas.FIND_ALL,query="FROM Marcas WHERE empresa = :cdEmp"),
+	@NamedQuery(name=Marcas.FIND_BY_TIPO,query="FROM Marcas WHERE empresa = :cdEmp AND tipoMarca = :tipoMarca ")
 })
 
 @Entity

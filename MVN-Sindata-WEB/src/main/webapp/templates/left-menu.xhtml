@@ -66,10 +66,30 @@
 				
 			</li>
 			<!-- Colaboradores -->
-			<li><a class="#{activeColaboradores}"
-				href="#{request.contextPath}/private/PagFuncionario.xhtml"><i
-					class="fa fa-user"></i>COLABORADORES</a>
+			
+			<li><a class="tree-toggle nav-header" href="#"> <span>
+						<i class="fa fa-user"></i>COLABORADORES<i class="fa fa-plus"></i>
+				</span>
+			</a>
+				<ul class="nav nav-list tree"
+					style="background-color: #4E4D4D; display:none">
+					<li><a class="#{activeRelatorioOSE}"
+							href="#{request.contextPath}/private/PagFuncionario.xhtml"> <i
+								class="fa fa-cog"></i>FUNCIONÁRIOS
+						</a>
+					</li>
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagVendedor.xhtml"> <i
+							class="fa fa-hand-o-left"></i>VENDEDORES
+						</a>
+					</li>
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagContaAReceber.xhtml"><i
+							class="fa fa-hand-o-right"></i>PRESTADORES</a>
+					</li>
+				</ul>
 			</li>
+			
 			<li><a class="#{activeServicos}"
 				href="#{request.contextPath}/servicos.jsf"><i class="fa fa-cog"></i>SERVIÇOS</a>
 
@@ -100,7 +120,7 @@
 			</li>
 			<li><a class="#{activePagamentoOSE}"
 				href="#{request.contextPath}/pagamento-ose.jsf"><i
-					class="fa fa-usd"></i>PAGAMENTO DE OSE</a>
+					class="fa fa-usd"></i>PAGAMENTOs</a>
 			</li>
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-cog"></i>CONFIGURAÇÕES<i class="fa fa-plus"></i>

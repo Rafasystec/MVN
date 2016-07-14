@@ -49,4 +49,11 @@
 			<to-view-id>/private/PagPedidoDeVenda.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/public/PagCadUsuario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>sucesso</from-outcome>
+			<to-view-id>/private/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

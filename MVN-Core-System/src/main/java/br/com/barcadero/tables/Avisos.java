@@ -31,7 +31,7 @@ public class Avisos extends EntidadeLoja {
 	public final static String FIND_ALL			 = "Avisos.findAll";
 	//public final static String FIND_BY_EMP		 = "Avisos.findByEmp";
 	public final static String PARAM_DT_VALIDADE = "dtValidade";
-	public final static String PARAM_CD_EMP		 = "cdEmp";
+	public final static String PARAM_CD_EMP		 = "empresa";
 	public final static String PARAM_DT_EXIBIR	 = "dtExibir";
 	
 	

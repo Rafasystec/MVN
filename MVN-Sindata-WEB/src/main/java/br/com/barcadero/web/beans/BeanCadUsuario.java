@@ -38,7 +38,7 @@ public class BeanCadUsuario extends SuperBean {
 		// TODO Auto-generated method stub
 		fcdUser.salvar(usuario);
 		ruleEmpresa.inserirEmpresaPadrao(usuario);
-		return null;
+		return "sucesso";
 	}
 
 	@Override
