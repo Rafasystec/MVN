@@ -5,6 +5,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleCaixaAbertura;
 import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
@@ -32,7 +33,7 @@ public class BeanAbrirCaixa extends SuperBean {
 
 	@Override
 	public String salvar() throws Exception {
-		String ret = ruleCaixaAbertura.insert(caixaAbertura);
+		String ret = ruleCaixaAbertura.insert(HandleFaceContext.getIpAddress(), caixaAbertura);
 		System.out.println(ret);
 		HandleMessage.info("Caixa aberto com sucesso!");
 		caixaAbertura = new CaixaAbertura(getLojaLogada(), getUsuarioLogado());

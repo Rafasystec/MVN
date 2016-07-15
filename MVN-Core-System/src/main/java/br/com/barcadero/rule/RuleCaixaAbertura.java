@@ -30,6 +30,25 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 		return daoCaixaAbertura.insert(entidade);
 	}
 	
+	/**
+	 * 
+	 * @param ipCaixa
+	 * @param entidade
+	 * @return
+	 * @throws Exception
+	 */
+	public String insert(String ipCaixa, Entidade entidade) throws Exception {
+		long codigoLoja = getLoja().getCodigo();
+		Caixa caixa = daoCaixa.findByIp(codigoLoja, ipCaixa);
+		if(caixa != null){
+			CaixaAbertura caixaAbertura = (CaixaAbertura) entidade;
+			caixaAbertura.setCaixa(caixa);
+			return insert(caixaAbertura);
+		}else{
+			throw new Exception("Não existe caixa com ip " + ipCaixa + " para a loja " + codigoLoja);
+		}
+	}
+	
 	public String insert(Entidade entidade, Caixa caixa) throws Exception {
 		// TODO Auto-generated method stub
 		caixa.setFlStCaixa(EnumStatusCaixa.ABERTO);

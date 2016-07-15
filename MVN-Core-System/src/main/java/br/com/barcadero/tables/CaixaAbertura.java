@@ -28,7 +28,7 @@ public class CaixaAbertura extends EntidadeLoja {
 	@Column(name="SUPRIMENTO")
 	private BigDecimal suprimento;
 	@ManyToOne
-	@JoinColumn(name="codigo_caixa", referencedColumnName="codigo")
+	@JoinColumn(name="caixa", referencedColumnName="codigo")
 	private Caixa caixa;
 	public Caixa getCaixa() {
 		return caixa;
