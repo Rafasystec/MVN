@@ -21,7 +21,7 @@
 							<clx:productSearch  id="cboProduto" value="#{beanVendaRapida.codigoProduto}"/>
 							<p:outputLabel value="Quantidade:" for="qtde"/>
 							<p:inputText id="qtde" value="#{beanVendaRapida.item.quantidade}" maxlength="10" size="8"> 
-								<p:ajax event="keyup" update="prodGrid" />
+								
 							</p:inputText>
 						</p:panelGrid>
 					</div>
@@ -32,18 +32,6 @@
 							<p:inputText id="txtSubTotal" readonly="true" value="#{beanVendaRapida.vlSubTotal}">
 								<f:convertNumber currencySymbol="R$" type="currency"/>
 							</p:inputText>
-							<p:outputLabel value="Descontos:"/>
-							<p:inputText readonly="true" value="#{beanVendaRapida.vlDesconto}">
-								<f:convertNumber currencySymbol="R$" type="currency"/>
-							</p:inputText>
-							<p:outputLabel value="Total:"/>
-							<p:inputText readonly="true" value="#{beanVendaRapida.vlTotal}">
-								<f:convertNumber currencySymbol="R$" type="currency"/>
-							</p:inputText>
-							<p:outputLabel value="Troco:"/>
-							<p:inputText readonly="true" value="#{beanVendaRapida.vlTroco}">
-								<f:convertNumber currencySymbol="R$" type="currency"/>
-							</p:inputText>
 						</h:panelGrid>
 					</div>
 				</div>
@@ -52,36 +40,7 @@
 					<p:outputLabel styleClass="font-produto" value="VASSOURA DE PIASSAVA - 30x 60"/>
 					
 				</div>
-				<div>
-					<p:dataTable id="prodGrid" var="item" value="#{beanVendaRapida.itens}" paginator="true"
-						rowKey="#{item.codigo}" rows="10" rowsPerPageTemplate="5,10,15" selectionMode="multiple"
-								selection="#{beanVendaRapida.itensSelecionados}" emptyMessage="Nenhum item para esta venda!"
-					>
-						<f:facet name="header">Produtos comprados</f:facet>
-						<p:column headerText="Item" width="50">
-							<h:outputText value="#{item.nrItem}"/>
-						</p:column>
-						<p:column headerText="Descricao" width="200">
-							<h:outputText value="#{item.descricao}"/>
-						</p:column>
-						<p:column headerText="Qtde" width="60">
-							<h:outputText value="#{item.quantidade}"/>
-						</p:column>
-						<p:column headerText="VL. Unitário" width="80">
-							<h:outputText value="#{item.vlUnidade}" >
-								<f:convertNumber currencySymbol="R$" type="currency" />
-							</h:outputText>
-						</p:column>
-						<p:column headerText="VL. Desconto" width="80">
-							<h:outputText value="#{item.vlDesc}"/>
-						</p:column>
-						<p:column headerText="Total" width="80">
-							<h:outputText value="#{item.vlTotal}" >
-								<f:convertNumber currencySymbol="R$" type="currency"/>
-							</h:outputText>
-						</p:column>
-					</p:dataTable>
-				</div>
+				
 				<div>
 					<p:panel header="Formas de Pagamento">
 						<h:panelGrid columns="2">
@@ -96,7 +55,7 @@
 				</div>
 				<p:panel header="Ações">
 					<h:panelGrid columns="5">
-						<p:commandButton value="Adicionar Item" ajax="true" update="prodGrid,txtSubTotal" actionListener="#{beanVendaRapida.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+						<p:commandButton value="Adicionar Item" ajax="true"  actionListener="#{beanVendaRapida.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 						</p:commandButton>
 						<p:commandButton value="Fechar a Venda" action="#{beanVendaRapida.fecharVenda}" alt="Você será levado para a tela de meios de pagmento."/>
 						<p:commandButton value="Cancelar Item" alt="Selecione um item na grid e depois cancele-o."/>

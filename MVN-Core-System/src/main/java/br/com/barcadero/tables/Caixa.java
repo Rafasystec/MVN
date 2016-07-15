@@ -54,16 +54,13 @@ public class Caixa extends EntidadeLoja {
 	@Column(name="tipo_nota",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumModeloNota tipoNota;
-	@Column(name="fl_st_caixa",nullable=false)
-	@Enumerated(EnumType.ORDINAL)
-	private EnumStatusCaixa flStCaixa = EnumStatusCaixa.ABERTO;
 	@Column(name="cod_ativ_cfe",nullable=false)
 	private String codAtivCfe = "";
 	@Column(name="cod_ativ_cfe_emergen",nullable=false)
 	private String codAtivCfeEmergen = "";
 	@Column(name="STATUS_CAIXA")
 	@Enumerated(EnumType.STRING)
-	private EnumStatusCaixa statusCaixa;
+	private EnumStatusCaixa statusCaixa = EnumStatusCaixa.ABERTO;
 	@OneToMany(mappedBy="caixa", targetEntity=CaixaAbertura.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<CaixaAbertura> aberturas = new ArrayList<CaixaAbertura>();
 	@OneToMany(mappedBy="caixa", targetEntity=CaixaFechamento.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -87,12 +84,7 @@ public class Caixa extends EntidadeLoja {
 	public void setTipoNota(EnumModeloNota tipoNota) {
 		this.tipoNota = tipoNota;
 	}
-	public EnumStatusCaixa getFlStCaixa() {
-		return flStCaixa;
-	}
-	public void setFlStCaixa(EnumStatusCaixa flStCaixa) {
-		this.flStCaixa = flStCaixa;
-	}
+
 	public String getCodAtivCfe() {
 		return codAtivCfe;
 	}
