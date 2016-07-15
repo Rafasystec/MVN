@@ -6,8 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQueries({
+	@NamedQuery(name=CaixaAbertura.FIND_ALL,query="FROM CaixaAbertura WHERE empresa = :empresa"),
+	@NamedQuery(name=CaixaAbertura.FIND_BY_CAIXA,query="FROM CaixaAbertura WHERE empresa = :empresa AND caixa = :caixa AND loja = :loja"),
+	@NamedQuery(name=CaixaAbertura.FIND_BY_LOJA,query="FROM CaixaAbertura WHERE empresa = :empresa AND loja = :loja")
+})
 /**
  * Classe para salvar as aberturas de caixa que ocorrerem
  * @author Rafael Rocha
@@ -17,12 +24,16 @@ import javax.persistence.Table;
 @Table(name="CAIXA_ABERTURA")
 public class CaixaAbertura extends EntidadeLoja {
 	private static final long serialVersionUID = -5256587585543120837L;
+	public static final String FIND_ALL 		= "CaixaAbertura.findAll";
+	public static final String FIND_BY_CAIXA 	= "CaixaAbertura.findByCaixa";
+	public static final String FIND_BY_LOJA 	= "CaixaAbertura.findByLoja";
+	
 	public CaixaAbertura() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CaixaAbertura(Loja loja, Usuario usuario){
-		super(loja,usuario);
+	public CaixaAbertura(Empresa empresa, Loja loja, Usuario usuario){
+		super(empresa,loja,usuario);
 	}
 	
 	@Column(name="SUPRIMENTO")
@@ -44,8 +55,6 @@ public class CaixaAbertura extends EntidadeLoja {
 
 	public void setSuprimento(BigDecimal suprimento) {
 		this.suprimento = suprimento;
-	}
-	
-	
+	}	
 	
 }

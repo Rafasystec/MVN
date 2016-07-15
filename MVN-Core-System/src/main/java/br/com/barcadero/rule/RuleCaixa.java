@@ -29,7 +29,7 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 		// TODO Auto-generated method stub
 		Caixa caixa = (Caixa)entidade;
 		//Note: Quando for inserido um caixa iremos inserir uma abertura
-		CaixaAbertura abertura = new CaixaAbertura(caixa.getLoja(), caixa.getUsuario());
+		CaixaAbertura abertura = new CaixaAbertura(caixa.getEmpresa(),caixa.getLoja(), caixa.getUsuario());
 		abertura.setCaixa(caixa);
 		List<CaixaAbertura> aberturas = new ArrayList<CaixaAbertura>();
 		aberturas.add(abertura);
@@ -55,8 +55,8 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 		return daoCaixa.find(codigo);
 	}
 	
-	public List<Caixa> findAll() {
-		return daoCaixa.findAll(0);
+	public List<Caixa> findAll() throws Exception {
+		return daoCaixa.findAll();
 	}
 
 	/**

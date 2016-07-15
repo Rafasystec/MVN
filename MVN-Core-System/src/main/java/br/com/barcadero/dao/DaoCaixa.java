@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
@@ -20,19 +22,20 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 	@Override
 	public Caixa find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
-		Query qry = getSession().getNamedQuery(Caixa.FIND_BY_CODE).setParameter(Caixa.PARAM_CODE, codigo);
+		Query qry = getSession().getNamedQuery(Caixa.FIND_BY_CODE).setLong(Caixa.PARAM_CODE, codigo);
 		return (Caixa) qry.uniqueResult();
 	}
 
 	@Override
 	public List<Caixa> findAll() throws Exception {
-		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL);
+		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL)
+				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
 		return qry.list();
 	}
 	
-	public List<Caixa> findAll(long cdEmp) {
+	public List<Caixa> findAll(long codigo) {
 		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL);
-		qry.setParameter("cdEmp", cdEmp);
+		qry.setLong(GlobalNameParam.PARAM_COD_EMP, codigo);
 		return qry.list();
 	}
 	
@@ -43,10 +46,10 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 	 * @return
 	 * @throws Exception
 	 */
-	public Caixa findByIp(long cdLoja, String ip) throws Exception{
+	public Caixa findByIp(long loja, String ip) throws Exception{
 		Query qry = getSession().getNamedQuery(Caixa.FIND_BY_IP)
-				.setParameter(Caixa.PARAM_CD_LOJA, cdLoja)
-				.setParameter(Caixa.PARAM_IP, ip);
+				.setLong(GlobalNameParam.PARAM_COD_LOJA, loja)
+				.setString(Caixa.PARAM_IP, ip);
 		return (Caixa) qry.uniqueResult();
 	}
 

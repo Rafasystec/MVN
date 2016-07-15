@@ -14,11 +14,11 @@ public class TestFacadeUsuario {
 	
 	//@BeforeClass
 	public static void init() {
-		System.out.println("Init JUnit case for Usuario process");
-		System.out.println(TestRuleCaixa.class + " Init");
-		session 		= HibernateHelper.getSession();
-		session.beginTransaction();
-		fcdUsuario	= new FacadeUsuario(null,null,session);
+//		System.out.println("Init JUnit case for Usuario process");
+//		System.out.println(TestRuleCaixa.class + " Init");
+//		session 		= HibernateHelper.getSession();
+//		session.beginTransaction();
+//		fcdUsuario	= new FacadeUsuario(null,null,session);
 	}
 	
 	//@AfterClass

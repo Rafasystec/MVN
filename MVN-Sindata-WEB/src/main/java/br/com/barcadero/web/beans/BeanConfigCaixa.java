@@ -1,12 +1,15 @@
 package br.com.barcadero.web.beans;
 
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.web.functions.HandleMessage;
 
 /**
  * Para a configuracao do caixa
@@ -19,23 +22,31 @@ public class BeanConfigCaixa extends SuperBean {
 
 	private static final long serialVersionUID = 2575309545374375876L;
 	private Caixa caixa;
+	private Caixa selectedCaixa;
+	private List<Caixa> caixas;
 	private RuleCaixa ruleCaixa;
 	private EnumModeloNota[] tiposNota;
 	private String ipAddress;
 	
 	public BeanConfigCaixa() {
 		// TODO Auto-generated constructor stub
-		caixa 		= new Caixa(getSession().getLojaLogada(),getSession().getUsuarioLogado());
+		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
 		ruleCaixa	= new RuleCaixa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		System.out.println(BeanConfigCaixa.class + " was created!");
 	}
 	
 	@Override
-	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("Salvar caixa");
-		caixa.setIp(getSession().getIpAddress());
-		System.out.println("Retorno: " + ruleCaixa.insert(caixa)); 
+	public String salvar() {
+		try{
+			// TODO Auto-generated method stub
+			System.out.println("Salvar caixa");
+			caixa.setIp(getSession().getIpAddress());
+			String ret = ruleCaixa.insert(caixa);
+			System.out.println("Retorno: " + ret);
+			HandleMessage.info(ret);
+		}catch(Exception e){
+			HandleMessage.error("Erro ao tentar salvar o caixa: ", e.getMessage());
+		}
 		return null;
 	}
 
@@ -78,6 +89,28 @@ public class BeanConfigCaixa extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<Caixa> getCaixas() {
+		try {
+			this.caixas = ruleCaixa.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return caixas;
+	}
+
+	public void setCaixas(List<Caixa> caixas) {
+		this.caixas = caixas;
+	}
+
+	public Caixa getSelectedCaixa() {
+		return selectedCaixa;
+	}
+
+	public void setSelectedCaixa(Caixa selectedCaixa) {
+		this.selectedCaixa = selectedCaixa;
 	}
 	
 

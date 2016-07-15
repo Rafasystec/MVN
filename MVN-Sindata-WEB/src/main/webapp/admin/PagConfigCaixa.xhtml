@@ -45,6 +45,35 @@
 				</p:selectOneMenu>
 			</p:panelGrid>
 		</p:panel>
+		<p:accordionPanel>
+			<p:tab title="Consultar" closable="true">
+				<p:panel header="Consulta">
+					<p:dataTable id="caixasGrid" var="cx" value="#{configCaixa.caixas}" resizableColumns="true" style="margin-bottom:20px" 
+					selectionMode="single" selection="#{configCaixa.selectedCaixa}"  rowKey="#{cx.codigo}">
+						<f:facet name="header">
+            				Clientes do Sistema
+        				</f:facet>
+						<p:column headerText="Código">
+							<h:outputText value="#{cx.cdCaixa}" />
+						</p:column>
+						<p:column headerText="IP Host">
+							<h:outputText value="#{cx.ip}" />
+						</p:column>
+						<p:column headerText="Loja">
+							<h:outputText value="#{cx.loja.codigo}" />
+						</p:column>
+						<p:column headerText="Status">
+							<h:outputText value="#{cx.statusCaixa}" />
+						</p:column>
+						<p:column style="width:60px;text-align: center" headerText="Mais">
+				             <p:commandButton  icon="ui-icon-search" title="Detalhes do Caixa">
+				                <f:setPropertyActionListener value="#{cx}" target="#{cx.caixa}" />
+				            </p:commandButton>
+				        </p:column>
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+		</p:accordionPanel>
 		<clx:buttonsCrud id="btnsDowns" bean="#{configCaixa}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>

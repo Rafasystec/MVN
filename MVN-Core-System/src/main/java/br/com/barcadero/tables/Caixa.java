@@ -18,10 +18,10 @@ import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumStatusCaixa;
 
 @NamedQueries({
-	@NamedQuery(name=Caixa.FIND_ALL		,query="FROM Caixa WHERE cdEmp = :cdEmp"),
-	@NamedQuery(name=Caixa.FIND_BY_CDCX	,query="FROM Caixa WHERE cdEmp = :cdEmp AND cdCaix = :cdCaixa"),
-	@NamedQuery(name=Caixa.FIND_BY_CODE	,query="FROM Caixa WHERE codigo= :codigo"),
-	@NamedQuery(name=Caixa.FIND_BY_IP	,query="FROM Caixa WHERE ip	   = :ip AND cd_loja = :cdLoja")
+	@NamedQuery(name=Caixa.FIND_ALL		,query="FROM Caixa WHERE empresa = :empresa"),
+	@NamedQuery(name=Caixa.FIND_BY_CDCX	,query="FROM Caixa WHERE empresa = :empresa AND cdCaixa = :cdCaixa"),
+	@NamedQuery(name=Caixa.FIND_BY_CODE	,query="FROM Caixa WHERE codigo  = :codigo"),
+	@NamedQuery(name=Caixa.FIND_BY_IP	,query="FROM Caixa WHERE ip	     = :ip AND loja = :loja")
 })
 
 @Entity
@@ -33,17 +33,19 @@ public class Caixa extends EntidadeLoja {
 	public Caixa() {
 		// TODO Auto-generated constructor stub
 	}
-	public Caixa(Loja loja, Usuario usuario) {
+
+	public Caixa(Empresa empresa, Loja loja, Usuario usuario) {
 		// TODO Auto-generated constructor stub
-		super(loja, usuario);
+		super(empresa, loja, usuario);
 	}
+	
+	
 	public final static String FIND_ALL 	= "Caixa.findAll";
 	public final static String FIND_BY_CDCX = "Caixa.findByCdcx";
 	public final static String FIND_BY_CODE = "Caixa.findByCode";
 	public final static String FIND_BY_IP 	= "Caixa.findByIp";
 	public final static String PARAM_CODE	= "codigo";
 	public final static String PARAM_IP	    = "ip";
-	public final static String PARAM_CD_LOJA= "cdLoja";
 	
 	@Column(name="cd_caixa",nullable=false)
 	private int cdCaixa;

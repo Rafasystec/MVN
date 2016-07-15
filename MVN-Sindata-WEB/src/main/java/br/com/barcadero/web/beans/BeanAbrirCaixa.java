@@ -21,7 +21,7 @@ public class BeanAbrirCaixa extends SuperBean {
 	
 	public BeanAbrirCaixa() {
 		// TODO Auto-generated constructor stub
-		caixaAbertura 		= new CaixaAbertura(getLojaLogada(), getUsuarioLogado());
+		caixaAbertura 		= getCaixaAberturaInstance();
 		ruleCaixaAbertura	= new RuleCaixaAbertura(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 
@@ -33,10 +33,16 @@ public class BeanAbrirCaixa extends SuperBean {
 
 	@Override
 	public String salvar() throws Exception {
-		String ret = ruleCaixaAbertura.insert(HandleFaceContext.getIpAddress(), caixaAbertura);
-		System.out.println(ret);
-		HandleMessage.info("Caixa aberto com sucesso!");
-		caixaAbertura = new CaixaAbertura(getLojaLogada(), getUsuarioLogado());
+		try{
+			String ret = ruleCaixaAbertura.insert(HandleFaceContext.getIpAddress(), caixaAbertura);
+			System.out.println(ret);
+			HandleMessage.info("Caixa aberto com sucesso!");
+			caixaAbertura = getCaixaAberturaInstance();
+			
+		}catch(Exception e){
+			HandleMessage.error("Erro ao abrir o caixa", e.getMessage());
+		}
+		
 		return null;
 	}
 
@@ -64,6 +70,10 @@ public class BeanAbrirCaixa extends SuperBean {
 
 	public void setCaixaAbertura(CaixaAbertura caixaAbertura) {
 		this.caixaAbertura = caixaAbertura;
+	}
+	
+	private CaixaAbertura getCaixaAberturaInstance() {
+		return new CaixaAbertura(getEmpresaLogada(),getLojaLogada(), getUsuarioLogado());
 	}
 
 }

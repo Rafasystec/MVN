@@ -42,6 +42,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 		Caixa caixa = daoCaixa.findByIp(codigoLoja, ipCaixa);
 		if(caixa != null){
 			CaixaAbertura caixaAbertura = (CaixaAbertura) entidade;
+			caixa.setFlStCaixa(EnumStatusCaixa.ABERTO);
 			caixaAbertura.setCaixa(caixa);
 			return insert(caixaAbertura);
 		}else{

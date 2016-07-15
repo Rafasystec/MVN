@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class EntidadeLoja extends Entidade {
+public abstract class EntidadeLoja extends EntidadeEmpresa {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -32,12 +32,10 @@ public abstract class EntidadeLoja extends Entidade {
 	}
 
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
-	@JoinColumn(name="cd_loja",referencedColumnName="codigo")
+	@JoinColumn(name="loja",referencedColumnName="codigo")
 	private Loja loja;
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY,targetEntity=Empresa.class)
-	@JoinColumn(name="cod_empresa",referencedColumnName="codigo")
-	private Empresa empresa;
-
+	
+	
 	public Loja getLoja() {
 		return loja;
 	}
@@ -45,11 +43,6 @@ public abstract class EntidadeLoja extends Entidade {
 	public void setLoja(Loja loja) {
 		this.loja = loja;
 	}
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
+	
 	
 }
