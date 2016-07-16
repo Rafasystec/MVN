@@ -23,15 +23,18 @@
 			type="java.lang.String" />
 	</composite:interface>
 	<composite:implementation>
-		<p:outputLabel id="#{cc.attrs.id}lbl" for="#{cc.attrs.id}"
-			value="#{cc.attrs.label}" />
-		<p:inputText id="#{cc.attrs.id}" 
-			styleClass="autoNumber"
-			style="width:100%;margin-right:4px;" title="#{cc.attrs.title}"
-			value="#{cc.attrs.value}" required="#{cc.attrs.riquired}"
-			requiredMessage="#{cc.attrs.requiredMessage}">
-			<f:converter converterId="bigDecimalConverter" />
-		</p:inputText>
+		
+			<p:outputLabel id="#{cc.attrs.id}lbl" for="#{cc.attrs.id}"
+				value="#{cc.attrs.label}" />
+			<p:inputText id="#{cc.attrs.id}" 
+				styleClass="autoNumber"
+				style="width:80%;margin-right:4px;" title="#{cc.attrs.title}"
+				value="#{cc.attrs.value}" required="#{cc.attrs.riquired}"
+				requiredMessage="#{cc.attrs.requiredMessage}"
+				size="10"
+				>
+				<f:converter converterId="bigDecimalConverter" />
+			</p:inputText>
 	</composite:implementation>
 </ui:composition>
 </html>

@@ -4,16 +4,20 @@ import java.math.BigDecimal;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.rule.RuleNota;
 import br.com.barcadero.rule.RuleNotaItens;
+import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
+import br.com.barcadero.tables.Produto;
 
 @ManagedBean
 @ViewScoped
@@ -30,24 +34,28 @@ public class BeanVendaRapida extends SuperBean {
 	//Rules e facades utilizados
 	private RuleNota ruleNota;
 	private RuleNotaItens ruleItens;
+	private RuleProduto ruleProduto;
 	//--------------------------
 	private BigDecimal vlTotal 		= new BigDecimal(0.00);
-	private BigDecimal vlSubTotal 	= new BigDecimal(20.00);
+	private BigDecimal vlSubTotal 	= new BigDecimal(0.00);
 	private BigDecimal vlDesconto 	= new BigDecimal(0.00);
 	private BigDecimal vlTroco 		= new BigDecimal(0.00);
 	//--------------------------
 	private long codNota;
 	private Session session;
-	
+	//---------------------------
+	private String strProduto;
+	private String lastProduto;
 	public BeanVendaRapida() {
 		System.out.println("BeanVendaRapida was created!");
 		this.session = getDBSessionForViewScope();
 		ruleNota = new RuleNota(getEmpresaLogada(), getLojaLogada(), this.session);
 		ruleItens= new RuleNotaItens(getEmpresaLogada(), getLojaLogada(), this.session);
 		itens	 = new ArrayList<NotaItens>();
-		item	 = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
+		item	 = getNewNotaItens();
 		itensSelecionados = new ArrayList<NotaItens>();
 		notaItem = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
+		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
 		
 	}
 	
@@ -55,10 +63,11 @@ public class BeanVendaRapida extends SuperBean {
 	public void init() {
 		System.out.println("@PostConstruct method init");
 		try {
-			if(this.session != null){
-				this.session.beginTransaction();
-			}
+//			if(this.session != null){
+//				this.session.beginTransaction();
+//			}
 			nota = createNota();
+			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,11 +88,9 @@ public class BeanVendaRapida extends SuperBean {
 	
 	public List<NotaItens> getItens() {
 		if(nota != null){
-			return ruleNota.getItensByCodeNota(nota.getCodigo());
-		}else{
-			return new ArrayList<NotaItens>();
+			itens = ruleNota.getItensByCodeNota(nota.getCodigo());
 		}
-		
+		return itens;
 	}
 
 	public void setItens(List<NotaItens> itens) {
@@ -184,12 +191,21 @@ public class BeanVendaRapida extends SuperBean {
 	}
 	
 	public void salvarItem() throws Exception {
+		
 		System.out.println("Save item called.");
+		beginTransaction();
 		if(nota == null){
 			nota	= createNota();
 		}
-		item = ruleItens.saveItemNotaFromProduto(nota, item);
+		Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
+		lastProduto = produto.getDescricao();
+		item.setProduto(produto);
+		item.setNota(nota);
+		//item = ruleItens.saveItemNotaFromProduto(nota, item);
+		ruleNota.inserirItem(nota, item);
 		totalizarSubTotal(item);
+		commit();
+		item = getNewNotaItens();
 	}
 	
 	private void totalizarSubTotal(NotaItens item) {
@@ -244,6 +260,38 @@ public class BeanVendaRapida extends SuperBean {
 
 	public void setCodigoProduto(String codigoProduto) {
 		this.codigoProduto = codigoProduto;
+	}
+
+	public String getStrProduto() {
+		return strProduto;
+	}
+
+	public void setStrProduto(String strProduto) {
+		this.strProduto = strProduto;
+	}
+	
+	public void beginTransaction() {
+		if(this.session != null){
+			this.session.beginTransaction();
+		}
+	}
+	
+	public void commit() {
+		if(this.session != null){
+			this.session.getTransaction().commit();
+		}
+	}
+	
+	private NotaItens getNewNotaItens() {
+		return new NotaItens(getEmpresaLogada(), getSession().getLojaLogada(), getSession().getUsuarioLogado());
+	}
+
+	public String getLastProduto() {
+		return lastProduto;
+	}
+
+	public void setLastProduto(String lastProduto) {
+		this.lastProduto = lastProduto;
 	}
 	
 }

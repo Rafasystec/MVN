@@ -14,28 +14,42 @@
 	<ui:define name="body">
 			<div>
 			<p:panel header="Venda Rápida ao Consumidor">
-				<p:hotkey bind="return" update="listProd" actionListener="#{beanVendaRapida.salvarItem}">
+				<p:hotkey bind="return" update="produtos" actionListener="#{beanVendaRapida.salvarItem}">
 				</p:hotkey>
 				<div class="fontValue">
-					<p:outputLabel styleClass="fontValue" value="R$ #{beanVendaRapida.vlSubTotal}"/>
+					<p:outputLabel id="blbVlTotal" styleClass="fontValue" value="#{beanVendaRapida.vlSubTotal}">
+						<f:convertNumber type="currency" currencySymbol="R$" />
+					</p:outputLabel>
 				</div>
 				<div class="divProdutos">
-					 <p:dataList id="listProd" value="#{beanVendaRapida.itens}" var="item" type="ordered" emptyMessage="Nenhum Produto ainda">
-				        <f:facet name="header">
-				            Produtos
-				        </f:facet>
-				        #{item.codigo} - #{item.descricao} - #{item.quantidade} x R$: #{item.vlTotal}
-				    </p:dataList>
-			    </div>
+				
+				<p:dataTable id="produtos" var="item" value="#{beanVendaRapida.itens}" resizableColumns="false" 
+					  rowKey="#{item.codigo}" style="width: 420px;border: none" scrollable="true" scrollHeight="150">	
+						<p:column headerText="Cód." style="width: 25px">
+							<h:outputText value="#{item.codigo}" />
+						</p:column>
+						<p:column headerText="Item" style="width: 100px">
+							<h:outputText value="#{item.produto.descricao}" />
+						</p:column>
+						<p:column headerText="Qtde" style="width: 30px">
+							<h:outputText value="#{item.quantidade} x" />
+						</p:column>
+						<p:column headerText="Valor" style="width: 40px">
+							<h:outputText value="#{item.vlTotal}" >
+								<f:convertNumber type="currency" currencySymbol=""/>
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</div>
 				<div class="div-main-venda">
 					
 					
 					<div>
-						<p:panelGrid columns="3" styleClass="noBorder">
-							<clx:productSearch  id="cboProduto" value="#{beanVendaRapida.codigoProduto}"/>
+						<p:panelGrid columns="3" styleClass="noBorder" style="background-color: #F5F5F5">
+							<clx:productSearch  id="cboProduto" value="#{beanVendaRapida.strProduto}"/>
 							<p:outputLabel value="Quantidade:" for="qtde"/>
 							<p:inputText id="qtde" value="#{beanVendaRapida.item.quantidade}" maxlength="10" size="8"> 
-								
+								<f:convertNumber type="number" integerOnly="true" pattern="#0"/>
 							</p:inputText>
 						</p:panelGrid>
 					</div>
@@ -44,25 +58,23 @@
 				
 				</p:panel>
 				<div class="div-baixo" id="embaixo">
-					<p:outputLabel styleClass="font-produto" value="VASSOURA DE PIASSAVA - 30x 60"/>
+					<p:outputLabel id="lblProdutoExibir" styleClass="font-produto" value="#{beanVendaRapida.lastProduto}"/>
 					
 				</div>
 				
 				<div>
 					<p:panel header="Formas de Pagamento">
-						<h:panelGrid columns="2">
-							<p:outputLabel value="Dinheiro:"/>
-							<p:inputText id="txtDinheiro"/>
-							<p:outputLabel value="TEF:"/>
-							<p:inputText id="txtTef"/>
-							<p:outputLabel value="Crediário:"/>
-							<p:inputText id="txtCrediario"/>
-						</h:panelGrid>
+						<p:panelGrid columns="1" styleClass="noBorder">
+							<clx:currency label="Dinheiro" value="" id="txtDinheiro"/>
+							<clx:currency label="Cartão" value="" id="txtCarta"/>
+							<clx:currency label="Crediário" value="" id="txtCrediario"/>
+							<clx:currency label="Cheque" value="" id="txtCheque"/>
+						</p:panelGrid>
 					</p:panel>
 				</div>
 				<p:panel header="Ações">
 					<h:panelGrid columns="5">
-						<p:commandButton value="Adicionar Item" ajax="true"  actionListener="#{beanVendaRapida.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+						<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbVlTotal"  actionListener="#{beanVendaRapida.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 						</p:commandButton>
 						<p:commandButton value="Fechar a Venda" action="#{beanVendaRapida.fecharVenda}" alt="Você será levado para a tela de meios de pagmento."/>
 						<p:commandButton value="Cancelar Item" alt="Selecione um item na grid e depois cancele-o."/>
