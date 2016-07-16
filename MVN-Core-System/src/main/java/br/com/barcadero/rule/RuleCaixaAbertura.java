@@ -42,7 +42,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 		Caixa caixa = daoCaixa.findByIp(codigoLoja, ipCaixa);
 		if(caixa != null){
 			CaixaAbertura caixaAbertura = (CaixaAbertura) entidade;
-			caixa.setFlStCaixa(EnumStatusCaixa.ABERTO);
+			caixa.setStatusCaixa(EnumStatusCaixa.ABERTO);
 			caixaAbertura.setCaixa(caixa);
 			return insert(caixaAbertura);
 		}else{
@@ -52,7 +52,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 	
 	public String insert(Entidade entidade, Caixa caixa) throws Exception {
 		// TODO Auto-generated method stub
-		caixa.setFlStCaixa(EnumStatusCaixa.ABERTO);
+		caixa.setStatusCaixa(EnumStatusCaixa.ABERTO);
 		daoCaixa.update(caixa);
 		return daoCaixaAbertura.insert(entidade);
 	}

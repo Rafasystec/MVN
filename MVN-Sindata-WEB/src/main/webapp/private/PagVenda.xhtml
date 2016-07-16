@@ -14,9 +14,23 @@
 	<ui:define name="body">
 			<div>
 			<p:panel header="Venda Rápida ao Consumidor">
+				<p:hotkey bind="return" update="listProd" actionListener="#{beanVendaRapida.salvarItem}">
+				</p:hotkey>
+				<div class="fontValue">
+					<p:outputLabel styleClass="fontValue" value="R$ #{beanVendaRapida.vlSubTotal}"/>
+				</div>
+				<div class="divProdutos">
+					 <p:dataList id="listProd" value="#{beanVendaRapida.itens}" var="item" type="ordered" emptyMessage="Nenhum Produto ainda">
+				        <f:facet name="header">
+				            Produtos
+				        </f:facet>
+				        #{item.codigo} - #{item.descricao} - #{item.quantidade} x R$: #{item.vlTotal}
+				    </p:dataList>
+			    </div>
 				<div class="div-main-venda">
 					
-					<div class="divesquerda">
+					
+					<div>
 						<p:panelGrid columns="3" styleClass="noBorder">
 							<clx:productSearch  id="cboProduto" value="#{beanVendaRapida.codigoProduto}"/>
 							<p:outputLabel value="Quantidade:" for="qtde"/>
@@ -25,16 +39,9 @@
 							</p:inputText>
 						</p:panelGrid>
 					</div>
-				
-					<div class="div-direita">
-						<h:panelGrid columns="2">
-							<p:outputLabel value="Sub Total:"/>
-							<p:inputText id="txtSubTotal" readonly="true" value="#{beanVendaRapida.vlSubTotal}">
-								<f:convertNumber currencySymbol="R$" type="currency"/>
-							</p:inputText>
-						</h:panelGrid>
-					</div>
+						
 				</div>
+				
 				</p:panel>
 				<div class="div-baixo" id="embaixo">
 					<p:outputLabel styleClass="font-produto" value="VASSOURA DE PIASSAVA - 30x 60"/>

@@ -32,7 +32,7 @@ public class BeanVendaRapida extends SuperBean {
 	private RuleNotaItens ruleItens;
 	//--------------------------
 	private BigDecimal vlTotal 		= new BigDecimal(0.00);
-	private BigDecimal vlSubTotal 	= new BigDecimal(0.00);
+	private BigDecimal vlSubTotal 	= new BigDecimal(20.00);
 	private BigDecimal vlDesconto 	= new BigDecimal(0.00);
 	private BigDecimal vlTroco 		= new BigDecimal(0.00);
 	//--------------------------
@@ -42,8 +42,8 @@ public class BeanVendaRapida extends SuperBean {
 	public BeanVendaRapida() {
 		System.out.println("BeanVendaRapida was created!");
 		this.session = getDBSessionForViewScope();
-		ruleNota = new RuleNota(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		ruleItens= new RuleNotaItens(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		ruleNota = new RuleNota(getEmpresaLogada(), getLojaLogada(), this.session);
+		ruleItens= new RuleNotaItens(getEmpresaLogada(), getLojaLogada(), this.session);
 		itens	 = new ArrayList<NotaItens>();
 		item	 = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
 		itensSelecionados = new ArrayList<NotaItens>();
