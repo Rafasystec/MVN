@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
@@ -38,7 +39,9 @@ public final class DaoNota extends DaoModelo<Nota> {
 	 */
 	public Nota findNota(long codigo) {
 		Query qry =  getSession().getNamedQuery(Nota.FIND_BY_CODE);
-		qry.setParameter("codigo", codigo);
+		qry.setLong("codigo", codigo)
+		.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+		.setLong(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo());
 		return (Nota)qry.uniqueResult();
 	}
 
@@ -50,7 +53,9 @@ public final class DaoNota extends DaoModelo<Nota> {
 	@SuppressWarnings("unchecked")
 	public List<NotaItens> getItensByCodeNota(long codNota) {
 		Query qry = getSession().getNamedQuery(NotaItens.FIND_BY_CODE_NOTA);
-		qry.setParameter(NotaItens.PARAM_COD_NOTA, codNota);
+		qry.setLong(NotaItens.PARAM_COD_NOTA, codNota)
+			.setLong(GlobalNameParam.PARAM_COD_EMP, empresa.getCodigo())
+			.setLong(GlobalNameParam.PARAM_COD_LOJA, loja.getCodigo());
 		return qry.list();
 	}
 }

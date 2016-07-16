@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -97,5 +98,12 @@ public class RuleProduto extends RuleModelo<Produto> {
 			}
 		}
 		return 0;
+	}
+	
+	public BigDecimal getPreco(Produto produto) {
+		if(produto != null){
+			return produto.getPrecoVenda();
+		}
+		return new BigDecimal(0.00);
 	}
 }

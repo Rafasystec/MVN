@@ -30,7 +30,7 @@ import br.com.barcadero.core.enums.EnumNotaFaturada;
  */
 
 @NamedQueries(
-		@NamedQuery(name=Nota.FIND_BY_CODE,query="FROM Nota WHERE codigo = :codigo")
+		@NamedQuery(name=Nota.FIND_BY_CODE,query="FROM Nota WHERE empresa = :empresa AND loja = :loja AND codigo = :codigo")
 )
 
 @Entity 
@@ -74,46 +74,23 @@ public final class Nota extends EntidadeLoja {
 	@Column(name="TP_IMPOSTO_ICMS", nullable=false)
 	private String tpImpostoIcms = "";
 	
-//	@Column(name="CST_PIS", nullable=false)
-//	private int cstPis;
-//	@Column(name="VL_BASE_CALC_PIS", nullable=false)
-//	private BigDecimal vlBaseCalcPis = new BigDecimal("0.00");
-//	@Column(name="PC_PIS", nullable=false)
-//	private BigDecimal pcPis = new BigDecimal("0.00");
-//	@Column(name="VL_PIS", nullable=false)
-//	private BigDecimal vlPis = new BigDecimal("0.00");
-//	@Column(name="CST_ICMS", nullable=false)
-//	private int cstIcms = 0;
-//	@Column(name="ORIGEM_ICMS", nullable=false)
-//	private String origemIcms = "00";
 	@Column(name="NATUREZA_OPERACAO", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumNaturezaOperacao naturezaOperacao;
 
-//	@Column(name="INDICADOR_PGTO", nullable=false)
-//	private int indicadoPgto;
-//	@Column(name="MOD_BASE_ICMS", nullable=false)
-//	private int modBaseIcms;
-//	@Column(name="VL_BASE_CALC_ICMS", nullable=false)
-//	private BigDecimal vlBaseCalcIcms = new BigDecimal("0.00");
-//	@Column(name="PC_REDZ_BC_ICMS", nullable=false)
-//	private BigDecimal pcRedzBcIcms = new BigDecimal("0.00");
-//	@Column(name="VL_BC_RET_ICMS", nullable=false)
-//	private BigDecimal vlBcRetIcms = new BigDecimal("0.00");
-	
 	@OneToMany(mappedBy="nota",cascade=CascadeType.ALL,targetEntity=NotaItens.class,fetch=FetchType.LAZY)
 	private List<NotaItens> itens;
 	@OneToMany(mappedBy="nota",cascade=CascadeType.ALL,targetEntity=NotaMeioPgto.class,fetch=FetchType.LAZY)
 	private List<NotaMeioPgto> meiosPgto;
 	
-	@Column(name="fl_faturado",nullable=false)
-	@Enumerated(EnumType.ORDINAL)
+	@Column(name="FL_FATURADO",nullable=false)
+	@Enumerated(EnumType.STRING)
 	private EnumNotaFaturada flFaturado = EnumNotaFaturada.NAO;
 	@Column(name="SERIE_NOTA", nullable=false)
 	private String serieNota;
     
 	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="codigo_caixa", referencedColumnName="codigo")
+	@JoinColumn(name="caixa", referencedColumnName="codigo")
 	private Caixa caixa;
 	
 	public String getSerieNota() {

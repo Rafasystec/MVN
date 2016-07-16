@@ -15,12 +15,10 @@ public abstract class SuperClassNota extends EntidadeLoja {
 	private static final long serialVersionUID = 1L;
 	public SuperClassNota(Loja loja, Usuario usuario) {
 		super(loja, usuario);
-		// TODO Auto-generated constructor stub
 	}
-//	@Column(name="CD_NOTA", nullable=false)
-//	private long cdNota;
+
 	@Column(name="SERIE_NOTA", nullable=false)
-	private String serieNota;
+	private String serieNota = "";
     public String getSerieNota() {
 		return serieNota;
 	}
@@ -28,10 +26,4 @@ public abstract class SuperClassNota extends EntidadeLoja {
 		this.serieNota = serieNota;
 	}
 
-//	public long getCdNota() {
-//		return cdNota;
-//	}
-//	public void setCdNota(long cdNota) {
-//		this.cdNota = cdNota;
-//	}
 }

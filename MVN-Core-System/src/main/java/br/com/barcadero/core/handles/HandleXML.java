@@ -174,12 +174,12 @@ public class HandleXML {
 				retorno.setFalt(null);
 				if(list.getLength() > 0){
 					org.w3c.dom.Node node = list.item(0);
-					retorno.setcStat(Integer.parseInt(node.getTextContent()));
+					//retorno.setcStat(Integer.parseInt(node.getTextContent()));
 				}
 				list = doc.getElementsByTagName("xMotivo");
 				if(list.getLength() > 0){
 					org.w3c.dom.Node node = list.item(0);
-					retorno.setMotivo(node.getTextContent());
+					//retorno.setMotivo(node.getTextContent());
 				}
 			}
 		}catch (Exception e) {

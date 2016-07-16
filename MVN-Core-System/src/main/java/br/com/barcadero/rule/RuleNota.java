@@ -10,7 +10,6 @@ import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.exeptions.DAOException;
 import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.dao.DaoNota;
-import br.com.barcadero.dao.DaoNotaItens;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
@@ -26,15 +25,17 @@ public class RuleNota extends RuleModelo<Nota> {
 
 	private final DaoNota daoNota;
 	private final DaoMeioPgto daoMeio;
-	private final DaoNotaItens daoItens;
+	//private final DaoNotaItens daoItens;
+	private final RuleNotaItens ruleNotaItens;
 	private final RuleCaixa ruleCaixa;
 	
 	public RuleNota(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoNota = new DaoNota(empresa, loja, session);
 		daoMeio = new DaoMeioPgto(empresa, loja, session);
-		daoItens= new DaoNotaItens(empresa, loja, session);
+		//daoItens= new DaoNotaItens(empresa, loja, session);
 		ruleCaixa= new RuleCaixa(empresa, loja, session);
+		ruleNotaItens = new RuleNotaItens(empresa, loja, session);
 	}
 
 	@Override
@@ -92,7 +93,8 @@ public class RuleNota extends RuleModelo<Nota> {
 	public void inserirItem(Nota nota,NotaItens item)throws Exception {
 		System.out.println("Insert item was called.");
 		if(nota != null && item != null){
-			System.out.println("Item insert message >> " + daoItens.insert(item)); 
+			getSession().save(nota);
+			System.out.println("Item insert message >> " + ruleNotaItens.insert(item)); 
 		}else{
 			if(nota == null){
 				throw new Exception("Nota veio nulo. Impossivel adicionar o item");
@@ -112,7 +114,7 @@ public class RuleNota extends RuleModelo<Nota> {
 		Nota nota = findNota(codeNota); 
 		if(nota != null){
 			item.setNota(nota);
-			System.out.println("Item insert message >> " + daoItens.insert(item));
+			System.out.println("Item insert message >> " + ruleNotaItens.insert(item));
 		}else{
 			throw new Exception("Nao foi possivel encontrar a nota de numero >> " + codeNota);
 		}
@@ -140,6 +142,7 @@ public class RuleNota extends RuleModelo<Nota> {
 		nota.setModelo(caixa.getTipoNota());
 		nota.setVlTotTributos(new BigDecimal(0));
 		nota.setCaixa(caixa);
+		nota.setEmpresa(getEmpresa());
 		return nota;
 	}
 	

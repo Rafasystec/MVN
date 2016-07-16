@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
@@ -18,9 +20,9 @@ import br.com.barcadero.core.enums.EnumItemCancelado;
 
 
 @NamedQueries({	
-	@NamedQuery(name=NotaItens.FIND_ALL, query="FROM NotaItens"),
-	@NamedQuery(name=NotaItens.FIND_BY_NOTA,query="FROM NotaItens WHERE codigo = :codigo"),
-	@NamedQuery(name=NotaItens.FIND_BY_CODE_NOTA,query="FROM NotaItens WHERE cod_nota = :codNota")
+	@NamedQuery(name=NotaItens.FIND_ALL, query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja"),
+	@NamedQuery(name=NotaItens.FIND_BY_NOTA,query="FROM NotaItens WHERE codigo = :codigo AND empresa = :empresa AND loja = :loja"),
+	@NamedQuery(name=NotaItens.FIND_BY_CODE_NOTA,query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja AND nota = :nota ORDER BY hrCadastro ASC")
 })
 @Entity
 @Table(name="NOTA_ITENS")
@@ -35,10 +37,16 @@ public class NotaItens extends SuperClassNota {
 		super(loja, usuario);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public NotaItens(Empresa empresa, Loja loja, Usuario usuario) {
+		super(loja, usuario);
+		setEmpresa(empresa);
+	}
+	
 	public static final String FIND_ALL     = "NotaItens.findAll";
 	public static final String FIND_BY_NOTA = "NotaItens.findByNota";
 	public static final String FIND_BY_CODE_NOTA = "NotaItens.findByCodeNota";
-	public static final String PARAM_COD_NOTA    = "codNota";
+	public static final String PARAM_COD_NOTA    = "nota";
 	
 	@Column(name="QUANTIDADE", nullable=false)
 	private BigDecimal quantidade;
@@ -47,17 +55,17 @@ public class NotaItens extends SuperClassNota {
 	@Column(name="VL_DESC", nullable=false)
 	private BigDecimal vlDesc = new BigDecimal(0D);
 	@Column(name="VL_TOTAL", nullable=false)
-	private BigDecimal vlTotal;
+	private BigDecimal vlTotal = new BigDecimal(0.00);
 	@Column(name="FL_CANCELADO", nullable=false)
 	@Enumerated(EnumType.STRING)
-	private EnumItemCancelado flCancelado;
+	private EnumItemCancelado flCancelado = EnumItemCancelado.N;
 	@Column(name="VL_TOT_FRETE", nullable=false)
 	private BigDecimal vlTotFrete = new BigDecimal(0);;
 	@Column(name="VL_TOT_SEGURO", nullable=false)
 	private BigDecimal vlTotSeguro = new BigDecimal(0);
 	@Column(name="FL_COMPOE_TOT_NOTA", nullable=false)
 	@Enumerated(EnumType.STRING)
-	private EnumCompeTotalNota flCompoeTotNota;
+	private EnumCompeTotalNota flCompoeTotNota = EnumCompeTotalNota.N;
 	@Column(name="NR_ITEM", nullable=false)
 	private int nrItem 			 = 0;
 	@Column(name="CD_PROD", nullable=false)
@@ -66,12 +74,14 @@ public class NotaItens extends SuperClassNota {
 	private String descricao 	 = "";
 	@Column(name="VL_UNIDADE", nullable=false)
 	private BigDecimal vlUnidade = new BigDecimal(0.00);
-	@Column(name="COD_PRODUTO", nullable=false)
-	private long codProduto = 0L;
 	
 	@ManyToOne
-	@JoinColumn(name="cod_nota",referencedColumnName="codigo")
+	@JoinColumn(name="nota",referencedColumnName="codigo")
 	private Nota nota;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Produto produto;
 	
 	public BigDecimal getQuantidade() {
 		return quantidade;
@@ -92,8 +102,6 @@ public class NotaItens extends SuperClassNota {
 		this.vlDesc = vlDesc;
 	}
 	public BigDecimal getVlTotal() {
-		vlTotal = getVlUnidade().multiply(getQuantidade());
-		vlTotal = vlTotal.subtract(getVlDesc());
 		return vlTotal;
 	}
 	public void setVlTotal(BigDecimal vlTotal) {
@@ -153,10 +161,11 @@ public class NotaItens extends SuperClassNota {
 	public void setVlUnidade(BigDecimal vlUnidade) {
 		this.vlUnidade = vlUnidade;
 	}
-	public long getCodProduto() {
-		return codProduto;
+	
+	public Produto getProduto() {
+		return produto;
 	}
-	public void setCodProduto(long codProduto) {
-		this.codProduto = codProduto;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 }
