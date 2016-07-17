@@ -12,11 +12,57 @@
 	<ui:param name="pageTitle" value="Pedido de Venda" />
 
 	<ui:define name="body">
+		<p:panel header="Ações">
+			<h:panelGrid columns="5">
+				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbVlTotal"  actionListener="#{beanVendaRapida.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+				</p:commandButton>
+				<p:commandButton value="Fechar o Pedido" action="#{beanVendaRapida.fecharVenda}" alt="Você será levado para a tela de meios de pagmento."/>
+			</h:panelGrid>
+		</p:panel>
 		<p:panel header="Pedido de venda">
+			<p:hotkey bind="return" update="produtos" actionListener="#{beanVendaRapida.salvarItem}">
+			</p:hotkey>
+			<div class="fontValue">
+				<p:outputLabel id="blbVlTotal" styleClass="fontValue" value="#{beanVendaRapida.vlSubTotal}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</p:outputLabel>
+			</div>
 			<h:panelGrid columns="2">
 				<clx:vendedorSearch id="vendedor" value="#{pedido.vededor}"/>
-				
 			</h:panelGrid>
+			<div class="div-main-venda">
+				<div>
+					<p:panelGrid columns="3" styleClass="noBorder" style="background-color: #F5F5F5">
+						<clx:productSearch  id="cboProduto" value="#{beanVendaRapida.strProduto}"/>
+						<p:outputLabel value="Quantidade:" for="qtde"/>
+						<p:inputText id="qtde" value="#{beanVendaRapida.item.quantidade}" maxlength="10" size="8"> 
+							<f:convertNumber type="number" integerOnly="true" pattern="#0"/>
+						</p:inputText>
+					</p:panelGrid>
+				</div>
+			</div>
+			<div class="div-baixo" id="embaixo">
+				<p:outputLabel id="lblProdutoExibir" styleClass="font-produto" value="#{beanVendaRapida.lastProduto}"/>
+			</div>
+			<div class="divProdutos">
+				<p:dataTable id="produtos" var="item" value="#{beanVendaRapida.itens}" resizableColumns="false" 
+					  rowKey="#{item.codigo}" style="width: 420px;border: none" scrollable="true" scrollHeight="150">	
+						<p:column headerText="Cód." style="width: 25px">
+							<h:outputText value="#{item.codigo}" />
+						</p:column>
+						<p:column headerText="Item" style="width: 100px">
+							<h:outputText value="#{item.produto.descricao}" />
+						</p:column>
+						<p:column headerText="Qtde" style="width: 30px">
+							<h:outputText value="#{item.quantidade} x" />
+						</p:column>
+						<p:column headerText="Valor" style="width: 40px">
+							<h:outputText value="#{item.vlTotal}" >
+								<f:convertNumber type="currency" currencySymbol=""/>
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</div>
 		</p:panel>
 	</ui:define>
 </ui:composition>
