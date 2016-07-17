@@ -12,16 +12,29 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumFormPgtoPedido;
+import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.enums.EnumTipoPedido;
 
+@NamedQueries({
+	@NamedQuery(name=Pedido.FIND_ALL		,query="FROM Pedido WHERE empresa = :empresa"),
+	@NamedQuery(name=Pedido.FIND_BY_LOJA	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja"),
+	@NamedQuery(name=Pedido.FIND_BY_CLIENTE	,query="FROM Pedido WHERE empresa = :empresa AND cliente = :cliente"),
+	@NamedQuery(name=Pedido.FIND_ALL		,query="FROM Pedido WHERE empresa = :empresa AND codigo = :codigo"),
+})
 @Entity
 @Table(name="PEDIDO")
 public final class Pedido extends EntidadeLoja {
 
+	public static final String FIND_ALL 		= "Pedido.findAll";
+	public static final String FIND_BY_LOJA 	= "Pedido.findByLoja";
+	public static final String FIND_BY_CLIENTE 	= "Pedido.findByCliente";
+	public static final String FIND_BY_CODE 	= "Pedido.findByCode";
 	public Pedido() {
 	}
 	
@@ -31,7 +44,8 @@ public final class Pedido extends EntidadeLoja {
 	}
 
 	@Column(name="FL_ST_PED", nullable=false, length=1)
-	private String flStPed        = "";
+	@Enumerated(EnumType.STRING)
+	private EnumStatusPedido flStPed        = EnumStatusPedido.ABERTO;
 	@Column(name="TP_PEDIDO", nullable=false, length=1)
 	private EnumTipoPedido tpPedido       = EnumTipoPedido.PEDIDO;
 	@Column(name="ENDERECO_ENT", nullable=false,length=250)
@@ -63,7 +77,7 @@ public final class Pedido extends EntidadeLoja {
 	 * Status do pedido: A
 	 * @return
 	 */
-	public String getFlStPed() {
+	public EnumStatusPedido getFlStPed() {
 		return flStPed;
 	}
 	
@@ -71,7 +85,7 @@ public final class Pedido extends EntidadeLoja {
 	 * Estado do pedido: A - aberto; F - faturado; P - Fechado; C - Cancelado
 	 * @param flStPed
 	 */
-	public void setFlStPed(String flStPed) {
+	public void setFlStPed(EnumStatusPedido flStPed) {
 		this.flStPed = flStPed;
 	}
 	public EnumTipoPedido getTpPedido() {

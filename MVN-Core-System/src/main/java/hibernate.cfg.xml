@@ -51,6 +51,8 @@
 		<mapping class="br.com.barcadero.tables.Estoque"/>
 		<mapping class="br.com.barcadero.tables.EstoqueDetalhe"/>
 		<mapping class="br.com.barcadero.tables.EstoqueBaixa"/>
+		<mapping class="br.com.barcadero.tables.Pedido"/>
+		<mapping class="br.com.barcadero.tables.PedidoItens"/>
 		
 	</session-factory>
 </hibernate-configuration>

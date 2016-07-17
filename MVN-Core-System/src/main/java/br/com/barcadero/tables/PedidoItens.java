@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -26,10 +28,7 @@ public class PedidoItens extends Entidade {
 	}
 	@Column(name="NR_ITEM", nullable=false)
 	private int nrItem            = 0;     
-	@Column(name="CD_REF", nullable=false)
-	private String cdRef          = "";
-	@Column(name="TP_PRODUTO", nullable=false)
-	private String tpProduto      = "";
+	
 	@Column(name="QUANTIDADE", nullable=false)
 	private BigDecimal quantidade = new BigDecimal(0);
 	@Column(name="VL_UNITARIO", nullable=false)
@@ -50,8 +49,12 @@ public class PedidoItens extends Entidade {
 	private BigDecimal pcAcrescimo= new BigDecimal(0);
 	
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
-	@JoinColumn(name="cd_pedido",referencedColumnName="codigo")
+	@JoinColumn(name="pedido",referencedColumnName="codigo")
 	private Pedido pedido;
+	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Produto produto;
 	
 	public int getNrItem() {
 		return nrItem;
@@ -59,18 +62,7 @@ public class PedidoItens extends Entidade {
 	public void setNrItem(int nrItem) {
 		this.nrItem = nrItem;
 	}
-	public String getCdRef() {
-		return cdRef;
-	}
-	public void setCdRef(String cdRef) {
-		this.cdRef = cdRef;
-	}
-	public String getTpProduto() {
-		return tpProduto;
-	}
-	public void setTpProduto(String tpProduto) {
-		this.tpProduto = tpProduto;
-	}
+
 	public BigDecimal getQuantidade() {
 		return quantidade;
 	}
@@ -131,6 +123,10 @@ public class PedidoItens extends Entidade {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	
-	
+	public Produto getProduto() {
+		return produto;
+	}
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 }
