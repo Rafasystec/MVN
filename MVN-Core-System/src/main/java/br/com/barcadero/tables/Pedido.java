@@ -39,8 +39,8 @@ public final class Pedido extends EntidadeLoja {
 	}
 	
 	private static final long serialVersionUID = -6452091706343711475L;
-	public Pedido(Loja loja, Usuario usuario) {
-		super(loja, usuario);
+	public Pedido(Empresa empresa, Loja loja, Usuario usuario) {
+		super(empresa, loja, usuario);
 	}
 
 	@Column(name="FL_ST_PED", nullable=false)

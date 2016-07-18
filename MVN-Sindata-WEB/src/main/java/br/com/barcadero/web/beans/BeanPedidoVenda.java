@@ -1,16 +1,20 @@
 package br.com.barcadero.web.beans;
 
 import java.math.BigDecimal;
+import java.net.UnknownHostException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.hibernate.Session;
+
+import br.com.barcadero.rule.RulePedido;
 import br.com.barcadero.rule.RulePedidoItens;
 import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Produto;
+import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
@@ -27,6 +31,7 @@ public class BeanPedidoVenda extends SuperBean{
 	private List<PedidoItens> itens;
 	private RulePedidoItens rulePedidoItens;
 	private RuleProduto ruleProduto;
+	private RulePedido rulePedido;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
 	
@@ -43,6 +48,7 @@ public class BeanPedidoVenda extends SuperBean{
 		session 		= getDBSessionForViewScope();
 		rulePedidoItens = new RulePedidoItens(getEmpresaLogada(), getLojaLogada(), session);
 		ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
+		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session);
 		item			= createItem();
 	}
 	
@@ -116,9 +122,8 @@ public class BeanPedidoVenda extends SuperBean{
 		}
 	}
 	
-	private Pedido createPedido() {
-		// TODO Auto-generated method stub
-		return null;
+	private Pedido createPedido() throws UnknownHostException, Exception {
+		return rulePedido.createPedido(getUsuarioLogado(), HandleFaceContext.getIpAddress());
 	}
 
 	public void fecharPedido() {
