@@ -34,30 +34,30 @@ public class CartaoPresente extends EntidadeLoja {
 		super(empresa, loja, usuario);
 	}
 	
-	@Column(name="")
+	@Column(name="DT_VALIDADE")
 	@Temporal(TemporalType.DATE)
 	private Date dtValidade;
-	@Column(name="")
+	@Column(name="DT_HR_VENDA")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtHrVenda;
-	@Column(name="")
-	private long numero;
-	@Column(name="")
-	private BigDecimal valor;
-	@Column(name="")
+	@Column(name="NUMERO")
+	private String numero = "0";
+	@Column(name="VALOR")
+	private BigDecimal valor = new BigDecimal(0.00);
+	@Column(name="FL_CANCELADO")
 	@Enumerated
-	private EnumSimNao flCancelado;
-	@Column(name="")
-	private String motivoCancel;
-	@Column(name="")
+	private EnumSimNao flCancelado = EnumSimNao.NAO;
+	@Column(name="MOTIVO_CANCEL")
+	private String motivoCancel = "";
+	@Column(name="DT_HR_CANCELAMENTO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtHrCancelamento;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@PrimaryKeyJoinColumn(name="loja_cancel",referencedColumnName="codigo")
 	private Loja lojaCancel;
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@PrimaryKeyJoinColumn(name="user_cancel",referencedColumnName="codigo")
 	private Usuario userCancel;
 	
 	@OneToOne
@@ -80,11 +80,11 @@ public class CartaoPresente extends EntidadeLoja {
 		this.dtHrVenda = dtHrVenda;
 	}
 
-	public long getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(long numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
