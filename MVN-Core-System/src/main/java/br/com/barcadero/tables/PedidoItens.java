@@ -9,23 +9,32 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
+@NamedQueries({
+	@NamedQuery(name=PedidoItens.FIND_ALL		,query="FROM PedidoItens WHERE empresa = :empresa"),
+	@NamedQuery(name=PedidoItens.FIND_BY_PEDIDO	,query="FROM PedidoItens WHERE empresa = :empresa AND pedido = :pedido")
+})
 @Entity
 @Table(name="PEDIDO_ITENS")
-public class PedidoItens extends Entidade {
+public class PedidoItens extends EntidadeLoja {
 
+	public static final String FIND_ALL 		= "PedidoItens.findAll";
+	public static final String FIND_BY_PEDIDO 	= "PedidoItens.findByPedido";
+	
 	public PedidoItens() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public PedidoItens(Empresa empresa, Loja loja, Usuario usuario) {
+		super(empresa, loja, usuario);
+	}
+	
 	private static final long serialVersionUID = -437268462584764920L;
 
-	public PedidoItens(Usuario usuario) {
-		super(usuario);
-		// TODO Auto-generated constructor stub
-	}
 	@Column(name="NR_ITEM", nullable=false)
 	private int nrItem            = 0;     
 	

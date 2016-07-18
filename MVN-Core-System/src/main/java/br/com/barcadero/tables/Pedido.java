@@ -25,7 +25,7 @@ import br.com.barcadero.core.enums.EnumTipoPedido;
 	@NamedQuery(name=Pedido.FIND_ALL		,query="FROM Pedido WHERE empresa = :empresa"),
 	@NamedQuery(name=Pedido.FIND_BY_LOJA	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja"),
 	@NamedQuery(name=Pedido.FIND_BY_CLIENTE	,query="FROM Pedido WHERE empresa = :empresa AND cliente = :cliente"),
-	@NamedQuery(name=Pedido.FIND_ALL		,query="FROM Pedido WHERE empresa = :empresa AND codigo = :codigo"),
+	@NamedQuery(name=Pedido.FIND_BY_CODE	,query="FROM Pedido WHERE empresa = :empresa AND codigo = :codigo"),
 })
 @Entity
 @Table(name="PEDIDO")
@@ -43,7 +43,7 @@ public final class Pedido extends EntidadeLoja {
 		super(loja, usuario);
 	}
 
-	@Column(name="FL_ST_PED", nullable=false, length=1)
+	@Column(name="FL_ST_PED", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumStatusPedido flStPed        = EnumStatusPedido.ABERTO;
 	@Column(name="TP_PEDIDO", nullable=false, length=1)
@@ -63,7 +63,7 @@ public final class Pedido extends EntidadeLoja {
 	@Enumerated(EnumType.ORDINAL)
 	private EnumFormPgtoPedido formaPgtoPedido = EnumFormPgtoPedido.A_VISTA;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.EAGER,targetEntity=Pedido.class)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.EAGER,targetEntity=PedidoItens.class)
 	private List<PedidoItens> itens;
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,targetEntity=Endereco.class)
@@ -72,6 +72,10 @@ public final class Pedido extends EntidadeLoja {
 	@ManyToOne
 	@JoinColumn(name="cliente", referencedColumnName="codigo")
 	private Cliente cliente;
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="caixa", referencedColumnName="codigo")
+	private Caixa caixa;
 
 	/**
 	 * Status do pedido: A
@@ -175,5 +179,13 @@ public final class Pedido extends EntidadeLoja {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public Caixa getCaixa() {
+		return caixa;
+	}
+
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
 	}
 }

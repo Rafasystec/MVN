@@ -1,14 +1,19 @@
 package br.com.barcadero.web.beans;
 
+import java.math.BigDecimal;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import org.hibernate.Session;
-
+import br.com.barcadero.rule.RulePedidoItens;
+import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Pedido;
+import br.com.barcadero.tables.PedidoItens;
+import br.com.barcadero.tables.Produto;
+import br.com.barcadero.web.functions.HandleMessage;
 
-@ManagedBean(name="pedido")
+@ManagedBean
 @ViewScoped
 public class BeanPedidoVenda extends SuperBean{
 
@@ -16,6 +21,15 @@ public class BeanPedidoVenda extends SuperBean{
 	private static final long serialVersionUID = -1991283788493039890L;
 	private Pedido pedido;
 	private String vededor;
+	private String strProduto;
+	private String lastProduto;
+	private PedidoItens item;
+	private List<PedidoItens> itens;
+	private RulePedidoItens rulePedidoItens;
+	private RuleProduto ruleProduto;
+	private BigDecimal vlSubTotal = new BigDecimal(0.00);
+	private BigDecimal vlUnitario = new BigDecimal(0.00);
+	
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -26,7 +40,10 @@ public class BeanPedidoVenda extends SuperBean{
 	private Session session;
 	public BeanPedidoVenda() {
 		// TODO Auto-generated constructor stub
-		session = getDBSessionForViewScope();
+		session 		= getDBSessionForViewScope();
+		rulePedidoItens = new RulePedidoItens(getEmpresaLogada(), getLojaLogada(), session);
+		ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
+		item			= createItem();
 	}
 	
 	@PostConstruct
@@ -76,5 +93,104 @@ public class BeanPedidoVenda extends SuperBean{
 
 	public void setVededor(String vededor) {
 		this.vededor = vededor;
+	}
+	
+	public void salvarItem() {
+		try {
+			System.out.println("Save item called.");
+			beginTransaction();
+			if(pedido == null){
+				pedido	= createPedido();
+			}
+			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
+			lastProduto = produto.getDescricao();
+			item.setProduto(produto);
+			item.setPedido(pedido);
+			rulePedidoItens.insert(pedido, item);
+			setVlUnitario(item.getVlTotal());
+			totalizarSubTotal(item);
+			commit();
+			item = createItem();
+		} catch (Exception e) {
+			HandleMessage.error("Erro ao inserir Item", e.getMessage());
+		}
+	}
+	
+	private Pedido createPedido() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void fecharPedido() {
+		
+	}
+
+	public String getStrProduto() {
+		return strProduto;
+	}
+
+	public void setStrProduto(String strProduto) {
+		this.strProduto = strProduto;
+	}
+
+	public String getLastProduto() {
+		return lastProduto;
+	}
+
+	public void setLastProduto(String lastProduto) {
+		this.lastProduto = lastProduto;
+	}
+
+	public PedidoItens getItem() {
+		return item;
+	}
+
+	public void setItem(PedidoItens item) {
+		this.item = item;
+	}
+
+	public List<PedidoItens> getItens() {
+		itens = rulePedidoItens.findByPedido(pedido);
+		return itens;
+	}
+
+	public void setItens(List<PedidoItens> itens) {
+		this.itens = itens;
+	}
+
+	public BigDecimal getVlSubTotal() {
+		return vlSubTotal;
+	}
+
+	public void setVlSubTotal(BigDecimal vlSubTotal) {
+		this.vlSubTotal = vlSubTotal;
+	}
+
+	public BigDecimal getVlUnitario() {
+		return vlUnitario;
+	}
+
+	public void setVlUnitario(BigDecimal vlUnitario) {
+		this.vlUnitario = vlUnitario;
+	}
+	
+	public void beginTransaction() {
+		if(this.session != null){
+			this.session.beginTransaction();
+		}
+	}
+	
+	public void commit() {
+		if(this.session != null){
+			this.session.getTransaction().commit();
+		}
+	}
+	
+	private void totalizarSubTotal(PedidoItens item) {
+		setVlSubTotal(getVlSubTotal().add(item.getVlTotal()));
+	}
+	
+	private PedidoItens createItem() {
+		return new PedidoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 	}
 }

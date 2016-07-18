@@ -69,6 +69,12 @@
 	font-size: 80px;
 }
 
+.fontSubTotal{
+	float: right;
+	color: #0000ff;
+	font-size: 60px;
+}
+
 .divProdutos{
 	float: right;
 }
