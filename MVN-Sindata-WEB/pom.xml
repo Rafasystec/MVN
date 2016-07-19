@@ -21,10 +21,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.1.0.Final</version>
 		</dependency>
-		<!-- http://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
-		<!-- <dependency> <groupId>org.hibernate.javax.persistence</groupId> <artifactId>hibernate-jpa-2.0-api</artifactId> 
-			<version>1.0.1.Final</version> </dependency> -->
-		<!-- http://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
@@ -42,12 +38,6 @@
 			<artifactId>postgresql</artifactId>
 			<version>8.4-702.jdbc4</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.primefaces</groupId> <artifactId>primefaces</artifactId> 
-			<version>5.3</version> </dependency> -->
-		<!-- http://mvnrepository.com/artifact/org.primefaces/primefaces <dependency> 
-			<groupId>org.primefaces</groupId> <artifactId>primefaces</artifactId> <version>5.1</version> 
-			</dependency> -->
-		<!-- http://mvnrepository.com/artifact/org.primefaces/primefaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
@@ -94,9 +84,6 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.sun.faces</groupId> <artifactId>jsf-api</artifactId> 
-			<version>2.2.13</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
@@ -108,15 +95,6 @@
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.12</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>com.sun.faces</groupId> <artifactId>jsf-impl</artifactId> 
-			<version>2.2.13</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/javax.faces/jsf-api -->
-
-
-		<!--https://mvnrepository.com/artifact/javax.faces/javax.faces-api <dependency> 
-			<groupId>javax.faces</groupId> <artifactId>javax.faces-api</artifactId> <version>2.1</version> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
 			<artifactId>all-themes</artifactId>

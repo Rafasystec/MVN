@@ -47,14 +47,23 @@ public class RuleCartaoPresente extends RuleModelo<CartaoPresente> {
 		// TODO Auto-generated method stub
 		return daoCartaoPresente.findAll();
 	}
-	
+	/**
+	 * 
+	 * @param serie
+	 * @param qtdeCartoes
+	 * @param usuario
+	 * @throws Exception
+	 */
 	public void gerarCartoes(int serie, int qtdeCartoes, Usuario usuario) throws Exception {
 		for (int i = 0; i < qtdeCartoes; i++) {
 			CartaoPresente cartaoPresente = new CartaoPresente(getEmpresa(), getLoja(), usuario);
 			daoCartaoPresente.insert(cartaoPresente);
 			String ano 		= HandleDateHour.getCurrentYear();
-			String empresa	= HandleString.padLeft(String.valueOf(getEmpresa().getCodigo()), 3);
-			
+			String empresa	= HandleString.zerosLeft(String.valueOf(getEmpresa().getCodigo()), 3);
+			String strSerie	= HandleString.zerosLeft(String.valueOf(serie), 4);
+			String seqCard	= HandleString.zerosLeft(String.valueOf(cartaoPresente.getCodigo()), 6);
+			String numero	= ano + empresa + strSerie + seqCard;
+			cartaoPresente.setNumero(numero);
 			daoCartaoPresente.update(cartaoPresente);
 		}
 	}

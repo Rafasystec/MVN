@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Gerar Cartões Presente" />
+
+	<ui:define name="body">
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton id="btnGerar" action="#{beanCartaoPresenteGerar.gerar}" value="Gerar Cartões" title="Gerar os cartões presente" icon="ui-icon-document" ajax="false"/>
+				<p:tooltip for="btnGerar" trackMouse="true" />
+			</f:facet>
+		</p:toolbar>
+		<p:panel header="Funcao Principal da tela">
+			<p:panelGrid columns="3" styleClass="noBorder">
+				<p:outputLabel value="Serie :"/>
+				<p:spinner id="txtSerie" value="#{beanCartaoPresenteGerar.serie}" maxlength="3" min="1" title="Serie dos cartoes" rendered="true" requiredMessage="Informe a serie"/>
+				<p:tooltip for="txtSerie" trackMouse="true" />
+				<p:outputLabel value="Quantidade :"/>
+				<p:spinner id="txtQuantidade" title="Quantidade de cartões que serão gerado para essa serie" value="#{beanCartaoPresenteGerar.quantidade}" maxlength="3" min="1" rendered="true" requiredMessage="Informe a quantidade de cartões para serem gerados"/>  
+				<p:tooltip for="txtQuantidade" trackMouse="true" />
+			</p:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

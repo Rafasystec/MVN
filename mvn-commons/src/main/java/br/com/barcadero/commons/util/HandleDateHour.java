@@ -1,6 +1,7 @@
 package br.com.barcadero.commons.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import br.com.barcadero.commons.enuns.EnumDateHourFormat;
@@ -33,6 +34,21 @@ public class HandleDateHour {
 	
 	public static String getCurrentDay() {
 		return new HandleDateHour().format(new Date(), EnumDateHourFormat.CURRENT_DAY);
+	}
+	
+	public static Date addYears(Date date, int numYears) {  
+		return getDateCalendar(date, Calendar.YEAR, numYears); 
+	}
+	
+	public static Date addDays(Date date, int numDays) {  
+		return getDateCalendar(date, Calendar.DAY_OF_MONTH, numDays);  
+	}
+	
+	private static Date getDateCalendar(Date date, int typeIncremet, int times) {
+		Calendar calendar = Calendar.getInstance();  
+		calendar.setTime(date);    
+		calendar.add(typeIncremet, times);  
+		return calendar.getTime();
 	}
 
 }

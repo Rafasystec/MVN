@@ -9,6 +9,10 @@ public class HandleString {
 	public static String padLeft(String s, int len) {
 		return padLeft(s, len, ' ');
 	}
+	
+	public static String zerosLeft(String s, int len) {
+		return padLeft(s, len, '0');
+	}
 
 	/**
 	 * Completa string com dtnado caracteres a esquerda para que ela fique com determinado
