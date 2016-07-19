@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -73,8 +74,21 @@ public class RulePedido extends RuleModelo<Pedido> {
 			return daoPedido.update(pedido);
 		} catch (Exception e) {
 			return e.getMessage();
+		}	
+	}
+	
+	public List<Pedido> findPedidosByDate(Date date) {
+		return daoPedido.findPedidosByDate(date);
+	}
+	
+	public List<Pedido> findPedidosAFaturarHoje(Date date) {
+		return daoPedido.findPedidosAFaturarHoje(date);
+	}
+	
+	public void faturarPedido(Pedido pedido) throws Exception{
+		if(pedido != null){
+			//Faturar pedido
 		}
-		
 	}
 
 }

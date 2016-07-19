@@ -26,6 +26,7 @@ import br.com.barcadero.core.enums.EnumTipoPedido;
 	@NamedQuery(name=Pedido.FIND_BY_LOJA	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja"),
 	@NamedQuery(name=Pedido.FIND_BY_CLIENTE	,query="FROM Pedido WHERE empresa = :empresa AND cliente = :cliente"),
 	@NamedQuery(name=Pedido.FIND_BY_CODE	,query="FROM Pedido WHERE empresa = :empresa AND codigo = :codigo"),
+	@NamedQuery(name=Pedido.FIND_BY_DATE	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja AND dtCadastro = :dtCadastro")
 })
 @Entity
 @Table(name="PEDIDO")
@@ -35,6 +36,7 @@ public final class Pedido extends EntidadeLoja {
 	public static final String FIND_BY_LOJA 	= "Pedido.findByLoja";
 	public static final String FIND_BY_CLIENTE 	= "Pedido.findByCliente";
 	public static final String FIND_BY_CODE 	= "Pedido.findByCode";
+	public static final String FIND_BY_DATE 	= "Pedido.findByDate";
 	public Pedido() {
 	}
 	
@@ -63,10 +65,10 @@ public final class Pedido extends EntidadeLoja {
 	@Enumerated(EnumType.ORDINAL)
 	private EnumFormPgtoPedido formaPgtoPedido = EnumFormPgtoPedido.A_VISTA;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.EAGER,targetEntity=PedidoItens.class)
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.LAZY,targetEntity=PedidoItens.class)
 	private List<PedidoItens> itens;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,targetEntity=Endereco.class)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,targetEntity=Endereco.class)
 	private List<Endereco> enderecos;
 	
 	@ManyToOne
@@ -188,4 +190,87 @@ public final class Pedido extends EntidadeLoja {
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((caixa == null) ? 0 : caixa.hashCode());
+		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
+		result = prime * result + ((dtEntrega == null) ? 0 : dtEntrega.hashCode());
+		result = prime * result + ((dtPrevEntrega == null) ? 0 : dtPrevEntrega.hashCode());
+		result = prime * result + ((enderecoEnt == null) ? 0 : enderecoEnt.hashCode());
+		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
+		result = prime * result + ((flStPed == null) ? 0 : flStPed.hashCode());
+		result = prime * result + ((formaPgtoPedido == null) ? 0 : formaPgtoPedido.hashCode());
+		result = prime * result + ((itens == null) ? 0 : itens.hashCode());
+		result = prime * result + ((observacao == null) ? 0 : observacao.hashCode());
+		result = prime * result + ((tpPedido == null) ? 0 : tpPedido.hashCode());
+		result = prime * result + ((vlTotal == null) ? 0 : vlTotal.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pedido other = (Pedido) obj;
+		if (caixa == null) {
+			if (other.caixa != null)
+				return false;
+		} else if (!caixa.equals(other.caixa))
+			return false;
+		if (cliente == null) {
+			if (other.cliente != null)
+				return false;
+		} else if (!cliente.equals(other.cliente))
+			return false;
+		if (dtEntrega == null) {
+			if (other.dtEntrega != null)
+				return false;
+		} else if (!dtEntrega.equals(other.dtEntrega))
+			return false;
+		if (dtPrevEntrega == null) {
+			if (other.dtPrevEntrega != null)
+				return false;
+		} else if (!dtPrevEntrega.equals(other.dtPrevEntrega))
+			return false;
+		if (enderecoEnt == null) {
+			if (other.enderecoEnt != null)
+				return false;
+		} else if (!enderecoEnt.equals(other.enderecoEnt))
+			return false;
+		if (enderecos == null) {
+			if (other.enderecos != null)
+				return false;
+		} else if (!enderecos.equals(other.enderecos))
+			return false;
+		if (flStPed != other.flStPed)
+			return false;
+		if (formaPgtoPedido != other.formaPgtoPedido)
+			return false;
+		if (itens == null) {
+			if (other.itens != null)
+				return false;
+		} else if (!itens.equals(other.itens))
+			return false;
+		if (observacao == null) {
+			if (other.observacao != null)
+				return false;
+		} else if (!observacao.equals(other.observacao))
+			return false;
+		if (tpPedido != other.tpPedido)
+			return false;
+		if (vlTotal == null) {
+			if (other.vlTotal != null)
+				return false;
+		} else if (!vlTotal.equals(other.vlTotal))
+			return false;
+		return true;
+	}
+	
 }

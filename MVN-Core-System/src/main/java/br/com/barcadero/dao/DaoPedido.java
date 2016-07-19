@@ -1,10 +1,15 @@
 package br.com.barcadero.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 
+import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
@@ -42,6 +47,26 @@ public class DaoPedido extends DaoModelo<Pedido> {
 				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
 				.setLong("cliente", cliente.getCodigo());
 		return qry.list();
+	}
+	
+	public List<Pedido> findPedidosByDate(Date date) {
+		Query qry = getSession().getNamedQuery(Pedido.FIND_BY_DATE)
+				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+				.setLong(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo())
+				.setDate("dtCadastro", date);
+		return qry.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Pedido> findPedidosAFaturarHoje(Date date) {
+		return getSession().createCriteria(Pedido.class)
+				.createAlias("empresa", "emp")
+				.add(Restrictions.eq("dtCadastro", date))
+				.add(Restrictions.eq(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo()))
+				.add(Restrictions.eq(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo()))
+				.add(Restrictions.eq("flStPed",EnumStatusPedido.FECHADO))
+				.addOrder(Property.forName("dtCadastro").asc())
+				.list();
 	}
 
 }

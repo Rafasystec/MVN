@@ -141,14 +141,36 @@
 							class="fa fa-hand-o-right"></i>PRODUTOS</a></li>
 				</ul>
 			</li>
-
+			
+			<!-- Recebimentos -->
+			<li><a class="tree-toggle nav-header" href="#"> <span>
+						<i class="fa fa-arrow-circle-down"></i>RECEBIMENTOS<i class="fa fa-plus"></i>
+				</span>
+			</a>
+				<ul class="nav nav-list tree" style="background-color: #4E4D4D; display:none">
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagReceberPedido.xhtml">
+							<i class="fa fa-cog"></i>CARTÃO PRESENTE
+					</a></li>
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagReceberPedido.xhtml"> <i
+							class="fa fa-hand-o-left"></i>PEDIDOS
+					</a></li>
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/relatorios/ose-relatorio.jsf"><i
+							class="fa fa-hand-o-right"></i>PRODUTOS</a></li>
+				</ul>
+			</li>
+			
+			<!-- 
 			<li><a class="#{activeRecebimentoOSE}"
 				href="#{request.contextPath}/recebimento-ose.jsf"><i
 					class="fa fa-arrow-circle-down"></i>RECEBIMENTOS</a>
 			</li>
+			 -->
 			<li><a class="#{activePagamentoOSE}"
 				href="#{request.contextPath}/pagamento-ose.jsf"><i
-					class="fa fa-usd"></i>PAGAMENTOs</a>
+					class="fa fa-usd"></i>PAGAMENTOS</a>
 			</li>
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-cog"></i>CONFIGURAÇÕES<i class="fa fa-plus"></i>

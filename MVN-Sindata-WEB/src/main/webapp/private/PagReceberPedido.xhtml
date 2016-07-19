@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Receber Pedido" />
+
+	<ui:define name="body">
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton id="btnFaturar" action="#{beanReceberPedido.faturarPedido}" value="Receber" title="Fatura o pedido por completo" icon="ui-icon-document" ajax="false"/>
+				<p:tooltip for="btnFaturar" trackMouse="true" />
+			</f:facet>
+		</p:toolbar>
+		<p:panel header="Receber Pedido">
+			<p:tab title="Pedidos A FATURAR de HOJE" closable="true">
+				<p:panel header="Consulta">
+					<p:dataTable id="tblPedidos" var="ped" value="#{beanReceberPedido.pedidosAFaturarHoje}" resizableColumns="true" style="margin-bottom:20px" 
+					selectionMode="single" selection="#{beanReceberPedido.selectedPedido}"  rowKey="#{ped.codigo}">	
+						<f:facet name="header">
+            				Clientes do Sistema
+        				</f:facet>
+						<p:column headerText="Número">
+							<h:outputText value="#{ped.codigo}" />
+						</p:column>
+						<p:column headerText="Cliente">
+							<h:outputText value="#{ped.cliente.pessoaFisica.nome}" />
+						</p:column>
+						<p:column headerText="Celular">
+							<h:outputText value="#{cli.cliente.pessoaFisica.celular}" />
+						</p:column>
+						<p:column headerText="Valor Total">
+							<h:outputText value="#{ped.vlTotal}" >
+								<f:convertNumber currencySymbol="R$" type="currency" />
+							</h:outputText>
+						</p:column>
+						<p:column style="width:60px;text-align: center" headerText="Mais">
+				             <p:commandButton  icon="ui-icon-search" title="Detalhes do cliente">
+				                <f:setPropertyActionListener value="#{cli}" target="#{cliente.cliente}" />
+				            </p:commandButton>
+				        </p:column>
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>
