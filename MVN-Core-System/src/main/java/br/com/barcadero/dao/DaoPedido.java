@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -60,13 +61,25 @@ public class DaoPedido extends DaoModelo<Pedido> {
 	@SuppressWarnings("unchecked")
 	public List<Pedido> findPedidosAFaturarHoje(Date date) {
 		return getSession().createCriteria(Pedido.class)
-				.createAlias("empresa", "emp")
+				//.createAlias("empresa", "emp")
+				//.createAlias("empresa", "emp", JoinType.INNER_JOIN)
 				.add(Restrictions.eq("dtCadastro", date))
-				.add(Restrictions.eq(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo()))
-				.add(Restrictions.eq(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo()))
+				.add(Restrictions.eq("empresa", getEmpresa().getCodigo()))
+				//.add(Restrictions.eq(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo()))
 				.add(Restrictions.eq("flStPed",EnumStatusPedido.FECHADO))
 				.addOrder(Property.forName("dtCadastro").asc())
 				.list();
+	}
+	
+	public List<Pedido> findPedidosAFaturarHoje() {
+		Criteria c = getSession().createCriteria(Pedido.class);
+		c.createCriteria("empresa", "emp");
+		//c.add(Restrictions.eq("dtCadastro", new Date()));
+		c.add(Restrictions.eq("emp.codigo", getEmpresa().getCodigo()));
+		//c.add(Restrictions.eq("flStPed",EnumStatusPedido.FECHADO));
+		c.addOrder(Property.forName("dtCadastro").asc());
+		return c.list();
+				
 	}
 
 }

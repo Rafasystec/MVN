@@ -43,7 +43,11 @@ public class TestDaoPedido  {
 	}
 	
 	public void testCriteria() {
-		daoPedido.findPedidosAFaturarHoje(new Date());
+		List<Pedido> findPedidosAFaturarHoje = daoPedido.findPedidosAFaturarHoje();
+		for (Pedido pedido : findPedidosAFaturarHoje) {
+			System.out.println("Codigo: " + pedido.getCodigo());
+			System.out.println("Empresa: " + pedido.getEmpresa().getCodigo());
+		}
 	}
 	
 
