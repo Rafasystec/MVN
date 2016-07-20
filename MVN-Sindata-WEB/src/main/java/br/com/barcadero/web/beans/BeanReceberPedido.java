@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.rule.RulePedido;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.web.functions.HandleMessage;
@@ -18,8 +19,10 @@ public class BeanReceberPedido extends SuperBean {
 	private RulePedido rulePedido;
 	private List<Pedido> pedidosAFaturarHoje;
 	private Pedido selectedPedido;
+	private FormasPagamento formasPagamento;
 	public BeanReceberPedido() {
-		rulePedido = new RulePedido(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		rulePedido 		= new RulePedido(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		formasPagamento = new FormasPagamento();
 	}
 	
 	@Override
@@ -71,7 +74,7 @@ public class BeanReceberPedido extends SuperBean {
 	public void faturarPedido() {
 		try {
 			if(selectedPedido != null){
-				rulePedido.faturarPedido(selectedPedido);
+				//rulePedido.faturarPedido(selectedPedido);
 				HandleMessage.info("Pedido faturado com sucesso!","Pronto para o próximo");
 			}else{
 				HandleMessage.error("Selecione um pedido na grid","");
@@ -88,6 +91,14 @@ public class BeanReceberPedido extends SuperBean {
 
 	public void setPedidosAFaturarHoje(List<Pedido> pedidosAFaturarHoje) {
 		this.pedidosAFaturarHoje = pedidosAFaturarHoje;
+	}
+
+	public FormasPagamento getFormasPagamento() {
+		return formasPagamento;
+	}
+
+	public void setFormasPagamento(FormasPagamento formasPagamento) {
+		this.formasPagamento = formasPagamento;
 	}
 
 }

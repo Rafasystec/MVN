@@ -1,0 +1,30 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition>
+
+	<composite:interface>
+		<composite:attribute name="pagamentos"	shortDescription="Objeto que contem o objeto para ser guardado as formas de pagamento"
+			type=" br.com.barcadero.core.util.FormasPagamento" />
+	</composite:interface>
+
+	<composite:implementation>
+		<p:panel header="Formas de Pagamento">
+			<p:panelGrid columns="1" styleClass="noBorder">
+				<clx:currency label="Dinheiro" 	value="#{cc.attrs.pagamentos.vlDinheiro}" id="txtDinheiro" />
+				<clx:currency label="Cartão" 	value="#{cc.attrs.pagamentos.vlTEF}" id="txtCarta" />
+				<clx:currency label="Cheque" 	value="#{cc.attrs.pagamentos.vlCheque}" id="txtCheque" />
+			</p:panelGrid>
+		</p:panel>
+	</composite:implementation>
+
+</ui:composition>
+</html>
+
+
+
