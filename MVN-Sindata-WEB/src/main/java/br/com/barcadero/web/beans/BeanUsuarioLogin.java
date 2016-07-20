@@ -11,7 +11,7 @@ import javax.faces.event.ComponentSystemEvent;
 
 import org.apache.log4j.Logger;
 
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.attributes.Attributs;
@@ -26,7 +26,7 @@ import br.com.barcadero.web.attributes.Attributs;
 public class BeanUsuarioLogin extends SuperBean{
 
 	private static final long serialVersionUID = 6123392904973257391L;
-	private FacadeUsuario facadeUsuario;
+	private RuleUsuario facadeUsuario;
 	private boolean autorizado;
 	@ManagedProperty(value="#{user}")
 	private Usuario user;
@@ -42,7 +42,7 @@ public class BeanUsuarioLogin extends SuperBean{
 	}
 	public BeanUsuarioLogin(){
 		try{
-			facadeUsuario = new FacadeUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+			facadeUsuario = new RuleUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 			user	= new Usuario(null);
 		}catch(Exception e){
 			e.printStackTrace();

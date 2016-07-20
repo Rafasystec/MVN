@@ -2,7 +2,7 @@ package br.com.barcadero.web.beans;
 
 import javax.faces.bean.ManagedBean;
 
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.rule.RuleEmpresa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Usuario;
@@ -14,7 +14,7 @@ public class BeanCadUsuario extends SuperBean {
 	private static final long serialVersionUID = 746108176250467310L;
 	private Usuario usuario 		= null;
 	private String confirm  		= "";
-	private FacadeUsuario fcdUser 	= null;
+	private RuleUsuario fcdUser 	= null;
 	private RuleEmpresa ruleEmpresa;
 	public Usuario getUsuario() {
 		return usuario;
@@ -31,7 +31,7 @@ public class BeanCadUsuario extends SuperBean {
 	public BeanCadUsuario() {
 		// TODO Auto-generated constructor stub
 		usuario 	= new Usuario(null);
-		fcdUser 	= new FacadeUsuario(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdUser 	= new RuleUsuario(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 	}
 	@Override

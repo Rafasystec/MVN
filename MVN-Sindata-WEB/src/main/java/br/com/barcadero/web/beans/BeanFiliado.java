@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 
 import org.hibernate.Session;
 
-import br.com.barcadero.rule.FacadeFiliado;
+import br.com.barcadero.rule.RuleFiliado;
 import br.com.barcadero.tables.Filiado;
 
 
@@ -59,10 +59,10 @@ public class BeanFiliado {
 	private Date dtSaida;
 	private Date dtEmisReservista;
 	private Date dtRetorno;
-	private FacadeFiliado facadeFiliado;
+	private RuleFiliado facadeFiliado;
 
 	public BeanFiliado(Session session){
-		facadeFiliado	= new FacadeFiliado(session);
+		facadeFiliado	= new RuleFiliado(session);
 	}
 
 	public long getCodigo() {

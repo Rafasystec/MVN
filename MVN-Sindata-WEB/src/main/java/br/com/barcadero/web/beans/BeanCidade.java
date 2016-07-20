@@ -8,8 +8,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
-import br.com.barcadero.rule.FacadeCidade;
-import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.rule.RuleCidade;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Estado;
 
@@ -21,17 +21,17 @@ public class BeanCidade extends SuperBean{
 	private String descricao	= "";
 	private String codIbge		= "";
 	private Date dtCadastro;
-	private FacadeCidade facadeCidade;
+	private RuleCidade facadeCidade;
 	//private FacadeEstado facadeEstado;
 	private List<Cidade> cidades;
 	private List<Estado> estados;
-	private FacadeEstado facadeEstado;
+	private RuleEstado facadeEstado;
 	FacesContext context ;
 	
 
 	public BeanCidade() {
-		facadeCidade = new FacadeCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		facadeEstado = new FacadeEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
+		facadeCidade = new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		facadeEstado = new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
 	}
 	
 	public long getCodigo() {

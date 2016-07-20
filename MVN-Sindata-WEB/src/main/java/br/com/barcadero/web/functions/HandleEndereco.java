@@ -10,9 +10,9 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.core.enums.EnumUF;
-import br.com.barcadero.rule.FacadeBairro;
-import br.com.barcadero.rule.FacadeCidade;
-import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.rule.RuleBairro;
+import br.com.barcadero.rule.RuleCidade;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Endereco;
@@ -27,18 +27,18 @@ public class HandleEndereco extends SuperBean{
 	private Endereco ender;
 	private EnumUF[] uf;
 	private EnumUF ufSelected;
-	private FacadeEstado fcdEstado;
-	private FacadeCidade fcdCidade;
-	private FacadeBairro fcdBairro;
+	private RuleEstado fcdEstado;
+	private RuleCidade fcdCidade;
+	private RuleBairro fcdBairro;
 	private long codEstado;
 	private long codCidade;
 	private static List<Cidade> cidades;
 	private static List<Bairro> bairros;
 	
 	public HandleEndereco() {
-		fcdEstado = new FacadeEstado(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdCidade = new FacadeCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdBairro = new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdEstado = new RuleEstado(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdCidade = new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdBairro = new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public Endereco getEnder() {
@@ -57,27 +57,27 @@ public class HandleEndereco extends SuperBean{
 		this.uf = uf;
 	}
 
-	public FacadeEstado getFcdEstado() {
+	public RuleEstado getFcdEstado() {
 		return fcdEstado;
 	}
 
-	public void setFcdEstado(FacadeEstado fcdEstado) {
+	public void setFcdEstado(RuleEstado fcdEstado) {
 		this.fcdEstado = fcdEstado;
 	}
 
-	public FacadeCidade getFcdCidade() {
+	public RuleCidade getFcdCidade() {
 		return fcdCidade;
 	}
 
-	public void setFcdCidade(FacadeCidade fcdCidade) {
+	public void setFcdCidade(RuleCidade fcdCidade) {
 		this.fcdCidade = fcdCidade;
 	}
 
-	public FacadeBairro getFcdBairro() {
+	public RuleBairro getFcdBairro() {
 		return fcdBairro;
 	}
 
-	public void setFcdBairro(FacadeBairro fcdBairro) {
+	public void setFcdBairro(RuleBairro fcdBairro) {
 		this.fcdBairro = fcdBairro;
 	}
 

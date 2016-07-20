@@ -5,8 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.barcadero.rule.FacadeBairro;
-import br.com.barcadero.rule.FacadeCidade;
+import br.com.barcadero.rule.RuleBairro;
+import br.com.barcadero.rule.RuleCidade;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
 
@@ -16,8 +16,8 @@ public class BeanBairro extends SuperBean {
 
 	private static final long serialVersionUID = 5859355521669947983L;
 	private Bairro bairro;
-	private FacadeBairro fcdBairro;
-	private FacadeCidade fcdCidade;
+	private RuleBairro fcdBairro;
+	private RuleCidade fcdCidade;
 	private long codCidade;
 	private List<Cidade> cidades;
 	private List<Bairro> bairros;
@@ -25,8 +25,8 @@ public class BeanBairro extends SuperBean {
 	
 	public BeanBairro() {
 		bairro 		= new Bairro(getUsuarioLogado());
-		fcdBairro	= new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdCidade	= new FacadeCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdCidade	= new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public List<Cidade> getCidades() {

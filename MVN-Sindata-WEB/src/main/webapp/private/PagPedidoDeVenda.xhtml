@@ -16,7 +16,7 @@
 			<h:panelGrid columns="5">
 				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 				</p:commandButton>
-				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado"/>
+				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="false"/>
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="Pedido de venda">

@@ -12,7 +12,7 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.barcadero.core.enums.EnumEstadoCivil;
 import br.com.barcadero.core.enums.EnumTipoLograd;
-import br.com.barcadero.rule.FacadeCliente;
+import br.com.barcadero.rule.RuleCliente;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.PessoaFisica;
@@ -25,13 +25,13 @@ public class BeanCliente extends SuperBean {
 	private Cliente	cliente			= null;
 	private List<Cliente> clientes 	= null;
 	private PessoaFisica pFisica	= null;
-	private FacadeCliente fcdCliente;
+	private RuleCliente fcdCliente;
 	private Endereco endereco		= null;
 	private Cliente selectedClie	= null;
 
 	public BeanCliente() {
 		// TODO Auto-generated constructor stub
-		fcdCliente  = new FacadeCliente(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdCliente  = new RuleCliente(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		cliente		= new Cliente(getSession().getEmpresaLogada(), getSession().getUsuarioLogado());
 		endereco	= new Endereco(getSession().getUsuarioLogado());
 		pFisica		= new PessoaFisica(getSession().getUsuarioLogado());

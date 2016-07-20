@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
 
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.rule.RuleUserMensagem;
 import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
@@ -17,7 +17,7 @@ public class BeanUserMessages extends SuperBean {
 
 	private UserMensagens message;
 	private RuleUserMensagem ruleMensagem;
-	private FacadeUsuario fcdUsuario;
+	private RuleUsuario fcdUsuario;
 	private String paramEmail;
 	private static final long serialVersionUID = -2290317476489236357L;
 
@@ -25,7 +25,7 @@ public class BeanUserMessages extends SuperBean {
 		// TODO Auto-generated constructor stub
 		message 	 = new UserMensagens(getEmpresaLogada(),getUsuarioLogado());
 		ruleMensagem = new RuleUserMensagem(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdUsuario	 = new FacadeUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdUsuario	 = new RuleUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override

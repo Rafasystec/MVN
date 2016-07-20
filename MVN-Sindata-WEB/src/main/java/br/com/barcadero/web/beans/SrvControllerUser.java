@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import com.google.gson.Gson;
 import br.com.barcadero.core.db.util.HibernateHelper;
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.tables.Usuario;
 
 @WebServlet(
@@ -31,7 +31,7 @@ public class SrvControllerUser extends HttpServlet {
 			
 			String param = req.getParameter("term");
 			System.out.println("Parametro: " + param);
-			FacadeUsuario fcdUser = new FacadeUsuario(null, null, session);
+			RuleUsuario fcdUser = new RuleUsuario(null, null, session);
 			List<Usuario> list = fcdUser.find(param);
 			String result = new Gson().toJson(list);
 			resp.getWriter().write(result);

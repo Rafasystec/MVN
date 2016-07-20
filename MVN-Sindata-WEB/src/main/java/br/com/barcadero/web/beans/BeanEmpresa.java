@@ -16,9 +16,9 @@ import br.com.barcadero.core.enums.EnumAtividadeEmp;
 import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.core.enums.EnumUF;
-import br.com.barcadero.rule.FacadeBairro;
-import br.com.barcadero.rule.FacadeCidade;
-import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.rule.RuleBairro;
+import br.com.barcadero.rule.RuleCidade;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.rule.RuleEmpresa;
 import br.com.barcadero.rule.RuleLoja;
 import br.com.barcadero.tables.Bairro;
@@ -48,9 +48,9 @@ public class BeanEmpresa extends SuperBean {
 	private FileUpload fileUpload;
 	//para o endereco
 	private EnumUF[] uf;
-	private FacadeEstado fcdEstado;
-	private FacadeCidade fcdCidade;
-	private FacadeBairro fcdBairro;
+	private RuleEstado fcdEstado;
+	private RuleCidade fcdCidade;
+	private RuleBairro fcdBairro;
 	private RuleLoja ruleLoja;
 	private static long codEstado;
 	private static long codCidade;
@@ -71,9 +71,9 @@ public class BeanEmpresa extends SuperBean {
 		pj 		= new PessoaJuridica(userLogado);
 		ender 	= new Endereco(userLogado);
 		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		fcdEstado	= new FacadeEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		fcdCidade	= new FacadeCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		fcdBairro	= new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdEstado	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdCidade	= new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		ruleLoja	= new RuleLoja(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		System.out.println("Bean Empresa was created.");
 	}

@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 
 /**
  * Controla todas as acoes do usuario e guarda as informacoes do mesmo
@@ -29,7 +29,7 @@ public class BeanUsuarioSessao {
 	private String login;
 	private String senha;
 	private Date dtCadastro;
-	private FacadeUsuario facadeUsuario;
+	private RuleUsuario facadeUsuario;
 	private HttpSession session;
 	
 	public long getCodigo() {

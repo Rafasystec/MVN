@@ -20,7 +20,7 @@
 		</p:toolbar>
 		<p:panel header="Receber Pedido">
 			<p:tab title="Pedidos A FATURAR de HOJE" closable="true">
-				<p:panel header="Consulta">
+				<p:panel header="Pedidos a Faturar">
 					<p:dataTable id="tblPedidos" var="ped" value="#{beanReceberPedido.pedidosAFaturarHoje}" resizableColumns="true" style="margin-bottom:20px" 
 					selectionMode="single" selection="#{beanReceberPedido.selectedPedido}"  rowKey="#{ped.codigo}">	
 						<f:facet name="header">
@@ -33,7 +33,7 @@
 							<h:outputText value="#{ped.cliente.pessoaFisica.nome}" />
 						</p:column>
 						<p:column headerText="Celular">
-							<h:outputText value="#{cli.cliente.pessoaFisica.celular}" />
+							<h:outputText value="#{ped.cliente.pessoaFisica.celular}" />
 						</p:column>
 						<p:column headerText="Valor Total">
 							<h:outputText value="#{ped.vlTotal}" >

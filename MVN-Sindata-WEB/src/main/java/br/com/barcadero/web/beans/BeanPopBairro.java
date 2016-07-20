@@ -8,8 +8,8 @@ import javax.faces.bean.RequestScoped;
 
 import org.primefaces.context.RequestContext;
 
-import br.com.barcadero.rule.FacadeBairro;
-import br.com.barcadero.rule.FacadeCidade;
+import br.com.barcadero.rule.RuleBairro;
+import br.com.barcadero.rule.RuleCidade;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
 
@@ -30,13 +30,13 @@ public class BeanPopBairro extends SuperBean{
 	private Date dtCadastro;
 	private List<Cidade> cidades;
 	private List<Bairro> bairros;
-	private FacadeBairro facadeBairro;
-	private FacadeCidade facadeCidade;
+	private RuleBairro facadeBairro;
+	private RuleCidade facadeCidade;
 	private List<String> params;
 	
 	public BeanPopBairro(){
-		this.facadeCidade	= new FacadeCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		this.facadeBairro	= new FacadeBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		this.facadeCidade	= new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		this.facadeBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		getParametros();
 	}
 	public List<Cidade> getCidades() {

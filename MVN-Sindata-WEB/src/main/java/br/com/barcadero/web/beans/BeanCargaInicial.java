@@ -3,7 +3,7 @@ package br.com.barcadero.web.beans;
 import javax.faces.bean.ManagedBean;
 
 import br.com.barcadero.core.util.HandleCargaCidadesCE;
-import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.rule.RuleParametros;
 /**
  * Para realizar a carga de algumas tabelas quando necessario.
@@ -14,12 +14,12 @@ import br.com.barcadero.rule.RuleParametros;
 public class BeanCargaInicial extends SuperBean {
 
 	private static final long serialVersionUID = 1L;
-	private FacadeEstado fcdEstado;
+	private RuleEstado fcdEstado;
 	private HandleCargaCidadesCE cargaCidCE;
 	private RuleParametros	ruleParam;
 	public BeanCargaInicial() {
 		// TODO Auto-generated constructor stub
-		fcdEstado 	= new FacadeEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		fcdEstado 	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		cargaCidCE 	= new HandleCargaCidadesCE(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(), getUsuarioLogado());
 		ruleParam	= new RuleParametros(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
 	}

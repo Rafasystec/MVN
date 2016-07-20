@@ -6,7 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import br.com.barcadero.rule.FacadeEstado;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.tables.Estado;
 
 @ManagedBean
@@ -20,7 +20,7 @@ public class BeanEstado extends SuperBean{
 	private String uf;
 	private String codIbge;
 	private Date dtCadastro;
-	private FacadeEstado facadeEstado;
+	private RuleEstado facadeEstado;
 
 	public BeanEstado() {
 		

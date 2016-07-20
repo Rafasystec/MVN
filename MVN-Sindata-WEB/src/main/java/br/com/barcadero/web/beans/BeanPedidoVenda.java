@@ -50,6 +50,7 @@ public class BeanPedidoVenda extends SuperBean{
 		ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
 		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session);
 		item			= createItem();
+		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 	}
 	
 	@PostConstruct
@@ -59,7 +60,7 @@ public class BeanPedidoVenda extends SuperBean{
 			if(this.session != null){
 				this.session.beginTransaction();
 			}
-			this.pedido = new Pedido();
+			//this.pedido = new Pedido();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,6 +128,15 @@ public class BeanPedidoVenda extends SuperBean{
 	}
 
 	public void fecharPedido() {
+		try {
+			beginTransaction();
+			String ret = rulePedido.fecharPedido(pedido);
+			System.out.println("Fechar pedido: " + ret);
+			HandleMessage.info("Fechar Pedido: ", ret);
+			commit();
+		} catch (Exception e) {
+			HandleMessage.error("Erro no fechamento do Pedido: ", e.getMessage());
+		}
 		
 	}
 

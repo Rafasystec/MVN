@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Usuario;
 /**
@@ -17,11 +17,11 @@ import br.com.barcadero.tables.Usuario;
 @RequestScoped
 public class BeanPopUsuario extends SuperBean {
 
-	private FacadeUsuario fcdUsuario;
+	private RuleUsuario fcdUsuario;
 	private static final long serialVersionUID = 736684237610838273L;
 
 	public BeanPopUsuario() {
-		fcdUsuario = new FacadeUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		fcdUsuario = new RuleUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override
@@ -57,10 +57,10 @@ public class BeanPopUsuario extends SuperBean {
 			return new ArrayList<Usuario>();
 		}
 	}
-	public FacadeUsuario getFcdUsuario() {
+	public RuleUsuario getFcdUsuario() {
 		return fcdUsuario;
 	}
-	public void setFcdUsuario(FacadeUsuario fcdUsuario) {
+	public void setFcdUsuario(RuleUsuario fcdUsuario) {
 		this.fcdUsuario = fcdUsuario;
 	}
 
