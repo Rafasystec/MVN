@@ -26,7 +26,8 @@ import br.com.barcadero.core.enums.EnumTipoPedido;
 	@NamedQuery(name=Pedido.FIND_BY_LOJA	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja"),
 	@NamedQuery(name=Pedido.FIND_BY_CLIENTE	,query="FROM Pedido WHERE empresa = :empresa AND cliente = :cliente"),
 	@NamedQuery(name=Pedido.FIND_BY_CODE	,query="FROM Pedido WHERE empresa = :empresa AND codigo = :codigo"),
-	@NamedQuery(name=Pedido.FIND_BY_DATE	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja AND dtCadastro = :dtCadastro")
+	@NamedQuery(name=Pedido.FIND_BY_DATE	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja AND dtCadastro = :dtCadastro"),
+	@NamedQuery(name=Pedido.FIND_AFATURAR	,query="FROM Pedido WHERE empresa = :empresa AND loja = :loja AND dtCadastro = :dtCadastro AND flStPed = :flStPed")
 })
 @Entity
 @Table(name="PEDIDO")
@@ -37,6 +38,8 @@ public final class Pedido extends EntidadeLoja {
 	public static final String FIND_BY_CLIENTE 	= "Pedido.findByCliente";
 	public static final String FIND_BY_CODE 	= "Pedido.findByCode";
 	public static final String FIND_BY_DATE 	= "Pedido.findByDate";
+	public static final String FIND_AFATURAR	= "Pedido.findAFaturar";
+	
 	public Pedido() {
 	}
 	

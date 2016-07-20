@@ -81,5 +81,11 @@ public class DaoPedido extends DaoModelo<Pedido> {
 		return c.list();
 				
 	}
+	
+	public List<Pedido> findPedidos() {
+		StringBuilder builder = new StringBuilder();
+		 Query query = getSession().createQuery(builder.toString());
+		 return null;
+	}
 
 }
