@@ -123,7 +123,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 		BigDecimal total = new BigDecimal(0.00);
 		if(pedido != null){
 			for (PedidoItens item : pedido.getItens()) {
-				total.add(item.getVlTotal());
+				total = total.add(item.getVlTotal());
 			}
 		}
 		return total;

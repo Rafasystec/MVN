@@ -54,6 +54,7 @@
 		<mapping class="br.com.barcadero.tables.Pedido"/>
 		<mapping class="br.com.barcadero.tables.PedidoItens"/>
 		<mapping class="br.com.barcadero.tables.CartaoPresente"/>
+		<mapping class="br.com.barcadero.tables.NotaSequence"/>
 		
 	</session-factory>
 </hibernate-configuration>

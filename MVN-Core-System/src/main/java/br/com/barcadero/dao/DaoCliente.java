@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
@@ -27,7 +28,8 @@ public class DaoCliente extends DaoModelo<Cliente> {
 
 	@Override
 	public List<Cliente> findAll() throws Exception {
-		Query qry = getSession().getNamedQuery(Cliente.FIND);
+		Query qry = getSession().getNamedQuery(Cliente.FIND)
+				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
 		return qry.list();
 	}
 

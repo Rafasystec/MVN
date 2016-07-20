@@ -54,5 +54,9 @@ public class RuleCliente extends RuleModelo<Cliente> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<String> getAutoComplet(String query) {
+		return null;
+	}
 
 }
