@@ -74,7 +74,7 @@ public class BeanReceberPedido extends SuperBean {
 	public void faturarPedido() {
 		try {
 			if(selectedPedido != null){
-				//rulePedido.faturarPedido(selectedPedido);
+				rulePedido.faturarPedido(selectedPedido, formasPagamento, getUsuarioLogado());
 				HandleMessage.info("Pedido faturado com sucesso!","Pronto para o próximo");
 			}else{
 				HandleMessage.error("Selecione um pedido na grid","");

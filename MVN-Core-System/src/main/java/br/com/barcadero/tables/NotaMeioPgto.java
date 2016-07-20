@@ -4,10 +4,15 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import br.com.barcadero.core.enums.EnumTipoMeioPgto;
+import br.com.barcadero.core.util.GlobalNameParam;
 
 @Entity
 @Table(name="Nota_meio_pgto")
@@ -23,17 +28,22 @@ public class NotaMeioPgto extends SuperClassNota {
 		super(loja, usuario);
 		// TODO Auto-generated constructor stub
 	}
-	@Column(name="valor",nullable=false)
+
+	@Column(name="VALOR",nullable=false)
 	private BigDecimal valor;
-	@Column(name="qt_parcelas",nullable=false)
+	@Column(name="QT_PARCELAS",nullable=false)
 	private int qtParcelas;
-	@Column(name="cd_administradora",nullable=false)
+	@Column(name="CD_ADMINISTRADORA",nullable=false)
 	private int cdAdministradora;
+	@Column(name="MEIO_PAGAMENTO")
+	@Enumerated(EnumType.STRING)
+	private EnumTipoMeioPgto tipoMeioPgto;
 	@Transient
 	private long codMeioPgto;	
 	@ManyToOne
-	@JoinColumn(name="cod_nota",referencedColumnName="codigo")
+	@JoinColumn(name=GlobalNameParam.PARAM_NOTA,referencedColumnName="codigo")
 	private Nota nota;
+	
 	@ManyToOne
 	@JoinColumn(name="cod_meio_pgto",referencedColumnName="codigo")
 	private MeiosPagamento meioPagamento;
@@ -74,7 +84,13 @@ public class NotaMeioPgto extends SuperClassNota {
 	public void setCodMeioPgto(long codMeioPgto) {
 		this.codMeioPgto = codMeioPgto;
 	}
-	
-	
 
+	public EnumTipoMeioPgto getTipoMeioPgto() {
+		return tipoMeioPgto;
+	}
+
+	public void setTipoMeioPgto(EnumTipoMeioPgto tipoMeioPgto) {
+		this.tipoMeioPgto = tipoMeioPgto;
+	}
+	
 }

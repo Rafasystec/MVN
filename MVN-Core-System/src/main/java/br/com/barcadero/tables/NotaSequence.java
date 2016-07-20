@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import br.com.barcadero.core.enums.EnumModeloNota;
 @NamedQueries({
 	@NamedQuery(name=NotaSequence.FIND_BY_MOD_SERIE,query="FROM NotaSequence WHERE empresa = :empresa AND modeloNota = :modeloNota AND serie = :serie"),
-	@NamedQuery(name=NotaSequence.FIND_BY_MOD_SERIE,query="FROM NotaSequence WHERE empresa = :empresa ")
+	@NamedQuery(name=NotaSequence.FIND_ALL,query="FROM NotaSequence WHERE empresa = :empresa ")
 })
 
 @Entity

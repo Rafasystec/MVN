@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
+import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.exeptions.DAOException;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoMeioPgto;
@@ -199,8 +200,8 @@ public class RuleNota extends RuleModelo<Nota> {
 			//------------------------------------------
 			//Inserir as formas de pagamento
 			//------------------------------------------
-			 
-			
+			 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
+			 update(nota);
 		}else{
 			return "O Pedido está com o valor nulo.";
 		}
@@ -241,10 +242,43 @@ public class RuleNota extends RuleModelo<Nota> {
 		return itens;
 	}
 	
-	public List<NotaMeioPgto> getMeiosPagamento(FormasPagamento formasPagamento, Usuario usuario) {
+	public List<NotaMeioPgto> getMeiosPagamento(Nota nota, FormasPagamento formasPagamento, Usuario usuario) {
 		 List<NotaMeioPgto> meioPgtos = new ArrayList<>();
 		 if(formasPagamento.getVlTEF().floatValue()  > 0.00f){
 			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+			 meioPgto.setNota(nota);
+			 meioPgto.setCdAdministradora(999);
+			 meioPgto.setEmpresa(getEmpresa());
+			 //meioPgto.setMeioPagamento(EnumTipoMeioPgto.TEF);
+			 meioPgto.setQtParcelas(0);
+			 meioPgto.setSerieNota(nota.getSerieNota());
+			 meioPgto.setTipoMeioPgto(EnumTipoMeioPgto.TEF); 
+			 meioPgto.setValor(formasPagamento.getVlTEF());
+			 meioPgtos.add(meioPgto);
+		 }
+		 if(formasPagamento.getVlCheque().floatValue() > 0.00f){
+			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+			 meioPgto.setNota(nota);
+			 meioPgto.setCdAdministradora(0);
+			 meioPgto.setEmpresa(getEmpresa());
+			 //meioPgto.setMeioPagamento(EnumTipoMeioPgto.TEF);
+			 meioPgto.setQtParcelas(0);
+			 meioPgto.setSerieNota(nota.getSerieNota());
+			 meioPgto.setTipoMeioPgto(EnumTipoMeioPgto.CHEQUE);
+			 meioPgto.setValor(formasPagamento.getVlCheque());
+			 meioPgtos.add(meioPgto);
+		 }
+		 if(formasPagamento.getVlDinheiro().floatValue() > 0.00f){
+			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+			 meioPgto.setNota(nota);
+			 meioPgto.setCdAdministradora(0);
+			 meioPgto.setEmpresa(getEmpresa());
+			 //meioPgto.setMeioPagamento(EnumTipoMeioPgto.TEF);
+			 meioPgto.setQtParcelas(0);
+			 meioPgto.setSerieNota(nota.getSerieNota());
+			 meioPgto.setTipoMeioPgto(EnumTipoMeioPgto.DINHEIRO);
+			 meioPgto.setValor(formasPagamento.getVlDinheiro());
+			 meioPgtos.add(meioPgto);
 		 }
 		 return meioPgtos;
 	}

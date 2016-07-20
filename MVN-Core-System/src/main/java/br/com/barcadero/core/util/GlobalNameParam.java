@@ -10,5 +10,6 @@ public class GlobalNameParam {
 	public static final String PARAM_COD_EMP  	= "empresa";
 	public static final String PARAM_COD_LOJA 	= "loja";
 	public static final String PARAM_CAIXA 		= "caixa";
+	public static final String PARAM_NOTA 		= "nota";
 
 }

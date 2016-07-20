@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import br.com.barcadero.rule.RulePedido;
 import br.com.barcadero.rule.RulePedidoItens;
 import br.com.barcadero.rule.RuleProduto;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Produto;
@@ -32,6 +33,7 @@ public class BeanPedidoVenda extends SuperBean{
 	private RulePedidoItens rulePedidoItens;
 	private RuleProduto ruleProduto;
 	private RulePedido rulePedido;
+	private Caixa caixa;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
 	
@@ -207,5 +209,13 @@ public class BeanPedidoVenda extends SuperBean{
 	
 	private PedidoItens createItem() {
 		return new PedidoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+	}
+
+	public Caixa getCaixa() {
+		return caixa;
+	}
+
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
 	}
 }
