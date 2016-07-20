@@ -7,11 +7,11 @@ import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
-public class FacadeBairro extends RuleModelo<Bairro> {
+public class RuleBairro extends RuleModelo<Bairro> {
 	
 	
 	private DaoBairro daoBairro	;
-	public FacadeBairro(Empresa empresa, Loja loja, Session session) {
+	public RuleBairro(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		this.daoBairro	= new DaoBairro(empresa, loja, session);
 	}
@@ -21,7 +21,6 @@ public class FacadeBairro extends RuleModelo<Bairro> {
 		try{
 			Bairro bairro	= (Bairro)entidade;
 			if(bairro != null){
-				bairro.setDtCadastro(FacadeHelperData.getDataAtual());
 				return this.daoBairro.insert(entidade);
 			}else{
 				return "Entidade veio nula do Bean.";

@@ -3,6 +3,8 @@ package br.com.barcadero.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -72,20 +74,27 @@ public class DaoPedido extends DaoModelo<Pedido> {
 	}
 	
 	public List<Pedido> findPedidosAFaturarHoje() {
-		Criteria c = getSession().createCriteria(Pedido.class);
-		c.createCriteria("empresa", "emp");
-		//c.add(Restrictions.eq("dtCadastro", new Date()));
-		c.add(Restrictions.eq("emp.codigo", getEmpresa().getCodigo()));
-		//c.add(Restrictions.eq("flStPed",EnumStatusPedido.FECHADO));
-		c.addOrder(Property.forName("dtCadastro").asc());
-		return c.list();
-				
+		Query qry = getSession().getNamedQuery(Pedido.FIND_AFATURAR)
+				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+				.setLong(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo())
+				.setDate("dtCadastro", new Date())
+				.setParameter("flStPed", EnumStatusPedido.FECHADO);
+		return qry.list();		
 	}
 	
-	public List<Pedido> findPedidos() {
+	public List<Pedido> findPedidosAFaturar(Date dtInicial, Date dtFinal) {
 		StringBuilder builder = new StringBuilder();
-		 Query query = getSession().createQuery(builder.toString());
-		 return null;
+		builder.append("FROM Pedido WHERE ")
+			   .append(GlobalNameParam.PARAM_COD_EMP).append(" = :empresa").append(" AND ")
+			   .append(GlobalNameParam.PARAM_COD_LOJA).append(" = :loja").append(" AND ")
+			   .append("dtCadastro BETWEEN (").append(":dtInicial").append(" AND ").append(":dtFinal)").append(" AND ")
+			   .append("flStPed = ").append(EnumStatusPedido.FECHADO);
+		Query query = getSession().createQuery(builder.toString());
+		query.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+			 .setLong(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo())
+			 .setDate("dtInicial", dtInicial)
+			 .setDate("dtFinal", dtFinal);
+		return query.list();
 	}
 
 }

@@ -4,13 +4,13 @@ import static org.junit.Assert.fail;
 
 import org.hibernate.Session;
 
-import br.com.barcadero.rule.FacadeUsuario;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.test.db.HibernateHelper;
 
 public class TestFacadeUsuario {
 	
 	private static Session session ;
-	private static FacadeUsuario fcdUsuario;
+	private static RuleUsuario fcdUsuario;
 	
 	//@BeforeClass
 	public static void init() {

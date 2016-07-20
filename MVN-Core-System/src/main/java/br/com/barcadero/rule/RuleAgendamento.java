@@ -11,7 +11,7 @@ import java.util.TimerTask;
  * @since versao 1.0 Beta dia 03/12/2013 as 21:57
  */
 
-public class FacadeAgendamento {
+public class RuleAgendamento {
 	
 	//private static int count = 0;
 	

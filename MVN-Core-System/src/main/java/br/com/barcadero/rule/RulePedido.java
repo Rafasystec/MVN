@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Pedido;
+import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Usuario;
 
 public class RulePedido extends RuleModelo<Pedido> {
@@ -68,27 +70,74 @@ public class RulePedido extends RuleModelo<Pedido> {
 		return pedido;
 	}
 	
+	/**
+	 * 
+	 * @param pedido
+	 * @return
+	 */
 	public String fecharPedido(Pedido pedido) {
 		try {
-			pedido.setFlStPed(EnumStatusPedido.FECHADO);
-			return daoPedido.update(pedido);
+			if(pedido != null){
+				pedido.setFlStPed(EnumStatusPedido.FECHADO);
+				daoPedido.update(pedido);
+				return "Pedido Fechado com sucesso!";
+			}else{
+				return "Nenhum pedido para ser FECHADO";
+			}
 		} catch (Exception e) {
 			return e.getMessage();
 		}	
 	}
 	
 	public List<Pedido> findPedidosByDate(Date date) {
-		return daoPedido.findPedidosByDate(date);
+		List<Pedido> pedidos = daoPedido.findPedidosByDate(date);
+		return totalizarTodosOsPedidos(pedidos);
 	}
 	
 	public List<Pedido> findPedidosAFaturarHoje(Date date) {
-		return daoPedido.findPedidosAFaturarHoje(date);
+		List<Pedido> pedidos = daoPedido.findPedidosAFaturarHoje(date);
+		return totalizarTodosOsPedidos(pedidos);
 	}
 	
-	public void faturarPedido(Pedido pedido) throws Exception{
+	public List<Pedido> findPedidosAFaturarHoje() {
+		List<Pedido> pedidos = daoPedido.findPedidosAFaturarHoje();
+		pedidos = totalizarTodosOsPedidos(pedidos);
+		return pedidos;
+	}
+	
+	public String faturarPedido(Pedido pedido) throws Exception{
 		if(pedido != null){
 			//Faturar pedido
+			return "Pedido Faturado";
+		}else{
+			return "Nenhum produto para ser FATURADO.";
 		}
 	}
-
+	
+	/**
+	 * Totaliza um pedido, pega todos os itens e soma o valor total um a um.
+	 * @param pedido
+	 * @return
+	 */
+	public BigDecimal totalizarPedido(Pedido pedido) {
+		BigDecimal total = new BigDecimal(0.00);
+		if(pedido != null){
+			for (PedidoItens item : pedido.getItens()) {
+				total.add(item.getVlTotal());
+			}
+		}
+		return total;
+	}
+	
+	/**
+	 * Totaliza uma lista de pedidos
+	 * @param pedidos
+	 * @return
+	 */
+	public List<Pedido> totalizarTodosOsPedidos(List<Pedido> pedidos) {
+		for (Pedido pedido : pedidos) {
+			pedido.setVlTotal(totalizarPedido(pedido));
+		}
+		return pedidos;
+	}
 }

@@ -10,13 +10,13 @@ import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
-public class FacadeCliente extends RuleModelo<Cliente> {
+public class RuleCliente extends RuleModelo<Cliente> {
 
 	
 
 	private final DaoCliente daoCliente;
 	
-	public FacadeCliente(Empresa empresa, Loja loja, Session session) {
+	public RuleCliente(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoCliente = new DaoCliente(empresa, loja, session);
 	}

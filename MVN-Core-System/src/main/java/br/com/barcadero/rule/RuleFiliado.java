@@ -8,11 +8,11 @@ import br.com.barcadero.dao.DaoFiliado;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Filiado;
 
-public class FacadeFiliado extends RuleModelo<Filiado>{
+public class RuleFiliado extends RuleModelo<Filiado>{
 	
 	
 	private DaoFiliado daoFiliado	= null;
-	public FacadeFiliado(Session session) {
+	public RuleFiliado(Session session) {
 		super(session);
 		daoFiliado 	= new DaoFiliado(session);
 	}

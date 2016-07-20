@@ -12,12 +12,12 @@ import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
-public class FacadeCidade extends RuleModelo<Cidade> {
+public class RuleCidade extends RuleModelo<Cidade> {
 
 	
 	private DaoCidade daoCidade	;
 	
-	public FacadeCidade(Empresa empresa, Loja loja, Session session) {
+	public RuleCidade(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		this.daoCidade	= new DaoCidade(empresa, loja, session);
 	}

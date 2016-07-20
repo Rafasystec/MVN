@@ -11,10 +11,10 @@ import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
-public class FacadeEstado extends RuleModelo<Estado> {
+public class RuleEstado extends RuleModelo<Estado> {
 
 	private final DaoEstado daoEstado ;
-	public FacadeEstado(Empresa empresa, Loja loja, Session session) {
+	public RuleEstado(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		this.daoEstado = new DaoEstado(empresa, loja, session);
 	}
@@ -23,7 +23,6 @@ public class FacadeEstado extends RuleModelo<Estado> {
 	public String insert(Entidade entidade) throws Exception {
 		Estado estado = (Estado)entidade;
 		if(estado != null){
-			estado.setDtCadastro(FacadeHelperData.getDataAtual());
 			return daoEstado.insert(estado);
 		}else{
 			return "O estado não pode ser recuperado.";

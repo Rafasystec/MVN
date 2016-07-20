@@ -12,13 +12,13 @@ import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
-public class FacadeUsuario extends RuleModelo<Usuario>{
+public class RuleUsuario extends RuleModelo<Usuario>{
 	
 	
 
 	private final DaoUsuario daoUsuario;	
 	
-	public FacadeUsuario(Empresa empresa, Loja loja, Session session) {
+	public RuleUsuario(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoUsuario = new DaoUsuario(empresa, loja, session);
 	}
