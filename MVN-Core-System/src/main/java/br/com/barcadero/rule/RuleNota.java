@@ -8,6 +8,7 @@ import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.exeptions.DAOException;
+import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.dao.DaoNota;
 import br.com.barcadero.tables.Caixa;
@@ -174,7 +175,7 @@ public class RuleNota extends RuleModelo<Nota> {
 	 * @return
 	 * @throws Exception
 	 */
-	public String parse(Pedido pedido, Usuario usuario) throws Exception{
+	public String parse(Pedido pedido, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
 		String result = "";
 		if(pedido != null){
 			Nota nota = new Nota(getLoja(), usuario);
@@ -195,6 +196,10 @@ public class RuleNota extends RuleModelo<Nota> {
 			for (NotaItens notaItens : itens) {
 				ruleNotaItens.insert(notaItens);
 			}
+			//------------------------------------------
+			//Inserir as formas de pagamento
+			//------------------------------------------
+			 
 			
 		}else{
 			return "O Pedido está com o valor nulo.";
@@ -234,6 +239,14 @@ public class RuleNota extends RuleModelo<Nota> {
 			notaItens.setNrItem(itemPed.getNrItem());
 		}
 		return itens;
+	}
+	
+	public List<NotaMeioPgto> getMeiosPagamento(FormasPagamento formasPagamento, Usuario usuario) {
+		 List<NotaMeioPgto> meioPgtos = new ArrayList<>();
+		 if(formasPagamento.getVlTEF().floatValue()  > 0.00f){
+			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+		 }
+		 return meioPgtos;
 	}
 
 }

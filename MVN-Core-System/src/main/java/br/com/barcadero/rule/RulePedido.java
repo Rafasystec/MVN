@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.core.enums.EnumStatusPedido;
+import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
@@ -20,10 +21,12 @@ public class RulePedido extends RuleModelo<Pedido> {
 
 	private RuleCaixa ruleCaixa;
 	private DaoPedido daoPedido;
+	private RuleNota ruleNota;
 	public RulePedido(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		ruleCaixa = new RuleCaixa(empresa, loja, session);
 		daoPedido = new DaoPedido(empresa, loja, session);
+		ruleNota  = new RuleNota(empresa, loja, session);
 	}
 
 	@Override
@@ -105,9 +108,10 @@ public class RulePedido extends RuleModelo<Pedido> {
 		return pedidos;
 	}
 	
-	public String faturarPedido(Pedido pedido) throws Exception{
+	public String faturarPedido(Pedido pedido, FormasPagamento formasPagamento, Usuario usuario) throws Exception{
 		if(pedido != null){
 			//Faturar pedido
+			ruleNota.parse(pedido, usuario,formasPagamento);
 			return "Pedido Faturado";
 		}else{
 			return "Nenhum produto para ser FATURADO.";
