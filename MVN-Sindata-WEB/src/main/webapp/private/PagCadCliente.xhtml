@@ -122,7 +122,7 @@ xmlns:h="http://java.sun.com/jsf/html"
 					<p:dataTable id="clientes" var="cli" value="#{cliente.clientes}" resizableColumns="true" style="margin-bottom:20px" 
 					selectionMode="single" selection="#{cliente.cliente}"  rowKey="#{cli.codigo}" rows="10" scrollable="true" >
 					 
-					<p:ajax event="rowSelect" update=":formMain"  />
+					<p:ajax event="rowSelect" update=":formMain:pnlDadosCliente"  />
 						
 						<f:facet name="header">
             				Clientes do Sistema

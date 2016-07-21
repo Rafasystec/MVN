@@ -11,10 +11,11 @@
 	<composite:interface>
 		<composite:attribute name="pagamentos"	shortDescription="Objeto que contem o objeto para ser guardado as formas de pagamento"
 			type="br.com.barcadero.core.util.FormasPagamento" />
+		<composite:attribute name="id"	shortDescription="Id do panel onde os componentes estão inseridos"	type="java.lang.String" default="frmPgtos" />
 	</composite:interface>
 
 	<composite:implementation>
-		<p:panel header="Formas de Pagamento" style="width 100px">
+		<p:panel header="Formas de Pagamento" id="#{cc.attrs.id}" style="width 100px">
 			<p:panelGrid columns="1" styleClass="noBorder">
 				<clx:currency label="Dinheiro" 	value="#{cc.attrs.pagamentos.vlDinheiro}" id="txtDinheiro" />
 				<clx:currency label="Cartão" 	value="#{cc.attrs.pagamentos.vlTEF}" id="txtCarta" />

@@ -122,8 +122,14 @@ public class BeanReceberPedido extends SuperBean {
 	public void onRowSelect(SelectEvent event) {
 		Pedido pedido = (Pedido)event.getObject();
 		atualizarTotal(pedido);
+		porValorDefaultEmDinheiro(pedido);
 	}
 	
+	public void porValorDefaultEmDinheiro(Pedido pedido) {
+		if(formasPagamento != null){
+			formasPagamento.setVlDinheiro(pedido.getVlTotal());
+		}
+	}
 	public void cancelar(){
 		if(selectedPedido != null){
 			System.out.println("Codigo pedido: " + selectedPedido.getCodigo());

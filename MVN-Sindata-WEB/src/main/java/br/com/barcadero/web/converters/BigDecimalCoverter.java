@@ -16,7 +16,7 @@ public class BigDecimalCoverter implements Converter {
 	@Override
 	 public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		
-		DecimalFormat df = null;
+		//DecimalFormat df = null;
 		
 		try {
 			
@@ -24,9 +24,10 @@ public class BigDecimalCoverter implements Converter {
 				return value;
 			}
 			value = value.replace(".","").replace(",", ".");			
-			df = new DecimalFormat("#,##0.00");
-			df.setParseBigDecimal(true);
-	        BigDecimal decimal = (BigDecimal) df.parse(value);
+			//df = new DecimalFormat("#,##0.00");
+			//df.setParseBigDecimal(true);
+	        //BigDecimal decimal = (BigDecimal) df.parse(value);
+			BigDecimal decimal = new BigDecimal(value);
 			return decimal;
 	        
 		} catch (Exception e) {

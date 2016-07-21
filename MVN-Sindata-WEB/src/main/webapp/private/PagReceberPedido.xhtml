@@ -31,7 +31,8 @@
 				
 					<p:dataTable id="tblPedidos" var="ped" value="#{beanReceberPedido.pedidosAFaturarHoje}" resizableColumns="true" style="margin-bottom:20px" 
 					selectionMode="single" selection="#{beanReceberPedido.selectedPedido}"  rowKey="#{ped.codigo}" scrollable="true" rows="5" emptyMessage="Nenhum Pedido Hoje." scrollHeight="150">	
-						<p:ajax event="rowSelect" listener="#{beanReceberPedido.onRowSelect}" update=":formMain:blbSubVlTotal,:formMain:lblNumPedido"/>
+						<p:ajax event="rowSelect" listener="#{beanReceberPedido.onRowSelect}" 
+						update=":formMain:blbSubVlTotal,:formMain:lblNumPedido,:formMain:pagamentos:txtDinheiro:txtDinheiro"/>
 						<f:facet name="header">
             				Pedidos de Hoje
         				</f:facet>
@@ -63,7 +64,7 @@
 				</p:panel>
 			</p:tab>
 		</p:panel>
-		<clx:formasPagameto pagamentos="#{beanReceberPedido.formasPagamento}"/>
+		<clx:formasPagameto pagamentos="#{beanReceberPedido.formasPagamento}" id="pagamentos"/>
 		
 	</ui:define>
 </ui:composition>
