@@ -7,11 +7,13 @@ import org.hibernate.Session;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
+import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.exeptions.DAOException;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.dao.DaoNota;
+import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
@@ -29,17 +31,19 @@ public class RuleNota extends RuleModelo<Nota> {
 
 	private final DaoNota daoNota;
 	private final DaoMeioPgto daoMeio;
+	private DaoPedido daoPedido;
 	//private final DaoNotaItens daoItens;
 	private final RuleNotaItens ruleNotaItens;
 	private final RuleCaixa ruleCaixa;
+	
 
 	public RuleNota(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		daoNota = new DaoNota(empresa, loja, session);
-		daoMeio = new DaoMeioPgto(empresa, loja, session);
-		//daoItens= new DaoNotaItens(empresa, loja, session);
-		ruleCaixa= new RuleCaixa(empresa, loja, session);
-		ruleNotaItens = new RuleNotaItens(empresa, loja, session);
+		daoNota 		= new DaoNota(empresa, loja, session);
+		daoMeio	 		= new DaoMeioPgto(empresa, loja, session);
+		ruleCaixa		= new RuleCaixa(empresa, loja, session);
+		ruleNotaItens 	= new RuleNotaItens(empresa, loja, session);
+		daoPedido		= new DaoPedido(empresa, loja, session);
 	}
 
 	@Override
@@ -202,6 +206,8 @@ public class RuleNota extends RuleModelo<Nota> {
 			//------------------------------------------
 			 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
 			 update(nota);
+			 pedido.setFlStPed(EnumStatusPedido.FATURADO);
+			 daoPedido.update(pedido);
 		}else{
 			return "O Pedido está com o valor nulo.";
 		}
@@ -238,6 +244,8 @@ public class RuleNota extends RuleModelo<Nota> {
 			NotaItens notaItens = new NotaItens(getEmpresa(), getLoja(), usuario);
 			notaItens.setNota(nota);
 			notaItens.setNrItem(itemPed.getNrItem());
+			notaItens.setProduto(itemPed.getProduto());
+			itens.add(notaItens);
 		}
 		return itens;
 	}

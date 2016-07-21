@@ -12,6 +12,13 @@
 	<ui:param name="pageTitle" value="Receber Pedido" />
 
 	<ui:define name="body">
+		<div class="fontSubTotal" id="divSubTotal">
+			<p:outputLabel id="blbSubVlTotal" styleClass="fontSubTotal" value="#{beanReceberPedido.vlSubTotal}">
+				<f:convertNumber type="currency" currencySymbol="R$" />
+			</p:outputLabel>
+		</div>
+		<p:outputLabel value="Número Pedido Selecionado: "/> 
+		<p:outputLabel value="#{beanReceberPedido.selectedPedido.codigo}" id="lblNumPedido" style="color:#FF4500 ; font-size:20px"/>
 		<p:toolbar>
 			<f:facet name="left">
 				<p:commandButton id="btnFaturar" action="#{beanReceberPedido.faturarPedido}" value="Receber" title="Fatura o pedido por completo" icon="ui-icon-document" ajax="false"/>
@@ -21,10 +28,12 @@
 		<p:panel header="Receber Pedido">
 			<p:tab title="Pedidos A FATURAR de HOJE" closable="true">
 				<p:panel header="Pedidos a Faturar">
+				
 					<p:dataTable id="tblPedidos" var="ped" value="#{beanReceberPedido.pedidosAFaturarHoje}" resizableColumns="true" style="margin-bottom:20px" 
-					selectionMode="single" selection="#{beanReceberPedido.selectedPedido}"  rowKey="#{ped.codigo}">	
+					selectionMode="single" selection="#{beanReceberPedido.selectedPedido}"  rowKey="#{ped.codigo}" scrollable="true" rows="5" emptyMessage="Nenhum Pedido Hoje." scrollHeight="150">	
+						<p:ajax event="rowSelect" listener="#{beanReceberPedido.onRowSelect}" update=":formMain:blbSubVlTotal,:formMain:lblNumPedido"/>
 						<f:facet name="header">
-            				Clientes do Sistema
+            				Pedidos de Hoje
         				</f:facet>
 						<p:column headerText="Número">
 							<h:outputText value="#{ped.codigo}" />
@@ -40,6 +49,11 @@
 								<f:convertNumber currencySymbol="R$" type="currency" />
 							</h:outputText>
 						</p:column>
+						<p:column style="width:60px;text-align: center" headerText="Cancel.">
+				             <p:commandButton title="Cancelar o pedido" icon="ui-icon-closethick" ajax="true"  actionListener="#{beanReceberPedido.cancelar}" update=":formMain:tblPedidos">
+				                <f:setPropertyActionListener value="#{ped}" target="#{beanReceberPedido.selectedPedido}" />
+				            </p:commandButton>
+				        </p:column>
 						<p:column style="width:60px;text-align: center" headerText="Mais">
 				             <p:commandButton  icon="ui-icon-search" title="Detalhes do cliente">
 				                <f:setPropertyActionListener value="#{cli}" target="#{cliente.cliente}" />
@@ -50,6 +64,7 @@
 			</p:tab>
 		</p:panel>
 		<clx:formasPagameto pagamentos="#{beanReceberPedido.formasPagamento}"/>
+		
 	</ui:define>
 </ui:composition>
 </html>

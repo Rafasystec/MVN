@@ -36,6 +36,7 @@ public class BeanPedidoVenda extends SuperBean{
 	private Caixa caixa;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
+
 	
 	public Pedido getPedido() {
 		return pedido;
@@ -53,6 +54,7 @@ public class BeanPedidoVenda extends SuperBean{
 		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session);
 		item			= createItem();
 		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+		caixa			= obterCaixaDeVenda();
 	}
 	
 	@PostConstruct
@@ -132,6 +134,7 @@ public class BeanPedidoVenda extends SuperBean{
 	public void fecharPedido() {
 		try {
 			beginTransaction();
+			pedido.setCaixa(caixa);
 			String ret = rulePedido.fecharPedido(pedido);
 			System.out.println("Fechar pedido: " + ret);
 			HandleMessage.info("Fechar Pedido: ", ret);
@@ -217,5 +220,13 @@ public class BeanPedidoVenda extends SuperBean{
 
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
+	}
+	
+	public Caixa obterCaixaDeVenda() {
+		caixa = getCaixaVenda();
+		if(caixa == null){
+			HandleMessage.error("Sua estação não possui caixa", "Por favor cadastre um caixa primeiro.");
+		}
+		return caixa;
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.barcadero.web.beans;
 
 import java.io.Serializable;
+import java.net.UnknownHostException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 
 import br.com.barcadero.core.db.util.HibernateHelper;
+import br.com.barcadero.rule.RuleCaixa;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
@@ -23,6 +26,7 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 	abstract public String alterar()throws Exception;
 	abstract public String deletar()throws Exception;
 	abstract public String novo()throws Exception;
+	private RuleCaixa ruleCaixa;
 	
 	public String validar() {
 		return "";
@@ -34,6 +38,7 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 	public SuperBean() {
 		// TODO Auto-generated constructor stub
 		this.session = SessionContext.getInstance();
+		ruleCaixa    = new RuleCaixa(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public SessionContext getSession() {
@@ -103,6 +108,20 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 		getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
 		getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
 		getSession().setAttribute(Attributs.USER, usuario);
+	}
+	
+	protected Caixa getCaixaVenda() {
+		Caixa caixa = null;
+		try {
+			caixa = ruleCaixa.findByIp(getLojaLogada().getCodigo(), session.getIpAddress());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return caixa;
 	}
 	
 }

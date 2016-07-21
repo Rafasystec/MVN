@@ -1,10 +1,13 @@
 package br.com.barcadero.web.beans;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
+import org.primefaces.event.SelectEvent;
 
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.rule.RulePedido;
@@ -20,6 +23,9 @@ public class BeanReceberPedido extends SuperBean {
 	private List<Pedido> pedidosAFaturarHoje;
 	private Pedido selectedPedido;
 	private FormasPagamento formasPagamento;
+	private BigDecimal vlSubTotal = new BigDecimal(0.00);
+
+	
 	public BeanReceberPedido() {
 		rulePedido 		= new RulePedido(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		formasPagamento = new FormasPagamento();
@@ -101,4 +107,37 @@ public class BeanReceberPedido extends SuperBean {
 		this.formasPagamento = formasPagamento;
 	}
 
+	public BigDecimal getVlSubTotal() {
+		return vlSubTotal;
+	}
+
+	public void setVlSubTotal(BigDecimal vlSubTotal) {
+		this.vlSubTotal = vlSubTotal;
+	}
+
+	public void atualizarTotal(Pedido pedido) {
+		setVlSubTotal(pedido.getVlTotal());
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+		Pedido pedido = (Pedido)event.getObject();
+		atualizarTotal(pedido);
+	}
+	
+	public void cancelar(){
+		if(selectedPedido != null){
+			System.out.println("Codigo pedido: " + selectedPedido.getCodigo());
+			try {
+				String ret = rulePedido.canelar(selectedPedido, getUsuarioLogado());
+				HandleMessage.info("Cancelamento: ", ret);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				HandleMessage.error("Erro no cancelamento do pedido: ", e.getMessage());
+			}
+			
+		}
+	}
+	
+	
+	
 }

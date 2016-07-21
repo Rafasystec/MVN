@@ -144,4 +144,20 @@ public class RulePedido extends RuleModelo<Pedido> {
 		}
 		return pedidos;
 	}
+	
+	/**
+	 * Cancelar um pedido
+	 * @param pedido
+	 * @return
+	 * @throws Exception
+	 */
+	public String canelar(Pedido pedido, Usuario usuario) throws Exception {
+		if(pedido != null){
+			pedido.setFlStPed(EnumStatusPedido.CANCELADO);
+			daoPedido.update(pedido);
+			return "Pedido " + pedido.getCodigo() + " cancelado.";
+		}else{
+			return "Pedido tem valor inválido ou está nulo.";
+		}
+	}
 }

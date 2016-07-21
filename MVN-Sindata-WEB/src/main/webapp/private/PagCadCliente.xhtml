@@ -120,10 +120,10 @@ xmlns:h="http://java.sun.com/jsf/html"
 			<p:tab title="Consultar" closable="true">
 				<p:panel header="Consulta">
 					<p:dataTable id="clientes" var="cli" value="#{cliente.clientes}" resizableColumns="true" style="margin-bottom:20px" 
-					selectionMode="single" selection="#{cliente.selectedClie}"  rowKey="#{cli.codigo}">
-					<!-- 
-					<p:ajax event="rowSelect" listener="#{cliente.onRowSelect}" update="@form" />
-					 -->	
+					selectionMode="single" selection="#{cliente.cliente}"  rowKey="#{cli.codigo}" rows="10" scrollable="true" >
+					 
+					<p:ajax event="rowSelect" update=":formMain"  />
+						
 						<f:facet name="header">
             				Clientes do Sistema
         				</f:facet>
