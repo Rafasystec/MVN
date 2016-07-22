@@ -16,13 +16,14 @@ import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumItemCancelado;
+import br.com.barcadero.core.util.GlobalNameParam;
 
 
 
 @NamedQueries({	
-	@NamedQuery(name=NotaItens.FIND_ALL, query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja"),
-	@NamedQuery(name=NotaItens.FIND_BY_NOTA,query="FROM NotaItens WHERE codigo = :codigo AND empresa = :empresa AND loja = :loja"),
-	@NamedQuery(name=NotaItens.FIND_BY_CODE_NOTA,query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja AND nota = :nota ORDER BY hrCadastro ASC")
+	@NamedQuery(name=NotaItens.FIND_ALL			, query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja"),
+	@NamedQuery(name=NotaItens.FIND_BY_NOTA		, query="FROM NotaItens WHERE codigo = :codigo AND empresa = :empresa AND loja = :loja"),
+	@NamedQuery(name=NotaItens.FIND_BY_CODE_NOTA, query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja AND nota = :nota ORDER BY hrCadastro ASC")
 })
 @Entity
 @Table(name="NOTA_ITENS")
@@ -80,7 +81,7 @@ public class NotaItens extends SuperClassNota {
 	private Nota nota;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name=GlobalNameParam.PARAM_PRODUTO, referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private Produto produto;
 	
 	public BigDecimal getQuantidade() {

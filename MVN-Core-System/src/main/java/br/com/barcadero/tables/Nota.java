@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
+import br.com.barcadero.core.enums.EnumStatusCFeNota;
 
 /**
  * Para as notas geradas pelo sistema
@@ -73,6 +74,8 @@ public final class Nota extends EntidadeLoja {
 	private BigDecimal vlTotTributos = new BigDecimal("0.00");;
 	@Column(name="TP_IMPOSTO_ICMS", nullable=false)
 	private String tpImpostoIcms = "";
+	@Column(name="STATUS_CFE")
+	private EnumStatusCFeNota statusCFe = EnumStatusCFeNota.XML_NAO_GERADO;
 	
 	@Column(name="NATUREZA_OPERACAO", nullable=false)
 	@Enumerated(EnumType.STRING)
@@ -270,5 +273,13 @@ public final class Nota extends EntidadeLoja {
 
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
+	}
+
+	public EnumStatusCFeNota getStatusCFe() {
+		return statusCFe;
+	}
+
+	public void setStatusCFe(EnumStatusCFeNota statusCFe) {
+		this.statusCFe = statusCFe;
 	}
 }

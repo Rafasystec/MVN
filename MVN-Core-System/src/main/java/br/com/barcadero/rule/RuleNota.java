@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+
+import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
@@ -180,36 +182,40 @@ public class RuleNota extends RuleModelo<Nota> {
 	 * @return
 	 * @throws Exception
 	 */
-	public String parse(Pedido pedido, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
-		String result = "";
-		if(pedido != null){
-			Nota nota = new Nota(getLoja(), usuario);
-			nota.setCaixa(pedido.getCaixa());
-			nota.setEmpresa(getEmpresa());
-			nota.setFlFaturado(EnumNotaFaturada.NAO);
-			nota.setLoja(getLoja());
-			nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + pedido.getCodigo());
-			nota.setModelo(pedido.getCaixa().getTipoNota());
-			nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
-			nota.setNrPed(pedido.getCodigo());
-			nota.setSerieNota(String.valueOf(getSerie(pedido.getCaixa())));
-			//------------------------------------------
-			//Montando a lista de itens para a nota
-			//------------------------------------------
-			insert(nota);
-			List<NotaItens> itens = getItensNota(nota,pedido,usuario);
-			for (NotaItens notaItens : itens) {
-				ruleNotaItens.insert(notaItens);
+	public Nota parse(Pedido pedido, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
+		Nota result = null;
+		try{
+			if(pedido != null){
+				Nota nota = new Nota(getLoja(), usuario);
+				nota.setCaixa(pedido.getCaixa());
+				nota.setEmpresa(getEmpresa());
+				nota.setFlFaturado(EnumNotaFaturada.NAO);
+				nota.setLoja(getLoja());
+				nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + pedido.getCodigo());
+				nota.setModelo(pedido.getCaixa().getTipoNota());
+				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
+				nota.setNrPed(pedido.getCodigo());
+				nota.setSerieNota(String.valueOf(getSerie(pedido.getCaixa())));
+				//------------------------------------------
+				//Montando a lista de itens para a nota
+				//------------------------------------------
+				insert(nota);
+				List<NotaItens> itens = getItensNota(nota,pedido,usuario);
+				for (NotaItens notaItens : itens) {
+					ruleNotaItens.insert(notaItens);
+				}
+				//------------------------------------------
+				//Inserir as formas de pagamento
+				//------------------------------------------
+				 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
+				 nota.setFlFaturado(EnumNotaFaturada.SIM);
+				 update(nota);
+				 pedido.setFlStPed(EnumStatusPedido.FATURADO);
+				 daoPedido.update(pedido);
+				 result = nota;
 			}
-			//------------------------------------------
-			//Inserir as formas de pagamento
-			//------------------------------------------
-			 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
-			 update(nota);
-			 pedido.setFlStPed(EnumStatusPedido.FATURADO);
-			 daoPedido.update(pedido);
-		}else{
-			return "O Pedido está com o valor nulo.";
+		}catch(Exception e){
+			throw new Exception("Erro ao transformar o pedido " + pedido.getCodigo() + " em uma Nota.");
 		}
 		return result;
 	}
@@ -245,6 +251,16 @@ public class RuleNota extends RuleModelo<Nota> {
 			notaItens.setNota(nota);
 			notaItens.setNrItem(itemPed.getNrItem());
 			notaItens.setProduto(itemPed.getProduto());
+			notaItens.setDescricao(itemPed.getProduto().getDescricao());
+			notaItens.setFlCompoeTotNota(EnumCompeTotalNota.S);
+			notaItens.setLoja(getLoja());
+			notaItens.setPcDesc(itemPed.getPcDesconto());
+			notaItens.setQuantidade(itemPed.getQuantidade());
+			notaItens.setSerieNota(nota.getSerieNota());
+			notaItens.setUsuario(usuario);
+			notaItens.setVlDesc(itemPed.getVlDesconto());
+			notaItens.setVlTotal(itemPed.getVlTotal());
+			notaItens.setVlUnidade(itemPed.getVlUnitario());
 			itens.add(notaItens);
 		}
 		return itens;

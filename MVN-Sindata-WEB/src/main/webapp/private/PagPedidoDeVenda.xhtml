@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:clx="http://java.sun.com/jsf/composite/components">
@@ -16,7 +16,9 @@
 			<h:panelGrid columns="5">
 				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 				</p:commandButton>
-				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="false"/>
+				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="true">
+					<f:ajax render="@form" resetValues="true"/>
+				</p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="Pedido de venda">

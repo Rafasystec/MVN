@@ -7,9 +7,11 @@ package br.com.barcadero.core.util;
  */
 public class GlobalNameParam {
 	
-	public static final String PARAM_COD_EMP  	= "empresa";
-	public static final String PARAM_COD_LOJA 	= "loja";
-	public static final String PARAM_CAIXA 		= "caixa";
-	public static final String PARAM_NOTA 		= "nota";
+	public static final String PARAM_COD_EMP  	          = "empresa";
+	public static final String PARAM_COD_LOJA 	          = "loja";
+	public static final String PARAM_CAIXA 		          = "caixa";
+	public static final String PARAM_NOTA 		          = "nota";
+	public static final String PARAM_PRODUTO 	          = "produto";
+	public static final String PARAM_DEFAULT_CODE_COLUMN  = "CODIGO";
 
 }

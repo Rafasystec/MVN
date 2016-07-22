@@ -2,11 +2,13 @@ package br.com.barcadero.web.beans;
 
 import java.io.Serializable;
 import java.net.UnknownHostException;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.event.ListSelectionEvent;
 
 import org.hibernate.Session;
 

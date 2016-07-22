@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import br.com.barcadero.core.util.GlobalNameParam;
 @NamedQueries({
 	@NamedQuery(name=PedidoItens.FIND_ALL		,query="FROM PedidoItens WHERE empresa = :empresa"),
 	@NamedQuery(name=PedidoItens.FIND_BY_PEDIDO	,query="FROM PedidoItens WHERE empresa = :empresa AND pedido = :pedido")
@@ -62,7 +64,7 @@ public class PedidoItens extends EntidadeLoja {
 	private Pedido pedido;
 	
 	@OneToOne
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name=GlobalNameParam.PARAM_PRODUTO, referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private Produto produto;
 	
 	public int getNrItem() {
