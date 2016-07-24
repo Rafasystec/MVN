@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import br.com.barcadero.core.enums.EnumCSTICMS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
+import br.com.barcadero.core.enums.EnumTipoICMS;
 import br.com.barcadero.core.enums.EnumTipoProduto;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 
@@ -100,7 +101,10 @@ public class Produto extends EntidadeEmpresa {
 	private String msgPromocional;
 	@Column(name="TIPO_PRODUTO")
 	@Enumerated(EnumType.STRING)
-	private EnumTipoProduto tipoProduto;
+	private EnumTipoProduto tipoProduto = EnumTipoProduto.NORMAL;
+	@Column(name="TIPO_ICMS")
+	@Enumerated(EnumType.STRING)
+	private EnumTipoICMS tipoICMS = EnumTipoICMS.ICMS00;
 	
 	@OneToMany(mappedBy="produto", targetEntity=Estoque.class)
 	private List<Estoque> estoques;
@@ -263,6 +267,25 @@ public class Produto extends EntidadeEmpresa {
 	}
 	public void setNaturezaOperacaoIssqn(int naturezaOperacaoIssqn) {
 		this.naturezaOperacaoIssqn = naturezaOperacaoIssqn;
+	}
+	public EnumTipoProduto getTipoProduto() {
+		return tipoProduto;
+	}
+	public void setTipoProduto(EnumTipoProduto tipoProduto) {
+		this.tipoProduto = tipoProduto;
+	}
+	
+	public List<Estoque> getEstoques() {
+		return estoques;
+	}
+	public void setEstoques(List<Estoque> estoques) {
+		this.estoques = estoques;
+	}
+	public EnumTipoICMS getTipoICMS() {
+		return tipoICMS;
+	}
+	public void setTipoICMS(EnumTipoICMS tipoICMS) {
+		this.tipoICMS = tipoICMS;
 	}
 	
 }

@@ -53,5 +53,29 @@ public class HandleString {
 					  .replace("/", "")
 					  .replace("-", "");
 	}
+	
+	public static String parse(int value) {
+		return String.valueOf(value);
+	}
+	
+	public static String parse(float value) {
+		return String.valueOf(value);
+	}
+	
+	public static String parse(double value) {
+		return String.valueOf(value);
+	}
+	
+	public static String parse(char value) {
+		return String.valueOf(value);
+	}
+	
+	public static String parse(Object value) {
+		return String.valueOf(value);
+	}
+	
+	public static String parse(short value) {
+		return String.valueOf(value);
+	}
 
 }

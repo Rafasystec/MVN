@@ -46,7 +46,7 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 			Produto produto = pedidoItens.getProduto();
 			BigDecimal vlUnitario = ruleProduto.getPreco(produto);
 			pedidoItens.setVlUnitario(vlUnitario);
-			pedidoItens.setVlTotal(pedidoItens.getQuantidade().multiply(vlUnitario));
+			pedidoItens.setVlTotal(vlUnitario.multiply(new BigDecimal(pedidoItens.getQuantidade())));
 			pedidoItens.setPedido(pedido);
 			return daoPedidoItens.insert(pedidoItens);
 		}else{

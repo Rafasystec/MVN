@@ -11,14 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumItemCancelado;
 import br.com.barcadero.core.util.GlobalNameParam;
-
-
 
 @NamedQueries({	
 	@NamedQuery(name=NotaItens.FIND_ALL			, query="FROM NotaItens WHERE empresa = :empresa AND loja = :loja"),
@@ -49,8 +46,8 @@ public class NotaItens extends SuperClassNota {
 	public static final String FIND_BY_CODE_NOTA = "NotaItens.findByCodeNota";
 	public static final String PARAM_COD_NOTA    = "nota";
 	
-	@Column(name="QUANTIDADE", nullable=false)
-	private BigDecimal quantidade;
+	@Column(name="QUANTIDADE", nullable=false,precision=20,scale=3)
+	private float quantidade;
 	@Column(name="PC_DESC", nullable=false)
 	private BigDecimal pcDesc = new BigDecimal(0D);
 	@Column(name="VL_DESC", nullable=false)
@@ -75,6 +72,8 @@ public class NotaItens extends SuperClassNota {
 	private String descricao 	 = "";
 	@Column(name="VL_UNIDADE", nullable=false)
 	private BigDecimal vlUnidade = new BigDecimal(0.00);
+	@Column(name="INFOR_ADICIONAIS", nullable=true)
+	private String inforAdicionais = "";
 	
 	@ManyToOne
 	@JoinColumn(name="nota",referencedColumnName="codigo")
@@ -84,10 +83,10 @@ public class NotaItens extends SuperClassNota {
 	@JoinColumn(name=GlobalNameParam.PARAM_PRODUTO, referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private Produto produto;
 	
-	public BigDecimal getQuantidade() {
+	public float getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(BigDecimal quantidade) {
+	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
 	}
 	public BigDecimal getPcDesc() {
@@ -168,5 +167,11 @@ public class NotaItens extends SuperClassNota {
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	public String getInforAdicionais() {
+		return inforAdicionais;
+	}
+	public void setInforAdicionais(String inforAdicionais) {
+		this.inforAdicionais = inforAdicionais;
 	}
 }

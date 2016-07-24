@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -41,7 +40,7 @@ public class PedidoItens extends EntidadeLoja {
 	private int nrItem            = 0;     
 	
 	@Column(name="QUANTIDADE", nullable=false)
-	private BigDecimal quantidade = new BigDecimal(0);
+	private float quantidade = 0.000f;
 	@Column(name="VL_UNITARIO", nullable=false)
 	private BigDecimal vlUnitario = new BigDecimal(0);
 	@Column(name="VL_TOTAL", nullable=false)
@@ -74,10 +73,10 @@ public class PedidoItens extends EntidadeLoja {
 		this.nrItem = nrItem;
 	}
 
-	public BigDecimal getQuantidade() {
+	public float getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(BigDecimal quantidade) {
+	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
 	}
 	public BigDecimal getVlUnitario() {

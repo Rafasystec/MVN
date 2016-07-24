@@ -35,13 +35,13 @@ public class Estoque extends EntidadeEmpresa {
 	}
 	
 	@Column(name="QUANTIDADE",length=12)
-	private int quantidade = 0;
+	private float quantidade = 0.000f;
 	@Column(name="ESTOQ_MAX",length=12)
-	private int estoqMax = 0;
+	private float estoqMax = 0.000f;
 	@Column(name="ESTOQ_MIN",length=12)
-	private int estoqMin= 0;
+	private float estoqMin= 0.000f;
 	@Column(name="ESTOQ_ANTERIOR",length=12)
-	private int estoqAnterior= 0 ;
+	private float estoqAnterior= 0.000f ;
 	
 	@ManyToOne
 	@JoinColumn(name="produto", referencedColumnName="codigo")
@@ -66,35 +66,35 @@ public class Estoque extends EntidadeEmpresa {
 		this.baixas = baixas;
 	}
 
-	public int getQuantidade() {
+	public float getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
 	}
 
-	public int getEstoqMax() {
+	public float getEstoqMax() {
 		return estoqMax;
 	}
 
-	public void setEstoqMax(int estoqMax) {
+	public void setEstoqMax(float estoqMax) {
 		this.estoqMax = estoqMax;
 	}
 
-	public int getEstoqMin() {
+	public float getEstoqMin() {
 		return estoqMin;
 	}
 
-	public void setEstoqMin(int estoqMin) {
+	public void setEstoqMin(float estoqMin) {
 		this.estoqMin = estoqMin;
 	}
 
-	public int getEstoqAnterior() {
+	public float getEstoqAnterior() {
 		return estoqAnterior;
 	}
 
-	public void setEstoqAnterior(int estoqAnterior) {
+	public void setEstoqAnterior(float estoqAnterior) {
 		this.estoqAnterior = estoqAnterior;
 	}
 
@@ -102,12 +102,11 @@ public class Estoque extends EntidadeEmpresa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((baixas == null) ? 0 : baixas.hashCode());
-		result = prime * result + estoqAnterior;
-		result = prime * result + estoqMax;
-		result = prime * result + estoqMin;
+		result = prime * result + Float.floatToIntBits(estoqAnterior);
+		result = prime * result + Float.floatToIntBits(estoqMax);
+		result = prime * result + Float.floatToIntBits(estoqMin);
 		result = prime * result + ((produto == null) ? 0 : produto.hashCode());
-		result = prime * result + quantidade;
+		result = prime * result + Float.floatToIntBits(quantidade);
 		return result;
 	}
 
@@ -120,25 +119,21 @@ public class Estoque extends EntidadeEmpresa {
 		if (getClass() != obj.getClass())
 			return false;
 		Estoque other = (Estoque) obj;
-		if (baixas == null) {
-			if (other.baixas != null)
-				return false;
-		} else if (!baixas.equals(other.baixas))
+		if (Float.floatToIntBits(estoqAnterior) != Float.floatToIntBits(other.estoqAnterior))
 			return false;
-		if (estoqAnterior != other.estoqAnterior)
+		if (Float.floatToIntBits(estoqMax) != Float.floatToIntBits(other.estoqMax))
 			return false;
-		if (estoqMax != other.estoqMax)
-			return false;
-		if (estoqMin != other.estoqMin)
+		if (Float.floatToIntBits(estoqMin) != Float.floatToIntBits(other.estoqMin))
 			return false;
 		if (produto == null) {
 			if (other.produto != null)
 				return false;
 		} else if (!produto.equals(other.produto))
 			return false;
-		if (quantidade != other.quantidade)
+		if (Float.floatToIntBits(quantidade) != Float.floatToIntBits(other.quantidade))
 			return false;
 		return true;
 	}
+
 	
 }

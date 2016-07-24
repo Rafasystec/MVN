@@ -1,21 +1,21 @@
 package br.com.barcadero.rule;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.resource.transaction.spi.TransactionStatus;
-
 import br.com.barcadero.commons.util.HandleString;
 import br.com.barcadero.commons.xml.HandleXML;
+import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
 import br.com.barcadero.core.enums.EnumRegimeISSQN;
 import br.com.barcadero.core.enums.EnumStatusCFeNota;
+import br.com.barcadero.core.enums.EnumTipoICMS;
 import br.com.barcadero.core.enums.EnumTipoPessoa;
+import br.com.barcadero.core.enums.EnumUnidadeMedida;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
-import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
+import br.com.barcadero.module.sat.enums.EnumCSTICMS40;
 import br.com.barcadero.module.sat.enums.EnumIndRegra;
 import br.com.barcadero.module.sat.enums.EnumMeioPagamento;
 import br.com.barcadero.module.sat.enums.EnumOrigICMS;
@@ -31,6 +31,7 @@ import br.com.barcadero.module.sat.xml.envio.Emit;
 import br.com.barcadero.module.sat.xml.envio.Entrega;
 import br.com.barcadero.module.sat.xml.envio.ICMS;
 import br.com.barcadero.module.sat.xml.envio.ICMS00;
+import br.com.barcadero.module.sat.xml.envio.ICMS40;
 import br.com.barcadero.module.sat.xml.envio.Ide;
 import br.com.barcadero.module.sat.xml.envio.Imposto;
 import br.com.barcadero.module.sat.xml.envio.InfCFe;
@@ -47,6 +48,7 @@ import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
+import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.Usuario;
 
@@ -56,6 +58,12 @@ public class RuleGenarateCFe {
 	public static final int CODE_STATUS_INVALIDO 	= 14;
 	private Empresa empresa = null;
 	private Loja loja = null;
+	
+	public static void main(String[] args) {
+		EnumUnidadeMedida enumMedido = EnumUnidadeMedida.UNIDADE;
+		String unidade = String.valueOf(enumMedido);
+		System.out.println(unidade);
+	}
 	
 	public RuleGenarateCFe(Empresa empresa, Loja loja) {
 		// TODO Auto-generated constructor stub
@@ -113,25 +121,17 @@ public class RuleGenarateCFe {
 		//-------------------------------------------------
 		//Idetificacao do Destinatario do cupom fiscal
 		//-------------------------------------------------
-//		Dest destinatario = new Dest();
-//		destinatario.setCpfCnpj(new CNPJ("46541673000150"));
-//		destinatario.setXNome("RAZAO SOCIAL");
 		infCFe.setDest(getDestinatario(nota));
 		//-------------------------------------------------
 		//Identificacao do local de entrega
 		//-------------------------------------------------
-		Entrega entrega = new Entrega();
-		entrega.setXLgr("Logradouro");
-		entrega.setNro("123");
-		entrega.setXCpl("complemento");
-		entrega.setXBairro("Bairro");
-		entrega.setXMun("Municipio");
-		entrega.setUF(EnumUF.CE);
+		Entrega entrega = getEnderecoEntrega(nota);
 		infCFe.setEntrega(entrega );
 		//-------------------------------------------------
 		//Detalhamento produtos e servicos da CF-e
 		//-------------------------------------------------
 		List<Det> dets = new ArrayList<Det>();
+		
 		Det det = new Det();
 		det.setNItem("001");
 		det.setInfAdProd("Informacao adicional");
@@ -370,5 +370,72 @@ public class RuleGenarateCFe {
 		}
 	}
 	
+	public List<Det> getProdutos(Nota nota) throws SATException{
+		List<Det> dets = new ArrayList<Det>();
+		int numItem = 0;
+		for (NotaItens item : nota.getItens()) {
+			++numItem;
+			Det det = new Det();
+			String strNumItem = HandleString.zerosLeft(String.valueOf(numItem), 3); 
+			det.setNItem(strNumItem);
+			det.setInfAdProd(item.getInforAdicionais());
+			Prod prod = new Prod();
+			prod.setCProd(String.valueOf(item.getCodigo()));
+			prod.setXProd(item.getDescricao());
+			prod.setNCM(HandleString.parse(item.getProduto().getCdNcm()));
+			prod.setCFOP(HandleString.parse(item.getProduto().getCfop())); // Faixa de 5000
+			prod.setUCom(HandleString.parse(item.getProduto().getUnidade()));
+			prod.setQCom(HandleString.parse(item.getQuantidade())+"0");
+			prod.setVUnCom(HandleString.parse(item.getVlUnidade()));
+			prod.setIndRegra(EnumIndRegra.ARREDONDAMENTO);
+			det.setProd(prod);
+			//-------------------------------------------------
+			//Tributos incidentes no Produto ou servico
+			//-------------------------------------------------
+			Imposto imposto = new Imposto();
+			imposto.setVItem12741("2.50");
+			//-------------------------------------------------
+			//ICMS Normal e ST
+			//-------------------------------------------------
+			ICMS icms 		= new ICMS();
+			EnumTipoICMS typeICMS = item.getProduto().getTipoICMS();
+			if(typeICMS == EnumTipoICMS.ICMS00){
+				ICMS00 icms00 	= new ICMS00();
+				icms00.setOrig(EnumOrigICMS.NACIONAL);
+				icms00.setCST(EnumCSTICMS00.TRIBUTADO_INTEGRALMENTE);
+				icms00.setPICMS("5.33");
+				icms.setiCMS(icms00);
+			}else if(typeICMS == EnumTipoICMS.ICMS40){
+				ICMS40 icms40 = new ICMS40();
+				icms40.setOrig(EnumOrigICMS.NACIONAL);
+				icms40.setCST(EnumCSTICMS40.ICMS_COBRADO);
+			}
+			imposto.setICMS(icms);
+			//-------------------------------------------------
+			//PIS
+			//-------------------------------------------------
+			PIS pis 		= new PIS();
+			PISAliq aliq	= new PISAliq();
+			aliq.setCST("01");
+			aliq.setPPIS("0.1700");
+			aliq.setVBC("10.99");
+			pis.setPISAliq(aliq);
+			imposto.setPIS(pis );
+			//-------------------------------------------------
+			//Cofins
+			//-------------------------------------------------
+			COFINS cofins 			= new COFINS();
+			COFINSAliq cofinsAliq 	= new COFINSAliq();
+			cofinsAliq.setCST(EnumCSTCOFINSAliq.OPER_TRIBUT_NORMAL);
+			cofinsAliq.setPCOFINS("0.0900");
+			cofinsAliq.setVBC("10.99");
+			cofins.setCofins(cofinsAliq);
+			imposto.setCOFINS(cofins );
+			det.setImposto(imposto );
+			dets.add(det);
+		}
+		
+		return dets;
+	}
 	
 }

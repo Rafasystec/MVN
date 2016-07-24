@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -37,7 +38,7 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 		if(entidade instanceof NotaItens){
 			NotaItens itens = (NotaItens) entidade;
 			Produto produto = itens.getProduto();
-			itens.setVlTotal(itens.getQuantidade().multiply(ruleProduto.getPreco(produto)));
+			itens.setVlTotal(ruleProduto.getPreco(produto).multiply(new BigDecimal(itens.getQuantidade())));
 			return daoNotaItens.insert(itens);
 		}else{
 			throw new Exception("Entidade passada como parametro não é do tipo:");
