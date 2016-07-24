@@ -67,7 +67,11 @@ public class Emit
 	{
 		return this.indRatISSQN;
 	}
-	
+	/**
+	 * Indicador de rateio do Desconto sobre
+     * subtotal entre itens sujeitos à tributação pelo ISSQN.
+	 * @param indRatISSQN
+	 */
 	public void setIndRatISSQN(EnumIndRatISSQN indRatISSQN)
 	{
 		this.indRatISSQN = indRatISSQN;

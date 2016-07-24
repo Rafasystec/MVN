@@ -15,11 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumFormPgtoPedido;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.enums.EnumTipoPedido;
+import br.com.barcadero.core.util.GlobalNameParam;
 
 @NamedQueries({
 	@NamedQuery(name=Pedido.FIND_ALL		,query="FROM Pedido WHERE empresa = :empresa"),
@@ -71,8 +73,9 @@ public final class Pedido extends EntidadeLoja {
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.LAZY,targetEntity=PedidoItens.class)
 	private List<PedidoItens> itens;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,targetEntity=Endereco.class)
-	private List<Endereco> enderecos;
+	@OneToOne
+	@JoinColumn(name="endereco", referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
+	private Endereco endereco;
 	
 	@ManyToOne
 	@JoinColumn(name="cliente", referencedColumnName="codigo")
@@ -178,14 +181,6 @@ public final class Pedido extends EntidadeLoja {
 		this.cliente = cliente;
 	}
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
 	public Caixa getCaixa() {
 		return caixa;
 	}
@@ -202,8 +197,8 @@ public final class Pedido extends EntidadeLoja {
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + ((dtEntrega == null) ? 0 : dtEntrega.hashCode());
 		result = prime * result + ((dtPrevEntrega == null) ? 0 : dtPrevEntrega.hashCode());
+		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((enderecoEnt == null) ? 0 : enderecoEnt.hashCode());
-		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((flStPed == null) ? 0 : flStPed.hashCode());
 		result = prime * result + ((formaPgtoPedido == null) ? 0 : formaPgtoPedido.hashCode());
 		result = prime * result + ((itens == null) ? 0 : itens.hashCode());
@@ -242,15 +237,15 @@ public final class Pedido extends EntidadeLoja {
 				return false;
 		} else if (!dtPrevEntrega.equals(other.dtPrevEntrega))
 			return false;
+		if (endereco == null) {
+			if (other.endereco != null)
+				return false;
+		} else if (!endereco.equals(other.endereco))
+			return false;
 		if (enderecoEnt == null) {
 			if (other.enderecoEnt != null)
 				return false;
 		} else if (!enderecoEnt.equals(other.enderecoEnt))
-			return false;
-		if (enderecos == null) {
-			if (other.enderecos != null)
-				return false;
-		} else if (!enderecos.equals(other.enderecos))
 			return false;
 		if (flStPed != other.flStPed)
 			return false;
@@ -275,5 +270,14 @@ public final class Pedido extends EntidadeLoja {
 			return false;
 		return true;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	
 }

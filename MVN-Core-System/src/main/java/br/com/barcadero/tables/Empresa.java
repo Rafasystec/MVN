@@ -23,6 +23,7 @@ import br.com.barcadero.core.enums.EnumAtividadeEmp;
  * @author Rafael Rocha
  * Nao foi datado o momento da criacao dessa classe pois veio do projeto gsind.
  */
+import br.com.barcadero.core.enums.EnumRegimeISSQN;
 
 @NamedQueries({
 	@NamedQuery(name=Empresa.FIND_ALL		,query="FROM Empresa"),
@@ -52,6 +53,11 @@ public class Empresa extends Entidade {
 	private Date dtFundacao = new Date();
 	@Column(name="observacoes", nullable=false)
 	private String observacoes = "";
+	@Column(name="CNPJ_SOFTWARE_HOUSE")
+	private String cnpjSoftwareHouse;
+	@Column(name="REGIME_TRIBUTACAO_ISSQN")
+	@Enumerated(EnumType.ORDINAL)
+	private EnumRegimeISSQN regimeISSQN = EnumRegimeISSQN.MICROEMPRESARIO_INDIVIDUAL;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
@@ -108,6 +114,86 @@ public class Empresa extends Entidade {
 
 	public void setLojas(List<Loja> lojas) {
 		this.lojas = lojas;
+	}
+
+	public String getCnpjSoftwareHouse() {
+		return cnpjSoftwareHouse;
+	}
+
+	public void setCnpjSoftwareHouse(String cnpjSoftwareHouse) {
+		this.cnpjSoftwareHouse = cnpjSoftwareHouse;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((atividade == null) ? 0 : atividade.hashCode());
+		result = prime * result + ((cnpjSoftwareHouse == null) ? 0 : cnpjSoftwareHouse.hashCode());
+		result = prime * result + ((dtFundacao == null) ? 0 : dtFundacao.hashCode());
+		result = prime * result + ((imgLogo == null) ? 0 : imgLogo.hashCode());
+		result = prime * result + ((lojas == null) ? 0 : lojas.hashCode());
+		result = prime * result + ((observacoes == null) ? 0 : observacoes.hashCode());
+		result = prime * result + ((pessoaJuridica == null) ? 0 : pessoaJuridica.hashCode());
+		result = prime * result + ((usuarios == null) ? 0 : usuarios.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empresa other = (Empresa) obj;
+		if (atividade != other.atividade)
+			return false;
+		if (cnpjSoftwareHouse == null) {
+			if (other.cnpjSoftwareHouse != null)
+				return false;
+		} else if (!cnpjSoftwareHouse.equals(other.cnpjSoftwareHouse))
+			return false;
+		if (dtFundacao == null) {
+			if (other.dtFundacao != null)
+				return false;
+		} else if (!dtFundacao.equals(other.dtFundacao))
+			return false;
+		if (imgLogo == null) {
+			if (other.imgLogo != null)
+				return false;
+		} else if (!imgLogo.equals(other.imgLogo))
+			return false;
+		if (lojas == null) {
+			if (other.lojas != null)
+				return false;
+		} else if (!lojas.equals(other.lojas))
+			return false;
+		if (observacoes == null) {
+			if (other.observacoes != null)
+				return false;
+		} else if (!observacoes.equals(other.observacoes))
+			return false;
+		if (pessoaJuridica == null) {
+			if (other.pessoaJuridica != null)
+				return false;
+		} else if (!pessoaJuridica.equals(other.pessoaJuridica))
+			return false;
+		if (usuarios == null) {
+			if (other.usuarios != null)
+				return false;
+		} else if (!usuarios.equals(other.usuarios))
+			return false;
+		return true;
+	}
+
+	public EnumRegimeISSQN getRegimeISSQN() {
+		return regimeISSQN;
+	}
+
+	public void setRegimeISSQN(EnumRegimeISSQN regimeISSQN) {
+		this.regimeISSQN = regimeISSQN;
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -12,6 +14,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.barcadero.module.sat.enums.EnumCFeXMLVersion;
+import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
 
 @NamedQueries({
 	@NamedQuery(name=Loja.FIND_ALL, query="FROM Loja WHERE empresa = :empresa"),
@@ -32,7 +37,13 @@ public class Loja extends EntidadeEmpresa {
 	}
 	public static final String FIND_ALL 	= "Loja.findAll";
 	public static final String FIND_BY_EMP	= "Loja.findByEmp";
-	
+	@Column(name="VERSAO_XML_CFE")
+	private EnumCFeXMLVersion verXMLCFe = EnumCFeXMLVersion.V_0_06;
+	@Column(name="SIGN_AC_SAT")
+	private String signAC = "SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT";
+	@Column(name="IND_RAT_ISSQN_CFE")
+	@Enumerated(EnumType.STRING)
+	private EnumIndRatISSQN indRatISSQNSAT = EnumIndRatISSQN.NAO;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
@@ -87,8 +98,30 @@ public class Loja extends EntidadeEmpresa {
 			return false;
 		return true;
 	}
-	
-	
+
+	public EnumCFeXMLVersion getVerXMLCFe() {
+		return verXMLCFe;
+	}
+
+	public void setVerXMLCFe(EnumCFeXMLVersion verXMLCFe) {
+		this.verXMLCFe = verXMLCFe;
+	}
+
+	public String getSignAC() {
+		return signAC;
+	}
+
+	public void setSignAC(String signAC) {
+		this.signAC = signAC;
+	}
+
+	public EnumIndRatISSQN getIndRatISSQNSAT() {
+		return indRatISSQNSAT;
+	}
+
+	public void setIndRatISSQNSAT(EnumIndRatISSQN indRatISSQNSAT) {
+		this.indRatISSQNSAT = indRatISSQNSAT;
+	}
 	
 	
 }

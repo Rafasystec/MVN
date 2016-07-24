@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +24,8 @@ import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.enums.EnumStatusCFeNota;
+import br.com.barcadero.core.util.GlobalNameParam;
+import br.com.barcadero.module.sat.enums.EnumCFeXMLVersion;
 
 /**
  * Para as notas geradas pelo sistema
@@ -76,6 +79,8 @@ public final class Nota extends EntidadeLoja {
 	private String tpImpostoIcms = "";
 	@Column(name="STATUS_CFE")
 	private EnumStatusCFeNota statusCFe = EnumStatusCFeNota.XML_NAO_GERADO;
+	@Column(name="VERSAO_XML_CFE")
+	private EnumCFeXMLVersion verXMLCFe = EnumCFeXMLVersion.V_0_06;
 	
 	@Column(name="NATUREZA_OPERACAO", nullable=false)
 	@Enumerated(EnumType.STRING)
@@ -95,6 +100,14 @@ public final class Nota extends EntidadeLoja {
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="caixa", referencedColumnName="codigo")
 	private Caixa caixa;
+	
+	@ManyToOne
+	@JoinColumn(name="cliente", referencedColumnName="codigo")
+	private Cliente cliente;
+	
+	@OneToOne
+	@JoinColumn(name="pedido",referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
+	private Pedido pedido;
 	
 	public String getSerieNota() {
 		return serieNota;
@@ -281,5 +294,29 @@ public final class Nota extends EntidadeLoja {
 
 	public void setStatusCFe(EnumStatusCFeNota statusCFe) {
 		this.statusCFe = statusCFe;
+	}
+
+	public EnumCFeXMLVersion getVerXMLCFe() {
+		return verXMLCFe;
+	}
+
+	public void setVerXMLCFe(EnumCFeXMLVersion verXMLCFe) {
+		this.verXMLCFe = verXMLCFe;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 }

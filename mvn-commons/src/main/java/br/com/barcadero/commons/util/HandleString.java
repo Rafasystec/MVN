@@ -48,5 +48,10 @@ public class HandleString {
 		return new String(retorno);
 	}
 
+	public static String cPFcNPJOnlyNumbers(String cpfCnpj) {
+		return cpfCnpj.replace(".", "")
+					  .replace("/", "")
+					  .replace("-", "");
+	}
 
 }
