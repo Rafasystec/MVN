@@ -132,7 +132,7 @@ public class MainTest {
 		aliq.setCST("01");
 		aliq.setPPIS("0.1700");
 		aliq.setVBC("10.99");
-		pis.setPISAliq(aliq);
+		pis.setPisGroup(aliq);
 		imposto.setPIS(pis );
 		//-------------------------------------------------
 		//Cofins

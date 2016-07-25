@@ -15,7 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import br.com.barcadero.core.enums.EnumCSTICMS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
+import br.com.barcadero.core.enums.EnumTipoCOFINS;
 import br.com.barcadero.core.enums.EnumTipoICMS;
+import br.com.barcadero.core.enums.EnumTipoPIS;
 import br.com.barcadero.core.enums.EnumTipoProduto;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 
@@ -105,6 +107,12 @@ public class Produto extends EntidadeEmpresa {
 	@Column(name="TIPO_ICMS")
 	@Enumerated(EnumType.STRING)
 	private EnumTipoICMS tipoICMS = EnumTipoICMS.ICMS00;
+	@Column(name="TIPO_PIS")
+	@Enumerated(EnumType.STRING)
+	private EnumTipoPIS tipoPis = EnumTipoPIS.PIS_ALIQUOTA;
+	@Column(name="TIPO_COFINS")
+	@Enumerated(EnumType.STRING)
+	private EnumTipoCOFINS tipoCofins;
 	
 	@OneToMany(mappedBy="produto", targetEntity=Estoque.class)
 	private List<Estoque> estoques;
@@ -286,6 +294,18 @@ public class Produto extends EntidadeEmpresa {
 	}
 	public void setTipoICMS(EnumTipoICMS tipoICMS) {
 		this.tipoICMS = tipoICMS;
+	}
+	public EnumTipoPIS getTipoPis() {
+		return tipoPis;
+	}
+	public void setTipoPis(EnumTipoPIS tipoPis) {
+		this.tipoPis = tipoPis;
+	}
+	public EnumTipoCOFINS getTipoCofins() {
+		return tipoCofins;
+	}
+	public void setTipoCofins(EnumTipoCOFINS tipoCofins) {
+		this.tipoCofins = tipoCofins;
 	}
 	
 }

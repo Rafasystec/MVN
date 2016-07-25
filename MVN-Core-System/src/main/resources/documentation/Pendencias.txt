@@ -1,0 +1,14 @@
+-------------------------------------------------
+TELA DE PEDIDO - 1.0
+-------------------------------------------------
+
+1.1 - Criar componente de quantidade que possibilie a digitação e consequente salva do valor no formato numerico com 3 casa decimais (Ex.: 1.000 -> será igual
+a 1 e 1.035 -> que poderia ser o peso de algum produto)(Pendente)
+
+
+
+-------------------------------------------------
+TELA DE VENDA
+-------------------------------------------------
+
+Idem ao 1.1 do 1.0

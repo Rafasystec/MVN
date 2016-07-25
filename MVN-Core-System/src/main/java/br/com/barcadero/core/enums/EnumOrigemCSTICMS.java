@@ -1,5 +1,9 @@
 package br.com.barcadero.core.enums;
-
+/**
+ * Enum ordinal de acordo com a especificacao do SAT
+ * @author antoniorafael
+ *
+ */
 public enum EnumOrigemCSTICMS {
 	
 	NACIONAL("Nacional"),

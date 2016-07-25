@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="PISNT")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PISNT
+public class PISNT extends PISGroup
 {
 	@XmlElement(required=true)
 	private String CST;

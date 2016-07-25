@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="PISAliq")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PISAliq
+public class PISAliq extends PISGroup
 {
 	@XmlElement(required=true)
 	private String CST;

@@ -36,7 +36,7 @@ cento) e inferior ou igual a 70%
 	 * 4 - Nacional, cuja produção
 tenha sido feita em conformidade
 com os processos produtivos
-básicos de que tratam as
+b�sicos de que tratam as
 legislações citadas nos Ajustes;
 	 */
 	@XmlEnumValue("4") NACIONAL_AJUSTES,

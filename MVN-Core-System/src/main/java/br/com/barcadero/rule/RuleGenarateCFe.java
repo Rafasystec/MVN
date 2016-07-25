@@ -1,16 +1,12 @@
 package br.com.barcadero.rule;
 
 import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import br.com.barcadero.commons.util.HandleString;
 import br.com.barcadero.commons.xml.HandleXML;
-import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
 import br.com.barcadero.core.enums.EnumRegimeISSQN;
 import br.com.barcadero.core.enums.EnumStatusCFeNota;
-import br.com.barcadero.core.enums.EnumTipoICMS;
 import br.com.barcadero.core.enums.EnumTipoPessoa;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
@@ -32,12 +28,18 @@ import br.com.barcadero.module.sat.xml.envio.Entrega;
 import br.com.barcadero.module.sat.xml.envio.ICMS;
 import br.com.barcadero.module.sat.xml.envio.ICMS00;
 import br.com.barcadero.module.sat.xml.envio.ICMS40;
+import br.com.barcadero.module.sat.xml.envio.ICMSSN102;
+import br.com.barcadero.module.sat.xml.envio.ICMSSN900;
 import br.com.barcadero.module.sat.xml.envio.Ide;
 import br.com.barcadero.module.sat.xml.envio.Imposto;
 import br.com.barcadero.module.sat.xml.envio.InfCFe;
 import br.com.barcadero.module.sat.xml.envio.MP;
 import br.com.barcadero.module.sat.xml.envio.PIS;
 import br.com.barcadero.module.sat.xml.envio.PISAliq;
+import br.com.barcadero.module.sat.xml.envio.PISNT;
+import br.com.barcadero.module.sat.xml.envio.PISOutr;
+import br.com.barcadero.module.sat.xml.envio.PISQtde;
+import br.com.barcadero.module.sat.xml.envio.PISSN;
 import br.com.barcadero.module.sat.xml.envio.Pgto;
 import br.com.barcadero.module.sat.xml.envio.Prod;
 import br.com.barcadero.module.sat.xml.envio.Total;
@@ -71,11 +73,11 @@ public class RuleGenarateCFe {
 		setLoja(loja);
 	}
 	
-	public CFeResult execute(Nota nota, Usuario usuario) {
+	public CFeResult execute(Nota nota, Usuario usuario) throws SATException {
 		CFeResult cfeResult = new CFeResult();
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
-				
+				String xml = genarateXML(nota);
 				
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
@@ -130,59 +132,7 @@ public class RuleGenarateCFe {
 		//-------------------------------------------------
 		//Detalhamento produtos e servicos da CF-e
 		//-------------------------------------------------
-		List<Det> dets = new ArrayList<Det>();
-		
-		Det det = new Det();
-		det.setNItem("001");
-		det.setInfAdProd("Informacao adicional");
-		Prod prod = new Prod();
-		prod.setCProd("0090980");
-		prod.setXProd("PROD HOMOLOG");
-		prod.setNCM("01031000");
-		prod.setCFOP("5102"); // Faixa de 5000
-		prod.setUCom("UN");
-		prod.setQCom("1.0000");
-		prod.setVUnCom("10.99");
-		prod.setIndRegra(EnumIndRegra.ARREDONDAMENTO);
-		det.setProd(prod);
-		//-------------------------------------------------
-		//Tributos incidentes no Produto ou servico
-		//-------------------------------------------------
-		Imposto imposto = new Imposto();
-		imposto.setVItem12741("2.50");
-		//-------------------------------------------------
-		//ICMS Normal e ST
-		//-------------------------------------------------
-		ICMS icms 		= new ICMS();
-		ICMS00 icms00 	= new ICMS00();
-		icms00.setOrig(EnumOrigICMS.NACIONAL);
-		icms00.setCST(EnumCSTICMS00.TRIBUTADO_INTEGRALMENTE);
-		icms00.setPICMS("5.33");
-		icms.setiCMS(icms00);
-		imposto.setICMS(icms );
-		//-------------------------------------------------
-		//PIS
-		//-------------------------------------------------
-		PIS pis 		= new PIS();
-		PISAliq aliq	= new PISAliq();
-		aliq.setCST("01");
-		aliq.setPPIS("0.1700");
-		aliq.setVBC("10.99");
-		pis.setPISAliq(aliq);
-		imposto.setPIS(pis );
-		//-------------------------------------------------
-		//Cofins
-		//-------------------------------------------------
-		COFINS cofins 			= new COFINS();
-		COFINSAliq cofinsAliq 	= new COFINSAliq();
-		cofinsAliq.setCST(EnumCSTCOFINSAliq.OPER_TRIBUT_NORMAL);
-		cofinsAliq.setPCOFINS("0.0900");
-		cofinsAliq.setVBC("10.99");
-		cofins.setCofins(cofinsAliq);
-		imposto.setCOFINS(cofins );
-		det.setImposto(imposto );
-		dets.add(det);
-		infCFe.setDets(dets);
+		infCFe.setDets(getProdutos(nota));
 		//------------------------
 		Total total = new Total(); 
 		total.setVCFeLei12741("1.05");
@@ -397,45 +347,150 @@ public class RuleGenarateCFe {
 			//-------------------------------------------------
 			//ICMS Normal e ST
 			//-------------------------------------------------
-			ICMS icms 		= new ICMS();
-			EnumTipoICMS typeICMS = item.getProduto().getTipoICMS();
-			if(typeICMS == EnumTipoICMS.ICMS00){
-				ICMS00 icms00 	= new ICMS00();
-				icms00.setOrig(EnumOrigICMS.NACIONAL);
-				icms00.setCST(EnumCSTICMS00.TRIBUTADO_INTEGRALMENTE);
-				icms00.setPICMS("5.33");
-				icms.setiCMS(icms00);
-			}else if(typeICMS == EnumTipoICMS.ICMS40){
-				ICMS40 icms40 = new ICMS40();
-				icms40.setOrig(EnumOrigICMS.NACIONAL);
-				icms40.setCST(EnumCSTICMS40.ICMS_COBRADO);
-			}
-			imposto.setICMS(icms);
+			imposto.setICMS(getICMS(item));
 			//-------------------------------------------------
 			//PIS
 			//-------------------------------------------------
-			PIS pis 		= new PIS();
-			PISAliq aliq	= new PISAliq();
-			aliq.setCST("01");
-			aliq.setPPIS("0.1700");
-			aliq.setVBC("10.99");
-			pis.setPISAliq(aliq);
-			imposto.setPIS(pis );
+			imposto.setPIS(getPIS(item));
 			//-------------------------------------------------
 			//Cofins
 			//-------------------------------------------------
-			COFINS cofins 			= new COFINS();
-			COFINSAliq cofinsAliq 	= new COFINSAliq();
-			cofinsAliq.setCST(EnumCSTCOFINSAliq.OPER_TRIBUT_NORMAL);
-			cofinsAliq.setPCOFINS("0.0900");
-			cofinsAliq.setVBC("10.99");
-			cofins.setCofins(cofinsAliq);
-			imposto.setCOFINS(cofins );
+			imposto.setCOFINS(getCOFINS(item));
 			det.setImposto(imposto );
 			dets.add(det);
 		}
 		
 		return dets;
+	}
+	
+	/**
+	 * Obter origem icms para o SAT na Nota
+	 * @param item
+	 * @return
+	 */
+	public ICMS getICMS(NotaItens item) {
+		ICMS icms = new ICMS();
+		//EnumTipoICMS typeICMS = item.getProduto().getTipoICMS();
+		switch (item.getProduto().getTipoICMS()) {
+		case ICMS00:
+			ICMS00 icms00 	= new ICMS00();
+			icms00.setOrig(getOrigemICMS(item));
+			icms00.setCST(EnumCSTICMS00.TRIBUTADO_INTEGRALMENTE);
+			icms00.setPICMS("5.33");
+			icms.setiCMS(icms00);
+			break;
+		case ICMSSN102:
+			ICMSSN102 icmssn102 = new ICMSSN102();
+			icmssn102.setOrig(getOrigemICMS(item));
+			icmssn102.setCSOSN(null);
+			break;
+		case ICMS40:
+			ICMS40 icms40 = new ICMS40();
+			icms40.setOrig(getOrigemICMS(item));
+			icms40.setCST(EnumCSTICMS40.ICMS_COBRADO);
+			break;
+		case ICMSSN900:
+			ICMSSN900 icmssn900 = new ICMSSN900();
+			icmssn900.setOrig(getOrigemICMS(item));
+			icmssn900.setCSOSN(null);
+			icmssn900.setPICMS("");
+			break;
+		default:
+			return null;
+		}
+		return icms;
+	}
+	
+	/**
+	 * 
+	 * @param item
+	 * @return
+	 */
+	public EnumOrigICMS getOrigemICMS(NotaItens item) {
+		switch (item.getProduto().getOrigemIcms()) {
+		case ESTRANGEIRA_IMP:
+			return EnumOrigICMS.ESTRANGEIRA_IMPORT;
+		case ESTRANGEIRA_N_SIMILAR:
+			return EnumOrigICMS.ESTRANGEIRA_ADQ_CAMEX;
+		case NACIONAL_40 :	
+			return EnumOrigICMS.NACIONAL_40_70;
+		case NACIONAL_BASICO:
+			return EnumOrigICMS.NACIONAL_AJUSTES;
+		case ESTRANGEIRA_INT:
+			return EnumOrigICMS.ESTRANGEIRA_ADQUIR;
+		case ESTRANGEIRA_SIMILAR:
+			return EnumOrigICMS.ESTRANGEIRA_CAMEX;
+		case NACIONAL_INF_40:
+			return EnumOrigICMS.NACIONAL_INF_40;
+		case NACIONAL_SUP_70:
+			return EnumOrigICMS.NACIONAL_SUPER_70;
+		default:
+			return EnumOrigICMS.NACIONAL;
+		}
+	}
+	/**
+	 * Obtem uma instacia de pis conforme o produto
+	 * @param item
+	 * @return
+	 */
+	public PIS getPIS(NotaItens item) {
+		PIS pis 		= new PIS();
+		switch (item.getProduto().getTipoPis()) {
+		case PIS_ALIQUOTA:
+			PISAliq aliq	= new PISAliq();
+			aliq.setCST("01");
+			aliq.setPPIS("0.1700");
+			aliq.setVBC("10.99");
+			pis.setPisGroup(aliq);
+			break;
+		case PIS_NT:
+			PISNT pisnt = new PISNT();
+			pisnt.setCST("");
+			pis.setPisGroup(pisnt);
+			break;
+		case PIS_OUTRO:
+			PISOutr pisOutr = new PISOutr();
+			pisOutr.setCST("");
+			pisOutr.setPPIS("");
+			pisOutr.setQBCProd("");
+			pisOutr.setVAliqProd("");
+			pisOutr.setVBC("");
+			pis.setPisGroup(pisOutr);
+			break;
+		case PIS_QTDE:
+			PISQtde pisQtde = new PISQtde();
+			pisQtde.setCST("");
+			pisQtde.setQBCProd("");
+			pisQtde.setVAliqProd("");
+			pis.setPisGroup(pisQtde);
+			break;
+		case PIS_SN:
+			PISSN pissn = new PISSN();
+			pissn.setCST("");
+			pis.setPisGroup(pissn);
+			break;
+		default:
+			break;
+		}
+		return pis;
+	}
+	
+	public COFINS getCOFINS(NotaItens item) {
+		COFINS cofins 			= new COFINS();
+		switch (item.getProduto().getTipoCofins()) {
+		case COFINS_ALIQ:
+			COFINSAliq cofinsAliq 	= new COFINSAliq();
+			cofinsAliq.setCST(EnumCSTCOFINSAliq.OPER_TRIBUT_NORMAL);
+			cofinsAliq.setPCOFINS("0.0900");
+			cofinsAliq.setVBC("10.99");
+			cofins.setCofins(cofinsAliq);
+			break;
+
+		default:
+			break;
+		}
+		return cofins;
+		
 	}
 	
 }
