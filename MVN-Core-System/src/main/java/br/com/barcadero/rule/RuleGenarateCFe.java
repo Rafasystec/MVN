@@ -7,9 +7,13 @@ import br.com.barcadero.commons.util.HandleString;
 import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.core.enums.EnumRegimeISSQN;
 import br.com.barcadero.core.enums.EnumStatusCFeNota;
+import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.enums.EnumTipoPessoa;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSNT;
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSOutr;
+import br.com.barcadero.module.sat.enums.EnumCSTCOFINSSN;
 import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
 import br.com.barcadero.module.sat.enums.EnumCSTICMS40;
 import br.com.barcadero.module.sat.enums.EnumIndRegra;
@@ -21,6 +25,10 @@ import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.module.sat.xml.envio.CFe;
 import br.com.barcadero.module.sat.xml.envio.COFINS;
 import br.com.barcadero.module.sat.xml.envio.COFINSAliq;
+import br.com.barcadero.module.sat.xml.envio.COFINSNT;
+import br.com.barcadero.module.sat.xml.envio.COFINSOutr;
+import br.com.barcadero.module.sat.xml.envio.COFINSQtde;
+import br.com.barcadero.module.sat.xml.envio.COFINSSN;
 import br.com.barcadero.module.sat.xml.envio.Dest;
 import br.com.barcadero.module.sat.xml.envio.Det;
 import br.com.barcadero.module.sat.xml.envio.Emit;
@@ -51,6 +59,7 @@ import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
+import br.com.barcadero.tables.NotaMeioPgto;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.Usuario;
 
@@ -94,7 +103,7 @@ public class RuleGenarateCFe {
 	private String genarateXML(Nota nota) throws SATException {
 		
 		
-		String xml = "";
+		String xml 		= "";
 		CFe cfe 		= new CFe();
 		InfCFe infCFe 	= new InfCFe();
 		infCFe.setVersaoDadosEnt(loja.getVerXMLCFe().toString());
@@ -140,19 +149,12 @@ public class RuleGenarateCFe {
 		//-------------------------------------------------
 		//WA - Informacoes sobre Pagamento
 		//-------------------------------------------------
-		Pgto pgto = new Pgto();
-		List<MP> mps = new ArrayList<MP>();
-		MP mp = new MP();
-		mp.setCMP(EnumMeioPagamento.DINHEIRO);
-		mp.setVMP("10.99");
-		mps.add(mp);
-		pgto.setMPs(mps );
-		infCFe.setPgto(pgto);
+		infCFe.setPgto(getMeiosDePagamento(nota));
 		cfe.setInfCFe(infCFe);
 		try {
-			//HandleXML.toFile(cfe, "D://temp/", "cfe.xml");
+			
 			xml = HandleXML.getXMLFromObject(cfe);
-			//System.out.println(xml);
+			System.out.println(xml);
 			//assertEquals("O XML gerado nao foi igual ao esperado",getXMLVendaEmperado(),xml);
 			//transmitirTanca(xml);
 		} catch (Exception e) {
@@ -319,8 +321,13 @@ public class RuleGenarateCFe {
 			return EnumUF.AC;
 		}
 	}
-	
-	public List<Det> getProdutos(Nota nota) throws SATException{
+	/**
+	 * Extrai os produtos da nota para o formato que o XML do CFe exige.
+	 * @param nota
+	 * @return
+	 * @throws SATException
+	 */
+	private List<Det> getProdutos(Nota nota) throws SATException{
 		List<Det> dets = new ArrayList<Det>();
 		int numItem = 0;
 		for (NotaItens item : nota.getItens()) {
@@ -359,7 +366,6 @@ public class RuleGenarateCFe {
 			det.setImposto(imposto );
 			dets.add(det);
 		}
-		
 		return dets;
 	}
 	
@@ -368,7 +374,7 @@ public class RuleGenarateCFe {
 	 * @param item
 	 * @return
 	 */
-	public ICMS getICMS(NotaItens item) {
+	private ICMS getICMS(NotaItens item) {
 		ICMS icms = new ICMS();
 		//EnumTipoICMS typeICMS = item.getProduto().getTipoICMS();
 		switch (item.getProduto().getTipoICMS()) {
@@ -406,7 +412,7 @@ public class RuleGenarateCFe {
 	 * @param item
 	 * @return
 	 */
-	public EnumOrigICMS getOrigemICMS(NotaItens item) {
+	private EnumOrigICMS getOrigemICMS(NotaItens item) {
 		switch (item.getProduto().getOrigemIcms()) {
 		case ESTRANGEIRA_IMP:
 			return EnumOrigICMS.ESTRANGEIRA_IMPORT;
@@ -433,7 +439,7 @@ public class RuleGenarateCFe {
 	 * @param item
 	 * @return
 	 */
-	public PIS getPIS(NotaItens item) {
+	private PIS getPIS(NotaItens item) {
 		PIS pis 		= new PIS();
 		switch (item.getProduto().getTipoPis()) {
 		case PIS_ALIQUOTA:
@@ -475,7 +481,12 @@ public class RuleGenarateCFe {
 		return pis;
 	}
 	
-	public COFINS getCOFINS(NotaItens item) {
+	/**
+	 * Obtem o COFINS do produto
+	 * @param item
+	 * @return
+	 */
+	private COFINS getCOFINS(NotaItens item) {
 		COFINS cofins 			= new COFINS();
 		switch (item.getProduto().getTipoCofins()) {
 		case COFINS_ALIQ:
@@ -485,12 +496,77 @@ public class RuleGenarateCFe {
 			cofinsAliq.setVBC("10.99");
 			cofins.setCofins(cofinsAliq);
 			break;
-
+		case COFINS_NT:
+			COFINSNT cofinsnt = new COFINSNT();
+			cofinsnt.setCST(EnumCSTCOFINSNT.OPER_SEM_INCIDENCIA);
+			cofins.setCofins(cofinsnt);
+			break;
+		case COFINS_OUTRO:
+			COFINSOutr cofinsOutr = new COFINSOutr();
+			cofinsOutr.setCST(EnumCSTCOFINSOutr.OUTRAS_OPERACOES);
+			cofinsOutr.setPCOFINS("");
+			cofinsOutr.setQBCProd("");
+			cofinsOutr.setVAliqProd("");
+			cofinsOutr.setVBC("");
+			cofins.setCofins(cofinsOutr);
+			break;
+		case COFINS_QTDE:
+			COFINSQtde cofinsQtde = new COFINSQtde();
+			cofinsQtde.setCST("");
+			cofinsQtde.setQBCProd("");
+			cofinsQtde.setVAliqProd("");
+			cofins.setCofins(cofinsQtde);
+			break;
+		case COFINS_SN:
+			COFINSSN cofinssn = new COFINSSN();
+			cofinssn.setCST(EnumCSTCOFINSSN.OUTRAS_OPERACOES);
+			cofins.setCofins(cofinssn);
+			break;
 		default:
 			break;
 		}
 		return cofins;
-		
+	}
+	
+	/**
+	 * 
+	 * @param nota
+	 * @return
+	 */
+	private Pgto getMeiosDePagamento(Nota nota) {
+		Pgto pgto = new Pgto();
+		List<NotaMeioPgto> meiosPgto = nota.getMeiosPgto();
+		List<MP> mps = new ArrayList<MP>();
+		for (NotaMeioPgto notaMeioPgto : meiosPgto) {
+			MP mp = new MP();
+			mp.setCMP(getEnumMeioPagamentoSAT(notaMeioPgto.getTipoMeioPgto()));
+			mp.setVMP(HandleString.parse(notaMeioPgto.getValor()));
+			mps.add(mp);
+		}
+		pgto.setMPs(mps);
+		return pgto;
+	}
+	
+	/**
+	 * Obter o tipo de pagamento que vem da nota 
+	 * @param enumMeio
+	 * @return
+	 */
+	private EnumMeioPagamento getEnumMeioPagamentoSAT(EnumTipoMeioPgto enumMeio) {
+		switch (enumMeio) {
+		case CHEQUE:
+			return EnumMeioPagamento.CHEQUE;
+		case DINHEIRO:
+			return EnumMeioPagamento.DINHEIRO;
+		case TEF:
+			return EnumMeioPagamento.CARTAO_CREDITO;
+		case FINANCIADO:
+			return EnumMeioPagamento.OUTROS;
+		case CREDIARIO:
+			return EnumMeioPagamento.OUTROS;
+		default:
+			return EnumMeioPagamento.OUTROS;
+		}
 	}
 	
 }

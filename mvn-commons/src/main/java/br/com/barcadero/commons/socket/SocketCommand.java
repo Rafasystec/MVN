@@ -47,6 +47,5 @@ public class SocketCommand implements Serializable{
 	public void setResponse(String response) {
 		this.response = response;
 	}
-	
-	
+
 }

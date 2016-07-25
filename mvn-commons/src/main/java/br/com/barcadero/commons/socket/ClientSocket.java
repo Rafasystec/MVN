@@ -8,7 +8,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.KeyStore;
-
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLSocket;
@@ -20,6 +19,7 @@ public class ClientSocket {
 	
 	private String ipServidor = "";
 	
+	public static final int PORT	= 9080; 
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
@@ -199,5 +199,40 @@ public class ClientSocket {
 	    }
 	}
 	
+	/**
+	 * 
+	 * @param comando
+	 * @return
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
+	public SocketCommand callAndReceive(SocketCommand comando) throws UnknownHostException, IOException {
+		//PrintStream saida	 	= null;
+		Socket client	  		= null;
+		ObjectOutputStream	out = null;
+		ServerSocket server		= null;
+		try{
+			client	= new Socket(getIpServidor(), SocketServer.SERVER_PORT);
+			out 	= new ObjectOutputStream(client.getOutputStream());
+			//comando.setIpHost(client.getLocalSocketAddress().toString());
+			out.writeObject(comando);
+			System.out.println("Enviou comando");
+			server = new ServerSocket(PORT);
+			server.setSoTimeout(50000);
+			Socket cliente = server.accept();
+			SocketCommand comandoRet = SocketUtil.getObjectFromStream(cliente);
+			return comandoRet;
+		}finally{
+			//if(saida != null)saida.close();
+			//if(client != null)client.close();
+			if(out != null){
+				out.flush();
+				out.reset();
+				out.close();
+			}
+			if(client != null)client.close();
+			if(server != null)server.close();
+		}
+	}
 
 }

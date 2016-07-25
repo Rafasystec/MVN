@@ -27,6 +27,7 @@ import br.com.barcadero.core.enums.EnumTipoPessoa;
 @Table(name="CLIENTE")
 public class Cliente extends EntidadeEmpresa{
 
+	
 	private static final long serialVersionUID = 6408718672593326415L;
 
 	public Cliente() {
