@@ -83,11 +83,12 @@ public class RuleGenarateCFe {
 		setLoja(loja);
 	}
 	
-	public CFeResult execute(Nota nota, Usuario usuario) throws SATException {
+	public CFeResult execute(Nota nota, Usuario usuario) throws SATException, Exception {
 		CFeResult cfeResult = new CFeResult();
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
 				String xml = genarateXML(nota);
+				RuleCFeComandos.enviarDadosVenda(021546, nota.getCaixa().getCodAtivCfe(), xml);
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
 				cfeResult.setDescription("Staus permitido para emitir CF-e : " + EnumStatusCFeNota.XML_NAO_GERADO + " ou " + EnumStatusCFeNota.REJEITADO + " mas veio " + nota.getStatusCFe());
@@ -445,8 +446,8 @@ public class RuleGenarateCFe {
 		case PIS_ALIQUOTA:
 			PISAliq aliq	= new PISAliq();
 			aliq.setCST(EnumCFeCSTPISAliq.CST_01);
-			aliq.setPPIS("0.1700");
-			aliq.setVBC("10.99");
+			aliq.setPPIS("0.6500");
+			aliq.setVBC(HandleString.parse(item.getVlTotal()));
 			pis.setPisGroup(aliq);
 			break;
 		case PIS_NT:
@@ -492,8 +493,8 @@ public class RuleGenarateCFe {
 		case COFINS_ALIQ:
 			COFINSAliq cofinsAliq 	= new COFINSAliq();
 			cofinsAliq.setCST(EnumCSTCOFINSAliq.OPER_TRIBUT_NORMAL);
-			cofinsAliq.setPCOFINS("0.0900");
-			cofinsAliq.setVBC("10.99");
+			cofinsAliq.setPCOFINS("3.0000");
+			cofinsAliq.setVBC(HandleString.parse(item.getVlTotal()));
 			cofins.setCofins(cofinsAliq);
 			break;
 		case COFINS_NT:

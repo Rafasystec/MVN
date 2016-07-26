@@ -2,6 +2,9 @@ package br.com.barcadero.rule;
 
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
+import br.com.barcadero.module.sat.socket.CmdAtivarSAT;
+import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
+import br.com.barcadero.tables.Caixa;
 
 /**
  * Ira enviar os comandos via socket para o modulo SAT.
@@ -11,17 +14,24 @@ import br.com.barcadero.commons.socket.SocketCommand;
 public class RuleCFeComandos {
 
 	private ClientSocket client;
-	public RuleCFeComandos() {
+	public RuleCFeComandos(Caixa caixa) {
 		// TODO Auto-generated constructor stub
 		client = new ClientSocket();
-		client.setIpServidor("");
+		client.setIpServidor(caixa.getIp());
 	}
 	
 	public String ativarSAT(int numeroSessao, int subComando, String codigoDeAtivacao, String cnpj, int cUF)
 			throws Exception {
 		SocketCommand command = newSocketCommand();
+		CmdAtivarSAT ativarSAT = new CmdAtivarSAT();
+		ativarSAT.setCnpj(cnpj);
+		ativarSAT.setCodigoDeAtivacao(codigoDeAtivacao);
+		ativarSAT.setcUF(cUF);
+		ativarSAT.setNumeroSessao(numeroSessao);
+		ativarSAT.setSubComando(subComando);
+		command.setDados(ativarSAT);
 		command = client.callAndReceive(command);
-		return null;
+		return command.getResponse();
 	}
 
 	
@@ -32,7 +42,7 @@ public class RuleCFeComandos {
 	}
 
 	
-	public String enviarDadosVenda(int numeroSessao, String codigoDeAtivacao, String dadosVenda) throws Exception {
+	public static String enviarDadosVenda(int numeroSessao, String codigoDeAtivacao, String dadosVenda) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,10 +54,19 @@ public class RuleCFeComandos {
 		return null;
 	}
 
-	
+	/**
+	 * Consultar o módulo SAT
+	 * @param numeroSessao
+	 * @return
+	 * @throws Exception
+	 */
 	public String consultarSAT(int numeroSessao) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		SocketCommand command = newSocketCommand();
+		CmdConsultarSAT consultarSAT = new CmdConsultarSAT();
+		consultarSAT.setNumeroSessao(numeroSessao);
+		command.setDados(consultarSAT);
+		command = client.callAndReceive(command);
+		return command.getResponse();
 	}
 
 	

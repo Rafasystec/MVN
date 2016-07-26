@@ -13,7 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.barcadero.core.enums.EnumCSTCOFINS;
 import br.com.barcadero.core.enums.EnumCSTICMS;
+import br.com.barcadero.core.enums.EnumCSTIPI;
 import br.com.barcadero.core.enums.EnumCSTPIS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
 import br.com.barcadero.core.enums.EnumTipoCOFINS;
@@ -47,56 +50,56 @@ public class Produto extends EntidadeEmpresa {
 	public static final String FIND_BY_DATE 		= "Produto.findByDate";
 	public static final String FIND_BY_COD_OR_DESC 	= "Produto.findByCodOrDesc";
 	
-	@Column(name="descricao", nullable=false)
+	@Column(name="DESCRICAO", nullable=false)
 	private String descricao = "";
-	@Column(name="",nullable=false)
+	@Column(name="CD_PROD",nullable=false)
 	private String cdProd = "";
-	@Column(name="unidade",nullable=false)
+	@Column(name="UNIDADE",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumUnidadeMedida unidade = EnumUnidadeMedida.UNIDADE;
-	@Column(name="ippt",nullable=false)
+	@Column(name="IPPT",nullable=false)
 	private String ippt = "";
-	@Column(name="sit_tributaria",nullable=false)
+	@Column(name="SIT_TRIBUTARIA",nullable=false)
 	private String sitTributaria = "";
-	@Column(name="aliquota",nullable=false)
+	@Column(name="ALIQUOTA",nullable=false)
 	private BigDecimal aliquota = new BigDecimal(0.00);
-	@Column(name="preco_custo",nullable=false)
+	@Column(name="PRECO_CUSTO",nullable=false)
 	private BigDecimal precoCusto = new BigDecimal(0.00);
-	@Column(name="cd_ncm",nullable=false)
+	@Column(name="CD_NCM",nullable=false)
 	private int cdNcm = 0;
-	@Column(name="ean",nullable=false)
+	@Column(name="EAN",nullable=false)
 	private String ean = "";
-	@Column(name="nm_aduaneiro",nullable=false)
+	@Column(name="NM_ADUANEIRO",nullable=false)
 	private String nmAduaneiro = "";
-	@Column(name="cest",nullable=false)
+	@Column(name="CEST",nullable=false)
 	private int cest = 0;
-	@Column(name="cfop",nullable=false)
+	@Column(name="CFOP",nullable=false)
 	private int cfop = 0;
-	@Column(name="cd_fornecedor",nullable=false)
+	@Column(name="CD_FORNECEDOR",nullable=false)
 	private long cdFornecedor;
-	@Column(name="fator",nullable=false)
+	@Column(name="FATOR",nullable=false)
 	private int fator = 0;
-	@Column(name="origem_icms",nullable=false)
+	@Column(name="ORIGEM_ICMS",nullable=false)
 	private EnumOrigemCSTICMS origemIcms;
-	@Column(name="cst_ipi", nullable=false)
-	private int cstIpi = 0;
-	@Column(name="cst_icms",nullable=false)
+	@Column(name="CST_IPI", nullable=false)
+	private EnumCSTIPI cstIpi = EnumCSTIPI.ENTRADA_ISENTA_02;
+	@Column(name="CST_ICMS",nullable=false)
 	private EnumCSTICMS cstIcms;
-	@Column(name="preco_venda",nullable=false)
+	@Column(name="PRECO_VENDA",nullable=false)
 	private BigDecimal precoVenda = new BigDecimal(0.00);
-	@Column(name="preco_promocao", nullable=false)
+	@Column(name="PRECO_PROMOCAO", nullable=false)
 	private BigDecimal precoPromo = new BigDecimal(0.00);
-	@Column(name="dt_inicio_promo", nullable=true)
+	@Column(name="DT_INICIO_PROMO", nullable=true)
 	@Temporal(TemporalType.DATE)
 	private Date dtInicioPromo;
-	@Column(name="dt_termino_promo", nullable=true)
+	@Column(name="DT_TERMINO_PROMO", nullable=true)
 	@Temporal(TemporalType.DATE)
 	private Date dtTerminPromo;
-	@Column(name="obs_fisco", nullable=false)
+	@Column(name="OBS_FISCO", nullable=false)
 	private String obsFisco = "";
-	@Column(name="aliquota_issqn", nullable=false)
+	@Column(name="ALIQUOTA_ISSQN", nullable=false)
 	private BigDecimal aliqISSQN = new BigDecimal(0.00);
-	@Column(name="natureza_operacao_issqn", nullable=false)
+	@Column(name="NATUREZA_OPERACAO_ISSQN", nullable=false)
 	private int naturezaOperacaoIssqn = 0;
 	@Column(name="MSG_PROMOCIONAL")
 	private String msgPromocional;
@@ -111,10 +114,13 @@ public class Produto extends EntidadeEmpresa {
 	private EnumTipoPIS tipoPis = EnumTipoPIS.PIS_ALIQUOTA;
 	@Column(name="TIPO_COFINS")
 	@Enumerated(EnumType.STRING)
-	private EnumTipoCOFINS tipoCofins;
+	private EnumTipoCOFINS tipoCofins = EnumTipoCOFINS.COFINS_ALIQ;
 	@Column(name="CST_PIS",length=5)
 	@Enumerated(EnumType.STRING)
-	private EnumCSTPIS cstPis;
+	private EnumCSTPIS cstPis = EnumCSTPIS._01;
+	@Column(name="CST_COFINS",length=5)
+	@Enumerated(EnumType.STRING)
+	private EnumCSTCOFINS cstCOFINS = EnumCSTCOFINS._01;
 	
 	@OneToMany(mappedBy="produto", targetEntity=Estoque.class)
 	private List<Estoque> estoques;
@@ -209,12 +215,6 @@ public class Produto extends EntidadeEmpresa {
 	public void setOrigemIcms(EnumOrigemCSTICMS origemIcms) {
 		this.origemIcms = origemIcms;
 	}
-	public int getCstIpi() {
-		return cstIpi;
-	}
-	public void setCstIpi(int cstIpi) {
-		this.cstIpi = cstIpi;
-	}
 	public EnumCSTICMS getCstIcms() {
 		return cstIcms;
 	}
@@ -308,6 +308,18 @@ public class Produto extends EntidadeEmpresa {
 	}
 	public void setCstPis(EnumCSTPIS cstPis) {
 		this.cstPis = cstPis;
+	}
+	public EnumCSTIPI getCstIpi() {
+		return cstIpi;
+	}
+	public void setCstIpi(EnumCSTIPI cstIpi) {
+		this.cstIpi = cstIpi;
+	}
+	public EnumCSTCOFINS getCstCOFINS() {
+		return cstCOFINS;
+	}
+	public void setCstCOFINS(EnumCSTCOFINS cstCOFINS) {
+		this.cstCOFINS = cstCOFINS;
 	}
 	
 }

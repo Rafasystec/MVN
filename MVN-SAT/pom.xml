@@ -6,6 +6,9 @@
 	<version>1.0</version>
 	<name>sat</name>
 	<description>para o proejto do SAT CF-e e MFe</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>

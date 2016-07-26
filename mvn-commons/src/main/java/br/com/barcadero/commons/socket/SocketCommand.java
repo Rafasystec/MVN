@@ -2,6 +2,8 @@ package br.com.barcadero.commons.socket;
 
 import java.io.Serializable;
 
+import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
+
 /**
  * Objeto que deverar ser serializado para envio de comando via socket
  * @author antoniorafael
@@ -16,6 +18,7 @@ public class SocketCommand implements Serializable{
 	private String codigoExecucao;
 	private SocketDados dados;
 	private String response;
+	private EnumTipoComandoSocket tipoComando;
 	
 	public String getIpHost() {
 		return ipHost;
@@ -46,6 +49,12 @@ public class SocketCommand implements Serializable{
 	}
 	public void setResponse(String response) {
 		this.response = response;
+	}
+	public EnumTipoComandoSocket getTipoComando() {
+		return tipoComando;
+	}
+	public void setTipoComando(EnumTipoComandoSocket tipoComando) {
+		this.tipoComando = tipoComando;
 	}
 
 }

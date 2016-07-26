@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Funções do SAT" />
+
+	<ui:define name="body">
+		<p:panel header="Funções do CF-e">
+			<p:hotkey bind="F1"  actionListener="#{beanCFeFuncoes.consultarSAT}"/>
+			<p:panelGrid columns="2">
+				<p:commandLink actionListener="#{beanCFeFuncoes.consultarSAT}" styleClass="btn btn-lg btn-success btn-block" value="Consultar SAT/MF-e(F1)"/>
+			</p:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

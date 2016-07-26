@@ -9,10 +9,12 @@ import org.hibernate.Session;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
+import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
+import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Usuario;
@@ -78,7 +80,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 	 * @param pedido
 	 * @return
 	 */
-	public String fecharPedido(Pedido pedido) {
+	public String fecharPedido(Pedido pedido) throws Exception{
 		try {
 			if(pedido != null){
 				pedido.setFlStPed(EnumStatusPedido.FECHADO);
@@ -108,16 +110,53 @@ public class RulePedido extends RuleModelo<Pedido> {
 		return pedidos;
 	}
 	
+	/**
+	 * Fatura o pedido de fato, ou seja, gera nota e emite o tipo de documento configurado no caixa.
+	 * @param pedido
+	 * @param formasPagamento
+	 * @param usuario
+	 * @return
+	 * @throws Exception
+	 */
 	public String faturarPedido(Pedido pedido, FormasPagamento formasPagamento, Usuario usuario) throws Exception{
 		if(pedido != null){
 			//Faturar pedido
-			ruleNota.parse(pedido, usuario,formasPagamento);
-			return "Pedido Faturado";
+			Caixa caixa = pedido.getCaixa();
+			Nota nota 	= ruleNota.parse(pedido, usuario, formasPagamento);
+			if(caixa != null){
+				switch (caixa.getTipoNota()) {
+				case MOD_55:
+					return "Nota fiscal eletrônica ainda não implementada";
+				case MOD_57:
+					return "CT-e ainda não suportado";
+				case MOD_59:
+					//Venda com SAT ou MF-e
+					return executarSAT(nota, usuario);
+				case MOD_65:
+					//NFC-e
+					return "NFC-e ainda não implementado.";
+				default:
+					break;
+				}
+				pedido.setFlStPed(EnumStatusPedido.FATURADO);
+				daoPedido.update(pedido);
+				return "Pedido Faturado";
+			}else{
+				throw new Exception("Caixa não foi configurado");
+			}
+			
+			
 		}else{
 			return "Nenhum produto para ser FATURADO.";
 		}
 	}
 	
+	private String executarSAT(Nota nota, Usuario usuario) throws SATException, Exception {
+		RuleGenarateCFe ruleCFe = new RuleGenarateCFe(getEmpresa(), getLoja());
+		ruleCFe.execute(nota, usuario);
+		return "";
+	}
+
 	/**
 	 * Totaliza um pedido, pega todos os itens e soma o valor total um a um.
 	 * @param pedido
@@ -160,4 +199,5 @@ public class RulePedido extends RuleModelo<Pedido> {
 			return "Pedido tem valor inválido ou está nulo.";
 		}
 	}
+	
 }

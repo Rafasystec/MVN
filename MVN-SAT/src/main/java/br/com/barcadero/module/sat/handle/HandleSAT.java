@@ -895,7 +895,7 @@ public void definirSatByClasse(String classe, String porta) throws Exception{
 		}else if(classe.equalsIgnoreCase(EnumModulosSAT.BEMATECH.getClassName())){
 			configurarBematechRB1000(porta);
 		}else{
-			log.info("OpÃ§Ã£o de classe invÃ¡lida >>> " + classe);
+			log.info("Opção de classe inválida >>> " + classe);
 		}
 		if(this.iSatMfe != null){
 			log.info(this.iSatMfe.toString());
