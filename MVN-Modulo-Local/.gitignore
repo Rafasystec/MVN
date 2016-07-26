@@ -1,1 +1,10 @@
 /target
+/bin/
+/logs/
+/.settings/
+*.class
+*.log
+*.classpath
+*.project
+.metadata
+/NFeCacerts
