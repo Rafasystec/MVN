@@ -11,6 +11,10 @@ import javax.persistence.Table;
 @Table(name="ORDEM_SERVICO_ITENS")
 public class OrdemServicoItens extends EntidadeLoja {
 
+	public OrdemServicoItens(Empresa empresa, Loja loja, Usuario usuario) {
+		super(empresa, loja, usuario);
+		
+	}
 
 	private static final long serialVersionUID = 4079218092887460544L;
 	@Column(name="DESCRICAO")

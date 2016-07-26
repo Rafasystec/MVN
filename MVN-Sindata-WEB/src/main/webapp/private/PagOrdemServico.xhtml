@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="puzzle-piece" />
+	<ui:param name="pageTitle" value="Pedido de Venda" />
+
+	<ui:define name="body">
+		<p:panel header="Ações">
+			<h:panelGrid columns="5">
+				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+				</p:commandButton>
+				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="true">
+					<f:ajax render="@form" resetValues="true"/>
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Pedido de venda">
+			<p:hotkey bind="return" update="produtos" actionListener="#{beanPedidoVenda.salvarItem}">
+			</p:hotkey>
+			<div class="fontValue">
+				<p:outputLabel id="blbVlUnitario" styleClass="fontValue" value="#{beanPedidoVenda.vlUnitario}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</p:outputLabel>
+			</div>
+			<div class="fontSubTotal">
+				<p:outputLabel id="blbSubVlTotal" styleClass="fontSubTotal" value="#{beanPedidoVenda.vlSubTotal}">
+					<f:convertNumber type="currency" currencySymbol="R$" />
+				</p:outputLabel>
+			</div>
+			<div class="div-main-venda">
+				<div>
+					<p:panelGrid columns="3" styleClass="noBorder" style="background-color: #F5F5F5">
+						<clx:productSearch  id="cboProduto" value="#{beanPedidoVenda.strProduto}"/>
+						<p:outputLabel value="Quantidade:" for="qtde"/>
+						<p:inputText id="qtde" value="#{beanPedidoVenda.item.quantidade}" maxlength="10" size="8"> 
+							<f:convertNumber type="number" integerOnly="true" pattern="#0"/>
+						</p:inputText>
+					</p:panelGrid>
+				</div>
+			</div>
+			<div class="div-baixo" id="embaixo">
+				<p:outputLabel id="lblProdutoExibir" styleClass="font-produto" value="#{beanPedidoVenda.lastProduto}"/>
+			</div>
+			<div class="divProdutos">
+				<p:dataTable id="produtos" var="item" value="#{beanPedidoVenda.itens}" resizableColumns="false" 
+					  rowKey="#{item.codigo}" style="max-width: 100%;border: none" scrollable="true" scrollHeight="150">	
+						<p:column headerText="Cód." style="width: 25px">
+							<h:outputText value="#{item.codigo}" />
+						</p:column>
+						<p:column headerText="Item" style="width: 100px">
+							<h:outputText value="#{item.produto.descricao}" />
+						</p:column>
+						<p:column headerText="Qtde" style="width: 50px">
+							<h:outputText value="#{item.quantidade} x #{item.vlUnitario}" />
+						</p:column>
+						<p:column headerText="Valor" style="width: 40px">
+							<h:outputText value="#{item.vlTotal}" >
+								<f:convertNumber type="currency" currencySymbol=""/>
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</div>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

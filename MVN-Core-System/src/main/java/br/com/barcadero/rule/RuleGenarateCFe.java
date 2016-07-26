@@ -88,7 +88,6 @@ public class RuleGenarateCFe {
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
 				String xml = genarateXML(nota);
-				
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
 				cfeResult.setDescription("Staus permitido para emitir CF-e : " + EnumStatusCFeNota.XML_NAO_GERADO + " ou " + EnumStatusCFeNota.REJEITADO + " mas veio " + nota.getStatusCFe());

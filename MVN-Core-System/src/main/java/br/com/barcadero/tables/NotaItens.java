@@ -1,7 +1,6 @@
 package br.com.barcadero.tables;
 
 import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +11,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import br.com.barcadero.core.enums.EnumCSTCOFINS;
+import br.com.barcadero.core.enums.EnumCSTICMS;
+import br.com.barcadero.core.enums.EnumCSTIPI;
+import br.com.barcadero.core.enums.EnumCSTPIS;
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumItemCancelado;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -41,8 +43,8 @@ public class NotaItens extends SuperClassNota {
 		setEmpresa(empresa);
 	}
 	
-	public static final String FIND_ALL     = "NotaItens.findAll";
-	public static final String FIND_BY_NOTA = "NotaItens.findByNota";
+	public static final String FIND_ALL     	 = "NotaItens.findAll";
+	public static final String FIND_BY_NOTA 	 = "NotaItens.findByNota";
 	public static final String FIND_BY_CODE_NOTA = "NotaItens.findByCodeNota";
 	public static final String PARAM_COD_NOTA    = "nota";
 	
@@ -74,6 +76,25 @@ public class NotaItens extends SuperClassNota {
 	private BigDecimal vlUnidade = new BigDecimal(0.00);
 	@Column(name="INFOR_ADICIONAIS", nullable=true)
 	private String inforAdicionais = "";
+	@Column(name="CST_IPI", length=50)
+	@Enumerated(EnumType.STRING)
+	private EnumCSTIPI cstIPI;
+	@Column(name="CST_PIS", length=4)
+	@Enumerated(EnumType.STRING)
+	private EnumCSTPIS cstPIS;
+	@Column(name="CST_COFINS", length=4)
+	@Enumerated(EnumType.STRING)
+	private EnumCSTCOFINS cstCOFINS;
+	@Column(name="CST_ICMS", length=4)
+	@Enumerated(EnumType.STRING)
+	private EnumCSTICMS cstICMS;
+	@Column(name="ICMS")
+	private BigDecimal icms = new BigDecimal(0.00);
+	@Column(name="PIS",precision=20, scale=4)
+	private float pis = 0.0000f;
+	@Column(name="COFINS",precision=20, scale=4)
+	private float cofins = 0.0000f;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="nota",referencedColumnName="codigo")
@@ -173,5 +194,47 @@ public class NotaItens extends SuperClassNota {
 	}
 	public void setInforAdicionais(String inforAdicionais) {
 		this.inforAdicionais = inforAdicionais;
+	}
+	public EnumCSTIPI getCstIPI() {
+		return cstIPI;
+	}
+	public void setCstIPI(EnumCSTIPI cstIPI) {
+		this.cstIPI = cstIPI;
+	}
+	public EnumCSTPIS getCstPIS() {
+		return cstPIS;
+	}
+	public void setCstPIS(EnumCSTPIS cstPIS) {
+		this.cstPIS = cstPIS;
+	}
+	public EnumCSTCOFINS getCstCOFINS() {
+		return cstCOFINS;
+	}
+	public void setCstCOFINS(EnumCSTCOFINS cstCOFINS) {
+		this.cstCOFINS = cstCOFINS;
+	}
+	public EnumCSTICMS getCstICMS() {
+		return cstICMS;
+	}
+	public void setCstICMS(EnumCSTICMS cstICMS) {
+		this.cstICMS = cstICMS;
+	}
+	public BigDecimal getIcms() {
+		return icms;
+	}
+	public void setIcms(BigDecimal icms) {
+		this.icms = icms;
+	}
+	public float getPis() {
+		return pis;
+	}
+	public void setPis(float pis) {
+		this.pis = pis;
+	}
+	public float getCofins() {
+		return cofins;
+	}
+	public void setCofins(float cofins) {
+		this.cofins = cofins;
 	}
 }
