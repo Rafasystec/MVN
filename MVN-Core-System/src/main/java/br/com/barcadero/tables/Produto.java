@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import br.com.barcadero.core.enums.EnumCSTICMS;
+import br.com.barcadero.core.enums.EnumCSTPIS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
 import br.com.barcadero.core.enums.EnumTipoCOFINS;
 import br.com.barcadero.core.enums.EnumTipoICMS;
@@ -93,8 +94,6 @@ public class Produto extends EntidadeEmpresa {
 	private Date dtTerminPromo;
 	@Column(name="obs_fisco", nullable=false)
 	private String obsFisco = "";
-	@Column(name="cst_pis", nullable=false)
-	private int cstPis = 0;
 	@Column(name="aliquota_issqn", nullable=false)
 	private BigDecimal aliqISSQN = new BigDecimal(0.00);
 	@Column(name="natureza_operacao_issqn", nullable=false)
@@ -113,6 +112,9 @@ public class Produto extends EntidadeEmpresa {
 	@Column(name="TIPO_COFINS")
 	@Enumerated(EnumType.STRING)
 	private EnumTipoCOFINS tipoCofins;
+	@Column(name="CST_PIS",length=5)
+	@Enumerated(EnumType.STRING)
+	private EnumCSTPIS cstPis;
 	
 	@OneToMany(mappedBy="produto", targetEntity=Estoque.class)
 	private List<Estoque> estoques;
@@ -258,12 +260,6 @@ public class Produto extends EntidadeEmpresa {
 	public void setObsFisco(String obsFisco) {
 		this.obsFisco = obsFisco;
 	}
-	public int getCstPis() {
-		return cstPis;
-	}
-	public void setCstPis(int cstPis) {
-		this.cstPis = cstPis;
-	}
 	public BigDecimal getAliqISSQN() {
 		return aliqISSQN;
 	}
@@ -306,6 +302,12 @@ public class Produto extends EntidadeEmpresa {
 	}
 	public void setTipoCofins(EnumTipoCOFINS tipoCofins) {
 		this.tipoCofins = tipoCofins;
+	}
+	public EnumCSTPIS getCstPis() {
+		return cstPis;
+	}
+	public void setCstPis(EnumCSTPIS cstPis) {
+		this.cstPis = cstPis;
 	}
 	
 }

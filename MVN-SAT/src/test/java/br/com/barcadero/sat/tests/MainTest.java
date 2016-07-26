@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import br.com.barcadero.commons.util.HandleFiles;
 import br.com.barcadero.commons.xml.HandleXML;
+import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
 import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
@@ -129,7 +130,7 @@ public class MainTest {
 		//-------------------------------------------------
 		PIS pis 		= new PIS();
 		PISAliq aliq	= new PISAliq();
-		aliq.setCST("01");
+		aliq.setCST(EnumCFeCSTPISAliq.CST_01);
 		aliq.setPPIS("0.1700");
 		aliq.setVBC("10.99");
 		pis.setPisGroup(aliq);

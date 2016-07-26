@@ -10,6 +10,7 @@ import br.com.barcadero.core.enums.EnumStatusCFeNota;
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.enums.EnumTipoPessoa;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
+import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSNT;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSOutr;
@@ -444,7 +445,7 @@ public class RuleGenarateCFe {
 		switch (item.getProduto().getTipoPis()) {
 		case PIS_ALIQUOTA:
 			PISAliq aliq	= new PISAliq();
-			aliq.setCST("01");
+			aliq.setCST(EnumCFeCSTPISAliq.CST_01);
 			aliq.setPPIS("0.1700");
 			aliq.setVBC("10.99");
 			pis.setPisGroup(aliq);
