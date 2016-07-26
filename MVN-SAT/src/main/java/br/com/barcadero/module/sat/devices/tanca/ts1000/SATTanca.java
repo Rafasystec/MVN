@@ -23,6 +23,7 @@ public class SATTanca extends AbstractSATSuperClass {
 		} catch (Exception e) {
 			// TODO: handle exception
 			//Logfactory.adicionar(e);
+			e.printStackTrace();
 			throw e;
 		}
 	}

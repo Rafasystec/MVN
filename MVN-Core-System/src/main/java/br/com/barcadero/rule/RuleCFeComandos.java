@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.module.sat.socket.CmdAtivarSAT;
@@ -61,7 +62,7 @@ public class RuleCFeComandos {
 	 * @throws Exception
 	 */
 	public String consultarSAT(int numeroSessao) throws Exception {
-		SocketCommand command = newSocketCommand();
+		SocketCommand command = newSocketCommandSAT();
 		CmdConsultarSAT consultarSAT = new CmdConsultarSAT();
 		consultarSAT.setNumeroSessao(numeroSessao);
 		command.setDados(consultarSAT);
@@ -136,6 +137,12 @@ public class RuleCFeComandos {
 	public SocketCommand newSocketCommand() {
 		SocketCommand command = new SocketCommand();
 		command.setIpHost("");
+		return command;
+	}
+	
+	public SocketCommand newSocketCommandSAT() {
+		SocketCommand command = newSocketCommand();
+		command.setTipoComando(EnumTipoComandoSocket.CMD_FOR_SAT);
 		return command;
 	}
 

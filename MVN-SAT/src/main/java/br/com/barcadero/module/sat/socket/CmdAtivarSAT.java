@@ -4,6 +4,10 @@ import br.com.barcadero.commons.socket.SocketDados;
 
 public class CmdAtivarSAT extends SocketDados {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4138281864344722657L;
 	private int numeroSessao; 
 	private int subComando; 
 	private String codigoDeAtivacao; 
