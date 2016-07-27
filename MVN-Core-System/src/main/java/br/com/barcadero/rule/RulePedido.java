@@ -10,6 +10,7 @@ import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.module.sat.exceptions.SATException;
+import br.com.barcadero.rule.RuleGenarateCFe.CFeResult;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
@@ -150,11 +151,25 @@ public class RulePedido extends RuleModelo<Pedido> {
 			return "Nenhum produto para ser FATURADO.";
 		}
 	}
-	
+	/**
+	 * Executar o comando de venda do SAT
+	 * @param nota
+	 * @param usuario
+	 * @return
+	 * @throws SATException
+	 * @throws Exception
+	 */
 	private String executarSAT(Nota nota, Usuario usuario) throws SATException, Exception {
-		RuleGenarateCFe ruleCFe = new RuleGenarateCFe(getEmpresa(), getLoja());
-		ruleCFe.execute(nota, usuario);
-		return "";
+		RuleGenarateCFe ruleCFe = new RuleGenarateCFe(getEmpresa(), getLoja(),nota.getCaixa());
+		CFeResult cfeResult = ruleCFe.execute(nota, usuario);
+		if(cfeResult.getCodeExecution() == RuleGenarateCFe.CODE_STATUS_OK){
+			//Depois tratar para salvar na tabela e apresentar Mensagem melhor
+			return "Venda OK: >>> " + cfeResult.getCodeExecution();
+			
+		}else{
+			return "Erro: " + cfeResult.getCodeExecution() + " - " + cfeResult.getDescription() ;
+		}
+		
 	}
 
 	/**

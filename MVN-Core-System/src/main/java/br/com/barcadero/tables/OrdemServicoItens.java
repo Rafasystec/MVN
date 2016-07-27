@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import br.com.barcadero.core.util.GlobalNameParam;
 
 @NamedQueries({
-	@NamedQuery(name=OrdemServicoItens.FIND_ALL		,query="FROM OrdemServicoItens WHERE empresa :empresa"),
-	@NamedQuery(name=OrdemServicoItens.FIND_BY_OS	,query="FROM OrdemServicoItens WHERE empresa :empresa AND ordemservico = :ordemservico")
+	@NamedQuery(name=OrdemServicoItens.FIND_ALL		,query="FROM OrdemServicoItens WHERE empresa = :empresa"),
+	@NamedQuery(name=OrdemServicoItens.FIND_BY_OS	,query="FROM OrdemServicoItens WHERE empresa = :empresa AND ordemservico = :ordemservico")
 })
 @Entity
 @Table(name="ORDEM_SERVICO_ITENS")

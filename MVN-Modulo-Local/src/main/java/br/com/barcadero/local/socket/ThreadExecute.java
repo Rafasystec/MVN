@@ -6,6 +6,7 @@ import br.com.barcadero.commons.socket.SocketDados;
 import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
+import br.com.barcadero.module.sat.socket.CmdEnviarDadosVenda;
 
 public class ThreadExecute implements Callable<String> {
 
@@ -39,15 +40,24 @@ public class ThreadExecute implements Callable<String> {
 	public void setCommand(SocketCommand command) {
 		this.command = command;
 	}
-	
+	/**
+	 * Definir o modulo SAT
+	 * @param command
+	 * @return
+	 * @throws Exception
+	 */
 	public String executarComandoSAT(SocketCommand command) throws Exception{
 		SocketDados dados 	= command.getDados();
-		HandleSAT handleSAT = new HandleSAT();
-		handleSAT.definirSatByClasse(EnumModulosSAT.TANCA.getClassName(), "");//Por enquanto deixar tanca fixo
+		HandleSAT handleSAT = new HandleSAT(command.getModuloSAT());
 		String result		= "";
 		if(dados instanceof CmdConsultarSAT){
-			CmdConsultarSAT consultarSAT = (CmdConsultarSAT) dados;
+			//CmdConsultarSAT consultarSAT = (CmdConsultarSAT) dados;
 			result = handleSAT.consultarSAT();
+		}else if(dados instanceof CmdEnviarDadosVenda){
+			CmdEnviarDadosVenda dadosVenda = (CmdEnviarDadosVenda) dados;
+			result = handleSAT.enviarDadosVenda(dadosVenda.getDadosVenda(), dadosVenda.getCodigoDeAtivacao());
+		}else{
+			result = "Comando não configurado!";
 		}
 		return result;
 	}

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.loggin.LoggerFile;
 import br.com.barcadero.commons.util.HandleFiles;
 import br.com.barcadero.module.sat.devices.bematech.SATBematech;
@@ -80,9 +81,14 @@ public static String getPatternPipe() {
  * Construtor padrao para a RulHelperSat
  */
 public HandleSAT() {
+	
+}
+
+public HandleSAT(EnumTipoModuloSAT typeModule) {
 	try {
-		initialize();
+		definirModulo(typeModule);
 	} catch (Exception e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
@@ -860,27 +866,13 @@ public String cancelarUltimaVenda(String chave, String codigoAtivacao, String da
 
 
 /**
- * Inicializar as funcionalidades do SAT
- * @throws Exception
- * @author Rafael Rocha
- */
-public void initialize() throws Exception{
-	String classSat	= "";
-	String portSat	= "";
-	try {
-		definirSatByClasse(classSat, portSat);
-	} catch (Exception e) {
-		throw e;
-	}
-}
-
-/**
  * Definir qual a classe que sera utilizada.
  * @param classe
  * @param porta
  * @throws Exception
  * @author Rafael Rocha
  */
+@Deprecated
 public void definirSatByClasse(String classe, String porta) throws Exception{
 	try {
 		classe = classe.trim();
@@ -900,11 +892,32 @@ public void definirSatByClasse(String classe, String porta) throws Exception{
 		if(this.iSatMfe != null){
 			log.info(this.iSatMfe.toString());
 		}else{
-			log.info("NÃ£o foi possÃ­vel Classe: " + classe);
+			log.info("Não foi possível Classe: " + classe);
 		}
 		
 	} catch (Exception e) {
 		throw e;
+	}
+}
+/**
+ * 
+ * @param typeMode
+ * @throws Exception
+ */
+public void definirModulo(EnumTipoModuloSAT typeMode) throws Exception {
+	switch (typeMode) {
+	case BEMATECH:
+		configurarBematechRB1000("");
+		break;
+	case DIMEP:
+		configurarDimep("");
+		break;
+	case TANCA:
+		configurarTancaTs1000("");
+		break;
+	default:
+		configurarEmulador("");
+		break;
 	}
 }
 

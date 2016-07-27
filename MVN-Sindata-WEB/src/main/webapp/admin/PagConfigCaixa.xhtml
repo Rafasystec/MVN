@@ -40,8 +40,8 @@
 				<p:password id="txtConfAtivacao" value="#" label="Password 2"
 					required="true" requiredMessage="Confirme o codigo de ativação!" />
 				<h:outputLabel for="cboModulo" value="Módulo:" />
-				<p:selectOneMenu id="cboModulo">
-					<f:selectItem>Ola</f:selectItem>
+				<p:selectOneMenu id="cboModulo" value="#{configCaixa.caixa.tipoModuloSAT}">
+					<f:selectItems value="#{configCaixa.modulosSAT}" />
 				</p:selectOneMenu>
 			</p:panelGrid>
 		</p:panel>

@@ -14,6 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumStatusCaixa;
 
@@ -47,20 +48,23 @@ public class Caixa extends EntidadeLoja {
 	public final static String PARAM_CODE	= "codigo";
 	public final static String PARAM_IP	    = "ip";
 	
-	@Column(name="cd_caixa",nullable=false)
+	@Column(name="CD_CAIXA",nullable=false)
 	private int cdCaixa;
-	@Column(name="ip",nullable=false)
+	@Column(name="IP",nullable=false)
 	private String ip = "127.0.0.1";
-	@Column(name="tipo_nota",nullable=false)
+	@Column(name="TIPO_NOTA",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumModeloNota tipoNota;
-	@Column(name="cod_ativ_cfe",nullable=false)
+	@Column(name="COD_ATIV_CFE",nullable=false)
 	private String codAtivCfe = "";
-	@Column(name="cod_ativ_cfe_emergen",nullable=false)
+	@Column(name="COD_ATIV_CFE_EMERGEN",nullable=false)
 	private String codAtivCfeEmergen = "";
 	@Column(name="STATUS_CAIXA")
 	@Enumerated(EnumType.STRING)
 	private EnumStatusCaixa statusCaixa = EnumStatusCaixa.ABERTO;
+	@Column(name="MODULO_SAT", length=20)
+	@Enumerated(EnumType.STRING)
+	private EnumTipoModuloSAT tipoModuloSAT = EnumTipoModuloSAT.EMULADOR;
 	@OneToMany(mappedBy="caixa", targetEntity=CaixaAbertura.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<CaixaAbertura> aberturas = new ArrayList<CaixaAbertura>();
 	@OneToMany(mappedBy="caixa", targetEntity=CaixaFechamento.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -114,6 +118,14 @@ public class Caixa extends EntidadeLoja {
 	}
 	public void setStatusCaixa(EnumStatusCaixa statusCaixa) {
 		this.statusCaixa = statusCaixa;
+	}
+
+	public EnumTipoModuloSAT getTipoModuloSAT() {
+		return tipoModuloSAT;
+	}
+
+	public void setTipoModuloSAT(EnumTipoModuloSAT tipoModuloSAT) {
+		this.tipoModuloSAT = tipoModuloSAT;
 	}
 	
 }

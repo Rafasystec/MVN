@@ -199,17 +199,20 @@ public class RuleNota extends RuleModelo<Nota> {
 				//------------------------------------------
 				//Montando a lista de itens para a nota
 				//------------------------------------------
-				insert(nota);
+				
 				List<NotaItens> itens = getItensNota(nota,pedido,usuario);
-				for (NotaItens notaItens : itens) {
-					ruleNotaItens.insert(notaItens);
-				}
+//				for (NotaItens notaItens : itens) {
+//					ruleNotaItens.insert(notaItens);
+//				}
+				
 				//------------------------------------------
 				//Inserir as formas de pagamento
 				//------------------------------------------
 				 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
+				 nota.setItens(itens);
 				 nota.setFlFaturado(EnumNotaFaturada.SIM);
-				 update(nota);
+				 //update(nota);
+				 insert(nota);
 				 pedido.setFlStPed(EnumStatusPedido.FATURADO);
 				 daoPedido.update(pedido);
 				 result = nota;

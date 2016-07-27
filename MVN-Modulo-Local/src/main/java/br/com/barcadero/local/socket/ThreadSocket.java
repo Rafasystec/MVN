@@ -89,7 +89,7 @@ public class ThreadSocket implements Runnable {
 		ClientSocket host = new ClientSocket();
 		//comando.setResposta("Resposta para o Host : " + comando.getIpHost() + " - Vinda do servidor");
 		host.setIpServidor(comando.getIpHost());
-		host.send(comando);
+		host.sendForRemoteServer(comando);
 	}
 	
 

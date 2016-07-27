@@ -75,6 +75,29 @@ public class ClientSocket {
 			if(client != null)client.close();
 		}
 	}
+	/**
+	 * Enviar resposta direto para o servidor
+	 * @param comando
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
+	public void sendForRemoteServer(SocketCommand comando) throws UnknownHostException, IOException {
+		Socket client	  		= null;
+		ObjectOutputStream	out = null;
+		try{
+			client	= new Socket(getIpServidor(), ClientSocket.PORT);
+			out 	= new ObjectOutputStream(client.getOutputStream());
+			out.writeObject(comando);
+			System.out.println("Enviou comando");
+		}finally{
+			if(out != null){
+				out.flush();
+				out.reset();
+				out.close();
+			}
+			if(client != null)client.close();
+		}
+	}
 	
 	/**
 	 * 

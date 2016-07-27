@@ -54,7 +54,7 @@ public class Empresa extends Entidade {
 	@Column(name="observacoes", nullable=false)
 	private String observacoes = "";
 	@Column(name="CNPJ_SOFTWARE_HOUSE")
-	private String cnpjSoftwareHouse;
+	private String cnpjSoftwareHouse = "16716114000172";
 	@Column(name="REGIME_TRIBUTACAO_ISSQN")
 	@Enumerated(EnumType.ORDINAL)
 	private EnumRegimeISSQN regimeISSQN = EnumRegimeISSQN.MICROEMPRESARIO_INDIVIDUAL;

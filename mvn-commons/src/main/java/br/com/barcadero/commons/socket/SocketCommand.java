@@ -3,6 +3,7 @@ package br.com.barcadero.commons.socket;
 import java.io.Serializable;
 
 import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
+import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 
 /**
  * Objeto que deverar ser serializado para envio de comando via socket
@@ -19,6 +20,7 @@ public class SocketCommand implements Serializable{
 	private SocketDados dados;
 	private String response;
 	private EnumTipoComandoSocket tipoComando;
+	private EnumTipoModuloSAT moduloSAT;
 	
 	public String getIpHost() {
 		return ipHost;
@@ -55,6 +57,12 @@ public class SocketCommand implements Serializable{
 	}
 	public void setTipoComando(EnumTipoComandoSocket tipoComando) {
 		this.tipoComando = tipoComando;
+	}
+	public EnumTipoModuloSAT getModuloSAT() {
+		return moduloSAT;
+	}
+	public void setModuloSAT(EnumTipoModuloSAT moduloSAT) {
+		this.moduloSAT = moduloSAT;
 	}
 
 }

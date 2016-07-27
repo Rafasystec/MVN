@@ -82,6 +82,7 @@ public class Produto extends EntidadeEmpresa {
 	@Column(name="ORIGEM_ICMS",nullable=false)
 	private EnumOrigemCSTICMS origemIcms;
 	@Column(name="CST_IPI", nullable=false)
+	@Enumerated(EnumType.STRING)
 	private EnumCSTIPI cstIpi = EnumCSTIPI.ENTRADA_ISENTA_02;
 	@Column(name="CST_ICMS",nullable=false)
 	private EnumCSTICMS cstIcms;

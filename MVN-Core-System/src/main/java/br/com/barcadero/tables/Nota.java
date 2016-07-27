@@ -86,9 +86,9 @@ public final class Nota extends EntidadeLoja {
 	@Enumerated(EnumType.STRING)
 	private EnumNaturezaOperacao naturezaOperacao;
 
-	@OneToMany(mappedBy="nota",cascade=CascadeType.ALL,targetEntity=NotaItens.class,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="nota",cascade=CascadeType.ALL,targetEntity=NotaItens.class,fetch=FetchType.EAGER)
 	private List<NotaItens> itens;
-	@OneToMany(mappedBy="nota",cascade=CascadeType.ALL,targetEntity=NotaMeioPgto.class,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="nota",cascade=CascadeType.ALL,targetEntity=NotaMeioPgto.class,fetch=FetchType.EAGER)
 	private List<NotaMeioPgto> meiosPgto;
 	
 	@Column(name="FL_FATURADO",nullable=false)

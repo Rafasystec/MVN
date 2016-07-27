@@ -56,26 +56,29 @@ xmlns:h="http://java.sun.com/jsf/html"
 						<p:selectOneMenu style="width:200px" value="#{produto.produto.origemIcms}" >
 							<f:selectItems id="origem" value="#{produto.origensIcms}" var="origem" itemLabel="#{origem.label}" />
 						</p:selectOneMenu>
-					
+					    
 						<p:outputLabel value="CST ICMS" for="cstIcms"/>
 						<p:selectOneMenu value="#{produto.produto.cstIcms}" style="width: 200px">
-							<f:selectItems id="cstIcms" value="#{produto.cstIcms}" var="cst" itemLabel="#{cst.label}" />
+							<f:selectItems id="cstIcms" value="#{produto.cstIcms}" var="cst" itemValue="#{cst}" itemLabel="#{cst.label}"  />
 						</p:selectOneMenu>
-
+					
+						  
 						<p:outputLabel value="CST IPI" for="cstIpi"/>
 						<p:selectOneMenu value="#{produto.produto.cstIpi}" style="width: 200px">
-							<f:selectItems id="cstIpi" value="#{produto.cstIpi}" var="cst" itemLabel="#{cst.label}" 
-								itemValue="#{cst.cst}"
+							<f:selectItems id="cstIpi" value="#{produto.cstIpi}" var="cst" itemValue="#{cst}" itemLabel="#{cst.label}" 
+								
 							/>
 						</p:selectOneMenu>
+						
 						<p:outputLabel value="Aliquota ICMS" for="aliquota"/>
 						<p:inputText id="aliquota" value="#{produto.produto.aliquota}"  required="true"/>
+						
 						<p:outputLabel value="Aliquota ISSQN" for="aliquotaISSQN"/>
 						<p:inputText id="aliquotaISSQN" value="#{produto.produto.aliqISSQN}"  required="true"/>
+						
 						<p:outputLabel value="CST PIS:" for="cstPis" />
-						<p:selectOneMenu value="#{produto.produto.cstIpi}" title="CST PIS"  label="CST PIS">
-							<f:selectItems id="cstPis" value="#{produto.cstPis}" var="cst" itemLabel="#{cst.label}" 
-								itemValue="#{cst.cst}"
+						<p:selectOneMenu value="#{produto.produto.cstPis}" title="CST PIS"  label="CST PIS">
+							<f:selectItems id="cstPis" value="#{produto.cstPis}" var="cst" itemValue="#{cst}" itemLabel="#{cst.label}" 
 							/>
 						</p:selectOneMenu>
 					</p:panelGrid>

@@ -1,6 +1,6 @@
 package br.com.barcadero.rule;
 
-import static org.junit.Assert.fail;
+//import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.barcadero.commons.util.HandleString;
@@ -54,6 +54,7 @@ import br.com.barcadero.module.sat.xml.envio.Prod;
 import br.com.barcadero.module.sat.xml.envio.Total;
 import br.com.barcadero.module.sat.xml.util.CNPJ;
 import br.com.barcadero.module.sat.xml.util.CPF;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
@@ -68,7 +69,9 @@ public class RuleGenarateCFe {
 	
 	public static final int CODE_NAO_TEM_NOTA 		= 13;
 	public static final int CODE_STATUS_INVALIDO 	= 14;
+	public static final int CODE_STATUS_OK 			= 0;
 	private Empresa empresa = null;
+	private RuleCFeComandos ruleCFeComandos			= null;
 	private Loja loja = null;
 	
 	public static void main(String[] args) {
@@ -77,18 +80,29 @@ public class RuleGenarateCFe {
 		System.out.println(unidade);
 	}
 	
-	public RuleGenarateCFe(Empresa empresa, Loja loja) {
+	public RuleGenarateCFe(Empresa empresa, Loja loja, Caixa caixa) {
 		// TODO Auto-generated constructor stub
 		setEmpresa(empresa);
 		setLoja(loja);
+		ruleCFeComandos = new RuleCFeComandos(caixa);
 	}
-	
+	/**
+	 * 
+	 * @param nota
+	 * @param usuario
+	 * @return
+	 * @throws SATException
+	 * @throws Exception
+	 */
 	public CFeResult execute(Nota nota, Usuario usuario) throws SATException, Exception {
 		CFeResult cfeResult = new CFeResult();
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
-				String xml = genarateXML(nota);
-				RuleCFeComandos.enviarDadosVenda(021546, nota.getCaixa().getCodAtivCfe(), xml);
+				String xml 		= genarateXML(nota);
+				String result 	= ruleCFeComandos.enviarDadosVenda(nota.getCaixa().getCodAtivCfe(), xml);
+				System.out.println("Resultado >>>> " + result);
+				cfeResult.setCodeExecution(CODE_STATUS_OK);
+				cfeResult.setDescription(result);
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
 				cfeResult.setDescription("Staus permitido para emitir CF-e : " + EnumStatusCFeNota.XML_NAO_GERADO + " ou " + EnumStatusCFeNota.REJEITADO + " mas veio " + nota.getStatusCFe());
@@ -101,19 +115,23 @@ public class RuleGenarateCFe {
 		return cfeResult;
 	}
 	
+	/**
+	 * Gera o XML do SAT.
+	 * @param nota
+	 * @return
+	 * @throws SATException
+	 */
 	private String genarateXML(Nota nota) throws SATException {
-		
-		
 		String xml 		= "";
 		CFe cfe 		= new CFe();
 		InfCFe infCFe 	= new InfCFe();
-		infCFe.setVersaoDadosEnt(loja.getVerXMLCFe().toString());
+		infCFe.setVersaoDadosEnt(loja.getVerXMLCFe().getValue());
 		//-------------------------------------------------
 		//Identificacao SOFTWARE HOUSE
 		//-------------------------------------------------
 		Ide ide = new Ide();
 		ide.setCNPJ(getEmpresa().getCnpjSoftwareHouse());
-		ide.setNumeroCaixa(String.valueOf(nota.getCaixa().getCdCaixa()));
+		ide.setNumeroCaixa(HandleString.zerosLeft(String.valueOf(nota.getCaixa().getCdCaixa()), 3) );
 		//"SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT"
 		ide.setSignAC(getLoja().getSignAC());
 		infCFe.setIde(ide);
@@ -153,14 +171,12 @@ public class RuleGenarateCFe {
 		infCFe.setPgto(getMeiosDePagamento(nota));
 		cfe.setInfCFe(infCFe);
 		try {
-			
 			xml = HandleXML.getXMLFromObject(cfe);
 			System.out.println(xml);
-			//assertEquals("O XML gerado nao foi igual ao esperado",getXMLVendaEmperado(),xml);
-			//transmitirTanca(xml);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			fail(e.getMessage());
+			throw new SATException("Erro ao tentar gerar o XML: " + e.getMessage());
+			//fail(e.getMessage());
 		}
 		return xml;
 	}

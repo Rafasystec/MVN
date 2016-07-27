@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
@@ -26,6 +27,7 @@ public class BeanConfigCaixa extends SuperBean {
 	private List<Caixa> caixas;
 	private RuleCaixa ruleCaixa;
 	private EnumModeloNota[] tiposNota;
+	private EnumTipoModuloSAT[] modulosSAT;
 	private String ipAddress;
 	
 	public BeanConfigCaixa() {
@@ -111,6 +113,14 @@ public class BeanConfigCaixa extends SuperBean {
 
 	public void setSelectedCaixa(Caixa selectedCaixa) {
 		this.selectedCaixa = selectedCaixa;
+	}
+
+	public EnumTipoModuloSAT[] getModulosSAT() {
+		return EnumTipoModuloSAT.values();
+	}
+
+	public void setModulosSAT(EnumTipoModuloSAT[] modulosSAT) {
+		this.modulosSAT = modulosSAT;
 	}
 	
 

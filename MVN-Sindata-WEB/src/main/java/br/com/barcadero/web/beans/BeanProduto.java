@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import br.com.barcadero.core.enums.EnumCSTICMS;
+import br.com.barcadero.core.enums.EnumCSTIPI;
 import br.com.barcadero.core.enums.EnumCSTPIS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
 import br.com.barcadero.core.enums.EnumSitTributCSTIPI;
@@ -18,7 +19,7 @@ public class BeanProduto extends SuperBean {
 	private static final long serialVersionUID = 5793307604069729331L;
 	private EnumCSTICMS[] cstIcms;
 	private EnumUnidadeMedida[] medidas;
-	private EnumSitTributCSTIPI[] cstIpi;
+	private EnumCSTIPI[] cstIpi;
 	private EnumCSTPIS[] cstPis;
 	private EnumOrigemCSTICMS[] origensIcms;
 	private List<Produto> produtos;
@@ -49,11 +50,11 @@ public class BeanProduto extends SuperBean {
 		this.medidas = medidas;
 	}
 
-	public EnumSitTributCSTIPI[] getCstIpi() {
-		return EnumSitTributCSTIPI.values();
+	public EnumCSTIPI[] getCstIpi() {
+		return EnumCSTIPI.values();
 	}
 
-	public void setCstPis(EnumSitTributCSTIPI[] cstPis) {
+	public void setCstPis(EnumCSTIPI[] cstPis) {
 		this.cstIpi = cstPis;
 	}
 

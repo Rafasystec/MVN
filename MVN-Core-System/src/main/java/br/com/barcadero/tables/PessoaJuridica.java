@@ -38,9 +38,9 @@ public class PessoaJuridica extends Pessoa {
 	@Column(name="razao_social",nullable=false,length=60)
 	private String razaoSocial;
 	@Column(name="ie",nullable=false,length=15)
-	private String ie;
+	private String ie = "149626224113";
 	@Column(name="cnpj",nullable=false,length=14)
-	private String cnpj;
+	private String cnpj = "08723218000186";
 	@Column(name="ie_subst_tributaria",nullable=false,length=15)
 	private String ieSubsTributaria;
 	@Column(name="im",nullable=false,length=15)
