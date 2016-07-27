@@ -10,6 +10,7 @@ import br.com.barcadero.core.enums.EnumStatusCFeNota;
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.enums.EnumTipoPessoa;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
+import br.com.barcadero.core.handles.HandleNumericFormat;
 import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSNT;
@@ -139,13 +140,10 @@ public class RuleGenarateCFe {
 		//Identificacao do Emitente do Cupom fiscal
 		//-------------------------------------------------
 		Emit emit = new Emit();
-		//"08723218000186" CNPJ da loja para testes com o TANCA
-		emit.setCNPJ(HandleString.cPFcNPJOnlyNumbers(loja.getPessoaJuridica().getCnpj())); //CNPJ da loja
-		//emit.setIE("149626224113");
+		emit.setCNPJ(HandleString.cPFcNPJOnlyNumbers(loja.getPessoaJuridica().getCnpj()));
 		emit.setIE(getLoja().getPessoaJuridica().getIe());
-		emit.setCRegTribISSQN(getRegimeISSQN(getEmpresa().getRegimeISSQN()));
+		//emit.setCRegTribISSQN(getRegimeISSQN(getEmpresa().getRegimeISSQN()));
 		emit.setIndRatISSQN(getLoja().getIndRatISSQNSAT());
-		//emit.setIM("123456789");
 		emit.setIM(getLoja().getPessoaJuridica().getIm());
 		infCFe.setEmit(emit);
 		//-------------------------------------------------
@@ -178,7 +176,7 @@ public class RuleGenarateCFe {
 			throw new SATException("Erro ao tentar gerar o XML: " + e.getMessage());
 			//fail(e.getMessage());
 		}
-		return xml;
+		return xml.replace("<?xml version=\"1.0\" ?>", "");
 	}
 
 	public Empresa getEmpresa() {
@@ -255,13 +253,18 @@ public class RuleGenarateCFe {
 		}
 		return destinatario;
 	}
-	
+	/**
+	 * 
+	 * @param nota
+	 * @return
+	 */
 	public Entrega getEnderecoEntrega(Nota nota) {
 		Pedido pedido = nota.getPedido();
-		Entrega entrega = new Entrega();
+		Entrega entrega = null;
 		if(pedido != null){
 			Endereco ender = pedido.getEndereco();
 			if(ender != null){
+				entrega = new Entrega();
 				entrega.setXLgr(ender.getLogradouro());
 				entrega.setNro(ender.getNumero());
 				entrega.setXCpl(ender.getComplemento());
@@ -350,16 +353,23 @@ public class RuleGenarateCFe {
 		for (NotaItens item : nota.getItens()) {
 			++numItem;
 			Det det = new Det();
-			String strNumItem = HandleString.zerosLeft(String.valueOf(numItem), 3); 
+			String strNumItem = String.valueOf(numItem);//HandleString.zerosLeft(String.valueOf(numItem), 3); 
 			det.setNItem(strNumItem);
-			det.setInfAdProd(item.getInforAdicionais());
+			String infAdProd = item.getInforAdicionais();
+			if(infAdProd.trim().isEmpty()){
+				det.setInfAdProd(null);
+			}else{
+				det.setInfAdProd(infAdProd);
+			}
+			
 			Prod prod = new Prod();
 			prod.setCProd(String.valueOf(item.getCodigo()));
 			prod.setXProd(item.getDescricao());
-			prod.setNCM(HandleString.parse(item.getProduto().getCdNcm()));
+			prod.setNCM(HandleString.zerosLeft(HandleString.parse(item.getProduto().getCdNcm()),8));
 			prod.setCFOP(HandleString.parse(item.getProduto().getCfop())); // Faixa de 5000
-			prod.setUCom(HandleString.parse(item.getProduto().getUnidade()));
-			prod.setQCom(HandleString.parse(item.getQuantidade())+"0");
+			prod.setUCom(HandleString.parse(item.getProduto().getUnidade()).substring(0, 4));
+			String quantidade = HandleNumericFormat.format(item.getQuantidade(), 4);
+			prod.setQCom(quantidade);
 			prod.setVUnCom(HandleString.parse(item.getVlUnidade()));
 			prod.setIndRegra(EnumIndRegra.ARREDONDAMENTO);
 			det.setProd(prod);
@@ -557,7 +567,8 @@ public class RuleGenarateCFe {
 		for (NotaMeioPgto notaMeioPgto : meiosPgto) {
 			MP mp = new MP();
 			mp.setCMP(getEnumMeioPagamentoSAT(notaMeioPgto.getTipoMeioPgto()));
-			mp.setVMP(HandleString.parse(notaMeioPgto.getValor()));
+			String vMP = HandleNumericFormat.format(HandleString.parse(notaMeioPgto.getValor()), 2);
+			mp.setVMP(vMP);
 			mps.add(mp);
 		}
 		pgto.setMPs(mps);

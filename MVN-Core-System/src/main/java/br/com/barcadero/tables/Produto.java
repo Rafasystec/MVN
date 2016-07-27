@@ -74,7 +74,7 @@ public class Produto extends EntidadeEmpresa {
 	@Column(name="CEST",nullable=false)
 	private int cest = 0;
 	@Column(name="CFOP",nullable=false)
-	private int cfop = 0;
+	private int cfop = 5102;
 	@Column(name="CD_FORNECEDOR",nullable=false)
 	private long cdFornecedor;
 	@Column(name="FATOR",nullable=false)

@@ -46,7 +46,7 @@ import br.com.barcadero.module.sat.xml.util.CNPJ;
 
 public class MainTest {
 	public static void main(String[] args) {
-		new MainTest().gerarXMLSAT();
+		new MainTest().enviarDadosVenda();
 		//decode();
 		//retornoVenda();
 	}
@@ -173,6 +173,16 @@ public class MainTest {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
+		}
+	}
+	
+	public void enviarDadosVenda() {
+		String dadosVenda = "<CFe><infCFe versaoDadosEnt=\"0.06\"><ide><CNPJ>16716114000172</CNPJ><signAC>SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT</signAC><numeroCaixa>003</numeroCaixa></ide><emit><CNPJ>08723218000186</CNPJ><IE>149626224113</IE><IM>123456789</IM><cRegTribISSQN>5</cRegTribISSQN></emit><dest></dest><det nItem=\"1\"><prod><cProd>15</cProd><xProd>PRODUTO 1</xProd><NCM>121544</NCM><CFOP>5102</CFOP><uCom>UNIDADE</uCom><qCom>2.0000</qCom><vUnCom>25.87</vUnCom><indRegra>A</indRegra></prod><imposto><vItem12741>2.50</vItem12741><ICMS><ICMS00><Orig>0</Orig><CST>00</CST><pICMS>5.33</pICMS></ICMS00></ICMS><PIS><PISAliq><CST>01</CST><vBC>51.74</vBC><pPIS>0.6500</pPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>51.74</vBC><pCOFINS>3.0000</pCOFINS></COFINSAliq></COFINS></imposto><infAdProd></infAdProd></det><total><vCFeLei12741>1.05</vCFeLei12741></total><pgto><MP><cMP>01</cMP><vMP>60</vMP></MP></pgto></infCFe></CFe>";
+		try {
+			transmitirTanca(dadosVenda);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
