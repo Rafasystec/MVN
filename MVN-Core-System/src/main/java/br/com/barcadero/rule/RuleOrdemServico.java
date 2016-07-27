@@ -45,5 +45,7 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

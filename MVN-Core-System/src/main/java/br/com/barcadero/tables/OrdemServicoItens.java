@@ -5,12 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import br.com.barcadero.core.util.GlobalNameParam;
+
+@NamedQueries({
+	@NamedQuery(name=OrdemServicoItens.FIND_ALL		,query="FROM OrdemServicoItens WHERE empresa :empresa"),
+	@NamedQuery(name=OrdemServicoItens.FIND_BY_OS	,query="FROM OrdemServicoItens WHERE empresa :empresa AND ordemservico = :ordemservico")
+})
 @Entity
 @Table(name="ORDEM_SERVICO_ITENS")
 public class OrdemServicoItens extends EntidadeLoja {
 
+	public static final String FIND_ALL 	= "OrdemServicoItens.findAll";
+	public static final String FIND_BY_OS 	= "OrdemServicoItens.findByOS";
 	public OrdemServicoItens(Empresa empresa, Loja loja, Usuario usuario) {
 		super(empresa, loja, usuario);
 		
@@ -25,11 +35,11 @@ public class OrdemServicoItens extends EntidadeLoja {
 	private int nrItem;
 	
 	@ManyToOne(fetch=FetchType.LAZY,targetEntity=OrdemServico.class)
-	@JoinColumn(name="cod_os",referencedColumnName="codigo")
+	@JoinColumn(name="ordemservico",referencedColumnName="codigo")
 	private OrdemServico ordemServico;
 	
 	@ManyToOne(fetch=FetchType.LAZY,targetEntity=ProdutoLoja.class)
-	@JoinColumn(name="cod_produto",referencedColumnName="codigo")
+	@JoinColumn(name=GlobalNameParam.PARAM_PRODUTO,referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private ProdutoLoja produto;
 	
 	public String getDescricao() {

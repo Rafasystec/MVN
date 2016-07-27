@@ -14,42 +14,42 @@
 	<ui:define name="body">
 		<p:panel header="Ações">
 			<h:panelGrid columns="5">
-				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario"  actionListener="#{beanOrdemServico.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 				</p:commandButton>
-				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="true">
+				<p:commandButton value="Fechar O.S" action="#{beanOrdemServico.fecharOS}" alt="A ordem de serviço será fechada" ajax="true">
 					<f:ajax render="@form" resetValues="true"/>
 				</p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="Pedido de venda">
-			<p:hotkey bind="return" update="produtos" actionListener="#{beanPedidoVenda.salvarItem}">
+			<p:hotkey bind="return" update="produtos" actionListener="#{beanOrdemServico.salvarItem}">
 			</p:hotkey>
 			<div class="fontValue">
-				<p:outputLabel id="blbVlUnitario" styleClass="fontValue" value="#{beanPedidoVenda.vlUnitario}">
+				<p:outputLabel id="blbVlUnitario" styleClass="fontValue" value="#{beanOrdemServico.vlUnitario}">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</p:outputLabel>
 			</div>
 			<div class="fontSubTotal">
-				<p:outputLabel id="blbSubVlTotal" styleClass="fontSubTotal" value="#{beanPedidoVenda.vlSubTotal}">
+				<p:outputLabel id="blbSubVlTotal" styleClass="fontSubTotal" value="#{beanOrdemServico.vlSubTotal}">
 					<f:convertNumber type="currency" currencySymbol="R$" />
 				</p:outputLabel>
 			</div>
 			<div class="div-main-venda">
 				<div>
 					<p:panelGrid columns="3" styleClass="noBorder" style="background-color: #F5F5F5">
-						<clx:productSearch  id="cboProduto" value="#{beanPedidoVenda.strProduto}"/>
+						<clx:productSearch  id="cboProduto" value="#{beanOrdemServico.strProduto}"/>
 						<p:outputLabel value="Quantidade:" for="qtde"/>
-						<p:inputText id="qtde" value="#{beanPedidoVenda.item.quantidade}" maxlength="10" size="8"> 
-							<f:convertNumber type="number" integerOnly="true" pattern="#0"/>
+						<p:inputText id="qtde" value="#{beanOrdemServico.item.quantidade}" maxlength="10" size="8"> 
+							<f:convertNumber type="number" pattern="#0"/>
 						</p:inputText>
 					</p:panelGrid>
 				</div>
 			</div>
 			<div class="div-baixo" id="embaixo">
-				<p:outputLabel id="lblProdutoExibir" styleClass="font-produto" value="#{beanPedidoVenda.lastProduto}"/>
+				<p:outputLabel id="lblProdutoExibir" styleClass="font-produto" value="#{beanOrdemServico.lastProduto}"/>
 			</div>
 			<div class="divProdutos">
-				<p:dataTable id="produtos" var="item" value="#{beanPedidoVenda.itens}" resizableColumns="false" 
+				<p:dataTable id="produtos" var="item" value="#{beanOrdemServico.itens}" resizableColumns="false" 
 					  rowKey="#{item.codigo}" style="max-width: 100%;border: none" scrollable="true" scrollHeight="150">	
 						<p:column headerText="Cód." style="width: 25px">
 							<h:outputText value="#{item.codigo}" />

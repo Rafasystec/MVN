@@ -1,11 +1,13 @@
 package br.com.barcadero.web.beans;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.barcadero.rule.RuleOrdemServico;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
 
@@ -18,6 +20,11 @@ public class BeanOrdemServico extends SuperBean {
 	private List<OrdemServicoItens> itens;
 	private OrdemServicoItens item;
 	private RuleOrdemServico ruleOrdemServico;
+	private Caixa caixa;
+	private BigDecimal vlSubTotal = new BigDecimal(0.00);
+	private BigDecimal vlUnitario = new BigDecimal(0.00);
+	private String strProduto;
+	private String lastProduto;
 	
 	public BeanOrdemServico() {
 		ruleOrdemServico = new RuleOrdemServico(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
@@ -63,11 +70,69 @@ public class BeanOrdemServico extends SuperBean {
 	}
 
 	public List<OrdemServicoItens> getItens() {
+		
 		return itens;
 	}
 
 	public void setItens(List<OrdemServicoItens> itens) {
 		this.itens = itens;
+	}
+	
+	public String fecharOS() {
+		
+		return null;
+	}
+	
+	public void salvarItem() {
+		
+	}
+
+	public OrdemServicoItens getItem() {
+		return item;
+	}
+
+	public void setItem(OrdemServicoItens item) {
+		this.item = item;
+	}
+
+	public Caixa getCaixa() {
+		return caixa;
+	}
+
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
+	}
+
+	public BigDecimal getVlSubTotal() {
+		return vlSubTotal;
+	}
+
+	public void setVlSubTotal(BigDecimal vlSubTotal) {
+		this.vlSubTotal = vlSubTotal;
+	}
+
+	public BigDecimal getVlUnitario() {
+		return vlUnitario;
+	}
+
+	public void setVlUnitario(BigDecimal vlUnitario) {
+		this.vlUnitario = vlUnitario;
+	}
+
+	public String getStrProduto() {
+		return strProduto;
+	}
+
+	public void setStrProduto(String strProduto) {
+		this.strProduto = strProduto;
+	}
+
+	public String getLastProduto() {
+		return lastProduto;
+	}
+
+	public void setLastProduto(String lastProduto) {
+		this.lastProduto = lastProduto;
 	}
 
 }
