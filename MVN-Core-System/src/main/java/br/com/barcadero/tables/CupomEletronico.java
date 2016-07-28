@@ -1,11 +1,14 @@
 package br.com.barcadero.tables;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="CUPOM_ELETRONICO")
@@ -21,13 +24,13 @@ public class CupomEletronico extends SuperClassNota {
 		// TODO Auto-generated constructor stub
 	}
 	@Column(name="CHV_ACESSO", nullable=false)
-	private String chvAcesso;
+	private String chvAcesso = "";
 	@Column(name="NR_EXTATO", nullable=false)
-	private long nrExtrato;
+	private long nrExtrato = 0L;
 	@Column(name="NR_SERIE_EQUIPAMENTO", nullable=false)
-	private String nrSerieEquipamento;
-	@Column(name="XML_BASE_64", nullable=false)
-	private String xmlBase64;
+	private String nrSerieEquipamento = "";
+	@Column(name="XML_BASE_64", nullable=false, length=10000)
+	private String xmlBase64 = "";
 	@Column(name="DT_EMISSAO", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dtEmissao = new Date();
@@ -35,23 +38,27 @@ public class CupomEletronico extends SuperClassNota {
 	@Temporal(TemporalType.TIME)
 	private Date hrEmissao = new Date();
 	@Column(name="MENSAGEM", nullable=false)
-	private String mensagem;
+	private String mensagem = "";
 	@Column(name="MENSAGEM_CANCEL", nullable=false)
-	private String mensagemCancel;
+	private String mensagemCancel = "";
 	@Column(name="NR_SESSAO_SAT", nullable=false)
-	private String nrSessaoSat;
+	private String nrSessaoSat = "";
 	@Column(name="NR_SESSAO_SAT_CANCEL", nullable=false)
-	private String nrSessaoSatCancel;
+	private String nrSessaoSatCancel = "";
 	@Column(name="CHV_ACESSO_CANCEL", nullable=false)
-	private String chvAcessoCancel;
+	private String chvAcessoCancel = "";
 	@Column(name="MSG_SEFAZ", nullable=false)
-	private String msgSefaz;
+	private String msgSefaz = "";
 	@Column(name="COD_SEFAZ", nullable=false)
-	private int codSefaz;
+	private int codSefaz = 0;
 	@Column(name="COD_RET_MODULO", nullable=false)
-	private int codRetModulo;
-	@Column(name="inf_adicionais", nullable=false)
+	private int codRetModulo = 0;
+	@Column(name="INF_ADICIONAIS", nullable=false)
 	private String infAdicionais="";
+	@Column(name="VL_TOTAL_CFE")
+	private BigDecimal valorTotal = new BigDecimal(0.00);
+	@Column(name="ASSINATURA_QRCODE", length=10000)
+	private String assinaturaQRCode = "";
 	
 	public String getChvAcesso() {
 		return chvAcesso;
@@ -137,5 +144,23 @@ public class CupomEletronico extends SuperClassNota {
 	}
 	public void setInfAdicionais(String infAdicionais) {
 		this.infAdicionais = infAdicionais;
+	}
+	public Date getHrEmissao() {
+		return hrEmissao;
+	}
+	public void setHrEmissao(Date hrEmissao) {
+		this.hrEmissao = hrEmissao;
+	}
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	public String getAssinaturaQRCode() {
+		return assinaturaQRCode;
+	}
+	public void setAssinaturaQRCode(String assinaturaQRCode) {
+		this.assinaturaQRCode = assinaturaQRCode;
 	}	
 }

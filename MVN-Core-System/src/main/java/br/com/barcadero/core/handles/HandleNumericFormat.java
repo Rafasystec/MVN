@@ -54,5 +54,48 @@ public class HandleNumericFormat {
 		
 		return format(doubleValue, zerosPosPonto);
 	}
+	/**
+	 * Converte uma String numerica em inteiro
+	 * @param value
+	 * @return
+	 */
+	public static int parseInt(String value) {
+		int result = 0;
+		try {
+			return Integer.parseInt(value);
+		} catch (Exception e) {
+			result = 0;
+		}
+		return result;
+	}
+	
+	/**
+	 * Tranforma uma String numerica em long
+	 * @param value
+	 * @return
+	 */
+	public static long parseLong(String value) {
+		long result = 0L;
+		try {
+			return Long.parseLong(value);
+		} catch (Exception e) {
+			result = 0L;
+		}
+		return result;
+	}
+	/**
+	 * Transforma String numerica em BigDecimal
+	 * @param value
+	 * @return
+	 */
+	public static BigDecimal parseBigDecimal(String value) {
+		BigDecimal result = null;
+		try {
+			result = new BigDecimal(value);
+		} catch (Exception e) {
+			result = new BigDecimal(0.00);
+		}
+		return result;
+	}
 
 }

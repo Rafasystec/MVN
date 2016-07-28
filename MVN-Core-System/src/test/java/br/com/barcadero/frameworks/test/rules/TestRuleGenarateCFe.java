@@ -6,7 +6,7 @@ import br.com.barcadero.rule.RuleGenarateCFe;
 public class TestRuleGenarateCFe extends TesteSuperClass{
 	
 	public void gerarXML() {
-		RuleGenarateCFe cfe = new RuleGenarateCFe(null, null, null);
+		RuleGenarateCFe cfe = new RuleGenarateCFe(null, null, null, null);
 	}
 
 }

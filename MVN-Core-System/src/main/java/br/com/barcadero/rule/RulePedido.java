@@ -25,11 +25,13 @@ public class RulePedido extends RuleModelo<Pedido> {
 	private RuleCaixa ruleCaixa;
 	private DaoPedido daoPedido;
 	private RuleNota ruleNota;
-	public RulePedido(Empresa empresa, Loja loja, Session session) {
+	private RuleGenarateCFe ruleGenarateCFe;
+	public RulePedido(Empresa empresa, Loja loja, Session session, Caixa caixa) {
 		super(empresa, loja, session);
-		ruleCaixa = new RuleCaixa(empresa, loja, session);
-		daoPedido = new DaoPedido(empresa, loja, session);
-		ruleNota  = new RuleNota(empresa, loja, session);
+		ruleCaixa       = new RuleCaixa(empresa, loja, session);
+		daoPedido       = new DaoPedido(empresa, loja, session);
+		ruleNota        = new RuleNota(empresa, loja, session);
+		ruleGenarateCFe = new RuleGenarateCFe(empresa, loja, caixa, session);
 	}
 
 	@Override
@@ -132,7 +134,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 					return "CT-e ainda não suportado";
 				case MOD_59:
 					//Venda com SAT ou MF-e
-					return executarSAT(nota, usuario);
+					return ruleGenarateCFe.executarVendaSAT(nota, usuario);
 				case MOD_65:
 					//NFC-e
 					return "NFC-e ainda não implementado.";
@@ -150,26 +152,6 @@ public class RulePedido extends RuleModelo<Pedido> {
 		}else{
 			return "Nenhum produto para ser FATURADO.";
 		}
-	}
-	/**
-	 * Executar o comando de venda do SAT
-	 * @param nota
-	 * @param usuario
-	 * @return
-	 * @throws SATException
-	 * @throws Exception
-	 */
-	private String executarSAT(Nota nota, Usuario usuario) throws SATException, Exception {
-		RuleGenarateCFe ruleCFe = new RuleGenarateCFe(getEmpresa(), getLoja(),nota.getCaixa());
-		CFeResult cfeResult = ruleCFe.execute(nota, usuario);
-		if(cfeResult.getCodeExecution() == RuleGenarateCFe.CODE_STATUS_OK){
-			//Depois tratar para salvar na tabela e apresentar Mensagem melhor
-			return "Venda OK: >>> " + cfeResult.getCodeExecution();
-			
-		}else{
-			return "Erro: " + cfeResult.getCodeExecution() + " - " + cfeResult.getDescription() ;
-		}
-		
 	}
 
 	/**

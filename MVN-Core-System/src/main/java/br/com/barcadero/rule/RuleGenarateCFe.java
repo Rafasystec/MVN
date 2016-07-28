@@ -3,6 +3,9 @@ package br.com.barcadero.rule;
 //import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Session;
+
 import br.com.barcadero.commons.util.HandleString;
 import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.core.enums.EnumRegimeISSQN;
@@ -12,6 +15,7 @@ import br.com.barcadero.core.enums.EnumTipoPessoa;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 import br.com.barcadero.core.handles.HandleNumericFormat;
 import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
+import br.com.barcadero.module.sat.enums.EnumCFeTipoFuncao;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSNT;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSOutr;
@@ -24,6 +28,8 @@ import br.com.barcadero.module.sat.enums.EnumOrigICMS;
 import br.com.barcadero.module.sat.enums.EnumRegimeTributarioISSQN;
 import br.com.barcadero.module.sat.enums.EnumUF;
 import br.com.barcadero.module.sat.exceptions.SATException;
+import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
+import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.xml.envio.CFe;
 import br.com.barcadero.module.sat.xml.envio.COFINS;
 import br.com.barcadero.module.sat.xml.envio.COFINSAliq;
@@ -55,6 +61,7 @@ import br.com.barcadero.module.sat.xml.envio.Prod;
 import br.com.barcadero.module.sat.xml.envio.Total;
 import br.com.barcadero.module.sat.xml.util.CNPJ;
 import br.com.barcadero.module.sat.xml.util.CPF;
+import br.com.barcadero.rule.RuleGenarateCFe.CFeResult;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
@@ -73,19 +80,24 @@ public class RuleGenarateCFe {
 	public static final int CODE_STATUS_OK 			= 0;
 	private Empresa empresa = null;
 	private RuleCFeComandos ruleCFeComandos			= null;
-	private Loja loja = null;
-	
+	private RuleCupomEletronico ruleCupomEletronico = null;
+	private RuleGenarateCFe ruleGenarateCFe			= null;
+	private Loja loja 		= null;
+	private Session session = null;
 	public static void main(String[] args) {
 		EnumUnidadeMedida enumMedido = EnumUnidadeMedida.UNIDADE;
 		String unidade = String.valueOf(enumMedido);
 		System.out.println(unidade);
 	}
 	
-	public RuleGenarateCFe(Empresa empresa, Loja loja, Caixa caixa) {
+	public RuleGenarateCFe(Empresa empresa, Loja loja, Caixa caixa, Session session) {
 		// TODO Auto-generated constructor stub
+		setSession(session);
 		setEmpresa(empresa);
 		setLoja(loja);
-		ruleCFeComandos = new RuleCFeComandos(caixa);
+		ruleCFeComandos 	= new RuleCFeComandos(caixa);
+		ruleCupomEletronico = new RuleCupomEletronico(empresa, loja, session);
+		//ruleGenarateCFe		= new RuleGenarateCFe(empresa, loja, caixa, session);
 	}
 	/**
 	 * 
@@ -103,7 +115,7 @@ public class RuleGenarateCFe {
 				String result 	= ruleCFeComandos.enviarDadosVenda(nota.getCaixa().getCodAtivCfe(), xml);
 				System.out.println("Resultado >>>> " + result);
 				cfeResult.setCodeExecution(CODE_STATUS_OK);
-				cfeResult.setDescription(result);
+				cfeResult.setDescription(tratarRetorno(EnumCFeTipoFuncao.CFE_ENVIAR_DADOS_VENDA, result, usuario));
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
 				cfeResult.setDescription("Staus permitido para emitir CF-e : " + EnumStatusCFeNota.XML_NAO_GERADO + " ou " + EnumStatusCFeNota.REJEITADO + " mas veio " + nota.getStatusCFe());
@@ -596,5 +608,107 @@ public class RuleGenarateCFe {
 			return EnumMeioPagamento.OUTROS;
 		}
 	}
+	/**
+	 * Tratar os retornos do modulo, aqui as tabelas relacionadas com o processo serao gravadas.
+	 * @param type
+	 * @param retorno
+	 * @throws SATException
+	 * @throws Exception
+	 */
+	private String tratarRetorno(EnumCFeTipoFuncao type,String retorno, Usuario usuario) throws SATException, Exception {
+		HandleRetornoSAT retSAT = null;
+		String result			= "";
+		switch (type) {
+		case CFE_ATIVA_SAT:
+			
+			break;
+		case CFE_ASSOCIAR_ASSINATURA:
+			
+			break;
+		case CFE_ATUALIZAR_SOFTWARE_SAT:
+			
+			break;
+		case CFE_BLOQUEAR_SAT :
+			
+			break;
+		case CFE_CANCELAR_ULTIMA_VENDA:
+			
+			break;
+		case CFE_CONSULTAR_NUMERO_SESSAO:
+			
+			break;
+		case CFE_CONSULTAR_SAT:
+			
+			break;
+		case CFE_CONSULTAR_STATUS_OPERACIONAL:
+			
+			break;
+		case CFE_DESBLOQUEAR_SAT:
+			
+			break;
+		case CFE_ENVIAR_DADOS_VENDA:
+			result = tratarRetornoVenda(retorno, usuario);
+			break;
+		case CFE_EXTRAIR_LOGS:
+			
+			break;
+		case CFE_TESTE_FIM_A_FIM:
+			
+			break;
+		case CFE_TROCAR_CODIGO_DE_ATIVACAO:
+			
+			break;
+
+		default:
+			break;
+		}
+		return result;
+	}
+	/**
+	 * 
+	 * @param retorno
+	 * @param usuario 
+	 * @throws SATException
+	 * @throws Exception
+	 */
+	private String tratarRetornoVenda(String retorno, Usuario usuario) throws SATException, Exception {
+		HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(retorno);
+		if(retornoSAT.getCodigoRetorno1().trim().equals("06000")){
+			//------------------------------------------------
+			//OK venda realizada com sucesso
+			//------------------------------------------------
+			ruleCupomEletronico.insert(retornoSAT, usuario);
+			return RuleCFeUtil.getMessage(retornoSAT);
+		}else{
+			throw new SATException("Não foi possível realizar a venda.");
+		}
+	}
 	
+	
+	/**
+	 * Executar o comando de venda do SAT
+	 * @param nota
+	 * @param usuario
+	 * @return
+	 * @throws SATException
+	 * @throws Exception
+	 */
+	public String executarVendaSAT(Nota nota, Usuario usuario ) throws SATException, Exception {
+		//RuleGenarateCFe ruleCFe = new RuleGenarateCFe(getEmpresa(), getLoja(),nota.getCaixa(),getSession());
+		CFeResult cfeResult = execute(nota, usuario);
+		if(cfeResult.getCodeExecution() == RuleGenarateCFe.CODE_STATUS_OK){
+			return cfeResult.getDescription();
+		}else{
+			return "Erro: " + cfeResult.getCodeExecution() + " - " + cfeResult.getDescription() ;
+		}
+	}
+
+	public Session getSession() {
+		return session;
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
 }

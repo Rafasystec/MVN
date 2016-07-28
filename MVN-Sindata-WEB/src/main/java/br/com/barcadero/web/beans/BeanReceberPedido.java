@@ -27,7 +27,7 @@ public class BeanReceberPedido extends SuperBean {
 
 	
 	public BeanReceberPedido() {
-		rulePedido 		= new RulePedido(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		rulePedido 		= new RulePedido(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(),getCaixaVenda());
 		formasPagamento = new FormasPagamento();
 	}
 	
@@ -80,8 +80,9 @@ public class BeanReceberPedido extends SuperBean {
 	public void faturarPedido() {
 		try {
 			if(selectedPedido != null){
-				rulePedido.faturarPedido(selectedPedido, formasPagamento, getUsuarioLogado());
+				String result = rulePedido.faturarPedido(selectedPedido, formasPagamento, getUsuarioLogado());
 				HandleMessage.info("Pedido faturado com sucesso!","Pronto para o próximo");
+				HandleMessage.warn("ATENÇÃO: ", result);
 			}else{
 				HandleMessage.error("Selecione um pedido na grid","");
 			}

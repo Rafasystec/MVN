@@ -20,7 +20,7 @@ public class TestRulePedido extends TesteSuperClass{
 	
 	@BeforeClass
 	public static void init() {
-		rulePedido = new RulePedido(null, null, null);
+		rulePedido = new RulePedido(null, null, null,null);
 	}
 	
 	@Test

@@ -51,7 +51,7 @@ public class BeanPedidoVenda extends SuperBean{
 		session 		= getDBSessionForViewScope();
 		rulePedidoItens = new RulePedidoItens(getEmpresaLogada(), getLojaLogada(), session);
 		ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
-		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session);
+		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session, getCaixaVenda());
 		item			= createItem();
 		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 		caixa			= obterCaixaDeVenda();
