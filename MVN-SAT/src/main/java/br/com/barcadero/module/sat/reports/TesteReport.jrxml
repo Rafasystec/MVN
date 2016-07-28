@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TesteReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from nota]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long"/>
+	<field name="dt_cadastro" class="java.sql.Date"/>
+	<field name="hr_cadastro" class="java.sql.Time"/>
+	<field name="dt_emissao" class="java.sql.Date"/>
+	<field name="fl_faturado" class="java.lang.String"/>
+	<field name="hr_emissao" class="java.sql.Time"/>
+	<field name="inf_adicionais" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.String"/>
+	<field name="natureza_operacao" class="java.lang.String"/>
+	<field name="nr_ped" class="java.lang.Long"/>
+	<field name="pc_acres_nota" class="java.math.BigDecimal"/>
+	<field name="pc_desc_nota" class="java.math.BigDecimal"/>
+	<field name="serie_nota" class="java.lang.String"/>
+	<field name="status_cfe" class="java.lang.Integer"/>
+	<field name="tp_imposto_icms" class="java.lang.String"/>
+	<field name="versao_xml_cfe" class="java.lang.Integer"/>
+	<field name="vl_acres_nota" class="java.math.BigDecimal"/>
+	<field name="vl_desc_nota" class="java.math.BigDecimal"/>
+	<field name="vl_tot_tributos" class="java.math.BigDecimal"/>
+	<field name="cd_user" class="java.lang.Long"/>
+	<field name="empresa" class="java.lang.Long"/>
+	<field name="loja" class="java.lang.Long"/>
+	<field name="caixa" class="java.lang.Long"/>
+	<field name="cliente" class="java.lang.Long"/>
+	<field name="pedido" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="12" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="22" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[dt_cadastro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[modelo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="12" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dt_cadastro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="18" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="18" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

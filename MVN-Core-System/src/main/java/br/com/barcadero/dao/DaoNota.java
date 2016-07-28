@@ -28,8 +28,8 @@ public final class DaoNota extends DaoModelo<Nota> {
 
 	@Override
 	public List<Nota> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Query qry = getSession().getNamedQuery(Nota.FIND_ALL);
+		return qry.list();
 	}
 	
 	/**

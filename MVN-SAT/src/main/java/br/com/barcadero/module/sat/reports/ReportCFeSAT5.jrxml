@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelCFeSAT5" language="groovy" pageWidth="156" pageHeight="850" columnWidth="139" leftMargin="0" rightMargin="17" topMargin="14" bottomMargin="14">
 	<property name="ireport.zoom" value="2.9282000000000084"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{PATH} + "/WEB-INF/classes/"]]></defaultValueExpression>
 	</parameter>
@@ -16,6 +16,7 @@
 		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
 	</parameter>
 	<parameter name="OBS_FISCO" class="java.lang.String"/>
+	<parameter name="NOTA" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[select
 
@@ -116,58 +117,9 @@ where DNOTA.CD_EMP    = 'FV'
   --and DNOTA.SR_DOCF   = ?(srDocf)
   and DNOTA.CD_CRED   = '']]>
 	</queryString>
-	<field name="versaoDadosEnt_infCFe" class="java.lang.String"/>
-	<field name="CNPJ_ide" class="java.lang.String"/>
-	<field name="signAC_ide" class="java.lang.String"/>
-	<field name="numeroCaixa_ide" class="java.lang.Short"/>
-	<field name="razao_emit" class="java.lang.String"/>
-	<field name="fantasia_emit" class="java.lang.String"/>
-	<field name="tipoLogradouro_emit" class="java.lang.String"/>
-	<field name="endereco_emit" class="java.lang.String"/>
-	<field name="dddTelefone_emit" class="java.lang.Short"/>
-	<field name="numTelefone_emit" class="java.lang.Integer"/>
-	<field name="cep_emit" class="java.lang.Integer"/>
-	<field name="numEnd_emit" class="java.lang.Integer"/>
-	<field name="complEnd_emit" class="java.lang.String"/>
-	<field name="bairro_emit" class="java.lang.String"/>
-	<field name="cidade_emit" class="java.lang.String"/>
-	<field name="uf_emit" class="java.lang.String"/>
-	<field name="codigoCfe" class="java.math.BigDecimal"/>
-	<field name="dataEmissaoCfe" class="java.lang.Integer"/>
-	<field name="horaEmissaoCfe" class="java.lang.Integer"/>
-	<field name="dataCancCfe" class="java.lang.Integer"/>
-	<field name="horaCancCfe" class="java.lang.Integer"/>
-	<field name="numSatCfe" class="java.math.BigDecimal"/>
-	<field name="chaveAcesso" class="java.lang.String"/>
-	<field name="CNPJ_emit" class="java.lang.String"/>
-	<field name="IE_emit" class="java.lang.String"/>
-	<field name="IM_emit" class="java.lang.String"/>
-	<field name="cRegTribISSQN_emit" class="java.lang.String"/>
-	<field name="indRatISSQN_emit" class="java.lang.String"/>
-	<field name="CNPJ_dest" class="java.lang.String"/>
-	<field name="CPF_dest" class="java.lang.String"/>
-	<field name="xNome_dest" class="java.lang.String"/>
-	<field name="xLgr_entrega" class="java.lang.String"/>
-	<field name="nro_entrega" class="java.lang.String"/>
-	<field name="xCpl_entrega" class="java.lang.String"/>
-	<field name="xBairro_entrega" class="java.lang.String"/>
-	<field name="xMun_entrega" class="java.lang.String"/>
-	<field name="UF_entrega" class="java.lang.String"/>
-	<field name="vCfeLei12741_total" class="java.math.BigDecimal"/>
-	<field name="vDescSubtot_total" class="java.math.BigDecimal"/>
-	<field name="vAcresSubtot_total" class="java.math.BigDecimal"/>
-	<field name="flagHomologacao" class="java.lang.String"/>
-	<field name="tpLgrEntrega" class="java.lang.String"/>
-	<field name="dsLgrEntrega" class="java.lang.String"/>
-	<field name="nroEntrega" class="java.lang.String"/>
-	<field name="cplEntrega" class="java.lang.String"/>
-	<field name="bairroEntrega" class="java.lang.String"/>
-	<field name="munEntrega" class="java.lang.String"/>
-	<field name="ufEntrega" class="java.lang.String"/>
-	<field name="isEntrega" class="java.lang.Number"/>
-	<field name="vDescontosItens" class="java.math.BigDecimal"/>
-	<field name="pntReferencia" class="java.lang.String"/>
-	<field name="flagExtratoResumido" class="java.lang.String"/>
+	<field name="ValorTotal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<variable name="ENDERECO_EMIT" class="java.lang.String">
 		<initialValueExpression><![CDATA[( ( $F{tipoLogradouro_emit} != null && !$F{tipoLogradouro_emit}.trim().isEmpty() ) ? $F{tipoLogradouro_emit}.trim() + ". " : "")
 + ( ( $F{endereco_emit} != null && !$F{endereco_emit}.trim().isEmpty() ) ? $F{endereco_emit}.trim() : "")
@@ -237,6 +189,9 @@ where DNOTA.CD_EMP    = 'FV'
   +"."+$V{NUM_SAT}.substring(6,9)
 : ""]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="NOTA" class="br.com.barcadero.tables.Nota">
+		<variableExpression><![CDATA[$P{NOTA}]]></variableExpression>
 	</variable>
 	<group name="CPF_CNPJ_CONS">
 		<groupHeader>

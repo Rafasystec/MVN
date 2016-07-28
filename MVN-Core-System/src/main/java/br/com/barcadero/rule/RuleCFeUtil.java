@@ -1,6 +1,9 @@
 package br.com.barcadero.rule;
 
+import java.util.HashMap;
+
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
+import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
 /**
  * Utilidade para o CF-e
  * @author Rafael Rocha
@@ -29,6 +32,21 @@ public class RuleCFeUtil {
 		}else{
 			return "Retorno do SAT veio com valor nulo.";
 		}
+	}
+	
+	public static void imprimir() {
+		//Definiri o Tamanho do PAPEL via parametro
+		HashMap<String, Object> parametersJasper 	= null;
+		String jasperReport = "";
+		//JRAbstractBeanDataSource
+		parametersJasper = new HashMap<String, Object>();
+		parametersJasper.put("OBS_FISCO"		, "");
+		parametersJasper.put("DADOS_ADICIONAIS"	, "");
+		parametersJasper.put("SUBREPORT_ITENS"	, "");
+		parametersJasper.put("SUBREPORT_MEIOS"	, "");
+		parametersJasper.put("PATH"				, "");							
+		parametersJasper.put("QR_CODE"			, "");	
+		parametersJasper.put("USA_LOGO"			, "");
 	}
 
 }

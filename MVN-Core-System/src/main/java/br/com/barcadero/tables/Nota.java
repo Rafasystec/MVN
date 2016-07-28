@@ -33,9 +33,10 @@ import br.com.barcadero.module.sat.enums.EnumCFeXMLVersion;
  * @since 2015
  */
 
-@NamedQueries(
-		@NamedQuery(name=Nota.FIND_BY_CODE,query="FROM Nota WHERE empresa = :empresa AND loja = :loja AND codigo = :codigo")
-)
+@NamedQueries({
+		@NamedQuery(name=Nota.FIND_BY_CODE,query="FROM Nota WHERE empresa = :empresa AND loja = :loja AND codigo = :codigo"),
+		@NamedQuery(name=Nota.FIND_ALL,query="FROM Nota")
+})
 
 @Entity 
 @Table(name="NOTA")
@@ -51,6 +52,7 @@ public final class Nota extends EntidadeLoja {
 		// TODO Auto-generated constructor stub
 	}
 	public static final String FIND_BY_CODE = "Nota.findByCode";
+	public static final String FIND_ALL 	= "Nota.findAll";
 	
 	@Column(name="DT_EMISSAO", nullable=false)
 	@Temporal(TemporalType.DATE)
