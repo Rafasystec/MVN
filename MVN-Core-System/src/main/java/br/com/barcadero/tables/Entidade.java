@@ -48,15 +48,15 @@ public abstract class Entidade implements Serializable {
 	TemporalType.TIMESTAMP (Padrão): Armazena a data e o horário.
 	------------------------------------------------------------------------------------------------- 
 	 */
-	@Column(name="DT_CADASTRO",nullable=false)
+	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dtCadastro = new Date();
-	@Column(name="HR_CADASTRO",nullable=false)
+	@Column(nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date hrCadastro = new Date();
 	
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
-	@JoinColumn(name="cd_user",referencedColumnName="codigo")
+	@JoinColumn(name="usuario",referencedColumnName="codigo")
 	private Usuario usuario;
 	
 	public Date getDtCadastro() {

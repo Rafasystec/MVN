@@ -31,45 +31,45 @@ public class NotaEletronica extends EntidadeLoja {
 		super(loja, usuario);
 		// TODO Auto-generated constructor stub
 	}
-	@Column(name="CHV_ACESSO", nullable=false)
+	@Column(nullable=false)
 	private String chvAcesso;
-	@Column(name="XML_BASE_64", nullable=false)
+	@Column(nullable=false)
 	private String xmlBase64;
-	@Column(name="PROTOC_AUTORIZ", nullable=false)
+	@Column(nullable=false)
 	private String protocAutoriz;
-	@Column(name="LOTE_ENV", nullable=false)
+	@Column(nullable=false)
 	private String loteEnv;
-	@Column(name="ID_DESTINO", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeIdDestino idDestino = EnumNFeIdDestino.INDEFINIDO;
-	@Column(name="TP_IMP_DANFE", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeTpDANFE tpImpDanfe;
-	@Column(name="TP_EMISSAO", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeTpEmissao tpEmissao;
-	@Column(name="TP_NOTA_FISCAL")
+	@Column
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeTipoNota tpNotaFiscal = EnumNFeTipoNota.SAIDA;
-	@Column(name="DG_CHV_ACESSO", nullable=false)
+	@Column(nullable=false)
 	private int dgChvAcesso;
-	@Column(name="TP_AMBIENTE", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeTpAmbiente tpAmbiente;
-	@Column(name="FINALIDADE", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeFinalidadeEmissao finalidade;
-	@Column(name="IND_PRESENCA_COMPR", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumNFeIndPresencaComprador indPresenCompr;
-	@Column(name="TP_PROC_EMIT", nullable=false)
+	@Column(nullable=false)
 	@Enumerated
 	private EnumNFeTpProcessoEmissao tpProcEmit;
-	@Column(name="VERSAO_APP", nullable=false)
+	@Column(nullable=false)
 	private String versaoApp;
-	@Column(name="DT_HR_CONTINGENCIA", nullable=false)
+	@Column(nullable=false)
 	private Date dtHrContingencia;
-	@Column(name="JUST_CONTINGENCIA", nullable=false)
+	@Column(nullable=false)
 	private String justContingencia;
 
 	public String getChvAcesso() {

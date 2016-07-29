@@ -48,51 +48,51 @@ public class NotaItens extends SuperClassNota {
 	public static final String FIND_BY_CODE_NOTA = "NotaItens.findByCodeNota";
 	public static final String PARAM_COD_NOTA    = "nota";
 	
-	@Column(name="QUANTIDADE", nullable=false,precision=20,scale=3)
+	@Column(nullable=false,precision=20,scale=3)
 	private float quantidade;
-	@Column(name="PC_DESC", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal pcDesc = new BigDecimal(0D);
-	@Column(name="VL_DESC", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal vlDesc = new BigDecimal(0D);
-	@Column(name="VL_TOTAL", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal vlTotal = new BigDecimal(0.00);
-	@Column(name="FL_CANCELADO", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumItemCancelado flCancelado = EnumItemCancelado.N;
-	@Column(name="VL_TOT_FRETE", nullable=false)
+	@Column
 	private BigDecimal vlTotFrete = new BigDecimal(0);;
-	@Column(name="VL_TOT_SEGURO", nullable=false)
+	@Column
 	private BigDecimal vlTotSeguro = new BigDecimal(0);
-	@Column(name="FL_COMPOE_TOT_NOTA", nullable=false)
+	@Column
 	@Enumerated(EnumType.STRING)
 	private EnumCompeTotalNota flCompoeTotNota = EnumCompeTotalNota.N;
-	@Column(name="NR_ITEM", nullable=false)
+	@Column
 	private int nrItem 			 = 0;
-	@Column(name="CD_PROD", nullable=false)
+	@Column
 	private String cdProd 		 = "00000000000000";
-	@Column(name="DESCRICAO", nullable=false)
+	@Column
 	private String descricao 	 = "";
-	@Column(name="VL_UNIDADE", nullable=false)
+	@Column
 	private BigDecimal vlUnidade = new BigDecimal(0.00);
-	@Column(name="INFOR_ADICIONAIS", nullable=true)
+	@Column
 	private String inforAdicionais = "";
-	@Column(name="CST_IPI", length=50)
+	@Column
 	@Enumerated(EnumType.STRING)
 	private EnumCSTIPI cstIPI;
-	@Column(name="CST_PIS", length=4)
+	@Column
 	@Enumerated(EnumType.STRING)
 	private EnumCSTPIS cstPIS;
-	@Column(name="CST_COFINS", length=4)
+	@Column
 	@Enumerated(EnumType.STRING)
 	private EnumCSTCOFINS cstCOFINS;
-	@Column(name="CST_ICMS", length=4)
+	@Column
 	@Enumerated(EnumType.STRING)
 	private EnumCSTICMS cstICMS;
-	@Column(name="ICMS")
+	@Column
 	private BigDecimal icms = new BigDecimal(0.00);
-	@Column(name="PIS",precision=20, scale=4)
+	@Column(precision=20, scale=4)
 	private float pis = 0.0000f;
-	@Column(name="COFINS",precision=20, scale=4)
+	@Column(precision=20, scale=4)
 	private float cofins = 0.0000f;
 	
 	

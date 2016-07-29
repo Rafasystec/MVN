@@ -54,34 +54,34 @@ public final class Nota extends EntidadeLoja {
 	public static final String FIND_BY_CODE = "Nota.findByCode";
 	public static final String FIND_ALL 	= "Nota.findAll";
 	
-	@Column(name="DT_EMISSAO", nullable=false)
+	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dtEmissao = new Date();
-	@Column(name="HR_EMISSAO", nullable=false)
+	@Column(nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date hrEmissao = new Date();
-	@Column(name="PC_DESC_NOTA", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal pcDescNota = new BigDecimal("0.00");
-	@Column(name="VL_DESC_NOTA", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal vlDescNota = new BigDecimal("0.00");
-	@Column(name="PC_ACRES_NOTA", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal pcAcresNota = new BigDecimal("0.00");
-	@Column(name="VL_ACRES_NOTA", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal vlAcresNota = new BigDecimal("0.00");;
-	@Column(name="MODELO", nullable=false)
+	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumModeloNota modelo;
-	@Column(name="INF_ADICIONAIS", nullable=false)
+	@Column(nullable=false)
 	private String infAdicionais = "";
-	@Column(name="NR_PED", nullable=false)
+	@Column(nullable=false)
 	private long nrPed = 0;
-	@Column(name="VL_TOT_TRIBUTOS", nullable=false)
+	@Column(nullable=false)
 	private BigDecimal vlTotTributos = new BigDecimal("0.00");;
-	@Column(name="TP_IMPOSTO_ICMS", nullable=false)
+	@Column(nullable=false)
 	private String tpImpostoIcms = "";
-	@Column(name="STATUS_CFE")
+	@Column
 	private EnumStatusCFeNota statusCFe = EnumStatusCFeNota.XML_NAO_GERADO;
-	@Column(name="VERSAO_XML_CFE")
+	@Column
 	private EnumCFeXMLVersion verXMLCFe = EnumCFeXMLVersion.V_0_06;
 	
 	@Column(name="NATUREZA_OPERACAO", nullable=false)
@@ -96,7 +96,7 @@ public final class Nota extends EntidadeLoja {
 	@Column(name="FL_FATURADO",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumNotaFaturada flFaturado = EnumNotaFaturada.NAO;
-	@Column(name="SERIE_NOTA", nullable=false)
+	@Column(nullable=false)
 	private String serieNota;
     
 	@ManyToOne(cascade=CascadeType.PERSIST)
@@ -180,46 +180,6 @@ public final class Nota extends EntidadeLoja {
 		this.tpImpostoIcms = tpImpostoIcms;
 	}
 	
-//	public int getCstPis() {
-//		return cstPis;
-//	}
-//	/**
-//	 * Utilizar a enumercao de cst do PIS {@link EnumCSTPIS}
-//	 * @param cstPis
-//	 */
-//	public void setCstPis(int cstPis) {
-//		this.cstPis = cstPis;
-//	}
-//	public BigDecimal getVlBaseCalcPis() {
-//		return vlBaseCalcPis;
-//	}
-//	public void setVlBaseCalcPis(BigDecimal vlBaseCalcPis) {
-//		this.vlBaseCalcPis = vlBaseCalcPis;
-//	}
-//	public BigDecimal getPcPis() {
-//		return pcPis;
-//	}
-//	public void setPcPis(BigDecimal pcPis) {
-//		this.pcPis = pcPis;
-//	}
-//	public BigDecimal getVlPis() {
-//		return vlPis;
-//	}
-//	public void setVlPis(BigDecimal vlPis) {
-//		this.vlPis = vlPis;
-//	}
-//	public int getCstIcms() {
-//		return cstIcms;
-//	}
-//	public void setCstIcms(int cstIcms) {
-//		this.cstIcms = cstIcms;
-//	}
-//	public String getOrigemIcms() {
-//		return origemIcms;
-//	}
-//	public void setOrigemIcms(String origemIcms) {
-//		this.origemIcms = origemIcms;
-//	}
 	public EnumNaturezaOperacao getNaturezaOperacao() {
 		return naturezaOperacao;
 	}
@@ -227,36 +187,6 @@ public final class Nota extends EntidadeLoja {
 		this.naturezaOperacao = naturezaOperacao;
 	}
 
-//	public int getIndicadoPgto() {
-//		return indicadoPgto;
-//	}
-//	public void setIndicadoPgto(int indicadoPgto) {
-//		this.indicadoPgto = indicadoPgto;
-//	}
-//	public int getModBaseIcms() {
-//		return modBaseIcms;
-//	}
-//	public void setModBaseIcms(int modBaseIcms) {
-//		this.modBaseIcms = modBaseIcms;
-//	}
-//	public BigDecimal getVlBaseCalcIcms() {
-//		return vlBaseCalcIcms;
-//	}
-//	public void setVlBaseCalcIcms(BigDecimal vlBaseCalcIcms) {
-//		this.vlBaseCalcIcms = vlBaseCalcIcms;
-//	}
-//	public BigDecimal getPcRedzBcIcms() {
-//		return pcRedzBcIcms;
-//	}
-//	public void setPcRedzBcIcms(BigDecimal pcRedzBcIcms) {
-//		this.pcRedzBcIcms = pcRedzBcIcms;
-//	}
-//	public BigDecimal getVlBcRetIcms() {
-//		return vlBcRetIcms;
-//	}
-//	public void setVlBcRetIcms(BigDecimal vlBcRetIcms) {
-//		this.vlBcRetIcms = vlBcRetIcms;
-//	}
 	public List<NotaItens> getItens() {
 		return itens;
 	}

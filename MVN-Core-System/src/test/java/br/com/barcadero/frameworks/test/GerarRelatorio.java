@@ -35,7 +35,7 @@ public class GerarRelatorio extends TesteSuperClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JasperReport pathjrxml = JasperCompileManager.compileReport("rel/TesteReport.jrxml");
+		JasperReport pathjrxml = JasperCompileManager.compileReport("br/com/barcadero/frameworks/test/dao/TesteReport.jrxml");
 		JasperPrint printReport = JasperFillManager.fillReport(pathjrxml, null, new JRBeanCollectionDataSource(listaUs));
 		JasperExportManager.exportReportToPdfFile(printReport, "rel/reportex.pdf");
 		System.out.println("Relatorio gerado");

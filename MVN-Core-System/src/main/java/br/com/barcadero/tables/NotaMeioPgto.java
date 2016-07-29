@@ -15,7 +15,7 @@ import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.util.GlobalNameParam;
 
 @Entity
-@Table(name="Nota_meio_pgto")
+@Table(name="NOTA_MEIO_PGTO")
 public class NotaMeioPgto extends SuperClassNota {
 
 	private static final long serialVersionUID = 1L;
@@ -29,13 +29,13 @@ public class NotaMeioPgto extends SuperClassNota {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Column(name="VALOR",nullable=false)
+	@Column
 	private BigDecimal valor;
-	@Column(name="QT_PARCELAS",nullable=false)
+	@Column
 	private int qtParcelas;
-	@Column(name="CD_ADMINISTRADORA",nullable=false)
+	@Column
 	private int cdAdministradora;
-	@Column(name="MEIO_PAGAMENTO")
+	@Column
 	@Enumerated(EnumType.STRING)
 	private EnumTipoMeioPgto tipoMeioPgto;
 	@Transient
@@ -45,7 +45,7 @@ public class NotaMeioPgto extends SuperClassNota {
 	private Nota nota;
 	
 	@ManyToOne
-	@JoinColumn(name="cod_meio_pgto",referencedColumnName="codigo")
+	@JoinColumn(name="meiopagamento",referencedColumnName="codigo")
 	private MeiosPagamento meioPagamento;
 	
 	public BigDecimal getValor() {
