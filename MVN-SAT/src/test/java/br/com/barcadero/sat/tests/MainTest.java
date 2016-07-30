@@ -169,7 +169,7 @@ public class MainTest {
 			String xml = HandleXML.getXMLFromObject(cfe);
 			//System.out.println(xml);
 			assertEquals("O XML gerado nao foi igual ao esperado",getXMLVendaEmperado(),xml);
-			transmitirTanca(xml);
+			//transmitirTanca(xml); //Habilitar somente quando for gerar os testes com o modulo conectado
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());

@@ -54,34 +54,32 @@ public final class Nota extends EntidadeLoja {
 	public static final String FIND_BY_CODE = "Nota.findByCode";
 	public static final String FIND_ALL 	= "Nota.findAll";
 	
-	@Column(nullable=false)
+	@Column(name="DT_EMISSAO",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dtEmissao = new Date();
-	@Column(nullable=false)
+	@Column(name="HR_EMISSAO",nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date hrEmissao = new Date();
-	@Column(nullable=false)
+	@Column(name="PC_DESC_NOTA",nullable=false)
 	private BigDecimal pcDescNota = new BigDecimal("0.00");
-	@Column(nullable=false)
+	@Column(name="VL_DESC_NOTA",nullable=false)
 	private BigDecimal vlDescNota = new BigDecimal("0.00");
-	@Column(nullable=false)
+	@Column(name="PC_ACRES_NOTA",nullable=false)
 	private BigDecimal pcAcresNota = new BigDecimal("0.00");
-	@Column(nullable=false)
+	@Column(name="VL_ACRES_NOTA",nullable=false)
 	private BigDecimal vlAcresNota = new BigDecimal("0.00");;
-	@Column(nullable=false)
+	@Column(name="MODELO",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumModeloNota modelo;
-	@Column(nullable=false)
+	@Column(name="INF_ADICIONAIS",nullable=false)
 	private String infAdicionais = "";
-	@Column(nullable=false)
-	private long nrPed = 0;
-	@Column(nullable=false)
+	@Column(name="VL_TOT_TRIBUTOS",nullable=false)
 	private BigDecimal vlTotTributos = new BigDecimal("0.00");;
-	@Column(nullable=false)
+	@Column(name="TP_IMPOSTO_ICMS",nullable=false)
 	private String tpImpostoIcms = "";
-	@Column
+	@Column(name="STATUS_CFE")
 	private EnumStatusCFeNota statusCFe = EnumStatusCFeNota.XML_NAO_GERADO;
-	@Column
+	@Column(name="VER_XML_CFE")
 	private EnumCFeXMLVersion verXMLCFe = EnumCFeXMLVersion.V_0_06;
 	
 	@Column(name="NATUREZA_OPERACAO", nullable=false)
@@ -96,7 +94,7 @@ public final class Nota extends EntidadeLoja {
 	@Column(name="FL_FATURADO",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumNotaFaturada flFaturado = EnumNotaFaturada.NAO;
-	@Column(nullable=false)
+	@Column(name="",nullable=false)
 	private String serieNota;
     
 	@ManyToOne(cascade=CascadeType.PERSIST)
@@ -110,6 +108,9 @@ public final class Nota extends EntidadeLoja {
 	@OneToOne
 	@JoinColumn(name="pedido",referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private Pedido pedido;
+	@OneToOne
+	@JoinColumn(name="cfe",referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
+	private CupomEletronico cfe;
 	
 	public String getSerieNota() {
 		return serieNota;
@@ -161,12 +162,7 @@ public final class Nota extends EntidadeLoja {
 	public void setInfAdicionais(String infAdicionais) {
 		this.infAdicionais = infAdicionais;
 	}
-	public long getNrPed() {
-		return nrPed;
-	}
-	public void setNrPed(long nrPed) {
-		this.nrPed = nrPed;
-	}
+
 	public BigDecimal getVlTotTributos() {
 		return vlTotTributos;
 	}
@@ -250,5 +246,13 @@ public final class Nota extends EntidadeLoja {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public CupomEletronico getCfe() {
+		return cfe;
+	}
+
+	public void setCfe(CupomEletronico cfe) {
+		this.cfe = cfe;
 	}
 }

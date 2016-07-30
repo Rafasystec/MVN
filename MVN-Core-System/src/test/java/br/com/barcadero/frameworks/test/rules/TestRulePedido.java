@@ -1,13 +1,13 @@
 package br.com.barcadero.frameworks.test.rules;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 import br.com.barcadero.frameworks.test.TesteSuperClass;
 import br.com.barcadero.rule.RulePedido;
@@ -18,10 +18,12 @@ public class TestRulePedido extends TesteSuperClass{
 	
 	private static RulePedido rulePedido;
 	
-	@BeforeClass
-	public static void init() {
+	
+	public TestRulePedido() {
 		rulePedido = new RulePedido(null, null, null,null);
 	}
+		
+	
 	
 	@Test
 	public void totalizarPedidos() {

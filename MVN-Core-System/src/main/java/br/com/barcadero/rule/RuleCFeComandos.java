@@ -1,5 +1,8 @@
 package br.com.barcadero.rule;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
@@ -30,7 +33,18 @@ public class RuleCFeComandos {
 	public RuleCFeComandos(Caixa caixa) {
 		// TODO Auto-generated constructor stub
 		client = new ClientSocket();
-		client.setIpServidor(caixa.getIp());
+		String ipServer = "";
+		if(caixa != null){
+			ipServer = caixa.getIp();
+		}else{
+			try {
+				ipServer = InetAddress.getLocalHost().getHostAddress();
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				ipServer = "127.0.0.1";
+			}
+		}
+		client.setIpServidor(ipServer);
 		setCaixa(caixa);
 	}
 	/**

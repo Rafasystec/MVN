@@ -194,24 +194,17 @@ public class RuleNota extends RuleModelo<Nota> {
 				nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + pedido.getCodigo());
 				nota.setModelo(pedido.getCaixa().getTipoNota());
 				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
-				nota.setNrPed(pedido.getCodigo());
 				nota.setSerieNota(String.valueOf(getSerie(pedido.getCaixa())));
 				//------------------------------------------
 				//Montando a lista de itens para a nota
 				//------------------------------------------
-				
 				List<NotaItens> itens = getItensNota(nota,pedido,usuario);
-//				for (NotaItens notaItens : itens) {
-//					ruleNotaItens.insert(notaItens);
-//				}
-				
 				//------------------------------------------
 				//Inserir as formas de pagamento
 				//------------------------------------------
 				 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
 				 nota.setItens(itens);
 				 nota.setFlFaturado(EnumNotaFaturada.SIM);
-				 //update(nota);
 				 insert(nota);
 				 pedido.setFlStPed(EnumStatusPedido.FATURADO);
 				 daoPedido.update(pedido);

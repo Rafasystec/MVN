@@ -15,9 +15,9 @@ public class TestRuleRegraTributaria extends TesteSuperClass{
 	@Test
 	public void testeCargaRegrasICMS() {
 		try {
-			getSession().beginTransaction();
+			//getSession().beginTransaction();
 			regraTributaria.cargaDasRegras(null);
-			getSession().getTransaction().commit();
+			//getSession().getTransaction().commit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
