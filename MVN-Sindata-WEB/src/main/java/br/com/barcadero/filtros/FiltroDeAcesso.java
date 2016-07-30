@@ -27,7 +27,7 @@ public class FiltroDeAcesso implements Filter{
 	private HttpServletRequest req 		= null;
 	private HttpServletResponse resp 	= null;
 	private HttpSession session	   		= null;
-	private Usuario usuario				= null;
+	//private Usuario usuario				= null;
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -59,18 +59,24 @@ public class FiltroDeAcesso implements Filter{
 	public void verifyNow(ServletRequest request, ServletResponse response,	FilterChain chain) throws IOException, ServletException {
 		req     = (HttpServletRequest)request;
 		session = req.getSession(false);
+		Usuario usuario = null;
 		if(session != null){
 			if(session.getAttribute(Attributs.USER) != null){
 				usuario = (Usuario)session.getAttribute(Attributs.USER);
 			}
-		}
-		if(usuario == null){
+			if(usuario == null){
+				String contextPath = ((HttpServletRequest) request).getContextPath();
+				resp = (HttpServletResponse) response;
+				resp.sendRedirect(contextPath + "/public/PagLogin.xhtml");
+			}else{
+				chain.doFilter(request, response);
+			}
+		}else{
 			String contextPath = ((HttpServletRequest) request).getContextPath();
 			resp = (HttpServletResponse) response;
 			resp.sendRedirect(contextPath + "/public/PagLogin.xhtml");
-		}else{
-			chain.doFilter(request, response);
 		}
+		
 	}
 
 	@Override

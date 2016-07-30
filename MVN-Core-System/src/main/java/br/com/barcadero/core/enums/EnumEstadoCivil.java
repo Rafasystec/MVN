@@ -10,5 +10,6 @@ public enum EnumEstadoCivil {
 	CASADO,
 	SOLTEIRO,
 	DIVORCIADO,
-	NOIVANDO
+	NOIVANDO,
+	VIUVO
 }
