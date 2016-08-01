@@ -6,10 +6,15 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.hibernate.Session;
+
 import br.com.barcadero.rule.RuleOrdemServico;
+import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
+import br.com.barcadero.tables.Produto;
+import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @ViewScoped
@@ -20,16 +25,20 @@ public class BeanOrdemServico extends SuperBean {
 	private List<OrdemServicoItens> itens;
 	private OrdemServicoItens item;
 	private RuleOrdemServico ruleOrdemServico;
+	private RuleProduto ruleProduto;
 	private Caixa caixa;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
 	private String strProduto;
 	private String lastProduto;
-	
+	private Session session;
 	public BeanOrdemServico() {
+		session 		 = getDBSessionForViewScope();
 		ruleOrdemServico = new RuleOrdemServico(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
+		ruleProduto		 = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
 		ordemServico	 = new OrdemServico(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 		item			 = new OrdemServicoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+		
 	}
 	
 	@Override
@@ -84,7 +93,29 @@ public class BeanOrdemServico extends SuperBean {
 	}
 	
 	public void salvarItem() {
-		
+		try {
+			System.out.println("Save item called.");
+			beginTransaction();
+			if(ordemServico == null){
+				ordemServico = createOrdemServico();
+			}
+			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
+			lastProduto = produto.getDescricao();
+			item.setProduto(produto);
+			item.setOrdemServico(ordemServico);
+			ruleOrdemServico.insert(ordemServico);
+			setVlUnitario(item.getValorTotal());
+			totalizarSubTotal(item);
+			commit();
+			item = new OrdemServicoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+		} catch (Exception e) {
+			HandleMessage.error("Erro ao inserir Item", e.getMessage());
+		}
+	}
+
+	private OrdemServico createOrdemServico() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public OrdemServicoItens getItem() {
@@ -133,6 +164,22 @@ public class BeanOrdemServico extends SuperBean {
 
 	public void setLastProduto(String lastProduto) {
 		this.lastProduto = lastProduto;
+	}
+	
+	public void beginTransaction() {
+		if(this.session != null){
+			this.session.beginTransaction();
+		}
+	}
+	
+	private void totalizarSubTotal(OrdemServicoItens item) {
+		setVlSubTotal(getVlSubTotal().add(item.getValorTotal()));
+	}
+	
+	public void commit() {
+		if(this.session != null){
+			this.session.getTransaction().commit();
+		}
 	}
 
 }

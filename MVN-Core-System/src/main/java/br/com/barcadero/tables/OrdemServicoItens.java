@@ -1,5 +1,7 @@
 package br.com.barcadero.tables;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -33,14 +36,18 @@ public class OrdemServicoItens extends EntidadeLoja {
 	private String quantidade;
 	@Column(name="NR_ITEM")
 	private int nrItem;
+	@Column(name="VALOR_UNITARIO")
+	private BigDecimal valorUnitario;
+	@Column(name="VALOR_TOTAL")
+	private BigDecimal valorTotal;
 	
 	@ManyToOne(fetch=FetchType.LAZY,targetEntity=OrdemServico.class)
 	@JoinColumn(name="ordemservico",referencedColumnName="codigo")
 	private OrdemServico ordemServico;
 	
-	@ManyToOne(fetch=FetchType.LAZY,targetEntity=ProdutoLoja.class)
-	@JoinColumn(name=GlobalNameParam.PARAM_PRODUTO,referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
-	private ProdutoLoja produto;
+	@OneToOne
+	@JoinColumn(name=GlobalNameParam.PARAM_PRODUTO, referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
+	private Produto produto;
 	
 	public String getDescricao() {
 		return descricao;
@@ -66,11 +73,24 @@ public class OrdemServicoItens extends EntidadeLoja {
 	public void setOrdemServico(OrdemServico ordemServico) {
 		this.ordemServico = ordemServico;
 	}
-	public ProdutoLoja getProduto() {
+
+	public Produto getProduto() {
 		return produto;
 	}
-	public void setProduto(ProdutoLoja produto) {
+	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
+	}
+	public void setValorUnitario(BigDecimal valorUnitario) {
+		this.valorUnitario = valorUnitario;
+	}
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 	
 }

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumNotaAtendimento;
+import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.core.enums.EnumTipoOS;
 import br.com.barcadero.core.util.GlobalNameParam;
 
@@ -57,6 +58,9 @@ public class OrdemServico extends EntidadeLoja {
 	private String contrato		= "";
 	@Column(name="CONTATO", length=15)
 	private String contato		= "";
+	@Column(name="FL_ESTADO")
+	@Enumerated
+	private EnumStatusOrdemServico status = EnumStatusOrdemServico.ABERTA;
 	
 	@ManyToOne
 	@JoinColumn(name=GlobalNameParam.PARAM_CLIENTE,referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
@@ -177,6 +181,12 @@ public class OrdemServico extends EntidadeLoja {
 	}
 	public void setContato(String contato) {
 		this.contato = contato;
+	}
+	public EnumStatusOrdemServico getStatus() {
+		return status;
+	}
+	public void setStatus(EnumStatusOrdemServico status) {
+		this.status = status;
 	}
 	
 	

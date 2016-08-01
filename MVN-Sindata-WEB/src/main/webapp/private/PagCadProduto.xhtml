@@ -16,38 +16,33 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 	<ui:define name="body">
 			<clx:buttonsCrud id="btnsUp" bean="#{produto}"></clx:buttonsCrud>
-				<p:panel header="Dados gerais ">
+				<p:panel header="Dados gerais" id="pnlGeral">
 					<p:panelGrid columns="1" styleClass="noBorder">
 						<p:outputLabel value="Descrição" for="descricao"/>
 						<p:inputText size="60" id="descricao" value="#{produto.produto.descricao}" required="true"/>
 					
-						<p:outputLabel value="Unid. medida" for="unidade"/>
-						<p:selectOneMenu value="#{produto.produto.unidade}">
-							<f:selectItems id="unidade" value="#{produto.medidas}" />
-						</p:selectOneMenu>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Unid. medida" for="unidade"/>
+							<p:selectOneMenu value="#{produto.produto.unidade}">
+								<f:selectItems id="unidade" value="#{produto.medidas}" />
+							</p:selectOneMenu>
+						
+							<p:outputLabel value="Cód. de Barras" for="ean"/>
+							<p:inputText id="ean" value="#{produto.produto.ean}" required="true"/>
+						
+							<p:outputLabel value="NCM" for="ncm"/>
+							<p:inputText id="ncm" value="#{produto.produto.cdNcm}" required="true"/>
+						</p:panelGrid>
+						
+						<clx:currency id="txtPcCusto" label="Preço Custo.:" value="#{produto.produto.precoCusto}" required="true"/>
+						
+						<clx:currency id="txtPcVenda" label="Preço Venda.:" value="#{produto.produto.precoVenda}" required="true"/>
+						
+						<clx:currency id="txtPcPromo" label="Preço Promo.:" value="#{produto.produto.precoPromo}" required="true"/>
 					
-						<p:outputLabel value="Cód. de Barras" for="ean"/>
-						<p:inputText id="ean" value="#{produto.produto.ean}" required="true"/>
-					
-						<p:outputLabel value="NCM" for="ncm"/>
-						<p:inputText id="ncm" value="#{produto.produto.cdNcm}" required="true"/>
-					
-						<p:outputLabel value="Preço Custo" for="pcCusto"/>
-						<p:inputText id="pcCusto" value="#{produto.produto.precoCusto}" required="true"/>
-					
-						<p:outputLabel value="Preço Venda" for="pcVenda"/>
-						<p:inputText id="pcVenda" value="#{produto.produto.precoVenda}" required="true"/>
-					
-						<p:outputLabel value="Preço Promo." for="pcPromo"/>
-						<p:inputText id="pcPromo" value="#{produto.produto.precoPromo}"/>
-					
-						<p:outputLabel value="Dt. Ini. Promo." for="dtIniPromo"/>
-						<p:calendar id="dtIniPromo" value="#{produto.produto.dtInicioPromo}" pattern="dd/MM/yyyy" 
-									required="false" maxlength="10" />
-					
-						<p:outputLabel value="Dt. Term. Promo." for="dtTermPromo"/>
-						<p:calendar id="dtTermPromo" value="#{produto.produto.dtTerminPromo}" pattern="dd/MM/yyyy" 
-									required="false" maxlength="10" />
+						<clx:dateCalendar id="txtDtIniPromo" label="Dt. Ini. Promo." value="#{produto.produto.dtInicioPromo}"/>
+						
+						<clx:dateCalendar id="txtDtTermPromo" label="Dt. Term. Promo." value="#{produto.produto.dtTerminPromo}"/>
 					</p:panelGrid>		
 				</p:panel>					
 				<p:panel header="Tributação">
@@ -88,15 +83,16 @@ xmlns:h="http://java.sun.com/jsf/html"
 					<p:dataTable id="produtos" var="prod" value="#{produto.produtos}" paginator="true" 
 						rowKey="#{prod.codigo}" rows="10" rowsPerPageTemplate="5,10,15" selectionMode="multiple"
 						selection="#{produto.produtosSelecionados}" >
-					<p:column headerText="Código" width="50px">
-						<h:outputText value="#{prod.codigo}"/>
-					</p:column>
-					<p:column headerText="Descricao" width="120px">
-						<h:outputText value="#{prod.descricao}"/>
-					</p:column>
-					<p:column headerText="Unidade" width="50px">
-						<h:outputText value="#{prod.unidade}"/>
-					</p:column>
+						<p:ajax event="rowSelect"  update=":formMain:descricao"  />
+						<p:column headerText="Código" width="50px">
+							<h:outputText value="#{prod.codigo}"/>
+						</p:column>
+						<p:column headerText="Descricao" width="120px">
+							<h:outputText value="#{prod.descricao}"/>
+						</p:column>
+						<p:column headerText="Unidade" width="50px">
+							<h:outputText value="#{prod.unidade}"/>
+						</p:column>
 					</p:dataTable>
 				</p:panel>
 			<clx:buttonsCrud id="btnsDowns" bean="#{produto}"></clx:buttonsCrud>
