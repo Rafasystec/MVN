@@ -7,3 +7,4 @@
 *.project
 .metadata
 /NFeCacerts
+*.jasper
