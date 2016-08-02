@@ -1,25 +1,28 @@
 package br.com.barcadero.web.beans;
 
 import java.io.IOException;
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import br.com.barcadero.rule.RuleSystemProperties;
+import br.com.barcadero.tables.SystemProperties;
 import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="index")
 @SessionScoped
-public class BeanIndex implements Serializable{
+public class BeanIndex extends SuperBean{
 
 	private static final long serialVersionUID = -8956924425290321691L;
 	private String userName;
 	private boolean isLogado;
 	private Usuario user;
+	private String versaoSystema;
+	private RuleSystemProperties ruleSystemProperties;
 	
 	public BeanIndex() {
 		// TODO Auto-generated constructor stub
 		System.out.println("Bean index was created");
+		ruleSystemProperties = new RuleSystemProperties(null, null, getDataBaseSession());
+		setVersaoSystema(getVersao());
 	}
 	
 	
@@ -53,6 +56,66 @@ public class BeanIndex implements Serializable{
 		SessionContext.getInstance().encerrarSessao();
 		SessionContext.getInstance().redirectToLogin();
 		System.out.println("Sessao encerrada. Indo para o login.");
+		return null;
+	}
+
+
+	public String getVersaoSystema() {
+		return versaoSystema;
+	}
+
+
+	public void setVersaoSystema(String versaoSystema) {
+		this.versaoSystema = versaoSystema;
+	}
+	
+	private String getVersao() {
+		SystemProperties properties = null;
+		try {
+			properties = ruleSystemProperties.find();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(properties != null){
+			return properties.getVersaoSistema();
+		}else{
+			return "1.0 - Indefinido";
+		}
+	}
+
+
+	@Override
+	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String salvar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String alterar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String deletar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String novo() throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

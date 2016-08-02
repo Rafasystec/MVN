@@ -56,5 +56,8 @@
 		<mapping class="br.com.barcadero.tables.CartaoPresente"/>
 		<mapping class="br.com.barcadero.tables.NotaSequence"/>
 		<mapping class="br.com.barcadero.tables.RegraTributaria"/>
+		<mapping class="br.com.barcadero.tables.SystemProperties"/>
+		<mapping class="br.com.barcadero.tables.SystemHistory"/>
+		<mapping class="br.com.barcadero.tables.SystemDevelopers"/>
 	</session-factory>
 </hibernate-configuration>

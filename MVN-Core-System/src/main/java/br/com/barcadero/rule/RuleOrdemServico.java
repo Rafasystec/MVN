@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoOrdemServico;
+import br.com.barcadero.dao.DaoOrdemServicoItens;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
@@ -16,11 +17,13 @@ import br.com.barcadero.tables.Produto;
 public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 
 	private DaoOrdemServico daoOrdemServico;
+	private DaoOrdemServicoItens daoOrdemServicoItens;
 	private RuleProduto ruleProduto;
 	public RuleOrdemServico(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		daoOrdemServico = new DaoOrdemServico(empresa, loja, session);
-		ruleProduto		= new RuleProduto(empresa, loja, session);
+		daoOrdemServico 		= new DaoOrdemServico(empresa, loja, session);
+		daoOrdemServicoItens 	= new DaoOrdemServicoItens(empresa, loja, session);
+		ruleProduto				= new RuleProduto(empresa, loja, session);
 	}
 
 	@Override
@@ -72,6 +75,10 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 	public List<OrdemServico> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public List<OrdemServicoItens> getItensByOS(OrdemServico ordemServico) throws Exception {
+		return daoOrdemServicoItens.findByOS(ordemServico);
 	}
 	
 	

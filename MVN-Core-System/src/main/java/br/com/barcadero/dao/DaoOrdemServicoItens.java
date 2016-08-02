@@ -25,7 +25,7 @@ public class DaoOrdemServicoItens extends DaoModelo<OrdemServicoItens> {
 	}
 	
 	public List<OrdemServicoItens> findByOS(OrdemServico ordemServico) {
-		Query qry = getSession().getNamedQuery(OrdemServicoItens.FIND_ALL)
+		Query qry = getSession().getNamedQuery(OrdemServicoItens.FIND_BY_OS)
 				.setLong("empresa", getEmpresa().getCodigo())
 				.setLong("ordemservico", ordemServico.getCodigo());
 		return qry.list();

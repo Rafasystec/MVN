@@ -79,7 +79,12 @@ public class BeanOrdemServico extends SuperBean {
 	}
 
 	public List<OrdemServicoItens> getItens() {
-		
+		try {
+			this.itens = ruleOrdemServico.getItensByOS(ordemServico);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return itens;
 	}
 
