@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.attributes.Attributs;
 import br.com.barcadero.web.beans.GlobalVariables;
@@ -63,18 +62,23 @@ public class FiltroDeAcesso implements Filter{
 		if(session != null){
 			if(session.getAttribute(Attributs.USER) != null){
 				usuario = (Usuario)session.getAttribute(Attributs.USER);
+				if(validarLojaEEmpresa((HttpServletRequest) request)){
+					if(session.getAttribute(Attributs.EMP_LOGADA) != null){
+						if(session.getAttribute(Attributs.LOJA_LOGADA) == null){
+							redirectToLogin(request, response);
+						}
+					}else{
+						redirectToLogin(request, response);
+					}
+				}
 			}
 			if(usuario == null){
-				String contextPath = ((HttpServletRequest) request).getContextPath();
-				resp = (HttpServletResponse) response;
-				resp.sendRedirect(contextPath + "/public/PagLogin.xhtml");
+				redirectToLogin(request, response);
 			}else{
 				chain.doFilter(request, response);
 			}
 		}else{
-			String contextPath = ((HttpServletRequest) request).getContextPath();
-			resp = (HttpServletResponse) response;
-			resp.sendRedirect(contextPath + "/public/PagLogin.xhtml");
+			redirectToLogin(request, response);
 		}
 		
 	}
@@ -83,6 +87,25 @@ public class FiltroDeAcesso implements Filter{
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
+		String contextPath = ((HttpServletRequest) request).getContextPath();
+		resp = (HttpServletResponse) response;
+		resp.sendRedirect(contextPath + "/public/PagLogin.xhtml");
+	}
+	
+	private boolean validarLojaEEmpresa(HttpServletRequest request) {
+		if(request != null){
+			String page = request.getRequestURI();
+			if(page.indexOf("PagLogin") != -1 || page.indexOf("PagEscolherEmpresa") != -1){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
 	}
 	
 }

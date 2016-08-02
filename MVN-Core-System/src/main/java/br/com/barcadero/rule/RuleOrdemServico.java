@@ -42,7 +42,9 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 			itens.setValorUnitario(vlUnitario);
 			itens.setValorTotal(vlUnitario.multiply(new BigDecimal(itens.getQuantidade())));
 			itens.setOrdemServico(ordemServico);
-			return daoOrdemServico.insert(ordemServico);
+			daoOrdemServico.insert(ordemServico);
+			itens.setOrdemServico(ordemServico);
+			return daoOrdemServico.insert(itens);
 		}else{
 			throw new Exception("Pedido não foi criado.");
 		}

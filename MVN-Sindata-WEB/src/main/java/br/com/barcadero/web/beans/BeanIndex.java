@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="index")
+@SessionScoped
 public class BeanIndex implements Serializable{
 
 	private static final long serialVersionUID = -8956924425290321691L;
@@ -46,23 +48,6 @@ public class BeanIndex implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-//	
-//	public void getUsuarioLogado() {
-//		try{
-//			if(SessionContext.getInstance().getUsuarioLogado() != null){
-//				user = SessionContext.getInstance().getUsuarioLogado();
-//				isLogado = true;
-//				userName = user.getNome();
-//			}else{
-//				user 	 = new Usuario();
-//				isLogado = false;
-//				userName = "";
-//			}
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//	}
 	
 	public String logOut() throws IOException {
 		SessionContext.getInstance().encerrarSessao();

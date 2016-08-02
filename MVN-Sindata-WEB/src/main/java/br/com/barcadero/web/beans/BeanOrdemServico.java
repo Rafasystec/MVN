@@ -103,7 +103,7 @@ public class BeanOrdemServico extends SuperBean {
 			lastProduto = produto.getDescricao();
 			item.setProduto(produto);
 			item.setOrdemServico(ordemServico);
-			ruleOrdemServico.insert(ordemServico);
+			ruleOrdemServico.insert(ordemServico,item);
 			setVlUnitario(item.getValorTotal());
 			totalizarSubTotal(item);
 			commit();
@@ -115,7 +115,7 @@ public class BeanOrdemServico extends SuperBean {
 
 	private OrdemServico createOrdemServico() {
 		// TODO Auto-generated method stub
-		return null;
+		return new OrdemServico(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 	}
 
 	public OrdemServicoItens getItem() {

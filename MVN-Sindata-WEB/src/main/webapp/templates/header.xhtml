@@ -28,6 +28,7 @@
 						style="color: #656D78;"></i><span class="badge badge-danger">0</span></a></li>
 			</ul>
 			</ui:remove>
+			
 
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
@@ -59,6 +60,7 @@
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right menu-top">
+
 				<li>
 					<div class="dropdown">
 						<button class="btn btn-default dropdown-toggle" type="button"
@@ -69,10 +71,17 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li>
+							<i class="fa fa-sign-out">
+								<img alt="ok" src="../resources/Imagens/logoSystec40x32.png" />
+							</i>
+							</li>
+						</ul>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<li><a href="usuarios.jsf"><i class="fa fa-user-plus"
 									aria-hidden="true"></i>USUÁRIOS</a></li>
 							<li role="separator" class="divider"></li>
-							<li><p:commandLink action="#">
+							<li><p:commandLink action="#{index.logOut}">
 									<i class="fa fa-sign-out"></i>
 			                			SAIR
 			                		</p:commandLink></li>
