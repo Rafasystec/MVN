@@ -36,6 +36,8 @@
 			</div>
 			<div class="div-main-venda">
 				<div>
+					<clx:clientSearch id="cboCliente" value="#{beanOrdemServico.strCliente}" label="Cliente" />
+					<clx:vendedorSearch id="cboVendedor" value="#{beanOrdemServico.strVendedor}" label="Vendedor:"/>
 					<p:panelGrid columns="3" styleClass="noBorder" style="background-color: #F5F5F5">
 						<clx:productSearch  id="cboProduto" value="#{beanOrdemServico.strProduto}"/>
 						<p:outputLabel value="Quantidade:" for="qtde"/>
@@ -58,10 +60,10 @@
 							<h:outputText value="#{item.produto.descricao}" />
 						</p:column>
 						<p:column headerText="Qtde" style="width: 50px">
-							<h:outputText value="#{item.quantidade} x #{item.vlUnitario}" />
+							<h:outputText value="#{item.quantidade} x #{item.valorUnitario}" />
 						</p:column>
 						<p:column headerText="Valor" style="width: 40px">
-							<h:outputText value="#{item.vlTotal}" >
+							<h:outputText value="#{item.valorTotal}" >
 								<f:convertNumber type="currency" currencySymbol=""/>
 							</h:outputText>
 						</p:column>

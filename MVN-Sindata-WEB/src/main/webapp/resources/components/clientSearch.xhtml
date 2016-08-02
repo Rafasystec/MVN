@@ -10,11 +10,12 @@
 		<composite:attribute name="label" shortDescription="Label do campo" />
 		<composite:attribute name="value" shortDescription="ID do componente" />
 	</composite:interface>
-		<p:outputLabel value="label"/>
+	<composite:implementation>
+		<p:outputLabel value="#{cc.attrs.label}" />
 		<p:autoComplete id="#{cc.attrs.id}" maxResults="8"
 			value="#{cc.attrs.value}"
-			completeMethod="#{beanCompletVendedor.completeText}" effect="fade"
-			placeholder="Vendedor">
+			completeMethod="#{beanCompletClient.completeText}" effect="fade"
+			placeholder="Cliente">
 		</p:autoComplete>
 	</composite:implementation>
 </ui:composition>

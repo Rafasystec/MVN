@@ -33,7 +33,7 @@ public class OrdemServicoItens extends EntidadeLoja {
 	@Column(name="DESCRICAO")
 	private String descricao;
 	@Column(name="QUANTIDADE")
-	private String quantidade;
+	private float quantidade = 0.000f;
 	@Column(name="NR_ITEM")
 	private int nrItem;
 	@Column(name="VALOR_UNITARIO")
@@ -55,10 +55,10 @@ public class OrdemServicoItens extends EntidadeLoja {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public String getQuantidade() {
+	public float getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(String quantidade) {
+	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
 	}
 	public int getNrItem() {

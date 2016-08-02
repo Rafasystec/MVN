@@ -65,6 +65,7 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 		try{
 			if(entidade != null){
 				getSession().save(entidade);
+				getSession().flush();
 				return getMSG_SUCESS_SAVE();
 			}else{
 				return getMSG_ERRO_SAVE();

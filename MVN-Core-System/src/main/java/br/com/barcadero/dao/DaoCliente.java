@@ -32,5 +32,18 @@ public class DaoCliente extends DaoModelo<Cliente> {
 				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
 		return qry.list();
 	}
+	/**
+	 * 
+	 * @param codigo
+	 * @param name
+	 * @return
+	 */
+	public List<Cliente> findByCodeOrName(long codigo, String name) {
+		Query qry = getSession().getNamedQuery(Cliente.FIND_BY_NAME_OR_CODIGO)
+				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+				.setLong(GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN, codigo)
+				.setString("nome", name);
+		return qry.list();
+	}
 
 }

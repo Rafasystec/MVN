@@ -9,12 +9,14 @@ import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
+import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.exeptions.DAOException;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.dao.DaoNota;
+import br.com.barcadero.dao.DaoOrdemServico;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
@@ -24,6 +26,8 @@ import br.com.barcadero.tables.MeiosPagamento;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.NotaMeioPgto;
+import br.com.barcadero.tables.OrdemServico;
+import br.com.barcadero.tables.OrdemServicoItens;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Usuario;
@@ -34,6 +38,7 @@ public class RuleNota extends RuleModelo<Nota> {
 	private final DaoNota daoNota;
 	private final DaoMeioPgto daoMeio;
 	private DaoPedido daoPedido;
+	private DaoOrdemServico daoOrdemServico;
 	//private final DaoNotaItens daoItens;
 	private final RuleNotaItens ruleNotaItens;
 	private final RuleCaixa ruleCaixa;
@@ -46,6 +51,7 @@ public class RuleNota extends RuleModelo<Nota> {
 		ruleCaixa		= new RuleCaixa(empresa, loja, session);
 		ruleNotaItens 	= new RuleNotaItens(empresa, loja, session);
 		daoPedido		= new DaoPedido(empresa, loja, session);
+		daoOrdemServico	= new DaoOrdemServico(empresa, loja, session);
 	}
 
 	@Override
@@ -215,6 +221,48 @@ public class RuleNota extends RuleModelo<Nota> {
 		}
 		return result;
 	}
+	/**
+	 * Transforma uma ordem de servico em nota
+	 * @param ordemServico
+	 * @param usuario
+	 * @param formasPagamento
+	 * @return
+	 * @throws Exception
+	 */
+	public Nota parse(OrdemServico ordemServico, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
+		Nota result = null;
+		try {
+			if(ordemServico != null){
+				Nota nota = new Nota(getLoja(), usuario);
+				nota.setCaixa(ordemServico.getCaixa());
+				nota.setEmpresa(getEmpresa());
+				nota.setFlFaturado(EnumNotaFaturada.NAO);
+				nota.setLoja(getLoja());
+				nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + ordemServico.getCodigo());
+				nota.setModelo(ordemServico.getCaixa().getTipoNota());
+				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
+				nota.setSerieNota(String.valueOf(getSerie(ordemServico.getCaixa())));
+				//------------------------------------------
+				//Montando a lista de itens para a nota
+				//------------------------------------------
+				List<NotaItens> itens = getItensNota(nota,ordemServico,usuario);
+				//------------------------------------------
+				//Inserir as formas de pagamento
+				//------------------------------------------
+				 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
+				 nota.setItens(itens);
+				 nota.setFlFaturado(EnumNotaFaturada.SIM);
+				 insert(nota);
+				 ordemServico.setStatus(EnumStatusOrdemServico.FATURADA);
+				 daoOrdemServico.update(ordemServico);
+				 result = nota;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception("Erro ao tentar converter Ordem de Serviço em Nota: " + e.getMessage());
+		}
+		return result;
+	}
 	
 	/**
 	 * Obtem a serie da nota de acordo com o modelo de nota.
@@ -257,6 +305,35 @@ public class RuleNota extends RuleModelo<Nota> {
 			notaItens.setVlDesc(itemPed.getVlDesconto());
 			notaItens.setVlTotal(itemPed.getVlTotal());
 			notaItens.setVlUnidade(itemPed.getVlUnitario());
+			itens.add(notaItens);
+		}
+		return itens;
+	}
+	/**
+	 * Transforma os itens da O.S em itens de uma nota.
+	 * @param nota
+	 * @param ordemServico
+	 * @param usuario
+	 * @return
+	 * @throws Exception
+	 */
+	public List<NotaItens> getItensNota(Nota nota, OrdemServico ordemServico, Usuario usuario) throws Exception{
+		List<NotaItens> itens = new ArrayList<>();
+		for (OrdemServicoItens itemOS : ordemServico.getItens()) {
+			NotaItens notaItens = new NotaItens(getEmpresa(), getLoja(), usuario);
+			notaItens.setNota(nota);
+			notaItens.setNrItem(itemOS.getNrItem());
+			notaItens.setProduto(itemOS.getProduto());
+			notaItens.setDescricao(itemOS.getProduto().getDescricao());
+			notaItens.setFlCompoeTotNota(EnumCompeTotalNota.S);
+			notaItens.setLoja(getLoja());
+			//notaItens.setPcDesc(itemPed.getPcDesconto());
+			notaItens.setQuantidade(itemOS.getQuantidade());
+			notaItens.setSerieNota(nota.getSerieNota());
+			notaItens.setUsuario(usuario);
+			//notaItens.setVlDesc(itemOS.getVlDesconto());
+			notaItens.setVlTotal(itemOS.getValorTotal());
+			notaItens.setVlUnidade(itemOS.getValorUnitario());
 			itens.add(notaItens);
 		}
 		return itens;

@@ -20,7 +20,7 @@ import br.com.barcadero.core.enums.EnumTipoPessoa;
 @NamedQueries({
 			@NamedQuery(name=Cliente.FIND		 			,query="FROM Cliente WHERE empresa = :empresa"),
 			@NamedQuery(name=Cliente.FIND_BY_CODE			,query="FROM Cliente WHERE codigo = :codigo"),
-			@NamedQuery(name=Cliente.FIND_BY_NAME_OR_CODIGO	,query="FROM Cliente c WHERE c.codigo = :codigo OR c.pessoaFisica.nome LIKE :nome")
+			@NamedQuery(name=Cliente.FIND_BY_NAME_OR_CODIGO	,query="FROM Cliente c WHERE c.empresa = :empresa AND (c.codigo = :codigo OR c.pessoaFisica.nome LIKE :nome)")
 			
 })
 @Entity

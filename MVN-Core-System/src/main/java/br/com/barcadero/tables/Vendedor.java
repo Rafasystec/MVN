@@ -17,7 +17,7 @@ import br.com.barcadero.core.enums.EnumSimNao;
 	
 	@NamedQuery(name=Vendedor.FIND_ALL				,query="FROM Vendedor WHERE empresa = :empresa"),
 	@NamedQuery(name=Vendedor.FIND_BY_CODE			,query="FROM Vendedor WHERE empresa = :empresa AND codigo = :codigo"),
-	@NamedQuery(name=Vendedor.FIND_BY_COD_OR_DESC	,query="FROM Vendedor WHERE codigo = :codigo OR apelido LIKE :apelido")
+	@NamedQuery(name=Vendedor.FIND_BY_COD_OR_DESC	,query="FROM Vendedor WHERE empresa = :empresa AND (codigo = :codigo OR apelido LIKE :apelido)")
 })
 
 /**

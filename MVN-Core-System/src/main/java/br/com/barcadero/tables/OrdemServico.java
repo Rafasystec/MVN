@@ -1,13 +1,17 @@
 package br.com.barcadero.tables;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.barcadero.core.enums.EnumNotaAtendimento;
@@ -71,6 +75,12 @@ public class OrdemServico extends EntidadeLoja {
 	@ManyToOne
 	@JoinColumn(name=GlobalNameParam.PARAM_VENDEDOR,referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private Vendedor vendedor;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="caixa", referencedColumnName="codigo")
+	private Caixa caixa;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="ordemServico",fetch=FetchType.LAZY,targetEntity=OrdemServicoItens.class)
+	private List<OrdemServicoItens> itens;
 	
 	public Date getDtEntrada() {
 		return dtEntrada;
@@ -187,6 +197,18 @@ public class OrdemServico extends EntidadeLoja {
 	}
 	public void setStatus(EnumStatusOrdemServico status) {
 		this.status = status;
+	}
+	public Caixa getCaixa() {
+		return caixa;
+	}
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
+	}
+	public List<OrdemServicoItens> getItens() {
+		return itens;
+	}
+	public void setItens(List<OrdemServicoItens> itens) {
+		this.itens = itens;
 	}
 	
 	

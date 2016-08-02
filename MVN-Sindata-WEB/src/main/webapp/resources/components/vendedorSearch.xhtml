@@ -8,10 +8,10 @@
 	<composite:interface>
 		<composite:attribute name="id" shortDescription="ID do componente" />
 		<composite:attribute name="label" shortDescription="Label do campo" />
-		<composite:attribute name="value" shortDescription="ID do componente" />
+		<composite:attribute name="value" shortDescription="Vai receber o valor do campo de pesquisa." />
 	</composite:interface>
 	<composite:implementation>
-		<p:outputLabel value="label"/>
+		<p:outputLabel value="#{cc.attrs.label}"/>
 		<p:autoComplete id="#{cc.attrs.id}" maxResults="8"
 			value="#{cc.attrs.value}"
 			completeMethod="#{beanCompletVendedor.completeText}" effect="fade"

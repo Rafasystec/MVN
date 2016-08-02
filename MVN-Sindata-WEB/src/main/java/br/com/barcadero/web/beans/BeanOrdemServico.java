@@ -31,6 +31,8 @@ public class BeanOrdemServico extends SuperBean {
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
 	private String strProduto;
 	private String lastProduto;
+	private String strVendedor= "";
+	private String strCliente = "";
 	private Session session;
 	public BeanOrdemServico() {
 		session 		 = getDBSessionForViewScope();
@@ -185,6 +187,22 @@ public class BeanOrdemServico extends SuperBean {
 		if(this.session != null){
 			this.session.getTransaction().commit();
 		}
+	}
+
+	public String getStrVendedor() {
+		return strVendedor;
+	}
+
+	public void setStrVendedor(String strVendedor) {
+		this.strVendedor = strVendedor;
+	}
+
+	public String getStrCliente() {
+		return strCliente;
+	}
+
+	public void setStrCliente(String strCliente) {
+		this.strCliente = strCliente;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServicoItens;
 import br.com.barcadero.tables.Empresa;
@@ -55,32 +56,38 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoOrdemServico.delete(codigo);
 	}
 
 	@Override
 	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoOrdemServico.update(entidade);
 	}
 
 	@Override
 	public OrdemServico find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoOrdemServico.find(codigo);
 	}
 
 	@Override
 	public List<OrdemServico> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoOrdemServico.findAll();
 	}
 	
 	public List<OrdemServicoItens> getItensByOS(OrdemServico ordemServico) throws Exception {
 		return daoOrdemServicoItens.findByOS(ordemServico);
 	}
-	
+	/**
+	 * Fecha a ordem de serviço
+	 * @param ordemServico
+	 * @throws Exception 
+	 */
+	public void fecharOS(OrdemServico ordemServico) throws Exception {
+		if(ordemServico != null){
+			ordemServico.setStatus(EnumStatusOrdemServico.FECHADA);
+			update(ordemServico);
+		}
+	}
 	
 
 }
