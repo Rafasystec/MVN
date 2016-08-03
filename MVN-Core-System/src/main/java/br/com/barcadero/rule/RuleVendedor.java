@@ -74,7 +74,7 @@ public class RuleVendedor extends RuleModelo<Vendedor> {
 		} catch (Exception e) {
 			codigo = 0;
 		}
-		return daoVendedor.getByCodeOrApelido(codigo, value);
+		return daoVendedor.getByCodeOrApelido(codigo, "%"+value+"%");
 	}
 
 }

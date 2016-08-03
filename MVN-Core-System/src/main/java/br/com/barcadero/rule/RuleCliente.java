@@ -80,7 +80,7 @@ public class RuleCliente extends RuleModelo<Cliente> {
 		} catch (Exception e) {
 			codigo = 0;
 		}
-		return daoCliente.findByCodeOrName(codigo, value);
+		return daoCliente.findByCodeOrName(codigo, "%"+value+"%");
 	}
 
 }
