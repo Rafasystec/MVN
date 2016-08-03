@@ -32,6 +32,20 @@ public class HandleDialog {
         RequestContext.getCurrentInstance().openDialog(PATH_POPUPS + page + ".xhtml", options, null);
 	}
 	
+	public static void openDialogOutCome(String outcome, String width, String height) {
+		Map<String,Object> options = new HashMap<String, Object>();
+        options.put("modal", true);
+        options.put("resizable", false);
+        options.put("draggable", true);
+        options.put("width", width);
+        options.put("height", height);
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");
+        options.put("headerElement", "customheader");
+         
+        RequestContext.getCurrentInstance().openDialog(outcome, options, null);
+	}
+	
 	public static void openDialog(String page, Map<String,List<String>> params, String width, String height) {
 		Map<String,Object> options = new HashMap<String, Object>();
         options.put("modal", true);
@@ -45,6 +59,22 @@ public class HandleDialog {
          
         RequestContext.getCurrentInstance().openDialog(PATH_POPUPS + page + ".xhtml", options, params);
 	}
+	
+	public static void openDialog(Map<String,List<String>> params, String outcome, String width, String height) {
+		Map<String,Object> options = new HashMap<String, Object>();
+        options.put("modal", true);
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("width", width);
+        options.put("height", height);
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");
+        options.put("headerElement", "customheader");
+         
+        RequestContext.getCurrentInstance().openDialog(outcome, options, params);
+	}
+	
+	
 	
 	public static void newParam(String key, String value) {
 		

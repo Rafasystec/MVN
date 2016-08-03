@@ -166,8 +166,13 @@ public class HandleEndereco extends SuperBean{
 		return  HandleEndereco.bairros;
 	}
 	
-	public void openCadCidade() throws Exception {
-		HandleOpenEnderDialog.openCadCidade();
+	public void openCadCidade(ActionEvent actionEvent){
+		try {
+			HandleOpenEnderDialog.openCadCidade();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("cad cidade");
 	}
 	
@@ -177,8 +182,13 @@ public class HandleEndereco extends SuperBean{
 	
 	
 	
-	public void openCadBairro(ActionEvent event) throws Exception {
-		HandleOpenEnderDialog.openCadBairro(String.valueOf(getCodCidade()));
+	public void openCadBairro(ActionEvent event){
+		try {
+			HandleOpenEnderDialog.openCadBairro(String.valueOf(getCodCidade()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("open popup bairro");
 	}
 

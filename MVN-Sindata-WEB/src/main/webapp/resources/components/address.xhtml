@@ -60,8 +60,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<p:ajax update="bairro" listener="#{ender.obterBairros}" />
 					</p:selectOneMenu>
 			
-					<p:commandButton actionListener="#{ender.openCadCidade}" value="+" id="btnAddCidade" title="Adicionar uma nova Cidade" >
-					</p:commandButton>
+					<p:commandButton actionListener="#{ender.openCadCidade}" value="+" id="btnAddCidade" title="Adicionar uma nova Cidade" ajax="true"/>
 
 					<p:outputLabel value="Bairro:" for="bairro" />
 					<p:selectOneMenu id="bairro" value="#{cc.attrs.endereco.codBairro}">

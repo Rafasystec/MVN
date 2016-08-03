@@ -18,7 +18,7 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 		<clx:buttonsCrud id="btnsUp" bean="#{cliente}"></clx:buttonsCrud>
 		<p:panel id="pnlDadosCliente" header="Cadastro de Clientes">
-			<div class="form-group ">
+			<div class="form-group">
 				<label class="control-label " for="email"> Nome </label>
 				<div class="input-group">
 					<div class="input-group-addon">
@@ -112,10 +112,10 @@ xmlns:h="http://java.sun.com/jsf/html"
 				</div>
 			</div>
 		</p:panel>
-
+		 <p:commandButton value="Ajax Submit" id="ajax"   actionListener="#{cliente.buttonAction}" styleClass="ui-priority-primary" ajax="true"/>
 		<clx:address endereco="#{cliente.endereco}"	 >
 		</clx:address>
-
+	
 		<p:accordionPanel>
 			<p:tab title="Consultar" closable="true">
 				<p:panel header="Consulta">

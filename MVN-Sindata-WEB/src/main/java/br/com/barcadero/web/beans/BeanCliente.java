@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
 
@@ -139,5 +140,10 @@ public class BeanCliente extends SuperBean {
 	public void setSelectedClie(Cliente selectedClie) {
 		this.selectedClie = selectedClie;
 	}
+	
+	 public void buttonAction(ActionEvent actionEvent) {
+		 System.out.println("Chamou action");
+	 }
+	
 	
 }
