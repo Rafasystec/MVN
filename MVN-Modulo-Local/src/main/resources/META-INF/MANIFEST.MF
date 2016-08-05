@@ -7,4 +7,5 @@ Class-Path: h2-1.4.191.jar hibernate-core-5.1.0.Final.jar jboss-logging-3.3.0.Fi
  Final.jar
 Created-By: Apache Maven 3.3.3
 Archiver-Version: 1.0
+Main-Class: br.com.barcadero.local.main.Main
 

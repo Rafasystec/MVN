@@ -1,9 +1,9 @@
 package br.com.barcadero.local.socket;
 
 import java.util.concurrent.Callable;
+
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.socket.SocketDados;
-import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
 import br.com.barcadero.module.sat.socket.CmdEnviarDadosVenda;

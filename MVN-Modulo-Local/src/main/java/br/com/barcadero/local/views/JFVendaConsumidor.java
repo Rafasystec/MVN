@@ -167,5 +167,6 @@ public class JFVendaConsumidor extends JFrame {
 	private void criarNota() {
 		this.nota = new Nota();
 		
+		
 	}
 }
