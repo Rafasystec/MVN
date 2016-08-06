@@ -2,22 +2,27 @@ package br.com.barcadero.local.views;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import br.com.barcadero.core.enums.EnumModeloNota;
+import br.com.barcadero.core.enums.EnumNaturezaOperacao;
+import br.com.barcadero.local.main.Main;
 import br.com.barcadero.rule.RuleNota;
+import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Nota;
-
-import java.awt.Font;
+import br.com.barcadero.tables.NotaItens;
+import br.com.barcadero.tables.Produto;
 
 public class JFVendaConsumidor extends JFrame {
 
@@ -30,6 +35,8 @@ public class JFVendaConsumidor extends JFrame {
 	private JTextField txtQuantidade;
 	private Nota nota;
 	private RuleNota ruleNota;
+	private RuleProduto ruleProduto;
+	private JLabel lblNota;
 
 	/**
 	 * Launch the application.
@@ -53,7 +60,7 @@ public class JFVendaConsumidor extends JFrame {
 	public JFVendaConsumidor() {
 		setTitle("VENDA AO CONSUMIDOR   ---    VERSÃO1.0 - RELEASE 35.06");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 858, 579);
+		setBounds(100, 100, 894, 582);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,7 +68,7 @@ public class JFVendaConsumidor extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 830, 111);
+		panel.setBounds(12, 12, 830, 111);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -77,21 +84,16 @@ public class JFVendaConsumidor extends JFrame {
 		
 		txtrTxtitens = new JTextArea();
 		//txtrTxtitens.setText("txtItens");
-		txtrTxtitens.setBounds(477, 133, 350, 370);
+		txtrTxtitens.setBounds(433, 165, 433, 370);
 		contentPane.add(txtrTxtitens);
 		
 		JButton btnConsultarProduto = new JButton("+");
 		btnConsultarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Chamou evento de adcionar pedido.");
-				//txtrTxtitens.add("0001 - PRODUTO SUBSTITUICAO TRIBUTARIA 1 X 5,80     5,80");
-				txtrTxtitens.append("0001 - PRODUTO SUBSTITUICAO TRIBUTARIA 1 X 5,80     5,80 \n");
-				//txtrTxtitens.setText("OK");
-				//txtrTxtitens.repaint();
-				System.out.println("Término da Chamada.");
+				
 			}
 		});
-		btnConsultarProduto.setBounds(108, 79, 43, 23);
+		btnConsultarProduto.setBounds(108, 79, 52, 23);
 		panel.add(btnConsultarProduto);
 		
 		txtCliente = new JTextField();
@@ -100,42 +102,42 @@ public class JFVendaConsumidor extends JFrame {
 		txtCliente.setColumns(10);
 		
 		JButton btnConsultarCliente = new JButton("+");
-		btnConsultarCliente.setBounds(108, 30, 43, 23);
+		btnConsultarCliente.setBounds(108, 30, 52, 23);
 		panel.add(btnConsultarCliente);
 		
 		JLabel lblLblcliente = new JLabel("Cliente:");
-		lblLblcliente.setBounds(10, 15, 46, 14);
+		lblLblcliente.setBounds(10, 15, 86, 14);
 		panel.add(lblLblcliente);
 		
 		JLabel lblLblnomecliente = new JLabel("MARCELO DE SOUSA LIMA");
 		lblLblnomecliente.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblLblnomecliente.setBounds(161, 34, 234, 17);
+		lblLblnomecliente.setBounds(193, 33, 234, 17);
 		panel.add(lblLblnomecliente);
 		
 		txtQuantidade = new JTextField();
-		txtQuantidade.setText("quantidade");
-		txtQuantidade.setBounds(161, 80, 86, 20);
+		txtQuantidade.setBounds(168, 80, 86, 20);
 		panel.add(txtQuantidade);
 		txtQuantidade.setColumns(10);
 		
 		JLabel lblQuantidade = new JLabel("Qauntidade:");
-		lblQuantidade.setBounds(161, 64, 86, 14);
+		lblQuantidade.setBounds(161, 64, 111, 14);
 		panel.add(lblQuantidade);
 		
 		JButton btnAddItem = new JButton("Add. Item");
-		btnAddItem.setBounds(257, 79, 111, 23);
+		btnAddItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addItem();
+			}
+		});
+		btnAddItem.setBounds(257, 79, 128, 23);
 		panel.add(btnAddItem);
 		
-		JButton btnFecharvenda = new JButton("Fechar Venda");
-		btnFecharvenda.setBounds(429, 0, 111, 23);
-		panel.add(btnFecharvenda);
-		
 		JButton btnCancelarVenda = new JButton("Cancelar Venda");
-		btnCancelarVenda.setBounds(709, 0, 111, 23);
+		btnCancelarVenda.setBounds(641, 3, 144, 23);
 		panel.add(btnCancelarVenda);
 		
 		JButton btnCancelarItem = new JButton("Cancelar Item");
-		btnCancelarItem.setBounds(595, 0, 111, 23);
+		btnCancelarItem.setBounds(641, 29, 144, 23);
 		panel.add(btnCancelarItem);
 		
 		JLabel lblLabelSubTotal = new JLabel("Sub Total:");
@@ -149,6 +151,10 @@ public class JFVendaConsumidor extends JFrame {
 		lblSubtotal.setBounds(632, 64, 188, 36);
 		panel.add(lblSubtotal);
 		
+		JButton btnFecharvenda = new JButton("Fechar Venda");
+		btnFecharvenda.setBounds(462, 0, 167, 51);
+		panel.add(btnFecharvenda);
+		
 		JLabel lblLblproddescricao = new JLabel("SMARTPHONE LG NUBIA-X 7\"");
 		lblLblproddescricao.setForeground(Color.BLUE);
 		lblLblproddescricao.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -158,15 +164,70 @@ public class JFVendaConsumidor extends JFrame {
 		JLabel lblValoritematual = new JLabel("5,80");
 		lblValoritematual.setFont(new Font("Tahoma", Font.BOLD, 42));
 		lblValoritematual.setForeground(Color.RED);
-		lblValoritematual.setBounds(10, 177, 177, 86);
+		lblValoritematual.setBounds(81, 177, 177, 86);
 		contentPane.add(lblValoritematual);
-		this.ruleNota = new RuleNota(null, null, null);
+		
+		JLabel lblColunasitens = new JLabel("item    | Descrição                 | Uni   | Qtde | Vl. Unit   | Vl. Total  ");
+		lblColunasitens.setBounds(440, 135, 426, 15);
+		contentPane.add(lblColunasitens);
+		
+		JLabel lblNumnota = new JLabel("Nota: ");
+		lblNumnota.setBounds(12, 523, 70, 15);
+		contentPane.add(lblNumnota);
+		
+		lblNota = new JLabel("Nota");
+		lblNota.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblNota.setForeground(Color.BLUE);
+		lblNota.setBounds(78, 514, 102, 24);
+		contentPane.add(lblNota);
+		criarRuleNota();
+		criarRuleProduto();
 		criarNota();
 	}
 	
 	private void criarNota() {
 		this.nota = new Nota();
+		nota.setInfAdicionais("ADICIONADO LOCALMENTE");
+		nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
+		nota.setModelo(EnumModeloNota.MOD_59);
+		try {
+			Main.beginTransaction();
+			ruleNota.insert(nota);
+			lblNota.setText(""+nota.getCodigo());
+			Main.commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void criarRuleNota() {
+		this.ruleNota = new RuleNota(null, null, Main.getSession());
+	}
+	
+	private void criarRuleProduto() {
+		this.ruleProduto = new RuleProduto(null, null, Main.getSession());
+	}
+	
+	private void addItem() {
 		
 		
+		NotaItens item = new NotaItens();
+		System.out.println("Chamou evento de adcionar pedido.");
+		try {
+			Produto produto = ruleProduto.find(Integer.parseInt(txtCodeProduto.getText()));
+			ruleNota.inserirItem(nota, item, produto);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		txtrTxtitens.append("0001 - PRODUTO SUBSTITUICAO TRIBUTARIA 1 X 5,80     5,80 \n");
+		//txtrTxtitens.setText("OK");
+		//txtrTxtitens.repaint();
+		System.out.println("Término da Chamada.");
 	}
 }

@@ -30,6 +30,7 @@ import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
+import br.com.barcadero.tables.Produto;
 import br.com.barcadero.tables.Usuario;
 
 
@@ -125,6 +126,13 @@ public class RuleNota extends RuleModelo<Nota> {
 		}
 	}
 	
+	public void inserirItem(Nota nota,NotaItens item, Produto produto)throws Exception {
+		if(nota != null && item != null){
+			getSession().save(nota);
+			item.setProduto(produto);
+			System.out.println("Item insert message >> " + ruleNotaItens.insert(item)); 
+		}
+	}
 	/**
 	 * Inserir um item dando a nota
 	 * @param codeNota

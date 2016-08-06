@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class SocketServer {
 	
-	public static int SERVER_PORT 						= 9000;
+	public static int SERVER_PORT 						= 9080;
 	static{
 		java.lang.System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
 		System.out.println("Criar escalonador");

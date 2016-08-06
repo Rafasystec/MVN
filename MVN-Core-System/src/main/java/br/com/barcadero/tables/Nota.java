@@ -95,7 +95,7 @@ public final class Nota extends EntidadeLoja {
 	@Enumerated(EnumType.STRING)
 	private EnumNotaFaturada flFaturado = EnumNotaFaturada.NAO;
 	@Column(name="",nullable=false)
-	private String serieNota;
+	private String serieNota = "";
     
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="caixa", referencedColumnName="codigo")

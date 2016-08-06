@@ -8,7 +8,7 @@ import org.h2.tools.Server;
 public class StartH2Engine {
 	
 	private static Server server = null;
-	private String dbPath		 = "/local/data/Monitor";
+	private String dbPath		 = "/local/data/Local";
 	public final static String PARAM_PORT		= "-tcpPort";
 	public final static String PARAM_BASE_DIR	= "-baseDir";
 	public final static String PARAM_PASS_WORD	= "-tcpPassword";
@@ -26,6 +26,7 @@ public class StartH2Engine {
 	public StartH2Engine() throws SQLException {
 		// TODO Auto-generated constructor stub
 		server = Server.createTcpServer(PARAM_BASE_DIR, dbPath);
+		
 	}
 	
 	
@@ -39,6 +40,16 @@ public class StartH2Engine {
 		if(server != null){
 			server.stop();
 			server = null;
+		}
+	}
+	
+	public static void runConsoleBrowser() {
+		try {
+			Console console = new Console();
+			console.runTool(null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
