@@ -11,7 +11,8 @@ public class HandleOpenEnderDialog extends SuperHandle{
 	
 	public static void openCadCidade() throws Exception {
 		//openDialog("cadCidade");
-		HandleDialog.openDialog("PopCidade", "500", "500");
+		//HandleDialog.openDialog("PopCidade", "500", "500");
+		HandleDialog.openDialogOutCome("popCidade", "500", "500");
 	}
 
 	public static void openCadBairro() throws Exception {
