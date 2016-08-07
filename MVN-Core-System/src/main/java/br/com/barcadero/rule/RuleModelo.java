@@ -2,6 +2,7 @@ package br.com.barcadero.rule;
 
 import org.hibernate.Session;
 
+import br.com.barcadero.dao.DaoModelo;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 
@@ -17,6 +18,9 @@ public abstract class RuleModelo<T> implements RuleEntityInterface<T>{
 	private Empresa empresa;
 	private Loja loja;
 	
+	public RuleModelo(DaoModelo<T> modelo) {
+		// TODO Auto-generated constructor stub
+	}
 	public RuleModelo(Empresa empresa, Loja loja, Session session) {
 		// TODO Auto-generated constructor stub
 		this.session = session;

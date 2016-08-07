@@ -2,25 +2,36 @@ package br.com.barcadero.rule;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import br.com.barcadero.dao.DaoCliente;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.Vendedor;
-
+/**
+ * Classe de negocio para o cliente
+ * @author Rafael Rocha
+ *
+ */
+@Service
 public class RuleCliente extends RuleModelo<Cliente> {
 
 	
 
-	private final DaoCliente daoCliente;
+	
+	private DaoCliente daoCliente;
+	
+	@Autowired
+	public RuleCliente(DaoCliente daoCliente) {
+		super(daoCliente);
+		this.daoCliente = daoCliente;
+	}
 	
 	public RuleCliente(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		daoCliente = new DaoCliente(empresa, loja, session);
+		//daoCliente = new DaoCliente(empresa, loja, session);
 	}
 	
 	@Override

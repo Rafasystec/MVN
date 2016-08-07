@@ -69,6 +69,7 @@ public class RESTProduto {
     @GET
     @Path("/{id}/get")
     public XMLProduto getProduto(@PathParam("id") int id) {
+    	System.out.println("Getting product with id " + id);
         return new XMLProduto();
     }
     

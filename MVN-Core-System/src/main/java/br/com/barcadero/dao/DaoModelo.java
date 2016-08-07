@@ -1,11 +1,16 @@
 package br.com.barcadero.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.Session;
+//import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
+//@Transactional
 public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_SUCESS_SAVE = "Registro salvo com sucesso!";
 	private final String MSG_SUCESS_DEL  = "Registro excluido!";
@@ -13,10 +18,20 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_ERRO_SAVE	 = "Erro ao tentar salvar o registro.";
 	private final String MSG_ERRO_DEL	 = "Erro ao tentar excluir o registro.";
 	private final String MSG_NOT_FOUND	 = "Registro não encontrado.";
-	private final Session	session;
-	protected final Empresa empresa;
-	protected final Loja loja;
+	private Session	session;
+	protected Empresa empresa;
+	protected Loja loja;
 
+	@PersistenceContext
+	private EntityManager manager;
+	
+	public DaoModelo() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public DaoModelo(EntityManager manager) {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Construtor da DaoModelo
 	 * @param empresa: empresa logada
@@ -29,6 +44,8 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 		this.loja 		= loja;
 		this.empresa 	= empresa;
 	}
+	
+	
 	
 	@Deprecated
 	public DaoModelo(Session session){
@@ -65,7 +82,7 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 		try{
 			if(entidade != null){
 				getSession().save(entidade);
-				getSession().flush();
+				//manager.persist(entidade);
 				return getMSG_SUCESS_SAVE();
 			}else{
 				return getMSG_ERRO_SAVE();
@@ -76,6 +93,7 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 		}
 	}
 
+	
 	public String delete(long codigo) throws Exception{
 		try {
 			if(codigo <= 0){
@@ -84,6 +102,7 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 			T entidade = this.find(codigo);
 			if(entidade != null){
 				getSession().delete(entidade);
+				//manager.remove(entidade);
 			}
 			return "";
 		}catch (Exception e) {
@@ -98,6 +117,7 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 				throw new Exception("Entidade veio nula.");
 			}
 			getSession().delete(entidade);
+			//manager.remove(entidade);
 			return "Registro Deletado.";
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -110,12 +130,12 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 			throw new Exception("Entidade veio nula.");
 		}
 		getSession().update(entidade);
+		//manager.merge(entidade);
 		return getMSG_SUCESS_UPD();
 	}
 
 	
 	public abstract T find(long codigo) throws Exception;
-	//public abstract List<Entidade> findAll() throws Exception;
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -123,6 +143,14 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 
 	public Loja getLoja() {
 		return loja;
+	}
+
+	public EntityManager getManager() {
+		return manager;
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
 	}
 
 }

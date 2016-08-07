@@ -21,8 +21,11 @@
                         http://www.springframework.org/schema/util
                         http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 
+	<!-- Habilitar o suporte para anotacoes -->
 	<context:annotation-config />
-	<context:component-scan base-package="br.com.scose.*" />
+	<!-- Realizar a procura por anotacoes @Respository, @Service e tec ... -->
+	<context:component-scan base-package="br.com.barcadero.dao" />
+	<context:component-scan base-package="br.com.barcadero.rule" />
 	
 	<!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -31,23 +34,24 @@
 		<property name="username" value="postgres" />
 		<property name="password" value="secrel" />
 	</bean>
- 
+ 	-->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" autowire-candidate="default">
+		<!-- 
 		<property name="dataSource" ref="dataSource" />
 		<property name="persistenceUnitName" value="SCOSE" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="false" />
-				<property name="showSql" value="true" />
+				<property name="showSql" value="false" />
 				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 			</bean>
 		</property>
+		 -->
 	</bean>
-	 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" autowire-candidate="default">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
+	<!-- Habilita o suporte ao controle transacional, delega ao Spring a funcao de abrir e fechar cada transacao -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
