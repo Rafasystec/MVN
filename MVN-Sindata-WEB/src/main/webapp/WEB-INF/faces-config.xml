@@ -15,11 +15,10 @@
 			Desta forma, sempre que o JSF avaliar uma EL em busca de um objeto e, este não for encontrado
 			no contexto do JSF, a busca caira sobre o container do Spring. Se o objeto com determinado nome 
 			existir no container spring, estão este sera retornado.
-		 
+		 -->
 		<el-resolver>
 			org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
-		-->
 	</application>
 
 	<navigation-rule>

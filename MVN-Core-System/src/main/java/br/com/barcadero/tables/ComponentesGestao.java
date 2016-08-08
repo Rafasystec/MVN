@@ -9,6 +9,10 @@ import javax.persistence.Table;
 public class ComponentesGestao extends Entidade{
 	private static final long serialVersionUID = 7446425245435925375L;
 
+	public ComponentesGestao() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public ComponentesGestao(Usuario usuario) {
 		super(usuario);
 		// TODO Auto-generated constructor stub

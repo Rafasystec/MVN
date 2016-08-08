@@ -11,6 +11,9 @@ public class ParametroConfigSAT extends Entidade {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public ParametroConfigSAT() {
+		// TODO Auto-generated constructor stub
+	}
 	public ParametroConfigSAT(Usuario usuario) {
 		super(usuario);
 		// TODO Auto-generated constructor stub

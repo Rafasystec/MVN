@@ -29,7 +29,7 @@ import br.com.barcadero.core.enums.EnumUF;
 @Entity
 @Table(name="ESTADO")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public final class Estado extends Entidade{
+public class Estado extends Entidade{
 
 	private static final long serialVersionUID = 3701487730264454049L;
 

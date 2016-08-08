@@ -51,7 +51,7 @@
 		</servlet-class>
 		<init-param>
       		<param-name>javax.ws.rs.Application</param-name>
-      		<param-value>br.com.barcadero.web.services.jaxrs.ProdutoApplication</param-value>
+      		<param-value>br.com.barcadero.web.services.jaxrs.RESTApplication</param-value>
     	</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -67,7 +67,6 @@
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	<!-- 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -80,7 +79,6 @@
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
-	 -->
 	<mime-mapping>
         <extension>eot</extension>
         <mime-type>application/vnd.ms-fontobject</mime-type>

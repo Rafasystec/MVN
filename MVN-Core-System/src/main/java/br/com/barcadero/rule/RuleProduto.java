@@ -7,20 +7,28 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import br.com.barcadero.core.xml.entities.XMLProduto;
 import br.com.barcadero.dao.DaoProduto;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
-
+@Service
 public class RuleProduto extends RuleModelo<Produto> {
 
-	private final DaoProduto daoProduto;
+	private DaoProduto daoProduto;
 	public RuleProduto(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoProduto = new DaoProduto(empresa, loja, session);
+	}
+	
+	@Autowired
+	public RuleProduto(Session session) {
+		super(session);
 	}
 
 	@Override
@@ -105,5 +113,47 @@ public class RuleProduto extends RuleModelo<Produto> {
 			return produto.getPrecoVenda();
 		}
 		return new BigDecimal(0.00);
+	}
+	/**
+	 * 
+	 * @param produto
+	 * @return
+	 */
+	public XMLProduto parseToXMLProduto(Produto produto) {
+		XMLProduto xmlProduto = null;
+		if(produto != null){
+			xmlProduto = new XMLProduto();
+			xmlProduto.setAliqISSQN( produto.getAliqISSQN());
+			xmlProduto.setAliquota( produto.getAliquota());
+			xmlProduto.setCdFornecedor(produto.getCdFornecedor());
+			xmlProduto.setCdNcm(produto.getCdNcm());
+			xmlProduto.setCdProd(produto.getCdProd());
+			xmlProduto.setCest(produto.getCest());
+			xmlProduto.setCfop(produto.getCfop());
+			xmlProduto.setCodigo(produto.getCodigo());
+			xmlProduto.setCstCOFINS(produto.getCstCOFINS());
+			xmlProduto.setCstIcms(produto.getCstIcms());
+			xmlProduto.setCstIpi(produto.getCstIpi());
+			xmlProduto.setCstPis( produto.getCstPis());
+			xmlProduto.setDescricao(produto.getDescricao());
+			xmlProduto.setDtInicioPromo( produto.getDtInicioPromo());
+			xmlProduto.setDtTerminPromo(produto.getDtTerminPromo());
+			xmlProduto.setEan(produto.getEan());
+			xmlProduto.setFator(produto.getFator());
+			xmlProduto.setMsgPromocional(produto.getMsgPromocional());
+			xmlProduto.setNaturezaOperacaoIssqn(produto.getNaturezaOperacaoIssqn());
+			xmlProduto.setNmAduaneiro(produto.getNmAduaneiro());
+			xmlProduto.setOrigemIcms(produto.getOrigemIcms());
+			xmlProduto.setPrecoCusto(produto.getPrecoCusto());
+			xmlProduto.setPrecoVenda(produto.getPrecoVenda());
+			xmlProduto.setPrecoPromo(produto.getPrecoPromo());
+			xmlProduto.setSitTributaria(produto.getSitTributaria());
+			xmlProduto.setTipoCofins(produto.getTipoCofins());
+			xmlProduto.setTipoICMS(produto.getTipoICMS());
+			xmlProduto.setTipoPis(produto.getTipoPis());
+			xmlProduto.setTipoProduto(produto.getTipoProduto());
+			xmlProduto.setUnidade(produto.getUnidade());
+		}
+		return xmlProduto;
 	}
 }

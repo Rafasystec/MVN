@@ -5,12 +5,13 @@ import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-@ApplicationPath("/services")
-public class ProdutoApplication extends Application {
+
+public class RESTApplication extends Application {
 	private Set<Object> singletons = new HashSet<Object>();
 	 
-    public ProdutoApplication() {
+    public RESTApplication() {
         singletons.add(new RESTProduto());
+        singletons.add(new RESTCliente());
     }
  
     @Override

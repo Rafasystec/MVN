@@ -2,15 +2,13 @@ package br.com.barcadero.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.hibernate.Session;
-//import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.transaction.annotation.Transactional;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
-//@Transactional
+@Transactional
 public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_SUCESS_SAVE = "Registro salvo com sucesso!";
 	private final String MSG_SUCESS_DEL  = "Registro excluido!";
@@ -18,12 +16,15 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 	private final String MSG_ERRO_SAVE	 = "Erro ao tentar salvar o registro.";
 	private final String MSG_ERRO_DEL	 = "Erro ao tentar excluir o registro.";
 	private final String MSG_NOT_FOUND	 = "Registro não encontrado.";
-	private Session	session;
+	
 	protected Empresa empresa;
 	protected Loja loja;
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@PersistenceContext
+	private Session	session;
 	
 	public DaoModelo() {
 		// TODO Auto-generated constructor stub

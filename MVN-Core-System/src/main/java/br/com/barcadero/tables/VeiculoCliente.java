@@ -11,6 +11,9 @@ import javax.persistence.Table;
 @Table(name="VEICULO_CLIENTE")
 public class VeiculoCliente extends VeiculoSuperClass {
 	
+	public VeiculoCliente() {
+		// TODO Auto-generated constructor stub
+	}
 	public VeiculoCliente(Empresa empresa,Usuario usuario) {
 		super(empresa,usuario);
 	}

@@ -14,6 +14,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class EntidadeFiliada extends Entidade{
+	
+	public EntidadeFiliada() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * 
 	 */

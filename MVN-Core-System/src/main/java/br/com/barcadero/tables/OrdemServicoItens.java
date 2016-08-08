@@ -24,6 +24,10 @@ public class OrdemServicoItens extends EntidadeLoja {
 
 	public static final String FIND_ALL 	= "OrdemServicoItens.findAll";
 	public static final String FIND_BY_OS 	= "OrdemServicoItens.findByOS";
+	public OrdemServicoItens() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public OrdemServicoItens(Empresa empresa, Loja loja, Usuario usuario) {
 		super(empresa, loja, usuario);
 		

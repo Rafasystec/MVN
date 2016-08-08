@@ -1,9 +1,20 @@
 package br.com.barcadero.core.enums;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
+/**
+ * 
+ * @author Rafael Rocha
+ *
+ */
+@XmlType
+@XmlEnum
 public enum EnumTipoCOFINS {
-	COFINS_ALIQ,
-	COFINS_NT,
-	COFINS_OUTRO,
-	COFINS_QTDE,
-	COFINS_SN
+	@XmlEnumValue("ALIQ") 	COFINS_ALIQ,
+	@XmlEnumValue("NT") 	COFINS_NT,
+	@XmlEnumValue("OUTRO") 	COFINS_OUTRO,
+	@XmlEnumValue("QTDE") 	COFINS_QTDE,
+	@XmlEnumValue("SN") 	COFINS_SN
 }

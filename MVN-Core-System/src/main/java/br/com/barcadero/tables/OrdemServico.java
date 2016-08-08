@@ -27,6 +27,9 @@ import br.com.barcadero.core.util.GlobalNameParam;
 @Table(name="ORDEM_SERVICO")
 public class OrdemServico extends EntidadeLoja {
 
+	public OrdemServico() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public OrdemServico(Empresa empresa, Loja loja, Usuario usuario) {
 		super(empresa, loja, usuario);

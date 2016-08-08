@@ -27,18 +27,17 @@
 	<context:component-scan base-package="br.com.barcadero.dao" />
 	<context:component-scan base-package="br.com.barcadero.rule" />
 	
-	<!-- 
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/scose" />
 		<property name="username" value="postgres" />
 		<property name="password" value="secrel" />
 	</bean>
- 	-->
+ 	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" autowire-candidate="default">
-		<!-- 
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="SCOSE" />
+		<property name="persistenceUnitName" value="NAUTILUS" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="false" />
@@ -46,7 +45,6 @@
 				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 			</bean>
 		</property>
-		 -->
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" autowire-candidate="default">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />

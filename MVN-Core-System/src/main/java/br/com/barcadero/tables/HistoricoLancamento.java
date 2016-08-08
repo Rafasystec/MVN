@@ -24,13 +24,13 @@ public class HistoricoLancamento extends Entidade{
 
 	private static final long serialVersionUID = 5234674210983840912L;
 
+	public HistoricoLancamento() {
+		// TODO Auto-generated constructor stub
+	}
 	public HistoricoLancamento(Usuario usuario) {
 		super(usuario);
 		// TODO Auto-generated constructor stub
 	}
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) 
-	@Column(name="codigo",nullable=false)
-	private long codigo;
 	@Column(name="cod_externo",nullable=false)
 	private long codExterno; //Codigo que sera apresentado ao usuario
 	@Column(name="cod_emp",nullable=false)
@@ -54,12 +54,6 @@ public class HistoricoLancamento extends Entidade{
 	}
 	public void setDtCadastro(Date dtCadastro) {
 		this.dtCadastro = dtCadastro;
-	}
-	public long getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
 	}
 	public long getCodExterno() {
 		return codExterno;

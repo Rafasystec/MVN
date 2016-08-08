@@ -1,5 +1,8 @@
 package br.com.barcadero.web.services.jaxrs;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,18 +15,18 @@ import javax.ws.rs.core.Response;
 
 import br.com.barcadero.core.xml.entities.RSGenericResponse;
 import br.com.barcadero.core.xml.entities.XMLProduto;
+import br.com.barcadero.core.xml.entities.XMLProdutoLote;
 import br.com.barcadero.rule.RuleProduto;
+import br.com.barcadero.tables.Produto;
 
 @Path("/produtos")
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class RESTProduto {
 	
+	@Inject
 	private RuleProduto ruleProduto;
 	
-	public RESTProduto() {
-		ruleProduto = new RuleProduto(null, null, null);
-	}
 	
 	@GET
 	@Path("/{param}")
@@ -75,8 +78,12 @@ public class RESTProduto {
     
     @GET
     @Path("/getAll")
-    public XMLProduto[] getAllProdutos() {
-    	 XMLProduto[] produtos = new  XMLProduto[3];
-        return  produtos;
+    public XMLProdutoLote getAllProdutos() {
+    	XMLProdutoLote produtos = new XMLProdutoLote();
+    	List<Produto> listProd = ruleProduto.findAll();
+    	for (Produto produto : listProd) {
+    		produtos.getProdutos().add(ruleProduto.parseToXMLProduto(produto));
+    	}
+    	return  produtos;
     }
 }

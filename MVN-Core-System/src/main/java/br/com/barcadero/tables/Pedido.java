@@ -33,7 +33,7 @@ import br.com.barcadero.core.util.GlobalNameParam;
 })
 @Entity
 @Table(name="PEDIDO")
-public final class Pedido extends EntidadeLoja {
+public class Pedido extends EntidadeLoja {
 
 	public static final String FIND_ALL 		= "Pedido.findAll";
 	public static final String FIND_BY_LOJA 	= "Pedido.findByLoja";

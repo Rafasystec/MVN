@@ -9,7 +9,7 @@ import javax.persistence.Entity;
  * @since Gsind 1.0 Beta 24/09/2013 06:30
  */
 @Entity
-public class Contato {
+public class Contato extends Entidade{
 	@Column(name="cod_pessoa",nullable=false)
 	private long codPessoa;
 	private int dddCel01;

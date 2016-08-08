@@ -15,6 +15,9 @@ public class UsuarioPermissoes extends Entidade{
 	 * 
 	 */
 	private static final long serialVersionUID = -3413518513189485701L;
+	public UsuarioPermissoes() {
+		// TODO Auto-generated constructor stub
+	}
 	public UsuarioPermissoes(Usuario usuario) {
 		super(usuario);
 		// TODO Auto-generated constructor stub

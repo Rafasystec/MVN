@@ -40,7 +40,7 @@ import br.com.barcadero.module.sat.enums.EnumCFeXMLVersion;
 
 @Entity 
 @Table(name="NOTA")
-public final class Nota extends EntidadeLoja {
+public class Nota extends EntidadeLoja {
 
 	private static final long serialVersionUID = -6879906509789228192L;
 	public Nota() {
