@@ -40,7 +40,7 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 	public SuperBean() {
 		// TODO Auto-generated constructor stub
 		this.session = SessionContext.getInstance();
-		ruleCaixa    = new RuleCaixa(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		//ruleCaixa    = new RuleCaixa(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public SessionContext getSession() {

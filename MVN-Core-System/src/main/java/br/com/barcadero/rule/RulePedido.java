@@ -28,7 +28,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 	private RuleGenarateCFe ruleGenarateCFe;
 	public RulePedido(Empresa empresa, Loja loja, Session session, Caixa caixa) {
 		super(empresa, loja, session);
-		ruleCaixa       = new RuleCaixa(empresa, loja, session);
+		//ruleCaixa       = new RuleCaixa(empresa, loja, session);
 		daoPedido       = new DaoPedido(empresa, loja, session);
 		ruleNota        = new RuleNota(empresa, loja, session);
 		ruleGenarateCFe = new RuleGenarateCFe(empresa, loja, caixa, session);

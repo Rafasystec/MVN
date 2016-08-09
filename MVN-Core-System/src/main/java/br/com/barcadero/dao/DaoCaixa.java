@@ -4,20 +4,24 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 
+@Repository
 public class DaoCaixa extends DaoModelo<Caixa> {
 
-	
-
-	public DaoCaixa(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
+	public DaoCaixa() {
 		// TODO Auto-generated constructor stub
 	}
+
+//	public DaoCaixa(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public Caixa find(long codigo) throws Exception {
@@ -28,9 +32,12 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 
 	@Override
 	public List<Caixa> findAll() throws Exception {
-		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL)
-				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
-		return qry.list();
+//		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL)
+//				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+//		return qry.list();
+		javax.persistence.Query qry = manager.createNamedQuery(Caixa.FIND_ALL);
+				//.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+		return qry.getResultList();
 	}
 	
 	public List<Caixa> findAll(long codigo) {

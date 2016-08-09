@@ -4,6 +4,7 @@ package br.com.barcadero.web.beans;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
@@ -25,6 +26,7 @@ public class BeanConfigCaixa extends SuperBean {
 	private Caixa caixa;
 	private Caixa selectedCaixa;
 	private List<Caixa> caixas;
+	@ManagedProperty(name="ruleCaixa",value="#{ruleCaixa}")
 	private RuleCaixa ruleCaixa;
 	private EnumModeloNota[] tiposNota;
 	private EnumTipoModuloSAT[] modulosSAT;
@@ -33,7 +35,7 @@ public class BeanConfigCaixa extends SuperBean {
 	public BeanConfigCaixa() {
 		// TODO Auto-generated constructor stub
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
-		ruleCaixa	= new RuleCaixa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+		//ruleCaixa	= new RuleCaixa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		System.out.println(BeanConfigCaixa.class + " was created!");
 	}
 	
@@ -121,6 +123,14 @@ public class BeanConfigCaixa extends SuperBean {
 
 	public void setModulosSAT(EnumTipoModuloSAT[] modulosSAT) {
 		this.modulosSAT = modulosSAT;
+	}
+
+	public RuleCaixa getRuleCaixa() {
+		return ruleCaixa;
+	}
+
+	public void setRuleCaixa(RuleCaixa ruleCaixa) {
+		this.ruleCaixa = ruleCaixa;
 	}
 	
 

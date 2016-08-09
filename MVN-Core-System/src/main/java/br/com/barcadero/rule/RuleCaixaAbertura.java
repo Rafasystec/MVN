@@ -21,7 +21,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 	public RuleCaixaAbertura(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoCaixaAbertura = new DaoCaixaAbertura(empresa, loja, session);
-		daoCaixa		 = new DaoCaixa(empresa, loja, session);
+		//daoCaixa		 = new DaoCaixa(empresa, loja, session);
 	}
 
 	@Override

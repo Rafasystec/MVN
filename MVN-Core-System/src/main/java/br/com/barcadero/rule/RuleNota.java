@@ -41,15 +41,15 @@ public class RuleNota extends RuleModelo<Nota> {
 	private DaoPedido daoPedido;
 	private DaoOrdemServico daoOrdemServico;
 	//private final DaoNotaItens daoItens;
-	private final RuleNotaItens ruleNotaItens;
-	private final RuleCaixa ruleCaixa;
+	private RuleNotaItens ruleNotaItens;
+	private RuleCaixa ruleCaixa;
 	
 
 	public RuleNota(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoNota 		= new DaoNota(empresa, loja, session);
 		daoMeio	 		= new DaoMeioPgto(empresa, loja, session);
-		ruleCaixa		= new RuleCaixa(empresa, loja, session);
+		//ruleCaixa		= new RuleCaixa(empresa, loja, session);
 		ruleNotaItens 	= new RuleNotaItens(empresa, loja, session);
 		daoPedido		= new DaoPedido(empresa, loja, session);
 		daoOrdemServico	= new DaoOrdemServico(empresa, loja, session);

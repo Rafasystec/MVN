@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.tables.Caixa;
@@ -13,13 +15,20 @@ import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
 
+@Component
 public class RuleCaixa extends RuleModelo<Caixa> {
 
 	private DaoCaixa daoCaixa;
-	public RuleCaixa(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoCaixa = new DaoCaixa(empresa, loja, session);
+	
+	@Autowired
+	public RuleCaixa(DaoCaixa daoCaixa) {
+		this.daoCaixa = daoCaixa;
 	}
+	
+//	public RuleCaixa(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		daoCaixa = new DaoCaixa(empresa, loja, session);
+//	}
 
 	/**
 	 * Inserir um caixa.
