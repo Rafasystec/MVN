@@ -37,9 +37,6 @@ public class HistoricoLancamento extends Entidade{
 	private long codEmp; //Codigo da empresa.
 	@Column(name="descricao",nullable=false)
 	private String descricao;
-	@Column(name="dt_cadastro",nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtCadastro;
 	
 	private boolean podeAlterar;
 	
@@ -48,12 +45,6 @@ public class HistoricoLancamento extends Entidade{
 	}
 	public void setPodeAlterar(boolean podeAlterar) {
 		this.podeAlterar = podeAlterar;
-	}
-	public Date getDtCadastro() {
-		return dtCadastro;
-	}
-	public void setDtCadastro(Date dtCadastro) {
-		this.dtCadastro = dtCadastro;
 	}
 	public long getCodExterno() {
 		return codExterno;

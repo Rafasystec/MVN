@@ -1,5 +1,7 @@
 package br.com.barcadero.tables;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,7 +46,7 @@ public class NFeIde extends Entidade{
 	@Column(name="DH_EMI")
 	@Enumerated(EnumType.STRING)
 	@Temporal(TemporalType.TIMESTAMP)
-	private String dhEmi;
+	private Date dhEmi;
 	@Column(name="DH_SAIENT")
 	private String dhSaiEnt;
 	@Column(name="TP_NF")
@@ -125,12 +127,6 @@ public class NFeIde extends Entidade{
 	}
 	public void setnNF(String nNF) {
 		this.nNF = nNF;
-	}
-	public String getDhEmi() {
-		return dhEmi;
-	}
-	public void setDhEmi(String dhEmi) {
-		this.dhEmi = dhEmi;
 	}
 	public String getDhSaiEnt() {
 		return dhSaiEnt;
@@ -227,6 +223,12 @@ public class NFeIde extends Entidade{
 	}
 	public void setNrCOO(String nrCOO) {
 		this.nrCOO = nrCOO;
+	}
+	public Date getDhEmi() {
+		return dhEmi;
+	}
+	public void setDhEmi(Date dhEmi) {
+		this.dhEmi = dhEmi;
 	}
 	
 	

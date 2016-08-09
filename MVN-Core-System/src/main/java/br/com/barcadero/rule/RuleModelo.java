@@ -1,5 +1,7 @@
 package br.com.barcadero.rule;
 
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoModelo;
@@ -18,9 +20,18 @@ public abstract class RuleModelo<T> implements RuleEntityInterface<T>{
 	private Empresa empresa;
 	private Loja loja;
 	
+	public RuleModelo() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public RuleModelo(DaoModelo<T> modelo) {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public RuleModelo(EntityManager manager) {
+		
+	}
+	
 	public RuleModelo(Empresa empresa, Loja loja, Session session) {
 		// TODO Auto-generated constructor stub
 		this.session = session;

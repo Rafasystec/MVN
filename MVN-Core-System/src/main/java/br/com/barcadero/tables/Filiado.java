@@ -77,28 +77,6 @@ public class Filiado extends PessoaFisica{
 	private Date dtEmisReservista;
 	@Column(name="dt_retornor",nullable=false)
 	private Date dtRetorno;
-
-	/*
-	-------------------------------------------------------------------------------------------------
-	Por padrão, quando aplicamos o tipo java.util.Date ou java.util.Calendar, tanto a data
-	quanto a hora serão armazenadas no banco de dados. Para mudar esse comportamento, devemos
-	aplicar a anotação @Temporal escolhendo uma das três opções abaixo:
-	TemporalType.DATE: Armazena apenas a data (dia, mês e ano).
-	TemporalType.TIME: Armazena apenas o horário (hora, minuto e segundo).
-	TemporalType.TIMESTAMP (Padrão): Armazena a data e o horário.
-	------------------------------------------------------------------------------------------------- 
-	 */
-	
-	@Column(name="dt_cadastro",nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtCadastro;
-
-	public Date getDtCadastro() {
-		return dtCadastro;
-	}
-	public void setDtCadastro(Date dtCadastro) {
-		this.dtCadastro = dtCadastro;
-	}
 	
 	public String getReservista() {
 		return reservista;

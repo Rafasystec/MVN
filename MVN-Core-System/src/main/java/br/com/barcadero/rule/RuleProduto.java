@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Component;
 import br.com.barcadero.core.xml.entities.XMLProduto;
 import br.com.barcadero.dao.DaoProduto;
 import br.com.barcadero.tables.Empresa;
@@ -17,18 +15,25 @@ import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
-@Service
+@Component
 public class RuleProduto extends RuleModelo<Produto> {
 
+	
 	private DaoProduto daoProduto;
 	public RuleProduto(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoProduto = new DaoProduto(empresa, loja, session);
 	}
 	
+	public RuleProduto() {
+		// TODO Auto-generated constructor stub
+		System.out.println(">>>>>>>>>>Criando Rule Produto<<<<<<<<<<<<<<<<<<<");
+	}
+	
 	@Autowired
-	public RuleProduto(Session session) {
-		super(session);
+	public RuleProduto(DaoProduto daoProduto){
+		this.daoProduto = daoProduto;
+		System.out.println(">>>>>>>>>>Criando Rule Produto com a dao produto <<<<<<<<<<<<<<<<<<<");
 	}
 
 	@Override
@@ -58,9 +63,8 @@ public class RuleProduto extends RuleModelo<Produto> {
 		return daoProduto.findByDataCadastro(date);
 	}
 	
-	public List<Produto> findAll() {
-		Query qry = getSession().getNamedQuery(Produto.FIND_ALL);
-		return (List<Produto>)qry.list();
+	public List<Produto> findAll() throws Exception {
+		return daoProduto.findAll();
 	}
 	
 	/**

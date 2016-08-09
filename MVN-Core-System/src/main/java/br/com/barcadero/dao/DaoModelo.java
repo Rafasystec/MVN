@@ -21,18 +21,14 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 	protected Loja loja;
 
 	@PersistenceContext
-	private EntityManager manager;
+	protected EntityManager manager;
 	
-	@PersistenceContext
 	private Session	session;
 	
 	public DaoModelo() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public DaoModelo(EntityManager manager) {
-		// TODO Auto-generated constructor stub
-	}
+
 	/**
 	 * Construtor da DaoModelo
 	 * @param empresa: empresa logada
@@ -82,8 +78,8 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 	public String insert(Entidade entidade) throws Exception{
 		try{
 			if(entidade != null){
-				getSession().save(entidade);
-				//manager.persist(entidade);
+				//getSession().save(entidade);
+				manager.persist(entidade);
 				return getMSG_SUCESS_SAVE();
 			}else{
 				return getMSG_ERRO_SAVE();

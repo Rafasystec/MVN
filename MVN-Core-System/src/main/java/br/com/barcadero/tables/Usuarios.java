@@ -1,11 +1,7 @@
 package br.com.barcadero.tables;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class Usuarios extends Entidade{
@@ -26,8 +22,6 @@ public class Usuarios extends Entidade{
 	private String login;
 	@Column(name="senha",nullable=false,length=60)
 	private String senha;
-	@Column(name="dt_cadastro",nullable=false)
-	private Date dtCadastro;
 	@Column(name="nome",nullable=false)
 	private String nome;
 	
@@ -61,12 +55,4 @@ public class Usuarios extends Entidade{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Date getDtCadastro() {
-		return dtCadastro;
-	}
-	public void setDtCadastro(Date dtCadastro) {
-		this.dtCadastro = dtCadastro;
-	}
-	
-	
 }

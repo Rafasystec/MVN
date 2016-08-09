@@ -27,12 +27,17 @@
 	<context:component-scan base-package="br.com.barcadero.dao" />
 	<context:component-scan base-package="br.com.barcadero.rule" />
 	
-	
+	<!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/scose" />
 		<property name="username" value="postgres" />
 		<property name="password" value="secrel" />
+	</bean>
+	 -->
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/nautilus" />
 	</bean>
  	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" autowire-candidate="default">
@@ -53,5 +58,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean id="rulePedido" class="br.com.barcadero.rule.RuleProduto">
+	</bean>
 
 </beans>

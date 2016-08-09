@@ -2,7 +2,6 @@ package br.com.barcadero.web.services.jaxrs;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,21 +11,34 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import br.com.barcadero.core.xml.entities.RSGenericResponse;
 import br.com.barcadero.core.xml.entities.XMLProduto;
 import br.com.barcadero.core.xml.entities.XMLProdutoLote;
 import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Produto;
-
+@Component
 @Path("/produtos")
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class RESTProduto {
 	
-	@Inject
 	private RuleProduto ruleProduto;
 	
+	public RESTProduto() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("**/applicationContext.xml");
+		//ApplicationContext context = new FileSystemXmlApplicationContext("**/applicationContext.xml");
+		 ruleProduto = context.getBean(RuleProduto.class);
+		 
+	}
+	
+	@Autowired
+	public RESTProduto(RuleProduto ruleProduto) {
+		this.ruleProduto = ruleProduto;
+	}
 	
 	@GET
 	@Path("/{param}")
@@ -78,7 +90,7 @@ public class RESTProduto {
     
     @GET
     @Path("/getAll")
-    public XMLProdutoLote getAllProdutos() {
+    public XMLProdutoLote getAllProdutos() throws Exception {
     	XMLProdutoLote produtos = new XMLProdutoLote();
     	List<Produto> listProd = ruleProduto.findAll();
     	for (Produto produto : listProd) {

@@ -20,23 +20,23 @@ public abstract class VeiculoSuperClass extends EntidadeEmpresa{
 	
 	private static final long serialVersionUID = 1758235854026841356L;
 	@Column(name="PLACA")
-	private String placa;
+	private String placa = "";
 	@Column(name="ANO_MODELO")
-	private String anoModelo;
+	private String anoModelo = "";
 	@Column(name="ANO_FABRICACAO")
-	private String anoFabricacao;
+	private String anoFabricacao = "";
 	@Column(name="TRACAO")
 	@Enumerated(EnumType.STRING)
-	private EnumTracaoVeiculo tracao;
+	private EnumTracaoVeiculo tracao = EnumTracaoVeiculo.T4X2;
 	@Column(name="DESCRICAO")
-	private String descricao;
+	private String descricao= "";
 	@Column(name="OBSERVACAO")
 	private String observacao;
 	@Column(name="COMBUSTIVEL")
 	@Enumerated(EnumType.STRING)
 	private EnumTipoCombustivel combustivel;
 	@Column(name="MEDIA_KM_DIA")
-	private int mediaKmDia;
+	private int mediaKmDia = 0;
 	
 	
 	public String getPlaca() {

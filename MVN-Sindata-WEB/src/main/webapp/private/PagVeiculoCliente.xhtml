@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Veiculo Cliente" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanVeiculoCliente}"></clx:buttonsCrud>
+		<p:panel header="Funcao Principal da tela">
+			<p:outputLabel value="Ano Fab"/>
+			<p:inputText value="#{beanVeiculoCliente.veiculoCliente.anoFabricacao}"/>
+			
+			<p:outputLabel value="Ano Modelo"/>
+			<p:inputText value="#{beanVeiculoCliente.veiculoCliente.anoModelo}"/>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>
