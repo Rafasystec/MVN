@@ -27,7 +27,7 @@ public class HandleCargaCidadesCE {
 	public HandleCargaCidadesCE(Empresa empresa, Loja loja, Session session, Usuario usuario) {
 		daoEstado 	 = new DaoEstado(empresa, loja, session);
 		daoCidade	 = new DaoCidade(empresa, loja, session);
-		daoBairro	 = new DaoBairro(empresa, loja, session);
+		//daoBairro	 = new DaoBairro(empresa, loja, session);
 		this.usuario = usuario;
 	}
 

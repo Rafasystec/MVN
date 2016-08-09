@@ -73,7 +73,7 @@ public class BeanEmpresa extends SuperBean {
 		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		fcdEstado	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		fcdCidade	= new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		//fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		ruleLoja	= new RuleLoja(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 		System.out.println("Bean Empresa was created.");
 	}

@@ -2,12 +2,14 @@ package br.com.barcadero.web.beans;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+
 import br.com.barcadero.core.enums.EnumCSTICMS;
 import br.com.barcadero.core.enums.EnumCSTIPI;
 import br.com.barcadero.core.enums.EnumCSTPIS;
 import br.com.barcadero.core.enums.EnumOrigemCSTICMS;
-import br.com.barcadero.core.enums.EnumSitTributCSTIPI;
 import br.com.barcadero.core.enums.EnumUnidadeMedida;
 import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Produto;
@@ -25,14 +27,13 @@ public class BeanProduto extends SuperBean {
 	private List<Produto> produtos;
 	private List<Produto> produtosSelecionados;
 	private Produto produto;
+	
+	@ManagedProperty(name="ruleProduto",value="#{ruleProduto}")
 	private RuleProduto ruleProduto;
 	
 	public BeanProduto() {
-		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		produto		= new Produto(getSession().getEmpresaLogada(), null);
 	}
-	
-	
 	
 	public EnumCSTICMS[] getCstIcms() {
 		return EnumCSTICMS.values();
@@ -139,6 +140,18 @@ public class BeanProduto extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	public RuleProduto getRuleProduto() {
+		return ruleProduto;
+	}
+
+
+
+	public void setRuleProduto(RuleProduto ruleProduto) {
+		this.ruleProduto = ruleProduto;
 	}
 
 }

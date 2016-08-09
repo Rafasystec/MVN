@@ -206,7 +206,7 @@ public class JFVendaConsumidor extends JFrame {
 	}
 	
 	private void criarRuleProduto() {
-		this.ruleProduto = new RuleProduto(null, null, Main.getSession());
+		//this.ruleProduto = new RuleProduto(null, null, Main.getSession());
 	}
 	
 	private void addItem() {

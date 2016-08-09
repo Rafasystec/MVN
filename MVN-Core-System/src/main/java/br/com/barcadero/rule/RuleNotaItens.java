@@ -27,7 +27,7 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 	
 	public RuleNotaItens(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		ruleProduto = new RuleProduto(empresa, loja, session);
+		//ruleProduto = new RuleProduto(empresa, loja, session);
 		//ruleNota	= new RuleNota(empresa, loja, session);
 		daoNotaItens= new DaoNotaItens(empresa, loja, session);
 	}

@@ -38,7 +38,7 @@ public class HandleEndereco extends SuperBean{
 	public HandleEndereco() {
 		fcdEstado = new RuleEstado(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		fcdCidade = new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdBairro = new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		//fcdBairro = new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public Endereco getEnder() {

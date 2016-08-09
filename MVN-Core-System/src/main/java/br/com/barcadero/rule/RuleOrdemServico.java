@@ -24,7 +24,7 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 		super(empresa, loja, session);
 		daoOrdemServico 		= new DaoOrdemServico(empresa, loja, session);
 		daoOrdemServicoItens 	= new DaoOrdemServicoItens(empresa, loja, session);
-		ruleProduto				= new RuleProduto(empresa, loja, session);
+		//ruleProduto				= new RuleProduto(empresa, loja, session);
 	}
 
 	@Override

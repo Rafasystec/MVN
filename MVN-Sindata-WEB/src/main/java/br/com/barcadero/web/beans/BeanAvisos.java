@@ -18,7 +18,7 @@ public class BeanAvisos extends SuperBean {
 	private EnumTipoAviso[] tipos;
 	private RuleAvisos rulAvisos;
 	public BeanAvisos() {
-		rulAvisos 	= new RuleAvisos(getDataBaseSession());
+		//rulAvisos 	= new RuleAvisos(getDataBaseSession());
 		aviso 		= new Avisos(getSession().getLojaLogada(), getSession().getUsuarioLogado());
 	}
 	

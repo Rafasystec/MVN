@@ -2,28 +2,15 @@ package br.com.barcadero.dao;
 
 import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.hibernate.Query;
-import org.hibernate.Session;
-//import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
+import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.tables.Produto;
 
-@Transactional
 @Repository
 public class DaoProduto extends DaoModelo <Produto>{
 
-	
-	public DaoProduto(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
-	}
-	
 	public DaoProduto() {
 		// TODO Auto-generated constructor stub
 	}
@@ -42,9 +29,9 @@ public class DaoProduto extends DaoModelo <Produto>{
 	}
 	
 	public List<Produto> findByDataCadastro(Date date) throws Exception {
-		Query qry = getSession().getNamedQuery(Produto.FIND_BY_DATE);
+		javax.persistence.Query qry = manager.createNamedQuery(Produto.FIND_BY_DATE);
 		qry.setParameter("date", date);
-		return qry.list();
+		return qry.getResultList();
 	}
 	
 	/**

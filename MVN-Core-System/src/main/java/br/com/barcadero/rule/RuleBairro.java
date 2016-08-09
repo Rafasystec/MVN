@@ -1,19 +1,21 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import br.com.barcadero.dao.DaoBairro;
 import br.com.barcadero.tables.Bairro;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
+
+@Component
 public class RuleBairro extends RuleModelo<Bairro> {
 	
 	
 	private DaoBairro daoBairro	;
-	public RuleBairro(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		this.daoBairro	= new DaoBairro(empresa, loja, session);
+	
+	@Autowired
+	public RuleBairro(DaoBairro daoBairro) {
+		this.daoBairro = daoBairro;
 	}
 	
 	@Override

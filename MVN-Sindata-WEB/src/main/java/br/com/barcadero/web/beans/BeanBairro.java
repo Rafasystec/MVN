@@ -25,7 +25,7 @@ public class BeanBairro extends SuperBean {
 	
 	public BeanBairro() {
 		bairro 		= new Bairro(getUsuarioLogado());
-		fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		//fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		fcdCidade	= new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	

@@ -2,8 +2,10 @@ package br.com.barcadero.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.hibernate.Session;
 import org.springframework.transaction.annotation.Transactional;
+
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
@@ -98,8 +100,8 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 			}
 			T entidade = this.find(codigo);
 			if(entidade != null){
-				getSession().delete(entidade);
-				//manager.remove(entidade);
+				//getSession().delete(entidade);
+				manager.remove(entidade);
 			}
 			return "";
 		}catch (Exception e) {
@@ -113,8 +115,8 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 			if(entidade == null){
 				throw new Exception("Entidade veio nula.");
 			}
-			getSession().delete(entidade);
-			//manager.remove(entidade);
+			//getSession().delete(entidade);
+			manager.remove(entidade);
 			return "Registro Deletado.";
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -126,8 +128,8 @@ public abstract class DaoModelo<T> implements DaoInterface<T> {
 		if(entidade == null){
 			throw new Exception("Entidade veio nula.");
 		}
-		getSession().update(entidade);
-		//manager.merge(entidade);
+		//getSession().update(entidade);
+		manager.merge(entidade);
 		return getMSG_SUCESS_UPD();
 	}
 

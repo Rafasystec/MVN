@@ -55,7 +55,7 @@ public class BeanVendaRapida extends SuperBean {
 		item	 = getNewNotaItens();
 		itensSelecionados = new ArrayList<NotaItens>();
 		notaItem = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
-		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
+		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
 		
 	}
 	

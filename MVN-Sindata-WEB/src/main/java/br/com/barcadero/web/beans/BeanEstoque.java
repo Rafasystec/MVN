@@ -25,7 +25,7 @@ public class BeanEstoque extends SuperBean {
 	private long codProduto;
 	
 	public BeanEstoque() {
-		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		ruleEstoque	= new RuleEstoque(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 		estoque		= new Estoque(getEmpresaLogada(), getUsuarioLogado());
 	}

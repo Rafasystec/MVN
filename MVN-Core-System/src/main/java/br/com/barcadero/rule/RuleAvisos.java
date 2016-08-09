@@ -1,18 +1,20 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import br.com.barcadero.dao.DaoAvisos;
 import br.com.barcadero.tables.Avisos;
 import br.com.barcadero.tables.Entidade;
 
 
+@Component
 public class RuleAvisos extends RuleModelo<Avisos> {
 
 	private DaoAvisos daoAvisos;
-	public RuleAvisos(Session session) {
-		super(session);
-		daoAvisos = new DaoAvisos(session);
+	@Autowired
+	public RuleAvisos(DaoAvisos daoAvisos){
+		this.daoAvisos = daoAvisos;
 	}
 
 	public String insert(Entidade entidade) throws Exception {

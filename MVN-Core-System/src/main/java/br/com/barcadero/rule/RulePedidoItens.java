@@ -20,7 +20,7 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 	public RulePedidoItens(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		daoPedidoItens 	= new DaoPedidoItens(empresa, loja, session);
-		ruleProduto		= new RuleProduto(empresa, loja, session);
+		//ruleProduto		= new RuleProduto(empresa, loja, session);
 	}
 
 	@Override

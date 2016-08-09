@@ -15,7 +15,7 @@ public class BeanCompletProduto extends SuperBean {
 
 	private RuleProduto ruleProduto;
 	public BeanCompletProduto() {
-		ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	@Override
 	public String imprimir() throws Exception {

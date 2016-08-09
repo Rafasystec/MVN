@@ -34,7 +34,7 @@ public class FiltroDeConexao implements Filter{
 		Session session = HibernateHelper.getSessionFactory().openSession();
 		try{
 			//Realizado no inicio
-			session.getTransaction().begin();
+			//session.getTransaction().begin();
 			request.setAttribute(Attributs.ATT_SESSION_DB, session);
 			//------------------------------------------------------------------------------
 			//NOTE: Todo o codigo que estiver antes do metodo doFilter sera executado na ida
@@ -43,10 +43,10 @@ public class FiltroDeConexao implements Filter{
 			//------------------------------------------------------------------------------
 			//NOTE: Todo o codigo que estiver depois do metodo doFilter sera executado na volta
 			//------------------------------------------------------------------------------
-			session.getTransaction().commit();
+			//session.getTransaction().commit();
 		}catch(Exception e){
 			e.printStackTrace();
-			session.getTransaction().rollback();
+			//session.getTransaction().rollback();
 		}finally{
 			if(session != null && session.isOpen()){
 				session.close();

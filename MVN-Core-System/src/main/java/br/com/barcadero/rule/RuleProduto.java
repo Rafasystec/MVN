@@ -4,29 +4,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import br.com.barcadero.core.xml.entities.XMLProduto;
 import br.com.barcadero.dao.DaoProduto;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
 @Component
 public class RuleProduto extends RuleModelo<Produto> {
 
-	
 	private DaoProduto daoProduto;
-	public RuleProduto(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoProduto = new DaoProduto(empresa, loja, session);
-	}
 	
 	public RuleProduto() {
-		// TODO Auto-generated constructor stub
 		System.out.println(">>>>>>>>>>Criando Rule Produto<<<<<<<<<<<<<<<<<<<");
 	}
 	
@@ -38,19 +28,16 @@ public class RuleProduto extends RuleModelo<Produto> {
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
 		return daoProduto.insert(entidade);
 	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return daoProduto.delete(codigo);
 	}
 
 	@Override
 	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
 		return daoProduto.update(entidade);
 	}
 

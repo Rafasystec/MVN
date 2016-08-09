@@ -37,7 +37,7 @@ public class BeanOrdemServico extends SuperBean {
 	public BeanOrdemServico() {
 		session 		 = getDBSessionForViewScope();
 		ruleOrdemServico = new RuleOrdemServico(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
-		ruleProduto		 = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
+		//ruleProduto		 = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
 		ordemServico	 = new OrdemServico(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 		item			 = new OrdemServicoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 		
