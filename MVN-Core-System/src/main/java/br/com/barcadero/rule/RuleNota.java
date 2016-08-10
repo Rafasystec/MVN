@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumModeloNota;
@@ -33,26 +35,23 @@ import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Produto;
 import br.com.barcadero.tables.Usuario;
 
-
+@Service
 public class RuleNota extends RuleModelo<Nota> {
 
-	private final DaoNota daoNota;
-	private final DaoMeioPgto daoMeio;
+	private DaoNota daoNota;
+	private DaoMeioPgto daoMeio;
 	private DaoPedido daoPedido;
 	private DaoOrdemServico daoOrdemServico;
 	//private final DaoNotaItens daoItens;
 	private RuleNotaItens ruleNotaItens;
 	private RuleCaixa ruleCaixa;
-	
-
-	public RuleNota(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoNota 		= new DaoNota(empresa, loja, session);
-		daoMeio	 		= new DaoMeioPgto(empresa, loja, session);
-		//ruleCaixa		= new RuleCaixa(empresa, loja, session);
-		ruleNotaItens 	= new RuleNotaItens(empresa, loja, session);
-		daoPedido		= new DaoPedido(empresa, loja, session);
-		daoOrdemServico	= new DaoOrdemServico(empresa, loja, session);
+	@Autowired
+	public RuleNota(DaoNota daoNota, DaoMeioPgto daoMeio,DaoPedido daoPedido,DaoOrdemServico daoOrdemServico) {
+		System.out.println("TODO Auto-generated constructor stub RuleNota");
+		this.daoMeio = daoMeio;
+		this.daoNota = daoNota;
+		this.daoOrdemServico = daoOrdemServico;
+		this.daoPedido 		 = daoPedido;
 	}
 
 	@Override

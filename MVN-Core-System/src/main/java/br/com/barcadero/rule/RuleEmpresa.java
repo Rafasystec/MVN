@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.dao.DaoEmpresa;
@@ -15,18 +16,25 @@ import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
+@Service
 public class RuleEmpresa extends RuleModelo<Empresa> {
 
 	
 
 	private DaoEmpresa daoEmpresa;
 	private RuleLoja ruleLoja;
-	
-	public RuleEmpresa(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoEmpresa  = new DaoEmpresa(empresa, loja, session);
-		ruleLoja	= new RuleLoja(empresa, loja, session);
+	@Autowired
+	public RuleEmpresa(DaoEmpresa daoEmpresa, RuleLoja ruleLoja) {
+		System.out.println("Auto-generated constructor stub RuleEmpresa");
+		this.daoEmpresa = daoEmpresa;
+		this.ruleLoja	= ruleLoja;
 	}
+	
+//	public RuleEmpresa(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		daoEmpresa  = new DaoEmpresa(empresa, loja, session);
+//		ruleLoja	= new RuleLoja(empresa, loja, session);
+//	}
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {

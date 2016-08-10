@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.hibernate.Session;
@@ -24,8 +25,6 @@ public class BeanOrdemServico extends SuperBean {
 	private OrdemServico ordemServico;
 	private List<OrdemServicoItens> itens;
 	private OrdemServicoItens item;
-	private RuleOrdemServico ruleOrdemServico;
-	private RuleProduto ruleProduto;
 	private Caixa caixa;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
@@ -33,15 +32,19 @@ public class BeanOrdemServico extends SuperBean {
 	private String lastProduto;
 	private String strVendedor= "";
 	private String strCliente = "";
-	private Session session;
-	public BeanOrdemServico() {
-		session 		 = getDBSessionForViewScope();
-		ruleOrdemServico = new RuleOrdemServico(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
-		//ruleProduto		 = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
-		ordemServico	 = new OrdemServico(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
-		item			 = new OrdemServicoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
-		
-	}
+	@ManagedProperty("#{ruleOrdemServico}")
+	private RuleOrdemServico ruleOrdemServico;
+	@ManagedProperty("#{ruleProduto}")
+	private RuleProduto ruleProduto;
+	
+//	public BeanOrdemServico() {
+//		session 		 = getDBSessionForViewScope();
+//		ruleOrdemServico = new RuleOrdemServico(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
+//		//ruleProduto		 = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDBSessionForViewScope());
+//		ordemServico	 = new OrdemServico(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+//		item			 = new OrdemServicoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+//		
+//	}
 	
 	@Override
 	public String imprimir() throws Exception {
@@ -102,7 +105,7 @@ public class BeanOrdemServico extends SuperBean {
 	public void salvarItem() {
 		try {
 			System.out.println("Save item called.");
-			beginTransaction();
+			//beginTransaction();
 			if(ordemServico == null){
 				ordemServico = createOrdemServico();
 			}
@@ -113,7 +116,7 @@ public class BeanOrdemServico extends SuperBean {
 			ruleOrdemServico.insert(ordemServico,item);
 			setVlUnitario(item.getValorTotal());
 			totalizarSubTotal(item);
-			commit();
+			//commit();
 			item = new OrdemServicoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 		} catch (Exception e) {
 			HandleMessage.error("Erro ao inserir Item", e.getMessage());
@@ -173,21 +176,21 @@ public class BeanOrdemServico extends SuperBean {
 		this.lastProduto = lastProduto;
 	}
 	
-	public void beginTransaction() {
-		if(this.session != null){
-			this.session.beginTransaction();
-		}
-	}
+//	public void beginTransaction() {
+//		if(this.session != null){
+//			this.session.beginTransaction();
+//		}
+//	}
 	
 	private void totalizarSubTotal(OrdemServicoItens item) {
 		setVlSubTotal(getVlSubTotal().add(item.getValorTotal()));
 	}
 	
-	public void commit() {
-		if(this.session != null){
-			this.session.getTransaction().commit();
-		}
-	}
+//	public void commit() {
+//		if(this.session != null){
+//			this.session.getTransaction().commit();
+//		}
+//	}
 
 	public String getStrVendedor() {
 		return strVendedor;
@@ -203,6 +206,22 @@ public class BeanOrdemServico extends SuperBean {
 
 	public void setStrCliente(String strCliente) {
 		this.strCliente = strCliente;
+	}
+
+	public RuleOrdemServico getRuleOrdemServico() {
+		return ruleOrdemServico;
+	}
+
+	public void setRuleOrdemServico(RuleOrdemServico ruleOrdemServico) {
+		this.ruleOrdemServico = ruleOrdemServico;
+	}
+
+	public RuleProduto getRuleProduto() {
+		return ruleProduto;
+	}
+
+	public void setRuleProduto(RuleProduto ruleProduto) {
+		this.ruleProduto = ruleProduto;
 	}
 
 }

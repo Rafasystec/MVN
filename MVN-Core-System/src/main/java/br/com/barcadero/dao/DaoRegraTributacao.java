@@ -2,18 +2,21 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
 
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
+import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.tables.RegraTributaria;
 
+@Repository
 public class DaoRegraTributacao extends DaoModelo<RegraTributaria> {
 
-	public DaoRegraTributacao(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
+	public DaoRegraTributacao() {
+		System.out.println("Auto-generated constructor stub DaoRegraTributacao");
 	}
+//	public DaoRegraTributacao(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//	}
 
 	@Override
 	public List<RegraTributaria> findAll() throws Exception {
@@ -30,7 +33,7 @@ public class DaoRegraTributacao extends DaoModelo<RegraTributaria> {
 	 * @return numero de rows afetadas
 	 */
 	public int deleteAll() {
-		Query qry = getSession().createQuery("DELETE FROM RegraTributaria");
+		Query qry = manager.createQuery("DELETE FROM RegraTributaria");
 		return qry.executeUpdate();
 	}
 

@@ -19,7 +19,7 @@ public class DaoNotaSequence extends DaoModelo<NotaSequence> {
 	private RuleNota ruleNota;
 	public DaoNotaSequence(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		ruleNota = new RuleNota(empresa, loja, session);
+		//ruleNota = new RuleNota(empresa, loja, session);
 	}
 
 	@Override

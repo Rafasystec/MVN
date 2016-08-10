@@ -3,6 +3,7 @@ package br.com.barcadero.web.functions;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 
@@ -27,19 +28,16 @@ public class HandleEndereco extends SuperBean{
 	private Endereco ender;
 	private EnumUF[] uf;
 	private EnumUF ufSelected;
-	private RuleEstado fcdEstado;
-	private RuleCidade fcdCidade;
-	private RuleBairro fcdBairro;
+	@ManagedProperty("#{ruleEstado}")
+	private RuleEstado ruleEstado;
+	@ManagedProperty("#{ruleCidade}")
+	private RuleCidade ruleCidade;
+	@ManagedProperty("#{ruleBairro}")
+	private RuleBairro ruleBairro;
 	private long codEstado;
 	private long codCidade;
 	private static List<Cidade> cidades;
 	private static List<Bairro> bairros;
-	
-	public HandleEndereco() {
-		fcdEstado = new RuleEstado(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdCidade = new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		//fcdBairro = new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-	}
 	
 	public Endereco getEnder() {
 		return ender;
@@ -55,30 +53,6 @@ public class HandleEndereco extends SuperBean{
 
 	public void setUf(EnumUF[] uf) {
 		this.uf = uf;
-	}
-
-	public RuleEstado getFcdEstado() {
-		return fcdEstado;
-	}
-
-	public void setFcdEstado(RuleEstado fcdEstado) {
-		this.fcdEstado = fcdEstado;
-	}
-
-	public RuleCidade getFcdCidade() {
-		return fcdCidade;
-	}
-
-	public void setFcdCidade(RuleCidade fcdCidade) {
-		this.fcdCidade = fcdCidade;
-	}
-
-	public RuleBairro getFcdBairro() {
-		return fcdBairro;
-	}
-
-	public void setFcdBairro(RuleBairro fcdBairro) {
-		this.fcdBairro = fcdBairro;
 	}
 
 	public long getCodEstado() {
@@ -139,7 +113,7 @@ public class HandleEndereco extends SuperBean{
 	}
 	
 	public List<Estado> getEstados() throws Exception {
-		return fcdEstado.findAllEstados();
+		return ruleEstado.findAllEstados();
 	}
 	
 	public EnumTipoLograd[] getTpLogradouros() {
@@ -147,22 +121,22 @@ public class HandleEndereco extends SuperBean{
 	}
 	
 	public List<Cidade> obterCidades() throws Exception {
-		HandleEndereco.cidades = fcdCidade.getCidadesByUF(getUfSelected()); 
+		HandleEndereco.cidades = ruleCidade.getCidadesByUF(getUfSelected()); 
 		return HandleEndereco.cidades; 
 	}
 	
 	public void hendleReturnCidades(SelectEvent event) throws Exception {
-		HandleEndereco.cidades = fcdCidade.getCidadesByUF(getUfSelected()); 
+		HandleEndereco.cidades = ruleCidade.getCidadesByUF(getUfSelected()); 
 		System.out.println("hendleReturnCidades Evento event: " + event); 
 	}
 	
 	public void hendleReturnBairros(SelectEvent event) throws Exception {
-		HandleEndereco.bairros = fcdBairro.getBairrosByCodCidade(getCodCidade()); 
+		HandleEndereco.bairros = ruleBairro.getBairrosByCodCidade(getCodCidade()); 
 		System.out.println("hendleReturnBairros Evento event: " + event); 
 	}
 	
 	public List<Bairro> obterBairros() throws Exception {
-		HandleEndereco.bairros = fcdBairro.getBairrosByCodCidade(getCodCidade()); 
+		HandleEndereco.bairros = ruleBairro.getBairrosByCodCidade(getCodCidade()); 
 		return  HandleEndereco.bairros;
 	}
 	

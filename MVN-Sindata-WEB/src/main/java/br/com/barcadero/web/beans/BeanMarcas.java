@@ -1,6 +1,8 @@
 package br.com.barcadero.web.beans;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.core.enums.EnumTipoMarca;
@@ -12,15 +14,16 @@ import br.com.barcadero.tables.Marcas;
 public class BeanMarcas extends SuperBean {
 
 	private static final long serialVersionUID = 1L;
-	RuleMarcas rule;
+	@ManagedProperty("#{ruleMarcas}")
+	RuleMarcas ruleMarcas;
 	Marcas marcas;
 	private EnumTipoMarca[] tipoMarcas;
 	
-	public BeanMarcas() {
-		rule 	= new RuleMarcas(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	@PostConstruct
+	private void init() {
 		marcas	= new Marcas(getEmpresaLogada(), getUsuarioLogado()); 
 	}
-	
+
 	@Override
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
@@ -30,7 +33,7 @@ public class BeanMarcas extends SuperBean {
 	@Override
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub
-		rule.insert(marcas);
+		ruleMarcas.insert(marcas);
 		marcas = new Marcas(getEmpresaLogada(), getUsuarioLogado());
 		return null;
 	}
@@ -63,6 +66,14 @@ public class BeanMarcas extends SuperBean {
 	
 	public EnumTipoMarca[] getTipoMarcas() {
 		return EnumTipoMarca.values();
+	}
+
+	public RuleMarcas getRuleMarcas() {
+		return ruleMarcas;
+	}
+
+	public void setRuleMarcas(RuleMarcas ruleMarcas) {
+		this.ruleMarcas = ruleMarcas;
 	}
 
 }

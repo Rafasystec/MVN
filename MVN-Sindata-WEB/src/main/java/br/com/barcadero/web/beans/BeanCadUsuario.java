@@ -1,6 +1,8 @@
 package br.com.barcadero.web.beans;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.rule.RuleEmpresa;
@@ -14,7 +16,9 @@ public class BeanCadUsuario extends SuperBean {
 	private static final long serialVersionUID = 746108176250467310L;
 	private Usuario usuario 		= null;
 	private String confirm  		= "";
-	private RuleUsuario fcdUser 	= null;
+	@ManagedProperty("#{ruleUsuario}")
+	private RuleUsuario fcdUser;
+	@ManagedProperty("#{ruleEmpresa}")
 	private RuleEmpresa ruleEmpresa;
 	public Usuario getUsuario() {
 		return usuario;
@@ -28,12 +32,19 @@ public class BeanCadUsuario extends SuperBean {
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
 	}
-	public BeanCadUsuario() {
-		// TODO Auto-generated constructor stub
+	
+	@PostConstruct
+	private void init() {
 		usuario 	= new Usuario(null);
-		fcdUser 	= new RuleUsuario(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 	}
+	
+//	public BeanCadUsuario() {
+//		// TODO Auto-generated constructor stub
+//		usuario 	= new Usuario(null);
+//		fcdUser 	= new RuleUsuario(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//	}
+	
 	@Override
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub
@@ -67,6 +78,18 @@ public class BeanCadUsuario extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public RuleUsuario getFcdUser() {
+		return fcdUser;
+	}
+	public void setFcdUser(RuleUsuario fcdUser) {
+		this.fcdUser = fcdUser;
+	}
+	public RuleEmpresa getRuleEmpresa() {
+		return ruleEmpresa;
+	}
+	public void setRuleEmpresa(RuleEmpresa ruleEmpresa) {
+		this.ruleEmpresa = ruleEmpresa;
 	}
 
 }

@@ -2,33 +2,36 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
 
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
+import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
 
+@Repository
 public class DaoOrdemServicoItens extends DaoModelo<OrdemServicoItens> {
 
-	public DaoOrdemServicoItens(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoOrdemServicoItens() {
+		System.out.println("Auto-generated constructor stub DaoOrdemServicoItens");
 	}
+//	public DaoOrdemServicoItens(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public List<OrdemServicoItens> findAll() throws Exception {
-		Query qry = getSession().getNamedQuery(OrdemServicoItens.FIND_ALL)
-				.setLong("empresa", getEmpresa().getCodigo());
-		return qry.list();
+		Query qry = manager.createNamedQuery(OrdemServicoItens.FIND_ALL)
+				.setParameter("empresa", getEmpresa().getCodigo());
+		return qry.getResultList();
 	}
 	
 	public List<OrdemServicoItens> findByOS(OrdemServico ordemServico) {
-		Query qry = getSession().getNamedQuery(OrdemServicoItens.FIND_BY_OS)
-				.setLong("empresa", getEmpresa().getCodigo())
-				.setLong("ordemservico", ordemServico.getCodigo());
-		return qry.list();
+		Query qry = manager.createNamedQuery(OrdemServicoItens.FIND_BY_OS)
+				.setParameter("empresa", getEmpresa().getCodigo())
+				.setParameter("ordemservico", ordemServico.getCodigo());
+		return qry.getResultList();
 	}
 
 	@Override

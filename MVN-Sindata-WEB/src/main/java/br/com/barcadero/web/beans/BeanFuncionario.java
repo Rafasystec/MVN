@@ -3,7 +3,9 @@ package br.com.barcadero.web.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleFuncionario;
@@ -17,15 +19,14 @@ public class BeanFuncionario extends SuperBean {
 	private static final long serialVersionUID = -199406563789273194L;
 	private Funcionario funcionario;
 	private Endereco endereco;
+	@ManagedProperty("#{ruleFuncionario}")
 	private RuleFuncionario ruleFuncionario;
 	
-	public BeanFuncionario() {
-		// TODO Auto-generated constructor stub
-		funcionario 	= new Funcionario();
-		ruleFuncionario = new RuleFuncionario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	@PostConstruct
+	private void init() {
+		funcionario 	= new Funcionario(getUsuarioLogado());
 		endereco		= new Endereco(getUsuarioLogado());
 	}
-	
 	
 	@Override
 	public String salvar() throws Exception {
@@ -81,6 +82,14 @@ public class BeanFuncionario extends SuperBean {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public RuleFuncionario getRuleFuncionario() {
+		return ruleFuncionario;
+	}
+
+	public void setRuleFuncionario(RuleFuncionario ruleFuncionario) {
+		this.ruleFuncionario = ruleFuncionario;
 	}
 
 }

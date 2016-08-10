@@ -1,24 +1,25 @@
 package br.com.barcadero.dao;
 
 import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
+import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 
-public final class DaoNota extends DaoModelo<Nota> {
+@Repository
+public class DaoNota extends DaoModelo<Nota> {
 
 	
 
-	public DaoNota(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoNota() {
+		System.out.println("Auto-generated constructor stub for DaoNota");
 	}
+	
+//	public DaoNota(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public Nota find(long codigo) throws Exception {
@@ -28,8 +29,8 @@ public final class DaoNota extends DaoModelo<Nota> {
 
 	@Override
 	public List<Nota> findAll() throws Exception {
-		Query qry = getSession().getNamedQuery(Nota.FIND_ALL);
-		return qry.list();
+		Query qry = manager.createNamedQuery(Nota.FIND_ALL);
+		return qry.getResultList();
 	}
 	
 	/**
@@ -38,11 +39,11 @@ public final class DaoNota extends DaoModelo<Nota> {
 	 * @return
 	 */
 	public Nota findNota(long codigo) {
-		Query qry =  getSession().getNamedQuery(Nota.FIND_BY_CODE);
-		qry.setLong("codigo", codigo)
-		.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
-		.setLong(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo());
-		return (Nota)qry.uniqueResult();
+		Query qry =  manager.createNamedQuery(Nota.FIND_BY_CODE);
+		qry.setParameter("codigo", codigo)
+		.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+		.setParameter(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo());
+		return (Nota)qry.getSingleResult();
 	}
 
 	/**
@@ -52,10 +53,10 @@ public final class DaoNota extends DaoModelo<Nota> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<NotaItens> getItensByCodeNota(long codNota) {
-		Query qry = getSession().getNamedQuery(NotaItens.FIND_BY_CODE_NOTA);
-		qry.setLong(NotaItens.PARAM_COD_NOTA, codNota)
-			.setLong(GlobalNameParam.PARAM_COD_EMP, empresa.getCodigo())
-			.setLong(GlobalNameParam.PARAM_COD_LOJA, loja.getCodigo());
-		return qry.list();
+		Query qry = manager.createNamedQuery(NotaItens.FIND_BY_CODE_NOTA);
+		 qry.setParameter(NotaItens.PARAM_COD_NOTA, codNota)
+			.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa.getCodigo())
+			.setParameter(GlobalNameParam.PARAM_COD_LOJA, loja.getCodigo());
+		return qry.getResultList();
 	}
 }

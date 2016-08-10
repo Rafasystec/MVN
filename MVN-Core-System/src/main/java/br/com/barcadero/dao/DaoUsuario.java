@@ -1,12 +1,8 @@
 package br.com.barcadero.dao;
 
 import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
+import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 import br.com.barcadero.tables.Usuario;
 
 /**
@@ -14,26 +10,20 @@ import br.com.barcadero.tables.Usuario;
  * @author Rafael Rocha
  * @since Gsind 1.0 Beta dia 25/10/2013 as 11:05
  */
+@Repository
 public class DaoUsuario extends DaoModelo<Usuario> {
 	
-	public DaoUsuario(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		this.session = session;
+	public DaoUsuario() {
+		System.out.println("Auto-generated constructor stub DaoUsuario");
 	}
-	private Session	session = null;
-	
-//	public DaoUsuario(Session session) {
-//		super(session);
-//		this.session = session;
-//	}
 	
 	@Override
 	public Usuario find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		Query qry = null;
 		try {
-			qry = session.getNamedQuery(Usuario.FIND_BY_CODE).setParameter(Usuario.PARA_CODIGO, codigo);
-			return (Usuario)qry.uniqueResult();
+			qry = manager.createNamedQuery(Usuario.FIND_BY_CODE).setParameter(Usuario.PARA_CODIGO, codigo);
+			return (Usuario)qry.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
@@ -48,10 +38,10 @@ public class DaoUsuario extends DaoModelo<Usuario> {
 	 */
 	public List<Usuario> find(String param) throws Exception {
 		Query qry = null;
-		qry 	  = this.session.getNamedQuery(Usuario.FIND_BY);
+		qry 	  = manager.createNamedQuery(Usuario.FIND_BY);
 		qry.setParameter(Usuario.PARA_NOME, param+"%");
 		qry.setParameter(Usuario.PARA_EMAIL, param+"%");
-		return (List<Usuario>)qry.list();
+		return (List<Usuario>)qry.getResultList();
 	}
 	/**
 	 * Procurar usuario por email
@@ -61,9 +51,9 @@ public class DaoUsuario extends DaoModelo<Usuario> {
 	 */
 	public Usuario findByEmail(String email) throws Exception {
 		Query qry = null;
-		qry 	  = this.session.getNamedQuery(Usuario.FIND_BY_EMAIL);
+		qry 	  = manager.createNamedQuery(Usuario.FIND_BY_EMAIL);
 		qry.setParameter(Usuario.PARA_EMAIL, email);
-		return (Usuario) qry.uniqueResult();
+		return (Usuario) qry.getSingleResult();
 	}
 	
 	/**
@@ -76,10 +66,10 @@ public class DaoUsuario extends DaoModelo<Usuario> {
 	public Usuario login(String login, String pwd) throws Exception{
 		Query qry = null;
 		try {
-			qry = this.session.getNamedQuery(Usuario.FIND_BY_LOGIN);
+			qry = manager.createNamedQuery(Usuario.FIND_BY_LOGIN);
 			qry.setParameter(Usuario.PARA_USUARIO, login);
 			qry.setParameter(Usuario.PARA_PWD, pwd);
-			return (Usuario)qry.uniqueResult();
+			return (Usuario)qry.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception("Erro ao tentar verificar o usuario: " + e.getMessage());
@@ -90,8 +80,8 @@ public class DaoUsuario extends DaoModelo<Usuario> {
 	 */
 	public List<Usuario> findAll() throws Exception {
 		Query qry = null;
-		qry = this.session.getNamedQuery(Usuario.FIND_ALL);
-		return qry.list();
+		qry = manager.createNamedQuery(Usuario.FIND_ALL);
+		return qry.getResultList();
 	}
 
 }

@@ -6,7 +6,7 @@ public class TestDaoCliente {
 
 	private DaoCliente dao;
 	public TestDaoCliente() {
-		dao = new DaoCliente(null,null,HibernateHelper.getSession());
+		//dao = new DaoCliente(null,null,HibernateHelper.getSession());
 	}
 	
 	public static void main(String[] args) {

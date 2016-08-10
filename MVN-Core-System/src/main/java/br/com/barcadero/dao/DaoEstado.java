@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Empresa;
@@ -12,14 +13,17 @@ import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
+@Repository
 public class DaoEstado extends DaoModelo<Estado>{
 	
-	
-	
-	public DaoEstado(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
+	public DaoEstado() {
 		// TODO Auto-generated constructor stub
 	}
+	
+//	public DaoEstado(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {

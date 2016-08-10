@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleLoja;
@@ -20,17 +21,11 @@ public class BeanEscolherEmpresa extends SuperBean {
 	private List<Loja> lojas;
 	private long codEmp;
 	private long codLoja;
+	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
-	
-	public BeanEscolherEmpresa() {
-		// TODO Auto-generated constructor stub
-		ruleLoja = new RuleLoja(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		System.out.println("Instanciou o bean: " + BeanEscolherEmpresa.class.getName());
-		
-	}
-	
 	private Usuario user;
 	private PessoaJuridica pJuridica;
+	private Empresa empresa;
 	
 	public Usuario getUser() {
 		return user;
@@ -70,7 +65,7 @@ public class BeanEscolherEmpresa extends SuperBean {
 	}
 	
 	
-	public List<Empresa> getEmpresa() {
+	public List<Empresa> getEmpresas() {
 		user = SessionContext.getInstance().getUsuarioLogado();
 		List<Empresa> list = user.getEmpresas();
 		if(list != null){
@@ -92,7 +87,8 @@ public class BeanEscolherEmpresa extends SuperBean {
 	}
 
 	public List<Loja> getLojas() throws Exception {
-		lojas = ruleLoja.getLojasDaEmpresa(getCodEmp());
+		//lojas = ruleLoja.getLojasDaEmpresa(getCodEmp());
+		lojas = ruleLoja.getLojasDaEmpresa(getEmpresa());
 		return lojas;
 	}
 
@@ -118,7 +114,7 @@ public class BeanEscolherEmpresa extends SuperBean {
 		System.out.println("Entrar no sistema pela empresa!");
 		Empresa emp 	= null;
 		Loja lojaLog	= null;
-		for (Empresa empresa : getEmpresa()) {
+		for (Empresa empresa : getEmpresas()) {
 			if(empresa.getCodigo() == getCodEmp()){
 				emp = empresa;
 			}
@@ -126,6 +122,8 @@ public class BeanEscolherEmpresa extends SuperBean {
 		if(emp == null){
 			return null;
 		}
+		
+		setEmpresa(emp);
 		
 		for (Loja loja : getLojas()) {
 			if(loja.getCodigo() == getCodLoja()){
@@ -155,6 +153,22 @@ public class BeanEscolherEmpresa extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleLoja getRuleLoja() {
+		return ruleLoja;
+	}
+
+	public void setRuleLoja(RuleLoja ruleLoja) {
+		this.ruleLoja = ruleLoja;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 	
 

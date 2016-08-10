@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleVendedor;
@@ -13,11 +14,8 @@ import br.com.barcadero.web.beans.SuperBean;
 @RequestScoped
 public class BeanCompletVendedor extends SuperBean {
 
+	@ManagedProperty("#{ruleVendedor}")
 	private RuleVendedor ruleVendedor;
-	
-	public BeanCompletVendedor() {
-		ruleVendedor = new RuleVendedor(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-	}
 	
 	@Override
 	public String imprimir() throws Exception {
@@ -58,6 +56,14 @@ public class BeanCompletVendedor extends SuperBean {
 			return new ArrayList<String>();
 		}
 		
+	}
+
+	public RuleVendedor getRuleVendedor() {
+		return ruleVendedor;
+	}
+
+	public void setRuleVendedor(RuleVendedor ruleVendedor) {
+		this.ruleVendedor = ruleVendedor;
 	}
 
 }

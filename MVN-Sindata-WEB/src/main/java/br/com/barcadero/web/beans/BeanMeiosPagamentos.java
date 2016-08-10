@@ -2,7 +2,9 @@ package br.com.barcadero.web.beans;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.enums.EnumUsaTEF;
@@ -14,7 +16,8 @@ public class BeanMeiosPagamentos extends SuperBean {
 	
 	private static final long serialVersionUID = -4955803744749124467L;
 	private MeiosPagamento meio;
-	private RuleMeioPgto rulMeio;
+	@ManagedProperty("#{ruleMeioPgto}")
+	private RuleMeioPgto ruleMeioPgto;
 	private boolean usaTEF;
 	private List<MeiosPagamento> meios;
 	private List<MeiosPagamento> meiosSelecionados;
@@ -27,11 +30,15 @@ public class BeanMeiosPagamentos extends SuperBean {
 	public void setLocalImg(String localImg) {
 		this.localImg = localImg;
 	}
-
-	public BeanMeiosPagamentos() throws Exception {
-		// TODO Auto-generated constructor stub
-		rulMeio = new RuleMeioPgto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		novo();
+	
+	@PostConstruct
+	private void init() {
+		try {
+			novo();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public EnumTipoMeioPgto[] getTipoMeiosPgto() {
@@ -47,7 +54,7 @@ public class BeanMeiosPagamentos extends SuperBean {
 			meio.setFlUsaTef(EnumUsaTEF.NAO);
 		}
 		System.out.println("Chamou o metodo salvar");
-		System.out.println(rulMeio.insert(meio));
+		System.out.println(ruleMeioPgto.insert(meio));
 		return null;
 		
 	}
@@ -55,7 +62,7 @@ public class BeanMeiosPagamentos extends SuperBean {
 	@Override
 	public String alterar() throws Exception {
 		// TODO Auto-generated method stub
-		return rulMeio.update(meio);
+		return ruleMeioPgto.update(meio);
 	}
 
 	@Override
@@ -88,7 +95,7 @@ public class BeanMeiosPagamentos extends SuperBean {
 	}
 
 	public List<MeiosPagamento> getMeios() {
-		this.meios = rulMeio.getAll();
+		this.meios = ruleMeioPgto.getAll();
 		return meios;
 	}
 
@@ -108,6 +115,14 @@ public class BeanMeiosPagamentos extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleMeioPgto getRuleMeioPgto() {
+		return ruleMeioPgto;
+	}
+
+	public void setRuleMeioPgto(RuleMeioPgto ruleMeioPgto) {
+		this.ruleMeioPgto = ruleMeioPgto;
 	}
 
 

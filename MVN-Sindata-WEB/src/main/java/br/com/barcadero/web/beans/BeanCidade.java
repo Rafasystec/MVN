@@ -2,10 +2,12 @@ package br.com.barcadero.web.beans;
 
 import java.util.Date;
 import java.util.List;
-import javax.faces.application.FacesMessage;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+
 import org.primefaces.context.RequestContext;
 
 import br.com.barcadero.rule.RuleCidade;
@@ -16,23 +18,30 @@ import br.com.barcadero.tables.Estado;
 @ManagedBean
 @RequestScoped
 public class BeanCidade extends SuperBean{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6261268226972226726L;
 	private long codigo 		= 0;
 	private long codEstado 		= 0;
 	private String descricao	= "";
 	private String codIbge		= "";
 	private Date dtCadastro;
-	private RuleCidade facadeCidade;
 	//private FacadeEstado facadeEstado;
 	private List<Cidade> cidades;
 	private List<Estado> estados;
+	@ManagedProperty("#{ruleCidade}")
+	private RuleCidade facadeCidade;
+	@ManagedProperty("#{ruleEstado}")
 	private RuleEstado facadeEstado;
 	FacesContext context ;
 	
 
-	public BeanCidade() {
-		facadeCidade = new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		facadeEstado = new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
-	}
+	
+//	public BeanCidade() {
+//		facadeCidade = new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		facadeEstado = new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
+//	}
 	
 	public long getCodigo() {
 		return codigo;
@@ -165,5 +174,21 @@ public class BeanCidade extends SuperBean{
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleCidade getFacadeCidade() {
+		return facadeCidade;
+	}
+
+	public void setFacadeCidade(RuleCidade facadeCidade) {
+		this.facadeCidade = facadeCidade;
+	}
+
+	public RuleEstado getFacadeEstado() {
+		return facadeEstado;
+	}
+
+	public void setFacadeEstado(RuleEstado facadeEstado) {
+		this.facadeEstado = facadeEstado;
 	}
 }

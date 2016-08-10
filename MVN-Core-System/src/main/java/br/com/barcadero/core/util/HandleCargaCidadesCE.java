@@ -2,8 +2,9 @@ package br.com.barcadero.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.junit.validator.PublicClassValidator;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.dao.DaoBairro;
@@ -11,11 +12,10 @@ import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.dao.DaoEstado;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Estado;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
+@Service
 public class HandleCargaCidadesCE {
 
 	private DaoEstado daoEstado;
@@ -23,12 +23,12 @@ public class HandleCargaCidadesCE {
 	private DaoBairro daoBairro;
 	private Estado ceara   	= null; 
 	private Usuario usuario	= null;
-	
-	public HandleCargaCidadesCE(Empresa empresa, Loja loja, Session session, Usuario usuario) {
-		daoEstado 	 = new DaoEstado(empresa, loja, session);
-		daoCidade	 = new DaoCidade(empresa, loja, session);
-		//daoBairro	 = new DaoBairro(empresa, loja, session);
-		this.usuario = usuario;
+	@Autowired
+	public HandleCargaCidadesCE(DaoEstado daoEstado,DaoCidade daoCidade,DaoBairro daoBairro) {
+		// TODO Auto-generated constructor stub
+		this.daoBairro = daoBairro;
+		this.daoCidade = daoCidade;
+		this.daoEstado = daoEstado;
 	}
 
 	public void loadCeara() throws Exception {

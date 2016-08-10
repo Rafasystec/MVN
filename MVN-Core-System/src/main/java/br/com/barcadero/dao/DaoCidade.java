@@ -6,32 +6,25 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
-import br.com.barcadero.tables.Loja;
-
+@Repository
 public class DaoCidade extends DaoModelo<Cidade>{
 
 	
 	private DaoEstado daoEstado;
-	public DaoCidade(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoEstado = new DaoEstado(empresa, loja, session);
+	
+	@Autowired
+	public DaoCidade(DaoEstado daoEstado) {
+		this.daoEstado = daoEstado;
 	}
 
-	
-	
-//	public DaoCidade(Session session) {
-//		super(session);
-//		daoEstado = new DaoEstado(session);
-//	}	
-	
 	@Override
 	public Cidade find(long codigo) throws Exception {
 		// TODO Auto-generated method stub

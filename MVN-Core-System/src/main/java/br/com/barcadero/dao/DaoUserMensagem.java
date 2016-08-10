@@ -2,20 +2,22 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
 
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
+import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
-
+@Repository
 public class DaoUserMensagem extends DaoModelo <UserMensagens>{
 
-	public DaoUserMensagem(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoUserMensagem() {
+		System.out.println("Auto-generated constructor stub DaoUserMensagem");
 	}
+//	public DaoUserMensagem(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public UserMensagens find(long codigo) throws Exception {
@@ -34,8 +36,8 @@ public class DaoUserMensagem extends DaoModelo <UserMensagens>{
 		query.append("SELECT u.nome, um.mensagem, um.dtMensagem, um.hrMensagem FROM UserMensagens um "); 
 		query.append("inner join Usuario u on u.codigo = um.usuario.codigo");
 		query.append(" WHERE um.cdUserReceive = :codigo");
-		Query qry = getSession().createQuery(query.toString()).setLong("codigo", usuario.getCodigo());
-		return qry.list();
+		Query qry = manager.createQuery(query.toString()).setParameter("codigo", usuario.getCodigo());
+		return qry.getResultList();
 	}
 
 }

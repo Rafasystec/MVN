@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.hibernate.Session;
@@ -32,8 +33,11 @@ public class BeanVendaRapida extends SuperBean {
 	private Nota nota;
 	private String codigoProduto;
 	//Rules e facades utilizados
+	@ManagedProperty("#{ruleNota}")
 	private RuleNota ruleNota;
-	private RuleNotaItens ruleItens;
+	@ManagedProperty("#{ruleNotaItens}")
+	private RuleNotaItens ruleNotaItens;
+	@ManagedProperty("#{ruleProduto}")
 	private RuleProduto ruleProduto;
 	//--------------------------
 	private BigDecimal vlTotal 		= new BigDecimal(0.00);
@@ -46,28 +50,15 @@ public class BeanVendaRapida extends SuperBean {
 	//---------------------------
 	private String strProduto;
 	private String lastProduto;
-	public BeanVendaRapida() {
-		System.out.println("BeanVendaRapida was created!");
-		this.session = getDBSessionForViewScope();
-		ruleNota = new RuleNota(getEmpresaLogada(), getLojaLogada(), this.session);
-		ruleItens= new RuleNotaItens(getEmpresaLogada(), getLojaLogada(), this.session);
-		itens	 = new ArrayList<NotaItens>();
-		item	 = getNewNotaItens();
-		itensSelecionados = new ArrayList<NotaItens>();
-		notaItem = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
-		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
-		
-	}
 	
 	@PostConstruct
 	public void init() {
 		System.out.println("@PostConstruct method init");
 		try {
-//			if(this.session != null){
-//				this.session.beginTransaction();
-//			}
-			nota = createNota();
-			
+			nota  	 = createNota();
+			itens 	 = new ArrayList<NotaItens>();
+			item 	 = getNewNotaItens();
+			notaItem = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -292,6 +283,22 @@ public class BeanVendaRapida extends SuperBean {
 
 	public void setLastProduto(String lastProduto) {
 		this.lastProduto = lastProduto;
+	}
+
+	public RuleNotaItens getRuleNotaItens() {
+		return ruleNotaItens;
+	}
+
+	public void setRuleNotaItens(RuleNotaItens ruleNotaItens) {
+		this.ruleNotaItens = ruleNotaItens;
+	}
+
+	public RuleProduto getRuleProduto() {
+		return ruleProduto;
+	}
+
+	public void setRuleProduto(RuleProduto ruleProduto) {
+		this.ruleProduto = ruleProduto;
 	}
 	
 }

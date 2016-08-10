@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 
@@ -42,15 +44,20 @@ public class BeanEmpresa extends SuperBean {
 	private Empresa emp;
 	private PessoaJuridica pj;
 	private Endereco ender;
-	private RuleEmpresa ruleEmpresa;
 	private EnumRegimeTributario[] regime;
 	private EnumAtividadeEmp[] atividade;
 	private FileUpload fileUpload;
 	//para o endereco
 	private EnumUF[] uf;
-	private RuleEstado fcdEstado;
-	private RuleCidade fcdCidade;
-	private RuleBairro fcdBairro;
+	@ManagedProperty("#{ruleEmpresa}")
+	private RuleEmpresa ruleEmpresa;
+	@ManagedProperty("#{ruleEstado}")
+	private RuleEstado ruleEstado;
+	@ManagedProperty("#{ruleCidade}")
+	private RuleCidade ruleCidade;
+	@ManagedProperty("#{ruleBairro}")
+	private RuleBairro ruleBairro;
+	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
 	private static long codEstado;
 	private static long codCidade;
@@ -64,19 +71,27 @@ public class BeanEmpresa extends SuperBean {
 	public void setFileUpload(FileUpload fileUpload) {
 		this.fileUpload = fileUpload;
 	}
-
-	public BeanEmpresa() {
+	
+	@PostConstruct
+	private void init() {
 		Usuario userLogado = getSession().getUsuarioLogado();
 		emp 	= new Empresa(userLogado);
 		pj 		= new PessoaJuridica(userLogado);
 		ender 	= new Endereco(userLogado);
-		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		fcdEstado	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		fcdCidade	= new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		//fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		ruleLoja	= new RuleLoja(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		System.out.println("Bean Empresa was created.");
 	}
+
+//	public BeanEmpresa() {
+//		Usuario userLogado = getSession().getUsuarioLogado();
+//		emp 	= new Empresa(userLogado);
+//		pj 		= new PessoaJuridica(userLogado);
+//		ender 	= new Endereco(userLogado);
+//		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		fcdEstado	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		fcdCidade	= new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		//fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+//		ruleLoja	= new RuleLoja(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		System.out.println("Bean Empresa was created.");
+//	}
 	
 	public Empresa getEmp() {
 		return emp;
@@ -141,7 +156,7 @@ public class BeanEmpresa extends SuperBean {
 	}
 	
 	public List<Estado> getEstados() throws Exception {
-		return fcdEstado.findAllEstados();
+		return ruleEstado.findAllEstados();
 	}
 
 	public EnumTipoLograd[] getTpLogradouros() {
@@ -217,7 +232,7 @@ public class BeanEmpresa extends SuperBean {
 	@Deprecated
 	public List<Cidade> obterCidades() throws Exception {
 		System.out.println("Obter as cidades pelo codigo Estado: " + getCodEstado());
-		BeanEmpresa.cidades = fcdCidade.getCidadesByCodEstado(getCodEstado()); 
+		BeanEmpresa.cidades = ruleCidade.getCidadesByCodEstado(getCodEstado()); 
 		return BeanEmpresa.cidades; 
 	}
 	/**
@@ -225,7 +240,7 @@ public class BeanEmpresa extends SuperBean {
 	 */
 	@Deprecated
 	public void hendleReturnCidades(SelectEvent event) throws Exception {
-		BeanEmpresa.cidades = fcdCidade.getCidadesByCodEstado(getCodEstado()); 
+		BeanEmpresa.cidades = ruleCidade.getCidadesByCodEstado(getCodEstado()); 
 		System.out.println("hendleReturnCidades Evento event: " + event); 
 	}
 	/**
@@ -233,7 +248,7 @@ public class BeanEmpresa extends SuperBean {
 	 */
 	@Deprecated
 	public void hendleReturnBairros(SelectEvent event) throws Exception {
-		BeanEmpresa.bairros = fcdBairro.getBairrosByCodCidade(getCodCidade()); 
+		BeanEmpresa.bairros = ruleBairro.getBairrosByCodCidade(getCodCidade()); 
 		System.out.println("hendleReturnBairros Evento event: " + event); 
 	}
 	/**
@@ -242,7 +257,7 @@ public class BeanEmpresa extends SuperBean {
 	@Deprecated
 	public List<Bairro> obterBairros() throws Exception {
 		System.out.println("Obter os bairros pelo codigo da Cidade: " + getCodCidade());
-		BeanEmpresa.bairros = fcdBairro.getBairrosByCodCidade(getCodCidade()); 
+		BeanEmpresa.bairros = ruleBairro.getBairrosByCodCidade(getCodCidade()); 
 		return  BeanEmpresa.bairros;
 	}
 	/**
@@ -275,5 +290,46 @@ public class BeanEmpresa extends SuperBean {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public RuleEmpresa getRuleEmpresa() {
+		return ruleEmpresa;
+	}
+
+	public void setRuleEmpresa(RuleEmpresa ruleEmpresa) {
+		this.ruleEmpresa = ruleEmpresa;
+	}
+
+	public RuleEstado getRuleEstado() {
+		return ruleEstado;
+	}
+
+	public void setRuleEstado(RuleEstado ruleEstado) {
+		this.ruleEstado = ruleEstado;
+	}
+
+	public RuleCidade getRuleCidade() {
+		return ruleCidade;
+	}
+
+	public void setRuleCidade(RuleCidade ruleCidade) {
+		this.ruleCidade = ruleCidade;
+	}
+
+	public RuleBairro getRuleBairro() {
+		return ruleBairro;
+	}
+
+	public void setRuleBairro(RuleBairro ruleBairro) {
+		this.ruleBairro = ruleBairro;
+	}
+
+	public RuleLoja getRuleLoja() {
+		return ruleLoja;
+	}
+
+	public void setRuleLoja(RuleLoja ruleLoja) {
+		this.ruleLoja = ruleLoja;
+	}
+
 	
 }

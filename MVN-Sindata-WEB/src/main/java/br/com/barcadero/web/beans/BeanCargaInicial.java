@@ -1,6 +1,7 @@
 package br.com.barcadero.web.beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import br.com.barcadero.core.util.HandleCargaCidadesCE;
 import br.com.barcadero.rule.RuleEstado;
@@ -14,15 +15,20 @@ import br.com.barcadero.rule.RuleParametros;
 public class BeanCargaInicial extends SuperBean {
 
 	private static final long serialVersionUID = 1L;
+	@ManagedProperty("#{ruleEstado}")
 	private RuleEstado fcdEstado;
+	@ManagedProperty("#{handleCargaCidadesCE}")
 	private HandleCargaCidadesCE cargaCidCE;
+	@ManagedProperty("#{ruleParametros}")
 	private RuleParametros	ruleParam;
-	public BeanCargaInicial() {
-		// TODO Auto-generated constructor stub
-		fcdEstado 	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		cargaCidCE 	= new HandleCargaCidadesCE(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(), getUsuarioLogado());
-		ruleParam	= new RuleParametros(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
-	}
+	
+	
+//	public BeanCargaInicial() {
+//		// TODO Auto-generated constructor stub
+//		fcdEstado 	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+//		cargaCidCE 	= new HandleCargaCidadesCE(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(), getUsuarioLogado());
+//		ruleParam	= new RuleParametros(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
+//	}
 	
 	public String carregarEstados() throws Exception {
 		fcdEstado.carregarEstados(getSession().getUsuarioLogado());
@@ -75,6 +81,30 @@ public class BeanCargaInicial extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleEstado getFcdEstado() {
+		return fcdEstado;
+	}
+
+	public void setFcdEstado(RuleEstado fcdEstado) {
+		this.fcdEstado = fcdEstado;
+	}
+
+	public HandleCargaCidadesCE getCargaCidCE() {
+		return cargaCidCE;
+	}
+
+	public void setCargaCidCE(HandleCargaCidadesCE cargaCidCE) {
+		this.cargaCidCE = cargaCidCE;
+	}
+
+	public RuleParametros getRuleParam() {
+		return ruleParam;
+	}
+
+	public void setRuleParam(RuleParametros ruleParam) {
+		this.ruleParam = ruleParam;
 	}
 
 }

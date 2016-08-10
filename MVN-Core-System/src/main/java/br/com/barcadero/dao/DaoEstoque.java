@@ -1,28 +1,27 @@
 package br.com.barcadero.dao;
 
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Estoque;
-import br.com.barcadero.tables.Loja;
 
+@Repository
 public class DaoEstoque extends DaoModelo<Estoque> {
 
-	public DaoEstoque(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
+	public DaoEstoque() {
+		
 	}
 
 	@Override
 	public List<Estoque> findAll() throws Exception {
-		return getMainQuery(Estoque.FIND_ALL).list();
+		return getMainQuery(Estoque.FIND_ALL).getResultList();
 	}
 
 	@Override
 	public Estoque find(long codigo) throws Exception {
-		Query qry = getMainQuery(Estoque.FIND_BY_COD).setLong("codigo", codigo);
-		return (Estoque) qry.uniqueResult();
+		Query qry = getMainQuery(Estoque.FIND_BY_COD).setParameter("codigo", codigo);
+		return (Estoque) qry.getSingleResult();
 	}
 	
 	public List<Estoque> findByCodigoOrDescricao(String codigoDescricao) throws Exception {
@@ -30,8 +29,8 @@ public class DaoEstoque extends DaoModelo<Estoque> {
 	}
 	
 	private Query getMainQuery(String queryName) {
-		Query qry = getSession().getNamedQuery(queryName)
-				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+		Query qry = manager.createNamedQuery(queryName)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
 		return qry;
 	}
 

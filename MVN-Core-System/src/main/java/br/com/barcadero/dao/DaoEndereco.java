@@ -2,20 +2,17 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
-import br.com.barcadero.tables.Loja;
-
+@Repository
 public class DaoEndereco extends DaoModelo<Endereco> {
 
 	
-
-	public DaoEndereco(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoEndereco() {
+		
 	}
+	
 
 	@Override
 	public List<Endereco> findAll() throws Exception {

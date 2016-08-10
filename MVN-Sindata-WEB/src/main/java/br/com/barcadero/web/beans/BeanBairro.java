@@ -2,9 +2,10 @@ package br.com.barcadero.web.beans;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-
 import br.com.barcadero.rule.RuleBairro;
 import br.com.barcadero.rule.RuleCidade;
 import br.com.barcadero.tables.Bairro;
@@ -16,17 +17,18 @@ public class BeanBairro extends SuperBean {
 
 	private static final long serialVersionUID = 5859355521669947983L;
 	private Bairro bairro;
+	@ManagedProperty("#{ruleBairro}")
 	private RuleBairro fcdBairro;
+	@ManagedProperty("#{ruleCidade}")
 	private RuleCidade fcdCidade;
 	private long codCidade;
 	private List<Cidade> cidades;
 	private List<Bairro> bairros;
 	private long codEstado;
 	
-	public BeanBairro() {
+	@PostConstruct
+	private void init() {
 		bairro 		= new Bairro(getUsuarioLogado());
-		//fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdCidade	= new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public List<Cidade> getCidades() {
@@ -115,6 +117,22 @@ public class BeanBairro extends SuperBean {
 
 	public void setBairros(List<Bairro> bairros) {
 		this.bairros = bairros;
+	}
+
+	public RuleBairro getFcdBairro() {
+		return fcdBairro;
+	}
+
+	public void setFcdBairro(RuleBairro fcdBairro) {
+		this.fcdBairro = fcdBairro;
+	}
+
+	public RuleCidade getFcdCidade() {
+		return fcdCidade;
+	}
+
+	public void setFcdCidade(RuleCidade fcdCidade) {
+		this.fcdCidade = fcdCidade;
 	}
 
 }

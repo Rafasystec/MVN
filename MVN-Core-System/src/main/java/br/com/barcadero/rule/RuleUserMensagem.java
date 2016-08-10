@@ -3,28 +3,30 @@ package br.com.barcadero.rule;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Session;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.dao.DaoUserMensagem;
 import br.com.barcadero.dao.DaoUsuario;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.TmpUserMessage;
 import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
 
-
+@Service
 public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 
 	
 	private DaoUserMensagem daoMensagem;
 	private DaoUsuario daoUsuario;
 	
-	public RuleUserMensagem(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoMensagem = new DaoUserMensagem(empresa, loja, session);
-		daoUsuario	= new DaoUsuario(empresa, loja, session);
+	@Autowired
+	public RuleUserMensagem(DaoUserMensagem daoMensagem,DaoUsuario daoUsuario) {
+		// TODO Auto-generated constructor stub
+		this.daoMensagem = daoMensagem;
+		this.daoUsuario = daoUsuario;
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package br.com.barcadero.web.beans;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleEstoque;
@@ -16,19 +18,25 @@ public class BeanEstoque extends SuperBean {
 
 	private static final long serialVersionUID = 2638846429735720878L;
 	private String paramProd;
-	private RuleProduto ruleProduto;
 	private List<Estoque> estoques;
 	private Estoque selectedEstoque;
-	private RuleEstoque ruleEstoque;
 	private Estoque estoque;
 	private Produto produto;
 	private long codProduto;
+	@ManagedProperty("#{ruleProduto}")
+	private RuleProduto ruleProduto;
+	@ManagedProperty("#{ruleEstoque}")
+	private RuleEstoque ruleEstoque;
 	
-	public BeanEstoque() {
-		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		ruleEstoque	= new RuleEstoque(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	@PostConstruct
+	private void init() {
 		estoque		= new Estoque(getEmpresaLogada(), getUsuarioLogado());
 	}
+//	public BeanEstoque() {
+//		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+//		ruleEstoque	= new RuleEstoque(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+//		estoque		= new Estoque(getEmpresaLogada(), getUsuarioLogado());
+//	}
 	
 	@Override
 	public String imprimir() throws Exception {

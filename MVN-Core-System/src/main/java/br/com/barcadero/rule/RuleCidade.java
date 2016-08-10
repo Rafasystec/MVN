@@ -3,24 +3,28 @@ package br.com.barcadero.rule;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.tables.Cidade;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 
+@Service
 public class RuleCidade extends RuleModelo<Cidade> {
 
 	
 	private DaoCidade daoCidade	;
-	
-	public RuleCidade(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		this.daoCidade	= new DaoCidade(empresa, loja, session);
+	@Autowired
+	public RuleCidade(DaoCidade daoCidade) {
+		// TODO Auto-generated constructor stub
+		this.daoCidade = daoCidade;
 	}
+//	public RuleCidade(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		this.daoCidade	= new DaoCidade(empresa, loja, session);
+//	}
 	
 	@Override
 	public String insert(Entidade entidade) throws Exception {

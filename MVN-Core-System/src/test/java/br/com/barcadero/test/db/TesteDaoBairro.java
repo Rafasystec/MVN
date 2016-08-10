@@ -50,7 +50,7 @@ public class TesteDaoBairro {
 			
 		
 			
-			DaoCidade daoCid = new DaoCidade(null,null,session);
+			DaoCidade daoCid = null;//new DaoCidade(null,null,session);
 			cidade = (Cidade)daoCid.find(18L);
 			bairro.setCidade(cidade);
 			bairro.setCodIbge("09094484877");

@@ -2,18 +2,20 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.OrdemServico;
 
+@Repository
 public class DaoOrdemServico extends DaoModelo<OrdemServico> {
 
-	public DaoOrdemServico(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoOrdemServico() {
+		System.out.println("Auto-generated constructor stub DaoOrdemServico");
 	}
+//	public DaoOrdemServico(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public List<OrdemServico> findAll() throws Exception {

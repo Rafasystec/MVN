@@ -26,7 +26,8 @@ import br.com.barcadero.web.attributes.Attributs;
 public class BeanUsuarioLogin extends SuperBean{
 
 	private static final long serialVersionUID = 6123392904973257391L;
-	private RuleUsuario facadeUsuario;
+	@ManagedProperty("#{ruleUsuario}")
+	private RuleUsuario ruleUsuario;
 	private boolean autorizado;
 	@ManagedProperty(value="#{user}")
 	private Usuario user;
@@ -40,18 +41,10 @@ public class BeanUsuarioLogin extends SuperBean{
 	public void setAutorizado(boolean autorizado) {
 		this.autorizado = autorizado;
 	}
-	public BeanUsuarioLogin(){
-		try{
-			facadeUsuario = new RuleUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-			user	= new Usuario(null);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
 			
 	public List<Usuario> getUsuarios() throws Exception{
 		try {
-			return facadeUsuario.findAll();
+			return ruleUsuario.findAll();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
@@ -69,7 +62,7 @@ public class BeanUsuarioLogin extends SuperBean{
 		String target 		= "index";
 		Usuario usuario 	= null;
 		try {	
-			usuario = facadeUsuario.login(getLogin(), getSenha());
+			usuario = ruleUsuario.login(getLogin(), getSenha());
 			if(usuario != null){
 //				autorizado = true;
 //				getSession().setAttribute("autorizado", autorizado);
@@ -178,5 +171,11 @@ public class BeanUsuarioLogin extends SuperBean{
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public RuleUsuario getRuleUsuario() {
+		return ruleUsuario;
+	}
+	public void setRuleUsuario(RuleUsuario ruleUsuario) {
+		this.ruleUsuario = ruleUsuario;
 	}
 }

@@ -4,35 +4,34 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
-import br.com.barcadero.module.sat.exceptions.SATException;
-import br.com.barcadero.rule.RuleGenarateCFe.CFeResult;
 import br.com.barcadero.tables.Caixa;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Usuario;
-
+@Service
 public class RulePedido extends RuleModelo<Pedido> {
 
 	private RuleCaixa ruleCaixa;
 	private DaoPedido daoPedido;
 	private RuleNota ruleNota;
 	private RuleGenarateCFe ruleGenarateCFe;
-	public RulePedido(Empresa empresa, Loja loja, Session session, Caixa caixa) {
-		super(empresa, loja, session);
-		//ruleCaixa       = new RuleCaixa(empresa, loja, session);
-		daoPedido       = new DaoPedido(empresa, loja, session);
-		ruleNota        = new RuleNota(empresa, loja, session);
-		ruleGenarateCFe = new RuleGenarateCFe(empresa, loja, caixa, session);
+	
+	@Autowired
+	public RulePedido(DaoPedido daoPedido,RuleCaixa ruleCaixa,RuleNota ruleNota) {
+		System.out.println("Auto-generated constructor stub RulePedido");
+		this.daoPedido = daoPedido;
+		this.ruleCaixa = ruleCaixa;
+		this.ruleNota  = ruleNota;
 	}
+
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {

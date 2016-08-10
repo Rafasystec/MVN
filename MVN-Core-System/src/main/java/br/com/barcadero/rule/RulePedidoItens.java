@@ -3,24 +3,26 @@ package br.com.barcadero.rule;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoPedidoItens;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Produto;
 
+@Service
 public class RulePedidoItens extends RuleModelo<Pedido> {
 
 	private DaoPedidoItens daoPedidoItens;
 	private RuleProduto ruleProduto;
-	public RulePedidoItens(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoPedidoItens 	= new DaoPedidoItens(empresa, loja, session);
-		//ruleProduto		= new RuleProduto(empresa, loja, session);
+	
+	@Autowired
+	public RulePedidoItens(DaoPedidoItens daoPedidoItens,RuleProduto ruleProduto) {
+		// TODO Auto-generated constructor stub
+		this.daoPedidoItens = daoPedidoItens;
+		this.ruleProduto	= ruleProduto;
 	}
 
 	@Override

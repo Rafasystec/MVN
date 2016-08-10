@@ -20,10 +20,10 @@ public class GerarRelatorio extends TesteSuperClass{
 	DaoNota daoNota;
 	public GerarRelatorio() {
 		// TODO Auto-generated constructor stub
-		daoNota = new DaoNota(null, null, getSession());
+		//daoNota = new DaoNota(null, null, getSession());
 	}
 	
-	@Test
+	//@Test
 	public void testReport() throws JRException,SQLException {
 		
 		System.out.println("Gerando relatório");

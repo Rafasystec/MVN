@@ -10,9 +10,9 @@ public class TestRuleRegraTributaria extends TesteSuperClass{
 	private RuleRegraTributaria regraTributaria;
 	public TestRuleRegraTributaria() {
 		// TODO Auto-generated constructor stub
-		regraTributaria = new RuleRegraTributaria(null, null, getSession());
+		//regraTributaria = new RuleRegraTributaria(null, null, getSession());
 	}
-	@Test
+	//@Test
 	public void testeCargaRegrasICMS() {
 		try {
 			//getSession().beginTransaction();

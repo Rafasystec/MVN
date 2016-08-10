@@ -17,7 +17,7 @@ import br.com.barcadero.core.db.util.HibernateHelper;
 import br.com.barcadero.web.attributes.Attributs;
 
 
-@WebFilter(urlPatterns="*.xhtml")
+
 public class FiltroDeConexao implements Filter{
 	/**
 	 * @author Rafael Rocha
@@ -30,7 +30,7 @@ public class FiltroDeConexao implements Filter{
 	}
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
+		System.out.println("Filtro conexao");
 		Session session = HibernateHelper.getSessionFactory().openSession();
 		try{
 			//Realizado no inicio

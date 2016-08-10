@@ -3,21 +3,22 @@ package br.com.barcadero.rule;
 import java.util.Arrays;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoSystemProperties;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.SystemHistory;
 import br.com.barcadero.tables.SystemProperties;
-
+@Service
 public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 
 	private DaoSystemProperties daoSystemProperties;
-	public RuleSystemProperties(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoSystemProperties = new DaoSystemProperties(session);
+	
+	@Autowired
+	public RuleSystemProperties(DaoSystemProperties daoSystemProperties) {
+		// TODO Auto-generated constructor stub
+		this.daoSystemProperties = daoSystemProperties;
 	}
 
 	@Override

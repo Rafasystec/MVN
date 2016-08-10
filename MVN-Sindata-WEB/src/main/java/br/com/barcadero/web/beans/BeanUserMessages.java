@@ -2,7 +2,10 @@ package br.com.barcadero.web.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
 
@@ -16,31 +19,30 @@ import br.com.barcadero.tables.Usuario;
 public class BeanUserMessages extends SuperBean {
 
 	private UserMensagens message;
-	private RuleUserMensagem ruleMensagem;
-	private RuleUsuario fcdUsuario;
 	private String paramEmail;
 	private static final long serialVersionUID = -2290317476489236357L;
-
-	public BeanUserMessages() {
-		// TODO Auto-generated constructor stub
+	@ManagedProperty("#{ruleUserMensagem}")
+	private RuleUserMensagem ruleUserMensagem;
+	@ManagedProperty("#{ruleUsuario}")
+	private RuleUsuario ruleUsuario;
+	@PostConstruct
+	private void init() {
 		message 	 = new UserMensagens(getEmpresaLogada(),getUsuarioLogado());
-		ruleMensagem = new RuleUserMensagem(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		fcdUsuario	 = new RuleUsuario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Enviar Mensagem ao usuario");
-		Usuario user = fcdUsuario.findByEmail(paramEmail);
+		Usuario user = ruleUsuario.findByEmail(paramEmail);
 		message.setCdUserReceive(user.getCodigo());
-		ruleMensagem.insert(message);
+		ruleUserMensagem.insert(message);
 		return null;
 	}
 
 	public List<String> completeText(String query)  {
 		try {
-			return ruleMensagem.getNomeEmail(query);
+			return ruleUserMensagem.getNomeEmail(query);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,6 +99,30 @@ public class BeanUserMessages extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getParamEmail() {
+		return paramEmail;
+	}
+
+	public void setParamEmail(String paramEmail) {
+		this.paramEmail = paramEmail;
+	}
+
+	public RuleUserMensagem getRuleUserMensagem() {
+		return ruleUserMensagem;
+	}
+
+	public void setRuleUserMensagem(RuleUserMensagem ruleUserMensagem) {
+		this.ruleUserMensagem = ruleUserMensagem;
+	}
+
+	public RuleUsuario getRuleUsuario() {
+		return ruleUsuario;
+	}
+
+	public void setRuleUsuario(RuleUsuario ruleUsuario) {
+		this.ruleUsuario = ruleUsuario;
 	}
 
 }

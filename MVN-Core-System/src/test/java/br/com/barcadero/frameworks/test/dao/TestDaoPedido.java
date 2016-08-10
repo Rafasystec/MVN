@@ -22,7 +22,7 @@ public class TestDaoPedido  {
 	DaoPedido daoPedido;
 
 	public TestDaoPedido() {
-		daoPedido = new DaoPedido(HandleEmpresaLoja.getEmpresa(), HandleEmpresaLoja.getLoja(), HibernateHelper.getSession());
+		//daoPedido = new DaoPedido(HandleEmpresaLoja.getEmpresa(), HandleEmpresaLoja.getLoja(), HibernateHelper.getSession());
 	}
 	
 	public TestDaoPedido(Empresa empresa, Loja loja, Session session) {

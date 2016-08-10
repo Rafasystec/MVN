@@ -3,7 +3,8 @@ package br.com.barcadero.rule;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoLoja;
 import br.com.barcadero.tables.Empresa;
@@ -13,15 +14,15 @@ import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
-
+@Service
 public class RuleLoja extends RuleModelo<Loja> {
 
-	
-
 	private DaoLoja daoLoja;
-	public RuleLoja(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoLoja = new DaoLoja(empresa, loja, session);
+	private Empresa empresa;
+	@Autowired
+	public RuleLoja(DaoLoja daoLoja) {
+		System.out.println("Auto-generated constructor stub for RuleLoja");
+		this.daoLoja = daoLoja;
 	}
 
 	@Override
@@ -69,6 +70,10 @@ public class RuleLoja extends RuleModelo<Loja> {
 	 */
 	public List<Loja> getLojasDaEmpresa(long cdEmp) throws Exception{
 		return daoLoja.getLojasDaEmpresa(cdEmp);
+	}
+	
+	public List<Loja> getLojasDaEmpresa(Empresa empresa) throws Exception{
+		return daoLoja.getLojasDaEmpresa(empresa);
 	}
 	
 	private void retirarFormatcao(Loja loja) {
@@ -132,6 +137,14 @@ public class RuleLoja extends RuleModelo<Loja> {
 	 */
 	public List<Loja> findAll() throws Exception {
 		return daoLoja.findAll();
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 }

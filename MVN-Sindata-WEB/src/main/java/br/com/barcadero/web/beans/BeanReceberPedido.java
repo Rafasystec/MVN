@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import org.primefaces.event.SelectEvent;
@@ -19,18 +21,18 @@ import br.com.barcadero.web.functions.HandleMessage;
 public class BeanReceberPedido extends SuperBean {
 
 	private static final long serialVersionUID = -2518308925844030905L;
-	private RulePedido rulePedido;
 	private List<Pedido> pedidosAFaturarHoje;
 	private Pedido selectedPedido;
 	private FormasPagamento formasPagamento;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
+	@ManagedProperty("#{rulePedido}")
+	private RulePedido rulePedido;
 
-	
-	public BeanReceberPedido() {
-		rulePedido 		= new RulePedido(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(),getCaixaVenda());
+	@PostConstruct
+	private void init() {
 		formasPagamento = new FormasPagamento();
 	}
-	
+
 	@Override
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
@@ -144,6 +146,14 @@ public class BeanReceberPedido extends SuperBean {
 			}
 			
 		}
+	}
+
+	public RulePedido getRulePedido() {
+		return rulePedido;
+	}
+
+	public void setRulePedido(RulePedido rulePedido) {
+		this.rulePedido = rulePedido;
 	}
 	
 	

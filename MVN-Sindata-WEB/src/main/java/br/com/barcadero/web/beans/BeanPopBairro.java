@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import org.primefaces.context.RequestContext;
@@ -30,18 +31,15 @@ public class BeanPopBairro extends SuperBean{
 	private Date dtCadastro;
 	private List<Cidade> cidades;
 	private List<Bairro> bairros;
-	private RuleBairro facadeBairro;
-	private RuleCidade facadeCidade;
 	private List<String> params;
+	@ManagedProperty("#{ruleBairro}")
+	private RuleBairro ruleBairro;
+	@ManagedProperty("#{ruleCidade}")
+	private RuleCidade ruleCidade;
 	
-	public BeanPopBairro(){
-		this.facadeCidade	= new RuleCidade(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		//this.facadeBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		getParametros();
-	}
 	public List<Cidade> getCidades() {
 		try{
-			this.cidades = facadeCidade.getCidadesByCodEstado(GlobalVariables.codEstado);
+			this.cidades = ruleCidade.getCidadesByCodEstado(GlobalVariables.codEstado);
 			return cidades;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -52,7 +50,7 @@ public class BeanPopBairro extends SuperBean{
 	public List<Bairro> getBairros() {
 		try{
 			if(getCodCidade() != 0 ){
-				this.bairros = this.facadeBairro.getBairrosByCodCidade(getCodCidade());
+				this.bairros = this.ruleBairro.getBairrosByCodCidade(getCodCidade());
 			}
 			return bairros;
 		}catch(Exception e){
@@ -105,10 +103,10 @@ public class BeanPopBairro extends SuperBean{
 			bairro.setDescricao(getDescricao());
 			bairro.setCodIbge(getCodIbge());
 			
-			cidade = (Cidade) facadeCidade.find(getCodCidade());
+			cidade = (Cidade) ruleCidade.find(getCodCidade());
 			if(cidade != null){
 				bairro.setCidade(cidade);
-				msg = this.facadeBairro.insert(bairro);
+				msg = this.ruleBairro.insert(bairro);
 				exibirMensagem(msg);
 			}else{
 				exibirErroGrave("Não foi possível encontrar a cidade para o relacionamento.");
@@ -174,5 +172,21 @@ public class BeanPopBairro extends SuperBean{
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleBairro getRuleBairro() {
+		return ruleBairro;
+	}
+
+	public void setRuleBairro(RuleBairro ruleBairro) {
+		this.ruleBairro = ruleBairro;
+	}
+
+	public RuleCidade getRuleCidade() {
+		return ruleCidade;
+	}
+
+	public void setRuleCidade(RuleCidade ruleCidade) {
+		this.ruleCidade = ruleCidade;
 	}
 }

@@ -2,25 +2,24 @@ package br.com.barcadero.rule;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.commons.util.HandleMD5;
 import br.com.barcadero.core.enums.EnumTipoUser;
 import br.com.barcadero.dao.DaoUsuario;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
-
+@Service
 public class RuleUsuario extends RuleModelo<Usuario>{
 	
 	
 
-	private final DaoUsuario daoUsuario;	
-	
-	public RuleUsuario(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoUsuario = new DaoUsuario(empresa, loja, session);
+	private DaoUsuario daoUsuario;	
+	@Autowired
+	public RuleUsuario(DaoUsuario daoUsuario) {
+		// TODO Auto-generated constructor stub
+		this.daoUsuario = daoUsuario;
 	}
 
 	public Usuario login(String login, String pwd) throws Exception{

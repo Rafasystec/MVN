@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.core.enums.EnumUF;
@@ -20,20 +22,30 @@ public class BeanLoja extends SuperBean {
 	private static final long serialVersionUID = 444117878813938158L;
 	private PessoaJuridica pj;
 	private Endereco ender;
+	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
 	private Loja loja;
 	private EnumRegimeTributario[] regime;
 	private EnumUF[] uf;
 	private long codEmpresa;
 	
-	public BeanLoja() {
+	@PostConstruct
+	private void init() {
 		Usuario userLogado = getSession().getUsuarioLogado();
 		pj 		= new PessoaJuridica(userLogado);
 		ender	= new Endereco(userLogado);
 		loja	= new Loja(userLogado);
-		ruleLoja = new RuleLoja(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		System.out.println("BeanLoja was created!");
 	}
+	
+	
+//	public BeanLoja() {
+//		Usuario userLogado = getSession().getUsuarioLogado();
+//		pj 		= new PessoaJuridica(userLogado);
+//		ender	= new Endereco(userLogado);
+//		loja	= new Loja(userLogado);
+//		ruleLoja = new RuleLoja(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+//		System.out.println("BeanLoja was created!");
+//	}
 	
 	public PessoaJuridica getPj() {
 		return pj;
@@ -131,6 +143,14 @@ public class BeanLoja extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleLoja getRuleLoja() {
+		return ruleLoja;
+	}
+
+	public void setRuleLoja(RuleLoja ruleLoja) {
+		this.ruleLoja = ruleLoja;
 	}
 
 }

@@ -2,24 +2,27 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
 
-import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Loja;
+import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.tables.SystemProperties;
-
+@Repository
 public class DaoSystemProperties extends DaoModelo<SystemProperties> {
 
-	public DaoSystemProperties(Session session) {
-		// TODO Auto-generated constructor stub
-		super(session);
+	public DaoSystemProperties() {
+		System.out.println("Auto-generated constructor stub DaoSystemProperties");
 	}
 	
-	public DaoSystemProperties(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
-	}
+//	public DaoSystemProperties(Session session) {
+//		// TODO Auto-generated constructor stub
+//		super(session);
+//	}
+	
+//	public DaoSystemProperties(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public List<SystemProperties> findAll() throws Exception {
@@ -34,8 +37,8 @@ public class DaoSystemProperties extends DaoModelo<SystemProperties> {
 	}
 	
 	public SystemProperties find() throws Exception {
-		Query qry = getSession().getNamedQuery(SystemProperties.FIND);
-		return (SystemProperties) qry.uniqueResult();
+		Query qry = manager.createNamedQuery(SystemProperties.FIND);
+		return (SystemProperties) qry.getSingleResult();
 	}
 
 }

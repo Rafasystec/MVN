@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.commons.util.HandleString;
 import br.com.barcadero.commons.xml.HandleXML;
@@ -61,8 +63,6 @@ import br.com.barcadero.module.sat.xml.envio.Prod;
 import br.com.barcadero.module.sat.xml.envio.Total;
 import br.com.barcadero.module.sat.xml.util.CNPJ;
 import br.com.barcadero.module.sat.xml.util.CPF;
-import br.com.barcadero.rule.RuleGenarateCFe.CFeResult;
-import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
@@ -72,7 +72,7 @@ import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.NotaMeioPgto;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.Usuario;
-
+@Service
 public class RuleGenarateCFe {
 	
 	public static final int CODE_NAO_TEM_NOTA 		= 13;
@@ -81,24 +81,31 @@ public class RuleGenarateCFe {
 	private Empresa empresa = null;
 	private RuleCFeComandos ruleCFeComandos			= null;
 	private RuleCupomEletronico ruleCupomEletronico = null;
-	private RuleGenarateCFe ruleGenarateCFe			= null;
 	private Loja loja 		= null;
 	private Session session = null;
+	
 	public static void main(String[] args) {
 		EnumUnidadeMedida enumMedido = EnumUnidadeMedida.UNIDADE;
 		String unidade = String.valueOf(enumMedido);
 		System.out.println(unidade);
 	}
 	
-	public RuleGenarateCFe(Empresa empresa, Loja loja, Caixa caixa, Session session) {
-		// TODO Auto-generated constructor stub
-		setSession(session);
-		setEmpresa(empresa);
-		setLoja(loja);
-		ruleCFeComandos 	= new RuleCFeComandos(caixa);
-		ruleCupomEletronico = new RuleCupomEletronico(empresa, loja, session);
-		//ruleGenarateCFe		= new RuleGenarateCFe(empresa, loja, caixa, session);
+	@Autowired
+	public RuleGenarateCFe(RuleCFeComandos ruleCFeComandos,RuleCupomEletronico ruleCupomEletronico) {
+		System.out.println("Auto-generated constructor stub RuleGenarateCFe");
+		this.ruleCFeComandos 		= ruleCFeComandos;
+		this.ruleCupomEletronico	= ruleCupomEletronico;
+		
 	}
+//	public RuleGenarateCFe(Empresa empresa, Loja loja, Caixa caixa, Session session) {
+//		// TODO Auto-generated constructor stub
+//		setSession(session);
+//		setEmpresa(empresa);
+//		setLoja(loja);
+//		ruleCFeComandos 	= new RuleCFeComandos(caixa);
+//		ruleCupomEletronico = new RuleCupomEletronico(empresa, loja, session);
+//		//ruleGenarateCFe		= new RuleGenarateCFe(empresa, loja, caixa, session);
+//	}
 	/**
 	 * 
 	 * @param nota
@@ -616,7 +623,6 @@ public class RuleGenarateCFe {
 	 * @throws Exception
 	 */
 	private String tratarRetorno(EnumCFeTipoFuncao type,String retorno, Usuario usuario) throws SATException, Exception {
-		HandleRetornoSAT retSAT = null;
 		String result			= "";
 		switch (type) {
 		case CFE_ATIVA_SAT:

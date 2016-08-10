@@ -30,7 +30,7 @@ public class TestRuleNota extends TesteSuperClass {
 	private RuleNota ruleNota;
 	public TestRuleNota() {
 		// TODO Auto-generated constructor stub
-		ruleNota = new RuleNota(null, null, getSession());
+		//ruleNota = new RuleNota(null, null, getSession());
 	}
 	
 	@Test

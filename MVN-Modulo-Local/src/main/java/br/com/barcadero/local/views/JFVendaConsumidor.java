@@ -202,7 +202,7 @@ public class JFVendaConsumidor extends JFrame {
 	}
 	
 	private void criarRuleNota() {
-		this.ruleNota = new RuleNota(null, null, Main.getSession());
+		//this.ruleNota = new RuleNota(null, null, Main.getSession());
 	}
 	
 	private void criarRuleProduto() {

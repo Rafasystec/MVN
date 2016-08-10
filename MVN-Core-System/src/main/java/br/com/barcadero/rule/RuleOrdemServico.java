@@ -3,28 +3,29 @@ package br.com.barcadero.rule;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServicoItens;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
 import br.com.barcadero.tables.Produto;
 
+@Service
 public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 
 	private DaoOrdemServico daoOrdemServico;
 	private DaoOrdemServicoItens daoOrdemServicoItens;
 	private RuleProduto ruleProduto;
-	public RuleOrdemServico(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoOrdemServico 		= new DaoOrdemServico(empresa, loja, session);
-		daoOrdemServicoItens 	= new DaoOrdemServicoItens(empresa, loja, session);
-		//ruleProduto				= new RuleProduto(empresa, loja, session);
+	
+	@Autowired
+	public RuleOrdemServico(DaoOrdemServico daoOrdemServico, DaoOrdemServicoItens daoOrdemServicoItens) {
+		System.out.println("Auto-generated constructor stub RuleOrdemServico");
+		this.daoOrdemServico 		= daoOrdemServico;
+		this.daoOrdemServicoItens	= daoOrdemServicoItens;
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package br.com.barcadero.rule;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.springframework.stereotype.Service;
+
 import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
@@ -26,10 +28,15 @@ import br.com.barcadero.tables.Caixa;
  * @author antoniorafael
  *
  */
+@Service
 public class RuleCFeComandos {
 
 	private ClientSocket client;
 	private Caixa caixa;
+	
+	public RuleCFeComandos() {
+		// TODO Auto-generated constructor stub
+	}
 	public RuleCFeComandos(Caixa caixa) {
 		// TODO Auto-generated constructor stub
 		client = new ClientSocket();

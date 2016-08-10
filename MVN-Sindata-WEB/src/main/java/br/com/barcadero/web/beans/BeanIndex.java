@@ -2,6 +2,7 @@ package br.com.barcadero.web.beans;
 
 import java.io.IOException;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import br.com.barcadero.rule.RuleSystemProperties;
 import br.com.barcadero.tables.SystemProperties;
@@ -16,15 +17,8 @@ public class BeanIndex extends SuperBean{
 	private boolean isLogado;
 	private Usuario user;
 	private String versaoSystema;
+	@ManagedProperty("#{ruleSystemProperties}")
 	private RuleSystemProperties ruleSystemProperties;
-	
-	public BeanIndex() {
-		// TODO Auto-generated constructor stub
-		System.out.println("Bean index was created");
-		ruleSystemProperties = new RuleSystemProperties(null, null, getDataBaseSession());
-		setVersaoSystema(getVersao());
-	}
-	
 	
 	public Usuario getUser() {
 		return user;
@@ -117,6 +111,14 @@ public class BeanIndex extends SuperBean{
 	public String novo() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleSystemProperties getRuleSystemProperties() {
+		return ruleSystemProperties;
+	}
+
+	public void setRuleSystemProperties(RuleSystemProperties ruleSystemProperties) {
+		this.ruleSystemProperties = ruleSystemProperties;
 	}
 
 }

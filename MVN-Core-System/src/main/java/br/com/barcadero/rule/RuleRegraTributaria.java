@@ -3,21 +3,23 @@ package br.com.barcadero.rule;
 
 import java.math.BigDecimal;
 import java.util.List;
-import org.hibernate.Session;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.dao.DaoRegraTributacao;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.RegraTributaria;
 import br.com.barcadero.tables.Usuario;
-
+@Service
 public class RuleRegraTributaria extends RuleModelo<RegraTributaria> {
 
 	private DaoRegraTributacao daoRegraTributacao;
-	public RuleRegraTributaria(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoRegraTributacao = new DaoRegraTributacao(empresa, loja, session);
+	@Autowired
+	public RuleRegraTributaria(DaoRegraTributacao daoRegraTributacao) {
+		// TODO Auto-generated constructor stub
+		this.daoRegraTributacao = daoRegraTributacao;
 	}
 
 	@Override

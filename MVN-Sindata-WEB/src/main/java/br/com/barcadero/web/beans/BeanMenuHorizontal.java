@@ -3,6 +3,7 @@ package br.com.barcadero.web.beans;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleUserMensagem;
@@ -13,11 +14,8 @@ import br.com.barcadero.tables.TmpUserMessage;
 public class BeanMenuHorizontal extends SuperBean {
 
 	private static final long serialVersionUID = 138203880609210500L;
-	private RuleUserMensagem ruleMensagem;
-	public BeanMenuHorizontal() {
-		// TODO Auto-generated constructor stub
-		ruleMensagem = new RuleUserMensagem(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-	}
+	@ManagedProperty("#{ruleUserMensagem}")
+	private RuleUserMensagem ruleUserMensagem;
 
 	@Override
 	public String salvar() throws Exception {
@@ -45,7 +43,7 @@ public class BeanMenuHorizontal extends SuperBean {
 	
 	public List<TmpUserMessage> getMensagens() throws Exception {
 		if(getUsuarioLogado() != null){
-			return ruleMensagem.getMensagens(getUsuarioLogado());
+			return ruleUserMensagem.getMensagens(getUsuarioLogado());
 		}else{
 			return new ArrayList<TmpUserMessage>();
 		}
@@ -55,6 +53,14 @@ public class BeanMenuHorizontal extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleUserMensagem getRuleUserMensagem() {
+		return ruleUserMensagem;
+	}
+
+	public void setRuleUserMensagem(RuleUserMensagem ruleUserMensagem) {
+		this.ruleUserMensagem = ruleUserMensagem;
 	}
 
 }

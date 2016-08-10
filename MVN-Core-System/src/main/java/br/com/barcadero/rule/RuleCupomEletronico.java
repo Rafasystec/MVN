@@ -2,24 +2,32 @@ package br.com.barcadero.rule;
 
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Session;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.barcadero.core.handles.HandleNumericFormat;
 import br.com.barcadero.dao.DaoCupomEletronico;
 import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.tables.CupomEletronico;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
+@Service
 public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 
 	private DaoCupomEletronico daoCupomEletronico;
-	public RuleCupomEletronico(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoCupomEletronico = new DaoCupomEletronico(empresa, loja, session);
+	
+	@Autowired
+	public RuleCupomEletronico(DaoCupomEletronico daoCupomEletronico) {
+		// TODO Auto-generated constructor stub
+		this.daoCupomEletronico = daoCupomEletronico;
 	}
+//	public RuleCupomEletronico(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		daoCupomEletronico = new DaoCupomEletronico(empresa, loja, session);
+//	}
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {

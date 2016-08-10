@@ -1,23 +1,22 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import br.com.barcadero.dao.DaoOrdemServicoItens;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
 
+@Service
 public class RuleOrdemServicoItens extends RuleModelo<OrdemServicoItens> {
 
 	private DaoOrdemServicoItens daoOrdemServicoItens;
-	public RuleOrdemServicoItens(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoOrdemServicoItens = new DaoOrdemServicoItens(empresa, loja, session);
+	
+	@Autowired
+	public RuleOrdemServicoItens(DaoOrdemServicoItens daoOrdemServicoItens) {
+		System.out.println("Auto-generated constructor stub RuleOrdemServicoItens");
+		this.daoOrdemServicoItens = daoOrdemServicoItens;
 	}
 
 	@Override

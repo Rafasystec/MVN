@@ -31,7 +31,7 @@ public class SrvControllerUser extends HttpServlet {
 			
 			String param = req.getParameter("term");
 			System.out.println("Parametro: " + param);
-			RuleUsuario fcdUser = new RuleUsuario(null, null, session);
+			RuleUsuario fcdUser = null;//new RuleUsuario(null, null, session);
 			List<Usuario> list = fcdUser.find(param);
 			String result = new Gson().toJson(list);
 			resp.getWriter().write(result);

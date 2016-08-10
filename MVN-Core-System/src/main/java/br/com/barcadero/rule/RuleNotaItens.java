@@ -3,13 +3,12 @@ package br.com.barcadero.rule;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumItemCancelado;
 import br.com.barcadero.dao.DaoNotaItens;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.Produto;
@@ -19,19 +18,19 @@ import br.com.barcadero.tables.Produto;
  * @author Rafael Rocha
  * @since versao 1.0 dia 23/02/2016 as 20:13
  */
+@Service
 public class RuleNotaItens extends RuleModelo<NotaItens> {
  
 	//private RuleNota ruleNota;
 	private DaoNotaItens daoNotaItens;
 	private RuleProduto ruleProduto;
-	
-	public RuleNotaItens(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		//ruleProduto = new RuleProduto(empresa, loja, session);
-		//ruleNota	= new RuleNota(empresa, loja, session);
-		daoNotaItens= new DaoNotaItens(empresa, loja, session);
+	@Autowired
+	public RuleNotaItens(DaoNotaItens daoNotaIten,RuleProduto ruleProduto) {
+		// TODO Auto-generated constructor stub
+		this.daoNotaItens = daoNotaIten;
+		this.ruleProduto  = ruleProduto;
 	}
-
+	
 	@Override
 	public String insert(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub

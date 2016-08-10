@@ -3,15 +3,20 @@ package br.com.barcadero.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.tables.PessoaJuridica;
 
+@Repository
 public class DaoPessoaJuridica extends DaoModelo<PessoaJuridica> {
 
-	public DaoPessoaJuridica(Session session) {
-		super(session);
-		// TODO Auto-generated constructor stub
+	public DaoPessoaJuridica() {
+		System.out.println("Auto-generated constructor stub DaoPessoaJuridica");
 	}
+//	public DaoPessoaJuridica(Session session) {
+//		super(session);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	@Override
 	public List<PessoaJuridica> findAll() throws Exception {

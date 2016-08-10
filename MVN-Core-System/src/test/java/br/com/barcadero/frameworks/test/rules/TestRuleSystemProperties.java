@@ -12,10 +12,10 @@ public class TestRuleSystemProperties extends TesteSuperClass {
 
 	private RuleSystemProperties ruleSystemProperties;
 	public TestRuleSystemProperties() {
-		ruleSystemProperties = new RuleSystemProperties(null, null, getSession());
+		//ruleSystemProperties = new RuleSystemProperties(null, null, getSession());
 	}
 	
-	@Test
+	//@Test
 	public void testInsert() {
 		SystemProperties properties = new SystemProperties();
 		properties.setCnpjSoftwareHouse("38596140000123");

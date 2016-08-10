@@ -2,24 +2,27 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
 
-import br.com.barcadero.tables.Empresa;
+import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.tables.Funcionario;
-import br.com.barcadero.tables.Loja;
-
+@Repository
 public class DaoFuncionario extends DaoModelo<Funcionario> {
 
-	public DaoFuncionario(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+//	public DaoFuncionario(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		// TODO Auto-generated constructor stub
+//	}
+	
+	public DaoFuncionario() {
+		System.out.println(">>>>>Criando a dao funcionario pelo default contructor<<<<<<");
 	}
 
 	@Override
 	public Funcionario find(long codigo) throws Exception {
-		Query qry = getSession().getNamedQuery(Funcionario.FIND_BY_CODE).setLong("codigo", codigo);
-		return (Funcionario) qry.uniqueResult();
+		Query qry = manager.createNamedQuery(Funcionario.FIND_BY_CODE).setParameter("codigo", codigo);
+		return (Funcionario) qry.getSingleResult();
 	}
 
 	@Override

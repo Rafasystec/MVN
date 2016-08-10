@@ -1,8 +1,9 @@
 package br.com.barcadero.web.beans;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-
 import br.com.barcadero.core.enums.EnumAtivo;
 import br.com.barcadero.rule.RuleFuncionario;
 import br.com.barcadero.rule.RuleVendedor;
@@ -15,15 +16,15 @@ public class BeanVendedor extends SuperBean {
 
 	private static final long serialVersionUID = 8726796444540957389L;
 	private Vendedor vendedor;
+	@ManagedProperty("#{ruleVendedor}")
 	private RuleVendedor ruleVendedor;
+	@ManagedProperty("#{ruleFuncionario}")
 	private RuleFuncionario ruleFuncionario;
 	private long codFuncionario;
 	
-	public BeanVendedor() {
-		// TODO Auto-generated constructor stub
+	@PostConstruct
+	private void init() {
 		vendedor 		= new Vendedor(getEmpresaLogada(), getUsuarioLogado());
-		ruleVendedor 	= new RuleVendedor(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-		ruleFuncionario = new RuleFuncionario(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	@Override

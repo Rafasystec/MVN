@@ -22,7 +22,7 @@ public class TestDaoEstado {
 	private static void update() {
 		Session session = HibernateHelper.getSession();
 		session.beginTransaction();
-		DaoEstado dao = new DaoEstado(null,null,session);
+		DaoEstado dao = null;//new DaoEstado(null,null,session);
 		
 		try {
 			Estado estado = (Estado) dao.find(3);
@@ -41,7 +41,7 @@ public class TestDaoEstado {
 	private static void delete() {
 		Session session = HibernateHelper.getSession();
 		session.beginTransaction();
-		DaoEstado dao = new DaoEstado(null,null,session);
+		DaoEstado dao = null;//new DaoEstado(null,null,session);
 		
 		try {
 			dao.delete(9);
@@ -101,7 +101,7 @@ public class TestDaoEstado {
 	private static void listAll() {
 		Session session = HibernateHelper.getSession();
 		session.beginTransaction();
-		DaoEstado dao = new DaoEstado(null,null,session);
+		DaoEstado dao = null;//new DaoEstado(null,null,session);
 		try {
 			List<Estado> list = (List)dao.findAll();
 			for(Estado estado : list){
@@ -119,7 +119,7 @@ public class TestDaoEstado {
 	public void inserirEstados() {
 		Session session = HibernateHelper.getSession();
 		session.beginTransaction();
-		DaoEstado dao = new DaoEstado(null,null,session);
+		DaoEstado dao = null;//new DaoEstado(null,null,session);
 		for (EnumUF uf : EnumUF.values()) {
 			Estado estado = new Estado(null);
 			estado.setCodIbge(String.valueOf(uf.getCdIbge()));

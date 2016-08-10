@@ -1,23 +1,25 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
-
-import org.hibernate.Session;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import br.com.barcadero.dao.DaoMeioPgto;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.MeiosPagamento;
 
-
+@Service
 public class RuleMeioPgto extends RuleModelo<MeiosPagamento> {
 
-	private final DaoMeioPgto dao;
-	public RuleMeioPgto(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		dao = new DaoMeioPgto(empresa, loja, session);
-	}
+	private DaoMeioPgto dao;
+	@Autowired
+	public RuleMeioPgto(DaoMeioPgto dao) {
+		// TODO Auto-generated constructor stub
+		this.dao = dao;
+	}                                                                     
+//	public RuleMeioPgto(Empresa empresa, Loja loja, Session session) {
+//		super(empresa, loja, session);
+//		dao = new DaoMeioPgto(empresa, loja, session);
+//	}
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {

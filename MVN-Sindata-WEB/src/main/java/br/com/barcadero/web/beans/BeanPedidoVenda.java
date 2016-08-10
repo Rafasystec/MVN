@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import org.hibernate.Session;
 
@@ -30,13 +31,19 @@ public class BeanPedidoVenda extends SuperBean{
 	private String lastProduto;
 	private PedidoItens item;
 	private List<PedidoItens> itens;
-	private RulePedidoItens rulePedidoItens;
-	private RuleProduto ruleProduto;
-	private RulePedido rulePedido;
 	private Caixa caixa;
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	private BigDecimal vlUnitario = new BigDecimal(0.00);
-
+	//--------------------------------------
+	//Rules envolvidas
+	//--------------------------------------
+	@ManagedProperty("#{}")
+	private RulePedidoItens rulePedidoItens;
+	@ManagedProperty("#{}")
+	private RuleProduto ruleProduto;
+	@ManagedProperty("#{}")
+	private RulePedido rulePedido;
+	
 	
 	public Pedido getPedido() {
 		return pedido;
@@ -45,30 +52,27 @@ public class BeanPedidoVenda extends SuperBean{
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	private Session session;
-	public BeanPedidoVenda() {
-		// TODO Auto-generated constructor stub
-		session 		= getDBSessionForViewScope();
-		rulePedidoItens = new RulePedidoItens(getEmpresaLogada(), getLojaLogada(), session);
-		//ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
-		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session, getCaixaVenda());
-		item			= createItem();
-		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
-		caixa			= obterCaixaDeVenda();
-	}
+	//private Session session;
+	
+	
+	
+//	public BeanPedidoVenda() {
+//		// TODO Auto-generated constructor stub
+//		session 		= getDBSessionForViewScope();
+//		rulePedidoItens = new RulePedidoItens(getEmpresaLogada(), getLojaLogada(), session);
+//		//ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
+//		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session, getCaixaVenda());
+//		item			= createItem();
+//		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+//		caixa			= obterCaixaDeVenda();
+//	}
 	
 	@PostConstruct
 	public void init() {
 		System.out.println("@PostConstruct method init");
-		try {
-			if(this.session != null){
-				this.session.beginTransaction();
-			}
-			//this.pedido = new Pedido();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		item			= createItem();
+		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+		caixa			= obterCaixaDeVenda();
 	}
 	
 	@Override
@@ -109,7 +113,7 @@ public class BeanPedidoVenda extends SuperBean{
 	public void salvarItem() {
 		try {
 			System.out.println("Save item called.");
-			beginTransaction();
+			//beginTransaction();
 			if(pedido == null){
 				pedido	= createPedido();
 			}
@@ -120,7 +124,7 @@ public class BeanPedidoVenda extends SuperBean{
 			rulePedidoItens.insert(pedido, item);
 			setVlUnitario(item.getVlTotal());
 			totalizarSubTotal(item);
-			commit();
+			//commit();
 			item = createItem();
 		} catch (Exception e) {
 			HandleMessage.error("Erro ao inserir Item", e.getMessage());
@@ -133,12 +137,12 @@ public class BeanPedidoVenda extends SuperBean{
 
 	public void fecharPedido() {
 		try {
-			beginTransaction();
+			//beginTransaction();
 			pedido.setCaixa(caixa);
 			String ret = rulePedido.fecharPedido(pedido);
 			System.out.println("Fechar pedido: " + ret);
 			HandleMessage.info("Fechar Pedido: ", ret);
-			commit();
+			//commit();
 		} catch (Exception e) {
 			HandleMessage.error("Erro no fechamento do Pedido: ", e.getMessage());
 		}
@@ -194,17 +198,17 @@ public class BeanPedidoVenda extends SuperBean{
 		this.vlUnitario = vlUnitario;
 	}
 	
-	public void beginTransaction() {
-		if(this.session != null){
-			this.session.beginTransaction();
-		}
-	}
-	
-	public void commit() {
-		if(this.session != null){
-			this.session.getTransaction().commit();
-		}
-	}
+//	public void beginTransaction() {
+//		if(this.session != null){
+//			this.session.beginTransaction();
+//		}
+//	}
+//	
+//	public void commit() {
+//		if(this.session != null){
+//			this.session.getTransaction().commit();
+//		}
+//	}
 	
 	private void totalizarSubTotal(PedidoItens item) {
 		setVlSubTotal(getVlSubTotal().add(item.getVlTotal()));
