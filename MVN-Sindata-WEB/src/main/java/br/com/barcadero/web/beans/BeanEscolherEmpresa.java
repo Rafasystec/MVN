@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import br.com.barcadero.rule.RuleEmpresa;
 import br.com.barcadero.rule.RuleLoja;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
@@ -23,6 +24,8 @@ public class BeanEscolherEmpresa extends SuperBean {
 	private long codLoja;
 	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
+	@ManagedProperty("#{ruleEmpresa}")
+	private RuleEmpresa ruleEmpresa; 
 	private Usuario user;
 	private PessoaJuridica pJuridica;
 	private Empresa empresa;
@@ -106,6 +109,13 @@ public class BeanEscolherEmpresa extends SuperBean {
 		if(codEmp != 0){
 			this.codEmp = codEmp;
 			getSession().setTempCodEmp(codEmp);
+			try {
+				Empresa empresa = ruleEmpresa.find(codEmp);
+				setEmpresa(empresa);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -169,6 +179,14 @@ public class BeanEscolherEmpresa extends SuperBean {
 
 	public Empresa getEmpresa() {
 		return empresa;
+	}
+
+	public RuleEmpresa getRuleEmpresa() {
+		return ruleEmpresa;
+	}
+
+	public void setRuleEmpresa(RuleEmpresa ruleEmpresa) {
+		this.ruleEmpresa = ruleEmpresa;
 	}
 	
 

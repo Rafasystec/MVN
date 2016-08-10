@@ -112,7 +112,7 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 	@Override
 	public Empresa find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return daoEmpresa.find(codigo);
 	}
 
 	@Override

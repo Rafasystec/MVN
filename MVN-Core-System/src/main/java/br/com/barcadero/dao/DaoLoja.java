@@ -49,9 +49,13 @@ public class DaoLoja extends DaoModelo<Loja> {
 	
 	public List<Loja> getLojasDaEmpresa(Empresa empresa) throws Exception{
 		try{
-			Query qry = manager.createNamedQuery(Loja.FIND_BY_EMP);
-			qry.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa);
-			return (List<Loja>)qry.getResultList();
+			if(empresa != null){
+				Query qry = manager.createNamedQuery(Loja.FIND_BY_EMP);
+				qry.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa);
+				return (List<Loja>)qry.getResultList();
+			}else{
+				return new ArrayList<>();
+			}
 		}catch(Exception e){
 			return new ArrayList<Loja>();
 		}

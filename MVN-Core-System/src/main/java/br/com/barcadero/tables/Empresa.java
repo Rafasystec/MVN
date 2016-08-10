@@ -26,6 +26,7 @@ import br.com.barcadero.core.enums.EnumAtividadeEmp;
 import br.com.barcadero.core.enums.EnumRegimeISSQN;
 
 @NamedQueries({
+	@NamedQuery(name=Empresa.FIND			,query="FROM Empresa WHERE codigo = :codigo"),
 	@NamedQuery(name=Empresa.FIND_ALL		,query="FROM Empresa"),
 	@NamedQuery(name=Empresa.FIND_BY_CODE	,query="FROM Empresa e WHERE e.codigo = :empresa")
 })
@@ -41,6 +42,7 @@ public class Empresa extends Entidade {
 	public Empresa(Usuario usuario) {
 		super(usuario);
 	}
+	public final static String FIND			= "Empresa.find";
 	public final static String FIND_ALL 	= "Empresa.FindAll";
 	public final static String FIND_BY_CODE	= "Empresa.findByCode";
 	
