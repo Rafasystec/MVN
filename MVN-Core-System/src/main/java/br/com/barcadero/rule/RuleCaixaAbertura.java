@@ -1,32 +1,29 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
-
-import org.hibernate.Session;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumStatusCaixa;
 import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.dao.DaoCaixaAbertura;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.CaixaAbertura;
-import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Loja;
 
+@Service
 public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 
 	private DaoCaixaAbertura daoCaixaAbertura; 
 	private DaoCaixa daoCaixa;
 	
-	public RuleCaixaAbertura(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoCaixaAbertura = new DaoCaixaAbertura(empresa, loja, session);
-		//daoCaixa		 = new DaoCaixa(empresa, loja, session);
+	@Autowired
+	public RuleCaixaAbertura(DaoCaixaAbertura daoCaixaAbertura,DaoCaixa daoCaixa) {
+		this.daoCaixaAbertura 	= daoCaixaAbertura;
+		this.daoCaixa 			= daoCaixa;
 	}
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
 		return daoCaixaAbertura.insert(entidade);
 	}
 	

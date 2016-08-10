@@ -31,7 +31,7 @@ public class RESTProduto {
 	public RESTProduto() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("**/applicationContext.xml");
 		//ApplicationContext context = new FileSystemXmlApplicationContext("**/applicationContext.xml");
-		 ruleProduto = context.getBean(RuleProduto.class);
+		 //ruleProduto = context.getBean(RuleProduto.class);
 		 
 	}
 	

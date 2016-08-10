@@ -1,6 +1,8 @@
 package br.com.barcadero.web.beans;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleCaixaAbertura;
@@ -17,12 +19,16 @@ public class BeanAbrirCaixa extends SuperBean {
 	 */
 	private static final long serialVersionUID = 7436825363700179568L;
 	private CaixaAbertura caixaAbertura 		= null;
-	private RuleCaixaAbertura ruleCaixaAbertura = null;
+	@ManagedProperty("#{ruleCaixaAbertura}")
+	private RuleCaixaAbertura ruleCaixaAbertura;
 	
-	public BeanAbrirCaixa() {
-		// TODO Auto-generated constructor stub
-		caixaAbertura 		= getCaixaAberturaInstance();
-		ruleCaixaAbertura	= new RuleCaixaAbertura(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
+	@PostConstruct
+	public void init() {
+		this.setCaixaAbertura(getCaixaAberturaInstance());
+		if(ruleCaixaAbertura != null){
+			ruleCaixaAbertura.setEmpresa(getEmpresaLogada());
+			ruleCaixaAbertura.setLoja(getLojaLogada());
+		}
 	}
 
 	@Override
@@ -38,11 +44,9 @@ public class BeanAbrirCaixa extends SuperBean {
 			System.out.println(ret);
 			HandleMessage.info("Caixa aberto com sucesso!");
 			caixaAbertura = getCaixaAberturaInstance();
-			
 		}catch(Exception e){
 			HandleMessage.error("Erro ao abrir o caixa", e.getMessage());
 		}
-		
 		return null;
 	}
 
@@ -74,6 +78,14 @@ public class BeanAbrirCaixa extends SuperBean {
 	
 	private CaixaAbertura getCaixaAberturaInstance() {
 		return new CaixaAbertura(getEmpresaLogada(),getLojaLogada(), getUsuarioLogado());
+	}
+
+	public RuleCaixaAbertura getRuleCaixaAbertura() {
+		return ruleCaixaAbertura;
+	}
+
+	public void setRuleCaixaAbertura(RuleCaixaAbertura ruleCaixaAbertura) {
+		this.ruleCaixaAbertura = ruleCaixaAbertura;
 	}
 
 }
