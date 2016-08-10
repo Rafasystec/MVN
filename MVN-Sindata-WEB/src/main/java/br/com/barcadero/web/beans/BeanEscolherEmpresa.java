@@ -29,6 +29,7 @@ public class BeanEscolherEmpresa extends SuperBean {
 	private Usuario user;
 	private PessoaJuridica pJuridica;
 	private Empresa empresa;
+	private final String OBJ_EMP_TEMP = "objEmpTemp";
 	
 	public Usuario getUser() {
 		return user;
@@ -175,10 +176,16 @@ public class BeanEscolherEmpresa extends SuperBean {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+		getSession().setAttribute(OBJ_EMP_TEMP, empresa);
 	}
 
 	public Empresa getEmpresa() {
-		return empresa;
+		if(getSession().getAttribute(OBJ_EMP_TEMP) != null){
+			return (Empresa) getSession().getAttribute(OBJ_EMP_TEMP);
+		}else{
+			return empresa;
+		}
+		
 	}
 
 	public RuleEmpresa getRuleEmpresa() {
