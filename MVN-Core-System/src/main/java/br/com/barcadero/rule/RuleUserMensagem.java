@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.dao.DaoUserMensagem;
 import br.com.barcadero.dao.DaoUsuario;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.TmpUserMessage;
 import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
@@ -98,6 +100,18 @@ public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 
 	@Override
 	public List<UserMensagens> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserMensagens> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserMensagens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

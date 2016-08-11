@@ -387,4 +387,16 @@ public class RuleNota extends RuleModelo<Nota> {
 		 return meioPgtos;
 	}
 
+	@Override
+	public List<Nota> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Nota> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

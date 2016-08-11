@@ -59,7 +59,7 @@ public class Cidade extends Entidade{
 	@Column(name="cod_ibge",length=14)
 	private String codIbge;
 	
-	@OneToMany(mappedBy="cidade", targetEntity=Bairro.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="cidade", targetEntity=Bairro.class, fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Bairro> bairros = new ArrayList<Bairro>();
 	
 	@ManyToOne

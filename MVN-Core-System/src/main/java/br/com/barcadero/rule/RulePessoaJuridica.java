@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoPessoaJuridica;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 @Service
 public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
@@ -50,6 +52,18 @@ public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
 
 	@Override
 	public List<PessoaJuridica> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PessoaJuridica> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PessoaJuridica> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

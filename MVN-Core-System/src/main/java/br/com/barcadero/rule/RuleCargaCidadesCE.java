@@ -1,4 +1,4 @@
-package br.com.barcadero.core.util;
+package br.com.barcadero.rule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +16,20 @@ import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Usuario;
 
 @Service
-public class HandleCargaCidadesCE {
+public class RuleCargaCidadesCE {
 
 	private DaoEstado daoEstado;
 	private DaoCidade daoCidade;
 	private DaoBairro daoBairro;
 	private Estado ceara   	= null; 
 	private Usuario usuario	= null;
+	
+	public RuleCargaCidadesCE() {
+		System.out.println("Auto-generated constructor stub HandleCargaCidadesCE");
+	}
+	
 	@Autowired
-	public HandleCargaCidadesCE(DaoEstado daoEstado,DaoCidade daoCidade,DaoBairro daoBairro) {
-		// TODO Auto-generated constructor stub
+	public RuleCargaCidadesCE(DaoEstado daoEstado,DaoCidade daoCidade,DaoBairro daoBairro) {
 		this.daoBairro = daoBairro;
 		this.daoCidade = daoCidade;
 		this.daoEstado = daoEstado;

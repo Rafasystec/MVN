@@ -6,6 +6,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.SystemProperties;
 @Repository
 public class DaoSystemProperties extends DaoModelo<SystemProperties> {
@@ -39,6 +41,18 @@ public class DaoSystemProperties extends DaoModelo<SystemProperties> {
 	public SystemProperties find() throws Exception {
 		Query qry = manager.createNamedQuery(SystemProperties.FIND);
 		return (SystemProperties) qry.getSingleResult();
+	}
+
+	@Override
+	public List<SystemProperties> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SystemProperties> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

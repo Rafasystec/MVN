@@ -6,7 +6,9 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Funcionario;
+import br.com.barcadero.tables.Loja;
 @Repository
 public class DaoFuncionario extends DaoModelo<Funcionario> {
 
@@ -27,6 +29,18 @@ public class DaoFuncionario extends DaoModelo<Funcionario> {
 
 	@Override
 	public List<Funcionario> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funcionario> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Funcionario> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -11,7 +11,9 @@ import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
@@ -194,6 +196,20 @@ public class RulePedido extends RuleModelo<Pedido> {
 		}else{
 			return "Pedido tem valor inválido ou está nulo.";
 		}
+	}
+
+
+	@Override
+	public List<Pedido> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Pedido> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

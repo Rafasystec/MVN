@@ -3,20 +3,19 @@ package br.com.barcadero.dao;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.ParametrosSistema;
 import br.com.barcadero.tables.ParametrosValores;
-
+@Repository
 public class DaoParametros extends DaoModelo<ParametrosSistema> {
 
-	public DaoParametros(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoParametros() {
+		System.out.println("Auto-generated constructor stub DaoParametros");
 	}
-
+	
 	@Override
 	public ParametrosSistema find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
@@ -55,6 +54,18 @@ public class DaoParametros extends DaoModelo<ParametrosSistema> {
 	public String insertValorParametro(ParametrosValores valor) throws Exception {
 		insert(valor);
 		return getMSG_SUCESS_SAVE();
+	}
+
+	@Override
+	public List<ParametrosSistema> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ParametrosSistema> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 @Service
 public class RuleCidade extends RuleModelo<Cidade> {
@@ -110,6 +112,18 @@ public class RuleCidade extends RuleModelo<Cidade> {
 	 */
 	public List<Cidade> getCidadesByUF(EnumUF uf) throws Exception{
 		return daoCidade.getCidadesByUF(uf);
+	}
+
+	@Override
+	public List<Cidade> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cidade> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

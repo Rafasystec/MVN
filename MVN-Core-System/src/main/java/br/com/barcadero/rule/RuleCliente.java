@@ -94,4 +94,20 @@ public class RuleCliente extends RuleModelo<Cliente> {
 		return daoCliente.findByCodeOrName(codigo, "%"+value+"%");
 	}
 
+	@Override
+	public List<Cliente> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		if(empresa != null){
+			return daoCliente.findByEmpresa(empresa);
+		}else{
+			return new ArrayList<>();
+		}
+	}
+
+	@Override
+	public List<Cliente> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

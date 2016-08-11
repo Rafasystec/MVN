@@ -7,8 +7,10 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Filiado;
+import br.com.barcadero.tables.Loja;
 
 public class DaoFiliado extends DaoModelo implements DaoInterface{
 	private Transaction trans;
@@ -32,6 +34,18 @@ public class DaoFiliado extends DaoModelo implements DaoInterface{
 
 	@Override
 	public Entidade find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -24,4 +24,16 @@ public class DaoCaixaFechamento extends DaoModelo<CaixaFechamento> {
 		return null;
 	}
 
+	@Override
+	public List<CaixaFechamento> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CaixaFechamento> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

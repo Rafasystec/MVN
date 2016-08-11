@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoSystemProperties;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.SystemHistory;
 import br.com.barcadero.tables.SystemProperties;
 @Service
@@ -72,6 +74,18 @@ public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 	
 	public SystemProperties find() throws Exception {
 		return daoSystemProperties.find();
+	}
+
+	@Override
+	public List<SystemProperties> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SystemProperties> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 
@@ -26,23 +27,18 @@ public class BeanCliente extends SuperBean {
 	private Cliente	cliente			= null;
 	private List<Cliente> clientes 	= null;
 	private PessoaFisica pFisica	= null;
-	private RuleCliente fcdCliente;
+	@ManagedProperty("#{ruleCliente}")
+	private RuleCliente ruleCliente = null;
 	private Endereco endereco		= null;
 	private Cliente selectedClie	= null;
-
-	public BeanCliente() {
-		// TODO Auto-generated constructor stub
-		fcdCliente  = new RuleCliente(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		cliente		= new Cliente(getSession().getEmpresaLogada(), getSession().getUsuarioLogado());
-		endereco	= new Endereco(getSession().getUsuarioLogado());
-		pFisica		= new PessoaFisica(getSession().getUsuarioLogado());
-		System.out.println("Bean cliente was created.");
-	}
 	
 	@PostConstruct
 	public void init() {
 		try {
-			clientes = fcdCliente.findAll();
+			cliente		= new Cliente(getSession().getEmpresaLogada(), getSession().getUsuarioLogado());
+			endereco	= new Endereco(getSession().getUsuarioLogado());
+			clientes 	= ruleCliente.findByEmpresa(getEmpresaLogada());
+			pFisica		= new PessoaFisica(getSession().getUsuarioLogado());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +81,7 @@ public class BeanCliente extends SuperBean {
 		pFisica.setEnderecos(listEnder);
 		cliente.setPessoaFisica(pFisica);
 		endereco.setPessoa(pFisica);
-		System.out.println(fcdCliente.insert(cliente));
+		System.out.println(ruleCliente.insert(cliente));
 		return null;
 	}
 	
@@ -144,6 +140,14 @@ public class BeanCliente extends SuperBean {
 	 public void buttonAction(ActionEvent actionEvent) {
 		 System.out.println("Chamou action");
 	 }
+
+	public RuleCliente getRuleCliente() {
+		return ruleCliente;
+	}
+
+	public void setRuleCliente(RuleCliente ruleCliente) {
+		this.ruleCliente = ruleCliente;
+	}
 	
 	
 }

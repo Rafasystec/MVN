@@ -34,4 +34,16 @@ public class DaoContaPagar extends DaoModelo <ContaPagar>{
 		return qry.list();
 	}
 
+	@Override
+	public List<ContaPagar> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ContaPagar> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

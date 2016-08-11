@@ -121,4 +121,16 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 		return null;
 	}
 
+	@Override
+	public List<Empresa> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Empresa> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

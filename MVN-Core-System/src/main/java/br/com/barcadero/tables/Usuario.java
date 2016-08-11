@@ -67,7 +67,7 @@ public class Usuario extends Entidade{
 	@Column(name="tipo_user")
 	private EnumTipoUser tipoUser = EnumTipoUser.MASTER;
 	
-	@ManyToMany(cascade=CascadeType.ALL,mappedBy="usuarios",fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.MERGE,mappedBy="usuarios",fetch=FetchType.EAGER)
 	private List<Empresa> empresas = new ArrayList<Empresa>();
 	
 	public long getCodPermissoes() {

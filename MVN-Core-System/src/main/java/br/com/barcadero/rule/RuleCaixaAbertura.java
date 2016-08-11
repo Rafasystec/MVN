@@ -8,7 +8,9 @@ import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.dao.DaoCaixaAbertura;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 @Service
 public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
@@ -86,6 +88,18 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public List<CaixaAbertura> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CaixaAbertura> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -82,4 +82,16 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 		}
 		return caixa;
 	}
+
+	@Override
+	public List<Caixa> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Caixa> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

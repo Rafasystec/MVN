@@ -35,4 +35,16 @@ public class DaoContaAReceber extends DaoModelo <ContaReceber>{
 		return null;
 	}
 
+	@Override
+	public List<ContaReceber> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ContaReceber> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

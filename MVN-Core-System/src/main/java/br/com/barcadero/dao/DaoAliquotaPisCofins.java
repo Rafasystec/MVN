@@ -28,4 +28,16 @@ public class DaoAliquotaPisCofins extends DaoModelo<AliquotasPISCOFINS> {
 		return null;
 	}
 
+	@Override
+	public List<AliquotasPISCOFINS> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AliquotasPISCOFINS> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

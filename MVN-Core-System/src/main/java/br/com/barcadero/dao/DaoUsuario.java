@@ -3,6 +3,9 @@ package br.com.barcadero.dao;
 import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
+
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
 /**
@@ -82,6 +85,18 @@ public class DaoUsuario extends DaoModelo<Usuario> {
 		Query qry = null;
 		qry = manager.createNamedQuery(Usuario.FIND_ALL);
 		return qry.getResultList();
+	}
+
+	@Override
+	public List<Usuario> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Usuario> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

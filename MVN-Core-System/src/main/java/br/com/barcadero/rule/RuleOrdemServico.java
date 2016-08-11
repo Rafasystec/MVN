@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServicoItens;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
 import br.com.barcadero.tables.Produto;
@@ -88,6 +90,18 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 			ordemServico.setStatus(EnumStatusOrdemServico.FECHADA);
 			update(ordemServico);
 		}
+	}
+
+	@Override
+	public List<OrdemServico> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdemServico> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

@@ -26,4 +26,16 @@ public class DaoCartaoPresente extends DaoModelo<CartaoPresente> {
 		return null;
 	}
 
+	@Override
+	public List<CartaoPresente> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CartaoPresente> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

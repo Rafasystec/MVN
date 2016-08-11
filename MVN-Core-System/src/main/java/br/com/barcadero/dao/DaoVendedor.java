@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Vendedor;
 
 @Repository
@@ -35,6 +36,18 @@ public class DaoVendedor extends DaoModelo <Vendedor>{
 				.setParameter("codigo", codigo)
 				.setParameter("apelido", apelido);
 		return qry.getResultList();
+	}
+
+	@Override
+	public List<Vendedor> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Vendedor> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

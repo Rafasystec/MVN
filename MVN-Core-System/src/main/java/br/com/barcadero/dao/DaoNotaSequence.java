@@ -86,4 +86,16 @@ public class DaoNotaSequence extends DaoModelo<NotaSequence> {
 		return sequence;
 	}
 
+	@Override
+	public List<NotaSequence> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<NotaSequence> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

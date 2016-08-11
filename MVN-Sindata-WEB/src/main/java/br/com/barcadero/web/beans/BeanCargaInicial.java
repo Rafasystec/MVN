@@ -3,7 +3,7 @@ package br.com.barcadero.web.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import br.com.barcadero.core.util.HandleCargaCidadesCE;
+import br.com.barcadero.rule.RuleCargaCidadesCE;
 import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.rule.RuleParametros;
 /**
@@ -17,19 +17,11 @@ public class BeanCargaInicial extends SuperBean {
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty("#{ruleEstado}")
 	private RuleEstado fcdEstado;
-	@ManagedProperty("#{handleCargaCidadesCE}")
-	private HandleCargaCidadesCE cargaCidCE;
+	@ManagedProperty("#{ruleCargaCidadesCE}")
+	private RuleCargaCidadesCE handleCargaCidadesCE;
 	@ManagedProperty("#{ruleParametros}")
 	private RuleParametros	ruleParam;
-	
-	
-//	public BeanCargaInicial() {
-//		// TODO Auto-generated constructor stub
-//		fcdEstado 	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//		cargaCidCE 	= new HandleCargaCidadesCE(getEmpresaLogada(), getLojaLogada(), getDataBaseSession(), getUsuarioLogado());
-//		ruleParam	= new RuleParametros(getEmpresaLogada(),getLojaLogada(),getDataBaseSession()); 
-//	}
-	
+		
 	public String carregarEstados() throws Exception {
 		fcdEstado.carregarEstados(getSession().getUsuarioLogado());
 		return null;
@@ -37,7 +29,7 @@ public class BeanCargaInicial extends SuperBean {
 	
 	public String carregarCidadesCeara() throws Exception {
 		System.out.println("Execuntando a carga na tabela de Cidades do Ceara");
-		cargaCidCE.loadCeara();
+		handleCargaCidadesCE.loadCeara();
 		System.out.println("Fim da carga");
 		return null;
 	}
@@ -91,20 +83,20 @@ public class BeanCargaInicial extends SuperBean {
 		this.fcdEstado = fcdEstado;
 	}
 
-	public HandleCargaCidadesCE getCargaCidCE() {
-		return cargaCidCE;
-	}
-
-	public void setCargaCidCE(HandleCargaCidadesCE cargaCidCE) {
-		this.cargaCidCE = cargaCidCE;
-	}
-
 	public RuleParametros getRuleParam() {
 		return ruleParam;
 	}
 
 	public void setRuleParam(RuleParametros ruleParam) {
 		this.ruleParam = ruleParam;
+	}
+
+	public RuleCargaCidadesCE getHandleCargaCidadesCE() {
+		return handleCargaCidadesCE;
+	}
+
+	public void setHandleCargaCidadesCE(RuleCargaCidadesCE handleCargaCidadesCE) {
+		this.handleCargaCidadesCE = handleCargaCidadesCE;
 	}
 
 }

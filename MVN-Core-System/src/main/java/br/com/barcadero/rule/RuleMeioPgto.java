@@ -4,7 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.barcadero.dao.DaoMeioPgto;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.MeiosPagamento;
 
 @Service
@@ -49,6 +51,18 @@ public class RuleMeioPgto extends RuleModelo<MeiosPagamento> {
 
 	@Override
 	public List<MeiosPagamento> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MeiosPagamento> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MeiosPagamento> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

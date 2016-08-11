@@ -179,5 +179,29 @@ public class HandleEndereco extends SuperBean{
 	public void setUfSelected(EnumUF ufSelected) {
 		this.ufSelected = ufSelected;
 	}
+
+	public RuleEstado getRuleEstado() {
+		return ruleEstado;
+	}
+
+	public void setRuleEstado(RuleEstado ruleEstado) {
+		this.ruleEstado = ruleEstado;
+	}
+
+	public RuleCidade getRuleCidade() {
+		return ruleCidade;
+	}
+
+	public void setRuleCidade(RuleCidade ruleCidade) {
+		this.ruleCidade = ruleCidade;
+	}
+
+	public RuleBairro getRuleBairro() {
+		return ruleBairro;
+	}
+
+	public void setRuleBairro(RuleBairro ruleBairro) {
+		this.ruleBairro = ruleBairro;
+	}
 	
 }

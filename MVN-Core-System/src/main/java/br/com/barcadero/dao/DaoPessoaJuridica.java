@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 
 @Repository
@@ -26,6 +28,18 @@ public class DaoPessoaJuridica extends DaoModelo<PessoaJuridica> {
 
 	@Override
 	public PessoaJuridica find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PessoaJuridica> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PessoaJuridica> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

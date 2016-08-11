@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Cliente;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Pedido;
 
 @Repository
@@ -90,6 +92,18 @@ public class DaoPedido extends DaoModelo<Pedido> {
 			 .setParameter("dtInicial", dtInicial)
 			 .setParameter("dtFinal", dtFinal);
 		return query.getResultList();
+	}
+
+	@Override
+	public List<Pedido> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pedido> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

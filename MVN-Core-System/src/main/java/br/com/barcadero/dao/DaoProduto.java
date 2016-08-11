@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
 @Repository
@@ -51,6 +53,18 @@ public class DaoProduto extends DaoModelo <Produto>{
 		qry.setParameter("codigo"	, codigo);
 		qry.setParameter("descricao", "%"+codigoOrDesc+"%");
 		return qry.list();
+	}
+
+	@Override
+	public List<Produto> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Produto> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

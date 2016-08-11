@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 
 @Repository
@@ -57,6 +58,18 @@ public class DaoCaixaAbertura extends DaoModelo<CaixaAbertura> {
 	private Query getMainQuery(String queryName) {
 		return manager.createNamedQuery(queryName)
 				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+	}
+
+	@Override
+	public List<CaixaAbertura> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CaixaAbertura> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

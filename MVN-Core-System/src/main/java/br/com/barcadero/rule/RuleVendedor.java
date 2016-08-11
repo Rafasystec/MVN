@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoVendedor;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Vendedor;
 
 @Service
@@ -74,6 +76,18 @@ public class RuleVendedor extends RuleModelo<Vendedor> {
 			codigo = 0;
 		}
 		return daoVendedor.getByCodeOrApelido(codigo, "%"+value+"%");
+	}
+
+	@Override
+	public List<Vendedor> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Vendedor> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

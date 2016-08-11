@@ -2,10 +2,9 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
@@ -20,11 +19,6 @@ public class DaoEstado extends DaoModelo<Estado>{
 		// TODO Auto-generated constructor stub
 	}
 	
-//	public DaoEstado(Empresa empresa, Loja loja, Session session) {
-//		super(empresa, loja, session);
-//		// TODO Auto-generated constructor stub
-//	}
-
 	@Override
 	public String insert(Entidade entidade) throws Exception {
 		String result = "";
@@ -41,7 +35,8 @@ public class DaoEstado extends DaoModelo<Estado>{
 	@Override
 	public Estado find(long codigo) throws Exception {
 		try {
-			return (Estado)getSession().getNamedQuery(Estado.FIND_BY_CODE).setLong("codigo", codigo).uniqueResult();
+			return (Estado)manager.createNamedQuery(Estado.FIND_BY_CODE)
+					.setParameter("codigo", codigo).getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
@@ -52,7 +47,7 @@ public class DaoEstado extends DaoModelo<Estado>{
 	@Override
 	public List<Estado> findAll() throws Exception {
 		try {
-			return getSession().getNamedQuery(Estado.FIND).list();
+			return manager.createNamedQuery(Estado.FIND).getResultList();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
@@ -62,7 +57,7 @@ public class DaoEstado extends DaoModelo<Estado>{
 	@SuppressWarnings("unchecked")
 	public List<Estado> findAllEstados() throws Exception {
 		try {
-			return (List<Estado>)getSession().getNamedQuery(Estado.FIND).list();
+			return (List<Estado>)manager.createNamedQuery(Estado.FIND).getResultList();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
@@ -75,7 +70,7 @@ public class DaoEstado extends DaoModelo<Estado>{
 			estado.setCodIbge(String.valueOf(uf.getCdIbge()));
 			estado.setDescricao(uf.getLabel());
 			estado.setUf(uf);	
-			estado.setCodigo(uf.getCdIbge());
+			//estado.setCodigo(uf.getCdIbge());
 			insert(estado);
 		}
 	}
@@ -86,9 +81,21 @@ public class DaoEstado extends DaoModelo<Estado>{
 	 * @return
 	 */
 	public Estado findByCodeIBGE(String codeIBGE) {
-		Query qry = getSession().getNamedQuery(Estado.FIND_BY_IBGE);
+		Query qry = manager.createNamedQuery(Estado.FIND_BY_IBGE);
 		qry.setParameter(Estado.PARAM_IBGE, codeIBGE);
-		return (Estado)qry.uniqueResult();
+		return (Estado)qry.getSingleResult();
+	}
+
+	@Override
+	public List<Estado> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Estado> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 			

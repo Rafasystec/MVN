@@ -73,4 +73,16 @@ public class DaoLoja extends DaoModelo<Loja> {
 		return (List<Loja>)qry.getResultList();
 	}
 
+	@Override
+	public List<Loja> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Loja> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

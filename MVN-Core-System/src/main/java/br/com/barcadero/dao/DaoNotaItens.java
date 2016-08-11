@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.NotaItens;
 
 @Repository
@@ -26,6 +28,18 @@ public class DaoNotaItens extends DaoModelo<NotaItens>{
 
 	@Override
 	public NotaItens find(long codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<NotaItens> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<NotaItens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

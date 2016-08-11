@@ -28,7 +28,7 @@ import br.com.barcadero.core.enums.EnumUF;
 
 @Entity
 @Table(name="ESTADO")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Estado extends Entidade{
 
 	private static final long serialVersionUID = 3701487730264454049L;
@@ -54,7 +54,7 @@ public class Estado extends Entidade{
 	@Enumerated(EnumType.STRING)
 	private EnumUF uf;
 	
-	@OneToMany(mappedBy="estado", targetEntity=Cidade.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="estado", targetEntity=Cidade.class, fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Cidade> cidades = new ArrayList<Cidade>();
 	
 	public String getDescricao() {

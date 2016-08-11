@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
+import br.com.barcadero.tables.Loja;
 @Repository
 public class DaoCidade extends DaoModelo<Cidade>{
 
@@ -185,6 +187,18 @@ public class DaoCidade extends DaoModelo<Cidade>{
 			System.out.println("Nenhum Estado encontrado com o codigo IBGE igual a " + codeIBGEEstado);
 			return 0;
 		}
+	}
+
+	@Override
+	public List<Cidade> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cidade> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

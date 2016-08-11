@@ -28,4 +28,16 @@ public class DaoPlanoContas extends DaoModelo<PlanoConta> {
 		return null;
 	}
 
+	@Override
+	public List<PlanoConta> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PlanoConta> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

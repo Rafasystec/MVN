@@ -4,7 +4,9 @@ import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Estoque;
+import br.com.barcadero.tables.Loja;
 
 @Repository
 public class DaoEstoque extends DaoModelo<Estoque> {
@@ -32,6 +34,18 @@ public class DaoEstoque extends DaoModelo<Estoque> {
 		Query qry = manager.createNamedQuery(queryName)
 				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
 		return qry;
+	}
+
+	@Override
+	public List<Estoque> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Estoque> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

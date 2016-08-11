@@ -1,6 +1,6 @@
-package br.com.barcadero.core.util;
+package br.com.barcadero.rule;
 
-public class HandleCargaCidadeSE {
+public class RuleCargaCidadeSE {
 
 	/*
  31011 AMPARO DE SAO FRANCISCO

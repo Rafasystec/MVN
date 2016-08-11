@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import br.com.barcadero.dao.DaoAvisos;
 import br.com.barcadero.tables.Avisos;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 
 
 @Component
@@ -44,6 +46,18 @@ public class RuleAvisos extends RuleModelo<Avisos> {
 	
 	public List<Avisos> findAll() throws Exception{
 		return daoAvisos.findAll();
+	}
+
+	@Override
+	public List<Avisos> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Avisos> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

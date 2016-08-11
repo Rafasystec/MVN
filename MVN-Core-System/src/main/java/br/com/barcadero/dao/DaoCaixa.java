@@ -7,6 +7,8 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 
 @Repository
 public class DaoCaixa extends DaoModelo<Caixa> {
@@ -50,6 +52,18 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 				.setParameter(GlobalNameParam.PARAM_COD_LOJA, getLoja())
 				.setParameter(Caixa.PARAM_IP, ip);
 		return (Caixa) qry.getSingleResult();
+	}
+
+	@Override
+	public List<Caixa> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Caixa> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -6,6 +6,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.UserMensagens;
 import br.com.barcadero.tables.Usuario;
 @Repository
@@ -38,6 +40,18 @@ public class DaoUserMensagem extends DaoModelo <UserMensagens>{
 		query.append(" WHERE um.cdUserReceive = :codigo");
 		Query qry = manager.createQuery(query.toString()).setParameter("codigo", usuario.getCodigo());
 		return qry.getResultList();
+	}
+
+	@Override
+	public List<UserMensagens> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserMensagens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

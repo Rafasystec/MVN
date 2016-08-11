@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumItemCancelado;
 import br.com.barcadero.dao.DaoNotaItens;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.Produto;
@@ -133,6 +135,18 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 
 	@Override
 	public List<NotaItens> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<NotaItens> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<NotaItens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

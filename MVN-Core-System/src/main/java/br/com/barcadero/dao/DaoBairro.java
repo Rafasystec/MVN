@@ -71,6 +71,18 @@ public class DaoBairro extends DaoModelo<Bairro>{
 		Query qry = manager.createNamedQuery(Bairro.FIND_BY_CID)
 				.setParameter("codCidade", codCidade);
 		return (List<Bairro>)qry.getResultList();
+	}
+
+	@Override
+	public List<Bairro> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Bairro> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }

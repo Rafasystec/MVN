@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.barcadero.core.enums.EnumSimNao;
 import br.com.barcadero.dao.DaoParametros;
@@ -14,20 +15,16 @@ import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.ParametrosSistema;
 import br.com.barcadero.tables.ParametrosValores;
 
+@Service
 public class RuleParametros extends RuleModelo<ParametrosSistema> {
 
 	
-	DaoParametros daoParametros;
-	public RuleParametros(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		daoParametros	= new DaoParametros(empresa, loja, session);
+	private DaoParametros daoParametros;
+	@Autowired
+	public RuleParametros(DaoParametros daoParametros) {
+		System.out.println("Auto-generated constructor stub RuleParametros");
+		this.daoParametros = daoParametros;
 	}
-	
-//	public RuleParametros(Session session) {
-//		super(session);
-//		daoParametros	= new DaoParametros(session);
-//	}
-
 	
 	/**
 	 * Inserir um parametro. Unsafe Method.
@@ -137,6 +134,18 @@ public class RuleParametros extends RuleModelo<ParametrosSistema> {
 
 	@Override
 	public List<ParametrosSistema> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ParametrosSistema> findByEmpresa(Empresa empresa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ParametrosSistema> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
