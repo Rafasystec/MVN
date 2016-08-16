@@ -18,6 +18,8 @@ import br.com.barcadero.rule.RuleCliente;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.PessoaFisica;
+import br.com.barcadero.web.functions.HandleMessage;
+import groovyjarjarasm.asm.Handle;
 
 @ManagedBean(name="cliente")
 @RequestScoped
@@ -83,7 +85,9 @@ public class BeanCliente extends SuperBean {
 		pFisica.setEnderecos(listEnder);
 		cliente.setPessoaFisica(pFisica);
 		endereco.setPessoa(pFisica);
-		System.out.println(ruleCliente.insert(cliente));
+		String ret = ruleCliente.insert(cliente);
+		System.out.println(ret);
+		HandleMessage.info("Registro Salvo!",ret);
 		return null;
 	}
 	
