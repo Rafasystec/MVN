@@ -2,13 +2,10 @@ package br.com.barcadero.dao;
 
 import java.util.Date;
 import java.util.List;
-
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
-import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
@@ -16,6 +13,7 @@ import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Loja;
+
 @Repository
 public class DaoCidade extends DaoModelo<Cidade>{
 
@@ -30,9 +28,12 @@ public class DaoCidade extends DaoModelo<Cidade>{
 	@Override
 	public Cidade find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
-		Query qry = getSession().getNamedQuery(Cidade.FIND_BY_CODE);
-		qry.setLong("codigo", codigo);
-		return (Cidade)qry.uniqueResult();
+//		Query qry = getSession().getNamedQuery(Cidade.FIND_BY_CODE);
+//		qry.setLong("codigo", codigo);
+//		return (Cidade)qry.uniqueResult();
+		Query query = manager.createNamedQuery(Cidade.FIND_BY_CODE)
+				.setParameter("codigo", codigo);
+		return (Cidade) query.getSingleResult();
 	}
 	
 	@Override
@@ -59,9 +60,10 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		List<Cidade> cidades	= null;
 		Query qry				= null;
 		try {
-			qry	= getSession().getNamedQuery("Cidade.findByCodEstado");
-			qry.setParameter("codEstado", codEstado);
-			cidades	= qry.list();
+			//qry	= getSession().getNamedQuery("Cidade.findByCodEstado");
+			qry = manager.createNamedQuery(Cidade.FIND_BY_CODE_ESTADO)
+						 .setParameter("codEstado", codEstado);
+			cidades	= qry.getResultList();
 			return cidades;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -79,9 +81,10 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		List<Cidade> cidades	= null;
 		Query qry				= null;
 		try {
-			qry	= getSession().getNamedQuery(Cidade.FIND_BY_UF);
-			qry.setParameter("uf", String.valueOf(uf));
-			cidades	= qry.list();
+			//qry	= getSession().getNamedQuery(Cidade.FIND_BY_UF);
+			qry = manager.createNamedQuery(Cidade.FIND_BY_UF)
+						 .setParameter("uf", String.valueOf(uf));
+			cidades	= qry.getResultList();
 			return cidades;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -99,10 +102,11 @@ public class DaoCidade extends DaoModelo<Cidade>{
 	public Cidade findByDescricaoEUF(String descricao, EnumUF uf) throws Exception{
 		Query qry				= null;
 		try {
-			qry	= getSession().getNamedQuery(Cidade.FIND_BY_DESC_AND_UF);
+			//qry	= getSession().getNamedQuery(Cidade.FIND_BY_DESC_AND_UF);
+			qry = manager.createNamedQuery(Cidade.FIND_BY_DESC_AND_UF);
 			qry.setParameter("uf", String.valueOf(uf));
 			qry.setParameter("descricao", descricao);
-			return (Cidade) qry.uniqueResult();
+			return (Cidade) qry.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
@@ -130,13 +134,15 @@ public class DaoCidade extends DaoModelo<Cidade>{
 			throw new Exception(e.getMessage());
 		}
 	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Cidade> findAll() throws Exception{
 		List<Cidade> cidades	= null;
 		Query qry	= null;
 		try {
-			qry		= getSession().getNamedQuery("Cidade.findAll");
-			cidades	= qry.list();
+			//qry		= getSession().getNamedQuery("Cidade.findAll");
+			qry	= manager.createNamedQuery(Cidade.FIND_ALL);
+			cidades	= qry.getResultList();
 			return cidades;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -151,9 +157,10 @@ public class DaoCidade extends DaoModelo<Cidade>{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Entidade> findAllCadToday() throws Exception{
-		Query qry = getSession().getNamedQuery(Cidade.FIND_BY_DT_CADASTRO);
+		//Query qry = getSession().getNamedQuery(Cidade.FIND_BY_DT_CADASTRO);
+		Query qry = manager.createNamedQuery(Cidade.FIND_BY_DT_CADASTRO);
 		qry.setParameter("dtCadastro", new Date());
-		return qry.list();
+		return qry.getResultList();
 	}
 	
 	/**
@@ -164,9 +171,10 @@ public class DaoCidade extends DaoModelo<Cidade>{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Entidade> findAllByDtCadastro(Date date) throws Exception{
-		Query qry = getSession().getNamedQuery(Cidade.FIND_BY_DT_CADASTRO);
+		//Query qry = getSession().getNamedQuery(Cidade.FIND_BY_DT_CADASTRO);
+		Query qry = manager.createNamedQuery(Cidade.FIND_BY_DT_CADASTRO);
 		qry.setParameter("dtCadastro", date);
-		return qry.list();
+		return qry.getResultList();
 	}
 	
 	/**
@@ -178,8 +186,9 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		Estado estado = daoEstado.findByCodeIBGE(codeIBGEEstado); 
 		if(estado != null){
 			String query = "DELETE FROM Cidade WHERE uf = :uf";
-			Query qry = getSession().createQuery(query).setParameter("uf", String.valueOf(estado.getUf())) ;
-			System.out.println("Executando query: " + qry.getQueryString());
+			//Query qry = getSession().createQuery(query).setParameter("uf", String.valueOf(estado.getUf())) ;
+			Query qry = manager.createQuery(query).setParameter("uf", String.valueOf(estado.getUf()));
+			//System.out.println("Executando query: " + qry.getQueryString());
 			int rows = qry.executeUpdate();
 			System.out.println("Quantidade de registros afetados: " + rows);
 			return rows;

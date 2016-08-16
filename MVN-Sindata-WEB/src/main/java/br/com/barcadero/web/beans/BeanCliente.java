@@ -63,7 +63,9 @@ public class BeanCliente extends SuperBean {
 	}
 
 	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+		if(cliente != null){
+			this.cliente = cliente;
+		}
 	}
 
 	public Endereco getEndereco() {
