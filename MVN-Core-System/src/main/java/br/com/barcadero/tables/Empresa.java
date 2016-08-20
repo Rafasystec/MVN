@@ -61,16 +61,16 @@ public class Empresa extends Entidade {
 	@Enumerated(EnumType.ORDINAL)
 	private EnumRegimeISSQN regimeISSQN = EnumRegimeISSQN.MICROEMPRESARIO_INDIVIDUAL;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
 	private PessoaJuridica pessoaJuridica;
 	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	@JoinTable(name="empresa_usuario",joinColumns={
 		@JoinColumn(name="empresa_id",nullable=false, updatable=false)
 	}, inverseJoinColumns = {@JoinColumn(name="user_id",nullable=false, updatable=false)})
 	private List<Usuario> usuarios;
-	@OneToMany(mappedBy="empresa", targetEntity=Loja.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="empresa", targetEntity=Loja.class, fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Loja> lojas;
 	
 	public List<Usuario> getUsuarios() {
