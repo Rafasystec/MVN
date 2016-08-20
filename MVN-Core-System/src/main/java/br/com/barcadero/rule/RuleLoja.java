@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoLoja;
+import br.com.barcadero.dao.DaoPessoaJuridica;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Entidade;
@@ -18,11 +19,13 @@ import br.com.barcadero.tables.Usuario;
 public class RuleLoja extends RuleModelo<Loja> {
 
 	private DaoLoja daoLoja;
+	private DaoPessoaJuridica daoPessoaJuridica;
 	private Empresa empresa;
 	@Autowired
-	public RuleLoja(DaoLoja daoLoja) {
+	public RuleLoja(DaoLoja daoLoja, DaoPessoaJuridica daoPessoaJuridica) {
 		System.out.println("Auto-generated constructor stub for RuleLoja");
-		this.daoLoja = daoLoja;
+		this.daoLoja 			= daoLoja;
+		this.daoPessoaJuridica 	= daoPessoaJuridica;
 	}
 
 	@Override
@@ -125,6 +128,7 @@ public class RuleLoja extends RuleModelo<Loja> {
 				listEnder.add(ender);
 			}
 		}
+		daoPessoaJuridica.insert(pJuridica);
 		loja.setDtInauguracao(empresa.getDtFundacao());
 		loja.setEmpresa(empresa);
 		loja.setPessoaJuridica(pJuridica);

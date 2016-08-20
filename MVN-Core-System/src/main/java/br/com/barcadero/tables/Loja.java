@@ -45,7 +45,7 @@ public class Loja extends EntidadeEmpresa {
 	@Enumerated(EnumType.STRING)
 	private EnumIndRatISSQN indRatISSQNSAT = EnumIndRatISSQN.NAO;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
 	private PessoaJuridica pessoaJuridica;
 	

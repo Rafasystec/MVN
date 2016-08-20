@@ -16,6 +16,10 @@ public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
 	
 	private DaoPessoaJuridica daoPessoa;
 	
+	public RulePessoaJuridica() {
+		System.out.println("TODO Auto-generated constructor stub RulePessoaJuridica");
+	}
+	
 	@Autowired
 	public RulePessoaJuridica(DaoPessoaJuridica daoPessoa) {
 		// TODO Auto-generated constructor stub

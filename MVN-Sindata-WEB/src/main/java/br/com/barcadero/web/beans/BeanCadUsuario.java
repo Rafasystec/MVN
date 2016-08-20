@@ -38,13 +38,6 @@ public class BeanCadUsuario extends SuperBean {
 		usuario 	= new Usuario(null);
 	}
 	
-//	public BeanCadUsuario() {
-//		// TODO Auto-generated constructor stub
-//		usuario 	= new Usuario(null);
-//		fcdUser 	= new RuleUsuario(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//	}
-	
 	@Override
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub

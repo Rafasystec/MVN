@@ -23,11 +23,13 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 
 	private DaoEmpresa daoEmpresa;
 	private RuleLoja ruleLoja;
+	private RulePessoaJuridica rulePessoaJuridica;
 	@Autowired
-	public RuleEmpresa(DaoEmpresa daoEmpresa, RuleLoja ruleLoja) {
+	public RuleEmpresa(DaoEmpresa daoEmpresa, RuleLoja ruleLoja, RulePessoaJuridica rulePessoaJuridica) {
 		System.out.println("Auto-generated constructor stub RuleEmpresa");
-		this.daoEmpresa = daoEmpresa;
-		this.ruleLoja	= ruleLoja;
+		this.daoEmpresa 		= daoEmpresa;
+		this.ruleLoja			= ruleLoja;
+		this.rulePessoaJuridica = rulePessoaJuridica;
 	}
 	
 //	public RuleEmpresa(Empresa empresa, Loja loja, Session session) {
@@ -91,6 +93,7 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 		pj.setUf("CE");
 		pj.setWebSite("www.meusite.com.br");
 		pj.setEnderecos(new ArrayList<Endereco>());
+		rulePessoaJuridica.insert(pj);
 		empresa.setPessoaJuridica(pj);
 		List<Usuario> users = new ArrayList<Usuario>();
 		users.add(usuario);
