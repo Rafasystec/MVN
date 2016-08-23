@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.dao.DaoPedidoItens;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
@@ -19,11 +20,13 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 
 	private DaoPedidoItens daoPedidoItens;
 	private RuleProduto ruleProduto;
+	private DaoPedido daoPedido;
 	
 	@Autowired
-	public RulePedidoItens(DaoPedidoItens daoPedidoItens,RuleProduto ruleProduto) {
+	public RulePedidoItens(DaoPedidoItens daoPedidoItens,RuleProduto ruleProduto,DaoPedido daoPedido) {
 		// TODO Auto-generated constructor stub
 		this.daoPedidoItens = daoPedidoItens;
+		this.daoPedido		= daoPedido;
 		this.ruleProduto	= ruleProduto;
 	}
 
@@ -43,7 +46,8 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 		// TODO Auto-generated method stub
 		if(pedido != null){
 			try{
-				getSession().save(pedido);
+				//getSession().save(pedido);
+				daoPedido.insert(pedido);
 			}catch(Exception e){
 				throw e;
 			}
@@ -99,6 +103,30 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 	public List<Pedido> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public DaoPedidoItens getDaoPedidoItens() {
+		return daoPedidoItens;
+	}
+
+	public void setDaoPedidoItens(DaoPedidoItens daoPedidoItens) {
+		this.daoPedidoItens = daoPedidoItens;
+	}
+
+	public RuleProduto getRuleProduto() {
+		return ruleProduto;
+	}
+
+	public void setRuleProduto(RuleProduto ruleProduto) {
+		this.ruleProduto = ruleProduto;
+	}
+
+	public DaoPedido getDaoPedido() {
+		return daoPedido;
+	}
+
+	public void setDaoPedido(DaoPedido daoPedido) {
+		this.daoPedido = daoPedido;
 	}
 
 }

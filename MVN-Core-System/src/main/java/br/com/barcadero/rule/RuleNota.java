@@ -114,7 +114,8 @@ public class RuleNota extends RuleModelo<Nota> {
 	public void inserirItem(Nota nota,NotaItens item)throws Exception {
 		System.out.println("Insert item was called.");
 		if(nota != null && item != null){
-			getSession().save(nota);
+			//getSession().save(nota);
+			daoNota.insert(nota);
 			System.out.println("Item insert message >> " + ruleNotaItens.insert(item)); 
 		}else{
 			if(nota == null){
@@ -127,7 +128,8 @@ public class RuleNota extends RuleModelo<Nota> {
 	
 	public void inserirItem(Nota nota,NotaItens item, Produto produto)throws Exception {
 		if(nota != null && item != null){
-			getSession().save(nota);
+			//getSession().save(nota);
+			daoNota.insert(nota);
 			item.setProduto(produto);
 			System.out.println("Item insert message >> " + ruleNotaItens.insert(item)); 
 		}

@@ -2,9 +2,9 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.springframework.stereotype.Repository;
+import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.ParametrosSistema;
@@ -24,8 +24,8 @@ public class DaoParametros extends DaoModelo<ParametrosSistema> {
 
 	@Override
 	public List<ParametrosSistema> findAll() throws Exception {
-		Query qry =  getSession().getNamedQuery(ParametrosSistema.FIND_ALL);
-		return (List<ParametrosSistema>)qry.list();
+		Query qry =  manager.createNamedQuery(ParametrosSistema.FIND_ALL);
+		return (List<ParametrosSistema>)qry.getResultList();
 	}
 	
 	@Deprecated

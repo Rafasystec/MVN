@@ -126,7 +126,8 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		List<Cidade> cidades	= null;
 		TypedQuery<Cidade> qry	= null;
 		try {
-			qry		= (TypedQuery<Cidade>) getSession().getNamedQuery("Cidade.findAll");
+			//qry		= (TypedQuery<Cidade>) getSession().getNamedQuery("Cidade.findAll");
+			qry = (TypedQuery<Cidade>) manager.createNamedQuery(Cidade.FIND_ALL);
 			cidades	= qry.getResultList();
 			return cidades;
 		} catch (Exception e) {

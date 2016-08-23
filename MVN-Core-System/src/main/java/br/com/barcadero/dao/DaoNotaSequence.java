@@ -2,8 +2,9 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.Query;
+
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -14,19 +15,20 @@ import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.NotaSequence;
 import br.com.barcadero.tables.Usuario;
 
+@Repository
 public class DaoNotaSequence extends DaoModelo<NotaSequence> {
 
 	private RuleNota ruleNota;
-	public DaoNotaSequence(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		//ruleNota = new RuleNota(empresa, loja, session);
+	
+	public DaoNotaSequence() {
+		System.out.println("Auto-generated constructor stub DaoNotaSequence");
 	}
 
 	@Override
 	public List<NotaSequence> findAll() throws Exception {
-		Query qry = getSession().getNamedQuery(NotaSequence.FIND_ALL)
-				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
-		return qry.list();
+		Query query = manager.createNamedQuery(NotaSequence.FIND_ALL)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+		return query.getResultList();
 	}
 	/**
 	 * 
@@ -35,11 +37,12 @@ public class DaoNotaSequence extends DaoModelo<NotaSequence> {
 	 * @return
 	 */
 	public NotaSequence findByModAndSerie(EnumModeloNota typeModeloNota, long serie) throws Exception {
-		Query qry = getSession().getNamedQuery(NotaSequence.FIND_BY_MOD_SERIE)
-				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
+		Query query = manager.createNamedQuery(NotaSequence.FIND_BY_MOD_SERIE)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
 				.setParameter("modeloNota", typeModeloNota)
-				.setLong("serie", serie);
-		return (NotaSequence) qry.uniqueResult();
+				.setParameter("serie", serie);
+		return (NotaSequence) query.getSingleResult();
+		
 	}
 
 	@Override

@@ -3,9 +3,9 @@ package br.com.barcadero.dao;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.springframework.stereotype.Repository;
+import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
@@ -19,9 +19,9 @@ public class DaoProduto extends DaoModelo <Produto>{
 
 	@Override
 	public Produto find(long codigo) throws Exception {
-		Query qry = getSession().getNamedQuery(Produto.FIND_BY_CODE);
+		Query qry = manager.createNamedQuery(Produto.FIND_BY_CODE);
 		qry.setParameter("codigo", codigo);
-		return (Produto)qry.uniqueResult();
+		return (Produto)qry.getSingleResult();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class DaoProduto extends DaoModelo <Produto>{
 	 * @throws Exception
 	 */
 	public List<Produto> findByCodOrDesc(String codigoOrDesc) throws Exception{
-		Query qry  = getSession().getNamedQuery(Produto.FIND_BY_COD_OR_DESC);
+		Query qry  = manager.createNamedQuery(Produto.FIND_BY_COD_OR_DESC);
 		long codigo = 0;
 		try {
 			codigo = Long.parseLong(codigoOrDesc);
@@ -52,7 +52,7 @@ public class DaoProduto extends DaoModelo <Produto>{
 		}
 		qry.setParameter("codigo"	, codigo);
 		qry.setParameter("descricao", "%"+codigoOrDesc+"%");
-		return qry.list();
+		return qry.getResultList();
 	}
 
 	@Override

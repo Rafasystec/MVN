@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
-import br.com.barcadero.tables.Filiado;
 import br.com.barcadero.tables.Loja;
 
 public class DaoFiliado extends DaoModelo implements DaoInterface{
@@ -23,9 +22,10 @@ public class DaoFiliado extends DaoModelo implements DaoInterface{
 		List<Entidade> filiados	= null;
 		TypedQuery<Entidade> qry	= null;
 		try {
-			qry			= ((TypedQuery<Entidade>)getSession().getNamedQuery("Estado.findAll"));
-			filiados	= qry.getResultList(); //.getResultList();
-			return filiados;
+//			qry			= ((TypedQuery<Entidade>)getSession().getNamedQuery("Estado.findAll"));
+//			filiados	= qry.getResultList(); //.getResultList();
+//			return filiados;
+			return null;
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
