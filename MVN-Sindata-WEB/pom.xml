@@ -108,6 +108,13 @@
 			<artifactId>resteasy-client</artifactId>
 			<version>3.0.10.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+			<scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.2.6.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

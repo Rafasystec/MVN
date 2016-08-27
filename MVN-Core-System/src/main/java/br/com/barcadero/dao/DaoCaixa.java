@@ -2,6 +2,7 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -48,10 +49,14 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 	 * @throws Exception
 	 */
 	public Caixa findByIp(long loja, String ip) throws Exception{
-		Query qry = manager.createNamedQuery(Caixa.FIND_BY_IP)
-				.setParameter(GlobalNameParam.PARAM_COD_LOJA, getLoja())
-				.setParameter(Caixa.PARAM_IP, ip);
-		return (Caixa) qry.getSingleResult();
+		try{
+			Query qry = manager.createNamedQuery(Caixa.FIND_BY_IP)
+					.setParameter(GlobalNameParam.PARAM_COD_LOJA, getLoja())
+					.setParameter(Caixa.PARAM_IP, ip);
+			return (Caixa) qry.getSingleResult();
+		}catch(NoResultException e){
+			return null;
+		}
 	}
 
 	@Override

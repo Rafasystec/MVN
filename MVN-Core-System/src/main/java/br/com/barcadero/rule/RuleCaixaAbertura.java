@@ -45,7 +45,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 			caixaAbertura.setCaixa(caixa);
 			return insert(caixaAbertura);
 		}else{
-			throw new Exception("Não existe caixa com ip " + ipCaixa + " para a loja " + codigoLoja);
+			throw new Exception("Não existe caixa com ip " + ipCaixa + " para a loja " + getLoja().getPessoaJuridica().getFantasia());
 		}
 	}
 	
