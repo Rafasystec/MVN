@@ -10,6 +10,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
+
 @NamedQueries({
 	@NamedQuery(name=CaixaAbertura.FIND_ALL,query="FROM CaixaAbertura WHERE empresa = :empresa"),
 	@NamedQuery(name=CaixaAbertura.FIND_BY_CAIXA,query="FROM CaixaAbertura WHERE empresa = :empresa AND caixa = :caixa AND loja = :loja"),
@@ -20,6 +23,7 @@ import javax.persistence.Table;
  * @author Rafael Rocha
  * @since versao 1.0 dia 24/02/2016 as 10:20
  */
+@Audited
 @Entity
 @Table(name="CAIXA_ABERTURA")
 public class CaixaAbertura extends EntidadeLoja {

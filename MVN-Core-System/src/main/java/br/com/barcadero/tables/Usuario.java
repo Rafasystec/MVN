@@ -12,6 +12,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
+
 import br.com.barcadero.core.enums.EnumTipoUser;
 
 /**
@@ -28,7 +31,7 @@ import br.com.barcadero.core.enums.EnumTipoUser;
 			@NamedQuery(name=Usuario.FIND_BY_EMAIL	,query="FROM Usuario u WHERE u.email = :email")
 		}
 )
-
+@Audited(targetAuditMode=RelationTargetAuditMode.NOT_AUDITED)
 @Entity
 @Table(name="USUARIO")
 public class Usuario extends Entidade{

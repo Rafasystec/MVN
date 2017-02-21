@@ -16,6 +16,7 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false"/>
+			<property name="org.hibernate.envers.audit_table_suffix" value="_AUDIT"/>
 		</properties>
 	</persistence-unit>
 </persistence>

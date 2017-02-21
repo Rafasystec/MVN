@@ -12,12 +12,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.envers.Audited;
+
 import br.com.barcadero.core.enums.EnumTipoAviso;
 
 @NamedQueries({
 	@NamedQuery(name=Avisos.FIND_ALL	,query="FROM Avisos a WHERE a.dtValidade >= :dtValidade AND a.dtExibir <= :dtExibir")
 })
-
+@Audited
 @Entity
 public class Avisos extends EntidadeLoja {
 	

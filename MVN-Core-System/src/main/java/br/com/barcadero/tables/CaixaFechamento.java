@@ -7,11 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 /**
  * Classe para salvar os fechamnetos de caixa que ocorrerem
  * @author Rafael Rocha
  * @since versao 1.0 dia 24/02/2016 as 10:34
  */
+@Audited
 @Entity
 @Table(name="CAIXA_FECHAMENTO")
 public class CaixaFechamento extends EntidadeLoja {

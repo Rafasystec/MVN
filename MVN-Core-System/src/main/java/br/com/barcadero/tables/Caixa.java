@@ -14,6 +14,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
+
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumStatusCaixa;
@@ -25,6 +28,7 @@ import br.com.barcadero.core.enums.EnumStatusCaixa;
 	@NamedQuery(name=Caixa.FIND_BY_IP	,query="FROM Caixa WHERE ip	     = :ip AND loja = :loja")
 })
 
+@Audited(targetAuditMode=RelationTargetAuditMode.NOT_AUDITED)
 @Entity
 @Table(name="CAIXA")
 public class Caixa extends EntidadeLoja {
