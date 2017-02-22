@@ -1,8 +1,10 @@
 package br.com.barcadero.web.beans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import br.com.barcadero.core.enums.EnumTipoAviso;
 import br.com.barcadero.rule.RuleAvisos;
@@ -16,10 +18,22 @@ public class BeanAvisos extends SuperBean {
 	private Avisos aviso;
 	private List<Entidade> avisos;
 	private EnumTipoAviso[] tipos;
-	private RuleAvisos rulAvisos;
+	@ManagedProperty(value="#{ruleAvisos}")
+	private RuleAvisos ruleAvisos;
 	public BeanAvisos() {
 		//rulAvisos 	= new RuleAvisos(getDataBaseSession());
 		aviso 		= new Avisos(getSession().getLojaLogada(), getSession().getUsuarioLogado());
+		testeAviso();
+	}
+	
+	public void testeAviso() {
+		Avisos avisos = new Avisos(getLojaLogada(),getUsuarioLogado());
+		avisos.setDescricao("OK ALGUMA COISA");
+		avisos.setDtExibir(new Date());
+		avisos.setDtValidade(new Date());
+		avisos.setFlTipo(EnumTipoAviso.I);
+		
+	
 	}
 	
 	public Avisos getAviso() {
@@ -31,7 +45,7 @@ public class BeanAvisos extends SuperBean {
 	}
 
 	public List<Avisos> getAvisos() throws Exception {
-		return rulAvisos.findAll();
+		return ruleAvisos.findAll();
 	}
 
 	public void setAvisos(List<Entidade> avisos) {
@@ -48,7 +62,7 @@ public class BeanAvisos extends SuperBean {
 
 	@Override
 	public String salvar() throws Exception {
-		rulAvisos.insert(aviso);
+		ruleAvisos.insert(aviso);
 		return null;
 	}
 
@@ -61,6 +75,11 @@ public class BeanAvisos extends SuperBean {
 	@Override
 	public String deletar() throws Exception {
 		// TODO Auto-generated method stub
+		Avisos avisos = ruleAvisos.find(1);
+		if(avisos!=null){
+			avisos.setDescricao("ATEREI PARA O AUDIT");
+			ruleAvisos.update(avisos);
+		}
 		return null;
 	}
 
@@ -74,6 +93,14 @@ public class BeanAvisos extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleAvisos getRuleAvisos() {
+		return ruleAvisos;
+	}
+
+	public void setRuleAvisos(RuleAvisos ruleAvisos) {
+		this.ruleAvisos = ruleAvisos;
 	}
 
 }

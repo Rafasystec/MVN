@@ -97,7 +97,8 @@ public class BeanConfigCaixa extends SuperBean {
 
 	public List<Caixa> getCaixas() {
 		try {
-			this.caixas = ruleCaixa.findAll();
+			//this.caixas = ruleCaixa.findAll();
+			this.caixas = ruleCaixa.findAll(getEmpresaLogada());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

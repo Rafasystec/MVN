@@ -20,7 +20,7 @@ public class DaoAvisos extends DaoModelo<Avisos> {
 	@Override
 	public Avisos find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return manager.find(Avisos.class, codigo);
 	}
 
 
