@@ -25,13 +25,15 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 		return (Caixa) qry.getSingleResult();
 	}
 
+	public List<Caixa> findAll(Empresa empresa) throws Exception {
+		Query qry = manager.createNamedQuery(Caixa.FIND_ALL)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa.getCodigo());
+		return qry.getResultList();
+	}
 	@Override
 	public List<Caixa> findAll() throws Exception {
-//		Query qry = getSession().getNamedQuery(Caixa.FIND_ALL)
-//				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
-//		return qry.list();
-		javax.persistence.Query qry = manager.createNamedQuery(Caixa.FIND_ALL);
-				//.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+		javax.persistence.Query qry = manager.createNamedQuery(Caixa.FIND_ALL)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
 		return qry.getResultList();
 	}
 	

@@ -41,7 +41,7 @@ public class RuleAvisos extends RuleModelo<Avisos> {
 
 	public Avisos find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return daoAvisos.find(codigo);
 	}
 	
 	public List<Avisos> findAll() throws Exception{

@@ -64,8 +64,13 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 		return daoCaixa.find(codigo);
 	}
 	
+	@Deprecated
 	public List<Caixa> findAll() throws Exception {
 		return daoCaixa.findAll();
+	}
+	
+	public List<Caixa> findAll(Empresa empresa) throws Exception {
+		return daoCaixa.findAll(empresa);
 	}
 
 	/**
