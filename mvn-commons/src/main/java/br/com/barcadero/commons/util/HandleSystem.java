@@ -7,5 +7,9 @@ public class HandleSystem {
 	public static String rootDirApp() {
 		return System.getProperty("user.dir") + File.separator;
 	}
+	
+	public void changeSysOut() {
+		
+	}
 
 }
