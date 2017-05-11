@@ -10,7 +10,7 @@ public class Sender {
 		// TODO Auto-generated constructor stub
 		iSender = new SenderMail();
 		iSender.setPassword("rafa1>rafa2");
-		iSender.setUserName("petshow@barcadero.com.br");
+		iSender.setUserName("contato@barcadero.com.br");
 		iSender.setHostEmail("mail.barcadero.com.br");
 		iSender.setSmtpPort(587);
 	}
@@ -19,7 +19,7 @@ public class Sender {
 		Sender sender = new Sender();
 		try {
 
-			sender.send("EMAIL PETSHOW TESTE \n Dia: " + HandleDateHour.getCurrentDay(), "PET SHOW TEST", "petshow@barcadero.com.br", "contato@barcadero.com.br");
+			sender.send("EMAIL PETSHOW TESTE \n Dia: " + HandleDateHour.getCurrentDay(), "PET SHOW TEST","contato@barcadero.com.br", "rafasystec@yahoo.com.br" );
 		} catch (MailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

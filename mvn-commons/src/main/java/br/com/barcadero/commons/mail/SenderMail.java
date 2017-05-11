@@ -52,7 +52,7 @@ class SenderMail implements ISender {
 			System.out.println("Sent message successfully....");
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
-			throw new MailException("Erro ao tentar enviar email para : " + getFromEmail() + " > " + e.getMessage());
+			throw new MailException("Erro ao tentar enviar email para : " + getDestinationEmail() + " > " + e.getMessage());
 		}
 
 	}
@@ -64,7 +64,7 @@ class SenderMail implements ISender {
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
+//		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", getHostEmail());
 		props.put("mail.smtp.port", getSmtpPort());
 		
