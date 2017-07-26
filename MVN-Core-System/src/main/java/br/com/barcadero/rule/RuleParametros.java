@@ -54,15 +54,15 @@ public class RuleParametros extends RuleModelo<ParametrosSistema> {
 		return daoParametros.insertParametro(parametro);
 	}
 	
-	/**
-	 * Inserir um avlor para um parametro
-	 * @param valor
-	 * @return
-	 * @throws Exception
-	 */
-	public String inserirValor(ParametrosValores valor) throws Exception {
-		return daoParametros.insertValorParametro(valor);
-	}
+//	/**
+//	 * Inserir um avlor para um parametro
+//	 * @param valor
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String inserirValor(ParametrosValores valor) throws Exception {
+//		return daoParametros.insertValorParametro(valor);
+//	}
 	
 	public void cargaDeParametros() throws Exception {
 		ParametrosSistema sistema = new ParametrosSistema();
@@ -146,6 +146,18 @@ public class RuleParametros extends RuleModelo<ParametrosSistema> {
 
 	@Override
 	public List<ParametrosSistema> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ParametrosSistema insert(ParametrosSistema entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ParametrosSistema update(ParametrosSistema entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

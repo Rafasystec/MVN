@@ -31,11 +31,11 @@ public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 		this.daoUsuario = daoUsuario;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoMensagem.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoMensagem.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -43,11 +43,11 @@ public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 		return daoMensagem.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoMensagem.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoMensagem.update(entidade);
+//	}
 
 	@Override
 	public UserMensagens find(long codigo) throws Exception {
@@ -112,6 +112,30 @@ public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 
 	@Override
 	public List<UserMensagens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserMensagens insert(UserMensagens entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserMensagens update(UserMensagens entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -19,12 +19,12 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 		daoContaPagar = new DaoContaPagar(empresa, loja, session);
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		ContaPagar conta = (ContaPagar)entidade;
-		return daoContaPagar.insert(conta);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		ContaPagar conta = (ContaPagar)entidade;
+//		return daoContaPagar.insert(conta);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -32,11 +32,11 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 		return daoContaPagar.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoContaPagar.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoContaPagar.update(entidade);
+//	}
 
 	@Override
 	public ContaPagar find(long codigo) throws Exception {
@@ -59,6 +59,30 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 
 	@Override
 	public List<ContaPagar> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContaPagar insert(ContaPagar entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContaPagar update(ContaPagar entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

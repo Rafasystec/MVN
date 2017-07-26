@@ -19,13 +19,13 @@ public class RuleAvisos extends RuleModelo<Avisos> {
 		this.daoAvisos = daoAvisos;
 	}
 
-	public String insert(Entidade entidade) throws Exception {
-		if(entidade == null){
-			throw new Exception("Entidade veio nula.");
-		}
-		Avisos avisos = (Avisos)entidade;
-		return daoAvisos.insert(avisos);
-	}
+//	public String insert(Entidade entidade) throws Exception {
+//		if(entidade == null){
+//			throw new Exception("Entidade veio nula.");
+//		}
+//		Avisos avisos = (Avisos)entidade;
+//		return daoAvisos.insert(avisos);
+//	}
 
 	public String delete(long codigo) throws Exception {
 		if(codigo <= 0){
@@ -34,10 +34,10 @@ public class RuleAvisos extends RuleModelo<Avisos> {
 		return daoAvisos.delete(codigo);
 	}
 
-	public String update(Entidade entidade) throws Exception {
-		
-		return daoAvisos.update(entidade);
-	}
+//	public String update(Entidade entidade) throws Exception {
+//		
+//		return daoAvisos.update(entidade);
+//	}
 
 	public Avisos find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
@@ -56,6 +56,30 @@ public class RuleAvisos extends RuleModelo<Avisos> {
 
 	@Override
 	public List<Avisos> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Avisos insert(Avisos entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Avisos update(Avisos entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -24,11 +24,11 @@ public class RuleRegraTributaria extends RuleModelo<RegraTributaria> {
 		this.daoRegraTributacao = daoRegraTributacao;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoRegraTributacao.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoRegraTributacao.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -36,11 +36,11 @@ public class RuleRegraTributaria extends RuleModelo<RegraTributaria> {
 		return daoRegraTributacao.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoRegraTributacao.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoRegraTributacao.update(entidade);
+//	}
 
 	@Override
 	public RegraTributaria find(long codigo) throws Exception {
@@ -190,6 +190,30 @@ public class RuleRegraTributaria extends RuleModelo<RegraTributaria> {
 
 	@Override
 	public List<RegraTributaria> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RegraTributaria insert(RegraTributaria entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RegraTributaria update(RegraTributaria entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

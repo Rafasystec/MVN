@@ -18,10 +18,10 @@ public class RuleCaixaFechamento extends RuleModelo<CaixaFechamento> {
 		daoFechamento = new DaoCaixaFechamento(empresa, loja, session);
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return daoFechamento.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		return daoFechamento.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -29,10 +29,10 @@ public class RuleCaixaFechamento extends RuleModelo<CaixaFechamento> {
 		return daoFechamento.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		return daoFechamento.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		return daoFechamento.update(entidade);
+//	}
 
 	@Override
 	public CaixaFechamento find(long codigo) throws Exception {
@@ -54,6 +54,30 @@ public class RuleCaixaFechamento extends RuleModelo<CaixaFechamento> {
 
 	@Override
 	public List<CaixaFechamento> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CaixaFechamento insert(CaixaFechamento entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CaixaFechamento update(CaixaFechamento entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

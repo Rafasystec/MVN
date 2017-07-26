@@ -45,16 +45,16 @@ public class DaoParametros extends DaoModelo<ParametrosSistema> {
 		return getMSG_SUCESS_SAVE();
 	}
 	
-	/**
-	 * Inserir um valor para um parametro
-	 * @param valor
-	 * @return
-	 * @throws Exception
-	 */
-	public String insertValorParametro(ParametrosValores valor) throws Exception {
-		insert(valor);
-		return getMSG_SUCESS_SAVE();
-	}
+//	/**
+//	 * Inserir um valor para um parametro
+//	 * @param valor
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String insertValorParametro(ParametrosValores valor) throws Exception {
+//		insert(valor);
+//		return getMSG_SUCESS_SAVE();
+//	}
 
 	@Override
 	public List<ParametrosSistema> findByEmpresa(Empresa empresa) throws Exception {

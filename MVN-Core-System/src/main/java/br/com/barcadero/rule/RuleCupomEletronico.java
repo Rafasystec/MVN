@@ -31,20 +31,20 @@ public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 //		daoCupomEletronico = new DaoCupomEletronico(empresa, loja, session);
 //	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return daoCupomEletronico.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		return daoCupomEletronico.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		return daoCupomEletronico.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		return daoCupomEletronico.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		return daoCupomEletronico.update(entidade);
+//	}
 
 	@Override
 	public CupomEletronico find(long codigo) throws Exception {
@@ -93,6 +93,30 @@ public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 
 	@Override
 	public List<CupomEletronico> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CupomEletronico insert(CupomEletronico entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CupomEletronico update(CupomEletronico entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

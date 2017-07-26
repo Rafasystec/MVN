@@ -29,38 +29,38 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 		this.daoPedido		= daoPedido;
 		this.ruleProduto	= ruleProduto;
 	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoPedidoItens.insert(entidade);
-	}
-	/**
-	 * Inserir um item no pedido
-	 * @param pedido
-	 * @param pedidoItens
-	 * @return
-	 * @throws Exception
-	 */
-	public String insert(Pedido pedido, PedidoItens pedidoItens) throws Exception {
-		// TODO Auto-generated method stub
-		if(pedido != null){
-			try{
-				//getSession().save(pedido);
-				daoPedido.insert(pedido);
-			}catch(Exception e){
-				throw e;
-			}
-			Produto produto = pedidoItens.getProduto();
-			BigDecimal vlUnitario = ruleProduto.getPreco(produto);
-			pedidoItens.setVlUnitario(vlUnitario);
-			pedidoItens.setVlTotal(vlUnitario.multiply(new BigDecimal(pedidoItens.getQuantidade())));
-			pedidoItens.setPedido(pedido);
-			return daoPedidoItens.insert(pedidoItens);
-		}else{
-			throw new Exception("Pedido não foi criado.");
-		}
-	}
+//
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoPedidoItens.insert(entidade);
+//	}
+//	/**
+//	 * Inserir um item no pedido
+//	 * @param pedido
+//	 * @param pedidoItens
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String insert(Pedido pedido, PedidoItens pedidoItens) throws Exception {
+//		// TODO Auto-generated method stub
+//		if(pedido != null){
+//			try{
+//				//getSession().save(pedido);
+//				daoPedido.insert(pedido);
+//			}catch(Exception e){
+//				throw e;
+//			}
+//			Produto produto = pedidoItens.getProduto();
+//			BigDecimal vlUnitario = ruleProduto.getPreco(produto);
+//			pedidoItens.setVlUnitario(vlUnitario);
+//			pedidoItens.setVlTotal(vlUnitario.multiply(new BigDecimal(pedidoItens.getQuantidade())));
+//			pedidoItens.setPedido(pedido);
+//			return daoPedidoItens.insert(pedidoItens);
+//		}else{
+//			throw new Exception("Pedido não foi criado.");
+//		}
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -127,6 +127,21 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 
 	public void setDaoPedido(DaoPedido daoPedido) {
 		this.daoPedido = daoPedido;
+	}
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Pedido insert(Pedido entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Pedido update(Pedido entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

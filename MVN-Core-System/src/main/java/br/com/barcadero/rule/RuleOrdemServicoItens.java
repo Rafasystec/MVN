@@ -21,11 +21,11 @@ public class RuleOrdemServicoItens extends RuleModelo<OrdemServicoItens> {
 		this.daoOrdemServicoItens = daoOrdemServicoItens;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoOrdemServicoItens.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoOrdemServicoItens.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -63,6 +63,24 @@ public class RuleOrdemServicoItens extends RuleModelo<OrdemServicoItens> {
 
 	@Override
 	public List<OrdemServicoItens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdemServicoItens insert(OrdemServicoItens entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdemServicoItens update(OrdemServicoItens entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

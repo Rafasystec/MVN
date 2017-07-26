@@ -23,23 +23,23 @@ public class RuleMarcas extends RuleModelo<Marcas> {
 //		daoMarcas = new DaoMarcas(empresa, loja, session);
 //	}	
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoMarcas.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoMarcas.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoMarcas.delete(codigo);
 	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoMarcas.update(entidade);
-	}
+//
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoMarcas.update(entidade);
+//	}
 
 	@Override
 	public Marcas find(long codigo) throws Exception {
@@ -61,6 +61,30 @@ public class RuleMarcas extends RuleModelo<Marcas> {
 
 	@Override
 	public List<Marcas> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Marcas insert(Marcas entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Marcas update(Marcas entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

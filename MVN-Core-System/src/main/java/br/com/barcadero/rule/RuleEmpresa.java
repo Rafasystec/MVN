@@ -38,13 +38,13 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 //		ruleLoja	= new RuleLoja(empresa, loja, session);
 //	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		Empresa empresa = (Empresa)entidade;
-		retirarFormatcao(empresa);
-		return daoEmpresa.insert(empresa);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		Empresa empresa = (Empresa)entidade;
+//		retirarFormatcao(empresa);
+//		return daoEmpresa.insert(empresa);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -132,6 +132,24 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 
 	@Override
 	public List<Empresa> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Empresa insert(Empresa entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Empresa update(Empresa entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

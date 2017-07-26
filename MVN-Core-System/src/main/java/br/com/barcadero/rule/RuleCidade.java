@@ -28,23 +28,23 @@ public class RuleCidade extends RuleModelo<Cidade> {
 //		this.daoCidade	= new DaoCidade(empresa, loja, session);
 //	}
 	
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		try{
-			Cidade cidade	= (Cidade)entidade;
-			if(cidade != null){
-				if(find(cidade.getCodigo()) == null){
-					return this.daoCidade.insert(entidade);
-				}else{
-					return "Cidade já cadastrada!";
-				}
-			}else{
-				return "Entidade veio nula do Bean.";
-			}
-		}catch(Exception e){
-			throw new Exception(e.getMessage());
-		}
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		try{
+//			Cidade cidade	= (Cidade)entidade;
+//			if(cidade != null){
+//				if(find(cidade.getCodigo()) == null){
+//					return this.daoCidade.insert(entidade);
+//				}else{
+//					return "Cidade já cadastrada!";
+//				}
+//			}else{
+//				return "Entidade veio nula do Bean.";
+//			}
+//		}catch(Exception e){
+//			throw new Exception(e.getMessage());
+//		}
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -52,11 +52,11 @@ public class RuleCidade extends RuleModelo<Cidade> {
 		return this.daoCidade.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		System.out.println("Update facade cidade.");
-		return this.daoCidade.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		System.out.println("Update facade cidade.");
+//		return this.daoCidade.update(entidade);
+//	}
 
 	@Override
 	public Cidade find(long codigo) throws Exception {
@@ -122,6 +122,30 @@ public class RuleCidade extends RuleModelo<Cidade> {
 
 	@Override
 	public List<Cidade> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cidade insert(Cidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cidade update(Cidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

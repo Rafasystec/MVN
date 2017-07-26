@@ -24,37 +24,37 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 		this.daoCaixa 			= daoCaixa;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return daoCaixaAbertura.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		return daoCaixaAbertura.insert(entidade);
+//	}
 	
-	/**
-	 * 
-	 * @param ipCaixa
-	 * @param entidade
-	 * @return
-	 * @throws Exception
-	 */
-	public String insert(String ipCaixa, Entidade entidade) throws Exception {
-		long codigoLoja = getLoja().getCodigo();
-		Caixa caixa = daoCaixa.findByIp(codigoLoja, ipCaixa);
-		if(caixa != null){
-			CaixaAbertura caixaAbertura = (CaixaAbertura) entidade;
-			caixa.setStatusCaixa(EnumStatusCaixa.ABERTO);
-			caixaAbertura.setCaixa(caixa);
-			return insert(caixaAbertura);
-		}else{
-			throw new Exception("Não existe caixa com ip " + ipCaixa + " para a loja " + getLoja().getPessoaJuridica().getFantasia());
-		}
-	}
+//	/**
+//	 * 
+//	 * @param ipCaixa
+//	 * @param entidade
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String insert(String ipCaixa, Entidade entidade) throws Exception {
+//		long codigoLoja = getLoja().getCodigo();
+//		Caixa caixa = daoCaixa.findByIp(codigoLoja, ipCaixa);
+//		if(caixa != null){
+//			CaixaAbertura caixaAbertura = (CaixaAbertura) entidade;
+//			caixa.setStatusCaixa(EnumStatusCaixa.ABERTO);
+//			caixaAbertura.setCaixa(caixa);
+//			return insert(caixaAbertura);
+//		}else{
+//			throw new Exception("Não existe caixa com ip " + ipCaixa + " para a loja " + getLoja().getPessoaJuridica().getFantasia());
+//		}
+//	}
 	
-	public String insert(Entidade entidade, Caixa caixa) throws Exception {
-		// TODO Auto-generated method stub
-		caixa.setStatusCaixa(EnumStatusCaixa.ABERTO);
-		daoCaixa.update(caixa);
-		return daoCaixaAbertura.insert(entidade);
-	}
+//	public String insert(Entidade entidade, Caixa caixa) throws Exception {
+//		// TODO Auto-generated method stub
+//		caixa.setStatusCaixa(EnumStatusCaixa.ABERTO);
+//		daoCaixa.update(caixa);
+//		return daoCaixaAbertura.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -62,11 +62,11 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 		return daoCaixaAbertura.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoCaixaAbertura.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoCaixaAbertura.update(entidade);
+//	}
 
 	@Override
 	public CaixaAbertura find(long codigo) throws Exception {
@@ -98,6 +98,30 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 
 	@Override
 	public List<CaixaAbertura> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CaixaAbertura insert(CaixaAbertura entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CaixaAbertura update(CaixaAbertura entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

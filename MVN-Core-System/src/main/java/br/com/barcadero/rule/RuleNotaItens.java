@@ -33,19 +33,19 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 		this.ruleProduto  = ruleProduto;
 	}
 	
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		if(entidade instanceof NotaItens){
-			NotaItens itens = (NotaItens) entidade;
-			Produto produto = itens.getProduto();
-			itens.setVlTotal(ruleProduto.getPreco(produto).multiply(new BigDecimal(itens.getQuantidade())));
-			return daoNotaItens.insert(itens);
-		}else{
-			throw new Exception("Entidade passada como parametro não é do tipo:");
-		}
-		
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		if(entidade instanceof NotaItens){
+//			NotaItens itens = (NotaItens) entidade;
+//			Produto produto = itens.getProduto();
+//			itens.setVlTotal(ruleProduto.getPreco(produto).multiply(new BigDecimal(itens.getQuantidade())));
+//			return daoNotaItens.insert(itens);
+//		}else{
+//			throw new Exception("Entidade passada como parametro não é do tipo:");
+//		}
+//		
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -53,11 +53,11 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 		return daoNotaItens.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoNotaItens.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoNotaItens.update(entidade);
+//	}
 
 	@Override
 	public NotaItens find(long codigo) throws Exception {
@@ -147,6 +147,30 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 
 	@Override
 	public List<NotaItens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NotaItens insert(NotaItens entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NotaItens update(NotaItens entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

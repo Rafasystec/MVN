@@ -2,12 +2,14 @@ package br.com.barcadero.dao;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.core.enums.EnumUF;
-import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
@@ -36,18 +38,18 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		return (Cidade) query.getSingleResult();
 	}
 	
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		if(entidade instanceof Cidade){
-			Cidade cidade = (Cidade)entidade;
-			for (Bairro bairro : cidade.getBairros()) {
-				super.insert(bairro);
-			}
-		}else{
-			throw new Exception("Entidade não é do Tipo :" + Cidade.class);
-		}
-		return super.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		if(entidade instanceof Cidade){
+//			Cidade cidade = (Cidade)entidade;
+//			for (Bairro bairro : cidade.getBairros()) {
+//				super.insert(bairro);
+//			}
+//		}else{
+//			throw new Exception("Entidade não é do Tipo :" + Cidade.class);
+//		}
+//		return super.insert(entidade);
+//	}
 	
 	/**
 	 * Utilizar a obtencao das cidades pela UF

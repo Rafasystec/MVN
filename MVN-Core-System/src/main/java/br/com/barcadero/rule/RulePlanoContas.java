@@ -211,4 +211,16 @@ public class RulePlanoContas extends RuleModelo<PlanoConta>{
 		return null;
 	}
 
+	@Override
+	public PlanoConta insert(PlanoConta entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PlanoConta update(PlanoConta entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

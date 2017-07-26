@@ -54,11 +54,11 @@ public class RuleNota extends RuleModelo<Nota> {
 		this.daoPedido 		 = daoPedido;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoNota.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoNota.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -66,11 +66,11 @@ public class RuleNota extends RuleModelo<Nota> {
 		return daoNota.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoNota.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoNota.update(entidade);
+//	}
 
 	@Override
 	public Nota find(long codigo) throws Exception {
@@ -81,29 +81,29 @@ public class RuleNota extends RuleModelo<Nota> {
 	public Nota findNota(long codigo) throws Exception {
 		return daoNota.findNota(codigo);
 	}
-	/**
-	 * Inserir meio de pagamento na Nota
-	 * @param codNota
-	 * @param meio
-	 * @throws Exception
-	 */
-	public void inserirMeioPgtoNota(long codNota, NotaMeioPgto meio) throws Exception {
-		if(meio == null){
-			throw new DAOException(new Exception("O meio de pagamento da nota veio com valor nulo"));
-		}
-		Nota nota = findNota(codNota); 
-		if(nota != null){
-			MeiosPagamento meioPgto = (MeiosPagamento) daoMeio.find(meio.getCodMeioPgto());
-			if(meioPgto == null){
-				throw new DAOException(new Exception("Erro ao tentar salvar o meio de pagmento da "
-						+ "Nota. Nenhum meio_pagamento encontrado para o codigo " + meio.getCodMeioPgto()));
-			}
-			meio.setNota(nota);
-			meio.setSerieNota(nota.getSerieNota());
-			meio.setMeioPagamento(meioPgto);
-			daoNota.insert(meio);
-		}
-	}
+//	/**
+//	 * Inserir meio de pagamento na Nota
+//	 * @param codNota
+//	 * @param meio
+//	 * @throws Exception
+//	 */
+//	public void inserirMeioPgtoNota(long codNota, NotaMeioPgto meio) throws Exception {
+//		if(meio == null){
+//			throw new DAOException(new Exception("O meio de pagamento da nota veio com valor nulo"));
+//		}
+//		Nota nota = findNota(codNota); 
+//		if(nota != null){
+//			MeiosPagamento meioPgto = (MeiosPagamento) daoMeio.find(meio.getCodMeioPgto());
+//			if(meioPgto == null){
+//				throw new DAOException(new Exception("Erro ao tentar salvar o meio de pagmento da "
+//						+ "Nota. Nenhum meio_pagamento encontrado para o codigo " + meio.getCodMeioPgto()));
+//			}
+//			meio.setNota(nota);
+//			meio.setSerieNota(nota.getSerieNota());
+//			meio.setMeioPagamento(meioPgto);
+//			daoNota.insert(meio);
+//		}
+//	}
 	
 	/**
 	 * Inserir um item passando a nota.
@@ -397,6 +397,30 @@ public class RuleNota extends RuleModelo<Nota> {
 
 	@Override
 	public List<Nota> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Nota insert(Nota entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Nota update(Nota entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

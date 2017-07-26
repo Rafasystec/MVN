@@ -19,18 +19,18 @@ public class DaoEstado extends DaoModelo<Estado>{
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		String result = "";
-		if(entidade instanceof Estado){
-			Estado estado = (Estado)entidade;
-			result = super.insert(estado);
-			return result;
-		}else{
-			throw new Exception("Entidade não compatíveis: " + entidade.getClass().getName() + " com " + Estado.class);
-		}
-		
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		String result = "";
+//		if(entidade instanceof Estado){
+//			Estado estado = (Estado)entidade;
+//			result = super.insert(estado);
+//			return result;
+//		}else{
+//			throw new Exception("Entidade não compatíveis: " + entidade.getClass().getName() + " com " + Estado.class);
+//		}
+//		
+//	}
 
 	@Override
 	public Estado find(long codigo) throws Exception {

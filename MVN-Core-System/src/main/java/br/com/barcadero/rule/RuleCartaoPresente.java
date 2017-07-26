@@ -21,10 +21,10 @@ public class RuleCartaoPresente extends RuleModelo<CartaoPresente> {
 		daoCartaoPresente = new DaoCartaoPresente(empresa, loja, session);
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return daoCartaoPresente.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		return daoCartaoPresente.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -32,10 +32,10 @@ public class RuleCartaoPresente extends RuleModelo<CartaoPresente> {
 		return daoCartaoPresente.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		return daoCartaoPresente.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		return daoCartaoPresente.update(entidade);
+//	}
 
 	@Override
 	public CartaoPresente find(long codigo) throws Exception {
@@ -76,6 +76,30 @@ public class RuleCartaoPresente extends RuleModelo<CartaoPresente> {
 
 	@Override
 	public List<CartaoPresente> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartaoPresente insert(CartaoPresente entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartaoPresente update(CartaoPresente entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

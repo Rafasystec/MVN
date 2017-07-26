@@ -20,15 +20,15 @@ public class RuleEstado extends RuleModelo<Estado> {
 		this.daoEstado = daoEstado;
 	}
 	
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		Estado estado = (Estado)entidade;
-		if(estado != null){
-			return daoEstado.insert(estado);
-		}else{
-			return "O estado não pode ser recuperado.";
-		}	
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		Estado estado = (Estado)entidade;
+//		if(estado != null){
+//			return daoEstado.insert(estado);
+//		}else{
+//			return "O estado não pode ser recuperado.";
+//		}	
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -36,11 +36,11 @@ public class RuleEstado extends RuleModelo<Estado> {
 		return daoEstado.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoEstado.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoEstado.update(entidade);
+//	}
 
 	@Override
 	public Estado find(long codigo) throws Exception {
@@ -78,6 +78,30 @@ public class RuleEstado extends RuleModelo<Estado> {
 
 	@Override
 	public List<Estado> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Estado insert(Estado entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Estado update(Estado entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

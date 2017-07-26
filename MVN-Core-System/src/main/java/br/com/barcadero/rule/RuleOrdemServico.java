@@ -29,43 +29,43 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 		this.daoOrdemServico 		= daoOrdemServico;
 		this.daoOrdemServicoItens	= daoOrdemServicoItens;
 	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return daoOrdemServico.insert(entidade);
-	}
+//
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		return daoOrdemServico.insert(entidade);
+//	}
 	
-	/**
-	 * Salvar uma ordem de servico
-	 * @param ordemServico
-	 * @param itens
-	 * @return
-	 * @throws Exception
-	 */
-	public String insert(OrdemServico ordemServico, OrdemServicoItens itens) throws Exception {
-		if(ordemServico != null){
-			Produto produto = itens.getProduto();
-			BigDecimal vlUnitario = ruleProduto.getPreco(produto);
-			itens.setValorUnitario(vlUnitario);
-			itens.setValorTotal(vlUnitario.multiply(new BigDecimal(itens.getQuantidade())));
-			itens.setOrdemServico(ordemServico);
-			daoOrdemServico.insert(ordemServico);
-			itens.setOrdemServico(ordemServico);
-			return daoOrdemServico.insert(itens);
-		}else{
-			throw new Exception("Pedido não foi criado.");
-		}
-	}
+//	/**
+//	 * Salvar uma ordem de servico
+//	 * @param ordemServico
+//	 * @param itens
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String insert(OrdemServico ordemServico, OrdemServicoItens itens) throws Exception {
+//		if(ordemServico != null){
+//			Produto produto = itens.getProduto();
+//			BigDecimal vlUnitario = ruleProduto.getPreco(produto);
+//			itens.setValorUnitario(vlUnitario);
+//			itens.setValorTotal(vlUnitario.multiply(new BigDecimal(itens.getQuantidade())));
+//			itens.setOrdemServico(ordemServico);
+//			daoOrdemServico.insert(ordemServico);
+//			itens.setOrdemServico(ordemServico);
+//			return daoOrdemServico.insert(itens);
+//		}else{
+//			throw new Exception("Pedido não foi criado.");
+//		}
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		return daoOrdemServico.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		return daoOrdemServico.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		return daoOrdemServico.update(entidade);
+//	}
 
 	@Override
 	public OrdemServico find(long codigo) throws Exception {
@@ -100,6 +100,30 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 
 	@Override
 	public List<OrdemServico> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdemServico insert(OrdemServico entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdemServico update(OrdemServico entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

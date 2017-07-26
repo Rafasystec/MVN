@@ -19,20 +19,20 @@ public class RuleAliquotaPisCofins extends RuleModelo<AliquotasPISCOFINS> {
 		daoAliquotaPisCofins = new DaoAliquotaPisCofins(empresa, loja, session);
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return daoAliquotaPisCofins.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		return daoAliquotaPisCofins.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		return daoAliquotaPisCofins.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		return daoAliquotaPisCofins.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		return daoAliquotaPisCofins.update(entidade);
+//	}
 
 	@Override
 	public AliquotasPISCOFINS find(long codigo) throws Exception {
@@ -71,5 +71,31 @@ public class RuleAliquotaPisCofins extends RuleModelo<AliquotasPISCOFINS> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AliquotasPISCOFINS insert(AliquotasPISCOFINS entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AliquotasPISCOFINS update(AliquotasPISCOFINS entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

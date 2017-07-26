@@ -58,4 +58,16 @@ public class RuleContaAReceber extends RuleModelo<ContaReceber> {
 		return null;
 	}
 
+	@Override
+	public ContaReceber insert(ContaReceber entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContaReceber update(ContaReceber entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

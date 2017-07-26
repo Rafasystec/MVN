@@ -18,16 +18,16 @@ public class RuleFiliado extends RuleModelo<Filiado>{
 		super(session);
 		daoFiliado 	= new DaoFiliado(session);
 	}
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		try {
-			return daoFiliado.insert((Filiado)entidade);
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw new Exception("Erro na camada Facade de Filiados: " + e.getMessage());
-		}
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		try {
+//			return daoFiliado.insert((Filiado)entidade);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			throw new Exception("Erro na camada Facade de Filiados: " + e.getMessage());
+//		}
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -73,6 +73,21 @@ public class RuleFiliado extends RuleModelo<Filiado>{
 	}
 	@Override
 	public List<Filiado> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Filiado insert(Filiado entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Filiado update(Filiado entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

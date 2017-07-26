@@ -33,18 +33,18 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 	/**
 	 * Inserir um caixa.
 	 */
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		Caixa caixa = (Caixa)entidade;
-		//Note: Quando for inserido um caixa iremos inserir uma abertura
-		CaixaAbertura abertura = new CaixaAbertura(caixa.getEmpresa(),caixa.getLoja(), caixa.getUsuario());
-		abertura.setCaixa(caixa);
-		List<CaixaAbertura> aberturas = new ArrayList<CaixaAbertura>();
-		aberturas.add(abertura);
-		caixa.setAberturas(aberturas);
-		return daoCaixa.insert(entidade);
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		Caixa caixa = (Caixa)entidade;
+//		//Note: Quando for inserido um caixa iremos inserir uma abertura
+//		CaixaAbertura abertura = new CaixaAbertura(caixa.getEmpresa(),caixa.getLoja(), caixa.getUsuario());
+//		abertura.setCaixa(caixa);
+//		List<CaixaAbertura> aberturas = new ArrayList<CaixaAbertura>();
+//		aberturas.add(abertura);
+//		caixa.setAberturas(aberturas);
+//		return daoCaixa.insert(entidade);
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -52,11 +52,11 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 		return daoCaixa.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return daoCaixa.update(entidade);
-	}
+//	@Override
+//	public String update(Entidade entidade) throws Exception {
+//		// TODO Auto-generated method stub
+//		return daoCaixa.update(entidade);
+//	}
 
 	@Override
 	public Caixa find(long codigo) throws Exception {
@@ -96,6 +96,30 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 
 	@Override
 	public List<Caixa> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Caixa insert(Caixa entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Caixa update(Caixa entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

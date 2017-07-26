@@ -23,30 +23,30 @@ public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 		this.daoSystemProperties = daoSystemProperties;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		SystemProperties properties 	= (SystemProperties) entidade;
-		SystemProperties propertiesAtu	= find();
-		
-		if(propertiesAtu != null){
-			//Ja existe um registro
-			SystemHistory history = new SystemHistory();
-			history.setCnpjSoftwareHouse(propertiesAtu.getCnpjSoftwareHouse());
-			history.setNomeComercial(propertiesAtu.getNomeComercial());
-			history.setSystem(propertiesAtu);
-			history.setVersao(propertiesAtu.getVersaoSistema());
-			daoSystemProperties.insert(history);
-			List<SystemHistory> histos = Arrays.asList(history);
-			propertiesAtu.setCnpjSoftwareHouse(properties.getCnpjSoftwareHouse());
-			propertiesAtu.setHistories(histos);
-			propertiesAtu.setNomeComercial(properties.getNomeComercial());
-			propertiesAtu.setVersaoSistema(properties.getVersaoSistema());
-			daoSystemProperties.update(propertiesAtu);
-		}else{
-			daoSystemProperties.insert(properties);
-		}
-		return "Inclusão efetuada";
-	}
+//	@Override
+//	public String insert(Entidade entidade) throws Exception {
+//		SystemProperties properties 	= (SystemProperties) entidade;
+//		SystemProperties propertiesAtu	= find();
+//		
+//		if(propertiesAtu != null){
+//			//Ja existe um registro
+//			SystemHistory history = new SystemHistory();
+//			history.setCnpjSoftwareHouse(propertiesAtu.getCnpjSoftwareHouse());
+//			history.setNomeComercial(propertiesAtu.getNomeComercial());
+//			history.setSystem(propertiesAtu);
+//			history.setVersao(propertiesAtu.getVersaoSistema());
+//			daoSystemProperties.insert(history);
+//			List<SystemHistory> histos = Arrays.asList(history);
+//			propertiesAtu.setCnpjSoftwareHouse(properties.getCnpjSoftwareHouse());
+//			propertiesAtu.setHistories(histos);
+//			propertiesAtu.setNomeComercial(properties.getNomeComercial());
+//			propertiesAtu.setVersaoSistema(properties.getVersaoSistema());
+//			daoSystemProperties.update(propertiesAtu);
+//		}else{
+//			daoSystemProperties.insert(properties);
+//		}
+//		return "Inclusão efetuada";
+//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -84,6 +84,24 @@ public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 
 	@Override
 	public List<SystemProperties> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String insert(Entidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SystemProperties insert(SystemProperties entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SystemProperties update(SystemProperties entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

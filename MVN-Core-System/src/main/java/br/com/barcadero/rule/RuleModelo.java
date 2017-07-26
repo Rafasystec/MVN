@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import br.com.barcadero.dao.DaoModelo;
 import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
 
@@ -14,7 +15,7 @@ import br.com.barcadero.tables.Loja;
  * @author Rafel Rocha
  * @since version 1.0 Beta
  */
-public abstract class RuleModelo<T> implements RuleEntityInterface<T>{
+public abstract class RuleModelo<T extends Entidade> implements RuleEntityInterface<T>{
 
 	private Session	session;
 	private Empresa empresa;

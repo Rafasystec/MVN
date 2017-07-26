@@ -3,11 +3,11 @@ package br.com.barcadero.dao;
 import java.util.List;
 
 /**
- * 
+ * Dont use this class anymore, use DaoModelo instead
  * @author Rafael Rocha
  * Criada dia 07/11/2013  as 11:19
  */
-
+@Deprecated
 public abstract class DaoSuperClasse {
 	//Constatens para as Menssagens
 	public final String MSG_SAVE_SUCESS = "Resgistro salvo com sucesso!";
