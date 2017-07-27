@@ -14,7 +14,6 @@ public class DaoContaPagar extends DaoModelo <ContaPagar>{
 
 	public DaoContaPagar(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

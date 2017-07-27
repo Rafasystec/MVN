@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
+import br.com.barcadero.tables.Usuario;
 
 @Transactional
 public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
@@ -40,6 +41,11 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 	public DaoModelo(Empresa empresa, Loja loja, Session session) {
 		// TODO Auto-generated constructor stub
 		this.session 	= session;
+		this.loja 		= loja;
+		this.empresa 	= empresa;
+	}
+	
+	public DaoModelo(Empresa empresa, Loja loja) {
 		this.loja 		= loja;
 		this.empresa 	= empresa;
 	}
