@@ -37,8 +37,8 @@ public class TestBeanCaixa {
 			caixa.setCodAtivCfeEmergen("123455678");
 			caixa.setIp("127.0.0.1");
 			caixa.setStatusCaixa(EnumStatusCaixa.FECHADO);
-			String ret = ruleCaixa.insert(caixa);
-			System.out.println(ret);
+			ruleCaixa.insert(caixa);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			fail(e.getMessage());

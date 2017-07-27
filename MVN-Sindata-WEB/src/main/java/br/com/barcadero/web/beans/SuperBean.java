@@ -84,10 +84,6 @@ public abstract class SuperBean  implements Serializable, IBeanClass{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,null,msgAlert));
 	}
 	
-	protected Session getDBSessionForViewScope() {
-		return HibernateHelper.getSession();
-	}
-	
 	protected Loja getLojaLogada() {
 		return getSession().getLojaLogada();
 	}

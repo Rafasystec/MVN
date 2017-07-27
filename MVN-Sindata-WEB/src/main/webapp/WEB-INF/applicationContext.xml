@@ -37,12 +37,12 @@
 	 -->
 
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:comp/env/jdbc/nautilus" />
+		<property name="jndiName" value="java:comp/env/jdbc/vendor" />
 	</bean>
  	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" autowire-candidate="default">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="NAUTILUS" />
+		<property name="persistenceUnitName" value="VENDOR" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="false" />
@@ -58,7 +58,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-	<bean id="rulePedido" class="br.com.barcadero.rule.RuleProduto">
-	</bean>
+	
 
 </beans>

@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<composite:interface>
+	
+		<composite:attribute name="bean"
+			shortDescription="Bean para ser passado" type="br.com.barcadero.web.beans.IBeanClass"  displayName="Passar o componente bean" />
+		<composite:attribute name="id"
+			shortDescription="ID para o componente" default="id" />
+	</composite:interface>
+	<composite:implementation>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton id="#{cc.attrs.id}-new"  action="#{cc.attrs.bean.novo}" value="Novo" title="Novo registro" icon="ui-icon-document" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-new" trackMouse="true" />
+				<p:commandButton id="#{cc.attrs.id}-save" action="#{cc.attrs.bean.salvar}" value="Salvar" title="Salvar registro" icon="ui-icon-folder-open" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-save" trackMouse="true" />
+				<span class="ui-separator"> <span
+					class="ui-icon ui-icon-grip-dotted-vertical" />
+				</span>
+
+				<p:commandButton id="#{cc.attrs.id}-trash"  action="#{cc.attrs.bean.deletar}" title="Excluir registro corrente" icon="ui-icon-trash" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-trash" trackMouse="true" />
+				<p:commandButton id="#{cc.attrs.id}-print" action="#{cc.attrs.bean.imprimir}" title="Imprimir" icon="ui-icon-print" ajax="false"/>
+				<p:tooltip for="#{cc.attrs.id}-print" trackMouse="true" />
+			</f:facet>
+			
+			
+		</p:toolbar>
+	</composite:implementation>
+</ui:composition>
+
+
+
+

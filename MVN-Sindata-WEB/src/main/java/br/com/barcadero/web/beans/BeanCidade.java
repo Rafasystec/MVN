@@ -117,8 +117,8 @@ public class BeanCidade extends SuperBean{
 			estado = (Estado) facadeEstado.find(getCodEstado());
 			if(estado != null){
 				cidade.setEstado(estado);
-				msg = this.facadeCidade.insert(cidade);
-				exibirMensagem(msg);
+				this.facadeCidade.insert(cidade);
+				//exibirMensagem(msg);
 			}else {
 				System.out.println("O estdo veio nulo.");
 				exibirErroGrave("O Estado veio nulo");

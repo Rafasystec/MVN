@@ -1,0 +1,80 @@
+<!-- 
+DateCalendar
+Criado dia 30/05/2016 as 22:12
+Motivacao: Criar um componente de data que seja reutilizavel e responsivo
+ -->
+ <html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition>
+
+	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->
+	<composite:interface>
+		<composite:attribute name="endereco"
+			shortDescription="Objeto endereco que sera passado"
+			type="br.com.barcadero.tables.Endereco" />
+	</composite:interface>
+
+	<composite:implementation>
+		<p:panel header="Endereco">
+			<div class="ui-fluid">
+				<p:panelGrid styleClass="noBorder" columns="2">
+
+					<p:outputLabel value="CEP:" for="cep" />
+					<p:inputMask id="cep" mask="99999-999"
+						value="#{cc.attrs.endereco.cep}" size="9" />
+					<p:outputLabel value="Número:" for="numero" />
+					<p:inputText id="numero" value="#{cc.attrs.beanNumero}"
+						maxlength="15" size="10" />
+
+					<p:outputLabel> tipo Logradouro:</p:outputLabel>
+					<p:selectOneMenu value="#{cc.attrs.endereco.tpLogradouro}">
+						<f:selectItem itemLabel="Selecione" itemValue="0" />
+						<f:selectItems value="#{ender.tpLogradouros}" var="log"
+							itemValue="#{log.value}" itemLabel="#{log.lable}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Logradouro:" for="lograd" />
+					<p:inputText id="lograd" value="#{cc.attrs.endereco.logradouro}"></p:inputText>
+
+					<p:outputLabel value="Estado:" for="estado" />
+					<p:selectOneMenu id="estado" value="#{ender.ufSelected}">
+						<f:selectItem itemLabel="Selecione" itemValue="0" />
+						<f:selectItems value="#{ender.estados}" var="estado"
+							itemLabel="#{estado.descricao}" itemValue="#{estado.uf}" />
+						<p:ajax update="cidade" listener="#{ender.obterCidades}" />
+					</p:selectOneMenu>
+			</p:panelGrid>
+			<p:panelGrid styleClass="noBorder" columns="3">
+					<p:outputLabel value="Cidade:" for="cidade" />
+					<p:selectOneMenu id="cidade" value="#{ender.codCidade}">
+						<f:selectItem itemLabel="Selecione" itemValue="0" />
+						<f:selectItems value="#{ender.cidades}" var="cidade"
+							itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}" />
+						<p:ajax update="bairro" listener="#{ender.obterBairros}" />
+					</p:selectOneMenu>
+			
+					<p:commandButton actionListener="#{ender.openCadCidade}" value="+" id="btnAddCidade" immediate="true" title="Adicionar uma nova Cidade" ajax="true"/>
+
+					<p:outputLabel value="Bairro:" for="bairro" />
+					<p:selectOneMenu id="bairro" value="#{cc.attrs.endereco.codBairro}">
+						<f:selectItem itemLabel="Selecione" itemValue="0" />
+						<f:selectItems value="#{ender.bairros}" var="bairro"
+							itemLabel="#{bairro.descricao}" itemValue="#{bairro.codigo}" />
+					</p:selectOneMenu>
+					
+					
+					<p:commandButton ajax="true"   value="+" actionListener="#{ender.openCadBairro}" type="button" id="btnAddBairro" update="bairro" title="Adicionar um novo Bairro para a Cidade selecionada" >
+					</p:commandButton>
+				</p:panelGrid>
+			</div>
+		</p:panel>
+	</composite:implementation>
+</ui:composition>
+</html>

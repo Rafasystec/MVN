@@ -45,9 +45,8 @@ public class BeanConfigCaixa extends SuperBean {
 			// TODO Auto-generated method stub
 			System.out.println("Salvar caixa");
 			caixa.setIp(getSession().getIpAddress());
-			String ret = ruleCaixa.insert(caixa);
-			System.out.println("Retorno: " + ret);
-			HandleMessage.info(ret);
+			ruleCaixa.insert(caixa);
+			
 		}catch(Exception e){
 			HandleMessage.error("Erro ao tentar salvar o caixa: ", e.getMessage());
 		}

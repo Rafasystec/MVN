@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>SindataPDV - Usuários</title>
+	<title>Vendor - Novo usuário</title>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,11 +60,8 @@
 									<div class="input-group">
 										
 										<br />
-										<p:commandLink action="#{cadUsuario.salvar}"
-											styleClass="btn btn-info">
-											<i class="fa fa-user-plus" aria-hidden="true"></i>
-											<b>Salvar</b>
-										</p:commandLink>
+										<h:commandButton action="#{cadUsuario.salvar}" value="Salvar" type="submit"/>
+											
 										
 									</div>
 								</div>

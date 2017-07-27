@@ -4,8 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.rule.RuleEmpresa;
+import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Usuario;
 
@@ -40,8 +40,7 @@ public class BeanCadUsuario extends SuperBean {
 	
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		fcdUser.salvar(usuario);
+		usuario = fcdUser.insert(usuario);
 		Empresa empresa = ruleEmpresa.inserirEmpresaPadrao(usuario);
 		
 		getSession().setLojaLogada(empresa.getLojas().get(0));
@@ -84,5 +83,6 @@ public class BeanCadUsuario extends SuperBean {
 	public void setRuleEmpresa(RuleEmpresa ruleEmpresa) {
 		this.ruleEmpresa = ruleEmpresa;
 	}
+	
 
 }

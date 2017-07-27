@@ -144,8 +144,9 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 
 	@Override
 	public Empresa insert(Empresa entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		//Empresa empresa = (Empresa)entidade;
+		retirarFormatcao(entidade);
+		return daoEmpresa.insert(entidade);
 	}
 
 	@Override

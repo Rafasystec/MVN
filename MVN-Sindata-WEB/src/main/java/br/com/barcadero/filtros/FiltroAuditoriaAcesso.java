@@ -61,7 +61,6 @@ public class FiltroAuditoriaAcesso implements Filter {
 				session.setAttribute(Attributs.CURRENT_PAGE, currentPage);
 			}
 		}
-		auditHost(httpRequest);
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
@@ -73,48 +72,5 @@ public class FiltroAuditoriaAcesso implements Filter {
 		// TODO Auto-generated method stub
 	}
 	
-	/**
-	 * Registra a auditoria no banco de dados
-	 * @param httpRequest
-	 */
-	private void auditHost(HttpServletRequest httpRequest) {
-		Session sessionBD = HibernateHelper.getSessionFactory().openSession();
-		AuditoriaLog auditoria = new AuditoriaLog();
-		try {
-			if(httpRequest != null){
-				sessionBD.getTransaction().begin();
-				auditoria.setCdUser("");
-				auditoria.setContextPath(httpRequest.getContextPath());
-				auditoria.setCurrentPage(httpRequest.getServletPath());
-				auditoria.setDateTimeReq(new Date());
-				auditoria.setHostIp(httpRequest.getRemoteAddr());
-				auditoria.setHttpSessionId(httpRequest.getRequestedSessionId());
-				auditoria.setIsSecure(String.valueOf(httpRequest.isSecure()));
-				auditoria.setLastPage(session.getAttribute(Attributs.LAST_PAGE).toString());
-				auditoria.setLocale(httpRequest.getLocale().toString());
-				auditoria.setMethod(httpRequest.getMethod());
-				auditoria.setProtocol(httpRequest.getProtocol());
-				auditoria.setRemoteAddress(httpRequest.getRemoteAddr());
-				auditoria.setRemotePort(String.valueOf(httpRequest.getRemotePort()));
-				auditoria.setRequestURI(httpRequest.getRequestURI());
-				auditoria.setRequestURL(httpRequest.getRequestURL().toString());
-				auditoria.setServerName(httpRequest.getServerName());
-				auditoria.setServerPort(String.valueOf(httpRequest.getServerPort()));
-				auditoria.setServletPath(httpRequest.getServletPath());
-				sessionBD.save(auditoria);
-				sessionBD.getTransaction().commit();
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			if(sessionBD != null){
-				sessionBD.getTransaction().rollback();
-			}
-			System.out.println("Erro na auditoria: " + e.getMessage());
-		}finally {
-			if(sessionBD != null){
-				sessionBD.close();
-			}
-		}
-	}
 
 }

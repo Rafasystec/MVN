@@ -85,9 +85,8 @@ public class BeanCliente extends SuperBean {
 		pFisica.setEnderecos(listEnder);
 		cliente.setPessoaFisica(pFisica);
 		endereco.setPessoa(pFisica);
-		String ret = ruleCliente.insert(cliente);
-		System.out.println(ret);
-		HandleMessage.info("Registro Salvo!",ret);
+		ruleCliente.insert(cliente);
+		
 		return null;
 	}
 	

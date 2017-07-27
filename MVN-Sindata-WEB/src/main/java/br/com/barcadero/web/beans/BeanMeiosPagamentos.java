@@ -59,11 +59,11 @@ public class BeanMeiosPagamentos extends SuperBean {
 		
 	}
 
-	@Override
-	public String alterar() throws Exception {
-		// TODO Auto-generated method stub
-		return ruleMeioPgto.update(meio);
-	}
+//	@Override
+//	public String alterar() throws Exception {
+//		// TODO Auto-generated method stub
+//		return ruleMeioPgto.update(meio);
+//	}
 
 	@Override
 	public String deletar() throws Exception {
@@ -123,6 +123,12 @@ public class BeanMeiosPagamentos extends SuperBean {
 
 	public void setRuleMeioPgto(RuleMeioPgto ruleMeioPgto) {
 		this.ruleMeioPgto = ruleMeioPgto;
+	}
+
+	@Override
+	public String alterar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

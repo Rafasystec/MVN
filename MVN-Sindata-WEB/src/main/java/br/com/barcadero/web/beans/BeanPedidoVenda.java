@@ -3,11 +3,11 @@ package br.com.barcadero.web.beans;
 import java.math.BigDecimal;
 import java.net.UnknownHostException;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
 
 import br.com.barcadero.rule.RulePedido;
 import br.com.barcadero.rule.RulePedidoItens;
@@ -15,7 +15,6 @@ import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
-import br.com.barcadero.tables.Produto;
 import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
@@ -110,26 +109,26 @@ public class BeanPedidoVenda extends SuperBean{
 		this.vededor = vededor;
 	}
 	
-	public void salvarItem() {
-		try {
-			System.out.println("Save item called.");
-			//beginTransaction();
-			if(pedido == null){
-				pedido	= createPedido();
-			}
-			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
-			lastProduto = produto.getDescricao();
-			item.setProduto(produto);
-			item.setPedido(pedido);
-			rulePedidoItens.insert(pedido, item);
-			setVlUnitario(item.getVlTotal());
-			totalizarSubTotal(item);
-			//commit();
-			item = createItem();
-		} catch (Exception e) {
-			HandleMessage.error("Erro ao inserir Item", e.getMessage());
-		}
-	}
+//	public void salvarItem() {
+//		try {
+//			System.out.println("Save item called.");
+//			//beginTransaction();
+//			if(pedido == null){
+//				pedido	= createPedido();
+//			}
+//			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
+//			lastProduto = produto.getDescricao();
+//			item.setProduto(produto);
+//			item.setPedido(pedido);
+//			rulePedidoItens.insert(pedido, item);
+//			setVlUnitario(item.getVlTotal());
+//			totalizarSubTotal(item);
+//			//commit();
+//			item = createItem();
+//		} catch (Exception e) {
+//			HandleMessage.error("Erro ao inserir Item", e.getMessage());
+//		}
+//	}
 	
 	private Pedido createPedido() throws UnknownHostException, Exception {
 		return rulePedido.createPedido(getUsuarioLogado(), HandleFaceContext.getIpAddress());

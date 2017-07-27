@@ -157,8 +157,8 @@ public class RuleUsuario extends RuleModelo<Usuario>{
 
 	@Override
 	public Usuario insert(Usuario entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		entidade.setPassWord(criptSenha(entidade.getPassWord()));
+		return daoUsuario.insert(entidade);
 	}
 
 	@Override

@@ -22,18 +22,18 @@ public class BeanContaPagar extends SuperBean {
 		contaPagar 		= new ContaPagar(getSession().getLojaLogada(),getSession().getUsuarioLogado());
 		ruleContaPagar 	= new RuleContaPagar(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
 	}
-	
-	@Override
-	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		return ruleContaPagar.insert(contaPagar);
-	}
-
-	@Override
-	public String alterar() throws Exception {
-		// TODO Auto-generated method stub
-		return ruleContaPagar.update(contaPagar);
-	}
+//	
+//	@Override
+//	public String salvar() throws Exception {
+//		// TODO Auto-generated method stub
+//		return ruleContaPagar.insert(contaPagar);
+//	}
+//
+//	@Override
+//	public String alterar() throws Exception {
+//		// TODO Auto-generated method stub
+//		return ruleContaPagar.update(contaPagar);
+//	}
 
 	@Override
 	public String deletar() throws Exception {
@@ -66,6 +66,18 @@ public class BeanContaPagar extends SuperBean {
 
 	@Override
 	public String imprimir() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String salvar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String alterar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

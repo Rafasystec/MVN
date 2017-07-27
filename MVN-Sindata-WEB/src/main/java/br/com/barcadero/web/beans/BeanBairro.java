@@ -53,19 +53,19 @@ public class BeanBairro extends SuperBean {
 		}
 	}
 	
-	@Override
-	public String salvar() throws Exception {
-		String ret = fcdBairro.insert(bairro);
-		System.out.println(ret);
-		return null;
-	}
+//	@Override
+//	public String salvar() throws Exception {
+//		String ret = fcdBairro.insert(bairro);
+//		System.out.println(ret);
+//		return null;
+//	}
 
-	@Override
-	public String alterar() throws Exception {
-		String ret = fcdBairro.update(bairro);
-		System.out.println(ret);
-		return null;
-	}
+//	@Override
+//	public String alterar() throws Exception {
+//		String ret = fcdBairro.update(bairro);
+//		System.out.println(ret);
+//		return null;
+//	}
 
 	@Override
 	public String deletar() throws Exception {
@@ -133,6 +133,18 @@ public class BeanBairro extends SuperBean {
 
 	public void setFcdCidade(RuleCidade fcdCidade) {
 		this.fcdCidade = fcdCidade;
+	}
+
+	@Override
+	public String salvar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String alterar() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

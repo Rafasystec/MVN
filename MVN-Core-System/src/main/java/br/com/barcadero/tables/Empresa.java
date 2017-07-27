@@ -126,6 +126,14 @@ public class Empresa extends Entidade {
 		this.cnpjSoftwareHouse = cnpjSoftwareHouse;
 	}
 
+	public EnumRegimeISSQN getRegimeISSQN() {
+		return regimeISSQN;
+	}
+
+	public void setRegimeISSQN(EnumRegimeISSQN regimeISSQN) {
+		this.regimeISSQN = regimeISSQN;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -134,10 +142,9 @@ public class Empresa extends Entidade {
 		result = prime * result + ((cnpjSoftwareHouse == null) ? 0 : cnpjSoftwareHouse.hashCode());
 		result = prime * result + ((dtFundacao == null) ? 0 : dtFundacao.hashCode());
 		result = prime * result + ((imgLogo == null) ? 0 : imgLogo.hashCode());
-		result = prime * result + ((lojas == null) ? 0 : lojas.hashCode());
 		result = prime * result + ((observacoes == null) ? 0 : observacoes.hashCode());
 		result = prime * result + ((pessoaJuridica == null) ? 0 : pessoaJuridica.hashCode());
-		result = prime * result + ((usuarios == null) ? 0 : usuarios.hashCode());
+		result = prime * result + ((regimeISSQN == null) ? 0 : regimeISSQN.hashCode());
 		return result;
 	}
 
@@ -167,11 +174,6 @@ public class Empresa extends Entidade {
 				return false;
 		} else if (!imgLogo.equals(other.imgLogo))
 			return false;
-		if (lojas == null) {
-			if (other.lojas != null)
-				return false;
-		} else if (!lojas.equals(other.lojas))
-			return false;
 		if (observacoes == null) {
 			if (other.observacoes != null)
 				return false;
@@ -182,20 +184,11 @@ public class Empresa extends Entidade {
 				return false;
 		} else if (!pessoaJuridica.equals(other.pessoaJuridica))
 			return false;
-		if (usuarios == null) {
-			if (other.usuarios != null)
-				return false;
-		} else if (!usuarios.equals(other.usuarios))
+		if (regimeISSQN != other.regimeISSQN)
 			return false;
 		return true;
 	}
-
-	public EnumRegimeISSQN getRegimeISSQN() {
-		return regimeISSQN;
-	}
-
-	public void setRegimeISSQN(EnumRegimeISSQN regimeISSQN) {
-		this.regimeISSQN = regimeISSQN;
-	}
+	
+	
 
 }

@@ -31,11 +31,9 @@ public class FiltroDeConexao implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("Filtro conexao");
-		Session session = HibernateHelper.getSessionFactory().openSession();
+		
 		try{
 			//Realizado no inicio
-			//session.getTransaction().begin();
-			request.setAttribute(Attributs.ATT_SESSION_DB, session);
 			//------------------------------------------------------------------------------
 			//NOTE: Todo o codigo que estiver antes do metodo doFilter sera executado na ida
 			//------------------------------------------------------------------------------
@@ -47,10 +45,6 @@ public class FiltroDeConexao implements Filter{
 		}catch(Exception e){
 			e.printStackTrace();
 			//session.getTransaction().rollback();
-		}finally{
-			if(session != null && session.isOpen()){
-				session.close();
-			}
 		}
 	}
 	@Override

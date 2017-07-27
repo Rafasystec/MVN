@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.barcadero</groupId>
-	<artifactId>Nautilus</artifactId>
-	<version>1.0</version>
-	<name>Nautilus</name>
+	<artifactId>Vendor</artifactId>
+	<version>2.0</version>
+	<name>Vendor</name>
 	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,11 +16,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-		</dependency>
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>8.4-702.jdbc4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>

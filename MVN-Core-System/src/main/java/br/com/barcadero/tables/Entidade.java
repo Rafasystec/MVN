@@ -98,7 +98,6 @@ public abstract class Entidade implements Serializable {
 		result = prime * result + (int) (codigo ^ (codigo >>> 32));
 		result = prime * result + ((dtCadastro == null) ? 0 : dtCadastro.hashCode());
 		result = prime * result + ((hrCadastro == null) ? 0 : hrCadastro.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 	@Override
@@ -121,11 +120,6 @@ public abstract class Entidade implements Serializable {
 			if (other.hrCadastro != null)
 				return false;
 		} else if (!hrCadastro.equals(other.hrCadastro))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

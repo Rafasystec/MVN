@@ -1,15 +1,12 @@
 package br.com.barcadero.rule;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.tables.Caixa;
-import br.com.barcadero.tables.CaixaAbertura;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;

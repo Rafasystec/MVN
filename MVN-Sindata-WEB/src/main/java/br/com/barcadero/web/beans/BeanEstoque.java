@@ -49,8 +49,7 @@ public class BeanEstoque extends SuperBean {
 		codProduto = ruleProduto.extrairCodigo(paramProd);
 		produto = ruleProduto.find(codProduto);
 		estoque.setProduto(produto);
-		String ret = ruleEstoque.insert(estoque);
-		System.out.println(ret);
+		ruleEstoque.insert(estoque);
 		return null;
 	}
 

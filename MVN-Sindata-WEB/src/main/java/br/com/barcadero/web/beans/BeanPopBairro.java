@@ -106,7 +106,7 @@ public class BeanPopBairro extends SuperBean{
 			cidade = (Cidade) ruleCidade.find(getCodCidade());
 			if(cidade != null){
 				bairro.setCidade(cidade);
-				msg = this.ruleBairro.insert(bairro);
+				this.ruleBairro.insert(bairro);
 				exibirMensagem(msg);
 			}else{
 				exibirErroGrave("Não foi possível encontrar a cidade para o relacionamento.");

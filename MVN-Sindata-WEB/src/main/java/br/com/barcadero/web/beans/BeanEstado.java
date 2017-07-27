@@ -2,10 +2,10 @@ package br.com.barcadero.web.beans;
 
 import java.util.Date;
 import java.util.List;
-import javax.faces.application.FacesMessage;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+
 import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.tables.Estado;
 
@@ -92,15 +92,15 @@ public class BeanEstado extends SuperBean{
 	//NOTE: Metodos que serao envocados na pagina
 	public String inserir() {
 		try{
-			String msg	= "";
+			
 			Estado estado = new Estado(getSession().getUsuarioLogado());
 			estado.setCodigo(getCodigo());
 			estado.setDescricao(getDescricao());
 			//estado.setUf(getUf());
 			estado.setCodIbge(getCodIbge());
 			//estado.setDtCadastro(getDtCadastro());
-			msg = this.facadeEstado.insert(estado);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Infor:", msg));  
+			this.facadeEstado.insert(estado);
+			  
 			return "";
 		}catch(Exception e){
 			e.printStackTrace();

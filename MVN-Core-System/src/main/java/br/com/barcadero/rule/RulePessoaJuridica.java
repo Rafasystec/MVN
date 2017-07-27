@@ -74,26 +74,29 @@ public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
 
 	@Override
 	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "";
 	}
 
 	@Override
 	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "";
 	}
 
 	@Override
 	public PessoaJuridica insert(PessoaJuridica entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		PessoaJuridica pj = (PessoaJuridica)entidade;
+		String cnpj 	= pj.getCnpj().replace(".", "").replace("-", "").replace("/", "");
+		String contato	= pj.getFone().replace("(", "").replace(")", "").replace("-", "");
+		pj.setCnpj(cnpj);
+		pj.setFone(contato);
+		return daoPessoa.insert(pj);
 	}
 
 	@Override
 	public PessoaJuridica update(PessoaJuridica entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoPessoa.update(entidade);
 	}
 
 }
