@@ -23,12 +23,14 @@ public class BeanContaLancamentos extends SuperBean {
 	@ManagedProperty("#{ruleContaLancamento}")
 	private RuleContaLancamento ruleContaLancamento;
 	private ContaLancamento contaLancamento;
+	private ContaLancamento selectedContaLancamento;
 	private EnumCentroCusto[] centroCusto;
 	private EnumFormaPgto[] formaPagamento;
 	@PostConstruct
 	private void init() {
-		//ruleContaLancamento = new RuleContaLancamento(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
+		System.out.println("Init view Lancamentos");
 		contaLancamento		= new ContaLancamento(getEmpresaLogada(), getUsuarioLogado(), getLojaLogada());
+		System.out.println("Fim init");
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class BeanContaLancamentos extends SuperBean {
 
 	@Override
 	public String salvar() throws Exception {
-		ruleContaLancamento.insert(contaLancamento);
+		contaLancamento = ruleContaLancamento.insert(contaLancamento);
 		return null;
 	}
 
@@ -95,6 +97,14 @@ public class BeanContaLancamentos extends SuperBean {
 	
 	public List<ContaLancamento> getLancamentos() {
 		return this.ruleContaLancamento.getAllOfThisMonth(getEmpresaLogada(),getLojaLogada());
+	}
+
+	public ContaLancamento getSelectedContaLancamento() {
+		return selectedContaLancamento;
+	}
+
+	public void setSelectedContaLancamento(ContaLancamento selectedContaLancamento) {
+		this.selectedContaLancamento = selectedContaLancamento;
 	}
 
 }

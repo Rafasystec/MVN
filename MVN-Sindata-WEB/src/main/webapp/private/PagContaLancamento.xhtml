@@ -15,20 +15,20 @@
 		<clx:buttonsCrud id="btnsUp" bean="#{beanContaLancamentos}"></clx:buttonsCrud>
 		<p:panel header="Lançamento de despesas">
 			<p:panelGrid columns="1">
-			
+									
 				<clx:dateCalendar id="txtData"
 					value="#{beanContaLancamentos.contaLancamento.data}" />
+					
 				<clx:currency title="Valor"
 					value="#{beanContaLancamentos.contaLancamento.valor}" />
-			
+				Centro de Custo:
 				<p:selectOneMenu id="centro"
 					value="#{beanContaLancamentos.contaLancamento.centroCusto}"
 					required="true" requiredMessage="Informe o centro de custo">
 					<f:selectItem itemLabel="CENTRO DE CUSTO" itemValue="-1" />
 					<f:selectItems value="#{beanContaLancamentos.centroCusto}" var="centro" itemLabel="#{centro.descricao}"/>
-				</p:selectOneMenu>
-
-
+				</p:selectOneMenu>				
+				Forma Pagamento:
 				<p:selectOneMenu id="pagto"
 					value="#{beanContaLancamentos.contaLancamento.formaPgto}"
 					required="true"
@@ -43,7 +43,7 @@
 			</p:panelGrid>
 			<p:panel header="Lançamentos do Mês">
 					<p:dataTable id="lancamentos" var="lan" value="#{beanContaLancamentos.lancamentos}" resizableColumns="true" style="margin-bottom:20px" 
-					selectionMode="single" selection="#{beanContaLancamentos.contaLancamento}"  rowKey="#{lan.codigo}" rows="10" scrollable="true" >
+					selectionMode="single" selection="#{beanContaLancamentos.selectedContaLancamento}"  rowKey="#{lan.codigo}" rows="10" scrollable="true" >
 						
 						<f:facet name="header">
             				Lançamentos do Mês
@@ -55,10 +55,14 @@
 							<h:outputText value="#{lan.descricao}" />
 						</p:column>
 						<p:column headerText="Data">
-							<h:outputText value="#{lan.data}" />
+							<h:outputText value="#{lan.data}" >
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
 						</p:column>
-						<p:column headerText="Valor $">
-							<h:outputText value="#{lan.valor}" />
+						<p:column headerText="Valor $" style="text-align: right;width:115px;" >
+							<h:outputText value="#{lan.valor}" >
+							 	<f:convertNumber pattern="##,###.00" />
+							</h:outputText>
 						</p:column>
 						
 					</p:dataTable>

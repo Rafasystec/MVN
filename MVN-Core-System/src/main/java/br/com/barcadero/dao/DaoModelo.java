@@ -84,7 +84,9 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 	
 	@Override
 	public T insert(T entidade) throws Exception {
-		manager.persist(entidade);
+		if(entidade != null){
+			manager.persist(entidade);
+		}
 		return entidade;
 	}
 	

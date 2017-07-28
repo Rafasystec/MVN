@@ -40,9 +40,9 @@ public class ContaLancamento extends EntidadeLoja {
 	@Column(name="VALOR", scale=2, precision=10,nullable=false)
 	private BigDecimal valor = new BigDecimal("0.00");
 	@Column(name="CENTRO_CUSTO",nullable=false)
-	private EnumCentroCusto centroCusto ;
+	private EnumCentroCusto centroCusto = EnumCentroCusto.OUTROS;
 	@Column(name="FORMA_PAGTO",nullable=false)
-	private EnumFormaPgto formaPgto ;
+	private EnumFormaPgto formaPgto = EnumFormaPgto.DINHEIRO;
 	@Column(name="DESCRICAO",nullable=false,length=60)
 	private String descricao= "";
 	
