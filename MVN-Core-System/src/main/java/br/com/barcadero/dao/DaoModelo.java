@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.Usuario;
 
 @Transactional
 public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
@@ -82,21 +81,6 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 	public Session getSession() {
 		return session;
 	}
-
-//	public String insert(Entidade entidade) throws Exception{
-//		try{
-//			if(entidade != null){
-//				//getSession().save(entidade);
-//				manager.persist(entidade);
-//				return getMSG_SUCESS_SAVE();
-//			}else{
-//				return getMSG_ERRO_SAVE();
-//			}
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			throw e;
-//		}
-//	}
 	
 	@Override
 	public T insert(T entidade) throws Exception {
@@ -113,7 +97,6 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 			}
 			T entidade = this.find(codigo);
 			if(entidade != null){
-				//getSession().delete(entidade);
 				manager.remove(entidade);
 			}
 			return "";
@@ -128,7 +111,6 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 			if(entidade == null){
 				throw new Exception("Entidade veio nula.");
 			}
-			//getSession().delete(entidade);
 			manager.remove(entidade);
 			return "Registro Deletado.";
 		}catch (Exception e) {
@@ -136,16 +118,6 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 			throw new Exception(e.getMessage());
 		}
 	}
-	
-//
-//	public String update(Entidade entidade) throws Exception{
-//		if(entidade == null){
-//			throw new Exception("Entidade veio nula.");
-//		}
-//		//getSession().update(entidade);
-//		manager.merge(entidade);
-//		return getMSG_SUCESS_UPD();
-//	}
 
 	@Override
 	public T update(T entidade) throws Exception {
@@ -168,6 +140,14 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 
 	public void setManager(EntityManager manager) {
 		this.manager = manager;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
 	}
 
 }

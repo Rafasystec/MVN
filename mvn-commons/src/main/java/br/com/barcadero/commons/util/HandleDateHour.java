@@ -9,7 +9,8 @@ import br.com.barcadero.commons.enuns.EnumDateHourFormat;
 public class HandleDateHour {
 	
 	public static void main(String[] args) {
-		 new HandleDateHour().format(new Date(), "dd/MM/yyyy");
+		 System.out.println(HandleDateHour.getFirstDateOfMonth());
+		 System.out.println(HandleDateHour.getLastDateOfMonth());
 	}
 	
 	public String format(Date date, String outputFormat) {
@@ -49,6 +50,18 @@ public class HandleDateHour {
 		calendar.setTime(date);    
 		calendar.add(typeIncremet, times);  
 		return calendar.getTime();
+	}
+	
+	public static Date getFirstDateOfMonth() {
+		Calendar date = Calendar.getInstance();
+		date.set(Calendar.DAY_OF_MONTH, 1);
+		return date.getTime();
+	}
+	
+	public static Date getLastDateOfMonth() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
+		return calendar.getTime(); 
 	}
 
 }

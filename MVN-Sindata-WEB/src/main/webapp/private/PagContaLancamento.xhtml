@@ -8,14 +8,61 @@
 <ui:composition template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
-	<ui:param name="pageIcon" value="hand-o-right" />
-	<ui:param name="pageTitle" value="Contas a Receber" />
+	<ui:param name="pageIcon" value="credit-card" />
+	<ui:param name="pageTitle" value="LANÇAMENTO DE DESPESA" />
 
 	<ui:define name="body">
 		<clx:buttonsCrud id="btnsUp" bean="#{beanContaLancamentos}"></clx:buttonsCrud>
-		<p:panel header="Contas a Receber">
-			<clx:dateCalendar  id="txtDtPrevisa" value="#{beanContaLancamentos.contaLancamento.data}" />
-			<clx:currency title="Valor" />
+		<p:panel header="Lançamento de despesas">
+			<p:panelGrid columns="1">
+			
+				<clx:dateCalendar id="txtData"
+					value="#{beanContaLancamentos.contaLancamento.data}" />
+				<clx:currency title="Valor"
+					value="#{beanContaLancamentos.contaLancamento.valor}" />
+			
+				<p:selectOneMenu id="centro"
+					value="#{beanContaLancamentos.contaLancamento.centroCusto}"
+					required="true" requiredMessage="Informe o centro de custo">
+					<f:selectItem itemLabel="CENTRO DE CUSTO" itemValue="-1" />
+					<f:selectItems value="#{beanContaLancamentos.centroCusto}" var="centro" itemLabel="#{centro.descricao}"/>
+				</p:selectOneMenu>
+
+
+				<p:selectOneMenu id="pagto"
+					value="#{beanContaLancamentos.contaLancamento.formaPgto}"
+					required="true"
+					requiredMessage="Informe qual foi a forma de pagamento">
+					<f:selectItem itemLabel="FORMA PAGAMENTO" itemValue="-1"/>
+					<f:selectItems value="#{beanContaLancamentos.formaPagamento}"
+						var="pgto" itemLabel="#{pgto.descricao}" />
+				</p:selectOneMenu>
+				
+				<p:inputTextarea id="descricao" value="#{beanContaLancamentos.contaLancamento.descricao}" required="true"
+				requiredMessage="Diga a descrição" placeholder="Breve descrição"/>
+			</p:panelGrid>
+			<p:panel header="Lançamentos do Mês">
+					<p:dataTable id="lancamentos" var="lan" value="#{beanContaLancamentos.lancamentos}" resizableColumns="true" style="margin-bottom:20px" 
+					selectionMode="single" selection="#{beanContaLancamentos.contaLancamento}"  rowKey="#{lan.codigo}" rows="10" scrollable="true" >
+						
+						<f:facet name="header">
+            				Lançamentos do Mês
+        				</f:facet>
+						<p:column headerText="Código">
+							<h:outputText value="#{lan.codigo}" />
+						</p:column>
+						<p:column headerText="Descrição">
+							<h:outputText value="#{lan.descricao}" />
+						</p:column>
+						<p:column headerText="Data">
+							<h:outputText value="#{lan.data}" />
+						</p:column>
+						<p:column headerText="Valor $">
+							<h:outputText value="#{lan.valor}" />
+						</p:column>
+						
+					</p:dataTable>
+				</p:panel>
 		</p:panel>
 	</ui:define>
 </ui:composition>
