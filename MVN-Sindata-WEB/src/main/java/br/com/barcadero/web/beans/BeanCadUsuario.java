@@ -11,7 +11,7 @@ import br.com.barcadero.tables.Usuario;
 
 
 @ManagedBean(name="cadUsuario")
-public class BeanCadUsuario extends SuperBean {
+public class BeanCadUsuario extends SuperBean<Usuario> {
 
 	private static final long serialVersionUID = 746108176250467310L;
 	private Usuario usuario 		= null;
@@ -82,6 +82,11 @@ public class BeanCadUsuario extends SuperBean {
 	}
 	public void setRuleEmpresa(RuleEmpresa ruleEmpresa) {
 		this.ruleEmpresa = ruleEmpresa;
+	}
+	@Override
+	public boolean validar(Usuario entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

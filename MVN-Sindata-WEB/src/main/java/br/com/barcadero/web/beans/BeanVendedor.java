@@ -12,7 +12,7 @@ import br.com.barcadero.tables.Vendedor;
 
 @ManagedBean(name="vendedor")
 @RequestScoped
-public class BeanVendedor extends SuperBean {
+public class BeanVendedor extends SuperBean<Vendedor> {
 
 	private static final long serialVersionUID = 8726796444540957389L;
 	private Vendedor vendedor;
@@ -78,6 +78,12 @@ public class BeanVendedor extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validar(Vendedor entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

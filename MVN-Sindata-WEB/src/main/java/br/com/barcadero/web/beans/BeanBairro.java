@@ -13,7 +13,7 @@ import br.com.barcadero.tables.Cidade;
 
 @ManagedBean
 @RequestScoped
-public class BeanBairro extends SuperBean {
+public class BeanBairro extends SuperBean<Bairro> {
 
 	private static final long serialVersionUID = 5859355521669947983L;
 	private Bairro bairro;
@@ -145,6 +145,12 @@ public class BeanBairro extends SuperBean {
 	public String alterar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validar(Bairro entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

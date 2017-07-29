@@ -12,7 +12,7 @@ import br.com.barcadero.rule.RuleMeioPgto;
 import br.com.barcadero.tables.MeiosPagamento;
 
 @ManagedBean(name="meioPgto")
-public class BeanMeiosPagamentos extends SuperBean {
+public class BeanMeiosPagamentos extends SuperBean<MeiosPagamento> {
 	
 	private static final long serialVersionUID = -4955803744749124467L;
 	private MeiosPagamento meio;
@@ -129,6 +129,12 @@ public class BeanMeiosPagamentos extends SuperBean {
 	public String alterar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validar(MeiosPagamento entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

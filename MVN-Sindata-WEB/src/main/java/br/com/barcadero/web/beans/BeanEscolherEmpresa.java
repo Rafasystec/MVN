@@ -16,7 +16,7 @@ import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="escolherEmp")
 @RequestScoped
-public class BeanEscolherEmpresa extends SuperBean {
+public class BeanEscolherEmpresa extends SuperBean<Empresa> {
 	
 	private static final long serialVersionUID = -2187058014897135548L;
 	private List<Loja> lojas;
@@ -194,6 +194,12 @@ public class BeanEscolherEmpresa extends SuperBean {
 
 	public void setRuleEmpresa(RuleEmpresa ruleEmpresa) {
 		this.ruleEmpresa = ruleEmpresa;
+	}
+
+	@Override
+	public boolean validar(Empresa entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

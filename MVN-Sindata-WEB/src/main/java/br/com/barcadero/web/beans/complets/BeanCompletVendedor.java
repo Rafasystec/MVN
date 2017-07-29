@@ -12,40 +12,10 @@ import br.com.barcadero.web.beans.SuperBean;
 
 @ManagedBean
 @RequestScoped
-public class BeanCompletVendedor extends SuperBean {
+public class BeanCompletVendedor {
 
 	@ManagedProperty("#{ruleVendedor}")
 	private RuleVendedor ruleVendedor;
-	
-	@Override
-	public String imprimir() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String alterar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deletar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String novo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public List<String> completeText(String query)  {
 		try {

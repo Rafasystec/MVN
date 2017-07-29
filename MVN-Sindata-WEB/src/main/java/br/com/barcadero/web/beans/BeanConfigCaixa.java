@@ -20,7 +20,7 @@ import br.com.barcadero.web.functions.HandleMessage;
  */
 @ManagedBean(name="configCaixa")
 @RequestScoped
-public class BeanConfigCaixa extends SuperBean {
+public class BeanConfigCaixa extends SuperBean<Caixa> {
 
 	private static final long serialVersionUID = 2575309545374375876L;
 	private Caixa caixa;
@@ -131,6 +131,12 @@ public class BeanConfigCaixa extends SuperBean {
 
 	public void setRuleCaixa(RuleCaixa ruleCaixa) {
 		this.ruleCaixa = ruleCaixa;
+	}
+
+	@Override
+	public boolean validar(Caixa entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

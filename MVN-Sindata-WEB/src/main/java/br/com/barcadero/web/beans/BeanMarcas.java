@@ -11,7 +11,7 @@ import br.com.barcadero.tables.Marcas;
 
 @ManagedBean
 @RequestScoped
-public class BeanMarcas extends SuperBean {
+public class BeanMarcas extends SuperBean<Marcas> {
 
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty("#{ruleMarcas}")
@@ -74,6 +74,12 @@ public class BeanMarcas extends SuperBean {
 
 	public void setRuleMarcas(RuleMarcas ruleMarcas) {
 		this.ruleMarcas = ruleMarcas;
+	}
+
+	@Override
+	public boolean validar(Marcas entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

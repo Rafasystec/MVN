@@ -4,11 +4,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleCFeComandos;
+import br.com.barcadero.tables.CupomEletronico;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @RequestScoped
-public class BeanCFeFuncoes extends SuperBean {
+public class BeanCFeFuncoes extends SuperBean <CupomEletronico>{
 
 	/**
 	 * 
@@ -57,6 +58,12 @@ public class BeanCFeFuncoes extends SuperBean {
 		} catch (Exception e) {
 			HandleMessage.error("Erro a tentar consultar o SAT", e.getMessage());
 		}
+	}
+
+	@Override
+	public boolean validar(CupomEletronico entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

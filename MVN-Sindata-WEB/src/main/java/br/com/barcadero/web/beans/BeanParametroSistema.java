@@ -11,7 +11,7 @@ import br.com.barcadero.tables.ParametrosSistema;
 
 @ManagedBean
 @RequestScoped
-public class BeanParametroSistema extends SuperBean {
+public class BeanParametroSistema extends SuperBean<ParametrosSistema> {
 
 	private static final long serialVersionUID = -2828344895149578421L;
 	
@@ -66,6 +66,12 @@ public class BeanParametroSistema extends SuperBean {
 
 	public void setRuleParametros(RuleParametros ruleParametros) {
 		this.ruleParametros = ruleParametros;
+	}
+
+	@Override
+	public boolean validar(ParametrosSistema entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -11,40 +11,11 @@ import br.com.barcadero.web.beans.SuperBean;
 
 @ManagedBean
 @RequestScoped
-public class BeanCompletProduto extends SuperBean {
+public class BeanCompletProduto {
 
 	private RuleProduto ruleProduto;
 	public BeanCompletProduto() {
 		//ruleProduto = new RuleProduto(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-	}
-	@Override
-	public String imprimir() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String alterar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deletar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String novo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	/**

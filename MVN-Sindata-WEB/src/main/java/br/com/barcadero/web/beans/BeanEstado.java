@@ -11,7 +11,7 @@ import br.com.barcadero.tables.Estado;
 
 @ManagedBean
 @RequestScoped
-public class BeanEstado extends SuperBean{
+public class BeanEstado extends SuperBean<Estado>{
 
 	private static final long serialVersionUID = 1469646686201259743L;
 	List<Estado> estados ;
@@ -131,5 +131,10 @@ public class BeanEstado extends SuperBean{
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public boolean validar(Estado entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -10,7 +10,7 @@ import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="index")
 @SessionScoped
-public class BeanIndex extends SuperBean{
+public class BeanIndex extends SuperBean<Usuario>{
 
 	private static final long serialVersionUID = -8956924425290321691L;
 	private String userName;
@@ -119,6 +119,12 @@ public class BeanIndex extends SuperBean{
 
 	public void setRuleSystemProperties(RuleSystemProperties ruleSystemProperties) {
 		this.ruleSystemProperties = ruleSystemProperties;
+	}
+
+	@Override
+	public boolean validar(Usuario entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

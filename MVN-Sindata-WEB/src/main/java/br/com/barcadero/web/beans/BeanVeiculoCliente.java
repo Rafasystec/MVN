@@ -7,7 +7,7 @@ import br.com.barcadero.dao.DaoVeiculoCliente;
 import br.com.barcadero.tables.VeiculoCliente;
 
 @ManagedBean
-public class BeanVeiculoCliente extends SuperBean {
+public class BeanVeiculoCliente extends SuperBean<VeiculoCliente> {
 
 	private static final long serialVersionUID = 4902274005698592024L;
 
@@ -65,6 +65,12 @@ public class BeanVeiculoCliente extends SuperBean {
 
 	public void setVeiculoCliente(VeiculoCliente veiculoCliente) {
 		this.veiculoCliente = veiculoCliente;
+	}
+
+	@Override
+	public boolean validar(VeiculoCliente entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

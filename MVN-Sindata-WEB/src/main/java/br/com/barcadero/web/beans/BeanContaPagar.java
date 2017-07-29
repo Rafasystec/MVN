@@ -1,6 +1,9 @@
 package br.com.barcadero.web.beans;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 
 import br.com.barcadero.core.enums.EnumTipoContaPagar;
 import br.com.barcadero.rule.RuleContaPagar;
@@ -11,34 +14,24 @@ import br.com.barcadero.tables.ContaPagar;
  * @since 1.0 dia 21/02/2016 21:45
  */
 @ManagedBean(name="contaPagar")
-public class BeanContaPagar extends SuperBean {
+@ViewScoped
+public class BeanContaPagar extends SuperBean<ContaPagar> {
 
 	private static final long serialVersionUID = -4716441225911437900L;
 	private ContaPagar contaPagar;
+	@ManagedProperty("#{ruleContaPagar}")
 	private RuleContaPagar ruleContaPagar;
 	private EnumTipoContaPagar[] tipoConta;
-	public BeanContaPagar() {
-		// TODO Auto-generated constructor stub
-		contaPagar 		= new ContaPagar(getSession().getLojaLogada(),getSession().getUsuarioLogado());
-		ruleContaPagar 	= new RuleContaPagar(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
+	
+	@PostConstruct
+	public void init() {
+		contaPagar 		= new ContaPagar(getSession().getLojaLogada(),getSession().getUsuarioLogado());//
 	}
-//	
-//	@Override
-//	public String salvar() throws Exception {
-//		// TODO Auto-generated method stub
-//		return ruleContaPagar.insert(contaPagar);
-//	}
-//
-//	@Override
-//	public String alterar() throws Exception {
-//		// TODO Auto-generated method stub
-//		return ruleContaPagar.update(contaPagar);
-//	}
 
 	@Override
 	public String deletar() throws Exception {
-		// TODO Auto-generated method stub
-		return ruleContaPagar.delete(contaPagar.getCodigo());
+		ruleContaPagar.delete(contaPagar.getCodigo());
+		return null;
 	}
 
 	@Override
@@ -72,7 +65,7 @@ public class BeanContaPagar extends SuperBean {
 
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
+		ruleContaPagar.insert(contaPagar);
 		return null;
 	}
 
@@ -80,6 +73,20 @@ public class BeanContaPagar extends SuperBean {
 	public String alterar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RuleContaPagar getRuleContaPagar() {
+		return ruleContaPagar;
+	}
+
+	public void setRuleContaPagar(RuleContaPagar ruleContaPagar) {
+		this.ruleContaPagar = ruleContaPagar;
+	}
+
+	@Override
+	public boolean validar(ContaPagar entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

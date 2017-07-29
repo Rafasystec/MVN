@@ -14,7 +14,7 @@ import br.com.barcadero.tables.Funcionario;
 
 @ManagedBean(name="funcionario")
 @RequestScoped
-public class BeanFuncionario extends SuperBean {
+public class BeanFuncionario extends SuperBean<Funcionario> {
 
 	private static final long serialVersionUID = -199406563789273194L;
 	private Funcionario funcionario;
@@ -90,6 +90,12 @@ public class BeanFuncionario extends SuperBean {
 
 	public void setRuleFuncionario(RuleFuncionario ruleFuncionario) {
 		this.ruleFuncionario = ruleFuncionario;
+	}
+
+	@Override
+	public boolean validar(Funcionario entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

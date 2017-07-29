@@ -6,13 +6,14 @@ import javax.faces.bean.ManagedProperty;
 import br.com.barcadero.rule.RuleCargaCidadesCE;
 import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.rule.RuleParametros;
+import br.com.barcadero.tables.macroentidades.EnderecoCarga;
 /**
  * Para realizar a carga de algumas tabelas quando necessario.
  * @author Rafael Rocha
  * @since 1.0 - dia 15/02/2016 as 10:42
  */
 @ManagedBean(name="carga")
-public class BeanCargaInicial extends SuperBean {
+public class BeanCargaInicial extends SuperBean <EnderecoCarga>{
 
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty("#{ruleEstado}")
@@ -97,6 +98,12 @@ public class BeanCargaInicial extends SuperBean {
 
 	public void setHandleCargaCidadesCE(RuleCargaCidadesCE handleCargaCidadesCE) {
 		this.handleCargaCidadesCE = handleCargaCidadesCE;
+	}
+
+	@Override
+	public boolean validar(EnderecoCarga entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -17,7 +17,7 @@ import br.com.barcadero.tables.Estado;
 
 @ManagedBean
 @RequestScoped
-public class BeanCidade extends SuperBean{
+public class BeanCidade extends SuperBean<Cidade>{
 	/**
 	 * 
 	 */
@@ -190,5 +190,11 @@ public class BeanCidade extends SuperBean{
 
 	public void setFacadeEstado(RuleEstado facadeEstado) {
 		this.facadeEstado = facadeEstado;
+	}
+
+	@Override
+	public boolean validar(Cidade entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

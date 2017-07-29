@@ -38,7 +38,7 @@ import br.com.barcadero.web.functions.HandleOpenEnderDialog;
  */
 @ManagedBean(name="beanEmpresa")
 @RequestScoped
-public class BeanEmpresa extends SuperBean {
+public class BeanEmpresa extends SuperBean<Empresa> {
 
 	private static final long serialVersionUID = 2807945448917304288L;
 	private Empresa emp;
@@ -329,6 +329,12 @@ public class BeanEmpresa extends SuperBean {
 
 	public void setRuleLoja(RuleLoja ruleLoja) {
 		this.ruleLoja = ruleLoja;
+	}
+
+	@Override
+	public boolean validar(Empresa entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

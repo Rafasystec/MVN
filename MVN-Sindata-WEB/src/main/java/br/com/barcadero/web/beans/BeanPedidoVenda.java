@@ -20,7 +20,7 @@ import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @ViewScoped
-public class BeanPedidoVenda extends SuperBean{
+public class BeanPedidoVenda extends SuperBean<Pedido>{
 
 
 	private static final long serialVersionUID = -1991283788493039890L;
@@ -231,5 +231,11 @@ public class BeanPedidoVenda extends SuperBean{
 			HandleMessage.error("Sua estação não possui caixa", "Por favor cadastre um caixa primeiro.");
 		}
 		return caixa;
+	}
+
+	@Override
+	public boolean validar(Pedido entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

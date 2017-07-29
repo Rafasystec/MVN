@@ -8,10 +8,11 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleUserMensagem;
 import br.com.barcadero.tables.TmpUserMessage;
+import br.com.barcadero.tables.UserMensagens;
 
 @ManagedBean(name="menuHorizontal")
 @RequestScoped
-public class BeanMenuHorizontal extends SuperBean {
+public class BeanMenuHorizontal extends SuperBean <UserMensagens>{
 
 	private static final long serialVersionUID = 138203880609210500L;
 	@ManagedProperty("#{ruleUserMensagem}")
@@ -61,6 +62,12 @@ public class BeanMenuHorizontal extends SuperBean {
 
 	public void setRuleUserMensagem(RuleUserMensagem ruleUserMensagem) {
 		this.ruleUserMensagem = ruleUserMensagem;
+	}
+
+	@Override
+	public boolean validar(UserMensagens entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

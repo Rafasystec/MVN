@@ -17,7 +17,7 @@ import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="loja")
-public class BeanLoja extends SuperBean {
+public class BeanLoja extends SuperBean<Loja> {
 
 	private static final long serialVersionUID = 444117878813938158L;
 	private PessoaJuridica pj;
@@ -151,6 +151,13 @@ public class BeanLoja extends SuperBean {
 
 	public void setRuleLoja(RuleLoja ruleLoja) {
 		this.ruleLoja = ruleLoja;
+	}
+
+
+	@Override
+	public boolean validar(Loja entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

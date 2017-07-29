@@ -21,7 +21,7 @@ import br.com.barcadero.tables.Cidade;
  */
 @RequestScoped
 @ManagedBean(name="popBairro")
-public class BeanPopBairro extends SuperBean{
+public class BeanPopBairro extends SuperBean<Bairro>{
 	
 	private static final long serialVersionUID = 8270960627163947540L;
 	private long codigo;
@@ -188,5 +188,11 @@ public class BeanPopBairro extends SuperBean{
 
 	public void setRuleCidade(RuleCidade ruleCidade) {
 		this.ruleCidade = ruleCidade;
+	}
+
+	@Override
+	public boolean validar(Bairro entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

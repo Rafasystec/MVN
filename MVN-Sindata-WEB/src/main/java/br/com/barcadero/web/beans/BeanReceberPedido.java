@@ -18,7 +18,7 @@ import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @RequestScoped
-public class BeanReceberPedido extends SuperBean {
+public class BeanReceberPedido extends SuperBean<Pedido> {
 
 	private static final long serialVersionUID = -2518308925844030905L;
 	private List<Pedido> pedidosAFaturarHoje;
@@ -154,6 +154,12 @@ public class BeanReceberPedido extends SuperBean {
 
 	public void setRulePedido(RulePedido rulePedido) {
 		this.rulePedido = rulePedido;
+	}
+
+	@Override
+	public boolean validar(Pedido entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

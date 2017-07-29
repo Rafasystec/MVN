@@ -16,11 +16,12 @@ import br.com.barcadero.core.db.util.HibernateHelper;
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
+import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.attributes.Attributs;
 
-public abstract class SuperBean  implements Serializable, IBeanClass{
+public abstract class SuperBean<T extends Entidade>  implements Serializable, IBeanClass<T>{
 	
 	private static final long serialVersionUID = -7940750516142819573L;
 	

@@ -12,7 +12,7 @@ import br.com.barcadero.tables.Avisos;
 import br.com.barcadero.tables.Entidade;
 
 @ManagedBean(name="avisos")
-public class BeanAvisos extends SuperBean {
+public class BeanAvisos extends SuperBean <Avisos>{
 
 	private static final long serialVersionUID = -6995320689933365585L;
 	private Avisos aviso;
@@ -101,6 +101,12 @@ public class BeanAvisos extends SuperBean {
 
 	public void setRuleAvisos(RuleAvisos ruleAvisos) {
 		this.ruleAvisos = ruleAvisos;
+	}
+
+	@Override
+	public boolean validar(Avisos entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

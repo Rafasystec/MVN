@@ -23,7 +23,7 @@ import groovyjarjarasm.asm.Handle;
 
 @ManagedBean(name="cliente")
 @RequestScoped
-public class BeanCliente extends SuperBean {
+public class BeanCliente extends SuperBean <Cliente>{
 
 	private static final long serialVersionUID = 5470117896075103063L;
 	private Cliente	cliente			= null;
@@ -152,6 +152,12 @@ public class BeanCliente extends SuperBean {
 
 	public void setRuleCliente(RuleCliente ruleCliente) {
 		this.ruleCliente = ruleCliente;
+	}
+
+	@Override
+	public boolean validar(Cliente entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

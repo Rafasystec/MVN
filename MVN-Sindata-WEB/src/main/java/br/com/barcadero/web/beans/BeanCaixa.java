@@ -6,7 +6,7 @@ import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
 
 @ManagedBean(name="caixa")
-public class BeanCaixa extends SuperBean {
+public class BeanCaixa extends SuperBean<Caixa> {
 
 	private static final long serialVersionUID = 6299768650271042835L;
 	private Caixa caixa;
@@ -60,6 +60,12 @@ public class BeanCaixa extends SuperBean {
 	public String imprimir() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validar(Caixa entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

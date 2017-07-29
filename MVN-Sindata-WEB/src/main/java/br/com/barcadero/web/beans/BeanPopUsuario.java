@@ -16,7 +16,7 @@ import br.com.barcadero.tables.Usuario;
  */
 @ManagedBean(name="popUsuario")
 @RequestScoped
-public class BeanPopUsuario extends SuperBean {
+public class BeanPopUsuario extends SuperBean<Usuario> {
 
 	@ManagedProperty("#{ruleUsuario}")
 	private RuleUsuario ruleUsuario;
@@ -68,6 +68,12 @@ public class BeanPopUsuario extends SuperBean {
 
 	public void setRuleUsuario(RuleUsuario ruleUsuario) {
 		this.ruleUsuario = ruleUsuario;
+	}
+
+	@Override
+	public boolean validar(Usuario entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

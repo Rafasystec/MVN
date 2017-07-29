@@ -16,7 +16,7 @@ import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="userMessage")
 @RequestScoped
-public class BeanUserMessages extends SuperBean {
+public class BeanUserMessages extends SuperBean<UserMensagens> {
 
 	private UserMensagens message;
 	private String paramEmail;
@@ -123,6 +123,12 @@ public class BeanUserMessages extends SuperBean {
 
 	public void setRuleUsuario(RuleUsuario ruleUsuario) {
 		this.ruleUsuario = ruleUsuario;
+	}
+
+	@Override
+	public boolean validar(UserMensagens entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

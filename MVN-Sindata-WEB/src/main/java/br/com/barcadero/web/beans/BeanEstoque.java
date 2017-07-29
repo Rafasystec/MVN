@@ -14,7 +14,7 @@ import br.com.barcadero.tables.Produto;
 
 @ManagedBean
 @RequestScoped
-public class BeanEstoque extends SuperBean {
+public class BeanEstoque extends SuperBean<Estoque> {
 
 	private static final long serialVersionUID = 2638846429735720878L;
 	private String paramProd;
@@ -117,5 +117,11 @@ public class BeanEstoque extends SuperBean {
 
 	public void setSelectedEstoque(Estoque selectedEstoque) {
 		this.selectedEstoque = selectedEstoque;
+	}
+
+	@Override
+	public boolean validar(Estoque entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

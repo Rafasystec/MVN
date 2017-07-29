@@ -10,7 +10,7 @@ import br.com.barcadero.tables.CaixaAbertura;
 
 @ManagedBean
 @RequestScoped
-public class BeanAbrirCaixa extends SuperBean {
+public class BeanAbrirCaixa extends SuperBean <CaixaAbertura>{
 
 	/**
 	 * 
@@ -90,6 +90,12 @@ public class BeanAbrirCaixa extends SuperBean {
 	public String salvar() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validar(CaixaAbertura entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

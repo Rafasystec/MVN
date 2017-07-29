@@ -15,7 +15,7 @@ import br.com.barcadero.tables.OrdemServicoItens;
 
 @ManagedBean
 @ViewScoped
-public class BeanOrdemServico extends SuperBean {
+public class BeanOrdemServico extends SuperBean<OrdemServico> {
 
 	private static final long serialVersionUID = -8018968486074012582L;
 	private OrdemServico ordemServico;
@@ -218,6 +218,12 @@ public class BeanOrdemServico extends SuperBean {
 
 	public void setRuleProduto(RuleProduto ruleProduto) {
 		this.ruleProduto = ruleProduto;
+	}
+
+	@Override
+	public boolean validar(OrdemServico entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -22,7 +22,7 @@ import br.com.barcadero.web.beans.SuperBean;
 
 @ManagedBean(name="ender")
 @RequestScoped	
-public class HandleEndereco extends SuperBean{
+public class HandleEndereco {
 
 	private static final long serialVersionUID = -2770111081253143663L;
 	private Endereco ender;
@@ -88,29 +88,6 @@ public class HandleEndereco extends SuperBean{
 		HandleEndereco.bairros = bairros;
 	}
 	
-	@Override
-	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String alterar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deletar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String novo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public List<Estado> getEstados() throws Exception {
 		return ruleEstado.findAllEstados();
@@ -164,12 +141,6 @@ public class HandleEndereco extends SuperBean{
 			e.printStackTrace();
 		}
 		System.out.println("open popup bairro");
-	}
-
-	@Override
-	public String imprimir() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public EnumUF getUfSelected() {

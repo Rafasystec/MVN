@@ -15,7 +15,7 @@ import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Produto;
 
 @ManagedBean(name="produto")
-public class BeanProduto extends SuperBean {
+public class BeanProduto extends SuperBean<Produto> {
 
 
 	private static final long serialVersionUID = 5793307604069729331L;
@@ -152,6 +152,12 @@ public class BeanProduto extends SuperBean {
 
 	public void setRuleProduto(RuleProduto ruleProduto) {
 		this.ruleProduto = ruleProduto;
+	}
+
+	@Override
+	public boolean validar(Produto entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

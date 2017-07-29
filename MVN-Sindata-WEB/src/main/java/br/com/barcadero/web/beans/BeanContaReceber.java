@@ -8,7 +8,7 @@ import br.com.barcadero.tables.ContaReceber;
 
 @ManagedBean
 @RequestScoped
-public class BeanContaReceber extends SuperBean {
+public class BeanContaReceber extends SuperBean<ContaReceber> {
 
 	
 	private static final long serialVersionUID = 7086040543170117779L;
@@ -57,6 +57,12 @@ public class BeanContaReceber extends SuperBean {
 
 	public void setConta(ContaReceber conta) {
 		this.conta = conta;
+	}
+
+	@Override
+	public boolean validar(ContaReceber entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

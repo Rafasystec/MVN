@@ -14,7 +14,7 @@ import br.com.barcadero.tables.ContaLancamento;
 
 @ManagedBean
 @ViewScoped
-public class BeanContaLancamentos extends SuperBean {
+public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 
 	/**
 	 * 
@@ -105,6 +105,12 @@ public class BeanContaLancamentos extends SuperBean {
 
 	public void setSelectedContaLancamento(ContaLancamento selectedContaLancamento) {
 		this.selectedContaLancamento = selectedContaLancamento;
+	}
+
+	@Override
+	public boolean validar(ContaLancamento entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

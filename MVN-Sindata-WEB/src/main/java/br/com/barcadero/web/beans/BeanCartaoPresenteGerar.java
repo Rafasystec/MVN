@@ -4,11 +4,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.barcadero.rule.RuleCartaoPresente;
+import br.com.barcadero.tables.CartaoPresente;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @RequestScoped
-public class BeanCartaoPresenteGerar extends SuperBean {
+public class BeanCartaoPresenteGerar extends SuperBean<CartaoPresente> {
 
 	/**
 	 * 
@@ -77,6 +78,12 @@ public class BeanCartaoPresenteGerar extends SuperBean {
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	@Override
+	public boolean validar(CartaoPresente entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

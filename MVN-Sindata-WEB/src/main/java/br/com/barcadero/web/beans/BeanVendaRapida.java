@@ -19,10 +19,11 @@ import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.Produto;
+import br.com.barcadero.tables.macroentidades.VendaRapida;
 
 @ManagedBean
 @ViewScoped
-public class BeanVendaRapida extends SuperBean {
+public class BeanVendaRapida extends SuperBean <VendaRapida>{
 
 
 	private static final long serialVersionUID = 1L;
@@ -299,6 +300,12 @@ public class BeanVendaRapida extends SuperBean {
 
 	public void setRuleProduto(RuleProduto ruleProduto) {
 		this.ruleProduto = ruleProduto;
+	}
+
+	@Override
+	public boolean validar(VendaRapida entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

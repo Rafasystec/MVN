@@ -23,7 +23,7 @@ import br.com.barcadero.web.attributes.Attributs;
  * Classe criada dia 27/11/2013 as 22:12
  */
 @ManagedBean(name="usuario")
-public class BeanUsuarioLogin extends SuperBean{
+public class BeanUsuarioLogin extends SuperBean<Usuario>{
 
 	private static final long serialVersionUID = 6123392904973257391L;
 	@ManagedProperty("#{ruleUsuario}")
@@ -177,5 +177,10 @@ public class BeanUsuarioLogin extends SuperBean{
 	}
 	public void setRuleUsuario(RuleUsuario ruleUsuario) {
 		this.ruleUsuario = ruleUsuario;
+	}
+	@Override
+	public boolean validar(Usuario entidade) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
