@@ -5,100 +5,145 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-<h:form>
-	<div class="navbar" role="navigation">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-		</div>
-		<div class="navbar-collapse collapse">
-			<ui:remove>
-			<ul class="nav navbar-nav nav-pills navbar-left">
-				<li role="presentation" data-toggle="tooltip" title="Avisos"><a
-					href="#"><i class="fa fa-bell" style="color: #656D78;"
-						title="Avisos"></i><span class="badge badge-info">101</span> </a></li>
-				<li role="presentation" title="Alertas do sistema"><a href="#"><i
-						class="fa fa-exclamation-triangle" style="color: #656D78;"></i><span
-						class="badge badge-warning">0</span></a></li>
-				<li role="presentation"><a href="#"><i class="fa fa-ban"
-						style="color: #656D78;"></i><span class="badge badge-danger">0</span></a></li>
-			</ul>
-			</ui:remove>
-			
+	<h:form>
 
-			<ul class="nav navbar-top-links navbar-right">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i
-						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-				</a>
-					<ul class="dropdown-menu dropdown-messages">
-						
-							<li><a href="#">
-									<div>
-										<strong>Padrão</strong> <span
-											class="pull-right text-muted"> <em>Hoje
-												10:22</em>
-										</span>
-									</div>
-									<div>Sistemas em desenvolvimento</div>
-							</a></li>
-							<li class="divider"></li>
-						
-						<li><a class="text-center" href="#"> <strong>Ver
-									todas</strong> <i class="fa fa-angle-right"></i>
-						</a></li>
-						<li class="divider"></li>
-						<li><a class="text-center"
-							href="../private/PagUserMensagens.xhtml"> <strong>Enviar
-									Mensagem</strong> <i class="fa fa-angle-right"></i>
-						</a></li>
-					</ul></li>
-			</ul>
-			<p:outputLabel value="Versão: "/>
-			<p:outputLabel value="#{index.versaoSystema}"/>
-			<ul class="nav navbar-nav navbar-right menu-top">
-
-				<li>
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button"
-							id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="true">
-							<i class="fa fa-user"></i>
-							<h:outputText value="#{authenticator.usuario}" />
-							<span class="caret"></span>
+		<nav class="navbar navbar-default">
+			<div class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"> </span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
 						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li>
-							<i class="fa fa-sign-out">
-								<img alt="ok" src="../resources/Imagens/logoSystec40x32.png" />
-							</i>
-							</li>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							
+
+							<li class="dropdown visible-xs"><a href="#"
+								class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-haspopup="true" aria-expanded="false">CADASTROS <span
+									class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li role="separator" class="divider"></li>
+									<li>
+										<a 
+											href="#{request.contextPath}/private/PagCadCliente.xhtml"> <i
+												class="fa fa-users"></i> CLIENTES
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/private/PagCadEmpresa.xhtml"> <i
+												class="fa fa-industry"></i> EMPRESA
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/private/PagCadLoja.xhtml"> <i
+												class="fa fa-shopping-cart"></i> LOJAS
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/relatorios/ose-relatorio.jsf"> <i
+												class="fa fa-users"></i> VENDEDORES
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/private/PagCadProduto.xhtml"> <i
+											class="fa fa-shopping-basket"></i> PRODUTOS
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+								</ul></li>
+
+							<li class="dropdown visible-xs"><a href="#"
+								class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-haspopup="true" aria-expanded="false"> FINANCEIRO <span
+									class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/private/PagContasAPagar.xhtml">
+											<i class="fa fa-hand-o-left"></i> A PAGAR
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/private/PagContaAReceber.xhtml"><i
+											class="fa fa-hand-o-right"></i> A RECEBER
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="#{request.contextPath}/private/PagContaLancamento.xhtml"><i
+											class="fa fa-credit-card"></i> LANÇAMENTOS
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>									
+								</ul></li>
 						</ul>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li><a href="usuarios.jsf"><i class="fa fa-user-plus"
-									aria-hidden="true"></i>USUÁRIOS</a></li>
-							<li role="separator" class="divider"></li>
-							<li><p:commandLink action="#{index.logOut}">
-									<i class="fa fa-sign-out"></i>
+
+						<ul class="nav navbar-top-links navbar-right">
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#"> <i
+									class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+							</a>
+								<ul class="dropdown-menu dropdown-messages">
+
+									<li><a href="#"> </a></li>
+									<li class="divider"></li>
+
+									<li><a class="text-center" href="#"> <strong>Ver
+												todas</strong> <i class="fa fa-angle-right"></i>
+									</a></li>
+									<li class="divider"></li>
+									<li><a class="text-center"
+										href="../private/PagUserMensagens.xhtml"> <strong>Enviar
+												Mensagem</strong> <i class="fa fa-angle-right"></i>
+									</a></li>
+								</ul></li>
+						</ul>
+						<p:outputLabel value="Versão: " />
+						<p:outputLabel value="#{index.versaoSystema}" />
+						<ul class="nav navbar-nav navbar-right menu-top">
+
+							<li>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<i class="fa fa-user"></i>
+										<h:outputText value="#{authenticator.usuario}" />
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+										<li><a href="usuarios.jsf"><i class="fa fa-user-plus"
+												aria-hidden="true"></i>USUÁRIOS</a></li>
+										<li role="separator" class="divider"></li>
+										<li><p:commandLink action="#{index.logOut}">
+												<i class="fa fa-sign-out"></i>
 			                			SAIR
 			                		</p:commandLink></li>
+									</ul>
+								</div>
+							</li>
+							<li
+								style="border-left-color: #E6E9ED; border-left-style: solid; border-left-width: 1px;">
+								<p:commandLink id="lnk-sair" title="Sair?" action="#">
+									<i class="fa fa-sign-out"></i>
+								</p:commandLink> <p:tooltip for="lnk-sair" trackMouse="true" />
+							</li>
 						</ul>
 					</div>
-				</li>
-				<li
-					style="border-left-color: #E6E9ED; border-left-style: solid; border-left-width: 1px;">
-					<p:commandLink id="lnk-sair" title="Sair?" action="#">
-						<i class="fa fa-sign-out"></i>
-					</p:commandLink> <p:tooltip for="lnk-sair" trackMouse="true" />
-				</li>
-			</ul>
-		</div>
-	</div>
-</h:form>
+				</div>
+			</div>
+		</nav>
+	</h:form>
 </ui:composition>
 
 </html>

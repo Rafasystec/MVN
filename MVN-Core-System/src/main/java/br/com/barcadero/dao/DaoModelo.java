@@ -18,7 +18,7 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 	private final String MSG_ERRO_SAVE	 = "Erro ao tentar salvar o registro.";
 	private final String MSG_ERRO_DEL	 = "Erro ao tentar excluir o registro.";
 	private final String MSG_NOT_FOUND	 = "Registro não encontrado.";
-	
+	public static String mesageInstanceSpring = "spring-framework instace class ";
 	protected Empresa empresa;
 	protected Loja loja;
 

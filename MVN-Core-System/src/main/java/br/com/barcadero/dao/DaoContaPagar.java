@@ -2,6 +2,8 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,9 @@ public class DaoContaPagar extends DaoModelo <ContaPagar>{
 
 	
 
+	public DaoContaPagar() {
+		System.out.println(mesageInstanceSpring+DaoContaPagar.class.getName());
+	}
 	public DaoContaPagar(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 	}
@@ -27,13 +32,10 @@ public class DaoContaPagar extends DaoModelo <ContaPagar>{
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<ContaPagar> findAll() throws Exception {
-		// TODO Auto-generated method stub
-//		Query qry = getSession().getNamedQuery(ContaPagar.FIND_ALL);
-//		return qry.list();
-		return null;
+		TypedQuery<ContaPagar> qry = manager.createNamedQuery(ContaPagar.FIND_ALL, ContaPagar.class);
+		return qry.getResultList();
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class BeanIndex extends SuperBean<Usuario>{
 	private String userName;
 	private boolean isLogado;
 	private Usuario user;
-	private String versaoSystema;
+	private String versaoSystema = "2.0";
 	@ManagedProperty("#{ruleSystemProperties}")
 	private RuleSystemProperties ruleSystemProperties;
 	

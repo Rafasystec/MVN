@@ -15,12 +15,18 @@
 		<clx:buttonsCrud id="btnsUp" bean="#{beanContaLancamentos}"></clx:buttonsCrud>
 		<p:panel header="Lançamento de despesas">
 			<p:panelGrid columns="1">
-									
+				Data Vencimento
+				<clx:dateCalendar id="txtDtVencimento"
+					value="#{beanContaLancamentos.contaLancamento.dtVencimento}" />
+				Data despesa					
 				<clx:dateCalendar id="txtData"
 					value="#{beanContaLancamentos.contaLancamento.data}" />
-					
-				<clx:currency title="Valor"
+				Valor:	
+				<clx:currency id="txtValor"
 					value="#{beanContaLancamentos.contaLancamento.valor}" />
+				Juros:
+				<clx:currency id="txtJuros"
+					value="#{beanContaLancamentos.contaLancamento.valorJuros}" />
 				Centro de Custo:
 				<p:selectOneMenu id="centro"
 					value="#{beanContaLancamentos.contaLancamento.centroCusto}"
@@ -37,7 +43,10 @@
 					<f:selectItems value="#{beanContaLancamentos.formaPagamento}"
 						var="pgto" itemLabel="#{pgto.descricao}" />
 				</p:selectOneMenu>
-				
+				<p:outputLabel value="Parcela" for="txtParcelas"/>
+				<p:inputText id="txtParcelas" >
+					<f:convertNumber integerOnly="true"/>
+				</p:inputText>
 				<p:inputTextarea id="descricao" value="#{beanContaLancamentos.contaLancamento.descricao}" required="true"
 				requiredMessage="Diga a descrição" placeholder="Breve descrição"/>
 			</p:panelGrid>

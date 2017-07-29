@@ -23,18 +23,24 @@
 			type="java.lang.String" />
 	</composite:interface>
 	<composite:implementation>
-		
-			<p:outputLabel id="#{cc.attrs.id}lbl" for="#{cc.attrs.id}"
-				value="#{cc.attrs.label}" />
-			<p:inputText id="#{cc.attrs.id}" 
-				styleClass="autoNumber"
+
+
+		<p:outputLabel id="#{cc.attrs.id}lbl" for="#{cc.attrs.id}"
+			value="#{cc.attrs.label}" />
+
+		<div class="input-group">
+			<div class="input-group-addon">
+				<span class="glyphicon glyphicon-usd"></span>
+			</div>
+
+
+			<p:inputText id="#{cc.attrs.id}" styleClass="autoNumber"
 				style="max-width:40px%;margin-right:4px;" title="#{cc.attrs.title}"
 				value="#{cc.attrs.value}" required="#{cc.attrs.riquired}"
-				requiredMessage="#{cc.attrs.requiredMessage}"
-				size="10"
-				>
+				requiredMessage="#{cc.attrs.requiredMessage}" size="10">
 				<f:converter converterId="bigDecimalConverter" />
 			</p:inputText>
+		</div>
 	</composite:implementation>
 </ui:composition>
 </html>

@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
 
@@ -37,6 +39,9 @@ public class ContaLancamento extends EntidadeLoja {
 	@Column(name="DATA",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data 		 = new Date();
+	@Column(name="DT_VENCIMENTO",nullable=true)
+	@Temporal(TemporalType.DATE)
+	private Date dtVencimento = new Date();
 	@Column(name="VALOR", scale=2, precision=10,nullable=false)
 	private BigDecimal valor = new BigDecimal("0.00");
 	@Column(name="CENTRO_CUSTO",nullable=false)
@@ -45,6 +50,10 @@ public class ContaLancamento extends EntidadeLoja {
 	private EnumFormaPgto formaPgto = EnumFormaPgto.DINHEIRO;
 	@Column(name="DESCRICAO",nullable=false,length=60)
 	private String descricao= "";
+	@Column(name="VALOR_JUROS", scale=2, precision=10,nullable=false)
+	private BigDecimal valorJuros = new BigDecimal("0.00");
+	@Column(name="PARCELAS",nullable=true)
+	private int parcelas = 0;
 	
 	public Date getData() {
 		return data;
@@ -116,6 +125,30 @@ public class ContaLancamento extends EntidadeLoja {
 		} else if (!valor.equals(other.valor))
 			return false;
 		return true;
+	}
+
+	public Date getDtVencimento() {
+		return dtVencimento;
+	}
+
+	public void setDtVencimento(Date dtVencimento) {
+		this.dtVencimento = dtVencimento;
+	}
+
+	public BigDecimal getValorJuros() {
+		return valorJuros;
+	}
+
+	public void setValorJuros(BigDecimal valorJuros) {
+		this.valorJuros = valorJuros;
+	}
+
+	public int getParcelas() {
+		return parcelas;
+	}
+
+	public void setParcelas(int parcelas) {
+		this.parcelas = parcelas;
 	}
 	
 	
