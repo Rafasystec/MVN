@@ -42,11 +42,16 @@
 					<f:selectItem itemLabel="FORMA PAGAMENTO" itemValue="-1"/>
 					<f:selectItems value="#{beanContaLancamentos.formaPagamento}"
 						var="pgto" itemLabel="#{pgto.descricao}" />
+						<p:ajax event="change" />
 				</p:selectOneMenu>
-				<p:outputLabel value="Parcela" for="txtParcelas"/>
-				<p:inputText id="txtParcelas" >
-					<f:convertNumber integerOnly="true"/>
-				</p:inputText>
+				
+				<p:panelGrid columns="2" rendered="#{beanContaLancamentos.habilitarDadosCartao}">
+					<p:outputLabel value="Parcela" for="txtParcelas"/>
+					<p:inputText id="txtParcelas" >
+						<f:convertNumber integerOnly="true"/>
+					</p:inputText>
+				</p:panelGrid>
+				
 				<p:inputTextarea id="descricao" value="#{beanContaLancamentos.contaLancamento.descricao}" required="true"
 				requiredMessage="Diga a descrição" placeholder="Breve descrição"/>
 			</p:panelGrid>

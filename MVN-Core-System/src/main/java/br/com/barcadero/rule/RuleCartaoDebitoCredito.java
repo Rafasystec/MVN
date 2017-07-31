@@ -29,7 +29,7 @@ public class RuleCartaoDebitoCredito extends RuleModelo<CartaoCreditoDebito> {
 	@Override
 	public List<CartaoCreditoDebito> findByEmpresa(Empresa empresa) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return daoCartaoCreditoDebito.findByEmpresa(empresa);
 	}
 
 	@Override

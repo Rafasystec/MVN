@@ -26,6 +26,7 @@
 	<!-- Realizar a procura por anotacoes @Respository, @Service e tec ... -->
 	<context:component-scan base-package="br.com.barcadero.dao" />
 	<context:component-scan base-package="br.com.barcadero.rule" />
+	<context:component-scan base-package="br.com.barcadero.web.converters" />
 	
 	<!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">

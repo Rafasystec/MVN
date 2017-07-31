@@ -16,13 +16,13 @@
 		<p:panelGrid columns="4">
 			<p:outputLabel value="Número do Cartão" id="lblNumCartao" for="txtNumCartao"/>
 			<p:inputText id="txtNumCartao" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.numero}" required="true" placeholder="Somente Números">
-				<f:convertNumber integerOnly="true" />
+				
 			</p:inputText>
 			
 			<p:outputLabel value="Banco" id="lblBanco" for="txtBanco"/>
-			<p:selectOneMenu id="txtBanco" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.banco}" required="true"	>
+			<p:selectOneMenu id="txtBanco" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.banco}" required="true"	converter="#{bancosConverter}">
 				<f:selectItem itemLabel="Selecione ..." itemValue="0"/>
-				<f:selectItems value="#{beanCartaoCreditoDebito.allBancosEmpresa}" var="banco" itemLabel="banco.descricao" itemValue="#{banco}"/>
+				<f:selectItems value="#{beanCartaoCreditoDebito.allBancosEmpresa}" var="banco" itemLabel="#{banco.codBanco} - #{banco.descricao}" itemValue="#{banco}"/>
 			</p:selectOneMenu>
 			
 			<p:outputLabel value="Bandeira:" id="lblBandeira" for="cboBandeira"/>
@@ -51,29 +51,49 @@
 			
 			<p:outputLabel value="Tipo de Conta:" id="lblTipoCOnta" for="cboTipoConta"/>
 			<p:selectOneMenu id="cboTipoConta" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.tipoConta}" required="true">
-				<f:selectItems value="#{beanCartaoCreditoDebito.tipoContaCartao}" var="conta" itemLabel="#{conta.decricao}" itemValue="#{conta}"/>
+				<f:selectItems value="#{beanCartaoCreditoDebito.tipoContaCartao}" var="conta" itemLabel="#{conta.descricao}" itemValue="#{conta}"/>
 			</p:selectOneMenu>
 		</p:panelGrid>
 		<p:panel header="Dados da conta">
-		
+			<p:panelGrid columns="2" >
+				<p:outputLabel id="txtValidade" value="Validade Cartão MÊS/ANO" />
+				<p:panelGrid columns="3">
+					<p:spinner id="spMes" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.mesValidade}" maxlength="2"  required="false" min="1" max="12" />
+					<p:outputLabel id="lblSeparaDg" value="/"/>
+					<p:spinner id="spAno" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.anoValidade}" maxlength="4" required="false" min="2017" max="2060" />
+				</p:panelGrid>
+			</p:panelGrid>
 			<p:panelGrid columns="4" >
-				<ui:remove>
-				<p:outputLabel id="" value="" for=""/>
-				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.mesValidade}" required="true">
-					<f:convertNumber integerOnly="true"/>
-				</p:inputText>
-				
-				<p:outputLabel id="" value="" for=""/>
-				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito}" required="true"></p:inputText>
-				
-				<p:outputLabel id="" value="" for=""/>
-				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito}" required="true"></p:inputText>
-				
-				<p:outputLabel id="" value="" for=""/>
-				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito}" required="true"></p:inputText>
-				</ui:remove>
+				<p:outputLabel id="lblNumConta" value="Número Conta" for="txtNumConta"/>
+				<p:inputText id="txtNumConta" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.numConta}" maxlength="10" required="false" />
+				<p:outputLabel id="lblDgConta" value="Dígito Conta" for="spDgConta"/>
+				<p:spinner id="spDgConta" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.digito}" maxlength="2"  required="false" min="0" max="99" />
+			</p:panelGrid>
+			<p:panelGrid columns="2">
+				<p:outputLabel id="lblTitular" value="Titular Conta/Cartão" for="txtTitular"/>
+				<p:inputText id="txtTitular"   value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.nomeTitular}" maxlength="60" required="false"></p:inputText>
 			</p:panelGrid>
 		</p:panel>
+		<!-- Grid -->
+		<p:dataTable id="grid" var="cartao" value="#{beanCartaoCreditoDebito.all}" resizableColumns="true" style="margin-bottom:20px" paginator="true"
+			selectionMode="single" selection="#{beanCartaoCreditoDebito.selectedCartaoCreditoDebito}"  rowKey="#{cartao.codigo}" rows="10" scrollable="false" >
+				
+				<f:facet name="header">
+          				Cartões Cadastrados
+      				</f:facet>
+				<p:column headerText="Número">
+					<h:outputText value="#{cartao.numero}" />
+				</p:column>
+				<p:column headerText="Titular">
+					<h:outputText value="#{cartao.nomeTitular}" />
+				</p:column>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{cartao.tipoConta}" />
+				</p:column>
+				<p:column headerText="Vencimento" style="text-align: right;width:115px;" >
+					<h:outputText value="#{cartao.mesValidade}/#{cartao.anoValidade}" />
+				</p:column>
+		</p:dataTable>
 	</ui:define>
 </ui:composition>
 </html>

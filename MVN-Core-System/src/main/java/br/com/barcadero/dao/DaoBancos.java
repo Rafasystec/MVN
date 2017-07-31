@@ -38,7 +38,6 @@ public class DaoBancos extends DaoModelo<Bancos> {
 
 	@Override
 	public Bancos find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -128,6 +128,9 @@ public abstract class DaoModelo<T extends Entidade> implements DaoInterface<T> {
 	
 	public abstract T find(long codigo) throws Exception;
 
+	public T find(long primaryKey, Class<T> entityClass) {
+		return manager.find(entityClass, primaryKey);
+	}
 	public Empresa getEmpresa() {
 		return empresa;
 	}

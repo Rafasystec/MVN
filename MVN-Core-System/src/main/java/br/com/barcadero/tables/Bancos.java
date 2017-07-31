@@ -85,6 +85,68 @@ public class Bancos extends EntidadeEmpresa {
 	public void setNomeGerente(String nomeGerente) {
 		this.nomeGerente = nomeGerente;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((codBanco == null) ? 0 : codBanco.hashCode());
+		result = prime * result + ((contato1 == null) ? 0 : contato1.hashCode());
+		result = prime * result + ((contato2 == null) ? 0 : contato2.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nomeGerente == null) ? 0 : nomeGerente.hashCode());
+		result = prime * result + ((site == null) ? 0 : site.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bancos other = (Bancos) obj;
+		if (codBanco == null) {
+			if (other.codBanco != null)
+				return false;
+		} else if (!codBanco.equals(other.codBanco))
+			return false;
+		if (contato1 == null) {
+			if (other.contato1 != null)
+				return false;
+		} else if (!contato1.equals(other.contato1))
+			return false;
+		if (contato2 == null) {
+			if (other.contato2 != null)
+				return false;
+		} else if (!contato2.equals(other.contato2))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (nomeGerente == null) {
+			if (other.nomeGerente != null)
+				return false;
+		} else if (!nomeGerente.equals(other.nomeGerente))
+			return false;
+		if (site == null) {
+			if (other.site != null)
+				return false;
+		} else if (!site.equals(other.site))
+			return false;
+		return true;
+	}
+	
 	
 	
 }

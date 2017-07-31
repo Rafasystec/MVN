@@ -16,7 +16,7 @@ public class RuleBancos extends RuleModelo<Bancos> {
 	@Autowired
 	private DaoBancos daoBancos;
 	public RuleBancos() {
-		
+		System.out.println("Spring-framework init class " + RuleBancos.class.getName());
 	}
 	
 
@@ -27,8 +27,7 @@ public class RuleBancos extends RuleModelo<Bancos> {
 
 	@Override
 	public Bancos find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoBancos.find(codigo,Bancos.class);
 	}
 
 	@Override

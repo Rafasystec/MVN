@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.behavior.AjaxBehavior;
 
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
@@ -26,6 +27,8 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	private ContaLancamento selectedContaLancamento;
 	private EnumCentroCusto[] centroCusto;
 	private EnumFormaPgto[] formaPagamento;
+	private boolean habilitarDadosCartao = false;
+	
 	@PostConstruct
 	private void init() {
 		System.out.println("Init view Lancamentos");
@@ -111,6 +114,34 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	public boolean validar(ContaLancamento entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public boolean isHabilitarDadosCartao() {
+		return habilitarDadosCartao;
+	}
+
+	public void setHabilitarDadosCartao(boolean habilitarDadosCartao) {
+		this.habilitarDadosCartao = habilitarDadosCartao;
+	}
+	
+	public void verificarSeMostraDadosCartao(final AjaxBehavior event) {
+		if(contaLancamento != null){
+			if(formasPgtoQueHabilitamCartao(contaLancamento.getFormaPgto())){
+				setHabilitarDadosCartao(true);
+			}
+		}
+	}
+	
+	private boolean formasPgtoQueHabilitamCartao(EnumFormaPgto formaPgto) {
+		boolean result = false;
+		if(formaPgto == EnumFormaPgto.CARTAO_CREDITO){
+			result = true;
+		}else if(formaPgto == EnumFormaPgto.CARTAO_DEBITO){
+			result = true;
+		}else if(formaPgto == EnumFormaPgto.DEBITO_EM_CONTA){
+			result = true;
+		}
+		return result;
 	}
 
 }

@@ -1,13 +1,13 @@
 package br.com.barcadero.web.converters;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
+
 import br.com.barcadero.web.functions.HandleMessage;
 
 @FacesConverter("bigDecimalConverter")

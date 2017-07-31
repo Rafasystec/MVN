@@ -15,6 +15,7 @@ import br.com.barcadero.rule.RuleBancos;
 import br.com.barcadero.rule.RuleCartaoDebitoCredito;
 import br.com.barcadero.tables.Bancos;
 import br.com.barcadero.tables.CartaoCreditoDebito;
+import br.com.barcadero.web.converters.BancosConverter;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
@@ -29,8 +30,10 @@ public class BeanCartaoCreditoDebito extends SuperBean<CartaoCreditoDebito>{
 	private RuleCartaoDebitoCredito ruleCartaoDebitoCredito;
 	@ManagedProperty("#{ruleBancos}")
 	private RuleBancos ruleBancos;
+	private BancosConverter bancosConverter;
 	
 	private CartaoCreditoDebito cartaoCreditoDebito;
+	private CartaoCreditoDebito selectedCartaoCreditoDebito;
 	
 	@PostConstruct
 	public void init() {
@@ -107,6 +110,14 @@ public class BeanCartaoCreditoDebito extends SuperBean<CartaoCreditoDebito>{
 		}
 	}
 	
+	public List<CartaoCreditoDebito> getAll() {
+		try {
+			return ruleCartaoDebitoCredito.findByEmpresa(getEmpresaLogada());
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
+	}
+	
 	public EnumCartaoBandeira[] getBandeiras() {
 		return EnumCartaoBandeira.values();
 	}
@@ -124,6 +135,22 @@ public class BeanCartaoCreditoDebito extends SuperBean<CartaoCreditoDebito>{
 						11,12,13,14,15,16,17,18,19,20,
 						21,22,23,24,25,26,27,28,29,30,31};
 		return result;
+	}
+
+	public BancosConverter getBancosConverter() {
+		return bancosConverter;
+	}
+
+	public void setBancosConverter(BancosConverter bancosConverter) {
+		this.bancosConverter = bancosConverter;
+	}
+
+	public CartaoCreditoDebito getSelectedCartaoCreditoDebito() {
+		return selectedCartaoCreditoDebito;
+	}
+
+	public void setSelectedCartaoCreditoDebito(CartaoCreditoDebito selectedCartaoCreditoDebito) {
+		this.selectedCartaoCreditoDebito = selectedCartaoCreditoDebito;
 	}
 	
 }

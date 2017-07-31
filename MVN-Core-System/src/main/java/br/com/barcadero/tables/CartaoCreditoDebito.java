@@ -58,8 +58,8 @@ public class CartaoCreditoDebito extends EntidadeEmpresa {
 	@Enumerated(EnumType.ORDINAL)
 	private EnumCartaoBandeira bandeira = EnumCartaoBandeira.OUTRA;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="CODIGO_BANCO",unique=true)
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="CODIGO_BANCO",unique=true, referencedColumnName="CODIGO")
 	private Bancos banco;
 	
 	public String getNumero() {
