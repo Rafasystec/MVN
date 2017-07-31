@@ -10,7 +10,6 @@ import br.com.barcadero.dao.DaoLoja;
 import br.com.barcadero.dao.DaoPessoaJuridica;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
@@ -18,22 +17,16 @@ import br.com.barcadero.tables.Usuario;
 @Service
 public class RuleLoja extends RuleModelo<Loja> {
 
+	@Autowired
 	private DaoLoja daoLoja;
+	@Autowired
 	private DaoPessoaJuridica daoPessoaJuridica;
 	private Empresa empresa;
-	@Autowired
-	public RuleLoja(DaoLoja daoLoja, DaoPessoaJuridica daoPessoaJuridica) {
-		System.out.println("Auto-generated constructor stub for RuleLoja");
-		this.daoLoja 			= daoLoja;
-		this.daoPessoaJuridica 	= daoPessoaJuridica;
-	}
-
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		Loja loja = (Loja)entidade;
-//		retirarFormatcao(loja);
-//		return daoLoja.insert(loja);
+//	@Autowired
+//	public RuleLoja(DaoLoja daoLoja, DaoPessoaJuridica daoPessoaJuridica) {
+//		System.out.println("Auto-generated constructor stub for RuleLoja");
+//		this.daoLoja 			= daoLoja;
+//		this.daoPessoaJuridica 	= daoPessoaJuridica;
 //	}
 
 	@Override
@@ -42,12 +35,6 @@ public class RuleLoja extends RuleModelo<Loja> {
 		return daoLoja.delete(codigo);
 	}
 
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		Loja loja = (Loja)entidade;
-//		return daoLoja.update(loja);
-//	}
 
 	@Override
 	public Loja find(long codigo) throws Exception {
@@ -159,18 +146,6 @@ public class RuleLoja extends RuleModelo<Loja> {
 
 	@Override
 	public List<Loja> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

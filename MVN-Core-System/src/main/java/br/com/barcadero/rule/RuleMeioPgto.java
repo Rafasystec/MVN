@@ -1,23 +1,26 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.MeiosPagamento;
 
 @Service
 public class RuleMeioPgto extends RuleModelo<MeiosPagamento> {
 
-	private DaoMeioPgto dao;
 	@Autowired
-	public RuleMeioPgto(DaoMeioPgto dao) {
-		// TODO Auto-generated constructor stub
-		this.dao = dao;
-	}                                                                     
+	private DaoMeioPgto dao;
+	
+//	@Autowired
+//	public RuleMeioPgto(DaoMeioPgto dao) {
+//		// TODO Auto-generated constructor stub
+//		this.dao = dao;
+//	}                                                                     
 //	public RuleMeioPgto(Empresa empresa, Loja loja, Session session) {
 //		super(empresa, loja, session);
 //		dao = new DaoMeioPgto(empresa, loja, session);
@@ -63,18 +66,6 @@ public class RuleMeioPgto extends RuleModelo<MeiosPagamento> {
 
 	@Override
 	public List<MeiosPagamento> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

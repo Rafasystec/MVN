@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
 
@@ -93,18 +92,6 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 
 	@Override
 	public List<Caixa> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

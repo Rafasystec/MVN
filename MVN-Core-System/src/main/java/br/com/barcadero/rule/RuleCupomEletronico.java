@@ -12,7 +12,6 @@ import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.tables.CupomEletronico;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
@@ -93,18 +92,6 @@ public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 
 	@Override
 	public List<CupomEletronico> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

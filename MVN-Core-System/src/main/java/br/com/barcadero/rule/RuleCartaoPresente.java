@@ -9,7 +9,6 @@ import br.com.barcadero.commons.util.HandleString;
 import br.com.barcadero.dao.DaoCartaoPresente;
 import br.com.barcadero.tables.CartaoPresente;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
@@ -21,21 +20,11 @@ public class RuleCartaoPresente extends RuleModelo<CartaoPresente> {
 		daoCartaoPresente = new DaoCartaoPresente(empresa, loja, session);
 	}
 
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		return daoCartaoPresente.insert(entidade);
-//	}
-
 	@Override
 	public String delete(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoCartaoPresente.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		return daoCartaoPresente.update(entidade);
-//	}
 
 	@Override
 	public CartaoPresente find(long codigo) throws Exception {
@@ -76,18 +65,6 @@ public class RuleCartaoPresente extends RuleModelo<CartaoPresente> {
 
 	@Override
 	public List<CartaoPresente> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

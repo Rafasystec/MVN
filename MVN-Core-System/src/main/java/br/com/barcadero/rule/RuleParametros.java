@@ -10,30 +10,25 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumSimNao;
 import br.com.barcadero.dao.DaoParametros;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.ParametrosSistema;
-import br.com.barcadero.tables.ParametrosValores;
 
 @Service
 public class RuleParametros extends RuleModelo<ParametrosSistema> {
 
-	
-	private DaoParametros daoParametros;
 	@Autowired
-	public RuleParametros(DaoParametros daoParametros) {
+	private DaoParametros daoParametros;
+	public RuleParametros() {
 		System.out.println("Auto-generated constructor stub RuleParametros");
-		this.daoParametros = daoParametros;
 	}
 	
-	/**
-	 * Inserir um parametro. Unsafe Method.
-	 */
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Autowired
+//	public RuleParametros(DaoParametros daoParametros) {
+//		System.out.println("Auto-generated constructor stub RuleParametros");
+//		this.daoParametros = daoParametros;
+//	}
+	
+	
 
 	/**
 	 * Deletar um parametro.
@@ -44,12 +39,6 @@ public class RuleParametros extends RuleModelo<ParametrosSistema> {
 		return daoParametros.delete(codigo);
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public String inserirParametro(ParametrosSistema parametro) throws Exception {
 		return daoParametros.insertParametro(parametro);
 	}

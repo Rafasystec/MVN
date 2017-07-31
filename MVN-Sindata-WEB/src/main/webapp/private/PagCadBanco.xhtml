@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="university" />
+	<ui:param name="pageTitle" value="Bancos" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanBanco}"></clx:buttonsCrud>
+			
+			<p:panelGrid columns="4">		
+					<p:outputLabel id="lblCodBanco" for="txtCodBanco"
+						value="Código Banco:" />
+				
+					<p:inputText id="txtCodBanco" value="#{beanBanco.banco.codBanco}" />
+					<p:outputLabel id="lblDescricao" for="txtDescricao"
+						value="Descrição:" />
+					<p:inputText id="txtDescricao" value="#{beanBanco.banco.descricao}" />
+			</p:panelGrid>
+			<p:panelGrid columns="4">
+					<p:outputLabel id="lblEmail" for="txtEmail" value="E-mail:" />
+					<p:inputText id="txtEmail" value="#{beanBanco.banco.email}" />
+				
+					<p:outputLabel id="lblSite" for="txtSite" value="Site/Home page" />
+					<p:inputText id="txtSite" value="#{beanBanco.banco.site}" />
+				
+					<p:outputLabel id="lblNomeGer" for="txtNomeGer"
+						value="Nome Gerente:" />
+					<p:inputText id="txtNomeGer" value="#{beanBanco.banco.nomeGerente}" />
+			</p:panelGrid>	
+			<p:panelGrid columns="4">
+					<p:outputLabel id="lblContato1" for="txtContato1" value="Contato:" />
+					<p:inputText id="txtContato1" value="#{beanBanco.banco.contato1}" />
+				
+					<p:outputLabel id="lbContato1" for="txtContato2" value="Contato:" />
+					<p:inputText id="txtContato2" value="#{beanBanco.banco.contato2}" />
+
+			</p:panelGrid>	
+		<clx:buttonsCrud id="btnsDown" bean="#{beanBanco}"></clx:buttonsCrud>
+		
+		<!-- Grid -->
+		<p:dataTable id="grid" var="banco" value="#{beanBanco.all}" resizableColumns="true" style="margin-bottom:20px" paginator="true"
+					selectionMode="single" selection="#{beanBanco.selectedBanco}"  rowKey="#{banco.codigo}" rows="10" scrollable="false" >
+						
+						<f:facet name="header">
+            				Bancos
+        				</f:facet>
+						<p:column headerText="Código">
+							<h:outputText value="#{banco.codBanco}" />
+						</p:column>
+						<p:column headerText="Descrição">
+							<h:outputText value="#{banco.descricao}" />
+						</p:column>
+						<p:column headerText="E-mail">
+							<h:outputText value="#{banco.email}" />
+						</p:column>
+						<p:column headerText="Contato" style="text-align: right;width:115px;" >
+							<h:outputText value="#{banco.contato1}" />
+							 	
+						</p:column>
+						
+					</p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>

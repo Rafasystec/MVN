@@ -4,29 +4,31 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import br.com.barcadero.core.xml.entities.XMLProduto;
 import br.com.barcadero.dao.DaoProduto;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
 
 @Component
 public class RuleProduto extends RuleModelo<Produto> {
 
+	@Autowired
 	private DaoProduto daoProduto;
 	
 	public RuleProduto() {
 		System.out.println(">>>>>>>>>>Criando Rule Produto<<<<<<<<<<<<<<<<<<<");
 	}
 	
-	@Autowired
-	public RuleProduto(DaoProduto daoProduto){
-		this.daoProduto = daoProduto;
-		System.out.println(">>>>>>>>>>Criando Rule Produto com a dao produto <<<<<<<<<<<<<<<<<<<");
-	}
+//	@Autowired
+//	public RuleProduto(DaoProduto daoProduto){
+//		this.daoProduto = daoProduto;
+//		System.out.println(">>>>>>>>>>Criando Rule Produto com a dao produto <<<<<<<<<<<<<<<<<<<");
+//	}
 
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -158,18 +160,6 @@ public class RuleProduto extends RuleModelo<Produto> {
 
 	@Override
 	public List<Produto> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

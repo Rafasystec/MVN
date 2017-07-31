@@ -1,6 +1,5 @@
 package br.com.barcadero.rule;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,26 +8,27 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.dao.DaoPedidoItens;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
-import br.com.barcadero.tables.Produto;
 
 @Service
 public class RulePedidoItens extends RuleModelo<Pedido> {
 
+	@Autowired
 	private DaoPedidoItens daoPedidoItens;
+	@Autowired
 	private RuleProduto ruleProduto;
+	@Autowired
 	private DaoPedido daoPedido;
 	
-	@Autowired
-	public RulePedidoItens(DaoPedidoItens daoPedidoItens,RuleProduto ruleProduto,DaoPedido daoPedido) {
-		// TODO Auto-generated constructor stub
-		this.daoPedidoItens = daoPedidoItens;
-		this.daoPedido		= daoPedido;
-		this.ruleProduto	= ruleProduto;
-	}
+//	@Autowired
+//	public RulePedidoItens(DaoPedidoItens daoPedidoItens,RuleProduto ruleProduto,DaoPedido daoPedido) {
+//		// TODO Auto-generated constructor stub
+//		this.daoPedidoItens = daoPedidoItens;
+//		this.daoPedido		= daoPedido;
+//		this.ruleProduto	= ruleProduto;
+//	}
 //
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -64,12 +64,6 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -128,11 +122,7 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 	public void setDaoPedido(DaoPedido daoPedido) {
 		this.daoPedido = daoPedido;
 	}
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public Pedido insert(Pedido entidade) throws Exception {
 		// TODO Auto-generated method stub

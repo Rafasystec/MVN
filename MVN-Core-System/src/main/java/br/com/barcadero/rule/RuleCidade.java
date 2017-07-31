@@ -16,48 +16,16 @@ import br.com.barcadero.tables.Loja;
 @Service
 public class RuleCidade extends RuleModelo<Cidade> {
 
-	
-	private DaoCidade daoCidade	;
 	@Autowired
-	public RuleCidade(DaoCidade daoCidade) {
-		// TODO Auto-generated constructor stub
-		this.daoCidade = daoCidade;
-	}
-//	public RuleCidade(Empresa empresa, Loja loja, Session session) {
-//		super(empresa, loja, session);
-//		this.daoCidade	= new DaoCidade(empresa, loja, session);
-//	}
+	private DaoCidade daoCidade	;
 	
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		try{
-//			Cidade cidade	= (Cidade)entidade;
-//			if(cidade != null){
-//				if(find(cidade.getCodigo()) == null){
-//					return this.daoCidade.insert(entidade);
-//				}else{
-//					return "Cidade já cadastrada!";
-//				}
-//			}else{
-//				return "Entidade veio nula do Bean.";
-//			}
-//		}catch(Exception e){
-//			throw new Exception(e.getMessage());
-//		}
-//	}
-
+	
 	@Override
 	public String delete(long codigo) throws Exception {
 		System.out.println("Excluindo cidade com o codigo: " + codigo);
 		return this.daoCidade.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		System.out.println("Update facade cidade.");
-//		return this.daoCidade.update(entidade);
-//	}
-
+	
 	@Override
 	public Cidade find(long codigo) throws Exception {
 		System.out.println("Procurando cidade pelo codigo: " + codigo);
@@ -127,12 +95,6 @@ public class RuleCidade extends RuleModelo<Cidade> {
 	}
 
 	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Cidade insert(Cidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
@@ -140,12 +102,6 @@ public class RuleCidade extends RuleModelo<Cidade> {
 
 	@Override
 	public Cidade update(Cidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

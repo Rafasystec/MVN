@@ -12,7 +12,6 @@ import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.Pedido;
@@ -21,18 +20,22 @@ import br.com.barcadero.tables.Usuario;
 @Service
 public class RulePedido extends RuleModelo<Pedido> {
 
+	@Autowired
 	private RuleCaixa ruleCaixa;
+	@Autowired
 	private DaoPedido daoPedido;
+	@Autowired
 	private RuleNota ruleNota;
+	@Autowired
 	private RuleGenarateCFe ruleGenarateCFe;
 	
-	@Autowired
-	public RulePedido(DaoPedido daoPedido,RuleCaixa ruleCaixa,RuleNota ruleNota) {
-		System.out.println("Auto-generated constructor stub RulePedido");
-		this.daoPedido = daoPedido;
-		this.ruleCaixa = ruleCaixa;
-		this.ruleNota  = ruleNota;
-	}
+//	@Autowired
+//	public RulePedido(DaoPedido daoPedido,RuleCaixa ruleCaixa,RuleNota ruleNota) {
+//		System.out.println("Auto-generated constructor stub RulePedido");
+//		this.daoPedido = daoPedido;
+//		this.ruleCaixa = ruleCaixa;
+//		this.ruleNota  = ruleNota;
+//	}
 
 
 //	@Override
@@ -211,21 +214,6 @@ public class RulePedido extends RuleModelo<Pedido> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public Pedido insert(Pedido entidade) throws Exception {

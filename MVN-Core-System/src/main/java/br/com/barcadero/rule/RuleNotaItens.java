@@ -1,6 +1,5 @@
 package br.com.barcadero.rule;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumItemCancelado;
 import br.com.barcadero.dao.DaoNotaItens;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
@@ -24,14 +22,16 @@ import br.com.barcadero.tables.Produto;
 public class RuleNotaItens extends RuleModelo<NotaItens> {
  
 	//private RuleNota ruleNota;
-	private DaoNotaItens daoNotaItens;
-	private RuleProduto ruleProduto;
 	@Autowired
-	public RuleNotaItens(DaoNotaItens daoNotaIten,RuleProduto ruleProduto) {
-		// TODO Auto-generated constructor stub
-		this.daoNotaItens = daoNotaIten;
-		this.ruleProduto  = ruleProduto;
-	}
+	private DaoNotaItens daoNotaItens;
+	@Autowired
+	private RuleProduto ruleProduto;
+//	@Autowired
+//	public RuleNotaItens(DaoNotaItens daoNotaIten,RuleProduto ruleProduto) {
+//		// TODO Auto-generated constructor stub
+//		this.daoNotaItens = daoNotaIten;
+//		this.ruleProduto  = ruleProduto;
+//	}
 	
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -147,18 +147,6 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 
 	@Override
 	public List<NotaItens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

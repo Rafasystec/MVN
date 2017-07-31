@@ -2,13 +2,14 @@ package br.com.barcadero.rule;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.barcadero.dao.DaoCliente;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 /**
  * Classe de negocio para o cliente
@@ -18,39 +19,23 @@ import br.com.barcadero.tables.Loja;
 @Service
 public class RuleCliente extends RuleModelo<Cliente> {
 
-	
-
-	
-	private DaoCliente daoCliente;
-	
-	@Autowired
-	public RuleCliente(DaoCliente daoCliente) {
-		super(daoCliente);
-		this.daoCliente = daoCliente;
+	public RuleCliente() {
+		System.out.println("Auto-generated constructor stub " + RuleCliente.class.getName()); 
 	}
+
+	@Autowired
+	private DaoCliente daoCliente;
 	
 	public RuleCliente(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
 		//daoCliente = new DaoCliente(empresa, loja, session);
 	}
-	
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		Cliente cliente = (Cliente)entidade;
-//		return daoCliente.insert(cliente);
-//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoCliente.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoCliente.update(entidade);
-//	}
 
 	@Override
 	public List<Cliente> findAll() throws Exception {
@@ -112,18 +97,6 @@ public class RuleCliente extends RuleModelo<Cliente> {
 
 	@Override
 	public Cliente insert(Cliente entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

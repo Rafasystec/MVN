@@ -1,6 +1,5 @@
 package br.com.barcadero.rule;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,20 +7,19 @@ import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoSystemProperties;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.SystemHistory;
 import br.com.barcadero.tables.SystemProperties;
 @Service
 public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 
+	@Autowired
 	private DaoSystemProperties daoSystemProperties;
 	
-	@Autowired
-	public RuleSystemProperties(DaoSystemProperties daoSystemProperties) {
-		// TODO Auto-generated constructor stub
-		this.daoSystemProperties = daoSystemProperties;
-	}
+//	@Autowired
+//	public RuleSystemProperties(DaoSystemProperties daoSystemProperties) {
+//		// TODO Auto-generated constructor stub
+//		this.daoSystemProperties = daoSystemProperties;
+//	}
 
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -55,12 +53,6 @@ public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 	}
 
 	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public SystemProperties find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
@@ -84,12 +76,6 @@ public class RuleSystemProperties extends RuleModelo<SystemProperties> {
 
 	@Override
 	public List<SystemProperties> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

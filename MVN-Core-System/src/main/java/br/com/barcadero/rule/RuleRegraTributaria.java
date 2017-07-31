@@ -10,19 +10,24 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.dao.DaoRegraTributacao;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.RegraTributaria;
 import br.com.barcadero.tables.Usuario;
 @Service
 public class RuleRegraTributaria extends RuleModelo<RegraTributaria> {
 
-	private DaoRegraTributacao daoRegraTributacao;
 	@Autowired
-	public RuleRegraTributaria(DaoRegraTributacao daoRegraTributacao) {
+	private DaoRegraTributacao daoRegraTributacao;
+	
+	public RuleRegraTributaria() {
 		// TODO Auto-generated constructor stub
-		this.daoRegraTributacao = daoRegraTributacao;
 	}
+	
+//	@Autowired
+//	public RuleRegraTributaria(DaoRegraTributacao daoRegraTributacao) {
+//		// TODO Auto-generated constructor stub
+//		this.daoRegraTributacao = daoRegraTributacao;
+//	}
 
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -190,18 +195,6 @@ public class RuleRegraTributaria extends RuleModelo<RegraTributaria> {
 
 	@Override
 	public List<RegraTributaria> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

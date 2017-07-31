@@ -6,7 +6,7 @@
 
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
-			<li class="sidebar-brand"><a href="#"><img alt="Nautilus"
+			<li class="sidebar-brand"><a href="#"><img alt="Logo sistema vendor"
 					src="#{request.contextPath}/resources/Imagens/logovendor.png"></img></a>
 			</li>
 
@@ -36,6 +36,10 @@
 						href="#{request.contextPath}/private/PagCadProduto.xhtml"> <i
 							class="fa fa-shopping-basket"></i>PRODUTOS
 					</a></li>
+					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagCadBanco.xhtml"> <i
+							class="fa fa-university"></i>BANCOS
+					</a></li>
 					
 				</ul>
 			</li>
@@ -61,8 +65,13 @@
 							class="fa fa-hand-o-right"></i>A RECEBER</a>
 					</li>
 					<li><a class="#{activeRelatorioOSE}"
+						href="#{request.contextPath}/private/PagCadCartaoCreditoDebito.xhtml"><i
+							class="fa fa-credit-card"></i>CARTÕES</a>
+					</li>
+					
+					<li><a class="#{activeRelatorioOSE}"
 						href="#{request.contextPath}/private/PagContaLancamento.xhtml"><i
-							class="fa fa-credit-card"></i>LANÇAMENTOS</a>
+							class="fa fa-money"></i>LANÇAMENTOS</a>
 					</li>
 				</ul>
 				

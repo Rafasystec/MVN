@@ -3,7 +3,7 @@ package br.com.barcadero.rule;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +14,13 @@ import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
-import br.com.barcadero.core.exeptions.DAOException;
 import br.com.barcadero.core.util.FormasPagamento;
-import br.com.barcadero.dao.DaoMeioPgto;
 import br.com.barcadero.dao.DaoNota;
 import br.com.barcadero.dao.DaoOrdemServico;
 import br.com.barcadero.dao.DaoPedido;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.MeiosPagamento;
 import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.NotaItens;
 import br.com.barcadero.tables.NotaMeioPgto;
@@ -38,39 +34,24 @@ import br.com.barcadero.tables.Usuario;
 @Service
 public class RuleNota extends RuleModelo<Nota> {
 
-	private DaoNota daoNota;
-	private DaoMeioPgto daoMeio;
-	private DaoPedido daoPedido;
-	private DaoOrdemServico daoOrdemServico;
-	//private final DaoNotaItens daoItens;
-	private RuleNotaItens ruleNotaItens;
-	private RuleCaixa ruleCaixa;
 	@Autowired
-	public RuleNota(DaoNota daoNota, DaoMeioPgto daoMeio,DaoPedido daoPedido,DaoOrdemServico daoOrdemServico) {
-		System.out.println("TODO Auto-generated constructor stub RuleNota");
-		this.daoMeio = daoMeio;
-		this.daoNota = daoNota;
-		this.daoOrdemServico = daoOrdemServico;
-		this.daoPedido 		 = daoPedido;
-	}
-
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoNota.insert(entidade);
-//	}
-
+	private DaoNota daoNota;
+//	@Autowired
+//	private DaoMeioPgto daoMeio;
+	@Autowired
+	private DaoPedido daoPedido;
+	@Autowired
+	private DaoOrdemServico daoOrdemServico;
+	@Autowired
+	private RuleNotaItens ruleNotaItens;
+	@Autowired
+	private RuleCaixa ruleCaixa;
+	
 	@Override
 	public String delete(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoNota.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoNota.update(entidade);
-//	}
 
 	@Override
 	public Nota find(long codigo) throws Exception {
@@ -397,18 +378,6 @@ public class RuleNota extends RuleModelo<Nota> {
 
 	@Override
 	public List<Nota> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

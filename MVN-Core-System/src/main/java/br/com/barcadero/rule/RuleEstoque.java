@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoEstoque;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estoque;
 import br.com.barcadero.tables.Loja;
 @Service
@@ -70,18 +69,6 @@ public class RuleEstoque extends RuleModelo<Estoque> {
 
 	@Override
 	public Estoque update(Estoque entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

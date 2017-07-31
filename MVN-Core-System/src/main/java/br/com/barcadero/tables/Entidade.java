@@ -14,13 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.envers.DefaultRevisionEntity;
 @MappedSuperclass
 public abstract class Entidade implements Serializable {
 	
 	//private static final long serialVersionUID = -4937210358058008264L;
-
+	public final static String PARAM_EMPRESA = "empresa"; 
 	/**
 	 * 
 	 */

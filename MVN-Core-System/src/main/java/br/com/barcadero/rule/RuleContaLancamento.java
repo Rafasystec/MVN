@@ -10,7 +10,6 @@ import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.dao.DaoContaLancamento;
 import br.com.barcadero.tables.ContaLancamento;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 
@@ -31,18 +30,7 @@ public class RuleContaLancamento extends RuleModelo<ContaLancamento> {
 	}
 	
 	@Override
-	public String insert(Entidade entidade) throws Exception {
-		return "";
-	}
-
-	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

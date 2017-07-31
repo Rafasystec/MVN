@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="credit-card" />
+	<ui:param name="pageTitle" value="Cartões de Crédito/Débito" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanCartaoCreditoDebito}"></clx:buttonsCrud>
+		<p:panelGrid columns="4">
+			<p:outputLabel value="Número do Cartão" id="lblNumCartao" for="txtNumCartao"/>
+			<p:inputText id="txtNumCartao" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.numero}" required="true" placeholder="Somente Números">
+				<f:convertNumber integerOnly="true" />
+			</p:inputText>
+			
+			<p:outputLabel value="Banco" id="lblBanco" for="txtBanco"/>
+			<p:selectOneMenu id="txtBanco" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.banco}" required="true"	>
+				<f:selectItem itemLabel="Selecione ..." itemValue="0"/>
+				<f:selectItems value="#{beanCartaoCreditoDebito.allBancosEmpresa}" var="banco" itemLabel="banco.descricao" itemValue="#{banco}"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Bandeira:" id="lblBandeira" for="cboBandeira"/>
+			<p:selectOneMenu value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.bandeira}" required="true" id="cboBandeira">
+				<f:selectItem itemLabel="Selecione ..." itemValue="#{null}"/>
+				<f:selectItems value="#{beanCartaoCreditoDebito.bandeiras}" />
+			</p:selectOneMenu>
+			
+			
+			<p:outputLabel value="Dia do vencimento" id="lblDiaVenc" for="cboDiaVencimento"/>
+			<p:selectOneMenu id="cboDiaVencimento" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.diaPagtoCartao}" required="false">
+				<f:selectItems value="#{beanCartaoCreditoDebito.diaVencimentoCombo}"/>
+			</p:selectOneMenu>
+			
+		</p:panelGrid>
+		<p:panelGrid columns="4">
+			<p:outputLabel value="Dia Melhor Compra" id="lblDiaMelhorComp" for="cboDiaMelhor"/>
+			<p:selectOneMenu id="cboDiaMelhor" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.diaMelhorCompra}" required="false">
+				<f:selectItems value="#{beanCartaoCreditoDebito.diaVencimentoCombo}"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="TIPO:" id="lblTipo" for="cboTipo"/>
+			<p:selectOneMenu id="cboTipo" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.tipoCartao}" required="true">
+				<f:selectItems value="#{beanCartaoCreditoDebito.tipoCartao}"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Tipo de Conta:" id="lblTipoCOnta" for="cboTipoConta"/>
+			<p:selectOneMenu id="cboTipoConta" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.tipoConta}" required="true">
+				<f:selectItems value="#{beanCartaoCreditoDebito.tipoContaCartao}" var="conta" itemLabel="#{conta.decricao}" itemValue="#{conta}"/>
+			</p:selectOneMenu>
+		</p:panelGrid>
+		<p:panel header="Dados da conta">
+		
+			<p:panelGrid columns="4" >
+				<ui:remove>
+				<p:outputLabel id="" value="" for=""/>
+				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.mesValidade}" required="true">
+					<f:convertNumber integerOnly="true"/>
+				</p:inputText>
+				
+				<p:outputLabel id="" value="" for=""/>
+				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito}" required="true"></p:inputText>
+				
+				<p:outputLabel id="" value="" for=""/>
+				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito}" required="true"></p:inputText>
+				
+				<p:outputLabel id="" value="" for=""/>
+				<p:inputText id="" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito}" required="true"></p:inputText>
+				</ui:remove>
+			</p:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

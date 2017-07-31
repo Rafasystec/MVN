@@ -3,15 +3,19 @@ package br.com.barcadero.tables;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.ColumnDefault;
 
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
@@ -45,15 +49,23 @@ public class ContaLancamento extends EntidadeLoja {
 	@Column(name="VALOR", scale=2, precision=10,nullable=false)
 	private BigDecimal valor = new BigDecimal("0.00");
 	@Column(name="CENTRO_CUSTO",nullable=false)
+	@Enumerated(EnumType.ORDINAL)
 	private EnumCentroCusto centroCusto = EnumCentroCusto.OUTROS;
 	@Column(name="FORMA_PAGTO",nullable=false)
+	@Enumerated(EnumType.ORDINAL)
 	private EnumFormaPgto formaPgto = EnumFormaPgto.DINHEIRO;
 	@Column(name="DESCRICAO",nullable=false,length=60)
 	private String descricao= "";
-	@Column(name="VALOR_JUROS", scale=2, precision=10,nullable=false)
+	@Column(name="VALOR_JUROS", scale=2, precision=10,nullable=true)
 	private BigDecimal valorJuros = new BigDecimal("0.00");
 	@Column(name="PARCELAS",nullable=true)
 	private int parcelas = 0;
+	
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="CODIGO_CARTAO",unique=true,nullable=true)
+	private CartaoCreditoDebito cartaoCreditoDebito;
+	
+	
 	
 	public Date getData() {
 		return data;
@@ -149,6 +161,14 @@ public class ContaLancamento extends EntidadeLoja {
 
 	public void setParcelas(int parcelas) {
 		this.parcelas = parcelas;
+	}
+
+	public CartaoCreditoDebito getCartaoCreditoDebito() {
+		return cartaoCreditoDebito;
+	}
+
+	public void setCartaoCreditoDebito(CartaoCreditoDebito cartaoCreditoDebito) {
+		this.cartaoCreditoDebito = cartaoCreditoDebito;
 	}
 	
 	

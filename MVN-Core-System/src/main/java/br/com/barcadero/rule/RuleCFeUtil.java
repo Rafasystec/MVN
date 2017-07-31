@@ -3,7 +3,6 @@ package br.com.barcadero.rule;
 import java.util.HashMap;
 
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
-import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
 /**
  * Utilidade para o CF-e
  * @author Rafael Rocha

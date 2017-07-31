@@ -11,7 +11,6 @@ import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.dao.DaoEmpresa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
@@ -48,12 +47,6 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -136,11 +129,6 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 		return null;
 	}
 
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Empresa insert(Empresa entidade) throws Exception {

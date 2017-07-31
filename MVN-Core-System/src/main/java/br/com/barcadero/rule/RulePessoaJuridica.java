@@ -7,24 +7,23 @@ import org.springframework.stereotype.Service;
 
 import br.com.barcadero.dao.DaoPessoaJuridica;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 @Service
 public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
 
-	
+	@Autowired
 	private DaoPessoaJuridica daoPessoa;
 	
 	public RulePessoaJuridica() {
 		System.out.println("TODO Auto-generated constructor stub RulePessoaJuridica");
 	}
 	
-	@Autowired
-	public RulePessoaJuridica(DaoPessoaJuridica daoPessoa) {
-		// TODO Auto-generated constructor stub
-		this.daoPessoa = daoPessoa;
-	}
+//	@Autowired
+//	public RulePessoaJuridica(DaoPessoaJuridica daoPessoa) {
+//		// TODO Auto-generated constructor stub
+//		this.daoPessoa = daoPessoa;
+//	}
 	
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -70,18 +69,6 @@ public class RulePessoaJuridica extends RuleModelo<PessoaJuridica> {
 	public List<PessoaJuridica> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		
-		return "";
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		
-		return "";
 	}
 
 	@Override

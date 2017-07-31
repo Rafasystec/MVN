@@ -2,12 +2,13 @@ package br.com.barcadero.rule;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.hibernate.Session;
+
 import br.com.barcadero.core.enums.EnumRegimePISCOFINS;
 import br.com.barcadero.dao.DaoAliquotaPisCofins;
 import br.com.barcadero.tables.AliquotasPISCOFINS;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
 public class RuleAliquotaPisCofins extends RuleModelo<AliquotasPISCOFINS> {
@@ -73,12 +74,6 @@ public class RuleAliquotaPisCofins extends RuleModelo<AliquotasPISCOFINS> {
 	}
 
 	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public AliquotasPISCOFINS insert(AliquotasPISCOFINS entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
@@ -90,11 +85,7 @@ public class RuleAliquotaPisCofins extends RuleModelo<AliquotasPISCOFINS> {
 		return null;
 	}
 
-	@Override
-	public String update(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 

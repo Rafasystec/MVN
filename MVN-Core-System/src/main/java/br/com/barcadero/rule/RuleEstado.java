@@ -1,11 +1,12 @@
 package br.com.barcadero.rule;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.barcadero.dao.DaoEstado;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
@@ -13,12 +14,8 @@ import br.com.barcadero.tables.Usuario;
 @Service
 public class RuleEstado extends RuleModelo<Estado> {
 
-	private DaoEstado daoEstado ;
 	@Autowired
-	public RuleEstado(DaoEstado daoEstado) {
-		// TODO Auto-generated constructor stub
-		this.daoEstado = daoEstado;
-	}
+	private DaoEstado daoEstado ;
 	
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -78,18 +75,6 @@ public class RuleEstado extends RuleModelo<Estado> {
 
 	@Override
 	public List<Estado> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

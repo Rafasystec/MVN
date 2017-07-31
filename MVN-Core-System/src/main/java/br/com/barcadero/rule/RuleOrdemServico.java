@@ -1,6 +1,5 @@
 package br.com.barcadero.rule;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,25 +9,20 @@ import br.com.barcadero.core.enums.EnumStatusOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServico;
 import br.com.barcadero.dao.DaoOrdemServicoItens;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.OrdemServico;
 import br.com.barcadero.tables.OrdemServicoItens;
-import br.com.barcadero.tables.Produto;
 
 @Service
 public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 
-	private DaoOrdemServico daoOrdemServico;
-	private DaoOrdemServicoItens daoOrdemServicoItens;
-	private RuleProduto ruleProduto;
-	
 	@Autowired
-	public RuleOrdemServico(DaoOrdemServico daoOrdemServico, DaoOrdemServicoItens daoOrdemServicoItens) {
-		System.out.println("Auto-generated constructor stub RuleOrdemServico");
-		this.daoOrdemServico 		= daoOrdemServico;
-		this.daoOrdemServicoItens	= daoOrdemServicoItens;
-	}
+	private DaoOrdemServico daoOrdemServico;
+	@Autowired
+	private DaoOrdemServicoItens daoOrdemServicoItens;
+//	@Autowired
+//	private RuleProduto ruleProduto;
+	
 //
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -100,18 +94,6 @@ public class RuleOrdemServico extends RuleModelo<OrdemServico> {
 
 	@Override
 	public List<OrdemServico> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

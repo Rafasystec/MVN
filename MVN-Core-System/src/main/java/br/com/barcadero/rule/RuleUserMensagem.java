@@ -11,7 +11,6 @@ import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.dao.DaoUserMensagem;
 import br.com.barcadero.dao.DaoUsuario;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.TmpUserMessage;
 import br.com.barcadero.tables.UserMensagens;
@@ -20,16 +19,17 @@ import br.com.barcadero.tables.Usuario;
 @Service
 public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 
-	
+	@Autowired
 	private DaoUserMensagem daoMensagem;
+	@Autowired
 	private DaoUsuario daoUsuario;
 	
-	@Autowired
-	public RuleUserMensagem(DaoUserMensagem daoMensagem,DaoUsuario daoUsuario) {
-		// TODO Auto-generated constructor stub
-		this.daoMensagem = daoMensagem;
-		this.daoUsuario = daoUsuario;
-	}
+//	@Autowired
+//	public RuleUserMensagem(DaoUserMensagem daoMensagem,DaoUsuario daoUsuario) {
+//		// TODO Auto-generated constructor stub
+//		this.daoMensagem = daoMensagem;
+//		this.daoUsuario = daoUsuario;
+//	}
 
 //	@Override
 //	public String insert(Entidade entidade) throws Exception {
@@ -112,18 +112,6 @@ public class RuleUserMensagem extends RuleModelo <UserMensagens>{
 
 	@Override
 	public List<UserMensagens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insert(Entidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String update(Entidade entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
