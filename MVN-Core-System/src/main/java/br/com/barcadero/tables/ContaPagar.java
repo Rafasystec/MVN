@@ -6,18 +6,15 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import br.com.barcadero.core.enums.EnumTipoContaPagar;
 @NamedQueries({
 	@NamedQuery(name=ContaPagar.FIND_ALL		 ,query="FROM ContaPagar"),
 	@NamedQuery(name=ContaPagar.FIND_BY_DTVENC	 ,query="FROM ContaPagar WHERE dtVencimento = :dtVenc"),
@@ -51,21 +48,28 @@ public class ContaPagar extends EntidadeLoja {
 	private int qtdDiasVenc;
 	@Column(name="total",nullable=false)
 	private BigDecimal total;
-	@Column(name="tipo",nullable=false)
-	@Enumerated(EnumType.ORDINAL)
-	private EnumTipoContaPagar tipo;
-	@Column(name="conta",nullable=false, length=15)
-	private String conta  = "";
-	@Column(name="pc_juros_am",nullable=false)
-	private BigDecimal pcJurosAM = new BigDecimal(0d);
+
+//	@Column(name="tipo",nullable=false)
+//	@Enumerated(EnumType.ORDINAL)
+//	private EnumTipoContaPagar tipo;
+	
+//	@Column(name="conta",nullable=false, length=15)
+//	private String conta  = "";
+	
+//	@Column(name="pc_juros_am",nullable=false)
+//	private BigDecimal pcJurosAM = new BigDecimal(0d);
+	
 	@Column(name="mora",nullable=false)
 	private BigDecimal mora  = new BigDecimal(0d);
-	@Column(name="mora_dia",nullable=false)
-	private BigDecimal moraDia = new BigDecimal(0d);
-	@Column(name="agencia_benef",nullable=false)
-	private long agenciaBenef = 0;
-	@Column(name="conta_benef",nullable=false)
-	private long contaBenef = 0;
+	
+//	@Column(name="mora_dia",nullable=false)
+//	private BigDecimal moraDia = new BigDecimal(0d);
+	
+//	@Column(name="agencia_benef",nullable=false)
+//	private long agenciaBenef = 0;
+//	@Column(name="conta_benef",nullable=false)
+//	private long contaBenef = 0;
+	
 	@Column(name="dt_emissao",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dtEmissao = new Date();
@@ -77,7 +81,11 @@ public class ContaPagar extends EntidadeLoja {
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name="cd_plano",referencedColumnName="codigo")
 	private PlanoConta planoConta;
-		
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="CD_CONTA_LANCAMENTO")
+	private ContaLancamento contaLancamento;
+	
 	public Date getDtVencimento() {
 		return dtVencimento;
 	}
@@ -96,47 +104,11 @@ public class ContaPagar extends EntidadeLoja {
 	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
-	public EnumTipoContaPagar getTipo() {
-		return tipo;
-	}
-	public void setTipo(EnumTipoContaPagar tipo) {
-		this.tipo = tipo;
-	}
-	public String getConta() {
-		return conta;
-	}
-	public void setConta(String conta) {
-		this.conta = conta;
-	}
-	public BigDecimal getPcJurosAM() {
-		return pcJurosAM;
-	}
-	public void setPcJurosAM(BigDecimal pcJurosAM) {
-		this.pcJurosAM = pcJurosAM;
-	}
 	public BigDecimal getMora() {
 		return mora;
 	}
 	public void setMora(BigDecimal mora) {
 		this.mora = mora;
-	}
-	public BigDecimal getMoraDia() {
-		return moraDia;
-	}
-	public void setMoraDia(BigDecimal moraDia) {
-		this.moraDia = moraDia;
-	}
-	public long getAgenciaBenef() {
-		return agenciaBenef;
-	}
-	public void setAgenciaBenef(long agenciaBenef) {
-		this.agenciaBenef = agenciaBenef;
-	}
-	public long getContaBenef() {
-		return contaBenef;
-	}
-	public void setContaBenef(long contaBenef) {
-		this.contaBenef = contaBenef;
 	}
 	public Date getDtEmissao() {
 		return dtEmissao;
@@ -162,6 +134,12 @@ public class ContaPagar extends EntidadeLoja {
 	}
 	public void setPlanoConta(PlanoConta planoConta) {
 		this.planoConta = planoConta;
+	}
+	public ContaLancamento getContaLancamento() {
+		return contaLancamento;
+	}
+	public void setContaLancamento(ContaLancamento contaLancamento) {
+		this.contaLancamento = contaLancamento;
 	}
 	
 }

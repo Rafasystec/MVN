@@ -1,5 +1,6 @@
 package br.com.barcadero.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +11,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
+import br.com.barcadero.rule.RuleCartaoDebitoCredito;
 import br.com.barcadero.rule.RuleContaLancamento;
+import br.com.barcadero.rule.RuleContaPagar;
+import br.com.barcadero.tables.CartaoCreditoDebito;
 import br.com.barcadero.tables.ContaLancamento;
 
 @ManagedBean
@@ -23,6 +27,10 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	private static final long serialVersionUID = -7676371071030680469L;
 	@ManagedProperty("#{ruleContaLancamento}")
 	private RuleContaLancamento ruleContaLancamento;
+	@ManagedProperty("#{ruleCartaoDebitoCredito}")
+	private RuleCartaoDebitoCredito ruleCartaoDebitoCredito;
+	@ManagedProperty("#{ruleContaPagar}")
+	private RuleContaPagar ruleContaPagar;
 	private ContaLancamento contaLancamento;
 	private ContaLancamento selectedContaLancamento;
 	private EnumCentroCusto[] centroCusto;
@@ -32,7 +40,7 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	@PostConstruct
 	private void init() {
 		System.out.println("Init view Lancamentos");
-		contaLancamento		= new ContaLancamento(getEmpresaLogada(), getUsuarioLogado(), getLojaLogada());
+		novoLancamento();
 		System.out.println("Fim init");
 	}
 
@@ -45,7 +53,13 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	@Override
 	public String salvar() throws Exception {
 		contaLancamento = ruleContaLancamento.insert(contaLancamento);
+		ruleContaPagar.gerarContaPagarCartao(contaLancamento);
+		novoLancamento();
 		return null;
+	}
+
+	private void novoLancamento() {
+		contaLancamento = new ContaLancamento(getEmpresaLogada(), getUsuarioLogado(), getLojaLogada());
 	}
 
 	@Override
@@ -134,6 +148,14 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 		}
 	}
 	
+	public List<CartaoCreditoDebito> getCartoesAtivos() {
+		try {
+			return ruleCartaoDebitoCredito.findByEmpresa(getEmpresaLogada());
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
+	}
+	
 	private boolean formasPgtoQueHabilitamCartao(EnumFormaPgto formaPgto) {
 		boolean result = false;
 		if(formaPgto == EnumFormaPgto.CARTAO_CREDITO){
@@ -144,6 +166,22 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 			result = true;
 		}
 		return result;
+	}
+
+	public RuleCartaoDebitoCredito getRuleCartaoDebitoCredito() {
+		return ruleCartaoDebitoCredito;
+	}
+
+	public void setRuleCartaoDebitoCredito(RuleCartaoDebitoCredito ruleCartaoDebitoCredito) {
+		this.ruleCartaoDebitoCredito = ruleCartaoDebitoCredito;
+	}
+
+	public RuleContaPagar getRuleContaPagar() {
+		return ruleContaPagar;
+	}
+
+	public void setRuleContaPagar(RuleContaPagar ruleContaPagar) {
+		this.ruleContaPagar = ruleContaPagar;
 	}
 
 }

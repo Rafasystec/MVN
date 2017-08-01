@@ -14,8 +14,18 @@ import br.com.barcadero.tables.CartaoCreditoDebito;
 @Component("cartaoCreditoDebitoConverter")
 public class CartaoCreditoDebitoConverter implements Converter,Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 732540050587659006L;
+	
 	@Autowired(required=true)
 	private RuleCartaoDebitoCredito ruleCartaoDebitoCredito;
+	
+	public CartaoCreditoDebitoConverter() {
+		System.out.println("Converter " + CartaoCreditoDebitoConverter.class.getName() + " .......... ON");
+	}
+	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		try {

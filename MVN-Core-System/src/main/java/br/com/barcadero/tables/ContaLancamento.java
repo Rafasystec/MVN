@@ -3,7 +3,6 @@ package br.com.barcadero.tables;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -61,8 +60,8 @@ public class ContaLancamento extends EntidadeLoja {
 	@Column(name="PARCELAS",nullable=false)
 	private int parcelas = 0;
 	
-	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="CODIGO_CARTAO",unique=true,nullable=true)
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="CODIGO_CARTAO",unique=false,nullable=true)
 	private CartaoCreditoDebito cartaoCreditoDebito;
 	
 	

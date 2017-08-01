@@ -11,12 +11,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
+import br.com.barcadero.core.db.util.HelperIniDataBase;
 import br.com.barcadero.core.enums.EnumCartaoBandeira;
 import br.com.barcadero.core.enums.EnumTipoCartao;
 import br.com.barcadero.core.enums.EnumTipoContaCartao;
 
 @NamedQueries({
-	@NamedQuery(name=CartaoCreditoDebito.FIND_ALL,query="FROM CartaoCreditoDebito WHERE empresa = :empresa")
+	@NamedQuery(name=CartaoCreditoDebito.FIND_ALL,query="FROM CartaoCreditoDebito WHERE empresa = :empresa AND flAtivo = :flAtivo")
 })
 @Entity
 @Table(name="CARTAO_CREDITO_DEBITO")
@@ -57,6 +60,13 @@ public class CartaoCreditoDebito extends EntidadeEmpresa {
 	@Column(name="BANDEIRA",nullable=false)
 	@Enumerated(EnumType.ORDINAL)
 	private EnumCartaoBandeira bandeira = EnumCartaoBandeira.OUTRA;
+	@Column(name="FL_ATIVO",nullable=false)
+	@ColumnDefault("'t'")
+	private boolean flAtivo = true;
+	@Column(name="DESCRICAO",nullable=false,length=30)
+	@ColumnDefault("''")
+	private String descricao = "";
+
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="CODIGO_BANCO",unique=true, referencedColumnName="CODIGO")
@@ -133,6 +143,18 @@ public class CartaoCreditoDebito extends EntidadeEmpresa {
 	}
 	public void setBanco(Bancos banco) {
 		this.banco = banco;
+	}
+	public boolean isFlAtivo() {
+		return flAtivo;
+	}
+	public void setFlAtivo(boolean flAtivo) {
+		this.flAtivo = flAtivo;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	

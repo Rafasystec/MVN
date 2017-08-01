@@ -21,7 +21,8 @@ public class DaoCartaoCreditoDebito extends DaoModelo<CartaoCreditoDebito> {
 	@Override
 	public List<CartaoCreditoDebito> findByEmpresa(Empresa empresa) throws Exception {
 		TypedQuery<CartaoCreditoDebito> qry = manager.createNamedQuery(CartaoCreditoDebito.FIND_ALL, CartaoCreditoDebito.class)
-				.setParameter(Entidade.PARAM_EMPRESA, empresa);
+				.setParameter(Entidade.PARAM_EMPRESA, empresa)
+				.setParameter("flAtivo", true);
 		return qry.getResultList();
 	}
 

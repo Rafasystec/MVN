@@ -13,8 +13,8 @@
 
 	<ui:define name="body">
 		<clx:buttonsCrud id="btnsUp" bean="#{beanContaLancamentos}"></clx:buttonsCrud>
-		<p:panel header="Lançamento de despesas">
-			<p:panelGrid id="pnlMain" columns="1">
+		<p:panel header="Lançamento de despesas" id="pnlMain">
+			<p:panelGrid  columns="1">
 				Data Vencimento
 				<clx:dateCalendar id="txtDtVencimento"
 					value="#{beanContaLancamentos.contaLancamento.dtVencimento}" />
@@ -33,8 +33,10 @@
 					required="true" requiredMessage="Informe o centro de custo">
 					<f:selectItem itemLabel="CENTRO DE CUSTO" itemValue="-1" />
 					<f:selectItems value="#{beanContaLancamentos.centroCusto}" var="centro" itemLabel="#{centro.descricao}"/>
-				</p:selectOneMenu>				
+				</p:selectOneMenu>			
 				Forma Pagamento:
+				
+				<p:panelGrid  id="pnlCartao" columns="1">
 				<p:selectOneMenu id="pagto"
 					value="#{beanContaLancamentos.contaLancamento.formaPgto}"
 					required="true"
@@ -42,20 +44,36 @@
 					<f:selectItem itemLabel="FORMA PAGAMENTO" itemValue="-1"/>
 					<f:selectItems value="#{beanContaLancamentos.formaPagamento}"
 						var="pgto" itemLabel="#{pgto.descricao}" />
-						<p:ajax event="change" listener="#{beanContaLancamentos.verificarSeMostraDadosCartao}" update="pnlMain,pnlDadosCartao"/>
+						<p:ajax event="change" listener="#{beanContaLancamentos.verificarSeMostraDadosCartao}" update="pnlCartao" />
 				</p:selectOneMenu>
 				
-				<p:panelGrid id="pnlDadosCartao" columns="2" rendered="#{beanContaLancamentos.habilitarDadosCartao}">
-					<p:outputLabel value="Número parcelas" for="txtParcelas"/>
-					<p:inputText id="txtParcelas" value="#{beanContaLancamentos.contaLancamento.parcelas}" maxlength="2" required="#{beanContaLancamentos.habilitarDadosCartao}"
-					requiredMessage="Informa as Parcelas mesmo que seja uma."
-					>
-						<f:convertNumber integerOnly="true"/>
+				<p:outputLabel value="Número parcelas" for="txtParcelas"
+						rendered="#{beanContaLancamentos.habilitarDadosCartao}" />
+					<p:inputText id="txtParcelas"
+						value="#{beanContaLancamentos.contaLancamento.parcelas}"
+						maxlength="2"
+						required="#{beanContaLancamentos.habilitarDadosCartao}"
+						requiredMessage="Informa as Parcelas mesmo que seja uma."
+						rendered="#{beanContaLancamentos.habilitarDadosCartao}">
+						<f:convertNumber integerOnly="true" />
 					</p:inputText>
-					<p:outputLabel value="Cartão" id="lblCartao" for="cboCartao"/>
-					
-				</p:panelGrid>
-				
+					<p:outputLabel value="Cartão" id="lblCartao" for="cboCartao" rendered="#{beanContaLancamentos.habilitarDadosCartao}"/>
+					<p:selectOneMenu id="cboCartao"
+						converter="#{cartaoCreditoDebitoConverter}"
+						value="#{beanContaLancamentos.contaLancamento.cartaoCreditoDebito}"
+						required="#{beanContaLancamentos.habilitarDadosCartao}"
+						rendered="#{beanContaLancamentos.habilitarDadosCartao}"
+						requiredMessage="Informe o cartão por favor">
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+						<f:selectItems var="cartao"
+							itemLabel="#{cartao.codigo} - #{cartao.descricao}"
+							value="#{beanContaLancamentos.cartoesAtivos}"
+							itemValue="#{cartao}" />
+					</p:selectOneMenu>
+					</p:panelGrid>
+			</p:panelGrid>
+			
+			<p:panelGrid columns="1">	
 				<p:inputTextarea id="descricao" value="#{beanContaLancamentos.contaLancamento.descricao}" required="true"
 				requiredMessage="Diga a descrição" placeholder="Breve descrição"/>
 			</p:panelGrid>
