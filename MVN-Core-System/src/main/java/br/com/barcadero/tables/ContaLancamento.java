@@ -56,9 +56,9 @@ public class ContaLancamento extends EntidadeLoja {
 	private EnumFormaPgto formaPgto = EnumFormaPgto.DINHEIRO;
 	@Column(name="DESCRICAO",nullable=false,length=60)
 	private String descricao= "";
-	@Column(name="VALOR_JUROS", scale=2, precision=10,nullable=true)
+	@Column(name="VALOR_JUROS", scale=2, precision=10,nullable=false)
 	private BigDecimal valorJuros = new BigDecimal("0.00");
-	@Column(name="PARCELAS",nullable=true)
+	@Column(name="PARCELAS",nullable=false)
 	private int parcelas = 0;
 	
 	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
@@ -97,47 +97,6 @@ public class ContaLancamento extends EntidadeLoja {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((centroCusto == null) ? 0 : centroCusto.hashCode());
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((formaPgto == null) ? 0 : formaPgto.hashCode());
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContaLancamento other = (ContaLancamento) obj;
-		if (centroCusto != other.centroCusto)
-			return false;
-		if (data == null) {
-			if (other.data != null)
-				return false;
-		} else if (!data.equals(other.data))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (formaPgto != other.formaPgto)
-			return false;
-		if (valor == null) {
-			if (other.valor != null)
-				return false;
-		} else if (!valor.equals(other.valor))
-			return false;
-		return true;
-	}
 
 	public Date getDtVencimento() {
 		return dtVencimento;
@@ -169,6 +128,70 @@ public class ContaLancamento extends EntidadeLoja {
 
 	public void setCartaoCreditoDebito(CartaoCreditoDebito cartaoCreditoDebito) {
 		this.cartaoCreditoDebito = cartaoCreditoDebito;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((cartaoCreditoDebito == null) ? 0 : cartaoCreditoDebito.hashCode());
+		result = prime * result + ((centroCusto == null) ? 0 : centroCusto.hashCode());
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((dtVencimento == null) ? 0 : dtVencimento.hashCode());
+		result = prime * result + ((formaPgto == null) ? 0 : formaPgto.hashCode());
+		result = prime * result + parcelas;
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		result = prime * result + ((valorJuros == null) ? 0 : valorJuros.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ContaLancamento other = (ContaLancamento) obj;
+		if (cartaoCreditoDebito == null) {
+			if (other.cartaoCreditoDebito != null)
+				return false;
+		} else if (!cartaoCreditoDebito.equals(other.cartaoCreditoDebito))
+			return false;
+		if (centroCusto != other.centroCusto)
+			return false;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!data.equals(other.data))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (dtVencimento == null) {
+			if (other.dtVencimento != null)
+				return false;
+		} else if (!dtVencimento.equals(other.dtVencimento))
+			return false;
+		if (formaPgto != other.formaPgto)
+			return false;
+		if (parcelas != other.parcelas)
+			return false;
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
+			return false;
+		if (valorJuros == null) {
+			if (other.valorJuros != null)
+				return false;
+		} else if (!valorJuros.equals(other.valorJuros))
+			return false;
+		return true;
 	}
 	
 	

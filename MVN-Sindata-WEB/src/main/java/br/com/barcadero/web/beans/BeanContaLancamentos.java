@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.behavior.AjaxBehavior;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
@@ -124,10 +124,12 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 		this.habilitarDadosCartao = habilitarDadosCartao;
 	}
 	
-	public void verificarSeMostraDadosCartao(final AjaxBehavior event) {
+	public void verificarSeMostraDadosCartao(final AjaxBehaviorEvent event) {
 		if(contaLancamento != null){
 			if(formasPgtoQueHabilitamCartao(contaLancamento.getFormaPgto())){
 				setHabilitarDadosCartao(true);
+			}else{
+				setHabilitarDadosCartao(false);
 			}
 		}
 	}

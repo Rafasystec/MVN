@@ -14,7 +14,7 @@
 	<ui:define name="body">
 		<clx:buttonsCrud id="btnsUp" bean="#{beanContaLancamentos}"></clx:buttonsCrud>
 		<p:panel header="Lançamento de despesas">
-			<p:panelGrid columns="1">
+			<p:panelGrid id="pnlMain" columns="1">
 				Data Vencimento
 				<clx:dateCalendar id="txtDtVencimento"
 					value="#{beanContaLancamentos.contaLancamento.dtVencimento}" />
@@ -42,14 +42,18 @@
 					<f:selectItem itemLabel="FORMA PAGAMENTO" itemValue="-1"/>
 					<f:selectItems value="#{beanContaLancamentos.formaPagamento}"
 						var="pgto" itemLabel="#{pgto.descricao}" />
-						<p:ajax event="change" />
+						<p:ajax event="change" listener="#{beanContaLancamentos.verificarSeMostraDadosCartao}" update="pnlMain,pnlDadosCartao"/>
 				</p:selectOneMenu>
 				
-				<p:panelGrid columns="2" rendered="#{beanContaLancamentos.habilitarDadosCartao}">
-					<p:outputLabel value="Parcela" for="txtParcelas"/>
-					<p:inputText id="txtParcelas" >
+				<p:panelGrid id="pnlDadosCartao" columns="2" rendered="#{beanContaLancamentos.habilitarDadosCartao}">
+					<p:outputLabel value="Número parcelas" for="txtParcelas"/>
+					<p:inputText id="txtParcelas" value="#{beanContaLancamentos.contaLancamento.parcelas}" maxlength="2" required="#{beanContaLancamentos.habilitarDadosCartao}"
+					requiredMessage="Informa as Parcelas mesmo que seja uma."
+					>
 						<f:convertNumber integerOnly="true"/>
 					</p:inputText>
+					<p:outputLabel value="Cartão" id="lblCartao" for="cboCartao"/>
+					
 				</p:panelGrid>
 				
 				<p:inputTextarea id="descricao" value="#{beanContaLancamentos.contaLancamento.descricao}" required="true"
@@ -62,9 +66,6 @@
 						<f:facet name="header">
             				Lançamentos do Mês
         				</f:facet>
-						<p:column headerText="Código">
-							<h:outputText value="#{lan.codigo}" />
-						</p:column>
 						<p:column headerText="Descrição">
 							<h:outputText value="#{lan.descricao}" />
 						</p:column>

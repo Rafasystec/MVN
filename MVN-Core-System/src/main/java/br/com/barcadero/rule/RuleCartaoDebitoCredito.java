@@ -23,7 +23,7 @@ public class RuleCartaoDebitoCredito extends RuleModelo<CartaoCreditoDebito> {
 
 	@Override
 	public CartaoCreditoDebito find(long codigo) throws Exception {
-		return daoCartaoCreditoDebito.find(codigo);
+		return daoCartaoCreditoDebito.find(codigo,CartaoCreditoDebito.class);
 	}
 
 	@Override
