@@ -18,7 +18,11 @@ import javax.persistence.TemporalType;
 
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
-
+/**
+ * Gera uma despesa que pode ser paga no futoro(vai gerar contas a pagar) ou pode ter sido um gasto imediato.
+ * @author Rafael Rocha
+ *
+ */
 @NamedQueries({
 	@NamedQuery(name=ContaLancamento.FIND_BY_MONTH,query="FROM ContaLancamento WHERE empresa = :empresa AND loja= :loja AND data BETWEEN :dtIni AND :dtFim ")
 })
