@@ -13,7 +13,6 @@ import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
 import br.com.barcadero.rule.RuleCartaoDebitoCredito;
 import br.com.barcadero.rule.RuleContaLancamento;
-import br.com.barcadero.rule.RuleContaPagar;
 import br.com.barcadero.tables.CartaoCreditoDebito;
 import br.com.barcadero.tables.ContaLancamento;
 
@@ -29,12 +28,12 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	private RuleContaLancamento ruleContaLancamento;
 	@ManagedProperty("#{ruleCartaoDebitoCredito}")
 	private RuleCartaoDebitoCredito ruleCartaoDebitoCredito;
-	@ManagedProperty("#{ruleContaPagar}")
-	private RuleContaPagar ruleContaPagar;
+//	@ManagedProperty("#{ruleContaPagar}")
+//	private RuleContaPagar ruleContaPagar;
 	private ContaLancamento contaLancamento;
 	private ContaLancamento selectedContaLancamento;
-	private EnumCentroCusto[] centroCusto;
-	private EnumFormaPgto[] formaPagamento;
+	//private EnumCentroCusto[] centroCusto;
+	//private EnumFormaPgto[] formaPagamento;
 	private boolean habilitarDadosCartao = false;
 	
 	@PostConstruct
@@ -53,7 +52,7 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	@Override
 	public String salvar() throws Exception {
 		contaLancamento = ruleContaLancamento.insert(contaLancamento);
-		ruleContaPagar.gerarContaPagarCartao(contaLancamento);
+		//ruleContaPagar.gerarContaPagarCartao(contaLancamento);
 		novoLancamento();
 		return null;
 	}
@@ -104,13 +103,13 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 		return EnumFormaPgto.values();
 	}
 
-	public void setCentroCusto(EnumCentroCusto[] centroCusto) {
-		this.centroCusto = centroCusto;
-	}
-
-	public void setFormaPagamento(EnumFormaPgto[] formaPagamento) {
-		this.formaPagamento = formaPagamento;
-	}
+//	public void setCentroCusto(EnumCentroCusto[] centroCusto) {
+//		this.centroCusto = centroCusto;
+//	}
+//
+//	public void setFormaPagamento(EnumFormaPgto[] formaPagamento) {
+//		this.formaPagamento = formaPagamento;
+//	}
 	
 	public List<ContaLancamento> getLancamentos() {
 		return this.ruleContaLancamento.getAllOfThisMonth(getEmpresaLogada(),getLojaLogada());
@@ -176,12 +175,12 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 		this.ruleCartaoDebitoCredito = ruleCartaoDebitoCredito;
 	}
 
-	public RuleContaPagar getRuleContaPagar() {
-		return ruleContaPagar;
-	}
-
-	public void setRuleContaPagar(RuleContaPagar ruleContaPagar) {
-		this.ruleContaPagar = ruleContaPagar;
-	}
+//	public RuleContaPagar getRuleContaPagar() {
+//		return ruleContaPagar;
+//	}
+//
+//	public void setRuleContaPagar(RuleContaPagar ruleContaPagar) {
+//		this.ruleContaPagar = ruleContaPagar;
+//	}
 
 }

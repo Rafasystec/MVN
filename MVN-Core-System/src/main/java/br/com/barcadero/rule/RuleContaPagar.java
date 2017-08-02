@@ -53,7 +53,7 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 	@Override
 	public List<ContaPagar> findByEmpresa(Empresa empresa) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return daoContaPagar.findByEmpresa(empresa);
 	}
 
 	@Override
@@ -99,10 +99,10 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 				Date dateVencimento 	= HandleDateHour.getDate(currentYear, currentMonth, diaMelhorCompra);
 				int equals = dateVencimento.compareTo(dataBase);
 				if(equals >= 0 ){
+					dateVencimento = HandleDateHour.getDate(currentYear, currentMonth +  i, cartaoCreditoDebito.getDiaPagtoCartao());
+				}else{
 					//NOTE: Vai cair so no proximo mes do cartao
 					dateVencimento = HandleDateHour.getDate(currentYear, currentMonth + (i + 1), cartaoCreditoDebito.getDiaPagtoCartao());
-				}else{
-					dateVencimento = HandleDateHour.getDate(currentYear, currentMonth +  i, cartaoCreditoDebito.getDiaPagtoCartao());
 				}
 				contaPagar.setDtVencimento(dateVencimento);
 				contaPagar.setDtEmissao(new Date());

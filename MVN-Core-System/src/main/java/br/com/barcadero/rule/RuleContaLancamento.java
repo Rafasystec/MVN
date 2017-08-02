@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.dao.DaoContaLancamento;
@@ -18,6 +19,8 @@ public class RuleContaLancamento extends RuleModelo<ContaLancamento> {
 
 	@Autowired
 	private DaoContaLancamento dao;
+	@Autowired
+	private RuleContaPagar ruleContaPagar;
 	
 	public RuleContaLancamento() {
 		if(this.dao != null){
@@ -58,8 +61,10 @@ public class RuleContaLancamento extends RuleModelo<ContaLancamento> {
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public ContaLancamento insert(ContaLancamento entidade) throws Exception {
+		ruleContaPagar.gerarContaPagarCartao(entidade);
 		return dao.insert(entidade);
 	}
 

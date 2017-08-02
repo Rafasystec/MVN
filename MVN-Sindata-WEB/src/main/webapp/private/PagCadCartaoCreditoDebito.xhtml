@@ -15,9 +15,8 @@
 		<clx:buttonsCrud id="btnsUp" bean="#{beanCartaoCreditoDebito}"></clx:buttonsCrud>
 		<p:panelGrid columns="4">
 			<p:outputLabel value="Número do Cartão" id="lblNumCartao" for="txtNumCartao"/>
-			<p:inputText id="txtNumCartao" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.numero}" required="true" placeholder="Somente Números">
-				
-			</p:inputText>
+			<p:inputText id="txtNumCartao" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.numero}" required="true" 
+			placeholder="Somente Números" maxlength="20"/>
 			
 			<p:outputLabel value="Banco" id="lblBanco" for="txtBanco"/>
 			<p:selectOneMenu id="txtBanco" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.banco}" required="true"	converter="#{bancosConverter}">
@@ -69,9 +68,12 @@
 				<p:outputLabel id="lblDgConta" value="Dígito Conta" for="spDgConta"/>
 				<p:spinner id="spDgConta" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.digito}" maxlength="2"  required="false" min="0" max="99" />
 			</p:panelGrid>
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="4">
 				<p:outputLabel id="lblTitular" value="Titular Conta/Cartão" for="txtTitular"/>
 				<p:inputText id="txtTitular"   value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.nomeTitular}" maxlength="60" required="false"></p:inputText>
+				<p:outputLabel id="lblDescricao" value="Breve Descrição" for="txtDescricao" />
+				<p:inputText id="txtDescricao" value="#{beanCartaoCreditoDebito.cartaoCreditoDebito.descricao}" required="true" 
+				requiredMessage="Forneça uma breve descrição" maxlength="30"/>
 			</p:panelGrid>
 		</p:panel>
 		<!-- Grid -->

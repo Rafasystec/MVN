@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import br.com.barcadero.core.db.util.HelperIniDataBase;
 import br.com.barcadero.core.enums.EnumCartaoBandeira;
 import br.com.barcadero.core.enums.EnumTipoCartao;
 import br.com.barcadero.core.enums.EnumTipoContaCartao;

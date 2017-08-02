@@ -12,86 +12,76 @@
 	<ui:param name="pageTitle" value="Contas a Pagar" />
 
 	<ui:define name="body">
-		<clx:buttonsCrud id="btnsUp" bean="#{contaPagar}"></clx:buttonsCrud>
-		<div class="form-group ">
-			<label class="control-label " for="dtVenc"> Data Vencimento </label>
-			<div class="input-group">
-				<div class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span>
-				</div>
 
-				<p:calendar id="dtVenc"
-					value="#{contaPagar.contaPagar.dtVencimento}" pattern="dd/MM/yyyy"
-					mask="99/99/9999" size="10" required="true"
-					requiredMessage="Informe a data de vencimento" />
+		<div class="ui-grid-row ui-grid-row-custom">
+			<div class="ui-grid-col-12">
+				<p:dataTable id="grid" var="anuncio" emptyMessage="Nenhuma Conta pra pagar esse mês"
+					scrollHeight="157" scrollable="true" resizableColumns="true"
+					value="#{beanContaPagar.}"
+					paginator="#{anuncioBean.anuncios.size() > 12}" rows="13"
+					paginatorPosition="bottom" tabindex="-1">
 
+					<f:facet name="header">
+						<p:outputLabel value="Anúncios" />
+					</f:facet>
 
+					<p:column headerText="Descrição" width="300">
+						<h:outputText value="#{anuncio.descricao}" />
+					</p:column>
+
+					<p:column headerText="Data inicial" width="100">
+						<h:outputText value="#{anuncio.dataInicial}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Data Final" width="100">
+						<h:outputText value="#{anuncio.dataVencimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Recife" />
+						</h:outputText>
+
+					</p:column>
+
+					<p:column headerText="Data Cadastro" width="100">
+						<h:outputText value="#{anuncio.dataCadastro}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Opções" style="text-align:center;width:20%">
+						<p:commandButton
+							actionListener="#{anuncioBean.selecionar(anuncio)}" type="submit"
+							styleClass="btn btn-info btn-lg" icon="fa fa-pencil-square-o"
+							title="Clique aqui para alterar alguma informação" ajax="true"
+							process="@this" update="@form">
+							<f:ajax render="@form" />
+						</p:commandButton>
+						<p:commandButton
+							action="#{anuncioBean.excluirAnuncio(anuncio.id)}" type="submit"
+							styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
+							title="Excluir o registro na grid" ajax="true" process="@this"
+							update="grid">
+							<f:ajax execute="@all" render="@form" />
+							<p:confirm header="Confirme a exclusão"
+								message="Você tem certeza que deseja excluir este registro?"
+								icon="fa fa-exclamation-triangle" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column style="text-align:center;" width="125">
+
+						<p:commandButton id="btnVisualizar" style="margin-right:4px"
+							styleClass="btn btn-info btn-lg" icon="fa fa-search">
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
 			</div>
-			<label class="control-label " for="dtEmissao"> Data Emissão </label>
-			<div class="input-group">
-				<div class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span>
-				</div>
-				<p:calendar id="dtEmissao"
-					value="#{contaPagar.contaPagar.dtEmissao}" pattern="dd/MM/yyyy"
-					maxlength="10" mask="99/99/9999" size="10" required="true"
-					requiredMessage="Informe a data de Emissão do documento" />
-			</div>
-			<label class="control-label " for="valor"> Valor </label>
-			<div class="input-group">
-				<div class="input-group-addon">
-					<span class="glyphicon glyphicon-usd"></span>
-				</div>
-				<p:inputText id="valor" value="#{contaPagar.contaPagar.total}"
-					required="true" requiredMessage="Informe o valor do documento" />
-			</div>
-
-
-
-			<label class="control-label " for="tipo"> Tipo </label>
-			<div class="input-group">
-				<p:selectOneMenu id="tipo" value="#{contaPagar.contaPagar.tipo}"
-					required="true" requiredMessage="Informe o tipo de conta">
-					<f:selectItems value="#{contaPagar.tipoConta}" />
-				</p:selectOneMenu>
-			</div>
-
-			<label class="control-label " for="valor"> Qtde dias Avisar </label>
-			<div class="input-group">
-				<div class="input-group-addon">
-					<span class="glyphicon glyphicon-bullhorn"></span>
-				</div>
-				<p:inputText id="qtdeDias"
-					alt="Quantidade de dias antes do vencimento para avisar que vai vencer."
-					value="#{contaPagar.contaPagar.qtdDiasVenc}" />
-			</div>
-
-			<label class="control-label " for="mora"> Mora </label>
-			<div class="input-group">
-				<div class="input-group-addon">
-					<span class="glyphicon glyphicon-usd"></span>
-				</div>
-				<p:inputText id="mora"
-					alt="Valor a ser acrescentado em caso de atraso"
-					value="#{contaPagar.contaPagar.mora}" />
-			</div>
-
-			<label class="control-label " for="nosso"> Nosso Número </label>
-			<div class="input-group">
-				<div class="input-group-addon">
-					<span class="glyphicon glyphicon-barcode"></span>
-				</div>
-				<p:inputText id="nossoNumero" alt="Nosso número"
-					value="#{contaPagar.contaPagar.nossoNumero}" maxlength="15" />
-			</div>
-			<label class="control-label " for="observacao"> Observação </label>
-			<div class="input-group">
-
-				<p:inputTextarea value="#{contaPagar.contaPagar.observacao}" />
-			</div>
-
 		</div>
-		<clx:buttonsCrud id="btnsBuutom" bean="#{contaPagar}"></clx:buttonsCrud>
+
 	</ui:define>
 </ui:composition>
 </html>

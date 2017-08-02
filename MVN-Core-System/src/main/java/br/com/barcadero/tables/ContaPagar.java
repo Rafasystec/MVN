@@ -19,7 +19,9 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name=ContaPagar.FIND_ALL		 ,query="FROM ContaPagar"),
 	@NamedQuery(name=ContaPagar.FIND_BY_DTVENC	 ,query="FROM ContaPagar WHERE dtVencimento = :dtVenc"),
 	@NamedQuery(name=ContaPagar.FIND_BY_CODE	 ,query="FROM ContaPagar WHERE codigo = :codigo"),
-	@NamedQuery(name=ContaPagar.FIND_VALID_COUNTS,query="FROM ContaPagar WHERE dtVencimento > :dtVenc")
+	@NamedQuery(name=ContaPagar.FIND_VALID_COUNTS,query="FROM ContaPagar WHERE dtVencimento > :dtVenc"),
+	@NamedQuery(name=ContaPagar.FIND_CURRENT_MONTH,query="FROM ContaPagar WHERE empresa =:empresa AND dtVencimento BETWEEN :dtIni AND :dtFim")
+	
 })
 @Entity
 @Table(name="CONTA_APAGAR")
@@ -38,6 +40,7 @@ public class ContaPagar extends EntidadeLoja {
 	public static final String FIND_BY_CODE			= "ContaPagar.findByCode";
 	public static final String FIND_BY_DTVENC 		= "ContaPagar.findByDtVencimento";
 	public static final String FIND_VALID_COUNTS 	= "ContaPagar.findValidCount";
+	public static final String FIND_CURRENT_MONTH 	= "br.com.barcadero.tables.ContaPagar.findCurrentMonth";
 	public static final String PARAM_DT_VENC 		= "dtVenc";
 	public static final String PARAM_CODIGO 		= "codigo";
 	
