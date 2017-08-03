@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -68,7 +69,9 @@ public class ContaLancamento extends EntidadeLoja {
 	@JoinColumn(name="CODIGO_CARTAO",unique=false,nullable=true)
 	private CartaoCreditoDebito cartaoCreditoDebito;
 	
-	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="COD_CENTRO_CUSTO",referencedColumnName="CODIGO")
+	private CentroDeCusto centroDeCusto;
 	
 	public Date getData() {
 		return data;
@@ -195,6 +198,14 @@ public class ContaLancamento extends EntidadeLoja {
 		} else if (!valorJuros.equals(other.valorJuros))
 			return false;
 		return true;
+	}
+
+	public CentroDeCusto getCentroDeCusto() {
+		return centroDeCusto;
+	}
+
+	public void setCentroDeCusto(CentroDeCusto centroDeCusto) {
+		this.centroDeCusto = centroDeCusto;
 	}
 	
 	

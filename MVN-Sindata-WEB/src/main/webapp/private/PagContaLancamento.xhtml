@@ -28,11 +28,11 @@
 				<clx:currency id="txtJuros"
 					value="#{beanContaLancamentos.contaLancamento.valorJuros}" />
 				Centro de Custo:
-				<p:selectOneMenu id="centro"
-					value="#{beanContaLancamentos.contaLancamento.centroCusto}"
+				<p:selectOneMenu id="centro" converter="#{centroDeCustoConverter}"
+					value="#{beanContaLancamentos.contaLancamento.centroDeCusto}"
 					required="true" requiredMessage="Informe o centro de custo">
 					<f:selectItem itemLabel="CENTRO DE CUSTO" itemValue="-1" />
-					<f:selectItems value="#{beanContaLancamentos.centroCusto}" var="centro" itemLabel="#{centro.descricao}"/>
+					<f:selectItems value="#{beanContaLancamentos.centroDeCusto}" var="centro" itemValue="#{centro}" itemLabel="#{centro.descricao}"/>
 				</p:selectOneMenu>			
 				Forma Pagamento:
 				

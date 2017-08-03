@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Contas a Receber" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanCentroDeCusto}"></clx:buttonsCrud>
+		<p:panelGrid columns="2">
+			<p:outputLabel id="lblDescrição" value="Descrição:" for="txtDescricao"/>
+			<p:inputText value="#{beanCentroDeCusto.centroDeCusto.descricao}" id="txtDescricao" required="true"/>
+			
+			<p:outputLabel id="lblTipo" value="Tipo:" for="cboTipo"/>
+			<p:selectOneMenu value="#{beanCentroDeCusto.centroDeCusto.tipo}" id="cboTipo">
+				<f:selectItems value="#{beanCentroDeCusto.tipoCentroCusto}"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel id="lblSaldoDespesa" value="Despesas anterior" for="txtSaldoDespesa"/>
+			<clx:currency value="#{beanCentroDeCusto.centroDeCusto.despesaAnterior}" id="txtSaldoDespesa" required="false"/>
+			
+			<p:outputLabel id="lblSaldoAnterior" value="Saldo Anterior" for="txtSaldoAnt" />
+			<clx:currency value="#{beanCentroDeCusto.centroDeCusto.saldoAnterior}" id="txtSaldoAnt" required="false"/>
+			
+		</p:panelGrid>
+		
+		<p:dataTable id="grid" var="centro"
+			value="#{beanCentroDeCusto.allCentroCusto}" resizableColumns="true"
+			style="margin-bottom:20px" selectionMode="single"
+			selection="#{beanCentroDeCusto.selectedCentroDeCusto}"
+			rowKey="#{centro.codigo}" rows="10" scrollable="true">
+
+			<f:facet name="header">
+            	Centro de custo
+        	</f:facet>
+			<p:column headerText="Descrição">
+				<h:outputText value="#{centro.descricao}" />
+			</p:column>
+			<p:column headerText="Tipo">
+				<h:outputText value="#{centro.tipo}" />
+			</p:column>
+			<p:column headerText="Status" >
+				<h:outputText value="#{centro.flAtivo}" />
+			</p:column>
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
+</html>

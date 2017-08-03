@@ -13,7 +13,7 @@ import br.com.barcadero.rule.RuleBancos;
 import br.com.barcadero.tables.Bancos;
 
 @Component("bancosConverter")
-public class BancosConverter implements Converter,Serializable {
+public class BancosConverter extends SuperConverter implements Converter,Serializable {
 
 	/**
 	 * 
@@ -56,12 +56,6 @@ public class BancosConverter implements Converter,Serializable {
 		this.ruleBancos = ruleBancos;
 	}
 	
-	private long getValueAsLong(String value) {
-		if(value!=null && !value.trim().isEmpty()){
-			return Long.parseLong(value);
-		}else{
-			return 0L;
-		}
-	}
+	
 
 }

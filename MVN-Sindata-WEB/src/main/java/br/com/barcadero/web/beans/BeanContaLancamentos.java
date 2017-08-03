@@ -12,8 +12,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
 import br.com.barcadero.rule.RuleCartaoDebitoCredito;
+import br.com.barcadero.rule.RuleCentroDeCusto;
 import br.com.barcadero.rule.RuleContaLancamento;
 import br.com.barcadero.tables.CartaoCreditoDebito;
+import br.com.barcadero.tables.CentroDeCusto;
 import br.com.barcadero.tables.ContaLancamento;
 
 @ManagedBean
@@ -28,12 +30,10 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	private RuleContaLancamento ruleContaLancamento;
 	@ManagedProperty("#{ruleCartaoDebitoCredito}")
 	private RuleCartaoDebitoCredito ruleCartaoDebitoCredito;
-//	@ManagedProperty("#{ruleContaPagar}")
-//	private RuleContaPagar ruleContaPagar;
+	@ManagedProperty("#{ruleCentroDeCusto}")
+	private RuleCentroDeCusto ruleCentroDeCusto;
 	private ContaLancamento contaLancamento;
 	private ContaLancamento selectedContaLancamento;
-	//private EnumCentroCusto[] centroCusto;
-	//private EnumFormaPgto[] formaPagamento;
 	private boolean habilitarDadosCartao = false;
 	
 	@PostConstruct
@@ -102,14 +102,6 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	public EnumFormaPgto[] getFormaPagamento() {
 		return EnumFormaPgto.values();
 	}
-
-//	public void setCentroCusto(EnumCentroCusto[] centroCusto) {
-//		this.centroCusto = centroCusto;
-//	}
-//
-//	public void setFormaPagamento(EnumFormaPgto[] formaPagamento) {
-//		this.formaPagamento = formaPagamento;
-//	}
 	
 	public List<ContaLancamento> getLancamentos() {
 		return this.ruleContaLancamento.getAllOfThisMonth(getEmpresaLogada(),getLojaLogada());
@@ -174,13 +166,21 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	public void setRuleCartaoDebitoCredito(RuleCartaoDebitoCredito ruleCartaoDebitoCredito) {
 		this.ruleCartaoDebitoCredito = ruleCartaoDebitoCredito;
 	}
+	
+	public List<CentroDeCusto> getCentroDeCusto() {
+		try {
+			return ruleCentroDeCusto.findByEmpresa(getEmpresaLogada());
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
+	}
 
-//	public RuleContaPagar getRuleContaPagar() {
-//		return ruleContaPagar;
-//	}
-//
-//	public void setRuleContaPagar(RuleContaPagar ruleContaPagar) {
-//		this.ruleContaPagar = ruleContaPagar;
-//	}
+	public RuleCentroDeCusto getRuleCentroDeCusto() {
+		return ruleCentroDeCusto;
+	}
+
+	public void setRuleCentroDeCusto(RuleCentroDeCusto ruleCentroDeCusto) {
+		this.ruleCentroDeCusto = ruleCentroDeCusto;
+	}
 
 }

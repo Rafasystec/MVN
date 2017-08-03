@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import br.com.barcadero.rule.RuleCartaoDebitoCredito;
 import br.com.barcadero.tables.CartaoCreditoDebito;
 @Component("cartaoCreditoDebitoConverter")
-public class CartaoCreditoDebitoConverter implements Converter,Serializable{
+public class CartaoCreditoDebitoConverter extends SuperConverter implements Converter,Serializable{
 
 	/**
 	 * 
@@ -55,11 +55,4 @@ public class CartaoCreditoDebitoConverter implements Converter,Serializable{
 		this.ruleCartaoDebitoCredito = ruleCartaoDebitoCredito;
 	}
 
-	private long getValueAsLong(String value) {
-		if(value!=null && !value.trim().isEmpty()){
-			return Long.parseLong(value);
-		}else{
-			return 0L;
-		}
-	}
 }

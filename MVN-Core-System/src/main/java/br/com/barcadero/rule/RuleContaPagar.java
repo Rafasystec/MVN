@@ -1,6 +1,7 @@
 package br.com.barcadero.rule;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -92,7 +93,7 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 		Date dataBase = new Date();
 		if(cartaoCreditoDebito.getTipoCartao() == EnumTipoCartao.CREDITO ){
 			int parcelas = contaLancamento.getParcelas();		
-			BigDecimal totalParcela = contaLancamento.getValor().divide(new BigDecimal(parcelas));
+			BigDecimal totalParcela = contaLancamento.getValor().divide(new BigDecimal(parcelas), 2, RoundingMode.HALF_UP);
 			for (int i = 0; i < parcelas; i++) {
 				ContaPagar contaPagar 	= new ContaPagar(contaLancamento.getLoja(), contaLancamento.getLoja().getUsuario());
 				int diaMelhorCompra 	= cartaoCreditoDebito.getDiaMelhorCompra();
