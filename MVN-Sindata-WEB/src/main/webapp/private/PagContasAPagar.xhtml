@@ -15,51 +15,41 @@
 
 		<div class="ui-grid-row ui-grid-row-custom">
 			<div class="ui-grid-col-12">
-				<p:dataTable id="grid" var="anuncio" emptyMessage="Nenhuma Conta pra pagar esse mês"
+				<p:dataTable id="grid" var="despesa" emptyMessage="Nenhuma Conta pra pagar esse mês"
 					scrollHeight="157" scrollable="true" resizableColumns="true"
-					value="#{beanContaPagar.}"
-					paginator="#{anuncioBean.anuncios.size() > 12}" rows="13"
+					value="#{beanContaPagar.contasAPagarDesteMes}"
+					paginator="#{beanContaPagar.contasAPagarDesteMes.size() > 12}" rows="13"
 					paginatorPosition="bottom" tabindex="-1">
 
 					<f:facet name="header">
-						<p:outputLabel value="Anúncios" />
+						<p:outputLabel value="Contas a pagar" />
 					</f:facet>
 
 					<p:column headerText="Descrição" width="300">
-						<h:outputText value="#{anuncio.descricao}" />
+						<h:outputText value="#{despesa.contaLancamento.descricao}" />
 					</p:column>
 
-					<p:column headerText="Data inicial" width="100">
-						<h:outputText value="#{anuncio.dataInicial}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
+					<p:column headerText="Vencimento" width="100">
+						<h:outputText value="#{despesa.dtVencimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
 								timeZone="America/Recife" />
 						</h:outputText>
 					</p:column>
-
-					<p:column headerText="Data Final" width="100">
-						<h:outputText value="#{anuncio.dataVencimento}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-								timeZone="America/Recife" />
-						</h:outputText>
-
-					</p:column>
-
-					<p:column headerText="Data Cadastro" width="100">
-						<h:outputText value="#{anuncio.dataCadastro}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-								timeZone="America/Recife" />
+					<p:column headerText="Valor $" style="text-align: right;width:115px;" >
+						<h:outputText value="#{despesa.total}" >
+						 	<f:convertNumber pattern="##,###.00" />
 						</h:outputText>
 					</p:column>
 					<p:column headerText="Opções" style="text-align:center;width:20%">
 						<p:commandButton
-							actionListener="#{anuncioBean.selecionar(anuncio)}" type="submit"
+							actionListener="#" type="submit"
 							styleClass="btn btn-info btn-lg" icon="fa fa-pencil-square-o"
 							title="Clique aqui para alterar alguma informação" ajax="true"
 							process="@this" update="@form">
 							<f:ajax render="@form" />
 						</p:commandButton>
 						<p:commandButton
-							action="#{anuncioBean.excluirAnuncio(anuncio.id)}" type="submit"
+							action="#" type="submit"
 							styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
 							title="Excluir o registro na grid" ajax="true" process="@this"
 							update="grid">

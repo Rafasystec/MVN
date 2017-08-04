@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="Contas a Receber" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanContaReceber}"></clx:buttonsCrud>
+		<p:panel header="Contas a Receber">
+			<clx:dateCalendar  id="txtDtPrevisa" value="#{beanContaReceber.conta.dtPrevisao}" />
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

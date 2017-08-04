@@ -63,7 +63,7 @@ public class ContaLancamento extends EntidadeLoja {
 	@Column(name="VALOR_JUROS", scale=2, precision=10,nullable=false)
 	private BigDecimal valorJuros = new BigDecimal("0.00");
 	@Column(name="PARCELAS",nullable=false)
-	private int parcelas = 0;
+	private int parcelas = 1;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="CODIGO_CARTAO",unique=false,nullable=true)
@@ -101,6 +101,9 @@ public class ContaLancamento extends EntidadeLoja {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
+		if(descricao != null){
+			descricao = descricao.toUpperCase();
+		}
 		this.descricao = descricao;
 	}
 

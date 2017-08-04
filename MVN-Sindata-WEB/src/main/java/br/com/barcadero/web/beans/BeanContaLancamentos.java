@@ -52,7 +52,6 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	@Override
 	public String salvar() throws Exception {
 		contaLancamento = ruleContaLancamento.insert(contaLancamento);
-		//ruleContaPagar.gerarContaPagarCartao(contaLancamento);
 		novoLancamento();
 		return null;
 	}

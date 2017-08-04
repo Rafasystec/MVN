@@ -50,29 +50,9 @@ public class ContaPagar extends EntidadeLoja {
 	@Column(name="qtd_dias_venc",nullable=false)
 	private int qtdDiasVenc;
 	@Column(name="total",nullable=false)
-	private BigDecimal total;
-
-//	@Column(name="tipo",nullable=false)
-//	@Enumerated(EnumType.ORDINAL)
-//	private EnumTipoContaPagar tipo;
-	
-//	@Column(name="conta",nullable=false, length=15)
-//	private String conta  = "";
-	
-//	@Column(name="pc_juros_am",nullable=false)
-//	private BigDecimal pcJurosAM = new BigDecimal(0d);
-	
+	private BigDecimal total = new BigDecimal("0.00");
 	@Column(name="mora",nullable=false)
 	private BigDecimal mora  = new BigDecimal(0d);
-	
-//	@Column(name="mora_dia",nullable=false)
-//	private BigDecimal moraDia = new BigDecimal(0d);
-	
-//	@Column(name="agencia_benef",nullable=false)
-//	private long agenciaBenef = 0;
-//	@Column(name="conta_benef",nullable=false)
-//	private long contaBenef = 0;
-	
 	@Column(name="dt_emissao",nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dtEmissao = new Date();
@@ -80,6 +60,8 @@ public class ContaPagar extends EntidadeLoja {
 	private String nossoNumero = "000000000000000";
 	@Column(name="observacao",nullable=false,length=80)
 	private String observacao = "";
+	@Column(name="NUMERO_PARCELA")
+	private int numeroParcela = 0;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name="cd_plano",referencedColumnName="codigo")
@@ -143,6 +125,12 @@ public class ContaPagar extends EntidadeLoja {
 	}
 	public void setContaLancamento(ContaLancamento contaLancamento) {
 		this.contaLancamento = contaLancamento;
+	}
+	public int getNumeroParcela() {
+		return numeroParcela;
+	}
+	public void setNumeroParcela(int numeroParcela) {
+		this.numeroParcela = numeroParcela;
 	}
 	
 }

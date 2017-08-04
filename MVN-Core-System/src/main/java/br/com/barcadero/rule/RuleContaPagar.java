@@ -95,6 +95,7 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 			int parcelas = contaLancamento.getParcelas();		
 			BigDecimal totalParcela = contaLancamento.getValor().divide(new BigDecimal(parcelas), 2, RoundingMode.HALF_UP);
 			for (int i = 0; i < parcelas; i++) {
+				int numeroDaParcela = i + 1;
 				ContaPagar contaPagar 	= new ContaPagar(contaLancamento.getLoja(), contaLancamento.getLoja().getUsuario());
 				int diaMelhorCompra 	= cartaoCreditoDebito.getDiaMelhorCompra();
 				Date dateVencimento 	= HandleDateHour.getDate(currentYear, currentMonth, diaMelhorCompra);
@@ -108,10 +109,11 @@ public class RuleContaPagar extends RuleModelo<ContaPagar> {
 				contaPagar.setDtVencimento(dateVencimento);
 				contaPagar.setDtEmissao(new Date());
 				contaPagar.setEmpresa(contaLancamento.getEmpresa());
-				contaPagar.setObservacao("GERADO AUTOMATICAMENTE POR LANÇAMENTO EM CARTÃO DE CRÉDITO");
+				contaPagar.setObservacao(cartaoCreditoDebito.getDescricao() + "- PARCELA " + numeroDaParcela + " DE " + parcelas);
 				contaPagar.setQtdDiasVenc(3);
 				contaPagar.setTotal(totalParcela);
 				contaPagar.setContaLancamento(contaLancamento);
+				contaPagar.setNumeroParcela(numeroDaParcela);
 				daoContaPagar.insert(contaPagar);
 			}
 
