@@ -4,19 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+
+import org.primefaces.event.TabChangeEvent;
 
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
+import br.com.barcadero.core.enums.EnumNaturezaReceita;
+import br.com.barcadero.core.enums.EnumTipoReceita;
 import br.com.barcadero.rule.RuleCartaoDebitoCredito;
 import br.com.barcadero.rule.RuleCentroDeCusto;
 import br.com.barcadero.rule.RuleContaLancamento;
 import br.com.barcadero.tables.CartaoCreditoDebito;
 import br.com.barcadero.tables.CentroDeCusto;
 import br.com.barcadero.tables.ContaLancamento;
+import br.com.barcadero.tables.Receita;
 
 @ManagedBean
 @ViewScoped
@@ -34,13 +41,16 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	private RuleCentroDeCusto ruleCentroDeCusto;
 	private ContaLancamento contaLancamento;
 	private ContaLancamento selectedContaLancamento;
+	private Receita receita;
 	private boolean habilitarDadosCartao = false;
+	private boolean requiredDespesas = true;
 	
 	@PostConstruct
 	private void init() {
-		System.out.println("Init view Lancamentos");
+		//System.out.println("Init view Lancamentos");
 		novoLancamento();
-		System.out.println("Fim init");
+		novaReceita();
+		//System.out.println("Fim init");
 	}
 
 	@Override
@@ -51,11 +61,20 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 
 	@Override
 	public String salvar() throws Exception {
-		contaLancamento = ruleContaLancamento.insert(contaLancamento);
-		novoLancamento();
+		if(isRequiredDespesas()){
+			contaLancamento = ruleContaLancamento.insert(contaLancamento);
+			novoLancamento();
+		}else{
+			receita			= null;
+			novaReceita();
+		}
+		
 		return null;
 	}
 
+	private void novaReceita() {
+		receita = new Receita(getEmpresaLogada(), getUsuarioLogado(), getLojaLogada());
+	}
 	private void novoLancamento() {
 		contaLancamento = new ContaLancamento(getEmpresaLogada(), getUsuarioLogado(), getLojaLogada());
 	}
@@ -96,6 +115,14 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	
 	public EnumCentroCusto[] getCentroCusto() {
 		return EnumCentroCusto.values();
+	}
+	
+	public EnumTipoReceita[] getTipoReceita() {
+		return EnumTipoReceita.values();
+	}
+	
+	public EnumNaturezaReceita[] getNaturezaReceita() {
+		return EnumNaturezaReceita.values();
 	}
 	
 	public EnumFormaPgto[] getFormaPagamento() {
@@ -180,6 +207,37 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 
 	public void setRuleCentroDeCusto(RuleCentroDeCusto ruleCentroDeCusto) {
 		this.ruleCentroDeCusto = ruleCentroDeCusto;
+	}
+	
+	public void onTabChange(TabChangeEvent event) {
+		String tabId = event.getTab().getId();
+		String title = event.getTab().getTitle();
+		String message = "";
+		if(tabId.equalsIgnoreCase("tabDespesa")){
+			message = "Lance as suas depesas";
+			setRequiredDespesas(true);
+		}else{
+			message = "Lance as suas receitas";
+			setRequiredDespesas(false);
+		}
+		FacesMessage msg = new FacesMessage(title, message);
+		FacesContext.getCurrentInstance().addMessage("growl", msg);
+	}
+
+	public boolean isRequiredDespesas() {
+		return requiredDespesas;
+	}
+
+	public void setRequiredDespesas(boolean requiredDespesas) {
+		this.requiredDespesas = requiredDespesas;
+	}
+
+	public Receita getReceita() {
+		return receita;
+	}
+
+	public void setReceita(Receita receita) {
+		this.receita = receita;
 	}
 
 }
