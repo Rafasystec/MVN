@@ -20,10 +20,12 @@ import br.com.barcadero.core.enums.EnumTipoReceita;
 import br.com.barcadero.rule.RuleCartaoDebitoCredito;
 import br.com.barcadero.rule.RuleCentroDeCusto;
 import br.com.barcadero.rule.RuleContaLancamento;
+import br.com.barcadero.rule.RuleReceita;
 import br.com.barcadero.tables.CartaoCreditoDebito;
 import br.com.barcadero.tables.CentroDeCusto;
 import br.com.barcadero.tables.ContaLancamento;
 import br.com.barcadero.tables.Receita;
+import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @ViewScoped
@@ -39,6 +41,11 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 	private RuleCartaoDebitoCredito ruleCartaoDebitoCredito;
 	@ManagedProperty("#{ruleCentroDeCusto}")
 	private RuleCentroDeCusto ruleCentroDeCusto;
+	@ManagedProperty("#{ruleReceita}")
+	private RuleReceita ruleReceita;
+	//---------------------------------------------------
+	//Beans
+	//---------------------------------------------------
 	private ContaLancamento contaLancamento;
 	private ContaLancamento selectedContaLancamento;
 	private Receita receita;
@@ -65,11 +72,22 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 			contaLancamento = ruleContaLancamento.insert(contaLancamento);
 			novoLancamento();
 		}else{
-			receita			= null;
-			novaReceita();
+			if(validarReceita()){
+				receita			= ruleReceita.insert(receita);
+				novaReceita();
+				HandleMessage.info("Receita Salva com sucesso");
+			}
 		}
 		
 		return null;
+	}
+	
+	public boolean validarReceita() {
+		if(receita == null){
+			HandleMessage.error("Erro de validação da Receita", "O objeto não foi instaciado.");
+			return false;
+		}
+		return true;
 	}
 
 	private void novaReceita() {
@@ -238,6 +256,14 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 
 	public void setReceita(Receita receita) {
 		this.receita = receita;
+	}
+
+	public RuleReceita getRuleReceita() {
+		return ruleReceita;
+	}
+
+	public void setRuleReceita(RuleReceita ruleReceita) {
+		this.ruleReceita = ruleReceita;
 	}
 
 }

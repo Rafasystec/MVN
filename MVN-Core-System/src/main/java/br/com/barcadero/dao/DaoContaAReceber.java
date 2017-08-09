@@ -2,7 +2,7 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import br.com.barcadero.tables.ContaReceber;
 import br.com.barcadero.tables.Empresa;
@@ -13,20 +13,15 @@ import br.com.barcadero.tables.Loja;
  * @author root
  * @since 1.0 dia 26/06/2016 as 17:36
  */
+@Repository
 public class DaoContaAReceber extends DaoModelo <ContaReceber>{
 
-
-	
-
-	public DaoContaAReceber(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	public DaoContaAReceber() {
 	}
 
 	@Override
 	public ContaReceber find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return find(codigo, ContaReceber.class);
 	}
 
 	@Override

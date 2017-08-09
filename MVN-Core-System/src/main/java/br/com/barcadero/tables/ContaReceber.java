@@ -3,8 +3,13 @@ package br.com.barcadero.tables;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,25 +26,24 @@ public class ContaReceber extends EntidadeEmpresa {
 	
 	private static final long serialVersionUID = -3229007342790706377L;
 	@Column(name="DT_PREVISAO")
-	private Date dtPrevisao;
+	private Date dtPrevisao = new Date();
 	@Column(name="DT_VENCIMENTO")
-	private Date dtVencimento;
-	@Column(name="VALOR_RECEBER")
-	private BigDecimal valorAReceber;
+	private Date dtVencimento = new Date();
+	@Column(name="VALOR_RECEBER",scale=2,precision=14)
+	private BigDecimal valorAReceber = new BigDecimal("0.00");
 	@Column(name="NR_NOTA_FISCAL")
-	private String nrNotaFiscal;
-	@Column(name="NR")
-	private long nrOS;
-	@Column(name="")
-	private String descricao;
-	@Column(name="")
-	private long codCliente;
-	@Column(name="")
-	private long codCentroCusto;
-	@Column(name="")
-	private long codBanco;
-	@Column(name="")
-	private long codPlanoConta;
+	private String nrNotaFiscal = "00000";
+	@Column(name="DESCRICAO", length=120)
+	private String descricao = "";
+
+	
+	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@JoinColumn(name="CD_PLANO_CONTA",referencedColumnName="codigo")
+	private PlanoConta planoConta;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="CD_RECEITA")
+	private Receita receita;
 	
 	public Date getDtPrevisao() {
 		return dtPrevisao;
@@ -65,40 +69,23 @@ public class ContaReceber extends EntidadeEmpresa {
 	public void setNrNotaFiscal(String nrNotaFiscal) {
 		this.nrNotaFiscal = nrNotaFiscal;
 	}
-	public long getNrOS() {
-		return nrOS;
-	}
-	public void setNrOS(long nrOS) {
-		this.nrOS = nrOS;
-	}
 	public String getDescricao() {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public long getCodCliente() {
-		return codCliente;
+	public PlanoConta getPlanoConta() {
+		return planoConta;
 	}
-	public void setCodCliente(long codCliente) {
-		this.codCliente = codCliente;
+	public void setPlanoConta(PlanoConta planoConta) {
+		this.planoConta = planoConta;
 	}
-	public long getCodCentroCusto() {
-		return codCentroCusto;
+	public Receita getReceita() {
+		return receita;
 	}
-	public void setCodCentroCusto(long codCentroCusto) {
-		this.codCentroCusto = codCentroCusto;
+	public void setReceita(Receita receita) {
+		this.receita = receita;
 	}
-	public long getCodBanco() {
-		return codBanco;
-	}
-	public void setCodBanco(long codBanco) {
-		this.codBanco = codBanco;
-	}
-	public long getCodPlanoConta() {
-		return codPlanoConta;
-	}
-	public void setCodPlanoConta(long codPlanoConta) {
-		this.codPlanoConta = codPlanoConta;
-	}
+
 }

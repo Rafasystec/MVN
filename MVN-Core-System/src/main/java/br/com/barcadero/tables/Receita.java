@@ -49,6 +49,9 @@ public class Receita extends EntidadeLoja {
 	private String descricao = "";
 	@Column(name="NATUREZA",nullable=false)
 	private EnumNaturezaReceita naturezaReceita = EnumNaturezaReceita.VARIAVEL;
+	//Se a natureza da receita for fixa
+	@Column(name="DIA_BASE")
+	private int diaBase = 1;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="COD_CENTRO_CUSTO",referencedColumnName="CODIGO")
@@ -104,6 +107,14 @@ public class Receita extends EntidadeLoja {
 
 	public void setDtBaseRecebimento(Date dtBaseRecebimento) {
 		this.dtBaseRecebimento = dtBaseRecebimento;
+	}
+
+	public int getDiaBase() {
+		return diaBase;
+	}
+
+	public void setDiaBase(int diaBase) {
+		this.diaBase = diaBase;
 	}
 	
 }

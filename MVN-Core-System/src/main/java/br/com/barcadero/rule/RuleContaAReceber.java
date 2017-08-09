@@ -2,24 +2,30 @@ package br.com.barcadero.rule;
 
 import java.util.List;
 
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.barcadero.dao.DaoContaAReceber;
 import br.com.barcadero.tables.ContaReceber;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 
+@Service
 public class RuleContaAReceber extends RuleModelo<ContaReceber> {
 
-	public RuleContaAReceber(Empresa empresa, Loja loja, Session session) {
-		super(empresa, loja, session);
-		// TODO Auto-generated constructor stub
+	@Autowired
+	private DaoContaAReceber daoContaAReceber;
+	
+	public RuleContaAReceber() {
+		
 	}
+	
 
+	@Transactional
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoContaAReceber.delete(codigo);
 	}
 
 	@Override
@@ -48,14 +54,22 @@ public class RuleContaAReceber extends RuleModelo<ContaReceber> {
 
 	@Override
 	public ContaReceber insert(ContaReceber entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoContaAReceber.insert(entidade);
 	}
 
 	@Override
 	public ContaReceber update(ContaReceber entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoContaAReceber.update(entidade);
+	}
+
+
+	public DaoContaAReceber getDaoContaAReceber() {
+		return daoContaAReceber;
+	}
+
+
+	public void setDaoContaAReceber(DaoContaAReceber daoContaAReceber) {
+		this.daoContaAReceber = daoContaAReceber;
 	}
 
 }
