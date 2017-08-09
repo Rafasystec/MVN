@@ -22,26 +22,26 @@
 					<p:panelGrid columns="4" styleClass="noBorder">
 						<p:outputLabel value="Data Vencimento" for="txtDtVencimento" />
 
-						<clx:dateCalendar id="txtDtVencimento"
+						<clx:dateCalendar id="txtDtVencimento" required="#{beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.contaLancamento.dtVencimento}" />
 
 						<p:outputLabel value="Data despesa" for="txtData" />
-						<clx:dateCalendar id="txtData"
+						<clx:dateCalendar id="txtData" required="#{beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.contaLancamento.data}" />
 
 						<p:outputLabel value="Valor:" for="txtValor" />
-						<clx:currency id="txtValor"
+						<clx:currency id="txtValor" required="#{beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.contaLancamento.valor}" />
 
 						<p:outputLabel value="Juros:" for="txtJuros" />
-						<clx:currency id="txtJuros"
+						<clx:currency id="txtJuros" required="false"
 							value="#{beanContaLancamentos.contaLancamento.valorJuros}" />
 
 						<p:outputLabel value="Centro de Custo:" for="cboCentroCusto" />
 						<p:selectOneMenu id="cboCentroCusto"
 							converter="#{centroDeCustoConverter}"
 							value="#{beanContaLancamentos.contaLancamento.centroDeCusto}"
-							required="true" requiredMessage="Informe o centro de custo">
+							required="#{beanContaLancamentos.requiredDespesas}" requiredMessage="Informe o centro de custo">
 							<f:selectItem itemLabel="CENTRO DE CUSTO" itemValue="-1" />
 							<f:selectItems value="#{beanContaLancamentos.centroDeCusto}"
 								var="centro" itemValue="#{centro}"
@@ -52,7 +52,7 @@
 						<p:panelGrid id="pnlCartao" columns="1" styleClass="noBorder">
 							<p:selectOneMenu id="pagto"
 								value="#{beanContaLancamentos.contaLancamento.formaPgto}"
-								required="true"
+								required="#{beanContaLancamentos.requiredDespesas}"
 								requiredMessage="Informe qual foi a forma de pagamento">
 								<f:selectItem itemLabel="FORMA PAGAMENTO" itemValue="-1" />
 								<f:selectItems value="#{beanContaLancamentos.formaPagamento}"
@@ -92,7 +92,7 @@
 					<p:panelGrid columns="1">
 						<p:inputTextarea id="descricao"
 							value="#{beanContaLancamentos.contaLancamento.descricao}"
-							required="true" requiredMessage="Diga a descrição"
+							required="#{beanContaLancamentos.requiredDespesas}" requiredMessage="Diga a descrição"
 							placeholder="Breve descrição" />
 					</p:panelGrid>
 					<p:panel header="Lançamentos do Mês">
@@ -131,11 +131,11 @@
 				<p:panel header="Lançamento de despesas" id="pnlMainReceita">
 					<p:panelGrid columns="4" styleClass="noBorder">
 						<p:outputLabel value="Data:" for="txtDtReceita" />
-						<clx:dateCalendar id="txtDtReceita"
+						<clx:dateCalendar id="txtDtReceita" required="#{!beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.receita.dtDaReceita}" />
 
 						<p:outputLabel value="Data Base" for="txtDataBase" />
-						<clx:dateCalendar id="txtDataBase"
+						<clx:dateCalendar id="txtDataBase" required="#{!beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.receita.dtBaseRecebimento}" />
 
 						<p:outputLabel value="Valor:" for="txtValorReceita" />
@@ -144,26 +144,26 @@
 
 						<p:outputLabel value="Tipo:" />
 						<p:selectOneMenu value="#{beanContaLancamentos.receita.tipo}"
-							id="cboTipoReceita">
+							id="cboTipoReceita" required="#{!beanContaLancamentos.requiredDespesas}">
 							<f:selectItems value="#{beanContaLancamentos.tipoReceita}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Natureza:" />
 						<p:selectOneMenu
 							value="#{beanContaLancamentos.receita.naturezaReceita}"
-							id="cboNaturezaRec">
+							id="cboNaturezaRec" required="#{!beanContaLancamentos.requiredDespesas}">
 							<f:selectItems value="#{beanContaLancamentos.naturezaReceita}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Descrição" for="txtDescReceita" />
-						<p:inputTextarea id="txtDescReceita"
+						<p:inputTextarea id="txtDescReceita" required="#{!beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.receita.descricao}" />
 
 						<p:outputLabel value="Centro de Custo:" for="cboCentroCustoRec" />
 						<p:selectOneMenu id="cboCentroCustoRec"
 							converter="#{centroDeCustoConverter}"
 							value="#{beanContaLancamentos.receita.centroDeCusto}"
-							required="true" requiredMessage="Informe o centro de custo">
+							required="#{!beanContaLancamentos.requiredDespesas}" requiredMessage="Informe o centro de custo">
 							<f:selectItem itemLabel="CENTRO DE CUSTO" itemValue="-1" />
 							<f:selectItems value="#{beanContaLancamentos.centroDeCusto}"
 								var="centro" itemValue="#{centro}"
