@@ -13,6 +13,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.event.TabChangeEvent;
 
+import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.core.enums.EnumCentroCusto;
 import br.com.barcadero.core.enums.EnumFormaPgto;
 import br.com.barcadero.core.enums.EnumNaturezaReceita;
@@ -264,6 +265,10 @@ public class BeanContaLancamentos extends SuperBean<ContaLancamento> {
 
 	public void setRuleReceita(RuleReceita ruleReceita) {
 		this.ruleReceita = ruleReceita;
+	}
+	
+	public List<String> getDiasDoMes() {
+		return HandleDateHour.getDaysList();
 	}
 
 }

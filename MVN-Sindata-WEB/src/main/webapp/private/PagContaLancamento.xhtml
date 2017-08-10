@@ -96,7 +96,7 @@
 							placeholder="Breve descrição" />
 					</p:panelGrid>
 					<p:panel header="Lançamentos do Mês">
-						<p:dataTable id="lancamentos" var="lan"
+						<p:dataTable id="lancamentos" var="lan" paginator="true"
 							value="#{beanContaLancamentos.lancamentos}"
 							resizableColumns="true" style="margin-bottom:20px"
 							selectionMode="single"
@@ -135,9 +135,10 @@
 							value="#{beanContaLancamentos.receita.dtDaReceita}" />
 
 						<p:outputLabel value="Data Base" for="txtDataBase" />
-						<clx:dateCalendar id="txtDataBase" required="#{!beanContaLancamentos.requiredDespesas}"
-							value="#{beanContaLancamentos.receita.dtBaseRecebimento}" />
-
+						<p:selectOneMenu value="#{beanContaLancamentos.receita.diaBase}">
+							<f:selectItems value="#{beanContaLancamentos.diasDoMes}" var="dia" itemLabel="#{dia}" itemValue="#{dia}"/>
+						</p:selectOneMenu>
+						
 						<p:outputLabel value="Valor:" for="txtValorReceita" />
 						<clx:currency id="txtValorReceita"
 							value="#{beanContaLancamentos.receita.valor}" />
@@ -159,7 +160,7 @@
 						<p:inputTextarea id="txtDescReceita" required="#{!beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.receita.descricao}" />
 
-						<p:outputLabel value="Centro de Custo:" for="cboCentroCustoRec" />
+						<p:outputLabel value="Centro de Lucro:" for="cboCentroCustoRec" />
 						<p:selectOneMenu id="cboCentroCustoRec"
 							converter="#{centroDeCustoConverter}"
 							value="#{beanContaLancamentos.receita.centroDeCusto}"
@@ -169,10 +170,7 @@
 								var="centro" itemValue="#{centro}"
 								itemLabel="#{centro.descricao}" />
 						</p:selectOneMenu>
-
 					</p:panelGrid>
-
-
 				</p:panel>
 			</p:tab>
 		</p:tabView>
