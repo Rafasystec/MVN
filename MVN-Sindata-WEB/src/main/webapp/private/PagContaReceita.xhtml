@@ -8,14 +8,73 @@
 <ui:composition template="../templates/main.xhtml">
 
 	<ui:param name="activeDashboard" value="active" />
-	<ui:param name="pageIcon" value="hand-o-right" />
-	<ui:param name="pageTitle" value="Contas a Receber" />
+	<ui:param name="pageIcon" value="chevron-circle-right" />
+	<ui:param name="pageTitle" value="Receitas" />
 
 	<ui:define name="body">
-		<clx:buttonsCrud id="btnsUp" bean="#{beanContaReceber}"></clx:buttonsCrud>
-		<p:panel header="Contas a Receber">
-			<clx:dateCalendar  id="txtDtPrevisa" value="#{beanContaReceber.conta.dtPrevisao}" />
-		</p:panel>
+		
+		 <p:accordionPanel>
+		<ui:remove>
+        <p:ajax event="tabChange" listener="#{tabbedView.onTabChange}"
+				update="msg" />
+        <p:ajax event="tabClose" listener="#{tabbedView.onTabClose}"
+				update="msg" />
+		</ui:remove>
+ 		<!-- Tab das receitas fixas do mes -->
+        <p:tab title="Receitas Fixas">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:panel header="Receitas fixas">
+						<p:dataTable id="receitas" var="receita" paginator="true"
+							value="#{beanReceita.receitasFixas}"
+							resizableColumns="true" style="margin-bottom:20px"
+							selectionMode="single"
+							selection="#{beanReceita.selectedReceita}"
+							rowKey="#{receita.codigo}" rows="10" scrollable="true">
+							
+							<f:facet name="header" >
+	            				<h:outputText value="#{beanReceita.totalReceitas}" style="color:#0000FF">
+	            					<f:convertNumber pattern="##,###.00" />
+	            				</h:outputText>
+        					</f:facet>
+							<p:column headerText="Descrição">
+								<h:outputText value="#{receita.descricao}" />
+							</p:column>
+							<p:column headerText="Dia base">
+								<h:outputText value="#{receita.diaBase}" />
+								
+							</p:column>
+							<p:column headerText="Valor $"
+								style="text-align: right;width:115px;">
+								<h:outputText value="#{receita.valor}">
+									<f:convertNumber pattern="##,###.00" />
+								</h:outputText>
+							</p:column>
+
+							
+						</p:dataTable>
+						
+					</p:panel>
+
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Receitas recebidas este Mês">
+            <h:panelGrid columns="2" cellpadding="10">
+                
+                <h:outputText
+						value="Mostrar receitas recebidas no Mês" />
+            </h:panelGrid>
+        </p:tab>
+		<ui:remove>
+        <p:tab title="Reajustes">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage
+						name="demo/images/godfather/godfather3.jpg" />
+                <h:outputText
+						value="After a break of more than 15 years..." />
+            </h:panelGrid>
+        </p:tab>
+		</ui:remove>
+    </p:accordionPanel>
 	</ui:define>
 </ui:composition>
 </html>

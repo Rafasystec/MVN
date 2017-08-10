@@ -8,18 +8,24 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.barcadero.core.enums.EnumNaturezaReceita;
 import br.com.barcadero.core.enums.EnumTipoReceita;
-
+@NamedQueries({
+	@NamedQuery(name=Receita.FIND_RECEITAS_FIXAS,query="FROM Receita WHERE empresa =:"+Receita.PARAM_EMPRESA+" AND flAtivo =:flAtivo")
+	
+})
 @Entity
 @Table(name="RECEITA")
 public class Receita extends EntidadeLoja {
 
-
+	public static final String FIND_RECEITAS_FIXAS 	= "br.com.barcadero.tables.Receita.findReceitasFixas";
+	public static final String PARAM_FL_ATIVO 		= "flAtivo";
 
 	public Receita() {
 		
@@ -52,6 +58,8 @@ public class Receita extends EntidadeLoja {
 	//Se a natureza da receita for fixa
 	@Column(name="DIA_BASE")
 	private int diaBase = 1;
+	@Column(name="FL_ATIVO")
+	private boolean flAtivo = true;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="COD_CENTRO_CUSTO",referencedColumnName="CODIGO")
@@ -115,6 +123,14 @@ public class Receita extends EntidadeLoja {
 
 	public void setDiaBase(int diaBase) {
 		this.diaBase = diaBase;
+	}
+
+	public boolean isFlAtivo() {
+		return flAtivo;
+	}
+
+	public void setFlAtivo(boolean flAtivo) {
+		this.flAtivo = flAtivo;
 	}
 	
 }
