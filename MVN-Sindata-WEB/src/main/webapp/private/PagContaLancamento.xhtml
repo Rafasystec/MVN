@@ -134,8 +134,8 @@
 						<clx:dateCalendar id="txtDtReceita" required="#{!beanContaLancamentos.requiredDespesas}"
 							value="#{beanContaLancamentos.receita.dtDaReceita}" />
 
-						<p:outputLabel value="Data Base" for="txtDataBase" />
-						<p:selectOneMenu value="#{beanContaLancamentos.receita.diaBase}">
+						<p:outputLabel value="Dia Base" for="cboDiaBase" />
+						<p:selectOneMenu id="cboDiaBase" value="#{beanContaLancamentos.receita.diaBase}">
 							<f:selectItems value="#{beanContaLancamentos.diasDoMes}" var="dia" itemLabel="#{dia}" itemValue="#{dia}"/>
 						</p:selectOneMenu>
 						

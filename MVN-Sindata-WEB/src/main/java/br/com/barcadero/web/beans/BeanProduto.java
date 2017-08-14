@@ -19,12 +19,6 @@ public class BeanProduto extends SuperBean<Produto> {
 
 
 	private static final long serialVersionUID = 5793307604069729331L;
-	private EnumCSTICMS[] cstIcms;
-	private EnumUnidadeMedida[] medidas;
-	private EnumCSTIPI[] cstIpi;
-	private EnumCSTPIS[] cstPis;
-	private EnumOrigemCSTICMS[] origensIcms;
-	private List<Produto> produtos;
 	private List<Produto> produtosSelecionados;
 	private Produto produto;
 	
@@ -39,40 +33,18 @@ public class BeanProduto extends SuperBean<Produto> {
 		return EnumCSTICMS.values();
 	}
 
-	public void setCstIcms(EnumCSTICMS[] cstIcms) {
-		this.cstIcms = cstIcms;
-	}
-
 	public EnumUnidadeMedida[] getMedidas() {
 		return EnumUnidadeMedida.values();
-	}
-
-	public void setMedidas(EnumUnidadeMedida[] medidas) {
-		this.medidas = medidas;
 	}
 
 	public EnumCSTIPI[] getCstIpi() {
 		return EnumCSTIPI.values();
 	}
-
-	public void setCstPis(EnumCSTIPI[] cstPis) {
-		this.cstIpi = cstPis;
-	}
-
 	public EnumOrigemCSTICMS[] getOrigensIcms() {
 		return EnumOrigemCSTICMS.values();
 	}
-
-	public void setOrigensIcms(EnumOrigemCSTICMS[] origensIcms) {
-		this.origensIcms = origensIcms;
-	}
-
 	public List<Produto> getProdutos() throws Exception {
 		return ruleProduto.findByDataCadastro(new Date());
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
 	}
 
 	public List<Produto> getProdutosSelecionados() {
@@ -86,15 +58,6 @@ public class BeanProduto extends SuperBean<Produto> {
 	public EnumCSTPIS[] getCstPis() {
 		return EnumCSTPIS.values();
 	}
-
-
-
-	public void setCstPis(EnumCSTPIS[] cstPis) {
-		this.cstPis = cstPis;
-	}
-
-
-
 	public Produto getProduto() {
 		return produto;
 	}
@@ -105,8 +68,8 @@ public class BeanProduto extends SuperBean<Produto> {
 
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println(ruleProduto.insert(produto));
+		ruleProduto.insert(produto);
+		novo();
 		return null;
 	}
 
@@ -129,7 +92,6 @@ public class BeanProduto extends SuperBean<Produto> {
 
 	@Override
 	public String novo() throws Exception {
-		// TODO Auto-generated method stub
 		produto = new Produto(getSession().getEmpresaLogada(), null);
 		return null;
 	}

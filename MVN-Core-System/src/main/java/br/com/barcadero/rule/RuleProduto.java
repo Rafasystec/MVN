@@ -23,27 +23,11 @@ public class RuleProduto extends RuleModelo<Produto> {
 	public RuleProduto() {
 		System.out.println(">>>>>>>>>>Criando Rule Produto<<<<<<<<<<<<<<<<<<<");
 	}
-	
-//	@Autowired
-//	public RuleProduto(DaoProduto daoProduto){
-//		this.daoProduto = daoProduto;
-//		System.out.println(">>>>>>>>>>Criando Rule Produto com a dao produto <<<<<<<<<<<<<<<<<<<");
-//	}
-
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		return daoProduto.insert(entidade);
-//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		return daoProduto.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		return daoProduto.update(entidade);
-//	}
 
 	@Override
 	public Produto find(long codigo) throws Exception {
@@ -154,25 +138,21 @@ public class RuleProduto extends RuleModelo<Produto> {
 
 	@Override
 	public List<Produto> findByEmpresa(Empresa empresa) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoProduto.findByEmpresa(empresa);
 	}
 
 	@Override
 	public List<Produto> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoProduto.findByEmpresaELoja(empresa, loja);
 	}
 
 	@Override
 	public Produto insert(Produto entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoProduto.insert(entidade);
 	}
 
 	@Override
 	public Produto update(Produto entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoProduto.update(entidade);
 	}
 }

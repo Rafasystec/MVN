@@ -8,7 +8,8 @@ public enum EnumTipoCartao {
 
 	CREDITO("CRÉDITO"),
 	DEBITO("DÉBITO"),
-	VOUCHER("VOUCHER");
+	VOUCHER("VOUCHER"),
+	CREDITO_DEBITO("CRÉDITO E DÉBITO");
 	
 	private final String descricao;
 	private EnumTipoCartao(String descricao) {
