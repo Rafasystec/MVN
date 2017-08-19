@@ -1,4 +1,4 @@
-package br.com.barcadero.module.sat.devices.compsis;
+package br.com.barcadero.module.sat.devices.sefaz;
 
 import java.io.File;
 
@@ -16,41 +16,20 @@ import br.com.barcadero.module.sat.handle.HandleSAT;
 
 import com.sun.jna.Native;
 
-public class MFeCompsis extends AbstractSATSuperClass {
+public class MFeSEFAZ extends AbstractSATSuperClass {
 	private static Functions library			= null;
 	private static final String DIR_LIB_LINUX	= File.separator + "usr" + File.separator + "lib" + File.separator;
-	public MFeCompsis () {
+	public MFeSEFAZ () {
 		
 	}
 	
-	public static MFeCompsis getInstance(){
-		return new MFeCompsis();
+	public static MFeSEFAZ getInstance(){
+		return new MFeSEFAZ();
 	}
-	public MFeCompsis (String satPort) throws Exception{			
-//		Propriedades propriedade = null;
-//		ConfigSat confSat		 = null;
-		String canal			 = "";
+	public MFeSEFAZ (boolean event) throws Exception{			
 		try{
-//			confSat		= new ConfigSat();
-//			propriedade	= confSat.getConfiguracoes();
-//			canal		= propriedade.getPortCanal();
 			initialize();
-			//Logfactory.adicionar("Canal selecionado: " + canal);
-			if(canal.equals("")){
-				//Logfactory.adicionar("Canal nao configurado. Utilizar o padrao : 2");
-				canal = "2";
-			}
-			//Logfactory.adicionar("Iniciando instancia SatCompsis iformando a porta");
-			exists();
 			loadLibrary();
-			if(getLibrary() == null){
-				//Logfactory.adicionar("Nao foi possivel carregar a lib " + getRealLibraryName());
-			}
-			int resultado 	= openPort(Integer.parseInt(canal));
-			//Logfactory.adicionar("resultado openPort = " + resultado + " ");
-			if (resultado != new Integer(EnumStatusPorta.SERIAL.getCod())) {
-				throw new Exception("Problema na abertura da porta.");
-			}
 		}catch (UnsatisfiedLinkError e) {
 			// TODO: handle exception
 			throw new Exception(e);

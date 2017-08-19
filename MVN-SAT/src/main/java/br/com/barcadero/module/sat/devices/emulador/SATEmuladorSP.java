@@ -1,19 +1,16 @@
 package br.com.barcadero.module.sat.devices.emulador;
 
-import java.io.File;
-
-import br.com.barcadero.module.sat.handle.AbstractSATSuperClass;
-import br.com.barcadero.module.sat.handle.HendleFile;
-import br.com.barcadero.module.sat.handle.HandleSAT;
-
 import com.sun.jna.Native;
 
+import br.com.barcadero.module.sat.handle.AbstractSATSuperClass;
+import br.com.barcadero.module.sat.handle.HandleSAT;
 
-public class SATEmulador extends AbstractSATSuperClass {
+
+public class SATEmuladorSP extends AbstractSATSuperClass {
 
 	private Functions library 						= null;
 
-	public SATEmulador(){
+	public SATEmuladorSP(){
 		try {
 			initialize();
 		} catch (Exception e) {
@@ -26,10 +23,10 @@ public class SATEmulador extends AbstractSATSuperClass {
 	 * @param porta
 	 * @throws Exception
 	 */
-	public SATEmulador(String porta) throws Exception, UnsatisfiedLinkError{
+	public SATEmuladorSP(String porta) throws Exception, UnsatisfiedLinkError{
 		try {
 			initialize();
-			verificarSeADLLExiste();
+			//verificarSeADLLExiste();
 			library = (Functions)Native.loadLibrary(getLibraryPath() + getLibraryName(), Functions.class);
 			setLibrary(library);
 		}catch (UnsatisfiedLinkError e) {
@@ -41,8 +38,8 @@ public class SATEmulador extends AbstractSATSuperClass {
 		}
 	}
 	
-	public static SATEmulador getInstance(){
-		return new SATEmulador();
+	public static SATEmuladorSP getInstance(){
+		return new SATEmuladorSP();
 	}
 
 
@@ -81,9 +78,9 @@ public class SATEmulador extends AbstractSATSuperClass {
 	
 	@Override
 	public String toString(){
-		String modelo 		= "";
-		String className	= "";
-		String codigo		= "";
+		String modelo 		= "EMULAR SAT SÃO PAULO";
+		String className	= this.getClass().getName();
+		String codigo		= "12";
 		StringBuilder ret	= null;
 		try {
 			ret 		= new StringBuilder();
@@ -99,22 +96,6 @@ public class SATEmulador extends AbstractSATSuperClass {
 		}
 		return ret.toString();
 	}
-	/**
-	 * verifica se o arquivo exite.
-	 * @throws Exception
-	 */
-	private void verificarSeADLLExiste() throws Exception {
-		File file	= null;
-		try {
-			file = new File(getLibraryPath() + getRealLibraryName());
-			if(!file.exists()){
-				throw new Exception("A biblioteca de Funcoes " + getRealLibraryName() + " nao foi encontrada em " + getLibraryPath() + ".");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
-	}
 	
 	@Override
 	public String TipoDoModulo() throws Exception {
@@ -127,7 +108,7 @@ public class SATEmulador extends AbstractSATSuperClass {
 	 * @throws Exception
 	 */
 	private void initialize()throws Exception {
-		String libraryPath = HendleFile.obterCaminhoRaiz() + "lib" + File.separator;
+		String libraryPath = "";//HendleFile.obterCaminhoRaiz() + "lib" + File.separator;
 		try {
 			setLibraryPath(libraryPath);
 			setLibraryNameWindows("SAT");

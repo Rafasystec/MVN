@@ -6,5 +6,7 @@ public enum EnumTipoModuloSAT {
 	EMULADOR,
 	DIMEP,
 	BEMATECH,
-	SWEDA
+	SWEDA,
+	INTEGRADOR,
+	MFE_DLL
 }

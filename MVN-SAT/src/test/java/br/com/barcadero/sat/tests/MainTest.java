@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.util.HandleFiles;
 import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
@@ -58,19 +59,19 @@ public class MainTest {
 		InfCFe infCFe 	= new InfCFe();
 		infCFe.setVersaoDadosEnt("0.06");
 		//-------------------------------------------------
-		//Identificacao
+		//Identificacao da SoftwareHouse
 		//-------------------------------------------------
 		Ide ide = new Ide();
-		ide.setCNPJ("16716114000172");
+		ide.setCNPJ(getCNPJSWEmuladorSP());
 		ide.setNumeroCaixa("001");
-		ide.setSignAC("SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT");
+		ide.setSignAC(getAssinaturaEmualdor());
 		infCFe.setIde(ide);
 		//-------------------------------------------------
 		//Identificacao do Emitente do Cupom fiscal
 		//-------------------------------------------------
 		Emit emit = new Emit();
-		emit.setCNPJ("08723218000186"); //CNPJ da loja
-		emit.setIE("149626224113");
+		emit.setCNPJ(getCNPJCOntribuinteEmuladorSP()); //CNPJ da loja
+		emit.setIE("111111111111");
 		emit.setCRegTribISSQN(EnumRegimeTributarioISSQN.MIRCOEMPRESA_MUNICIPAL);
 		emit.setIndRatISSQN(EnumIndRatISSQN.NAO);
 		emit.setIM("123456789");
@@ -167,13 +168,41 @@ public class MainTest {
 		try {
 			//HandleXML.toFile(cfe, "D://temp/", "cfe.xml");
 			String xml = HandleXML.getXMLFromObject(cfe);
-			//System.out.println(xml);
-			assertEquals("O XML gerado nao foi igual ao esperado",getXMLVendaEmperado(),xml);
+			System.out.println(xml);
+			//assertEquals("O XML gerado nao foi igual ao esperado",getXMLVendaEmperado(),xml);
+			//transmitirEmuladorSaoPaulo(xml);
+			transmitirComIntegrador(xml);
 			//transmitirTanca(xml); //Habilitar somente quando for gerar os testes com o modulo conectado
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			fail(e.getMessage());
 		}
+	}
+	public String getCNPJSWPraTanca() {
+		return "16716114000172";
+	}
+	
+	public String getCNPJSWEmuladorSP() {
+		return "32832786000108";
+	}
+	
+	public String getCNPJContribuinteTanca() {
+		return "08723218000186";
+	}
+	/**
+	 * Esse CNPJ pode varia, depende de qual vc tenha cadastrador no ativador do emulador
+	 * @return
+	 */
+	public String getCNPJCOntribuinteEmuladorSP() {
+		return "11111111111111";
+	}
+	
+	public String getAssinaturaPadraoSAT() {
+		return "SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT";
+	}
+	
+	public String getAssinaturaEmualdor() {
+		return "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
 	}
 	
 	public void enviarDadosVenda() {
@@ -189,7 +218,24 @@ public class MainTest {
 	public static void transmitirTanca(String xml) throws Exception {
 		
 		HandleSAT sat = new HandleSAT();
-		sat.definirSatByClasse(EnumModulosSAT.TANCA.getClassName(), "");
+		sat.definirModulo(EnumTipoModuloSAT.TANCA);
+		String result = sat.enviarDadosVenda(xml,"12345678");
+		System.out.println(result);
+	}
+	
+	public static void transmitirComIntegrador(String xml) throws Exception {
+		System.out.println("Transmissao Integrador");
+		HandleSAT sat = new HandleSAT();
+		sat.definirModulo(EnumTipoModuloSAT.INTEGRADOR);
+		String result = sat.enviarDadosVenda(xml,"12345678");
+		System.out.println(result);
+	}
+	
+	public static void transmitirEmuladorSaoPaulo(String xml) throws Exception {
+		System.out.println("Transmissao com o emulador São Paulo");
+		HandleSAT sat = new HandleSAT();
+		sat.definirModulo(EnumTipoModuloSAT.EMULADOR);
+		//sat.definirSatByClasse(EnumModulosSAT.TANCA.getClassName(), "");
 		String result = sat.enviarDadosVenda(xml,"12345678");
 		System.out.println(result);
 	}

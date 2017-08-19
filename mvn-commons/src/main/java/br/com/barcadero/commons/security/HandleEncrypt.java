@@ -1,5 +1,9 @@
 package br.com.barcadero.commons.security;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,6 +14,7 @@ public class HandleEncrypt {
 
 	private static String key   = "h2R45X7x9r1X34WQ";
 	private static String vetor = "123XTY789HIJ34UU";
+	public static final String MD5_ALGORITHM = "MD5";
 	
 	public static String encrypt(String value) {
 		return encrypt(getKey(), getVetor(), value);
@@ -53,6 +58,25 @@ public class HandleEncrypt {
 		}
 
 		return null;
+	}
+	
+	public static String toMD5(final String valor) { 
+		MessageDigest mDigest; 
+		try { 
+			mDigest = MessageDigest.getInstance(MD5_ALGORITHM);  
+			byte[] valorMD5 = mDigest.digest(valor.getBytes("UTF-8"));  
+			StringBuffer sb = new StringBuffer(); 
+			for (byte b : valorMD5){ 
+				sb.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1,3)); 
+			} 
+			return sb.toString(); 
+		} catch (NoSuchAlgorithmException e) { 
+			// TODO Auto-generated catch block 
+			e.printStackTrace(); return null; 
+		} catch (UnsupportedEncodingException e) { 
+			// TODO Auto-generated catch block 
+			e.printStackTrace(); return null; 
+		} 
 	}
 
 	public static void main(String[] args) {

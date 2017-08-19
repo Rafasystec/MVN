@@ -1,42 +1,40 @@
 package br.com.barcadero.module.sat.handle;
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.loggin.LoggerFile;
 import br.com.barcadero.commons.util.HandleFiles;
 import br.com.barcadero.module.sat.devices.bematech.SATBematech;
-import br.com.barcadero.module.sat.devices.compsis.MFeCompsis;
 import br.com.barcadero.module.sat.devices.dimep.SATDimep;
-import br.com.barcadero.module.sat.devices.emulador.SATEmulador;
-//import br.com.secrel.sat.logs.LogFactory;
-//import br.com.secrel.sat.properties.ConfigSat;
+import br.com.barcadero.module.sat.devices.emulador.SATEmuladorSP;
+import br.com.barcadero.module.sat.devices.integrador.IntegradorMFeImpl;
+import br.com.barcadero.module.sat.devices.sefaz.MFeSEFAZ;
 import br.com.barcadero.module.sat.devices.tanca.ts1000.SATTanca;
 import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.exceptions.SATException;
-//import br.com.secrel.sat.util.FileHelper;
+
 
 
 
 /**
- * Classe para comunicacao com os modulos SAT-MFe
+ * Classe para comunicacao com os modulos SAT,MFe e Integrador
  * @author Rafael Rocha
- * @since SAT-MFe versï¿½o beta dia 29/01/2015 09:00
+ * @since 18/08/2017
  */
 public class HandleSAT 
 {
 
 	private InterfaceSAT iSatMfe				= null;
-	private AbstractSATSuperClass aSatMfe				= null;
-	private static String charSeparator = "|";
-	private static String patternPipe	= Pattern.quote("|");
-	private static Integer timeout 		= 10000;
-	private static Integer numberOfRetry = 3;
+	private AbstractSATSuperClass aSatMfe		= null;
+	private static String charSeparator 		= "|";
+	private static String patternPipe			= Pattern.quote("|");
+	private static Integer timeout 				= 10000;
+	private static Integer numberOfRetry 		= 3;
 	
 	//------------------------------------------------
 	//NOTE: Funcoes do modulo SAT-MFe
@@ -88,7 +86,6 @@ public HandleSAT(EnumTipoModuloSAT typeModule) {
 	try {
 		definirModulo(typeModule);
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
@@ -864,41 +861,6 @@ public String cancelarUltimaVenda(String chave, String codigoAtivacao, String da
 	}	
 }
 
-
-/**
- * Definir qual a classe que sera utilizada.
- * @param classe
- * @param porta
- * @throws Exception
- * @author Rafael Rocha
- */
-@Deprecated
-public void definirSatByClasse(String classe, String porta) throws Exception{
-	try {
-		classe = classe.trim();
-		if(classe.equalsIgnoreCase(EnumModulosSAT.COMPSIS.getClassName())){
-			configurarCompsis(porta);
-		}else if(classe.equalsIgnoreCase(EnumModulosSAT.EMULADOR.getClassName())){
-			configurarEmulador(porta);
-		}else if(classe.equalsIgnoreCase(EnumModulosSAT.DIMEP.getClassName())){
-			configurarDimep(porta);
-		}else if(classe.equalsIgnoreCase(EnumModulosSAT.TANCA.getClassName())){
-			configurarTancaTs1000(porta);
-		}else if(classe.equalsIgnoreCase(EnumModulosSAT.BEMATECH.getClassName())){
-			configurarBematechRB1000(porta);
-		}else{
-			log.info("Opção de classe inválida >>> " + classe);
-		}
-		if(this.iSatMfe != null){
-			log.info(this.iSatMfe.toString());
-		}else{
-			log.info("Não foi possível Classe: " + classe);
-		}
-		
-	} catch (Exception e) {
-		throw e;
-	}
-}
 /**
  * 
  * @param typeMode
@@ -915,8 +877,13 @@ public void definirModulo(EnumTipoModuloSAT typeMode) throws Exception {
 	case TANCA:
 		configurarTancaTs1000("");
 		break;
+	case INTEGRADOR:
+		configurarIntegradorFiscalSEFAZ();
+		break;
+	case MFE_DLL:
+		configurarComunicaoMFe();
 	default:
-		configurarEmulador("");
+		configurarEmulador();
 		break;
 	}
 }
@@ -926,11 +893,10 @@ public void definirModulo(EnumTipoModuloSAT typeMode) throws Exception {
  * @param porta
  * @throws Exception
  */
-private void configurarCompsis(String porta) throws Exception{
-	MFeCompsis satCompsis = null;
+private void configurarComunicaoMFe() throws Exception{
+	
 	try {
-		satCompsis	 = new MFeCompsis(porta);
-		this.iSatMfe = satCompsis;
+		this.iSatMfe = new MFeSEFAZ(true);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -957,12 +923,20 @@ private void configurarDimep(String porta) throws Exception{
  * @param porta
  * @throws Exception
  */
-private void configurarEmulador(String porta) throws Exception{
-	SATEmulador satEmulador = null;
+private void configurarEmulador() throws Exception{
+	SATEmuladorSP satEmulador = null;
 	try {
-		satEmulador	 = new SATEmulador("");
+		satEmulador	 = new SATEmuladorSP("");
 		this.iSatMfe = satEmulador;
 		this.aSatMfe = satEmulador;
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+private void configurarIntegradorFiscalSEFAZ() throws Exception{
+	try {
+		this.iSatMfe = new IntegradorMFeImpl(new File("C:\\Integrador\\Input"), new File("C:\\Integrador\\Output"));
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -994,18 +968,6 @@ private void configurarBematechRB1000(String porta) throws Exception{
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-}
-
-/**
- * Obtem data ou hora
- * @param formato
- * @return
- * @author Rafael Rocha
- */
-public static String obterDataOuHora(String formato) {
-	Date data = new Date();
-	SimpleDateFormat sdf = new SimpleDateFormat(formato);
-	return sdf.format(data);
 }
 
 /**

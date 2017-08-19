@@ -3,6 +3,8 @@ package br.com.barcadero.sat.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import org.junit.Test;
+
+import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
@@ -66,7 +68,7 @@ public class TestCancelamento {
 	
 	public void transmitirCancelamento(String xml) throws Exception {
 		HandleSAT sat = new HandleSAT();
-		sat.definirSatByClasse(EnumModulosSAT.TANCA.getClassName(), "");
+		sat.definirModulo(EnumTipoModuloSAT.TANCA);
 		String result = sat.cancelarUltimaVenda("CFe35160608723218000186599000025910004973807404","12345678", xml );
 		System.out.println(result);
 	}

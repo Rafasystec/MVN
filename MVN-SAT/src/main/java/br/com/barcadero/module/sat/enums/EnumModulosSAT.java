@@ -1,9 +1,9 @@
 package br.com.barcadero.module.sat.enums;
 
-import br.com.barcadero.module.sat.devices.compsis.*;
 import br.com.barcadero.module.sat.devices.bematech.*;
 import br.com.barcadero.module.sat.devices.dimep.*;
 import br.com.barcadero.module.sat.devices.emulador.*;
+import br.com.barcadero.module.sat.devices.sefaz.*;
 import br.com.barcadero.module.sat.devices.sweda.*;
 import br.com.barcadero.module.sat.devices.tanca.ts1000.*;
 
@@ -13,8 +13,8 @@ import br.com.barcadero.module.sat.devices.tanca.ts1000.*;
  * @since SAT-MFe dia 31/01/2015 as 22:28
  */
 public enum EnumModulosSAT {
-	COMPSIS(MFeCompsis.getInstance().getCodModule(),MFeCompsis.getInstance().getModuleName(),MFeCompsis.getInstance().getModuleClass()),
-	EMULADOR(SATEmulador.getInstance().getCodModule(),SATEmulador.getInstance().getModuleName(), SATEmulador.getInstance().getModuleClass()),
+	COMPSIS(MFeSEFAZ.getInstance().getCodModule(),MFeSEFAZ.getInstance().getModuleName(),MFeSEFAZ.getInstance().getModuleClass()),
+	EMULADOR(SATEmuladorSP.getInstance().getCodModule(),SATEmuladorSP.getInstance().getModuleName(), SATEmuladorSP.getInstance().getModuleClass()),
 	DIMEP(SATDimep.getInstance().getCodModule(),SATDimep.getInstance().getModuleName(), SATDimep.getInstance().getModuleClass()),
 	TANCA(SATTanca.getInstance().getCodModule(),SATTanca.getInstance().getModuleName(),SATTanca.getInstance().getModuleClass()),
 	SWEDA(SATSweda.getInstance().getCodModule(),SATSweda.getInstance().getModuleName(),SATSweda.getInstance().getModuleClass()),
