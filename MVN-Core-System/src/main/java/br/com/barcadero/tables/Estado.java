@@ -39,7 +39,6 @@ public class Estado extends Entidade{
 	
 	public Estado(Usuario usuario) {
 		super(usuario);
-		// TODO Auto-generated constructor stub
 	}
 	public static final String FIND 			= "Estado.findAll";
 	public static final String FIND_BY_CODE 	= "Estado.findByCode";

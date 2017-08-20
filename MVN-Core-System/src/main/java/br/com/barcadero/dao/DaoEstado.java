@@ -5,12 +5,11 @@ import java.util.List;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.Usuario;
 
 @Repository
 public class DaoEstado extends DaoModelo<Estado>{
@@ -64,13 +63,12 @@ public class DaoEstado extends DaoModelo<Estado>{
 		}
 	}
 	
-	public void carregarEstados(Usuario usuario) throws Exception{
+	public void carregarEstados() throws Exception{
 		for (EnumUF uf : EnumUF.values()) {
-			Estado estado = new Estado(usuario);
+			Estado estado = new Estado();
 			estado.setCodIbge(String.valueOf(uf.getCdIbge()));
 			estado.setDescricao(uf.getLabel());
 			estado.setUf(uf);	
-			//estado.setCodigo(uf.getCdIbge());
 			insert(estado);
 		}
 	}

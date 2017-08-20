@@ -18,12 +18,16 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 		<clx:buttonsCrud id="btnsUp" bean="#{cliente}"></clx:buttonsCrud>
 		<p:panel id="pnlDadosCliente" header="Cadastro de Clientes">
+		
+		<p:panelGrid columns="4" styleClass="noBorder">
 			<div class="form-group">
 				<label class="control-label " for="email"> Nome </label>
 				<div class="input-group">
+				<!-- 
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-user"></span>
 					</div>
+				 -->
 					<p:inputText id="nome" label="Nome" value="#{cliente.pFisica.nome}"
 						maxlength="60" required="true"
 						requiredMessage="Nome é obrigatório" placeholder="Nome" />
@@ -31,9 +35,11 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 				<label class="control-label " for="email"> E-mail </label>
 				<div class="input-group">
+				<!-- 
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-envelope"></span>
 					</div>
+				-->
 					<p:inputText id="email" label="Email"
 						value="#{cliente.pFisica.email}" maxlength="60" required="true"
 						requiredMessage="E-mail é obrigatório" placeholder="E-mail" />
@@ -41,9 +47,11 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 				<label class="control-label " for="email"> CPF </label>
 				<div class="input-group">
+				<!-- 
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-info-sign"></span>
 					</div>
+				-->
 					<p:inputMask id="cpf" mask="999.999.999-99" label="CPF do cliente"
 						alt="Informe o CPF" value="#{cliente.pFisica.cpf}" size="11"
 						maxlength="11" required="true" requiredMessage="CPF é obrigatório"
@@ -52,9 +60,11 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 				<label class="control-label " for="email"> Data Nascimento </label>
 				<div class="input-group">
+				<!-- 
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</div>
+				-->
 					<p:calendar id="dtNascimento"
 						alt="A data de nascimento no formato DD/MM/AAAA"
 						value="#{cliente.pFisica.dtNascimento}" pattern="dd/MM/yyyy"
@@ -89,17 +99,21 @@ xmlns:h="http://java.sun.com/jsf/html"
 				</div>
 				<label class="control-label " for="email"> Telefone </label>
 				<div class="input-group">
+				<!-- 
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-phone-alt"></span>
 					</div>
+				-->
 					<p:inputMask mask="(999)9999-9999" id="telefone"
 						value="#{cliente.pFisica.telefone}" />
 				</div>
 				<label class="control-label " for="email"> Celular </label>
 				<div class="input-group">
+				<!-- 
 					<div class="input-group-addon">
 						<span class="glyphicon glyphicon-phone-alt"></span>
 					</div>
+				-->
 					<p:inputMask mask="(999)99999-9999" id="celular"
 						value="#{cliente.pFisica.celular}" />
 				</div>
@@ -111,6 +125,7 @@ xmlns:h="http://java.sun.com/jsf/html"
 
 				</div>
 			</div>
+			</p:panelGrid>
 		</p:panel>
 		<clx:address endereco="#{cliente.endereco}"	 >
 		</clx:address>

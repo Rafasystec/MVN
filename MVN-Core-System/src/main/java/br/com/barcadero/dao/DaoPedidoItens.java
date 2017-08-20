@@ -2,6 +2,8 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Empresa;
@@ -37,9 +39,9 @@ public class DaoPedidoItens extends DaoModelo<PedidoItens> {
 	 * @return
 	 */
 	public List<PedidoItens> findByPedido(Pedido pedido) {
-		Query qry = manager.createNamedQuery(PedidoItens.FIND_BY_PEDIDO)
-				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
-				.setParameter("pedido", pedido.getCodigo());
+		TypedQuery<PedidoItens> qry = manager.createNamedQuery(PedidoItens.FIND_BY_PEDIDO,PedidoItens.class)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, pedido.getEmpresa())
+				.setParameter("pedido", pedido);
 		return qry.getResultList();
 	}
 

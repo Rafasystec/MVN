@@ -16,28 +16,12 @@ public class RuleEstado extends RuleModelo<Estado> {
 
 	@Autowired
 	private DaoEstado daoEstado ;
-	
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		Estado estado = (Estado)entidade;
-//		if(estado != null){
-//			return daoEstado.insert(estado);
-//		}else{
-//			return "O estado não pode ser recuperado.";
-//		}	
-//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoEstado.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoEstado.update(entidade);
-//	}
 
 	@Override
 	public Estado find(long codigo) throws Exception {
@@ -63,8 +47,11 @@ public class RuleEstado extends RuleModelo<Estado> {
 	 * @throws Exception
 	 * @author Rafael Rocha
 	 */
-	public void carregarEstados(Usuario usuario) throws Exception{
-		daoEstado.carregarEstados(usuario);
+	public void carregarEstados() throws Exception{
+		if(daoEstado.findAll().size() == 0){
+			System.out.println("Realizando a carga dos Estados no Sistema.");
+			daoEstado.carregarEstados();
+		}
 	}
 
 	@Override
@@ -81,14 +68,12 @@ public class RuleEstado extends RuleModelo<Estado> {
 
 	@Override
 	public Estado insert(Estado entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoEstado.insert(entidade);
 	}
 
 	@Override
 	public Estado update(Estado entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoEstado.update(entidade);
 	}
 
 }

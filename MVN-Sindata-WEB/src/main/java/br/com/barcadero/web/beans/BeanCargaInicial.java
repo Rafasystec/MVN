@@ -24,7 +24,7 @@ public class BeanCargaInicial extends SuperBean <EnderecoCarga>{
 	private RuleParametros	ruleParam;
 		
 	public String carregarEstados() throws Exception {
-		fcdEstado.carregarEstados(getSession().getUsuarioLogado());
+		fcdEstado.carregarEstados();
 		return null;
 	}
 	

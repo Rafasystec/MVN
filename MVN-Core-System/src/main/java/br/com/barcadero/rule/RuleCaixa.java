@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,19 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 	public Caixa update(Caixa entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Caixa getCaixaVenda(Loja loja, String ipAddress) {
+		Caixa caixa = null;
+		try {
+			caixa = findByIp(loja.getCodigo(), ipAddress);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return caixa;
 	}
 }

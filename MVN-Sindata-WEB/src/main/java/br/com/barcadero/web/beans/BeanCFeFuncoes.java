@@ -18,7 +18,7 @@ public class BeanCFeFuncoes extends SuperBean <CupomEletronico>{
 	private RuleCFeComandos ruleCFeComandos;
 	
 	public BeanCFeFuncoes() {
-		ruleCFeComandos = new RuleCFeComandos(getCaixaVenda());
+		//ruleCFeComandos = new RuleCFeComandos(getCaixaVenda());
 	}
 	
 	@Override

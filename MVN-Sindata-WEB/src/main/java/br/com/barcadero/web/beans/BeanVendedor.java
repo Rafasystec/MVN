@@ -86,4 +86,20 @@ public class BeanVendedor extends SuperBean<Vendedor> {
 		return false;
 	}
 
+	public RuleVendedor getRuleVendedor() {
+		return ruleVendedor;
+	}
+
+	public void setRuleVendedor(RuleVendedor ruleVendedor) {
+		this.ruleVendedor = ruleVendedor;
+	}
+
+	public RuleFuncionario getRuleFuncionario() {
+		return ruleFuncionario;
+	}
+
+	public void setRuleFuncionario(RuleFuncionario ruleFuncionario) {
+		this.ruleFuncionario = ruleFuncionario;
+	}
+
 }

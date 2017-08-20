@@ -9,12 +9,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.rule.RulePedido;
 import br.com.barcadero.rule.RulePedidoItens;
 import br.com.barcadero.rule.RuleProduto;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Pedido;
 import br.com.barcadero.tables.PedidoItens;
+import br.com.barcadero.tables.Produto;
 import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
@@ -36,12 +38,14 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 	//--------------------------------------
 	//Rules envolvidas
 	//--------------------------------------
-	@ManagedProperty("#{}")
+	@ManagedProperty("#{rulePedidoItens}")
 	private RulePedidoItens rulePedidoItens;
-	@ManagedProperty("#{}")
+	@ManagedProperty("#{ruleProduto}")
 	private RuleProduto ruleProduto;
-	@ManagedProperty("#{}")
+	@ManagedProperty("#{rulePedido}")
 	private RulePedido rulePedido;
+	@ManagedProperty("#{ruleCaixa}")
+	private RuleCaixa ruleCaixa;
 	
 	
 	public Pedido getPedido() {
@@ -51,32 +55,40 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	//private Session session;
-	
-	
-	
-//	public BeanPedidoVenda() {
-//		// TODO Auto-generated constructor stub
-//		session 		= getDBSessionForViewScope();
-//		rulePedidoItens = new RulePedidoItens(getEmpresaLogada(), getLojaLogada(), session);
-//		//ruleProduto		= new RuleProduto(getEmpresaLogada(), getLojaLogada(), session);
-//		rulePedido		= new RulePedido(getEmpresaLogada(), getLojaLogada(), session, getCaixaVenda());
-//		item			= createItem();
-//		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
-//		caixa			= obterCaixaDeVenda();
-//	}
-	
+
 	@PostConstruct
 	public void init() {
 		System.out.println("@PostConstruct method init");
 		item			= createItem();
 		pedido			= new Pedido(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
-		caixa			= obterCaixaDeVenda();
+		try {
+			caixa			= obterCaixaDeVenda();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			System.out.println("Save item called.");
+			//beginTransaction();
+			if(pedido == null){
+				pedido	= createPedido();
+			}
+			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
+			lastProduto = produto.getDescricao();
+			item.setProduto(produto);
+			item.setPedido(pedido);
+			rulePedidoItens.insert(pedido, item);
+			setVlUnitario(item.getVlTotal());
+			totalizarSubTotal(item);
+			//commit();
+			item = createItem();
+		} catch (Exception e) {
+			HandleMessage.error("Erro ao inserir Item", e.getMessage());
+		}
 		return null;
 	}
 	@Override
@@ -109,26 +121,26 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 		this.vededor = vededor;
 	}
 	
-//	public void salvarItem() {
-//		try {
-//			System.out.println("Save item called.");
-//			//beginTransaction();
-//			if(pedido == null){
-//				pedido	= createPedido();
-//			}
-//			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
-//			lastProduto = produto.getDescricao();
-//			item.setProduto(produto);
-//			item.setPedido(pedido);
-//			rulePedidoItens.insert(pedido, item);
-//			setVlUnitario(item.getVlTotal());
-//			totalizarSubTotal(item);
-//			//commit();
-//			item = createItem();
-//		} catch (Exception e) {
-//			HandleMessage.error("Erro ao inserir Item", e.getMessage());
-//		}
-//	}
+	public void salvarItem() {
+		try {
+			System.out.println("Save item called.");
+			//beginTransaction();
+			if(pedido == null){
+				pedido	= createPedido();
+			}
+			Produto produto = ruleProduto.find(ruleProduto.extrairCodigo(getStrProduto()));
+			lastProduto = produto.getDescricao();
+			item.setProduto(produto);
+			item.setPedido(pedido);
+			rulePedidoItens.insert(pedido, item);
+			setVlUnitario(item.getVlTotal());
+			totalizarSubTotal(item);
+			//commit();
+			item = createItem();
+		} catch (Exception e) {
+			HandleMessage.error("Erro ao inserir Item", e.getMessage());
+		}
+	}
 	
 	private Pedido createPedido() throws UnknownHostException, Exception {
 		return rulePedido.createPedido(getUsuarioLogado(), HandleFaceContext.getIpAddress());
@@ -197,18 +209,6 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 		this.vlUnitario = vlUnitario;
 	}
 	
-//	public void beginTransaction() {
-//		if(this.session != null){
-//			this.session.beginTransaction();
-//		}
-//	}
-//	
-//	public void commit() {
-//		if(this.session != null){
-//			this.session.getTransaction().commit();
-//		}
-//	}
-	
 	private void totalizarSubTotal(PedidoItens item) {
 		setVlSubTotal(getVlSubTotal().add(item.getVlTotal()));
 	}
@@ -225,8 +225,8 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 		this.caixa = caixa;
 	}
 	
-	public Caixa obterCaixaDeVenda() {
-		caixa = getCaixaVenda();
+	public Caixa obterCaixaDeVenda() throws UnknownHostException {
+		caixa = ruleCaixa.getCaixaVenda(getLojaLogada(), getSession().getIpAddress());
 		if(caixa == null){
 			HandleMessage.error("Sua estação não possui caixa", "Por favor cadastre um caixa primeiro.");
 		}
@@ -237,5 +237,37 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 	public boolean validar(Pedido entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public RulePedidoItens getRulePedidoItens() {
+		return rulePedidoItens;
+	}
+
+	public void setRulePedidoItens(RulePedidoItens rulePedidoItens) {
+		this.rulePedidoItens = rulePedidoItens;
+	}
+
+	public RuleProduto getRuleProduto() {
+		return ruleProduto;
+	}
+
+	public void setRuleProduto(RuleProduto ruleProduto) {
+		this.ruleProduto = ruleProduto;
+	}
+
+	public RulePedido getRulePedido() {
+		return rulePedido;
+	}
+
+	public void setRulePedido(RulePedido rulePedido) {
+		this.rulePedido = rulePedido;
+	}
+
+	public RuleCaixa getRuleCaixa() {
+		return ruleCaixa;
+	}
+
+	public void setRuleCaixa(RuleCaixa ruleCaixa) {
+		this.ruleCaixa = ruleCaixa;
 	}
 }

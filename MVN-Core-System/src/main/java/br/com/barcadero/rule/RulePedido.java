@@ -111,8 +111,8 @@ public class RulePedido extends RuleModelo<Pedido> {
 		return totalizarTodosOsPedidos(pedidos);
 	}
 	
-	public List<Pedido> findPedidosAFaturarHoje() {
-		List<Pedido> pedidos = daoPedido.findPedidosAFaturarHoje();
+	public List<Pedido> findPedidosAFaturarHoje(Empresa empresa,Loja loja) {
+		List<Pedido> pedidos = daoPedido.findPedidosAFaturarHoje(empresa,loja);
 		pedidos = totalizarTodosOsPedidos(pedidos);
 		return pedidos;
 	}

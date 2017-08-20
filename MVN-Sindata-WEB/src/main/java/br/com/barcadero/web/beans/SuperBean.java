@@ -2,17 +2,11 @@ package br.com.barcadero.web.beans;
 
 import java.io.Serializable;
 import java.net.UnknownHostException;
-import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.event.ListSelectionEvent;
-
 import org.hibernate.Session;
-
-import br.com.barcadero.core.db.util.HibernateHelper;
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
@@ -29,7 +23,7 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 	abstract public String alterar()throws Exception;
 	abstract public String deletar()throws Exception;
 	abstract public String novo()throws Exception;
-	private RuleCaixa ruleCaixa;
+	//private RuleCaixa ruleCaixa;
 	
 	public String validar() {
 		return "";
@@ -109,18 +103,5 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 		getSession().setAttribute(Attributs.USER, usuario);
 	}
 	
-	protected Caixa getCaixaVenda() {
-		Caixa caixa = null;
-		try {
-			caixa = ruleCaixa.findByIp(getLojaLogada().getCodigo(), session.getIpAddress());
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return caixa;
-	}
 	
 }

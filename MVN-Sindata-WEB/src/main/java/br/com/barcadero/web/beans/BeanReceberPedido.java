@@ -68,7 +68,7 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 	}
 	
 	public List<Pedido> listarPedidosAFaturarHoje() {
-		return rulePedido.findPedidosAFaturarHoje();
+		return rulePedido.findPedidosAFaturarHoje(getEmpresaLogada(),getLojaLogada());
 	}
 
 	public Pedido getSelectedPedido() {

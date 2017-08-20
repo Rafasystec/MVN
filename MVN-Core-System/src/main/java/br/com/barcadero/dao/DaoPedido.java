@@ -3,6 +3,8 @@ package br.com.barcadero.dao;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -70,10 +72,10 @@ public class DaoPedido extends DaoModelo<Pedido> {
 		return null;
 	}
 	
-	public List<Pedido> findPedidosAFaturarHoje() {
-		Query qry = manager.createNamedQuery(Pedido.FIND_AFATURAR)
-				.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
-				.setParameter(GlobalNameParam.PARAM_COD_LOJA, getLoja().getCodigo())
+	public List<Pedido> findPedidosAFaturarHoje(Empresa empresa, Loja loja) {
+		TypedQuery<Pedido> qry = manager.createNamedQuery(Pedido.FIND_AFATURAR,Pedido.class)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa)
+				.setParameter(GlobalNameParam.PARAM_COD_LOJA, loja)
 				.setParameter("dtCadastro", new Date())
 				.setParameter("flStPed", EnumStatusPedido.FECHADO);
 		return qry.getResultList();		

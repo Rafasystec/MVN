@@ -33,20 +33,21 @@ xmlns:h="http://java.sun.com/jsf/html"
 							<p:outputLabel value="NCM" for="ncm"/>
 							<p:inputText id="ncm" value="#{produto.produto.cdNcm}" required="true"/>
 						</p:panelGrid>
+						<p:panelGrid columns="3" styleClass="noBorder">
+							<clx:currency id="txtPcCusto" label="Preço Custo.:" value="#{produto.produto.precoCusto}" required="true"/>
+							
+							<clx:currency id="txtPcVenda" label="Preço Venda.:" value="#{produto.produto.precoVenda}" required="true"/>
+							
+							<clx:currency id="txtPcPromo" label="Preço Promo.:" value="#{produto.produto.precoPromo}" required="true"/>
 						
-						<clx:currency id="txtPcCusto" label="Preço Custo.:" value="#{produto.produto.precoCusto}" required="true"/>
-						
-						<clx:currency id="txtPcVenda" label="Preço Venda.:" value="#{produto.produto.precoVenda}" required="true"/>
-						
-						<clx:currency id="txtPcPromo" label="Preço Promo.:" value="#{produto.produto.precoPromo}" required="true"/>
-					
-						<clx:dateCalendar id="txtDtIniPromo" label="Dt. Ini. Promo." value="#{produto.produto.dtInicioPromo}"/>
-						
-						<clx:dateCalendar id="txtDtTermPromo" label="Dt. Term. Promo." value="#{produto.produto.dtTerminPromo}"/>
+							<clx:dateCalendar id="txtDtIniPromo" label="Dt. Ini. Promo." value="#{produto.produto.dtInicioPromo}"/>
+							
+							<clx:dateCalendar id="txtDtTermPromo" label="Dt. Term. Promo." value="#{produto.produto.dtTerminPromo}"/>
+						</p:panelGrid>
 					</p:panelGrid>		
 				</p:panel>					
 				<p:panel header="Tributação">
-					<p:panelGrid columns="1" styleClass="noBorder">
+					<p:panelGrid columns="4" styleClass="noBorder">
 						<p:outputLabel value="Origem" for="origem"/>
 						<p:selectOneMenu style="width:200px" value="#{produto.produto.origemIcms}" >
 							<f:selectItems id="origem" value="#{produto.origensIcms}" var="origem" itemLabel="#{origem.label}" />
