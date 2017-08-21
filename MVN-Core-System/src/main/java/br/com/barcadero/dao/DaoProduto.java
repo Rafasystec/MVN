@@ -4,8 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+
+import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Produto;
@@ -42,8 +45,8 @@ public class DaoProduto extends DaoModelo <Produto>{
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Produto> findByCodOrDesc(String codigoOrDesc) throws Exception{
-		Query qry  = manager.createNamedQuery(Produto.FIND_BY_COD_OR_DESC);
+	public List<Produto> findByCodOrDesc(Empresa empresa,String codigoOrDesc) throws Exception{
+		TypedQuery<Produto> qry  = manager.createNamedQuery(Produto.FIND_BY_COD_OR_DESC,Produto.class);
 		long codigo = 0;
 		try {
 			codigo = Long.parseLong(codigoOrDesc);
@@ -52,6 +55,7 @@ public class DaoProduto extends DaoModelo <Produto>{
 		}
 		qry.setParameter("codigo"	, codigo);
 		qry.setParameter("descricao", "%"+codigoOrDesc+"%");
+		qry.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa);
 		return qry.getResultList();
 	}
 

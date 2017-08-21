@@ -16,7 +16,7 @@ public class HandleOpenEnderDialog extends SuperHandle{
 	}
 
 	public static void openCadBairro() throws Exception {
-		openDialog("cadBairro");
+		HandleDialog.openDialogOutCome("cadBairro", "500", "500");
 	}
 	
 	public static void openCadBairro(String... params) throws Exception {

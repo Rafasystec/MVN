@@ -29,8 +29,11 @@ public class RuleFuncionario extends RuleModelo<Funcionario> {
 
 	@Override
 	public Funcionario find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.find(codigo);
+		if(codigo != 0){
+			return dao.find(codigo);
+		}else{
+			return new Funcionario();
+		}
 	}
 
 	@Override

@@ -143,7 +143,7 @@ public class RuleNota extends RuleModelo<Nota> {
 	 * @throws Exception 
 	 */
 	public Nota createNota(Loja loja, Usuario usuario, String ip) throws Exception {
-		Caixa caixa = ruleCaixa.findByIp(loja.getCodigo(), ip);
+		Caixa caixa = ruleCaixa.findByIp(loja, ip);
 		Nota nota = new Nota(loja, usuario);
 		nota.setFlFaturado(EnumNotaFaturada.NAO);
 		nota.setInfAdicionais("SOMENTE PARA HOMOLOGACAO");

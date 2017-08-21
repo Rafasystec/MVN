@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.dao.DaoLoja;
 import br.com.barcadero.dao.DaoPessoaJuridica;
@@ -22,12 +25,6 @@ public class RuleLoja extends RuleModelo<Loja> {
 	@Autowired
 	private DaoPessoaJuridica daoPessoaJuridica;
 	private Empresa empresa;
-//	@Autowired
-//	public RuleLoja(DaoLoja daoLoja, DaoPessoaJuridica daoPessoaJuridica) {
-//		System.out.println("Auto-generated constructor stub for RuleLoja");
-//		this.daoLoja 			= daoLoja;
-//		this.daoPessoaJuridica 	= daoPessoaJuridica;
-//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -38,8 +35,7 @@ public class RuleLoja extends RuleModelo<Loja> {
 
 	@Override
 	public Loja find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return (Loja)daoLoja.find(codigo);
+		return daoLoja.find(codigo);
 	}
 	
 	/**
@@ -66,13 +62,16 @@ public class RuleLoja extends RuleModelo<Loja> {
 		return daoLoja.getLojasDaEmpresa(empresa);
 	}
 	
-	private void retirarFormatcao(Loja loja) {
+	private String retirarFormatcaoCNPJ(Loja loja) {
 		String cnpj = loja.getPessoaJuridica().getCnpj();
-		String fone = loja.getPessoaJuridica().getFone();
 		cnpj = cnpj.replace(".", "").replace("/", "").replace("-", "");
+		return cnpj;
+	}
+	
+	private String retirarFormatcaoFone(Loja loja) {
+		String fone = loja.getPessoaJuridica().getFone();
 		fone = fone.replace("-", "").replace("(", "").replace(")", "");
-		loja.getPessoaJuridica().setCnpj(cnpj);
-		loja.getPessoaJuridica().setFone(fone);
+		return fone;
 	}
 	
 	/**
@@ -127,6 +126,7 @@ public class RuleLoja extends RuleModelo<Loja> {
 	 * Tras todas as lojas da empresa
 	 */
 	public List<Loja> findAll() throws Exception {
+		daoLoja.setEmpresa(getEmpresa());
 		return daoLoja.findAll();
 	}
 
@@ -150,16 +150,16 @@ public class RuleLoja extends RuleModelo<Loja> {
 		return null;
 	}
 
-	@Override
+	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
 	public Loja insert(Loja entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		entidade.getPessoaJuridica().setCnpj(retirarFormatcaoCNPJ(entidade));
+		entidade.getPessoaJuridica().setFone(retirarFormatcaoFone(entidade));
+		return daoLoja.insert(entidade);
 	}
 
 	@Override
-	public Loja update(Loja entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Loja update(Loja loja) throws Exception {
+		return daoLoja.update(loja);
 	}
 
 }

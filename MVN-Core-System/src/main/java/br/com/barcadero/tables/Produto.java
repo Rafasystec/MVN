@@ -29,7 +29,7 @@ import br.com.barcadero.core.enums.EnumUnidadeMedida;
 	@NamedQuery(name=Produto.FIND_ALL			,query="FROM Produto"),
 	@NamedQuery(name=Produto.FIND_BY_CODE		,query="FROM Produto WHERE codigo = :codigo"),
 	@NamedQuery(name=Produto.FIND_BY_DATE		,query="FROM Produto WHERE dtCadastro = :date"),
-	@NamedQuery(name=Produto.FIND_BY_COD_OR_DESC,query="FROM Produto WHERE codigo = :codigo OR descricao Like :descricao")
+	@NamedQuery(name=Produto.FIND_BY_COD_OR_DESC,query="FROM Produto WHERE empresa = :empresa AND (codigo = :codigo OR descricao Like :descricao)")
 	
 })
 

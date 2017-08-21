@@ -16,7 +16,7 @@ import br.com.barcadero.tables.PedidoItens;
 import br.com.barcadero.tables.Produto;
 
 @Service
-public class RulePedidoItens extends RuleModelo<Pedido> {
+public class RulePedidoItens extends RuleModelo<PedidoItens> {
 
 	@Autowired
 	private DaoPedidoItens daoPedidoItens;
@@ -24,33 +24,21 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 	private RuleProduto ruleProduto;
 	@Autowired
 	private DaoPedido daoPedido;
-	
-//	@Autowired
-//	public RulePedidoItens(DaoPedidoItens daoPedidoItens,RuleProduto ruleProduto,DaoPedido daoPedido) {
-//		// TODO Auto-generated constructor stub
-//		this.daoPedidoItens = daoPedidoItens;
-//		this.daoPedido		= daoPedido;
-//		this.ruleProduto	= ruleProduto;
-//	}
-//
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoPedidoItens.insert(entidade);
-//	}
-//	/**
-//	 * Inserir um item no pedido
-//	 * @param pedido
-//	 * @param pedidoItens
-//	 * @return
-//	 * @throws Exception
-//	 */
+		
+	/**
+	 * Inserir um item no pedido
+	 * @param pedido
+	 * @param pedidoItens
+	 * @return
+	 * @throws Exception
+	 */
 	public PedidoItens insert(Pedido pedido, PedidoItens pedidoItens) throws Exception {
 		// TODO Auto-generated method stub
 		if(pedido != null){
 			try{
-				//getSession().save(pedido);
-				daoPedido.insert(pedido);
+				if(pedido.getCodigo() == 0){
+					daoPedido.insert(pedido);
+				}
 			}catch(Exception e){
 				throw e;
 			}
@@ -65,22 +53,8 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 		}
 	}
 
-	@Override
-	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Pedido find(long codigo) throws Exception {
-		return null;
-	}
-
-	@Override
-	public List<Pedido> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
 	/**
 	 * 
 	 * @param pedido
@@ -92,18 +66,6 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 		}else{
 			return new ArrayList<>();
 		}
-	}
-
-	@Override
-	public List<Pedido> findByEmpresa(Empresa empresa) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Pedido> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public DaoPedidoItens getDaoPedidoItens() {
@@ -130,15 +92,57 @@ public class RulePedidoItens extends RuleModelo<Pedido> {
 		this.daoPedido = daoPedido;
 	}
 
+
+
 	@Override
-	public Pedido insert(Pedido entidade) throws Exception {
+	public String delete(long codigo) throws Exception {
+		return daoPedidoItens.delete(codigo);
+	}
+
+
+
+	@Override
+	public PedidoItens find(long codigo) throws Exception {
+		return daoPedidoItens.find(codigo, PedidoItens.class);
+	}
+
+
+
+	@Override
+	public List<PedidoItens> findByEmpresa(Empresa empresa) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 	@Override
-	public Pedido update(Pedido entidade) throws Exception {
+	public List<PedidoItens> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public List<PedidoItens> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public PedidoItens insert(PedidoItens entidade) throws Exception {
+		return daoPedidoItens.insert(entidade);
+	}
+
+
+
+	@Override
+	public PedidoItens update(PedidoItens entidade) throws Exception {
+		return daoPedidoItens.update(entidade);
+	}
+
 
 }

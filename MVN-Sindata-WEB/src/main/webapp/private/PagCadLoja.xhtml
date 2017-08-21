@@ -81,14 +81,31 @@
 			</h:panelGrid>
 		</p:panel>
 
-		<clx:address beanCEP="#{loja.ender.cep}"
-			beanNumero="#{loja.ender.numero}"
-			beanTipoLog="#{loja.ender.tpLogradouro}"
-			beanLog="#{cliente.endereco.logradouro}" beanUF="#{loja.ender.uf}"
-			beanCidade="#{loja.ender.cidade}" beanBairro="#{loja.ender.bairro}"
-			beanComplemento="#{loja.ender.complemento}">
-		</clx:address>
-
+		<clx:address endereco="#{loja.endereco}"	 />
+		<p:dataTable id="grid" var="loj"
+				value="#{loja.lojasDaEmpresa}" resizableColumns="true"
+				style="margin-bottom:20px" selectionMode="single"
+				selection="#{loja.selectedLoja}" rowKey="#{loj.codigo}" rows="10"
+				scrollable="true" paginator="true">
+	
+				<f:facet name="header">
+	            	Lojas da empresa
+	        	</f:facet>
+				<p:column headerText="Código">
+					<h:outputText value="#{loj.codigo}" />
+				</p:column>
+				<p:column headerText="CNPJ">
+					<h:outputText value="#{loj.pessoaJuridica.cnpj}" />
+				</p:column>
+				<p:column headerText="FANTASIA">
+					<h:outputText value="#{loj.pessoaJuridica.fantasia}" />
+				</p:column>
+				<p:column headerText="Data Inauguração">
+					<h:outputText value="#{loj.dtCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
 		<clx:buttonsCrud id="btnsFooter" actionSave="#{loja.salvar}"/>
 	</ui:define>
 </ui:composition>

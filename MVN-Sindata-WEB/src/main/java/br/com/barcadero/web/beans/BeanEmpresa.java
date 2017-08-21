@@ -8,11 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
 
 //import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.primefaces.component.fileupload.FileUpload;
-import org.primefaces.event.SelectEvent;
 
 import br.com.barcadero.core.enums.EnumAtividadeEmp;
 import br.com.barcadero.core.enums.EnumRegimeTributario;
@@ -20,8 +18,8 @@ import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.rule.RuleBairro;
 import br.com.barcadero.rule.RuleCidade;
-import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.rule.RuleEmpresa;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.rule.RuleLoja;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
@@ -30,7 +28,6 @@ import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
-import br.com.barcadero.web.functions.HandleOpenEnderDialog;
 /**
  * Bean para salvar a empresa.
  * @author Rafael Rocha
@@ -226,56 +223,7 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 		GlobalVariables.codCidade 	= codCidade;
 	}
 	
-	/**
-	 * Depreciado. Utilizar a classe br.com.barcadero.web.function.HandleEndereco
-	 */
-	@Deprecated
-	public List<Cidade> obterCidades() throws Exception {
-		System.out.println("Obter as cidades pelo codigo Estado: " + getCodEstado());
-		BeanEmpresa.cidades = ruleCidade.getCidadesByCodEstado(getCodEstado()); 
-		return BeanEmpresa.cidades; 
-	}
-	/**
-	 * Depreciado. Utilizar a classe br.com.barcadero.web.function.HandleEndereco
-	 */
-	@Deprecated
-	public void hendleReturnCidades(SelectEvent event) throws Exception {
-		BeanEmpresa.cidades = ruleCidade.getCidadesByCodEstado(getCodEstado()); 
-		System.out.println("hendleReturnCidades Evento event: " + event); 
-	}
-	/**
-	 * Depreciado. Utilizar a classe br.com.barcadero.web.function.HandleEndereco
-	 */
-	@Deprecated
-	public void hendleReturnBairros(SelectEvent event) throws Exception {
-		BeanEmpresa.bairros = ruleBairro.getBairrosByCodCidade(getCodCidade()); 
-		System.out.println("hendleReturnBairros Evento event: " + event); 
-	}
-	/**
-	 * Depreciado. Utilizar a classe br.com.barcadero.web.function.HandleEndereco
-	 */
-	@Deprecated
-	public List<Bairro> obterBairros() throws Exception {
-		System.out.println("Obter os bairros pelo codigo da Cidade: " + getCodCidade());
-		BeanEmpresa.bairros = ruleBairro.getBairrosByCodCidade(getCodCidade()); 
-		return  BeanEmpresa.bairros;
-	}
-	/**
-	 * Depreciado. Utilizar a classe br.com.barcadero.web.function.HandleEndereco
-	 */
-	@Deprecated
-	public void openCadCidade(ActionEvent event) throws Exception {
-		HandleOpenEnderDialog.openCadCidade();
-		System.out.println("cad cidade");
-	}
-	/**
-	 * Depreciado. Utilizar a classe br.com.barcadero.web.function.HandleEndereco
-	 */
-	@Deprecated
-	public void openCadBairro(ActionEvent event) throws Exception {
-		HandleOpenEnderDialog.openCadBairro();
-		System.out.println("open popup bairro");
-	}
+	
 	
 	public Usuario getUser() {
 		return SessionContext.getInstance().getUsuarioLogado();

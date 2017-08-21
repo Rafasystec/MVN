@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -13,20 +14,18 @@ import br.com.barcadero.tables.Loja;
 public class DaoLoja extends DaoModelo<Loja> {
 
 	public DaoLoja() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
 	public Loja find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return find(codigo, Loja.class);
 	}
 
 	@Override
 	public List<Loja> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		Query qry = manager.createNamedQuery(Loja.FIND_ALL);
-		qry.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo());
+		TypedQuery<Loja> qry = manager.createNamedQuery(Loja.FIND_ALL,Loja.class);
+		qry.setParameter(GlobalNameParam.PARAM_COD_EMP, getEmpresa());
 		return qry.getResultList();
 	}
 	

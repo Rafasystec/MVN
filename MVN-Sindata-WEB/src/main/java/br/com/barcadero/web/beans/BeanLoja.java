@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 
 import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.core.enums.EnumUF;
@@ -17,14 +18,16 @@ import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="loja")
+@ViewScoped
 public class BeanLoja extends SuperBean<Loja> {
 
 	private static final long serialVersionUID = 444117878813938158L;
 	private PessoaJuridica pj;
-	private Endereco ender;
 	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
 	private Loja loja;
+	private Loja selectedLoja;
+	private Endereco endereco		= null;
 	private EnumRegimeTributario[] regime;
 	private EnumUF[] uf;
 	private long codEmpresa;
@@ -33,7 +36,7 @@ public class BeanLoja extends SuperBean<Loja> {
 	private void init() {
 		Usuario userLogado = getSession().getUsuarioLogado();
 		pj 		= new PessoaJuridica(userLogado);
-		ender	= new Endereco(userLogado);
+		endereco	= new Endereco(getUsuarioLogado());
 		loja	= new Loja(userLogado);
 	}
 	
@@ -53,14 +56,6 @@ public class BeanLoja extends SuperBean<Loja> {
 
 	public void setPj(PessoaJuridica pj) {
 		this.pj = pj;
-	}
-
-	public Endereco getEnder() {
-		return ender;
-	}
-
-	public void setEnder(Endereco ender) {
-		this.ender = ender;
 	}
 	
 	public EnumRegimeTributario[] getRegime() {
@@ -89,13 +84,12 @@ public class BeanLoja extends SuperBean<Loja> {
 
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
 		try {
 			System.out.println("Salvar method involked");
 			pj.setDtUltAlteracao(new Date());
-			ender.setPessoa(pj);
+			endereco.setPessoa(pj);
 			List<Endereco> listEnder = new ArrayList<Endereco>();
-			listEnder.add(ender);
+			listEnder.add(endereco);
 			pj.setEnderecos(listEnder);
 			loja.setPessoaJuridica(pj);
 			loja.setEmpresa(getSession().getEmpresaLogada());
@@ -158,6 +152,35 @@ public class BeanLoja extends SuperBean<Loja> {
 	public boolean validar(Loja entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public List<Loja> getLojasDaEmpresa() {
+		getRuleLoja().setEmpresa(getEmpresaLogada());
+		try {
+			return getRuleLoja().findAll();
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
+	}
+
+
+	public Loja getSelectedLoja() {
+		return selectedLoja;
+	}
+
+
+	public void setSelectedLoja(Loja selectedLoja) {
+		this.selectedLoja = selectedLoja;
+	}
+
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 }

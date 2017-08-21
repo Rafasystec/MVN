@@ -11,6 +11,7 @@ import br.com.barcadero.dao.DaoCidade;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
+import br.com.barcadero.tables.Estado;
 import br.com.barcadero.tables.Loja;
 
 @Service
@@ -30,23 +31,6 @@ public class RuleCidade extends RuleModelo<Cidade> {
 	public Cidade find(long codigo) throws Exception {
 		System.out.println("Procurando cidade pelo codigo: " + codigo);
 		return this.daoCidade.find(codigo);
-	}
-	
-	/**
-	 * Utilize a busca por UF
-	 * @param codEstado
-	 * @return
-	 * @throws Exception
-	 */
-	@Deprecated	
-	public List<Cidade> getCidadesByCodEstado(long codEstado) throws Exception{
-		try {
-			System.out.println("Procurando cidades do estado de codigo: " +codEstado);
-			return this.daoCidade.getCidadesByCodEstado(codEstado);
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw new Exception(e.getMessage());
-		}
 	}
 	
 	public List<Cidade> findAll() throws Exception{
@@ -81,6 +65,10 @@ public class RuleCidade extends RuleModelo<Cidade> {
 	public List<Cidade> getCidadesByUF(EnumUF uf) throws Exception{
 		return daoCidade.getCidadesByUF(uf);
 	}
+	
+	public List<Cidade> getCidadeByEstado(Estado estado) {
+		return daoCidade.getCidadeByEstado(estado);
+	}
 
 	@Override
 	public List<Cidade> findByEmpresa(Empresa empresa) throws Exception {
@@ -96,14 +84,12 @@ public class RuleCidade extends RuleModelo<Cidade> {
 
 	@Override
 	public Cidade insert(Cidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoCidade.insert(entidade);
 	}
 
 	@Override
 	public Cidade update(Cidade entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoCidade.update(entidade);
 	}
 
 }

@@ -21,7 +21,7 @@
 			<h:panelGrid columns="1">
 				<!-- Panel do butoes -->
 				<h:panelGrid columns="6">
-					<p:commandButton value="Salvar" action="#{popBairro.inserir}" update="grid" />
+					<p:commandButton value="Salvar" action="#{popBairro.salvar}" update="grid" />
 				</h:panelGrid>
 				<!-- Panel do formulario -->
 				<h:panelGrid columns="4">
@@ -29,12 +29,7 @@
 					<p:inputText id="descricao" required="true" value="#{popBairro.descricao}">
 						<f:validateLength minimum="3" />
 					</p:inputText>
-					<p:outputLabel value="" for="cidades"/>
-					<p:selectOneMenu id="cidades" required="true" value="#{popBairro.codCidade}" >
-						<f:selectItem itemValue="0" itemLabel="Selecione o município"/>
-						<f:selectItems value="#{popBairro.cidades}" var="cidades" itemValue="#{cidades.codigo}" itemLabel="#{cidades.descricao}"/>
-						<p:ajax event="change" update="grid" />
-					</p:selectOneMenu>
+					
 					<p:outputLabel value="Cód. IBGE:" for="ibge"/>
 					<p:inputText id="ibge" required="true" value="#{popBairro.codIbge}"/>
 				</h:panelGrid>	

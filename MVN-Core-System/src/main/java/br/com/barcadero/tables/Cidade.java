@@ -26,6 +26,7 @@ a anotação @NamedQueries quando queremos definir várias consultas.
 @NamedQueries(
 		{
 			@NamedQuery(name=Cidade.FIND_ALL,query="FROM Cidade"),
+			@NamedQuery(name=Cidade.FIND_BY_ESTADO,query="FROM Cidade WHERE estado = :estado"),
 			@NamedQuery(name=Cidade.FIND_BY_CODE_ESTADO,query="FROM Cidade WHERE cod_estado = :codEstado"),
 			@NamedQuery(name=Cidade.FIND_BY_CODE,query="FROM Cidade WHERE codigo = :codigo"),
 			@NamedQuery(name=Cidade.FIND_BY_DT_CADASTRO,query="FROM Cidade WHERE dtCadastro = :dtCadastro"),
@@ -50,6 +51,7 @@ public class Cidade extends Entidade{
 	public static final String FIND_BY_CODE = "Cidade.findByCode";
 	public static final String FIND_ALL 	= "Cidade.findAll";
 	public static final String FIND_BY_UF 	= "Cidade.findByUF";
+	public static final String FIND_BY_ESTADO = "Cidade.findByEstado";
 	public static final String FIND_BY_CODE_ESTADO 	= "Cidade.findByCodEstado";
 	public static final String FIND_BY_DT_CADASTRO 	= "Cidade.findByDtCadastro";
 	public static final String FIND_BY_DESC_AND_UF 	= "Cidade.findByDescAndUF";

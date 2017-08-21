@@ -1,5 +1,8 @@
 package br.com.barcadero.web.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -16,6 +19,7 @@ public class BeanVendedor extends SuperBean<Vendedor> {
 
 	private static final long serialVersionUID = 8726796444540957389L;
 	private Vendedor vendedor;
+	private Vendedor selectedVendedor;
 	@ManagedProperty("#{ruleVendedor}")
 	private RuleVendedor ruleVendedor;
 	@ManagedProperty("#{ruleFuncionario}")
@@ -24,15 +28,18 @@ public class BeanVendedor extends SuperBean<Vendedor> {
 	
 	@PostConstruct
 	private void init() {
+		novoVendedor();
+	}
+
+	private void novoVendedor() {
 		vendedor 		= new Vendedor(getEmpresaLogada(), getUsuarioLogado());
 	}
 	
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		vendedor.setFuncionario((Funcionario)ruleFuncionario.find(codFuncionario));
+		vendedor.setFuncionario(ruleFuncionario.find(codFuncionario));
 		ruleVendedor.insert(vendedor);
-		vendedor = new Vendedor(getEmpresaLogada(), getUsuarioLogado());
+		novoVendedor();
 		return null;
 	}
 
@@ -50,7 +57,7 @@ public class BeanVendedor extends SuperBean<Vendedor> {
 
 	@Override
 	public String novo() throws Exception {
-		// TODO Auto-generated method stub
+		novoVendedor();
 		return null;
 	}
 
@@ -100,6 +107,23 @@ public class BeanVendedor extends SuperBean<Vendedor> {
 
 	public void setRuleFuncionario(RuleFuncionario ruleFuncionario) {
 		this.ruleFuncionario = ruleFuncionario;
+	}
+	
+	public List<Vendedor> getFindAll() {
+		try {
+			getRuleVendedor().setEmpresa(getEmpresaLogada());
+			return getRuleVendedor().findAll();
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
+	}
+
+	public Vendedor getSelectedVendedor() {
+		return selectedVendedor;
+	}
+
+	public void setSelectedVendedor(Vendedor selectedVendedor) {
+		this.selectedVendedor = selectedVendedor;
 	}
 
 }

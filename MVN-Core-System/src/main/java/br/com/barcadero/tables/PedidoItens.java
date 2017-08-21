@@ -58,7 +58,7 @@ public class PedidoItens extends EntidadeLoja {
 	@Column(name="PC_ACRESCIMO", nullable=false)
 	private BigDecimal pcAcrescimo= new BigDecimal(0);
 	
-	@ManyToOne(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pedido",referencedColumnName="codigo")
 	private Pedido pedido;
 	

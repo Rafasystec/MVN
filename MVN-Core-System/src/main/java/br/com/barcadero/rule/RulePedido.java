@@ -29,42 +29,18 @@ public class RulePedido extends RuleModelo<Pedido> {
 	@Autowired
 	private RuleGenarateCFe ruleGenarateCFe;
 	
-//	@Autowired
-//	public RulePedido(DaoPedido daoPedido,RuleCaixa ruleCaixa,RuleNota ruleNota) {
-//		System.out.println("Auto-generated constructor stub RulePedido");
-//		this.daoPedido = daoPedido;
-//		this.ruleCaixa = ruleCaixa;
-//		this.ruleNota  = ruleNota;
-//	}
-
-
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoPedido.insert(entidade);
-//	}
-
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return daoPedido.delete(codigo);
 	}
 
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoPedido.update(entidade);
-//	}
-
 	@Override
 	public Pedido find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return daoPedido.find(codigo);
 	}
 
 	@Override
 	public List<Pedido> findAll() throws Exception {
-		// TODO Auto-generated method stub
 		return daoPedido.findAll();
 	}
 	
@@ -77,7 +53,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 	 */
 	public Pedido createPedido(Usuario usuario, String ip) throws Exception {
 		Pedido pedido = new Pedido(getEmpresa(), getLoja(), usuario);
-		Caixa caixa = ruleCaixa.findByIp(getLoja().getCodigo(), ip);
+		Caixa caixa = ruleCaixa.findByIp(getLoja(), ip);
 		pedido.setCaixa(caixa);
 		return pedido;
 	}
@@ -150,9 +126,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 				return "Pedido Faturado";
 			}else{
 				throw new Exception("Caixa não foi configurado");
-			}
-			
-			
+			}	
 		}else{
 			return "Nenhum produto para ser FATURADO.";
 		}
@@ -217,15 +191,13 @@ public class RulePedido extends RuleModelo<Pedido> {
 
 	@Override
 	public Pedido insert(Pedido entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoPedido.insert(entidade);
 	}
 
 
 	@Override
 	public Pedido update(Pedido entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoPedido.update(entidade);
 	}
 	
 }

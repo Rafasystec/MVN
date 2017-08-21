@@ -1,5 +1,6 @@
 package br.com.barcadero.web.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class BeanCidade extends SuperBean<Cidade>{
 	private RuleCidade facadeCidade;
 	@ManagedProperty("#{ruleEstado}")
 	private RuleEstado facadeEstado;
+	
 	FacesContext context ;
 	
 
@@ -86,8 +88,12 @@ public class BeanCidade extends SuperBean<Cidade>{
 	public List<Cidade> getCidades() {
 		try{
 			if(getCodEstado() != 0 ){
-				//Procura pelo codigo especificado
-				this.cidades = this.facadeCidade.getCidadesByCodEstado(getCodEstado());
+				Estado estado = getFacadeEstado().find(getCodEstado());
+				if(estado != null){
+					this.cidades = this.facadeCidade.getCidadeByEstado(estado);
+				}else{
+					this.cidades = new ArrayList<Cidade>();
+				}
 			}
 			return cidades;
 		}catch(Exception e){

@@ -133,7 +133,7 @@ xmlns:h="http://java.sun.com/jsf/html"
 		<p:accordionPanel>
 			<p:tab title="Consultar" closable="true">
 				<p:panel header="Consulta">
-					<p:dataTable id="clientes" var="cli" value="#{cliente.clientes}" resizableColumns="true" style="margin-bottom:20px" 
+					<p:dataTable id="clientes" var="cli" value="#{cliente.clientesCadastradosHoje}" resizableColumns="true" style="margin-bottom:20px" 
 					selectionMode="single" selection="#{cliente.cliente}"  rowKey="#{cli.codigo}" rows="10" scrollable="true" >
 					 
 					<p:ajax event="rowSelect" update=":formMain:pnlDadosCliente"  />

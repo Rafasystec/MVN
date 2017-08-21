@@ -31,7 +31,8 @@ public class RuleVendedor extends RuleModelo<Vendedor> {
 
 	@Override
 	public List<Vendedor> findAll() throws Exception {
-		return null;
+		daoVendedor.setEmpresa(getEmpresa());
+		return daoVendedor.findAll();
 	}
 
 	@Override
@@ -82,14 +83,12 @@ public class RuleVendedor extends RuleModelo<Vendedor> {
 
 	@Override
 	public Vendedor insert(Vendedor entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoVendedor.insert(entidade);
 	}
 
 	@Override
 	public Vendedor update(Vendedor entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoVendedor.update(entidade);
 	}
 
 }

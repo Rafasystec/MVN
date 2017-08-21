@@ -77,10 +77,10 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 	 * @return
 	 * @throws Exception
 	 */
-	public Caixa findByIp(long cdLoja, String ip) throws Exception{
-		Caixa caixa = daoCaixa.findByIp(cdLoja, ip); 
+	public Caixa findByIp(Loja loja, String ip) throws Exception{
+		Caixa caixa = daoCaixa.findByIp(loja, ip); 
 		if(caixa == null){
-			throw new Exception("Não foi encontrado caixa para loja >> " + cdLoja + " e ip >> " + ip);
+			throw new Exception("Não foi encontrado caixa para loja >> " + loja.getCodigo() + " e ip >> " + ip);
 		}
 		return caixa;
 	}
@@ -112,7 +112,7 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 	public Caixa getCaixaVenda(Loja loja, String ipAddress) {
 		Caixa caixa = null;
 		try {
-			caixa = findByIp(loja.getCodigo(), ipAddress);
+			caixa = findByIp(loja, ipAddress);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

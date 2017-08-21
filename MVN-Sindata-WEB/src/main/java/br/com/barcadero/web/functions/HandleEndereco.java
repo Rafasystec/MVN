@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -18,10 +18,9 @@ import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Estado;
-import br.com.barcadero.web.beans.SuperBean;
 
 @ManagedBean(name="ender")
-@RequestScoped	
+@ViewScoped
 public class HandleEndereco {
 
 	private static final long serialVersionUID = -2770111081253143663L;

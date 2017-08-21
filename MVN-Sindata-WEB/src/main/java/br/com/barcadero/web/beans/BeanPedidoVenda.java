@@ -124,7 +124,6 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 	public void salvarItem() {
 		try {
 			System.out.println("Save item called.");
-			//beginTransaction();
 			if(pedido == null){
 				pedido	= createPedido();
 			}

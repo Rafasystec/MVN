@@ -15,5 +15,7 @@ public class GlobalNameParam {
 	public static final String PARAM_DEFAULT_CODE_COLUMN  = "codigo";
 	public static final String PARAM_CLIENTE			  = "cliente";
 	public static final String PARAM_VENDEDOR			  = "vendedor";
+	public static final String PARAM_DT_CADASTRO		  = "dtCadastro";
+	
 
 }

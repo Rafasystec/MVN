@@ -8,8 +8,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import br.com.barcadero.rule.RuleBairro;
 import br.com.barcadero.rule.RuleCidade;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Estado;
 
 @ManagedBean
 @RequestScoped
@@ -25,6 +27,8 @@ public class BeanBairro extends SuperBean<Bairro> {
 	private List<Cidade> cidades;
 	private List<Bairro> bairros;
 	private long codEstado;
+	@ManagedProperty("#{ruleEstado}")
+	private RuleEstado ruleEstado;
 	
 	@PostConstruct
 	private void init() {
@@ -33,7 +37,12 @@ public class BeanBairro extends SuperBean<Bairro> {
 	
 	public List<Cidade> getCidades() {
 		try{
-			this.cidades = fcdCidade.getCidadesByCodEstado(getCodEstado());
+			if(getCodEstado() != 0){
+				Estado estado = ruleEstado.find(getCodEstado());
+				if(estado != null){
+					this.cidades = fcdCidade.getCidadeByEstado(estado);
+				}
+			}
 			return cidades;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -151,6 +160,14 @@ public class BeanBairro extends SuperBean<Bairro> {
 	public boolean validar(Bairro entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public RuleEstado getRuleEstado() {
+		return ruleEstado;
+	}
+
+	public void setRuleEstado(RuleEstado ruleEstado) {
+		this.ruleEstado = ruleEstado;
 	}
 
 }

@@ -20,6 +20,7 @@ import br.com.barcadero.core.enums.EnumTipoPessoa;
 @NamedQueries({
 			@NamedQuery(name=Cliente.FIND		 			,query="FROM Cliente WHERE empresa = :empresa"),
 			@NamedQuery(name=Cliente.FIND_BY_CODE			,query="FROM Cliente WHERE codigo = :codigo"),
+			@NamedQuery(name=Cliente.FIND_CLIENTES_CAD_HOJE	,query="FROM Cliente WHERE empresa = :empresa AND dtCadastro = :dtCadastro"),
 			@NamedQuery(name=Cliente.FIND_BY_NAME_OR_CODIGO	,query="FROM Cliente c WHERE c.empresa = :empresa AND (c.codigo = :codigo OR c.pessoaFisica.nome LIKE :nome)")
 			
 })
@@ -39,6 +40,7 @@ public class Cliente extends EntidadeEmpresa{
 		// TODO Auto-generated constructor stub
 	}
 	public final static String FIND 					= "Cliente.find";
+	public final static String FIND_CLIENTES_CAD_HOJE	= "Cliente.findClienteCadHoje";
 	public final static String FIND_BY_CODE 			= "Cliente.findByCode";
 	public final static String FIND_BY_NAME_OR_CODIGO 	= "Cliente.findByNameOrCodigo";
 

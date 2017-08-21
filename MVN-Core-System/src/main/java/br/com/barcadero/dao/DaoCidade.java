@@ -29,13 +29,7 @@ public class DaoCidade extends DaoModelo<Cidade>{
 
 	@Override
 	public Cidade find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-//		Query qry = getSession().getNamedQuery(Cidade.FIND_BY_CODE);
-//		qry.setLong("codigo", codigo);
-//		return (Cidade)qry.uniqueResult();
-		Query query = manager.createNamedQuery(Cidade.FIND_BY_CODE)
-				.setParameter("codigo", codigo);
-		return (Cidade) query.getSingleResult();
+		return find(codigo, Cidade.class);
 	}
 	
 //	@Override
@@ -51,27 +45,7 @@ public class DaoCidade extends DaoModelo<Cidade>{
 //		return super.insert(entidade);
 //	}
 	
-	/**
-	 * Utilizar a obtencao das cidades pela UF
-	 * @param codEstado
-	 * @return
-	 * @throws Exception
-	 */
-	@Deprecated
-	public List<Cidade> getCidadesByCodEstado(long codEstado) throws Exception{
-		List<Cidade> cidades	= null;
-		Query qry				= null;
-		try {
-			//qry	= getSession().getNamedQuery("Cidade.findByCodEstado");
-			qry = manager.createNamedQuery(Cidade.FIND_BY_CODE_ESTADO)
-						 .setParameter("codEstado", codEstado);
-			cidades	= qry.getResultList();
-			return cidades;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw new Exception(e.getMessage());
-		}
-	}
+	
 	
 	/**
 	 * Obter as cidades por UF
@@ -94,6 +68,11 @@ public class DaoCidade extends DaoModelo<Cidade>{
 		}
 	}
 	
+	public List<Cidade> getCidadeByEstado(Estado estado) {
+		TypedQuery<Cidade> qry = manager.createNamedQuery(Cidade.FIND_BY_ESTADO, Cidade.class)
+				.setParameter("estado", estado);
+		return qry.getResultList();
+	}
 	/**
 	 * 
 	 * @param descricao

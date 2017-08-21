@@ -48,8 +48,8 @@ public class RuleProduto extends RuleModelo<Produto> {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Produto> findByCodOrDesc(String codigoOrDesc) throws Exception{
-		return daoProduto.findByCodOrDesc(codigoOrDesc);
+	public List<Produto> findByCodOrDesc(Empresa empresa,String codigoOrDesc) throws Exception{
+		return daoProduto.findByCodOrDesc(empresa,codigoOrDesc);
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class RuleProduto extends RuleModelo<Produto> {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<String> getAutoComplete(String codigoOrDesc) throws Exception{
-		List<Produto> produtos 	= daoProduto.findByCodOrDesc(codigoOrDesc);
+	public List<String> getAutoComplete(Empresa empresa, String codigoOrDesc) throws Exception{
+		List<Produto> produtos 	= daoProduto.findByCodOrDesc(empresa,codigoOrDesc);
 		List<String> list 		= new ArrayList<String>();
 		for (Produto produto : produtos) {
 			String description = produto.getCodigo() + " -|- " + produto.getDescricao();

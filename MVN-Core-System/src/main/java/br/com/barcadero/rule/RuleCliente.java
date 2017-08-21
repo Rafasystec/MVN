@@ -6,6 +6,9 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.dao.DaoCliente;
 import br.com.barcadero.tables.Cliente;
@@ -28,24 +31,20 @@ public class RuleCliente extends RuleModelo<Cliente> {
 	
 	public RuleCliente(Empresa empresa, Loja loja, Session session) {
 		super(empresa, loja, session);
-		//daoCliente = new DaoCliente(empresa, loja, session);
 	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return daoCliente.delete(codigo);
 	}
 
 	@Override
 	public List<Cliente> findAll() throws Exception {
-		// TODO Auto-generated method stub
 		return daoCliente.findAll();
 	}
 
 	@Override
 	public Cliente find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return daoCliente.find(codigo);
 	}
 	
@@ -54,8 +53,8 @@ public class RuleCliente extends RuleModelo<Cliente> {
 	 * @param value
 	 * @return
 	 */
-	public List<String> getAutoComplet(String value) {
-		List<Cliente> list 		= getByCodeOrName(value);
+	public List<String> getAutoComplet(Empresa empresa,String value) {
+		List<Cliente> list 		= getByCodeOrName(empresa,value);
 		List<String> listStrings	= new ArrayList<>();
 		for(Cliente cliente : list){
 			String patter = cliente.getCodigo() + " | " + cliente.getPessoaFisica().getNome();
@@ -69,19 +68,18 @@ public class RuleCliente extends RuleModelo<Cliente> {
 	 * @param value
 	 * @return
 	 */
-	public List<Cliente> getByCodeOrName(String value) {
+	public List<Cliente> getByCodeOrName(Empresa empresa,String value) {
 		long codigo = 0;
 		try {
 			codigo = Long.parseLong(value);
 		} catch (Exception e) {
 			codigo = 0;
 		}
-		return daoCliente.findByCodeOrName(codigo, "%"+value+"%");
+		return daoCliente.findByCodeOrName(empresa,codigo, "%"+value+"%");
 	}
 
 	@Override
 	public List<Cliente> findByEmpresa(Empresa empresa) throws Exception {
-		// TODO Auto-generated method stub
 		if(empresa != null){
 			return daoCliente.findByEmpresa(empresa);
 		}else{
@@ -95,16 +93,18 @@ public class RuleCliente extends RuleModelo<Cliente> {
 		return null;
 	}
 
-	@Override
-	public Cliente insert(Cliente entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
+	public Cliente insert(Cliente entidade) throws Exception {		
+		return daoCliente.insert(entidade);
 	}
 
 	@Override
 	public Cliente update(Cliente entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoCliente.update(entidade);
+	}
+	
+	public List<Cliente> conasultarClientesCadastradosDoDia(Empresa empresa) {
+		return daoCliente.conasultarClientesCadastradosDoDia(empresa);
 	}
 
 }

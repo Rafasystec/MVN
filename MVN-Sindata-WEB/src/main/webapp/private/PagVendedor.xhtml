@@ -16,7 +16,7 @@
 		<p:panel header="Vendedores">
 			<p:panelGrid columns="2" styleClass="noBorder">
 				<p:outputLabel id="lblApelido" value="Apelido:" />
-				<p:inputText id="txtApelido" value="#{vendedor.vendedor.apelido}" />
+				<p:inputText id="txtApelido" value="#{vendedor.vendedor.apelido}"  maxlength="40"/>
 				<p:outputLabel id="lblPercentualComissao"
 					value="Percentual Comissão:" />
 				<p:inputText id="txtComissao"
@@ -29,9 +29,30 @@
 				<p:outputLabel id="lblCodFuncionario" value="Código Funcionário" />
 				<p:inputText id="txtCodFuncionario"
 					value="#{vendedor.codFuncionario}" />
-
+				
 			</p:panelGrid>
 		</p:panel>
+			<p:dataTable id="grid" var="vend"
+				value="#{vendedor.findAll}" resizableColumns="true"
+				style="margin-bottom:20px" selectionMode="single"
+				selection="#{vendedor.selectedVendedor}" rowKey="#{vend.codigo}" rows="10"
+				scrollable="true" paginator="true">
+	
+				<f:facet name="header">
+	            	Vendedores do Sistema
+	        	</f:facet>
+				<p:column headerText="Código">
+					<h:outputText value="#{vend.codigo}" />
+				</p:column>
+				<p:column headerText="Apelido">
+					<h:outputText value="#{vend.apelido}" />
+				</p:column>
+				<p:column headerText="Data de cadatro">
+					<h:outputText value="#{vend.dtCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
 		<clx:buttonsCrud id="btnDowns" bean="#{vendedor}"/>
 	</ui:define>
 </ui:composition>

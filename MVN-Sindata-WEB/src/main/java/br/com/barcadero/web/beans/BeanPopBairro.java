@@ -3,29 +3,33 @@ package br.com.barcadero.web.beans;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.context.RequestContext;
 
 import br.com.barcadero.rule.RuleBairro;
 import br.com.barcadero.rule.RuleCidade;
+import br.com.barcadero.rule.RuleEstado;
 import br.com.barcadero.tables.Bairro;
 import br.com.barcadero.tables.Cidade;
+import br.com.barcadero.tables.Estado;
 
 /**
  * Atencao: Usar esse bean somente para a popup de bairro
  * @author Rafael Rocha
  *
  */
-@RequestScoped
+@ViewScoped
 @ManagedBean(name="popBairro")
 public class BeanPopBairro extends SuperBean<Bairro>{
 	
 	private static final long serialVersionUID = 8270960627163947540L;
 	private long codigo;
 	private long codCidade;
+	private long codEstado;
 	private String codIbge;
 	private String descricao;
 	private Date dtCadastro;
@@ -36,15 +40,28 @@ public class BeanPopBairro extends SuperBean<Bairro>{
 	private RuleBairro ruleBairro;
 	@ManagedProperty("#{ruleCidade}")
 	private RuleCidade ruleCidade;
+	@ManagedProperty("#{ruleEstado}")
+	private RuleEstado ruleEstado;
+	private Bairro bairro;
 	
 	public List<Cidade> getCidades() {
 		try{
-			this.cidades = ruleCidade.getCidadesByCodEstado(GlobalVariables.codEstado);
+			if(getCodEstado() != 0){
+				Estado estado = ruleEstado.find(getCodEstado());
+				if(estado != null){
+					this.cidades = ruleCidade.getCidadeByEstado(estado);
+				}
+			}
+			
 			return cidades;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
+	}
+	@PostConstruct
+	public void init() {
+		novoBairro();
 	}
 	
 	public List<Bairro> getBairros() {
@@ -93,8 +110,47 @@ public class BeanPopBairro extends SuperBean<Bairro>{
 		this.dtCadastro = dtCadastro;
 	}
 	
-	//NOTE: Metodos que serao envocados na pagina
-	public String inserir() {
+//	//NOTE: Metodos que serao envocados na pagina
+//	public String inserir() {
+//		try{
+//			String msg		= "";
+//			Bairro bairro	= new Bairro(getSession().getUsuarioLogado());
+//			Cidade cidade	= null;
+//			bairro.setCodigo(getCodigo());
+//			bairro.setDescricao(getDescricao());
+//			bairro.setCodIbge(getCodIbge());
+//			
+//			cidade = (Cidade) ruleCidade.find(getCodCidade());
+//			if(cidade != null){
+//				bairro.setCidade(cidade);
+//				this.ruleBairro.insert(bairro);
+//				exibirMensagem(msg);
+//			}else{
+//				exibirErroGrave("Não foi possível encontrar a cidade para o relacionamento.");
+//			}
+//			return null;
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+	
+	public String inserirOnPopup() {
+		try {
+			salvar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		RequestContext.getCurrentInstance().closeDialog(null);
+		return null;
+	}
+	
+	public String cancelar() {
+		RequestContext.getCurrentInstance().closeDialog(null);
+		return null;
+	}
+	@Override
+	public String salvar() throws Exception {
 		try{
 			String msg		= "";
 			Bairro bairro	= new Bairro(getSession().getUsuarioLogado());
@@ -111,27 +167,12 @@ public class BeanPopBairro extends SuperBean<Bairro>{
 			}else{
 				exibirErroGrave("Não foi possível encontrar a cidade para o relacionamento.");
 			}
+			novoBairro();
 			return null;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-	public String inserirOnPopup() {
-		inserir();
-		RequestContext.getCurrentInstance().closeDialog(null);
-		return null;
-	}
-	
-	public String cancelar() {
-		RequestContext.getCurrentInstance().closeDialog(null);
-		return null;
-	}
-	@Override
-	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	@Override
 	public String alterar() throws Exception {
@@ -145,17 +186,13 @@ public class BeanPopBairro extends SuperBean<Bairro>{
 	}
 	@Override
 	public String novo() throws Exception {
-		// TODO Auto-generated method stub
+		novoBairro();
 		return null;
 	}
-	
-	private void getParametros() {
-//		 @SuppressWarnings("unchecked")
-//		List<String> parans = (List<String>) RequestContext.getCurrentInstance().getAttributes().get(Attributs.POP_BAIRRO_PARAMS);
-//		for (String string : parans) {
-//			System.out.println(string);
-//		}
+	private void novoBairro() {
+		this.bairro = new Bairro(getUsuarioLogado());
 	}
+	
 	public List<String> getParams() {
 		return params;
 	}
@@ -194,5 +231,31 @@ public class BeanPopBairro extends SuperBean<Bairro>{
 	public boolean validar(Bairro entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public long getCodEstado() {
+		return codEstado;
+	}
+
+	public void setCodEstado(long codEstado) {
+		this.codEstado = codEstado;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
+	public RuleEstado getRuleEstado() {
+		return ruleEstado;
+	}
+
+	public void setRuleEstado(RuleEstado ruleEstado) {
+		this.ruleEstado = ruleEstado;
+	}
+	public Bairro getBairro() {
+		return bairro;
+	}
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
 	}
 }

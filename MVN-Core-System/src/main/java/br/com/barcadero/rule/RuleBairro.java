@@ -20,31 +20,15 @@ public class RuleBairro extends RuleModelo<Bairro> {
 	public RuleBairro(DaoBairro daoBairro) {
 		this.daoBairro = daoBairro;
 	}
-	
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		try{
-//			Bairro bairro	= (Bairro)entidade;
-//			if(bairro != null){
-//				return this.daoBairro.insert(entidade);
-//			}else{
-//				return "Entidade veio nula do Bean.";
-//			}
-//		}catch(Exception e){
-//			throw new Exception(e.getMessage());
-//		}
-//	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoBairro.delete(codigo);
 	}
 
 	@Override
 	public Bairro find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoBairro.find(codigo, Bairro.class);
 	}
 	
 	public List<Bairro> findAll() throws Exception{
@@ -66,7 +50,6 @@ public class RuleBairro extends RuleModelo<Bairro> {
 		try {
 			return this.daoBairro.getBairroByCidade(codCidade);
 		} catch (Exception e) {
-			// TODO: handle exception
 			throw new Exception(e.getMessage());
 		}
 	}
@@ -90,8 +73,7 @@ public class RuleBairro extends RuleModelo<Bairro> {
 
 	@Override
 	public Bairro update(Bairro entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoBairro.update(entidade);
 	}
 
 }

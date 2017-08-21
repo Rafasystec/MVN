@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.SelectEvent;
@@ -19,10 +19,9 @@ import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.PessoaFisica;
 import br.com.barcadero.web.functions.HandleMessage;
-import groovyjarjarasm.asm.Handle;
 
 @ManagedBean(name="cliente")
-@RequestScoped
+@ViewScoped
 public class BeanCliente extends SuperBean <Cliente>{
 
 	private static final long serialVersionUID = 5470117896075103063L;
@@ -86,7 +85,7 @@ public class BeanCliente extends SuperBean <Cliente>{
 		cliente.setPessoaFisica(pFisica);
 		endereco.setPessoa(pFisica);
 		ruleCliente.insert(cliente);
-		
+		HandleMessage.info("Salvo com sucesso!");
 		return null;
 	}
 	
@@ -158,6 +157,10 @@ public class BeanCliente extends SuperBean <Cliente>{
 	public boolean validar(Cliente entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public List<Cliente> getClientesCadastradosHoje() {
+		return ruleCliente.conasultarClientesCadastradosDoDia(getEmpresaLogada());
 	}
 	
 	

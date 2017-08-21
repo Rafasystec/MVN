@@ -5,8 +5,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
+import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.rule.RuleCaixaAbertura;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.CaixaAbertura;
+import br.com.barcadero.web.functions.HandleFaceContext;
+import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
 @RequestScoped
@@ -19,6 +23,8 @@ public class BeanAbrirCaixa extends SuperBean <CaixaAbertura>{
 	private CaixaAbertura caixaAbertura 		= null;
 	@ManagedProperty("#{ruleCaixaAbertura}")
 	private RuleCaixaAbertura ruleCaixaAbertura;
+	@ManagedProperty("#{ruleCaixa}")
+	private RuleCaixa ruleCaixa;
 	
 	@PostConstruct
 	public void init() {
@@ -88,7 +94,14 @@ public class BeanAbrirCaixa extends SuperBean <CaixaAbertura>{
 
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
+		try{
+			Caixa caixa = ruleCaixa.findByIp(getLojaLogada(), HandleFaceContext.getIpAddress());
+			caixaAbertura = ruleCaixaAbertura.insert(caixaAbertura);
+			HandleMessage.info("Caixa aberto com sucesso!");
+			caixaAbertura = getCaixaAberturaInstance();
+		}catch(Exception e){
+			HandleMessage.error("Erro ao abrir o caixa", e.getMessage());
+		}
 		return null;
 	}
 
@@ -96,6 +109,14 @@ public class BeanAbrirCaixa extends SuperBean <CaixaAbertura>{
 	public boolean validar(CaixaAbertura entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public RuleCaixa getRuleCaixa() {
+		return ruleCaixa;
+	}
+
+	public void setRuleCaixa(RuleCaixa ruleCaixa) {
+		this.ruleCaixa = ruleCaixa;
 	}
 
 }

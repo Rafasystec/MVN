@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.core.enums.EnumStatusCaixa;
 import br.com.barcadero.dao.DaoCaixaAbertura;
@@ -16,7 +19,7 @@ import br.com.barcadero.tables.Loja;
 public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 
 	@Autowired
-	private DaoCaixaAbertura daoCaixaAbertura; 
+	private DaoCaixaAbertura daoCaixaAbertura;
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -59,7 +62,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 	}
 
 	
-	@Override
+	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
 	public CaixaAbertura insert(CaixaAbertura entidade) throws Exception {
 		return daoCaixaAbertura.insert(entidade);
 	}
@@ -68,6 +71,7 @@ public class RuleCaixaAbertura extends RuleModelo<CaixaAbertura> {
 	public CaixaAbertura update(CaixaAbertura entidade) throws Exception {
 		return daoCaixaAbertura.update(entidade);
 	}
+
 	
 	
 

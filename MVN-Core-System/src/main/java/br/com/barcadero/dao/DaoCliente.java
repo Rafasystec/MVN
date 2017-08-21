@@ -1,8 +1,10 @@
 package br.com.barcadero.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -19,8 +21,7 @@ public class DaoCliente extends DaoModelo<Cliente> {
 	
 	@Override
 	public Cliente find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return find(codigo, Cliente.class);
 	}
 
 	@Override
@@ -35,12 +36,13 @@ public class DaoCliente extends DaoModelo<Cliente> {
 	 * @param name
 	 * @return
 	 */
-	public List<Cliente> findByCodeOrName(long codigo, String name) {
-//		Query qry = getSession().getNamedQuery(Cliente.FIND_BY_NAME_OR_CODIGO)
-//				.setLong(GlobalNameParam.PARAM_COD_EMP, getEmpresa().getCodigo())
-//				.setLong(GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN, codigo)
-//				.setString("nome", name);
-//		return qry.list();
+	public List<Cliente> findByCodeOrName(Empresa empresa,long codigo, String name) {
+		TypedQuery<Cliente> qry = manager.createNamedQuery(Cliente.FIND_BY_NAME_OR_CODIGO, Cliente.class)
+				
+				.setParameter(GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN, codigo)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa)
+				.setParameter("nome", name);
+		qry.getResultList();
 		return null;
 	}
 
@@ -53,9 +55,17 @@ public class DaoCliente extends DaoModelo<Cliente> {
 
 	@Override
 	public List<Cliente> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
-		Query qry = getManager().createNamedQuery(Cliente.FIND)
+		TypedQuery<Cliente> qry = getManager().createNamedQuery(Cliente.FIND,Cliente.class)
 				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa)
 				.setParameter(GlobalNameParam.PARAM_COD_LOJA, loja);
+		return qry.getResultList();
+	}
+	
+	public List<Cliente> conasultarClientesCadastradosDoDia(Empresa empresa) {
+		TypedQuery<Cliente> qry = manager.createNamedQuery(Cliente.FIND_CLIENTES_CAD_HOJE, Cliente.class)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa)
+				.setParameter(GlobalNameParam.PARAM_DT_CADASTRO, new Date());
+		
 		return qry.getResultList();
 	}
 

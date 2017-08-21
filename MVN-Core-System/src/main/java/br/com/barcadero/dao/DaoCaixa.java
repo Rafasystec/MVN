@@ -50,10 +50,10 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 	 * @return
 	 * @throws Exception
 	 */
-	public Caixa findByIp(long loja, String ip) throws Exception{
+	public Caixa findByIp(Loja loja, String ip) throws Exception{
 		try{
 			Query qry = manager.createNamedQuery(Caixa.FIND_BY_IP)
-					.setParameter(GlobalNameParam.PARAM_COD_LOJA, getLoja())
+					.setParameter(GlobalNameParam.PARAM_COD_LOJA, loja)
 					.setParameter(Caixa.PARAM_IP, ip);
 			return (Caixa) qry.getSingleResult();
 		}catch(NoResultException e){

@@ -2,6 +2,8 @@ package br.com.barcadero.dao;
 
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
@@ -17,8 +19,8 @@ public class DaoVendedor extends DaoModelo <Vendedor>{
 
 	@Override
 	public List<Vendedor> findAll() throws Exception {
-		Query qry = manager.createNamedQuery(Vendedor.FIND_ALL)
-				.setParameter(Empresa.EMPRESA, empresa.getCodigo());
+		TypedQuery<Vendedor> qry = manager.createNamedQuery(Vendedor.FIND_ALL,Vendedor.class)
+				.setParameter(Empresa.EMPRESA, empresa);
 		return qry.getResultList();
 	}
 
