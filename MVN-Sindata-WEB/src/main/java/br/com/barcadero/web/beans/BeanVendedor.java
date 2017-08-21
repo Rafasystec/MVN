@@ -2,19 +2,17 @@ package br.com.barcadero.web.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import br.com.barcadero.core.enums.EnumAtivo;
 import br.com.barcadero.rule.RuleFuncionario;
 import br.com.barcadero.rule.RuleVendedor;
-import br.com.barcadero.tables.Funcionario;
 import br.com.barcadero.tables.Vendedor;
 
 @ManagedBean(name="vendedor")
-@RequestScoped
+@ViewScoped
 public class BeanVendedor extends SuperBean<Vendedor> {
 
 	private static final long serialVersionUID = 8726796444540957389L;

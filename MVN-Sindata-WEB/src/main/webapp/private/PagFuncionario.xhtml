@@ -45,7 +45,7 @@
 				<p:inputMask mask="(99)99999-9999"
 					value="#{funcionario.funcionario.pessoaFisica.celular}" />
 				<p:outputLabel id="lblRg" value="R.G:" />
-				<p:inputText id="txtRg"
+				<p:inputText id="txtRg" maxlength="15"
 					value="#{funcionario.funcionario.pessoaFisica.rg}" />
 				<p:outputLabel value="CPF:" for="cpf" />
 				<p:inputMask id="cpf" mask="999.999.999-99" label="CPF do cliente"
@@ -56,8 +56,8 @@
 			<br />
 			<fieldset>
 				<p:panelGrid styleClass="noBorder" columns="2">
-					<p:outputLabel id="lblPis" value="PIS/COFINS" />
-					<p:inputText id="txtPis" value="#{funcionario.funcionario.pis}" />
+					<p:outputLabel id="lblPis" value="PIS/COFINS"/>
+					<p:inputText id="txtPis" value="#{funcionario.funcionario.pis}" maxlength="15"/>
 					<p:outputLabel value="Dt. Admissão:" for="dtAdmissao" />
 					<p:calendar id="dtAdmissao"
 						value="#{funcionario.funcionario.dtAdmissao}" pattern="dd/MM/yyyy"
@@ -78,6 +78,27 @@
 			
 		</p:panel>
 		<clx:address endereco="#{funcionario.endereco}"	 />
+		<p:dataTable id="grid" var="func"
+				value="#{funcionario.all}" resizableColumns="true"
+				style="margin-bottom:20px" selectionMode="single"
+				selection="#{vendedor.selectedVendedor}" rowKey="#{func.codigo}" rows="10"
+				scrollable="true" paginator="true">
+	
+				<f:facet name="header">
+	            	Funcionários do Sistema
+	        	</f:facet>
+				<p:column headerText="Código">
+					<h:outputText value="#{func.codigo}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{func.pessoaFisica.nome}" />
+				</p:column>
+				<p:column headerText="Data de Admissão">
+					<h:outputText value="#{func.dtAdmissao}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
 		<clx:buttonsCrud id="btnsButtoms" bean="#{funcionario}"></clx:buttonsCrud>
 	</ui:define>
 </ui:composition>

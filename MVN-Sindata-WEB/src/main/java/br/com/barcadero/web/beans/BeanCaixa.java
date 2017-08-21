@@ -1,11 +1,13 @@
 package br.com.barcadero.web.beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
 
 @ManagedBean(name="caixa")
+@ViewScoped
 public class BeanCaixa extends SuperBean<Caixa> {
 
 	private static final long serialVersionUID = 6299768650271042835L;

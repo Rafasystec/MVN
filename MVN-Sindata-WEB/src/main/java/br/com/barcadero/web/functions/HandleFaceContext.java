@@ -19,7 +19,7 @@ public class HandleFaceContext {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String ipAddress = request.getHeader("X-FORWARDED-FOR");
 		if (ipAddress == null){ 
-			ipAddress = request.getRemoteAddr();  // IP
+			ipAddress = request.getLocalAddr();  // IP
 		}
 		return ipAddress;
 	}

@@ -6,14 +6,15 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.barcadero.rule.RuleFuncionario;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Funcionario;
+import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean(name="funcionario")
-@RequestScoped
+@ViewScoped
 public class BeanFuncionario extends SuperBean<Funcionario> {
 
 	private static final long serialVersionUID = -199406563789273194L;
@@ -24,8 +25,12 @@ public class BeanFuncionario extends SuperBean<Funcionario> {
 	
 	@PostConstruct
 	private void init() {
-		funcionario 	= new Funcionario(getUsuarioLogado());
+		novoFuncionario();
 		endereco		= new Endereco(getUsuarioLogado());
+	}
+
+	private void novoFuncionario() {
+		funcionario 	= new Funcionario(getUsuarioLogado(),getEmpresaLogada());
 	}
 	
 	@Override
@@ -35,8 +40,17 @@ public class BeanFuncionario extends SuperBean<Funcionario> {
 		listEnder.add(endereco);
 		funcionario.getPessoaFisica().setEnderecos(listEnder);
 		ruleFuncionario.insert(funcionario);
-		funcionario = new Funcionario(getUsuarioLogado());
+		novoFuncionario();
+		HandleMessage.info("Funcionário salvo com sucesso!");
 		return null;
+	}
+	
+	public List<Funcionario> getAll() {
+		try {
+			return ruleFuncionario.findByEmpresa(getEmpresaLogada());
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override
@@ -47,26 +61,22 @@ public class BeanFuncionario extends SuperBean<Funcionario> {
 
 	@Override
 	public String deletar() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return ruleFuncionario.delete(funcionario.getCodigo());
 	}
 
 	@Override
 	public String novo() throws Exception {
-		// TODO Auto-generated method stub
+		novoFuncionario();
 		return null;
 	}
-
 
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
 
-
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-
 
 	@Override
 	public String imprimir() throws Exception {

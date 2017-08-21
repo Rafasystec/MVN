@@ -131,16 +131,22 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 
 
 	@Override
-	public Empresa insert(Empresa entidade) throws Exception {
-		//Empresa empresa = (Empresa)entidade;
-		retirarFormatcao(entidade);
-		return daoEmpresa.insert(entidade);
+	public Empresa insert(Empresa empresa) throws Exception {
+		if(empresa != null){
+			retirarFormatcao(empresa);
+			if(empresa.getCodigo() > 0){
+				return daoEmpresa.update(empresa);
+			}else{
+				return daoEmpresa.insert(empresa);
+			}
+		}else{
+			return new Empresa();
+		}
 	}
 
 	@Override
-	public Empresa update(Empresa entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Empresa update(Empresa empresa) throws Exception {
+		return daoEmpresa.update(empresa);
 	}
 
 }

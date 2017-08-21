@@ -1,12 +1,12 @@
 package br.com.barcadero.web.beans;
 
-
+import java.net.UnknownHostException;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.rule.RuleCaixa;
@@ -19,7 +19,7 @@ import br.com.barcadero.web.functions.HandleMessage;
  * @since versao 1.0 dia 24/02/2016 as 11:04
  */
 @ManagedBean(name="configCaixa")
-@RequestScoped
+@ViewScoped
 public class BeanConfigCaixa extends SuperBean<Caixa> {
 
 	private static final long serialVersionUID = 2575309545374375876L;
@@ -33,20 +33,14 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	private String ipAddress;
 	
 	public BeanConfigCaixa() {
-		// TODO Auto-generated constructor stub
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
-		//ruleCaixa	= new RuleCaixa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-		System.out.println(BeanConfigCaixa.class + " was created!");
 	}
 	
 	@Override
 	public String salvar() {
 		try{
-			// TODO Auto-generated method stub
-			System.out.println("Salvar caixa");
 			caixa.setIp(getSession().getIpAddress());
-			ruleCaixa.insert(caixa);
-			
+			ruleCaixa.insert(caixa);			
 		}catch(Exception e){
 			HandleMessage.error("Erro ao tentar salvar o caixa: ", e.getMessage());
 		}
@@ -96,10 +90,9 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 
 	public List<Caixa> getCaixas() {
 		try {
-			//this.caixas = ruleCaixa.findAll();
+			System.out.println(getIpAddress());
 			this.caixas = ruleCaixa.findAll(getEmpresaLogada());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return caixas;
@@ -139,5 +132,13 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 		return false;
 	}
 	
+	public static String getIpAddress() throws UnknownHostException {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String ipAddress = request.getHeader("X-FORWARDED-FOR");
+		if (ipAddress == null){ 
+			ipAddress = request.getRemoteAddr();
+		}
+		return ipAddress;
+	}
 
 }

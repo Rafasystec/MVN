@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
@@ -26,8 +27,8 @@ public class DaoCaixa extends DaoModelo<Caixa> {
 	}
 
 	public List<Caixa> findAll(Empresa empresa) throws Exception {
-		Query qry = manager.createNamedQuery(Caixa.FIND_ALL)
-				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa.getCodigo());
+		TypedQuery<Caixa> qry = manager.createNamedQuery(Caixa.FIND_ALL,Caixa.class)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa);
 		return qry.getResultList();
 	}
 	@Override

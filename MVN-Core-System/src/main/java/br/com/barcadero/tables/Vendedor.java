@@ -41,20 +41,22 @@ public class Vendedor extends EntidadeEmpresa{
 	
 	@Column(name="APELIDO", nullable=false)
 	private String apelido = "";
-	@Column(name="PERCENT_COMISSAO", nullable=false)
-	private BigDecimal percentComissao = new BigDecimal(0);
+	@Column(name="PERCENT_COMISSAO", nullable=false,scale=2,precision=2)
+	private BigDecimal percentComissao = new BigDecimal("0.00");
 	@Column(name="FL_ATIVO", nullable=false)
 	private EnumAtivo flAtivo = EnumAtivo.S;
 	@Column(name="CANCELA_VENDA")
 	private EnumSimNao candelaVenda = EnumSimNao.SIM;
+	@Column(name="ALCADA_MAXIMA",scale=2,precision=2)
+	private BigDecimal percentAlcadaMaxima = new BigDecimal("0.00");
 	
 	public Vendedor(Empresa empresa, Usuario usuario) {
 		super(empresa, usuario);
 	}
 		
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name="cod_funcionario", referencedColumnName="codigo")
-	private Funcionario funcionario = new Funcionario(getUsuario());
+	private Funcionario funcionario = new Funcionario(getUsuario(),getEmpresa());
 
 	public Funcionario getFuncionario() {
 		return funcionario;
@@ -94,6 +96,14 @@ public class Vendedor extends EntidadeEmpresa{
 
 	public void setCandelaVenda(EnumSimNao candelaVenda) {
 		this.candelaVenda = candelaVenda;
+	}
+
+	public BigDecimal getPercentAlcadaMaxima() {
+		return percentAlcadaMaxima;
+	}
+
+	public void setPercentAlcadaMaxima(BigDecimal percentAlcadaMaxima) {
+		this.percentAlcadaMaxima = percentAlcadaMaxima;
 	}
 	
 }

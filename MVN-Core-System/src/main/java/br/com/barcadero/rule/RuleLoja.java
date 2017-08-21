@@ -23,7 +23,7 @@ public class RuleLoja extends RuleModelo<Loja> {
 	@Autowired
 	private DaoLoja daoLoja;
 	@Autowired
-	private DaoPessoaJuridica daoPessoaJuridica;
+	private RulePessoaJuridica rulePessoaJuridica; 
 	private Empresa empresa;
 
 	@Override
@@ -114,7 +114,7 @@ public class RuleLoja extends RuleModelo<Loja> {
 				listEnder.add(ender);
 			}
 		}
-		daoPessoaJuridica.insert(pJuridica);
+		rulePessoaJuridica.insert(pJuridica);
 		loja.setDtInauguracao(empresa.getDtFundacao());
 		loja.setEmpresa(empresa);
 		loja.setPessoaJuridica(pJuridica);
@@ -151,15 +151,25 @@ public class RuleLoja extends RuleModelo<Loja> {
 	}
 
 	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
-	public Loja insert(Loja entidade) throws Exception {
-		entidade.getPessoaJuridica().setCnpj(retirarFormatcaoCNPJ(entidade));
-		entidade.getPessoaJuridica().setFone(retirarFormatcaoFone(entidade));
-		return daoLoja.insert(entidade);
+	public Loja insert(Loja loja) throws Exception {
+		PessoaJuridica pj = rulePessoaJuridica.insert(loja.getPessoaJuridica());
+		loja.setPessoaJuridica(pj);
+		return daoLoja.insert(loja);
 	}
 
 	@Override
 	public Loja update(Loja loja) throws Exception {
 		return daoLoja.update(loja);
+	}
+
+
+	public RulePessoaJuridica getRulePessoaJuridica() {
+		return rulePessoaJuridica;
+	}
+
+
+	public void setRulePessoaJuridica(RulePessoaJuridica rulePessoaJuridica) {
+		this.rulePessoaJuridica = rulePessoaJuridica;
 	}
 
 }

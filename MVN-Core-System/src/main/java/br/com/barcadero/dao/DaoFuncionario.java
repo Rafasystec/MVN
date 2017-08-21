@@ -3,9 +3,11 @@ package br.com.barcadero.dao;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Funcionario;
 import br.com.barcadero.tables.Loja;
@@ -35,8 +37,9 @@ public class DaoFuncionario extends DaoModelo<Funcionario> {
 
 	@Override
 	public List<Funcionario> findByEmpresa(Empresa empresa) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Funcionario> qry = getManager().createNamedQuery(Funcionario.FIND_BY_EMPRESA,Funcionario.class)
+				.setParameter(GlobalNameParam.PARAM_COD_EMP, empresa);
+		return qry.getResultList();
 	}
 
 	@Override

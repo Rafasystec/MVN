@@ -16,6 +16,7 @@ import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
+import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean(name="loja")
 @ViewScoped
@@ -34,21 +35,15 @@ public class BeanLoja extends SuperBean<Loja> {
 	
 	@PostConstruct
 	private void init() {
-		Usuario userLogado = getSession().getUsuarioLogado();
-		pj 		= new PessoaJuridica(userLogado);
-		endereco	= new Endereco(getUsuarioLogado());
-		loja	= new Loja(userLogado);
+		novoRegistro();
 	}
-	
-	
-//	public BeanLoja() {
-//		Usuario userLogado = getSession().getUsuarioLogado();
-//		pj 		= new PessoaJuridica(userLogado);
-//		ender	= new Endereco(userLogado);
-//		loja	= new Loja(userLogado);
-//		ruleLoja = new RuleLoja(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-//		System.out.println("BeanLoja was created!");
-//	}
+
+	private void novoRegistro() {
+		Usuario userLogado = getSession().getUsuarioLogado();
+		pj 			= new PessoaJuridica(userLogado);
+		endereco	= new Endereco(getUsuarioLogado());
+		loja		= new Loja(userLogado);
+	}
 	
 	public PessoaJuridica getPj() {
 		return pj;
@@ -94,9 +89,10 @@ public class BeanLoja extends SuperBean<Loja> {
 			loja.setPessoaJuridica(pj);
 			loja.setEmpresa(getSession().getEmpresaLogada());
 			ruleLoja.insert(loja);
+			HandleMessage.info("Loja cadastrada com sucesso!");
+			novoRegistro();
 			return "";
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return null;
 		}

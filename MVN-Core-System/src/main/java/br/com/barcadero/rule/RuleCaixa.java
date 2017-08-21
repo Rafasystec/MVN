@@ -1,6 +1,7 @@
 package br.com.barcadero.rule;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.barcadero.dao.DaoCaixa;
 import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.tables.CaixaAbertura;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
 
@@ -48,12 +50,6 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 		// TODO Auto-generated method stub
 		return daoCaixa.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoCaixa.update(entidade);
-//	}
 
 	@Override
 	public Caixa find(long codigo) throws Exception {
@@ -98,9 +94,14 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 	}
 
 	@Override
-	public Caixa insert(Caixa entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Caixa insert(Caixa caixa) throws Exception {
+		//Note: Quando for inserido um caixa iremos inserir uma abertura
+		CaixaAbertura abertura = new CaixaAbertura(caixa.getEmpresa(),caixa.getLoja(), caixa.getUsuario());
+		abertura.setCaixa(caixa);
+		List<CaixaAbertura> aberturas = new ArrayList<>();
+		aberturas.add(abertura);
+		caixa.setAberturas(aberturas);
+		return daoCaixa.insert(caixa);
 	}
 
 	@Override

@@ -71,24 +71,19 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 	
 	@PostConstruct
 	private void init() {
-		Usuario userLogado = getSession().getUsuarioLogado();
-		emp 	= new Empresa(userLogado);
-		pj 		= new PessoaJuridica(userLogado);
-		ender 	= new Endereco(userLogado);
+		emp 	= getEmpresaLogada();
+		pj 		= getEmpresaLogada().getPessoaJuridica();
+		getEnderecoEmpresa();
 	}
 
-//	public BeanEmpresa() {
-//		Usuario userLogado = getSession().getUsuarioLogado();
-//		emp 	= new Empresa(userLogado);
-//		pj 		= new PessoaJuridica(userLogado);
-//		ender 	= new Endereco(userLogado);
-//		ruleEmpresa = new RuleEmpresa(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//		fcdEstado	= new RuleEstado(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//		fcdCidade	= new RuleCidade(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//		//fcdBairro	= new RuleBairro(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
-//		ruleLoja	= new RuleLoja(getEmpresaLogada(),getLojaLogada(),getDataBaseSession());
-//		System.out.println("Bean Empresa was created.");
-//	}
+	private Endereco getEnderecoEmpresa() {
+		if(getEmpresaLogada().getPessoaJuridica().getEnderecos() != null && getEmpresaLogada().getPessoaJuridica().getEnderecos().size() > 0){
+			ender 	= getEmpresaLogada().getPessoaJuridica().getEnderecos().get(0);
+		}else{
+			ender = new Endereco(getUsuarioLogado()); 
+		}
+		return ender;
+	}
 	
 	public Empresa getEmp() {
 		return emp;

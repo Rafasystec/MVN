@@ -14,15 +14,16 @@
 	<ui:define name="body">
 		<p:panel header="Ações">
 			<h:panelGrid columns="5">
-				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario,lblNumPedido"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 				</p:commandButton>
 				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="true">
 					<f:ajax render="@form" resetValues="true"/>
 				</p:commandButton>
+				<p:outputLabel id="lblNumPedido" value="PEDIDO: #{beanPedidoVenda.pedido.codigo}"/>
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="Pedido de venda">
-			<p:hotkey bind="return" update="produtos" actionListener="#{beanPedidoVenda.salvarItem}">
+			<p:hotkey bind="return" update="produtos,lblNumPedido" actionListener="#{beanPedidoVenda.salvarItem}">
 			</p:hotkey>
 			<div class="fontValue">
 				<p:outputLabel id="blbVlUnitario" styleClass="fontValue" value="#{beanPedidoVenda.vlUnitario}">

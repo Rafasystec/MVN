@@ -21,21 +21,22 @@ import javax.persistence.TemporalType;
  */
 
 @NamedQueries({
-	@NamedQuery(name=Funcionario.FIND_BY_CODE,query="FROM Funcionario f WHERE codigo = :codigo")
+	@NamedQuery(name=Funcionario.FIND_BY_CODE,query="FROM Funcionario f WHERE codigo = :codigo"),
+	@NamedQuery(name=Funcionario.FIND_BY_EMPRESA,query="FROM Funcionario WHERE empresa = :empresa")
 })
 
 @Entity
 @Table(name="FUNCIONARIO")
-public class Funcionario extends Entidade{
+public class Funcionario extends EntidadeEmpresa{
 	
-	public final static String FIND_BY_CODE = "funcionario.findByCode";
+	public final static String FIND_BY_CODE 	= "br.com.barcadero.tables.funcionario.findByCode";
+	public final static String FIND_BY_EMPRESA 	= "br.com.barcadero.tables.funcionario.findByEmpresa";
 	
-	public Funcionario() {
-		// TODO Auto-generated constructor stub
+	public Funcionario() {		
 	}
 	private static final long serialVersionUID = -3927665040219416759L;
-	public Funcionario(Usuario usuario) {
-		super(usuario);
+	public Funcionario(Usuario usuario,Empresa empresa) {
+		super(empresa, usuario);
 	}
 	@Column(name="cod_interno")
 	private long codInterno = 0;
@@ -64,10 +65,6 @@ public class Funcionario extends Entidade{
 	private BigDecimal salarioInicial = new BigDecimal(0);
 	@Column(name="OBSERVACOES")
 	private String observacoes = "";
-	
-	@ManyToOne
-	@JoinColumn(name="COD_EMP",referencedColumnName="codigo")
-	private Empresa empresa;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
@@ -119,14 +116,6 @@ public class Funcionario extends Entidade{
 
 	public void setCartTrabalho(String cartTrabalho) {
 		this.cartTrabalho = cartTrabalho;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
 	}
 
 	public String getNomePai() {
