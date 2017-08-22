@@ -18,11 +18,11 @@ public class ThreadExecuteCommad implements Callable<String> {
 	private String execute(SocketCommand command) throws Exception {
 		switch (command.getTipoComando()) {
 		case CMD_FOR_ECF:
-			return "ECF n„o implementado.";
+			return "ECF n√£o implementado.";
 		case CMD_FOR_SAT:
 			return executarComandoSAT(command);
 		default:
-			return "Tipo de comando n„o implementado : " + command.getTipoComando().toString() ;
+			return "Tipo de comando n√£o implementado : " + command.getTipoComando().toString() ;
 		}
 	}
 

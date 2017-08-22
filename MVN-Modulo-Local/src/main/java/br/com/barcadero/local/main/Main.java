@@ -1,8 +1,7 @@
 package br.com.barcadero.local.main;
 
-import javax.persistence.FlushModeType;
-
 import org.hibernate.Session;
+
 import br.com.barcadero.local.persistence.HibernateHelper;
 import br.com.barcadero.local.socket.SocketServer;
 import br.com.barcadero.local.views.JFMain;
@@ -23,7 +22,7 @@ public class Main {
 			//----------------------------------------
 			//Iniciando a persistencia da aplicacao
 			//----------------------------------------
-			iniciarPersistencia();
+			//iniciarPersistencia();
 			//----------------------------------------
 			//Invocando Interface grafica
 			//----------------------------------------
@@ -34,7 +33,6 @@ public class Main {
 			new Thread(()->{try {
 				SocketServer.start();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}}).start();
 		

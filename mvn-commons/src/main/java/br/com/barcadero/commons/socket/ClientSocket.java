@@ -19,7 +19,7 @@ public class ClientSocket {
 	
 	private String ipServidor = "";
 	
-	public static final int PORT	= 9080; 
+	public static final int PORT	= 9083; 
 	
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		

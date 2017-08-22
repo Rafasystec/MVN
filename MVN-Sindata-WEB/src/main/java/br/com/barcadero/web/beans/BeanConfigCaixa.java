@@ -1,16 +1,23 @@
 package br.com.barcadero.web.beans;
 
+import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+
+import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
+import br.com.barcadero.commons.socket.ClientSocket;
+import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
+import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
 /**
@@ -29,10 +36,9 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	@ManagedProperty(name="ruleCaixa",value="#{ruleCaixa}")
 	private RuleCaixa ruleCaixa;
 	private EnumModeloNota[] tiposNota;
-	private EnumTipoModuloSAT[] modulosSAT;
-	private String ipAddress;
 	
-	public BeanConfigCaixa() {
+	@PostConstruct
+	public void init() {
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
 	}
 	
@@ -90,7 +96,7 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 
 	public List<Caixa> getCaixas() {
 		try {
-			System.out.println(getIpAddress());
+			System.out.println(HandleFaceContext.getIpAddress());
 			this.caixas = ruleCaixa.findAll(getEmpresaLogada());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,10 +120,6 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 		return EnumTipoModuloSAT.values();
 	}
 
-	public void setModulosSAT(EnumTipoModuloSAT[] modulosSAT) {
-		this.modulosSAT = modulosSAT;
-	}
-
 	public RuleCaixa getRuleCaixa() {
 		return ruleCaixa;
 	}
@@ -132,13 +134,25 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 		return false;
 	}
 	
-	public static String getIpAddress() throws UnknownHostException {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String ipAddress = request.getHeader("X-FORWARDED-FOR");
-		if (ipAddress == null){ 
-			ipAddress = request.getRemoteAddr();
+	public void callClient() {
+		ClientSocket cliente = new ClientSocket();		
+		try {
+			cliente.setIpServidor(Inet4Address.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		return ipAddress;
+        
+        SocketCommand cmd = new SocketCommand();
+        cmd.setCommand("VetorComando");
+        cmd.setTipoComando(EnumTipoComandoSocket.CMD_FOR_ECF);
+        try {
+        	cmd = cliente.sendAndReceive(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Resposta do servidor: " + cmd.getResponse());
 	}
 
 }

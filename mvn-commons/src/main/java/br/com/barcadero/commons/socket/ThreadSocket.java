@@ -59,15 +59,14 @@ public class ThreadSocket implements Runnable {
 	private SocketCommand enviarComando(SocketCommand comando) throws InterruptedException {
 		ExecutorService poolMFe 	= Executors.newCachedThreadPool();
 		Callable<String> callable 	= new ThreadExecuteCommad(comando);
-		Future<String> future = poolMFe.submit(callable);
+		Future<String> future 		= poolMFe.submit(callable);
 		try {
 			try {
 				comando.setResponse(future.get(20, TimeUnit.SECONDS));
 			} catch (TimeoutException e) {
-				comando.setResponse("Socket n„o responde.");
+				comando.setResponse("TimeoutException - Socket n√£o responde.");
 			}
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return comando;

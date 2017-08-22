@@ -25,7 +25,7 @@ public class ThreadExecute implements Callable<String> {
 	private String execute(SocketCommand command) throws Exception {
 		switch (command.getTipoComando()) {
 		case CMD_FOR_ECF:
-			return "ECF n�o implementado.";
+			return "ECF não implementado.";
 		case CMD_FOR_SAT:
 			return executarComandoSAT(command);
 		default:
@@ -51,7 +51,6 @@ public class ThreadExecute implements Callable<String> {
 		HandleSAT handleSAT = new HandleSAT(command.getModuloSAT());
 		String result		= "";
 		if(dados instanceof CmdConsultarSAT){
-			//CmdConsultarSAT consultarSAT = (CmdConsultarSAT) dados;
 			result = handleSAT.consultarSAT();
 		}else if(dados instanceof CmdEnviarDadosVenda){
 			CmdEnviarDadosVenda dadosVenda = (CmdEnviarDadosVenda) dados;

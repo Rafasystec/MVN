@@ -21,6 +21,7 @@ public class SocketCommand implements Serializable{
 	private String response;
 	private EnumTipoComandoSocket tipoComando;
 	private EnumTipoModuloSAT moduloSAT;
+	private Object object;
 	
 	public String getIpHost() {
 		return ipHost;
@@ -63,6 +64,12 @@ public class SocketCommand implements Serializable{
 	}
 	public void setModuloSAT(EnumTipoModuloSAT moduloSAT) {
 		this.moduloSAT = moduloSAT;
+	}
+	public Object getObject() {
+		return object;
+	}
+	public void setObject(Object object) {
+		this.object = object;
 	}
 
 }

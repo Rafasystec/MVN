@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class SocketServer {
 	
-	public static int SERVER_PORT 						= 9080;
+	//public static int SERVER_PORT 						= 9080;
 	static{
 		java.lang.System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
 		System.out.println("Criar escalonador");
@@ -18,10 +18,10 @@ public class SocketServer {
 	}
 
 	public static void start() throws IOException {
-		ServerSocket server = new ServerSocket(SERVER_PORT);
+		ServerSocket server = new ServerSocket(br.com.barcadero.commons.socket.SocketServer.SERVER_PORT);
 		try {
-			System.out.println("Porta " + SERVER_PORT + " foi aberta");
-
+			System.out.println("Iniciando Thread com socket");
+			System.out.println("Porta " + br.com.barcadero.commons.socket.SocketServer.SERVER_PORT + " foi aberta");
 			boolean keepAlive = true;
 			while (keepAlive) {
 				//-------------------------------------------------------
