@@ -85,7 +85,7 @@ public class ClientSocket {
 		Socket client	  		= null;
 		ObjectOutputStream	out = null;
 		try{
-			client	= new Socket(getIpServidor(), ClientSocket.PORT);
+			client	= new Socket(getIpServidor(), SocketServer.SERVER_PORT);
 			out 	= new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(comando);
 			System.out.println("Enviou comando");
