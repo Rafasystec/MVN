@@ -40,6 +40,7 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	@PostConstruct
 	public void init() {
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
+		callClient();
 	}
 	
 	@Override
@@ -136,12 +137,9 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	
 	public void callClient() {
 		ClientSocket cliente = new ClientSocket();		
-		try {
-			cliente.setIpServidor(Inet4Address.getLocalHost().getHostAddress());
-		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
+			cliente.setIpServidor("192.168.15.8");
+		
         
         SocketCommand cmd = new SocketCommand();
         cmd.setCommand("VetorComando");

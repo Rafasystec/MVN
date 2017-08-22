@@ -117,7 +117,7 @@ public class ClientSocket {
 			out.writeObject(comando);
 			System.out.println("Enviou comando");
 			server = new ServerSocket(SocketServer.SERVER_PORT);
-			server.setSoTimeout(5000);
+			server.setSoTimeout(30000);
 			Socket cliente = server.accept();
 			SocketCommand comandoRet = SocketUtil.getObjectFromStream(cliente);
 			return comandoRet;
