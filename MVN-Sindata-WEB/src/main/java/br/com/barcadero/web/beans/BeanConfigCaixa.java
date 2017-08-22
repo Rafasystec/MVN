@@ -40,7 +40,7 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	@PostConstruct
 	public void init() {
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
-		callClient();
+		//callClient();
 	}
 	
 	@Override
@@ -138,7 +138,7 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	public void callClient() {
 		ClientSocket cliente = new ClientSocket();		
 		
-			cliente.setIpServidor("192.168.15.8");
+			cliente.setIpServidor("192.168.15.8");//ip do cliente a ser invocado
 		
         
         SocketCommand cmd = new SocketCommand();

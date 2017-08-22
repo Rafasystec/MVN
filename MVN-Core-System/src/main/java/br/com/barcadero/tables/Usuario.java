@@ -7,9 +7,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
@@ -24,7 +26,7 @@ import br.com.barcadero.core.enums.EnumTipoUser;
  */
 @NamedQueries(
 		{
-			@NamedQuery(name=Usuario.FIND_ALL		,query="FROM Usuario"),
+			@NamedQuery(name=Usuario.FIND_ALL		,query="FROM Usuario WHERE empresa = :empresa"),
 			@NamedQuery(name=Usuario.FIND_BY_CODE	,query="FROM Usuario u WHERE u.codigo = :codigo"),
 			@NamedQuery(name=Usuario.FIND_BY_LOGIN	,query="FROM Usuario u WHERE u.email = :email AND u.passWord = :senha"),
 			@NamedQuery(name=Usuario.FIND_BY		,query="FROM Usuario u WHERE  u.nome LIKE :nome OR u.email LIKE :email "),
@@ -34,7 +36,7 @@ import br.com.barcadero.core.enums.EnumTipoUser;
 @Audited(targetAuditMode=RelationTargetAuditMode.NOT_AUDITED)
 @Entity
 @Table(name="USUARIO")
-public class Usuario extends Entidade{
+public class Usuario extends EntidadeEmpresa{
 	
 	/**
 	 * 
@@ -42,12 +44,13 @@ public class Usuario extends Entidade{
 	private static final long serialVersionUID = 8937600656781400155L;
 
 	public Usuario() {
-		// TODO Auto-generated constructor stub
 	}
 	
-	public Usuario(Usuario usuario) {
-		super(usuario);
+	public Usuario(Empresa empresa,Usuario usuario) {
+		super(empresa, usuario);
 	}
+	
+	
 	public static final String FIND_ALL 	= "Usuario.findAll";
 	public static final String FIND_BY_CODE = "Usuario.findByCodigo";
 	public static final String FIND_BY_LOGIN= "Usuario.findByLogin";
@@ -60,18 +63,22 @@ public class Usuario extends Entidade{
 	public static final String PARA_NOME 	= "nome";
 	
 	@Column(name="cod_permissoes",nullable=false)
-	private long codPermissoes;
+	private long codPermissoes = 0;
 	@Column(name="email",nullable=false)
-	private String email;
+	private String email = "";
 	@Column(name="senha",nullable=false)
-	private String passWord;
+	private String passWord = "";
 	@Column
-	private String nome;
+	private String nome = "";
 	@Column(name="tipo_user")
 	private EnumTipoUser tipoUser = EnumTipoUser.MASTER;
 	
-	@ManyToMany(cascade=CascadeType.MERGE,mappedBy="usuarios",fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.PERSIST,mappedBy="usuarios",fetch=FetchType.EAGER)
 	private List<Empresa> empresas = new ArrayList<Empresa>();
+	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER,targetEntity=UsuarioPermissoes.class)
+	@JoinColumn(name="permissoes",referencedColumnName="CODIGO")
+	private UsuarioPermissoes permissoes;
 	
 	public long getCodPermissoes() {
 		return codPermissoes;
@@ -158,6 +165,14 @@ public class Usuario extends Entidade{
 		if (tipoUser != other.tipoUser)
 			return false;
 		return true;
+	}
+
+	public UsuarioPermissoes getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(UsuarioPermissoes permissoes) {
+		this.permissoes = permissoes;
 	}
 	
 	

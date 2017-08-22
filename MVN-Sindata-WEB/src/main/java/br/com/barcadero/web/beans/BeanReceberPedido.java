@@ -89,7 +89,6 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 				HandleMessage.error("Selecione um pedido na grid","");
 			}
 		} catch (Exception e) {
-			getDataBaseSession().getTransaction().rollback();
 			HandleMessage.error("Erro ao tentar Faturar o pedido", e.getMessage());
 		}
 	}

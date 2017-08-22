@@ -132,8 +132,7 @@ public class RuleUsuario extends RuleModelo<Usuario>{
 
 	@Override
 	public List<Usuario> findByEmpresa(Empresa empresa) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return daoUsuario.findByEmpresa(empresa);
 	}
 
 	@Override
@@ -143,14 +142,17 @@ public class RuleUsuario extends RuleModelo<Usuario>{
 	}
 
 	@Override
-	public Usuario insert(Usuario entidade) throws Exception {
-		entidade.setPassWord(criptSenha(entidade.getPassWord()));
-		return daoUsuario.insert(entidade);
+	public Usuario insert(Usuario usuario) throws Exception {
+		if(usuario.getCodigo() > 0){
+			return daoUsuario.update(usuario);
+		}else{
+			usuario.setPassWord(criptSenha(usuario.getPassWord()));
+			return daoUsuario.insert(usuario);
+		}
 	}
 
 	@Override
-	public Usuario update(Usuario entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario update(Usuario usuario) throws Exception {
+		return daoUsuario.update(usuario);
 	}
 }

@@ -70,7 +70,7 @@ public class Pedido extends EntidadeLoja {
 	@Enumerated(EnumType.ORDINAL)
 	private EnumFormPgtoPedido formaPgtoPedido = EnumFormPgtoPedido.A_VISTA;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="pedido",fetch=FetchType.LAZY,targetEntity=PedidoItens.class)
+	@OneToMany(mappedBy="pedido",fetch=FetchType.EAGER,targetEntity=PedidoItens.class)
 	private List<PedidoItens> itens;
 	
 	@OneToOne
@@ -81,7 +81,7 @@ public class Pedido extends EntidadeLoja {
 	@JoinColumn(name="cliente", referencedColumnName="codigo")
 	private Cliente cliente;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="caixa", referencedColumnName="codigo")
 	private Caixa caixa;
 

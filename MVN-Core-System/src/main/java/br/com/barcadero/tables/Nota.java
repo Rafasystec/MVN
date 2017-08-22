@@ -97,7 +97,7 @@ public class Nota extends EntidadeLoja {
 	@Column(name="",nullable=false)
 	private String serieNota = "";
     
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name="caixa", referencedColumnName="codigo")
 	private Caixa caixa;
 	

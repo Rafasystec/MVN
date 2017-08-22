@@ -11,7 +11,7 @@ import br.com.barcadero.tables.Usuario;
 public class HandleUsuarioPadrao {
 	
 	public static Usuario getUsuarioHomologacao() {
-		Usuario user 		= new Usuario(null);
+		Usuario user 		= new Usuario(null,null);
 		Date dtCad 	 		= new Date();
 		Empresa emp			= HandleEmpresaHomo.getEmpresaHomo();
 		List<Usuario> usuarios = new ArrayList<Usuario>();

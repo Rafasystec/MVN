@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition>
 
@@ -10,7 +13,9 @@
 			<img alt="Logo sistema vendor" width="50%" height="50%"
 					src="#{request.contextPath}/resources/Imagens/pdvTempLogo.png"></img></a>
 			</li>
-
+			
+			<!-- Cadastros básico -->
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarCadastros}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa fa-cubes"></i>CADASTROS<i class="fa fa-plus"></i>
 				</span>
@@ -40,7 +45,13 @@
 					
 				</ul>
 			</li>
+			
+			</h:panelGroup>
+			
+			
+			
 			<!-- Menu do financeiro -->
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarFinanceiro}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-usd"></i>FINANCEIRO<i class="fa fa-plus"></i>
 				</span>
@@ -81,8 +92,12 @@
 				</ul>
 				
 			</li>
-			<!-- Colaboradores -->
+			</h:panelGroup>
 			
+			
+			
+			<!-- Colaboradores -->
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarColaboradores}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-user"></i>COLABORADORES<i class="fa fa-plus"></i>
 				</span>
@@ -105,9 +120,11 @@
 					</li>
 				</ul>
 			</li>
+			</h:panelGroup>			
 			
 			
 			
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarOperacional}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-cog"></i>OPERACIONAL<i class="fa fa-plus"></i>
 				</span>
@@ -144,8 +161,11 @@
 					</li>
 				</ul>
 			</li>
+			</h:panelGroup>
+			
 			
 			<!-- Consultas do sistema -->
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarCRM}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-usd"></i>CRM<i class="fa fa-plus"></i>
 				</span>
@@ -164,7 +184,9 @@
 							class="fa fa-hand-o-right"></i>PRODUTOS</a></li>
 				</ul>
 			</li>
+			</h:panelGroup>
 			
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarRecebimento}">
 			<!-- Recebimentos -->
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-arrow-circle-down"></i>RECEBIMENTOS<i class="fa fa-plus"></i>
@@ -184,17 +206,9 @@
 							class="fa fa-hand-o-right"></i>PRODUTOS</a></li>
 				</ul>
 			</li>
+			</h:panelGroup>
 			
-			<!-- 
-			<li><a class="#{activeRecebimentoOSE}"
-				href="#{request.contextPath}/recebimento-ose.jsf"><i
-					class="fa fa-arrow-circle-down"></i>RECEBIMENTOS</a>
-			</li>
-			 -->
-			<li><a class="#{activePagamentoOSE}"
-				href="#{request.contextPath}/pagamento-ose.jsf"><i
-					class="fa fa-usd"></i>PAGAMENTOS</a>
-			</li>
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarConfiguracoes}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-cog"></i>CONFIGURAÇÕES<i class="fa fa-plus"></i>
 				</span>
@@ -204,13 +218,17 @@
 						href="#{request.contextPath}/admin/PagConfigCaixa.xhtml">CAIXA</a>
 					</li>
 					<li><a class="#{activeRelatorioOSE}"
-						href="#{request.contextPath}/admin/PagParametros.xhtml">Parâmetros</a>
+						href="#{request.contextPath}/admin/PagParametros.xhtml">PARÂMETROS</a>
 					</li>
 					<li><a class="#{activeRelatorioOSE}"
-						href="#{request.contextPath}/relatorios/ose-relatorio.jsf">NF-e E NFC-e</a>
+						href="#{request.contextPath}/admin/PagUsuarios.xhtml">USUÁRIOS</a>
 					</li>
 				</ul>
 			</li>
+			</h:panelGroup>
+			
+			
+			<h:panelGroup rendered="#{beanPermissoesUsuario.permissoes.podeAcessarRelatorio}">
 			<li><a class="tree-toggle nav-header" href="#"> <span>
 						<i class="fa fa-file-text"></i>RELATÓRIOS<i class="fa fa-plus"></i>
 				</span>
@@ -221,6 +239,7 @@
 					</li>
 				</ul>
 			</li>
+			</h:panelGroup>
 		</ul>
 	</div>
 </ui:composition>

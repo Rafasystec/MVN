@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -27,7 +28,7 @@ public class Pessoa extends Entidade {
 		// TODO Auto-generated constructor stub
 	}
 
-	@OneToMany(mappedBy="pessoa",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="pessoa",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 
 	public List<Endereco> getEnderecos() {

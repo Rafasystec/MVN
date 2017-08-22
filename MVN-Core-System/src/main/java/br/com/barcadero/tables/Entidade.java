@@ -55,7 +55,7 @@ public abstract class Entidade implements Serializable {
 	@Temporal(TemporalType.TIME)
 	private Date hrCadastro = new Date();
 	
-	@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="usuario",referencedColumnName="codigo")
 	private Usuario usuario;
 	

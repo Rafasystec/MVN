@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.FormasPagamento;
@@ -63,6 +64,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 	 * @param pedido
 	 * @return
 	 */
+	@Transactional(readOnly=false)
 	public String fecharPedido(Pedido pedido) throws Exception{
 		try {
 			if(pedido != null){
@@ -103,7 +105,6 @@ public class RulePedido extends RuleModelo<Pedido> {
 	 */
 	public String faturarPedido(Pedido pedido, FormasPagamento formasPagamento, Usuario usuario) throws Exception{
 		if(pedido != null){
-			//Faturar pedido
 			Caixa caixa = pedido.getCaixa();
 			Nota nota 	= ruleNota.parse(pedido, usuario, formasPagamento);
 			if(caixa != null){

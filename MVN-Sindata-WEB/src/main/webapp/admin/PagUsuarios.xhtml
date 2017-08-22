@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="user-plus fa-2x" />
+	<ui:param name="pageTitle" value="Usuários do Sistema" />
+
+	<ui:define name="body">
+		<clx:buttonsCrud id="btnsUp" bean="#{beanUsuarios}"></clx:buttonsCrud>
+		<p:panel header="Usuário">
+			<p:panelGrid columns="4" styleClass="noBorder">
+			
+				<p:outputLabel id="lblNome" value="Nome:" for="txtNome"/>
+				<p:inputText id="txtNome" value="#{beanUsuarios.usuario.nome}" maxlength="60" rendered="true" requiredMessage="Informe o nomde de usuário"/>
+				
+				<p:outputLabel id="lblEmail" value="E-mail:" for="txtEmail"/>
+				<p:inputText id="txtEmail" value="#{beanUsuarios.usuario.email}" maxlength="60" rendered="true" requiredMessage="Informe o e-mail pois ele será o login do Usuário"/>
+				
+				<p:outputLabel id="lblSenha" value="Senha:" for="txtSenha"/>
+				<p:password redisplay="" id="txtSenha" value="#{beanUsuarios.senha}" maxlength="32" rendered="true" requiredMessage="Informe a senha"/>
+				
+				<p:outputLabel id="lblCOnfSenha" value="Confirme a senha:" for="txtConfSenha"/>
+				<p:password redisplay="true" id="txtConfSenha" value="#{beanUsuarios.confimSenha}" maxlength="32" rendered="true" requiredMessage="Confirme a senha"/>
+			
+			</p:panelGrid>
+		</p:panel>
+		<p:panel header="O que o Usuário poderá acessar?">
+		
+			<p:panelGrid columns="4" styleClass="noBorder">
+				<p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarCadastros}" itemLabel="Cadastros"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarColaboradores}" itemLabel="Colaboradores - HR"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarConfiguracoes}" itemLabel="Configurações"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarCRM}" itemLabel="CRM"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarFinanceiro}" itemLabel="Financeiro"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarOperacional}" itemLabel="Operacional"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarPagamentos}" itemLabel="Pagamentos"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarRecebimento}" itemLabel="Recebimentos"/>
+	            <p:selectBooleanCheckbox value="#{beanUsuarios.usuario.permissoes.podeAcessarRelatorio}" itemLabel="Relatórios"/>	     
+        	</p:panelGrid>
+		</p:panel>
+		<p:dataTable id="grid" var="user"
+				value="#{beanUsuarios.usuarios}" resizableColumns="true"
+				style="margin-bottom:20px" selectionMode="single"
+				selection="#{beanUsuarios.selectedUsuario}" rowKey="#{user.codigo}" rows="10"
+				scrollable="true" paginator="true">
+	
+				<f:facet name="header">
+	            	Usuarios
+	        	</f:facet>
+				<p:column headerText="Código">
+					<h:outputText value="#{user.codigo}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{user.nome}" />
+				</p:column>
+				<p:column headerText="Login">
+					<h:outputText value="#{user.email}" />
+				</p:column>
+				<p:column headerText="Data de cadatro">
+					<h:outputText value="#{user.dtCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+			<p:column headerText="Opções" style="text-align:center;width:20%">
+				<p:commandButton actionListener="#{beanUsuarios.selecionar(user)}"
+					type="submit" styleClass="btn btn-info btn-lg"
+					icon="fa fa-pencil-square-o"
+					title="Clique aqui para alterar alguma informação" ajax="true"
+					process="@this" update="@form">
+					<f:ajax render="@form" />
+				</p:commandButton>
+				
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>

@@ -134,7 +134,7 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 			rulePedidoItens.insert(pedido, item);
 			setVlUnitario(item.getVlTotal());
 			totalizarSubTotal(item);
-			//commit();
+
 			item = createItem();
 		} catch (Exception e) {
 			HandleMessage.error("Erro ao inserir Item", e.getMessage());
@@ -147,16 +147,14 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 
 	public void fecharPedido() {
 		try {
-			//beginTransaction();
 			pedido.setCaixa(caixa);
 			String ret = rulePedido.fecharPedido(pedido);
 			System.out.println("Fechar pedido: " + ret);
 			HandleMessage.info("Fechar Pedido: ", ret);
-			//commit();
+			pedido = createPedido();
 		} catch (Exception e) {
 			HandleMessage.error("Erro no fechamento do Pedido: ", e.getMessage());
 		}
-		
 	}
 
 	public String getStrProduto() {

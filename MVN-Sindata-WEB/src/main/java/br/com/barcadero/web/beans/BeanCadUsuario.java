@@ -35,7 +35,7 @@ public class BeanCadUsuario extends SuperBean<Usuario> {
 	
 	@PostConstruct
 	private void init() {
-		usuario 	= new Usuario(null);
+		usuario 	= new Usuario(null,null);
 	}
 	
 	@Override

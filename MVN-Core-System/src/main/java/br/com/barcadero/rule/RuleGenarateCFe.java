@@ -1,6 +1,6 @@
 package br.com.barcadero.rule;
 
-//import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,15 +97,7 @@ public class RuleGenarateCFe {
 		this.ruleCupomEletronico	= ruleCupomEletronico;
 		
 	}
-//	public RuleGenarateCFe(Empresa empresa, Loja loja, Caixa caixa, Session session) {
-//		// TODO Auto-generated constructor stub
-//		setSession(session);
-//		setEmpresa(empresa);
-//		setLoja(loja);
-//		ruleCFeComandos 	= new RuleCFeComandos(caixa);
-//		ruleCupomEletronico = new RuleCupomEletronico(empresa, loja, session);
-//		//ruleGenarateCFe		= new RuleGenarateCFe(empresa, loja, caixa, session);
-//	}
+
 	/**
 	 * 
 	 * @param nota
@@ -145,25 +137,24 @@ public class RuleGenarateCFe {
 		String xml 		= "";
 		CFe cfe 		= new CFe();
 		InfCFe infCFe 	= new InfCFe();
-		infCFe.setVersaoDadosEnt(loja.getVerXMLCFe().getValue());
+		infCFe.setVersaoDadosEnt(nota.getLoja().getVerXMLCFe().getValue());
 		//-------------------------------------------------
 		//Identificacao SOFTWARE HOUSE
 		//-------------------------------------------------
 		Ide ide = new Ide();
-		ide.setCNPJ(getEmpresa().getCnpjSoftwareHouse());
+		ide.setCNPJ(nota.getEmpresa().getCnpjSoftwareHouse());
 		ide.setNumeroCaixa(HandleString.zerosLeft(String.valueOf(nota.getCaixa().getCdCaixa()), 3) );
 		//"SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT"
-		ide.setSignAC(getLoja().getSignAC());
+		ide.setSignAC(nota.getLoja().getSignAC());
 		infCFe.setIde(ide);
 		//-------------------------------------------------
 		//Identificacao do Emitente do Cupom fiscal
 		//-------------------------------------------------
 		Emit emit = new Emit();
-		emit.setCNPJ(HandleString.cPFcNPJOnlyNumbers(loja.getPessoaJuridica().getCnpj()));
-		emit.setIE(getLoja().getPessoaJuridica().getIe());
-		//emit.setCRegTribISSQN(getRegimeISSQN(getEmpresa().getRegimeISSQN()));
-		emit.setIndRatISSQN(getLoja().getIndRatISSQNSAT());
-		emit.setIM(getLoja().getPessoaJuridica().getIm());
+		emit.setCNPJ(HandleString.cPFcNPJOnlyNumbers(nota.getLoja().getPessoaJuridica().getCnpj()));
+		emit.setIE(nota.getLoja().getPessoaJuridica().getIe());
+		emit.setIndRatISSQN(nota.getLoja().getIndRatISSQNSAT());
+		emit.setIM(nota.getLoja().getPessoaJuridica().getIm());
 		infCFe.setEmit(emit);
 		//-------------------------------------------------
 		//Idetificacao do Destinatario do cupom fiscal
@@ -191,9 +182,9 @@ public class RuleGenarateCFe {
 			xml = HandleXML.getXMLFromObject(cfe);
 			System.out.println(xml);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			throw new SATException("Erro ao tentar gerar o XML: " + e.getMessage());
-			//fail(e.getMessage());
+			
 		}
 		return xml.replace("<?xml version=\"1.0\" ?>", "");
 	}

@@ -31,7 +31,7 @@ public abstract class EntidadeLoja extends EntidadeEmpresa {
 		// TODO Auto-generated constructor stub
 	}
 
-	@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.LAZY)
 	@JoinColumn(name="loja",referencedColumnName="codigo")
 	private Loja loja;
 	

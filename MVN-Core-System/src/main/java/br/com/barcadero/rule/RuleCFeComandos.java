@@ -323,7 +323,7 @@ public class RuleCFeComandos {
 	public SocketCommand newSocketCommandSAT() {
 		SocketCommand command = newSocketCommand();
 		command.setTipoComando(EnumTipoComandoSocket.CMD_FOR_SAT);
-		command.setModuloSAT(getCaixa().getTipoModuloSAT());
+		//command.setModuloSAT(getCaixa().getTipoModuloSAT());
 		return command;
 	}
 	public Caixa getCaixa() {

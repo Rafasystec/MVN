@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.barcadero.core.enums.EnumCompeTotalNota;
 import br.com.barcadero.core.enums.EnumModeloNota;
@@ -178,15 +181,16 @@ public class RuleNota extends RuleModelo<Nota> {
 	 * @return
 	 * @throws Exception
 	 */
+	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED,readOnly=false)
 	public Nota parse(Pedido pedido, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
 		Nota result = null;
 		try{
 			if(pedido != null){
-				Nota nota = new Nota(getLoja(), usuario);
+				Nota nota = new Nota(pedido.getLoja(), usuario);
 				nota.setCaixa(pedido.getCaixa());
-				nota.setEmpresa(getEmpresa());
+				nota.setEmpresa(pedido.getEmpresa());
 				nota.setFlFaturado(EnumNotaFaturada.NAO);
-				nota.setLoja(getLoja());
+				nota.setLoja(pedido.getLoja());
 				nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + pedido.getCodigo());
 				nota.setModelo(pedido.getCaixa().getTipoNota());
 				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
@@ -201,7 +205,7 @@ public class RuleNota extends RuleModelo<Nota> {
 				 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
 				 nota.setItens(itens);
 				 nota.setFlFaturado(EnumNotaFaturada.SIM);
-				 insert(nota);
+				 nota = insert(nota);
 				 pedido.setFlStPed(EnumStatusPedido.FATURADO);
 				 daoPedido.update(pedido);
 				 result = nota;
@@ -383,15 +387,13 @@ public class RuleNota extends RuleModelo<Nota> {
 	}
 
 	@Override
-	public Nota insert(Nota entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Nota insert(Nota nota) throws Exception {
+		return daoNota.insert(nota);
 	}
 
 	@Override
-	public Nota update(Nota entidade) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Nota update(Nota nota) throws Exception {
+		return daoNota.update(nota);
 	}
 
 }

@@ -12,9 +12,7 @@ import javax.faces.event.ComponentSystemEvent;
 import org.apache.log4j.Logger;
 
 import br.com.barcadero.rule.RuleUsuario;
-import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Usuario;
-import br.com.barcadero.web.attributes.Attributs;
 
 /**
  * Classe responsavel por controlar as acoes do usuario.
@@ -64,15 +62,7 @@ public class BeanUsuarioLogin extends SuperBean<Usuario>{
 		try {	
 			usuario = ruleUsuario.login(getLogin(), getSenha());
 			if(usuario != null){
-//				autorizado = true;
-//				getSession().setAttribute("autorizado", autorizado);
-//				getSession().setAttribute(Attributs.USER_NOME,   usuario.getNome());
-//				getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
-//				getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
-//				getSession().setAttribute(Attributs.USER, usuario);
-	            //return "/index.xhtml?faces-redirect=true";
 				autorizarLogin(usuario);
-				//NOTE: Redirecionar para escolher a empresa para se logar
 				return "/private/PagEscolherEmpresa.xhtml?faces-redirect=true";
 			}else{
 				autorizado = false;

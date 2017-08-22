@@ -19,6 +19,10 @@ public class HandleMessage {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary+":", detail+".");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	public static void errorValidacao(String detail) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação de conteúdo"+":", detail+".");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 	public static void warn(String summary, String detail) {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, summary+":", detail+".");
         FacesContext.getCurrentInstance().addMessage(null, msg);
