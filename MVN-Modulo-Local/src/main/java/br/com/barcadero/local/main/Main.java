@@ -17,7 +17,7 @@ public class Main {
 	private static Session session;
 	public static final String APP_NAME 	= "Nautilus";
 	public static final String APP_VERSION	= "1.0 - DesckTop";
-	
+	private JFMain jfMain;
 	public static void main(String[] args) {
 			//----------------------------------------
 			//Iniciando a persistencia da aplicacao
@@ -57,13 +57,15 @@ public class Main {
 	/**
 	 * 
 	 */
-	private static void invokMainInterface() {
+	private static JFMain invokMainInterface() {
 		System.out.println("--------------------------------------------");
 		System.out.println("Invocando a Interface grafica ...");
 		System.out.println("--------------------------------------------");
 		JFMain jFMain = new JFMain();
 		jFMain.setDefaultCloseOperation(JFMain.EXIT_ON_CLOSE);
 		jFMain.setVisible(true);
+		jFMain.setTextAreaAction("Invocando a Interface grafica ...");
+		return jFMain;
 	}
 	
 	public static void beginTransaction() {

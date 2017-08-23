@@ -107,11 +107,13 @@ public class RuleGenarateCFe {
 	 * @throws Exception
 	 */
 	public CFeResult execute(Nota nota, Usuario usuario) throws SATException, Exception {
-		CFeResult cfeResult = new CFeResult();
+		CFeResult cfeResult 		= new CFeResult();
+		RuleCFeComandos cfeComandos = null;
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
 				String xml 		= genarateXML(nota);
-				String result 	= ruleCFeComandos.enviarDadosVenda(nota.getCaixa().getCodAtivCfe(), xml);
+				cfeComandos		= new RuleCFeComandos(nota.getCaixa());
+				String result 	= cfeComandos.enviarDadosVenda(nota.getCaixa().getCodAtivCfe(), xml);
 				System.out.println("Resultado >>>> " + result);
 				cfeResult.setCodeExecution(CODE_STATUS_OK);
 				cfeResult.setDescription(tratarRetorno(EnumCFeTipoFuncao.CFE_ENVIAR_DADOS_VENDA, result, usuario));

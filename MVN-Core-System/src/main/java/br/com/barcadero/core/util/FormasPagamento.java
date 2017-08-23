@@ -11,11 +11,11 @@ public class FormasPagamento {
 	public final static String CHEQUE		= "CHEQUE";
 	public final static String CREDIARIO 	= "CREDIARIO";
 	
-	private BigDecimal vlTEF;
-	private BigDecimal vlDinheiro;
-	private BigDecimal vlCheque;
-	private BigDecimal vlCrediario;
-	private BigDecimal vlTotalVenda;
+	private BigDecimal vlTEF 			= new BigDecimal("0.00");
+	private BigDecimal vlDinheiro       = new BigDecimal("0.00");
+	private BigDecimal vlCheque         = new BigDecimal("0.00");
+	private BigDecimal vlCrediario      = new BigDecimal("0.00");
+	private BigDecimal vlTotalVenda     = new BigDecimal("0.00");
 	
 	public BigDecimal getVlTEF() {
 		return vlTEF;
