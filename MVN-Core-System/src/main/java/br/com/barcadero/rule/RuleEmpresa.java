@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.dao.DaoEmpresa;
 import br.com.barcadero.tables.Empresa;
-import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
 @Service
@@ -20,30 +18,10 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 
 	
 
-	private DaoEmpresa daoEmpresa;
-	private RuleLoja ruleLoja;
-	private RulePessoaJuridica rulePessoaJuridica;
 	@Autowired
-	public RuleEmpresa(DaoEmpresa daoEmpresa, RuleLoja ruleLoja, RulePessoaJuridica rulePessoaJuridica) {
-		System.out.println("Auto-generated constructor stub RuleEmpresa");
-		this.daoEmpresa 		= daoEmpresa;
-		this.ruleLoja			= ruleLoja;
-		this.rulePessoaJuridica = rulePessoaJuridica;
-	}
-	
-//	public RuleEmpresa(Empresa empresa, Loja loja, Session session) {
-//		super(empresa, loja, session);
-//		daoEmpresa  = new DaoEmpresa(empresa, loja, session);
-//		ruleLoja	= new RuleLoja(empresa, loja, session);
-//	}
-
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		Empresa empresa = (Empresa)entidade;
-//		retirarFormatcao(empresa);
-//		return daoEmpresa.insert(empresa);
-//	}
+	private DaoEmpresa daoEmpresa;
+	@Autowired
+	private RuleLoja ruleLoja;
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -52,12 +30,12 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 	}
 	
 	private void retirarFormatcao(Empresa empresa) {
-		String cnpj = empresa.getPessoaJuridica().getCnpj();
-		String fone = empresa.getPessoaJuridica().getFone();
+		String cnpj = empresa.getCnpj();
+		String fone = empresa.getFone();
 		cnpj = cnpj.replace(".", "").replace("/", "").replace("-", "");
 		fone = fone.replace("-", "").replace("(", "").replace(")", "");
-		empresa.getPessoaJuridica().setCnpj(cnpj);
-		empresa.getPessoaJuridica().setFone(fone);
+		empresa.setCnpj(cnpj);
+		empresa.setFone(fone);
 	}
 	
 	/**
@@ -68,26 +46,23 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 	 */
 	public Empresa inserirEmpresaPadrao(Usuario usuario) throws Exception {
 		Empresa empresa 	= new Empresa(usuario);
-		PessoaJuridica pj	= new PessoaJuridica(usuario);
+		
 		empresa.setImgLogo("");
 		empresa.setObservacoes("EMPRESA CRIADA JUNTO COM O USUARIO, ALTERE OS DADOS PARA OS DA SUA EMPRESA");
 		//NOTE: Dados da pessoa juridica
-		pj.setCnaeFiscal("");
-		pj.setCnpj("00000000000000");
-		pj.setCodRegTribut(EnumRegimeTributario.SIMPLES_NACIONAL);
-		pj.setDtUltAlteracao(new Date());
-		pj.setEmail(usuario.getEmail());
-		pj.setFantasia("NOME FANTASIA");
-		pj.setFone("000000000000");
-		pj.setIe("0000000000");
-		pj.setIeSubsTributaria("0000000000");
-		pj.setIm("0000000000");
-		pj.setRazaoSocial("RAZAO SOCIAL EMPRESA");
-		pj.setUf("CE");
-		pj.setWebSite("www.meusite.com.br");
-		pj.setEnderecos(new ArrayList<Endereco>());
-		rulePessoaJuridica.insert(pj);
-		empresa.setPessoaJuridica(pj);
+		empresa.setCnaeFiscal("");
+		empresa.setCnpj("00000000000000");
+		empresa.setCodRegTribut(EnumRegimeTributario.SIMPLES_NACIONAL);
+		empresa.setDtUltAlteracao(new Date());
+		empresa.setEmail(usuario.getEmail());
+		empresa.setFantasia("NOME FANTASIA");
+		empresa.setFone("000000000000");
+		empresa.setIe("0000000000");
+		empresa.setIeSubsTributaria("0000000000");
+		empresa.setIm("0000000000");
+		empresa.setRazaoSocial("RAZAO SOCIAL EMPRESA");
+		empresa.setUf("CE");
+		empresa.setWebSite("www.meusite.com.br");
 		List<Usuario> users = new ArrayList<Usuario>();
 		users.add(usuario);
 		empresa.setUsuarios(users);
@@ -98,7 +73,7 @@ public class RuleEmpresa extends RuleModelo<Empresa> {
 		//--------------------------------------------------------
 		//NOTE: Inserir a loja Matriz
 		//--------------------------------------------------------
-		Loja loja = ruleLoja.inserirLojaMatriz(usuario, pj, empresa);
+		Loja loja = ruleLoja.inserirLojaMatriz(usuario, empresa);
 		List<Loja> lojas = new ArrayList<>();
 		lojas.add(loja);
 		empresa.setLojas(lojas);

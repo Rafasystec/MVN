@@ -63,6 +63,7 @@ import br.com.barcadero.module.sat.xml.envio.Prod;
 import br.com.barcadero.module.sat.xml.envio.Total;
 import br.com.barcadero.module.sat.xml.util.CNPJ;
 import br.com.barcadero.module.sat.xml.util.CPF;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
@@ -79,7 +80,6 @@ public class RuleGenarateCFe {
 	public static final int CODE_STATUS_INVALIDO 	= 14;
 	public static final int CODE_STATUS_OK 			= 0;
 	private Empresa empresa = null;
-	private RuleCFeComandos ruleCFeComandos			= null;
 	private RuleCupomEletronico ruleCupomEletronico = null;
 	private Loja loja 		= null;
 	private Session session = null;
@@ -93,7 +93,6 @@ public class RuleGenarateCFe {
 	@Autowired
 	public RuleGenarateCFe(RuleCFeComandos ruleCFeComandos,RuleCupomEletronico ruleCupomEletronico) {
 		System.out.println("Auto-generated constructor stub RuleGenarateCFe");
-		this.ruleCFeComandos 		= ruleCFeComandos;
 		this.ruleCupomEletronico	= ruleCupomEletronico;
 		
 	}
@@ -106,17 +105,17 @@ public class RuleGenarateCFe {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	public CFeResult execute(Nota nota, Usuario usuario) throws SATException, Exception {
+	public CFeResult execute(Caixa caixa, Nota nota, Usuario usuario) throws SATException, Exception {
 		CFeResult cfeResult 		= new CFeResult();
 		RuleCFeComandos cfeComandos = null;
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
 				String xml 		= genarateXML(nota);
 				cfeComandos		= new RuleCFeComandos(nota.getCaixa());
-				String result 	= cfeComandos.enviarDadosVenda(nota.getCaixa().getCodAtivCfe(), xml);
+				String result 	= cfeComandos.enviarDadosVenda(caixa.getCodAtivCfe(), xml);
 				System.out.println("Resultado >>>> " + result);
 				cfeResult.setCodeExecution(CODE_STATUS_OK);
-				cfeResult.setDescription(tratarRetorno(EnumCFeTipoFuncao.CFE_ENVIAR_DADOS_VENDA, result, usuario));
+				cfeResult.setDescription(tratarRetorno(nota.getEmpresa(),nota.getLoja(),EnumCFeTipoFuncao.CFE_ENVIAR_DADOS_VENDA, result, usuario));
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
 				cfeResult.setDescription("Staus permitido para emitir CF-e : " + EnumStatusCFeNota.XML_NAO_GERADO + " ou " + EnumStatusCFeNota.REJEITADO + " mas veio " + nota.getStatusCFe());
@@ -153,10 +152,10 @@ public class RuleGenarateCFe {
 		//Identificacao do Emitente do Cupom fiscal
 		//-------------------------------------------------
 		Emit emit = new Emit();
-		emit.setCNPJ(HandleString.cPFcNPJOnlyNumbers(nota.getLoja().getPessoaJuridica().getCnpj()));
-		emit.setIE(nota.getLoja().getPessoaJuridica().getIe());
+		emit.setCNPJ(HandleString.cPFcNPJOnlyNumbers(nota.getLoja().getCnpj()));
+		emit.setIE(nota.getLoja().getIe());
 		emit.setIndRatISSQN(nota.getLoja().getIndRatISSQNSAT());
-		emit.setIM(nota.getLoja().getPessoaJuridica().getIm());
+		emit.setIM(nota.getLoja().getIm());
 		infCFe.setEmit(emit);
 		//-------------------------------------------------
 		//Idetificacao do Destinatario do cupom fiscal
@@ -256,11 +255,11 @@ public class RuleGenarateCFe {
 		Cliente cliente = nota.getCliente();
 		if(cliente != null){
 			if(cliente.getTipoPessoa() == EnumTipoPessoa.FISICA){
-				destinatario.setCpfCnpj(new CPF(cliente.getPessoaFisica().getCpf()));
-				destinatario.setXNome(cliente.getPessoaFisica().getNome());
+				destinatario.setCpfCnpj(new CPF(cliente.getCpf()));
+				destinatario.setXNome(cliente.getNome());
 			}else{
-				destinatario.setCpfCnpj(new CNPJ(cliente.getPessoaJuridica().getCnpj()));
-				destinatario.setXNome(cliente.getPessoaJuridica().getFantasia());
+				destinatario.setCpfCnpj(new CNPJ(cliente.getCnpj()));
+				destinatario.setXNome(cliente.getFantasia());
 			}
 		}
 		return destinatario;
@@ -615,7 +614,7 @@ public class RuleGenarateCFe {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	private String tratarRetorno(EnumCFeTipoFuncao type,String retorno, Usuario usuario) throws SATException, Exception {
+	private String tratarRetorno(Empresa empresa, Loja loja,EnumCFeTipoFuncao type,String retorno, Usuario usuario) throws SATException, Exception {
 		String result			= "";
 		switch (type) {
 		case CFE_ATIVA_SAT:
@@ -646,7 +645,7 @@ public class RuleGenarateCFe {
 			
 			break;
 		case CFE_ENVIAR_DADOS_VENDA:
-			result = tratarRetornoVenda(retorno, usuario);
+			result = tratarRetornoVenda(empresa,loja, retorno, usuario);
 			break;
 		case CFE_EXTRAIR_LOGS:
 			
@@ -670,13 +669,13 @@ public class RuleGenarateCFe {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	private String tratarRetornoVenda(String retorno, Usuario usuario) throws SATException, Exception {
+	private String tratarRetornoVenda(Empresa empresa, Loja loja, String retorno, Usuario usuario) throws SATException, Exception {
 		HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(retorno);
 		if(retornoSAT.getCodigoRetorno1().trim().equals("06000")){
 			//------------------------------------------------
 			//OK venda realizada com sucesso
 			//------------------------------------------------
-			ruleCupomEletronico.insert(retornoSAT, usuario);
+			ruleCupomEletronico.insert(loja,empresa,retornoSAT, usuario);
 			return RuleCFeUtil.getMessage(retornoSAT);
 		}else{
 			throw new SATException("Não foi possível realizar a venda.");
@@ -692,9 +691,8 @@ public class RuleGenarateCFe {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	public String executarVendaSAT(Nota nota, Usuario usuario ) throws SATException, Exception {
-		//RuleGenarateCFe ruleCFe = new RuleGenarateCFe(getEmpresa(), getLoja(),nota.getCaixa(),getSession());
-		CFeResult cfeResult = execute(nota, usuario);
+	public String executarVendaSAT(Caixa caixa, Nota nota, Usuario usuario ) throws SATException, Exception {
+		CFeResult cfeResult = execute(caixa,nota,usuario);
 		if(cfeResult.getCodeExecution() == RuleGenarateCFe.CODE_STATUS_OK){
 			return cfeResult.getDescription();
 		}else{

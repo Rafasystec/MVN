@@ -29,7 +29,7 @@
 							<p:outputLabel value="Fantasia:" for="fantasia" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.fantasia}" id="fantasia"
+							<p:inputText value="#{beanEmpresa.emp.fantasia}" id="fantasia"
 								required="true" requiredMessage="Fantasia é obrigatório."
 								maxlength="60" size="60" />
 						</div>
@@ -44,7 +44,7 @@
 							<p:outputLabel value="Razão Social:" for="rsocial" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.razaoSocial}" id="rsocial"
+							<p:inputText value="#{beanEmpresa.emp.razaoSocial}" id="rsocial"
 								required="true"
 								requiredMessage="Razão Social deve ser preenchida."
 								maxlength="60" size="60" />
@@ -59,7 +59,7 @@
 							<p:outputLabel value="Insc. Estadual:" for="ie" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.ie}" id="ie" required="true"
+							<p:inputText value="#{beanEmpresa.emp.ie}" id="ie" required="true"
 								requiredMessage="Inscrição Estadual é necessária."
 								maxlength="15" size="15" />
 						</div>
@@ -73,7 +73,7 @@
 							<p:outputLabel value="CNPJ:" for="cnpj" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputMask value="#{beanEmpresa.pj.cnpj}" id="cnpj"
+							<p:inputMask value="#{beanEmpresa.emp.cnpj}" id="cnpj"
 								required="true"
 								requiredMessage="Informe o CNPJ - Somente números."
 								mask="99.999.999/9999-99" />
@@ -88,7 +88,7 @@
 							<p:outputLabel value="I.E. subst. tributária:" for="ietrib" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.ieSubsTributaria}"
+							<p:inputText value="#{beanEmpresa.emp.ieSubsTributaria}"
 								id="ietrib" maxlength="15" size="15" />
 						</div>
 					</div>
@@ -101,7 +101,7 @@
 							<p:outputLabel value="Insc. Municipal:" for="im" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.im}" id="im" maxlength="15"
+							<p:inputText value="#{beanEmpresa.emp.im}" id="im" maxlength="15"
 								size="15" />
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 						</div>
 						<div class="ui-grid-row">
 							<p:selectOneMenu id="regime"
-								value="#{beanEmpresa.pj.codRegTribut}" required="true"
+								value="#{beanEmpresa.emp.codRegTribut}" required="true"
 								requiredMessage="Regime tributário é obrigatório.">
 								<f:selectItems value="#{beanEmpresa.regime}" />
 							</p:selectOneMenu>
@@ -130,7 +130,7 @@
 							<p:outputLabel value="Contato:" for="contato" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputMask value="#{beanEmpresa.pj.fone}" id="contato"
+							<p:inputMask value="#{beanEmpresa.emp.fone}" id="contato"
 								mask="(999)99999-9999" required="true"
 								requiredMessage="Informe um contato por favor." />
 						</div>
@@ -145,7 +145,7 @@
 							<p:outputLabel value="UF:" for="uf" />
 						</div>
 						<div class="ui-grid-row">
-							<p:selectOneMenu value="#{beanEmpresa.pj.uf}" id="uf"
+							<p:selectOneMenu value="#{beanEmpresa.emp.uf}" id="uf"
 								maxlength="4">
 								<f:selectItems value="#{beanEmpresa.uf}" />
 							</p:selectOneMenu>
@@ -161,7 +161,7 @@
 							<p:outputLabel value="E-mail" for="email" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.email}" id="email"
+							<p:inputText value="#{beanEmpresa.emp.email}" id="email"
 								required="true" requiredMessage="E-mail é obrigatório."
 								maxlength="35" size="35" />
 						</div>
@@ -175,7 +175,7 @@
 							<p:outputLabel value="Web Site: www." for="site" />
 						</div>
 						<div class="ui-grid-row">
-							<p:inputText value="#{beanEmpresa.pj.webSite}" id="site" />
+							<p:inputText value="#{beanEmpresa.emp.webSite}" id="site" />
 						</div>
 					</div>
 				</div>
@@ -206,16 +206,6 @@
 		
 		</p:panel>
 	 
-		<clx:address beanCEP="#{beanEmpresa.ender.cep}"
-			beanNumero="#{beanEmpresa.ender.numero}"
-			beanTipoLog="#{beanEmpresa.ender.tpLogradouro}"
-			beanLog="#{beanEmpresa.ender.logradouro}"
-			beanUF="#{beanEmpresa.ender.uf}"
-			beanCidade="#{beanEmpresa.ender.cidade}"
-			beanBairro="#{beanEmpresa.ender.bairro}"
-			beanComplemento="#{beanEmpresa.ender.complemento}">
-		</clx:address>
-		
 		<clx:buttonsCrud></clx:buttonsCrud>
 
 	</ui:define>

@@ -1,7 +1,6 @@
 package br.com.barcadero.web.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +25,6 @@ import br.com.barcadero.tables.Cidade;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Estado;
-import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 /**
  * Bean para salvar a empresa.
@@ -39,13 +37,8 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 
 	private static final long serialVersionUID = 2807945448917304288L;
 	private Empresa emp;
-	private PessoaJuridica pj;
 	private Endereco ender;
-	private EnumRegimeTributario[] regime;
-	private EnumAtividadeEmp[] atividade;
 	private FileUpload fileUpload;
-	//para o endereco
-	private EnumUF[] uf;
 	@ManagedProperty("#{ruleEmpresa}")
 	private RuleEmpresa ruleEmpresa;
 	@ManagedProperty("#{ruleEstado}")
@@ -71,19 +64,11 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 	
 	@PostConstruct
 	private void init() {
-		emp 	= getEmpresaLogada();
-		pj 		= getEmpresaLogada().getPessoaJuridica();
-		getEnderecoEmpresa();
+		emp = getEmpresaLogada();
+	
 	}
 
-	private Endereco getEnderecoEmpresa() {
-		if(getEmpresaLogada().getPessoaJuridica().getEnderecos() != null && getEmpresaLogada().getPessoaJuridica().getEnderecos().size() > 0){
-			ender 	= getEmpresaLogada().getPessoaJuridica().getEnderecos().get(0);
-		}else{
-			ender = new Endereco(getUsuarioLogado()); 
-		}
-		return ender;
-	}
+	
 	
 	public Empresa getEmp() {
 		return emp;
@@ -91,14 +76,6 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 
 	public void setEmp(Empresa emp) {
 		this.emp = emp;
-	}
-
-	public PessoaJuridica getPj() {
-		return pj;
-	}
-
-	public void setPj(PessoaJuridica pj) {
-		this.pj = pj;
 	}
 
 	public Endereco getEnder() {
@@ -111,20 +88,8 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 	
 	@Override
 	public String salvar() throws Exception {
-		// TODO Auto-generated method stub
-		pj.setDtUltAlteracao(new Date());
-		ender.setPessoa(pj);
-		List<Endereco> listEnder = new ArrayList<Endereco>();
-		listEnder.add(ender);
-		pj.setEnderecos(listEnder);
-		emp.setPessoaJuridica(pj);
-		
-		List<Usuario> users = new ArrayList<Usuario>();
-		users.add(getUser());
-		emp.setUsuarios(users);
-		
 		ruleEmpresa.insert(emp);
-		incluirLojaMatriz(pj, emp);
+		incluirLojaMatriz( emp);
 		
 		return null;
 	}
@@ -159,24 +124,12 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 		return EnumRegimeTributario.values();
 	}
 
-	public void setRegime(EnumRegimeTributario[] regime) {
-		this.regime = regime;
-	}
-
 	public EnumAtividadeEmp[] getAtividade() {
 		return EnumAtividadeEmp.values();
 	}
 
-	public void setAtividade(EnumAtividadeEmp[] atividade) {
-		this.atividade = atividade;
-	}
-
 	public EnumUF[] getUf() {
 		return EnumUF.values();
-	}
-
-	public void setUf(EnumUF[] uf) {
-		this.uf = uf;
 	}
 
 	public long getCodEstado() {
@@ -224,8 +177,8 @@ public class BeanEmpresa extends SuperBean<Empresa> {
 		return SessionContext.getInstance().getUsuarioLogado();
 	}
 	
-	private void incluirLojaMatriz(PessoaJuridica pj, Empresa empresa) throws Exception{
-		ruleLoja.inserirLojaMatriz(getSession().getUsuarioLogado(), pj,empresa);
+	private void incluirLojaMatriz(Empresa empresa) throws Exception{
+		ruleLoja.inserirLojaMatriz(getSession().getUsuarioLogado(),empresa);
 	}
 
 	@Override

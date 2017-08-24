@@ -182,19 +182,19 @@ public class RuleNota extends RuleModelo<Nota> {
 	 * @throws Exception
 	 */
 	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED,readOnly=false)
-	public Nota parse(Pedido pedido, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
+	public Nota parse(Caixa caixa,Pedido pedido, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
 		Nota result = null;
 		try{
 			if(pedido != null){
 				Nota nota = new Nota(pedido.getLoja(), usuario);
-				nota.setCaixa(pedido.getCaixa());
+				nota.setCaixa(caixa);
 				nota.setEmpresa(pedido.getEmpresa());
 				nota.setFlFaturado(EnumNotaFaturada.NAO);
 				nota.setLoja(pedido.getLoja());
 				nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + pedido.getCodigo());
-				nota.setModelo(pedido.getCaixa().getTipoNota());
+				nota.setModelo(caixa.getTipoNota());
 				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
-				nota.setSerieNota(String.valueOf(getSerie(pedido.getCaixa())));
+				nota.setSerieNota(String.valueOf(getSerie(caixa)));
 				//------------------------------------------
 				//Montando a lista de itens para a nota
 				//------------------------------------------
@@ -223,19 +223,19 @@ public class RuleNota extends RuleModelo<Nota> {
 	 * @return
 	 * @throws Exception
 	 */
-	public Nota parse(OrdemServico ordemServico, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
+	public Nota parse(Caixa caixa, OrdemServico ordemServico, Usuario usuario, FormasPagamento formasPagamento) throws Exception{
 		Nota result = null;
 		try {
 			if(ordemServico != null){
 				Nota nota = new Nota(getLoja(), usuario);
-				nota.setCaixa(ordemServico.getCaixa());
+				nota.setCaixa(caixa);
 				nota.setEmpresa(getEmpresa());
 				nota.setFlFaturado(EnumNotaFaturada.NAO);
-				nota.setLoja(getLoja());
+				nota.setLoja(ordemServico.getLoja());
 				nota.setInfAdicionais("NOTA GERADA A PARTIR DO PEDIDO " + ordemServico.getCodigo());
-				nota.setModelo(ordemServico.getCaixa().getTipoNota());
+				nota.setModelo(caixa.getTipoNota());
 				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
-				nota.setSerieNota(String.valueOf(getSerie(ordemServico.getCaixa())));
+				nota.setSerieNota(String.valueOf(getSerie(caixa)));
 				//------------------------------------------
 				//Montando a lista de itens para a nota
 				//------------------------------------------
@@ -336,7 +336,7 @@ public class RuleNota extends RuleModelo<Nota> {
 	public List<NotaMeioPgto> getMeiosPagamento(Nota nota, FormasPagamento formasPagamento, Usuario usuario) {
 		 List<NotaMeioPgto> meioPgtos = new ArrayList<>();
 		 if(formasPagamento.getVlTEF().floatValue()  > 0.00f){
-			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+			 NotaMeioPgto meioPgto = new NotaMeioPgto(nota.getEmpresa(), nota.getLoja(), usuario);
 			 meioPgto.setNota(nota);
 			 meioPgto.setCdAdministradora(999);
 			 meioPgto.setEmpresa(getEmpresa());
@@ -348,7 +348,7 @@ public class RuleNota extends RuleModelo<Nota> {
 			 meioPgtos.add(meioPgto);
 		 }
 		 if(formasPagamento.getVlCheque().floatValue() > 0.00f){
-			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+			 NotaMeioPgto meioPgto = new NotaMeioPgto(nota.getEmpresa(), nota.getLoja(), usuario);
 			 meioPgto.setNota(nota);
 			 meioPgto.setCdAdministradora(0);
 			 meioPgto.setEmpresa(getEmpresa());
@@ -360,7 +360,7 @@ public class RuleNota extends RuleModelo<Nota> {
 			 meioPgtos.add(meioPgto);
 		 }
 		 if(formasPagamento.getVlDinheiro().floatValue() > 0.00f){
-			 NotaMeioPgto meioPgto = new NotaMeioPgto(getLoja(), usuario);
+			 NotaMeioPgto meioPgto = new NotaMeioPgto(nota.getEmpresa(), nota.getLoja(), usuario);
 			 meioPgto.setNota(nota);
 			 meioPgto.setCdAdministradora(0);
 			 meioPgto.setEmpresa(getEmpresa());

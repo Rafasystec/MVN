@@ -23,7 +23,7 @@
 				<p:selectOneMenu id="emp" value="#{loja.codEmpresa}" required="true">
 					<f:selectItem itemLabel="Primeiro escolha a empresa" itemValue="0" />
 					<f:selectItems value="#{escolherEmp.empresa}" var="emp"
-						itemLabel="#{emp.pessoaJuridica.fantasia}"
+						itemLabel="#{emp.fantasia}"
 						itemValue="#{emp.codigo}" />
 						<p:ajax update="grdLoja"/>
 				</p:selectOneMenu>
@@ -33,13 +33,13 @@
 			<p:dataTable id="grdLoja" var="lj" value="#{loja.lojasPorEmpresa}" paginator="true"
 				rows="5">
 				<p:column headerText="UF">
-					<h:outputText value="#{lj.pessoaJuridica.uf}" />
+					<h:outputText value="#{lj.uf}" />
 				</p:column>
 				<p:column headerText="Descrição">
-					<h:outputText value="#{lj.pessoaJuridica.fantasia}" />
+					<h:outputText value="#{lj.fantasia}" />
 				</p:column>
 				<p:column headerText="Razão Social">
-					<h:outputText value="#{lj.pessoaJuridica.razaoSocial}" />
+					<h:outputText value="#{lj.razaoSocial}" />
 				</p:column>
 			</p:dataTable>
 		</p:panel>

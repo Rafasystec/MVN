@@ -19,56 +19,56 @@
 			<h:panelGrid columns="2">
 
 				<p:outputLabel value="Fantasia:" for="fantasia" />
-				<p:inputText value="#{loja.pj.fantasia}" id="fantasia"
+				<p:inputText value="#{loja.loja.fantasia}" id="fantasia"
 					required="true" requiredMessage="Fantasia é obrigatório."
 					maxlength="60" size="60" />
 
 				<p:outputLabel value="Razão Social:" for="rsocial" />
-				<p:inputText value="#{loja.pj.razaoSocial}" id="rsocial"
+				<p:inputText value="#{loja.loja.razaoSocial}" id="rsocial"
 					required="true" requiredMessage="Razão Social deve ser preenchida."
 					maxlength="60" size="60" />
 
 				<p:outputLabel value="Insc. Estadual:" for="ie" />
-				<p:inputText value="#{loja.pj.ie}" id="ie" required="true"
+				<p:inputText value="#{loja.loja.ie}" id="ie" required="true"
 					requiredMessage="Inscrição Estadual é necessária." maxlength="15"
 					size="15" />
 
 				<p:outputLabel value="CNPJ:" for="cnpj" />
-				<p:inputMask value="#{loja.pj.cnpj}" id="cnpj" required="true"
+				<p:inputMask value="#{loja.loja.cnpj}" id="cnpj" required="true"
 					requiredMessage="Informe o CNPJ - Somente números."
 					mask="99.999.999/9999-99" />
 
 				<p:outputLabel value="I.E. subst. tributária:" for="ietrib" />
-				<p:inputText value="#{loja.pj.ieSubsTributaria}" id="ietrib"
+				<p:inputText value="#{loja.loja.ieSubsTributaria}" id="ietrib"
 					maxlength="15" size="15" />
 
 				<p:outputLabel value="Insc. Municipal:" for="im" />
-				<p:inputText value="#{loja.pj.im}" id="im" maxlength="15" size="15" />
+				<p:inputText value="#{loja.loja.im}" id="im" maxlength="15" size="15" />
 
 				<p:outputLabel value="Regime Tributário:" for="regime" />
-				<p:selectOneMenu id="regime" value="#{loja.pj.codRegTribut}"
+				<p:selectOneMenu id="regime" value="#{loja.loja.codRegTribut}"
 					required="true" requiredMessage="Regime tributário é obrigatório.">
 					<f:selectItems value="#{loja.regime}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Contato:" for="contato" />
-				<p:inputMask value="#{loja.pj.fone}" id="contato"
+				<p:inputMask value="#{loja.loja.fone}" id="contato"
 					mask="(999)99999-9999" required="true"
 					requiredMessage="Informe um contato por favor." />
 
 
 				<p:outputLabel value="UF:" for="uf" />
-				<p:selectOneMenu value="#{loja.pj.uf}" id="uf" maxlength="4">
+				<p:selectOneMenu value="#{loja.loja.uf}" id="uf" maxlength="4">
 					<f:selectItems value="#{loja.uf}" />
 				</p:selectOneMenu>
 
 
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText value="#{loja.pj.email}" id="email" required="true"
+				<p:inputText value="#{loja.loja.email}" id="email" required="true"
 					requiredMessage="E-mail é obrigatório." maxlength="35" size="35" />
 
 				<p:outputLabel value="Web Site: www." for="site" />
-				<p:inputText value="#{loja.pj.webSite}" id="site" />
+				<p:inputText value="#{loja.loja.webSite}" id="site" />
 
 			</h:panelGrid>
 		</p:panel>
@@ -95,10 +95,10 @@
 					<h:outputText value="#{loj.codigo}" />
 				</p:column>
 				<p:column headerText="CNPJ">
-					<h:outputText value="#{loj.pessoaJuridica.cnpj}" />
+					<h:outputText value="#{loj.cnpj}" />
 				</p:column>
 				<p:column headerText="FANTASIA">
-					<h:outputText value="#{loj.pessoaJuridica.fantasia}" />
+					<h:outputText value="#{loj.fantasia}" />
 				</p:column>
 				<p:column headerText="Data Inauguração">
 					<h:outputText value="#{loj.dtCadastro}">

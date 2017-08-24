@@ -104,6 +104,7 @@ public class RuleCFeComandos {
 		enviarDadosVenda.setCodigoDeAtivacao(codigoDeAtivacao);
 		enviarDadosVenda.setDadosVenda(dadosVenda);
 		enviarDadosVenda.setNumeroSessao(0);
+		command.setModuloSAT(getCaixa().getTipoModuloSAT());
 		command.setDados(enviarDadosVenda);
 		command = client.callAndReceive(command);
 		return command.getResponse();

@@ -59,12 +59,10 @@ public class BeanVendaRapida extends SuperBean <VendaRapida>{
 			nota  	 = createNota();
 			itens 	 = new ArrayList<NotaItens>();
 			item 	 = getNewNotaItens();
-			notaItem = new NotaItens(getSession().getLojaLogada(), getSession().getUsuarioLogado());
+			notaItem = new NotaItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -226,18 +224,6 @@ public class BeanVendaRapida extends SuperBean <VendaRapida>{
 
 	public void setCodNota(long codNota) {
 		this.codNota = codNota;
-	}
-	
-	public String fecharVenda() {
-		if(this.session != null){
-			try {
-				this.session.getTransaction().commit();
-			} catch (Exception e) {
-				// TODO: handle exception
-				this.session.getTransaction().rollback();
-			}
-		}
-		return "";
 	}
 
 	@Override

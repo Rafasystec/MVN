@@ -8,18 +8,27 @@ import br.com.barcadero.rule.RuleEmpresa;
 import br.com.barcadero.rule.RuleUsuario;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Usuario;
+import br.com.barcadero.tables.UsuarioPermissoes;
 
 
 @ManagedBean(name="cadUsuario")
 public class BeanCadUsuario extends SuperBean<Usuario> {
 
 	private static final long serialVersionUID = 746108176250467310L;
-	private Usuario usuario 		= null;
+	private Usuario usuario 					= null;
+	private UsuarioPermissoes usuarioPermissoes = null;
 	private String confirm  		= "";
+	public UsuarioPermissoes getUsuarioPermissoes() {
+		return usuarioPermissoes;
+	}
+	public void setUsuarioPermissoes(UsuarioPermissoes usuarioPermissoes) {
+		this.usuarioPermissoes = usuarioPermissoes;
+	}
 	@ManagedProperty("#{ruleUsuario}")
 	private RuleUsuario fcdUser;
 	@ManagedProperty("#{ruleEmpresa}")
 	private RuleEmpresa ruleEmpresa;
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -36,6 +45,21 @@ public class BeanCadUsuario extends SuperBean<Usuario> {
 	@PostConstruct
 	private void init() {
 		usuario 	= new Usuario(null,null);
+		permissoesUsuarioFull();
+		usuario.setPermissoes(usuarioPermissoes);
+	}
+	
+	private void permissoesUsuarioFull() {
+		usuarioPermissoes = new UsuarioPermissoes(usuario);
+		usuarioPermissoes.setPodeAcessarCadastros(true);
+		usuarioPermissoes.setPodeAcessarColaboradores(true);
+		usuarioPermissoes.setPodeAcessarConfiguracoes(true);
+		usuarioPermissoes.setPodeAcessarCRM(true);
+		usuarioPermissoes.setPodeAcessarFinanceiro(true);
+		usuarioPermissoes.setPodeAcessarOperacional(true);
+		usuarioPermissoes.setPodeAcessarPagamentos(true);
+		usuarioPermissoes.setPodeAcessarRecebimento(true);
+		usuarioPermissoes.setPodeAcessarRelatorio(true);
 	}
 	
 	@Override

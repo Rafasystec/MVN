@@ -16,12 +16,8 @@ public class RuleUsuario extends RuleModelo<Usuario>{
 	
 	
 
-	private DaoUsuario daoUsuario;	
 	@Autowired
-	public RuleUsuario(DaoUsuario daoUsuario) {
-		// TODO Auto-generated constructor stub
-		this.daoUsuario = daoUsuario;
-	}
+	private DaoUsuario daoUsuario;	
 
 	public Usuario login(String login, String pwd) throws Exception{
 		try {
@@ -38,23 +34,6 @@ public class RuleUsuario extends RuleModelo<Usuario>{
 		}
 	}
 	
-//	public String update(Usuario usuario) throws Exception{
-//		return daoUsuario.update(usuario);
-//	}
-	
-//	public String salvar(Usuario usuario) throws Exception{
-//		try {
-//			if(usuario == null){
-//				throw new Exception("Usuário com valor nulo.");
-//			}
-//			usuario.setPassWord(criptSenha(usuario.getPassWord()));
-//			return daoUsuario.insert(usuario);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			throw new Exception("Erro grave ao tentar incluir o usuario: " + e.getMessage());
-//		}
-//	}
-	
 	public List<Usuario> findAll() throws Exception{
 		try {
 			return daoUsuario.findAll();
@@ -70,23 +49,11 @@ public class RuleUsuario extends RuleModelo<Usuario>{
 		return pwdEncripted;
 	}
 
-//	@Override
-//	public String insert(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoUsuario.insert(entidade);
-//	}
-
 	@Override
 	public String delete(long codigo) throws Exception {
 		// TODO Auto-generated method stub
 		return daoUsuario.delete(codigo);
 	}
-
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoUsuario.update(entidade);
-//	}
 
 	@Override
 	public Usuario find(long codigo) throws Exception {

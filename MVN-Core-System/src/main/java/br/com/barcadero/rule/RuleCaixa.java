@@ -75,9 +75,6 @@ public class RuleCaixa extends RuleModelo<Caixa> {
 	 */
 	public Caixa findByIp(Loja loja, String ip) throws Exception{
 		Caixa caixa = daoCaixa.findByIp(loja, ip); 
-		if(caixa == null){
-			throw new Exception("Não foi encontrado caixa para loja >> " + loja.getCodigo() + " e ip >> " + ip);
-		}
 		return caixa;
 	}
 

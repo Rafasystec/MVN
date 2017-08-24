@@ -1,5 +1,4 @@
 package br.com.barcadero.tables;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 /**
  * Classe criada para persistir o endereco dos Filiados, funcionarios ou qualquer outra pressoa
@@ -10,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import br.com.barcadero.core.enums.EnumTipoLograd;
@@ -41,16 +39,11 @@ public class Endereco extends Entidade{
 	@Enumerated(EnumType.STRING)
 	@Column(name="tp_lograd",nullable=false,length=25)
 	private EnumTipoLograd tpLogradouro;
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cod_pessoa")
-	private Pessoa pessoa;
 	@Column(name="UF",nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumUF uf = EnumUF.AC;
 	@Column(name="CIDADE",nullable=false)
 	private String cidade = "";
-//	@Column(name="BAIRRO",nullable=false)
-//	private String bairro = "";
 	@Column(name="COMPLEMENTO",nullable=false)
 	private String complemento = "";
 	@Column(name="REFERENCIA",nullable=false)
@@ -101,12 +94,6 @@ public class Endereco extends Entidade{
 	public void setTpLogradouro(EnumTipoLograd tpLogradouro) {
 		this.tpLogradouro = tpLogradouro;
 	}
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
 	public EnumUF getUf() {
 		return uf;
 	}
@@ -137,85 +124,5 @@ public class Endereco extends Entidade{
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
-		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + (int) (codBairro ^ (codBairro >>> 32));
-		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
-		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
-		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-		result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		result = prime * result + ((tpLogradouro == null) ? 0 : tpLogradouro.hashCode());
-		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Endereco other = (Endereco) obj;
-		if (bairro == null) {
-			if (other.bairro != null)
-				return false;
-		} else if (!bairro.equals(other.bairro))
-			return false;
-		if (cep == null) {
-			if (other.cep != null)
-				return false;
-		} else if (!cep.equals(other.cep))
-			return false;
-		if (cidade == null) {
-			if (other.cidade != null)
-				return false;
-		} else if (!cidade.equals(other.cidade))
-			return false;
-		if (codBairro != other.codBairro)
-			return false;
-		if (complemento == null) {
-			if (other.complemento != null)
-				return false;
-		} else if (!complemento.equals(other.complemento))
-			return false;
-		if (logradouro == null) {
-			if (other.logradouro != null)
-				return false;
-		} else if (!logradouro.equals(other.logradouro))
-			return false;
-		if (numero == null) {
-			if (other.numero != null)
-				return false;
-		} else if (!numero.equals(other.numero))
-			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
-			return false;
-		if (referencia == null) {
-			if (other.referencia != null)
-				return false;
-		} else if (!referencia.equals(other.referencia))
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
-		if (tpLogradouro != other.tpLogradouro)
-			return false;
-		if (uf != other.uf)
-			return false;
-		return true;
-	}
-		
+			
 }

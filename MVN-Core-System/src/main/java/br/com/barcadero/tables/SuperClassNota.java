@@ -13,8 +13,8 @@ public abstract class SuperClassNota extends EntidadeLoja {
 	}
 	
 	private static final long serialVersionUID = 1L;
-	public SuperClassNota(Loja loja, Usuario usuario) {
-		super(loja, usuario);
+	public SuperClassNota(Empresa empresa, Loja loja, Usuario usuario) {
+		super(empresa,loja, usuario);
 	}
 
 	@Column(name="SERIE_NOTA", nullable=false)

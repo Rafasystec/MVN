@@ -28,11 +28,17 @@
 		<p:panel header="Receber Pedido">
 			<p:tab title="Pedidos A FATURAR de HOJE" closable="true">
 				<p:panel header="Pedidos a Faturar">
-				
-					<p:dataTable id="tblPedidos" var="ped" value="#{beanReceberPedido.pedidosAFaturarHoje}" resizableColumns="true" style="margin-bottom:20px" 
-					selectionMode="single" selection="#{beanReceberPedido.selectedPedido}"  rowKey="#{ped.codigo}" scrollable="true" rows="5" emptyMessage="Nenhum Pedido Hoje." scrollHeight="150">	
-						<p:ajax event="rowSelect" listener="#{beanReceberPedido.onRowSelect}" 
-						update=":formMain:blbSubVlTotal,:formMain:lblNumPedido,:formMain:pagamentos:txtDinheiro:txtDinheiro"/>
+
+					<p:dataTable id="grid" var="ped"
+						value="#{beanReceberPedido.pedidosAFaturarHoje}"
+						resizableColumns="true" style="margin-bottom:20px"
+						selectionMode="single"
+						selection="#{beanReceberPedido.selectedPedido}"
+						rowKey="#{ped.codigo}" scrollable="true" rows="5"
+						emptyMessage="Nenhum Pedido Hoje." scrollHeight="150">
+						<p:ajax event="rowSelect"
+							listener="#{beanReceberPedido.onRowSelect}"
+							update=":formMain:blbSubVlTotal,:formMain:lblNumPedido,:formMain:pagamentos:txtDinheiro" />
 						<f:facet name="header">
             				Pedidos de Hoje
         				</f:facet>
@@ -40,26 +46,31 @@
 							<h:outputText value="#{ped.codigo}" />
 						</p:column>
 						<p:column headerText="Cliente">
-							<h:outputText value="#{ped.cliente.pessoaFisica.nome}" />
+							<h:outputText value="#{ped.cliente.nome}" />
 						</p:column>
 						<p:column headerText="Celular">
-							<h:outputText value="#{ped.cliente.pessoaFisica.celular}" />
+							<h:outputText value="#{ped.cliente.celular}" />
 						</p:column>
 						<p:column headerText="Valor Total">
-							<h:outputText value="#{ped.vlTotal}" >
+							<h:outputText value="#{ped.vlTotal}">
 								<f:convertNumber currencySymbol="R$" type="currency" />
 							</h:outputText>
 						</p:column>
-						<p:column style="width:60px;text-align: center" headerText="Cancel.">
-				             <p:commandButton title="Cancelar o pedido" icon="ui-icon-closethick" ajax="true"  actionListener="#{beanReceberPedido.cancelar}" update=":formMain:tblPedidos">
-				                <f:setPropertyActionListener value="#{ped}" target="#{beanReceberPedido.selectedPedido}" />
-				            </p:commandButton>
-				        </p:column>
-						<p:column style="width:60px;text-align: center" headerText="Mais">
-				             <p:commandButton  icon="ui-icon-search" title="Detalhes do cliente">
-				                <f:setPropertyActionListener value="#{cli}" target="#{cliente.cliente}" />
-				            </p:commandButton>
-				        </p:column>
+						<p:column headerText="Opções" style="text-align:center;width:20%">
+
+							<p:commandButton action="#{beanReceberPedido.cancelar}"
+								type="submit" styleClass="btn btn-danger btn-lg"
+								icon="fa fa-trash-o" title="Excluir o registro na grid"
+								ajax="true" process="@this" update="grid">
+								<f:ajax execute="@all" render="@form" />
+								<f:setPropertyActionListener value="#{ped}"
+									target="#{beanReceberPedido.selectedPedido}" />
+								<p:confirm header="Confirme a exclusão"
+									message="Você tem certeza que deseja excluir este registro?"
+									icon="fa fa-exclamation-triangle" />
+							</p:commandButton>
+						</p:column>
+
 					</p:dataTable>
 				</p:panel>
 			</p:tab>

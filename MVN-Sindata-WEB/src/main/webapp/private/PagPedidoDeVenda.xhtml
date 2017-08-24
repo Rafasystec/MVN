@@ -12,9 +12,14 @@
 	<ui:param name="pageTitle" value="Pedido de Venda" />
 
 	<ui:define name="body">
+	
+	<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade" severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade" appendToBody="true" ajax="false">
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes btn btn-info btn-lg" icon="ui-icon-check" />
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no btn btn-danger btn-lg" icon="ui-icon-close" />
+    </p:confirmDialog>
 		<p:panel header="Ações">
 			<h:panelGrid columns="5">
-				<p:commandButton value="Adicionar Item" ajax="true" update="produtos,lblProdutoExibir,blbSubVlTotal,blbVlUnitario,lblNumPedido"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
+				<p:commandButton value="Adicionar Item" ajax="true" update="grid,lblProdutoExibir,blbSubVlTotal,blbVlUnitario,lblNumPedido"  actionListener="#{beanPedidoVenda.salvarItem}" alt="Adiciona o item cujo código você digitou lá encima.">
 				</p:commandButton>
 				<p:commandButton value="Fechar o Pedido" action="#{beanPedidoVenda.fecharPedido}" alt="O pedido será fechado" ajax="true">
 					<f:ajax render="@form" resetValues="true"/>
@@ -23,7 +28,7 @@
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="Pedido de venda">
-			<p:hotkey bind="return" update="produtos,lblNumPedido" actionListener="#{beanPedidoVenda.salvarItem}">
+			<p:hotkey bind="return" update="grid,lblNumPedido" actionListener="#{beanPedidoVenda.salvarItem}">
 			</p:hotkey>
 			<div class="fontValue">
 				<p:outputLabel id="blbVlUnitario" styleClass="fontValue" value="#{beanPedidoVenda.vlUnitario}">
@@ -50,7 +55,7 @@
 				<p:outputLabel id="lblProdutoExibir" styleClass="font-produto" value="#{beanPedidoVenda.lastProduto}"/>
 			</div>
 			<div class="divProdutos">
-				<p:dataTable id="produtos" var="item" value="#{beanPedidoVenda.itens}" resizableColumns="false" 
+				<p:dataTable id="grid" var="item" value="#{beanPedidoVenda.itens}" resizableColumns="false" 
 					  rowKey="#{item.codigo}" style="max-width: 100%;border: none" scrollable="true" scrollHeight="150">	
 						<p:column headerText="Cód." style="width: 25px">
 							<h:outputText value="#{item.codigo}" />
@@ -66,7 +71,20 @@
 								<f:convertNumber type="currency" currencySymbol=""/>
 							</h:outputText>
 						</p:column>
-					</p:dataTable>
+					<p:column headerText="Opções" style="text-align:center;width:20%">
+
+						<p:commandButton
+							action="#{beanPedidoVenda.excuirItem(item)}" type="button"
+							styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
+							title="Excluir o registro na grid" ajax="true" process="@this"
+							update="grid">
+							<f:ajax render="@form" />
+							<p:confirm header="Confirme a exclusão"
+								message="Você tem certeza que deseja excluir este registro?"
+								icon="fa fa-exclamation-triangle" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
 				</div>
 		</p:panel>
 	</ui:define>

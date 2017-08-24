@@ -21,7 +21,7 @@
 			<p:panelGrid styleClass="noBorder" columns="2">
 				<p:outputLabel id="lblNome" value="Nome:" for="txtNome" />
 				<p:inputText id="txtNome"
-					value="#{funcionario.funcionario.pessoaFisica.nome}"
+					value="#{funcionario.funcionario.nome}"
 					required="true" requiredMessage="Informe o Nome" />
 				<p:outputLabel id="lblNomeConjuge" value="Nome Conjuge:"
 					for="txtNomeConj" />
@@ -35,22 +35,22 @@
 					value="#{funcionario.funcionario.nomeMae}" />
 				<p:outputLabel value="Dt. Nascimento:" for="dtNascimento" />
 				<p:calendar id="dtNascimento"
-					value="#{funcionario.funcionario.pessoaFisica.dtNascimento}"
+					value="#{funcionario.funcionario.dtNascimento}"
 					pattern="dd/MM/yyyy" maxlength="10" mask="99/99/9999" size="10"
 					required="true" requiredMessage="Informe a data de Nascimento" />
 				<p:outputLabel id="lblEmail" value="E-mail:" />
 				<p:inputText id="txtEmail"
-					value="#{funcionario.funcionario.pessoaFisica.email}" />
+					value="#{funcionario.funcionario.email}" />
 				<p:outputLabel id="lblCelular" value="Celular:" />
 				<p:inputMask mask="(99)99999-9999"
-					value="#{funcionario.funcionario.pessoaFisica.celular}" />
+					value="#{funcionario.funcionario.celular}" />
 				<p:outputLabel id="lblRg" value="R.G:" />
 				<p:inputText id="txtRg" maxlength="15"
-					value="#{funcionario.funcionario.pessoaFisica.rg}" />
+					value="#{funcionario.funcionario.rg}" />
 				<p:outputLabel value="CPF:" for="cpf" />
 				<p:inputMask id="cpf" mask="999.999.999-99" label="CPF do cliente"
 					alt="Informe o CPF"
-					value="#{funcionario.funcionario.pessoaFisica.cpf}" size="11"
+					value="#{funcionario.funcionario.cpf}" size="11"
 					maxlength="11" required="true" requiredMessage="CPF é obrigatório" />
 			</p:panelGrid>
 			<br />
@@ -91,7 +91,7 @@
 					<h:outputText value="#{func.codigo}" />
 				</p:column>
 				<p:column headerText="Nome">
-					<h:outputText value="#{func.pessoaFisica.nome}" />
+					<h:outputText value="#{func.nome}" />
 				</p:column>
 				<p:column headerText="Data de Admissão">
 					<h:outputText value="#{func.dtAdmissao}">

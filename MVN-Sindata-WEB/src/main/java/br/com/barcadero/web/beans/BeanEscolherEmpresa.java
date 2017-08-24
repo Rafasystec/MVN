@@ -11,7 +11,6 @@ import br.com.barcadero.rule.RuleEmpresa;
 import br.com.barcadero.rule.RuleLoja;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 
 @ManagedBean(name="escolherEmp")
@@ -20,14 +19,12 @@ public class BeanEscolherEmpresa extends SuperBean<Empresa> {
 	
 	private static final long serialVersionUID = -2187058014897135548L;
 	private List<Loja> lojas;
-	private long codEmp;
 	private long codLoja;
 	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
 	@ManagedProperty("#{ruleEmpresa}")
 	private RuleEmpresa ruleEmpresa; 
 	private Usuario user;
-	private PessoaJuridica pJuridica;
 	private Empresa empresa;
 	private final String OBJ_EMP_TEMP = "objEmpTemp";
 	
@@ -74,7 +71,7 @@ public class BeanEscolherEmpresa extends SuperBean<Empresa> {
 		List<Empresa> list = user.getEmpresas();
 		if(list != null){
 			for (Empresa empresa : list) {
-				System.out.println("Empresa: " + empresa.getPessoaJuridica().getFantasia());
+				System.out.println("Empresa: " + empresa.getFantasia());
 			}
 		}else{
 			list = new ArrayList<Empresa>();
@@ -82,13 +79,6 @@ public class BeanEscolherEmpresa extends SuperBean<Empresa> {
 		return list;
 	}
 
-	public PessoaJuridica getpJuridica() {
-		return pJuridica;
-	}
-
-	public void setpJuridica(PessoaJuridica pJuridica) {
-		this.pJuridica = pJuridica;
-	}
 
 	public List<Loja> getLojas() throws Exception {
 		//lojas = ruleLoja.getLojasDaEmpresa(getCodEmp());
@@ -108,7 +98,6 @@ public class BeanEscolherEmpresa extends SuperBean<Empresa> {
 
 	public void setCodEmp(long codEmp) {
 		if(codEmp != 0){
-			this.codEmp = codEmp;
 			getSession().setTempCodEmp(codEmp);
 			try {
 				Empresa empresa = ruleEmpresa.find(codEmp);
