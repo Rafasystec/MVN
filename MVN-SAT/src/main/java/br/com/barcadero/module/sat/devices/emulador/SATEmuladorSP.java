@@ -25,6 +25,7 @@ public class SATEmuladorSP extends AbstractSATSuperClass {
 	 */
 	public SATEmuladorSP(String porta) throws Exception, UnsatisfiedLinkError{
 		try {
+			System.out.println("Iniciando Emulador SAT Sao PAulo");
 			initialize();
 			//verificarSeADLLExiste();
 			library = (Functions)Native.loadLibrary(getLibraryPath() + getLibraryName(), Functions.class);
