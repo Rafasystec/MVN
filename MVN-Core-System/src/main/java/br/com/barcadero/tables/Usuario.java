@@ -73,7 +73,7 @@ public class Usuario extends EntidadeEmpresa{
 	@Column(name="tipo_user")
 	private EnumTipoUser tipoUser = EnumTipoUser.MASTER;
 	
-	@ManyToMany(cascade=CascadeType.PERSIST,mappedBy="usuarios",fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="usuarios",fetch=FetchType.EAGER)
 	private List<Empresa> empresas = new ArrayList<Empresa>();
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER,targetEntity=UsuarioPermissoes.class)

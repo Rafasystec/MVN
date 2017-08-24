@@ -1,10 +1,11 @@
 package br.com.barcadero.dao;
 
 import java.util.List;
-import javax.persistence.Query;
+
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
@@ -29,8 +30,7 @@ public class DaoPedidoItens extends DaoModelo<PedidoItens> {
 
 	@Override
 	public PedidoItens find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return find(codigo, PedidoItens.class);
 	}
 	
 	/**

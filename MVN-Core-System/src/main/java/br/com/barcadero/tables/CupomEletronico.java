@@ -2,13 +2,12 @@ package br.com.barcadero.tables;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="CUPOM_ELETRONICO")
@@ -19,8 +18,8 @@ public class CupomEletronico extends SuperClassNota {
 	}
 	private static final long serialVersionUID = 7410077273026250384L;
 
-	public CupomEletronico(Loja loja, Usuario usuario) {
-		super(loja, usuario);
+	public CupomEletronico(Empresa empresa, Loja loja, Usuario usuario) {
+		super(empresa,loja, usuario);
 		// TODO Auto-generated constructor stub
 	}
 	@Column(name="CHV_ACESSO", nullable=false)
@@ -29,7 +28,7 @@ public class CupomEletronico extends SuperClassNota {
 	private long nrExtrato = 0L;
 	@Column(name="NR_SERIE_EQUIPAMENTO", nullable=false)
 	private String nrSerieEquipamento = "";
-	@Column(name="XML_BASE_64", nullable=false, length=10000)
+	@Column(name="XML_BASE_64", nullable=false, length=100000)
 	private String xmlBase64 = "";
 	@Column(name="DT_EMISSAO", nullable=false)
 	@Temporal(TemporalType.DATE)

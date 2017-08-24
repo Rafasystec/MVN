@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,6 +23,7 @@ import br.com.barcadero.core.enums.EnumAtividadeEmp;
  * Nao foi datado o momento da criacao dessa classe pois veio do projeto gsind.
  */
 import br.com.barcadero.core.enums.EnumRegimeISSQN;
+import br.com.barcadero.core.enums.EnumRegimeTributario;
 
 @NamedQueries({
 	@NamedQuery(name=Empresa.FIND			,query="FROM Empresa WHERE codigo = :codigo"),
@@ -34,6 +34,7 @@ import br.com.barcadero.core.enums.EnumRegimeISSQN;
 @Entity
 public class Empresa extends Entidade {
 	public static final String EMPRESA = "empresa";
+	
 	private static final long serialVersionUID = 6135467736845199870L;
 
 	public Empresa() {
@@ -60,10 +61,33 @@ public class Empresa extends Entidade {
 	@Column(name="REGIME_TRIBUTACAO_ISSQN")
 	@Enumerated(EnumType.ORDINAL)
 	private EnumRegimeISSQN regimeISSQN = EnumRegimeISSQN.MICROEMPRESARIO_INDIVIDUAL;
-	
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
-	private PessoaJuridica pessoaJuridica;
+	@Column(name="fantasia",nullable=false,length=60)
+	private String fantasia;
+	@Column(name="razao_social",nullable=false,length=60)
+	private String razaoSocial;
+	@Column(name="ie",nullable=false,length=15)
+	private String ie = "149626224113";
+	@Column(name="cnpj",nullable=false,length=14)
+	private String cnpj = "08723218000186";
+	@Column(name="ie_subst_tributaria",nullable=false,length=15)
+	private String ieSubsTributaria;
+	@Column(name="im",nullable=false,length=15)
+	private String im;
+	@Column(name="cnae_fiscal",nullable=false,length=10)
+	private String cnaeFiscal = "";
+	@Column(name="cod_reg_tribut",nullable=false,length=2)
+	@Enumerated(EnumType.ORDINAL)
+	private EnumRegimeTributario codRegTribut;
+	@Column(name="fone",nullable=false,length=15)
+	private String fone;
+	@Column(name="uf",nullable=false,length=2)
+	private String uf;
+	@Column(name="email",nullable=false,length=60)
+	private String email;
+	@Column(name="web_site",nullable=false,length=60)
+	private String webSite;
+	@Column(name="dt_ult_alteracao",nullable=false)
+	private Date dtUltAlteracao;
 	
 	@ManyToMany(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	@JoinTable(name="empresa_usuario",joinColumns={
@@ -103,12 +127,6 @@ public class Empresa extends Entidade {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	public PessoaJuridica getPessoaJuridica() {
-		return pessoaJuridica;
-	}
-	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-		this.pessoaJuridica = pessoaJuridica;
-	}
 
 	public List<Loja> getLojas() {
 		return lojas;
@@ -133,62 +151,109 @@ public class Empresa extends Entidade {
 	public void setRegimeISSQN(EnumRegimeISSQN regimeISSQN) {
 		this.regimeISSQN = regimeISSQN;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((atividade == null) ? 0 : atividade.hashCode());
-		result = prime * result + ((cnpjSoftwareHouse == null) ? 0 : cnpjSoftwareHouse.hashCode());
-		result = prime * result + ((dtFundacao == null) ? 0 : dtFundacao.hashCode());
-		result = prime * result + ((imgLogo == null) ? 0 : imgLogo.hashCode());
-		result = prime * result + ((observacoes == null) ? 0 : observacoes.hashCode());
-		result = prime * result + ((pessoaJuridica == null) ? 0 : pessoaJuridica.hashCode());
-		result = prime * result + ((regimeISSQN == null) ? 0 : regimeISSQN.hashCode());
-		return result;
+	public String getFantasia() {
+		return fantasia;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Empresa other = (Empresa) obj;
-		if (atividade != other.atividade)
-			return false;
-		if (cnpjSoftwareHouse == null) {
-			if (other.cnpjSoftwareHouse != null)
-				return false;
-		} else if (!cnpjSoftwareHouse.equals(other.cnpjSoftwareHouse))
-			return false;
-		if (dtFundacao == null) {
-			if (other.dtFundacao != null)
-				return false;
-		} else if (!dtFundacao.equals(other.dtFundacao))
-			return false;
-		if (imgLogo == null) {
-			if (other.imgLogo != null)
-				return false;
-		} else if (!imgLogo.equals(other.imgLogo))
-			return false;
-		if (observacoes == null) {
-			if (other.observacoes != null)
-				return false;
-		} else if (!observacoes.equals(other.observacoes))
-			return false;
-		if (pessoaJuridica == null) {
-			if (other.pessoaJuridica != null)
-				return false;
-		} else if (!pessoaJuridica.equals(other.pessoaJuridica))
-			return false;
-		if (regimeISSQN != other.regimeISSQN)
-			return false;
-		return true;
+	public void setFantasia(String fantasia) {
+		this.fantasia = fantasia;
 	}
-	
+
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+
+	public String getIe() {
+		return ie;
+	}
+
+	public void setIe(String ie) {
+		this.ie = ie;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getIeSubsTributaria() {
+		return ieSubsTributaria;
+	}
+
+	public void setIeSubsTributaria(String ieSubsTributaria) {
+		this.ieSubsTributaria = ieSubsTributaria;
+	}
+
+	public String getIm() {
+		return im;
+	}
+
+	public void setIm(String im) {
+		this.im = im;
+	}
+
+	public String getCnaeFiscal() {
+		return cnaeFiscal;
+	}
+
+	public void setCnaeFiscal(String cnaeFiscal) {
+		this.cnaeFiscal = cnaeFiscal;
+	}
+
+	public EnumRegimeTributario getCodRegTribut() {
+		return codRegTribut;
+	}
+
+	public void setCodRegTribut(EnumRegimeTributario codRegTribut) {
+		this.codRegTribut = codRegTribut;
+	}
+
+	public String getFone() {
+		return fone;
+	}
+
+	public void setFone(String fone) {
+		this.fone = fone;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getWebSite() {
+		return webSite;
+	}
+
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+
+	public Date getDtUltAlteracao() {
+		return dtUltAlteracao;
+	}
+
+	public void setDtUltAlteracao(Date dtUltAlteracao) {
+		this.dtUltAlteracao = dtUltAlteracao;
+	}
 	
 
 }

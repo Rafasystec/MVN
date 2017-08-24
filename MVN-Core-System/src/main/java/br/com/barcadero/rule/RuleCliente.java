@@ -57,7 +57,7 @@ public class RuleCliente extends RuleModelo<Cliente> {
 		List<Cliente> list 		= getByCodeOrName(empresa,value);
 		List<String> listStrings	= new ArrayList<>();
 		for(Cliente cliente : list){
-			String patter = cliente.getCodigo() + " | " + cliente.getPessoaFisica().getNome();
+			String patter = cliente.getCodigo() + " | " + cliente.getNome();
 			listStrings.add(patter);
 		}
 		return listStrings;

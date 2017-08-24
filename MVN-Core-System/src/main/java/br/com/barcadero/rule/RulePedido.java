@@ -22,8 +22,6 @@ import br.com.barcadero.tables.Usuario;
 public class RulePedido extends RuleModelo<Pedido> {
 
 	@Autowired
-	private RuleCaixa ruleCaixa;
-	@Autowired
 	private DaoPedido daoPedido;
 	@Autowired
 	private RuleNota ruleNota;
@@ -52,10 +50,8 @@ public class RulePedido extends RuleModelo<Pedido> {
 	 * @return
 	 * @throws Exception
 	 */
-	public Pedido createPedido(Usuario usuario, String ip) throws Exception {
-		Pedido pedido = new Pedido(getEmpresa(), getLoja(), usuario);
-		Caixa caixa = ruleCaixa.findByIp(getLoja(), ip);
-		pedido.setCaixa(caixa);
+	public Pedido createPedido(Empresa empresa,Loja loja, Usuario usuario, String ip) throws Exception {
+		Pedido pedido = new Pedido(empresa, loja, usuario);
 		return pedido;
 	}
 	
@@ -103,10 +99,9 @@ public class RulePedido extends RuleModelo<Pedido> {
 	 * @return
 	 * @throws Exception
 	 */
-	public String faturarPedido(Pedido pedido, FormasPagamento formasPagamento, Usuario usuario) throws Exception{
+	public String faturarPedido(Caixa caixa, Pedido pedido, FormasPagamento formasPagamento, Usuario usuario) throws Exception{
 		if(pedido != null){
-			Caixa caixa = pedido.getCaixa();
-			Nota nota 	= ruleNota.parse(pedido, usuario, formasPagamento);
+			Nota nota 	= ruleNota.parse(caixa, pedido, usuario, formasPagamento);
 			if(caixa != null){
 				switch (caixa.getTipoNota()) {
 				case MOD_55:
@@ -115,7 +110,7 @@ public class RulePedido extends RuleModelo<Pedido> {
 					return "CT-e ainda não suportado";
 				case MOD_59:
 					//Venda com SAT ou MF-e
-					return ruleGenarateCFe.executarVendaSAT(nota, usuario);
+					return ruleGenarateCFe.executarVendaSAT(caixa,nota, usuario);
 				case MOD_65:
 					//NFC-e
 					return "NFC-e ainda não implementado.";

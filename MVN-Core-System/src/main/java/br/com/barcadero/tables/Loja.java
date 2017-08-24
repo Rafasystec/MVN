@@ -7,14 +7,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.barcadero.core.enums.EnumRegimeTributario;
 import br.com.barcadero.module.sat.enums.EnumCFeXMLVersion;
 import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
 
@@ -39,27 +41,45 @@ public class Loja extends EntidadeEmpresa {
 	public static final String FIND_BY_EMP	= "Loja.findByEmp";
 	@Column(name="VERSAO_XML_CFE")
 	private EnumCFeXMLVersion verXMLCFe = EnumCFeXMLVersion.V_0_06;
-	@Column(name="SIGN_AC_SAT")
+	@Column(name="SIGN_AC_SAT",length=344)
 	private String signAC = "SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT";
 	@Column(name="IND_RAT_ISSQN_CFE")
 	@Enumerated(EnumType.STRING)
 	private EnumIndRatISSQN indRatISSQNSAT = EnumIndRatISSQN.NAO;
-	
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="cod_pessoa", referencedColumnName="cod_pessoa")
-	private PessoaJuridica pessoaJuridica;
-	
+	@Column(name="fantasia",nullable=false,length=60)
+	private String fantasia;
+	@Column(name="razao_social",nullable=false,length=60)
+	private String razaoSocial;
+	@Column(name="ie",nullable=false,length=15)
+	private String ie = "149626224113";
+	@Column(name="cnpj",nullable=false,length=14)
+	private String cnpj = "08723218000186";
+	@Column(name="ie_subst_tributaria",nullable=false,length=15)
+	private String ieSubsTributaria;
+	@Column(name="im",nullable=false,length=15)
+	private String im;
+	@Column(name="cnae_fiscal",nullable=false,length=10)
+	private String cnaeFiscal = "";
+	@Column(name="cod_reg_tribut",nullable=false,length=2)
+	@Enumerated(EnumType.ORDINAL)
+	private EnumRegimeTributario codRegTribut;
+	@Column(name="fone",nullable=false,length=15)
+	private String fone;
+	@Column(name="uf",nullable=false,length=2)
+	private String uf;
+	@Column(name="email",nullable=false,length=60)
+	private String email;
+	@Column(name="web_site",nullable=false,length=60)
+	private String webSite;
+	@Column(name="dt_ult_alteracao",nullable=false)
+	private Date dtUltAlteracao;
 	@Column(name="dt_inauguracao")
 	@Temporal(TemporalType.DATE)
 	private Date dtInauguracao = new Date();
 	
-	
-	public PessoaJuridica getPessoaJuridica() {
-		return pessoaJuridica;
-	}
-	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-		this.pessoaJuridica = pessoaJuridica;
-	}
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="ENDERECO",referencedColumnName="CODIGO")
+	private Endereco endereco = null;
 	
 	public Date getDtInauguracao() {
 		return dtInauguracao;
@@ -68,35 +88,83 @@ public class Loja extends EntidadeEmpresa {
 		this.dtInauguracao = dtInauguracao;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((dtInauguracao == null) ? 0 : dtInauguracao.hashCode());
-		result = prime * result + ((pessoaJuridica == null) ? 0 : pessoaJuridica.hashCode());
-		return result;
+	public String getFantasia() {
+		return fantasia;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Loja other = (Loja) obj;
-		if (dtInauguracao == null) {
-			if (other.dtInauguracao != null)
-				return false;
-		} else if (!dtInauguracao.equals(other.dtInauguracao))
-			return false;
-		if (pessoaJuridica == null) {
-			if (other.pessoaJuridica != null)
-				return false;
-		} else if (!pessoaJuridica.equals(other.pessoaJuridica))
-			return false;
-		return true;
+	public void setFantasia(String fantasia) {
+		this.fantasia = fantasia;
+	}
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+	public String getIe() {
+		return ie;
+	}
+	public void setIe(String ie) {
+		this.ie = ie;
+	}
+	public String getCnpj() {
+		return cnpj;
+	}
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+	public String getIeSubsTributaria() {
+		return ieSubsTributaria;
+	}
+	public void setIeSubsTributaria(String ieSubsTributaria) {
+		this.ieSubsTributaria = ieSubsTributaria;
+	}
+	public String getIm() {
+		return im;
+	}
+	public void setIm(String im) {
+		this.im = im;
+	}
+	public String getCnaeFiscal() {
+		return cnaeFiscal;
+	}
+	public void setCnaeFiscal(String cnaeFiscal) {
+		this.cnaeFiscal = cnaeFiscal;
+	}
+	public EnumRegimeTributario getCodRegTribut() {
+		return codRegTribut;
+	}
+	public void setCodRegTribut(EnumRegimeTributario codRegTribut) {
+		this.codRegTribut = codRegTribut;
+	}
+	public String getFone() {
+		return fone;
+	}
+	public void setFone(String fone) {
+		this.fone = fone;
+	}
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getWebSite() {
+		return webSite;
+	}
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+	public Date getDtUltAlteracao() {
+		return dtUltAlteracao;
+	}
+	public void setDtUltAlteracao(Date dtUltAlteracao) {
+		this.dtUltAlteracao = dtUltAlteracao;
 	}
 
 	public EnumCFeXMLVersion getVerXMLCFe() {
@@ -121,6 +189,14 @@ public class Loja extends EntidadeEmpresa {
 
 	public void setIndRatISSQNSAT(EnumIndRatISSQN indRatISSQNSAT) {
 		this.indRatISSQNSAT = indRatISSQNSAT;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	

@@ -1,7 +1,7 @@
 package br.com.barcadero.web.beans;
 
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +17,6 @@ import br.com.barcadero.core.enums.EnumTipoLograd;
 import br.com.barcadero.rule.RuleCliente;
 import br.com.barcadero.tables.Cliente;
 import br.com.barcadero.tables.Endereco;
-import br.com.barcadero.tables.PessoaFisica;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean(name="cliente")
@@ -27,7 +26,6 @@ public class BeanCliente extends SuperBean <Cliente>{
 	private static final long serialVersionUID = 5470117896075103063L;
 	private Cliente	cliente			= null;
 	private List<Cliente> clientes 	= null;
-	private PessoaFisica pFisica	= null;
 	@ManagedProperty("#{ruleCliente}")
 	private RuleCliente ruleCliente = null;
 	private Endereco endereco		= null;
@@ -39,7 +37,6 @@ public class BeanCliente extends SuperBean <Cliente>{
 			cliente		= new Cliente(getSession().getEmpresaLogada(), getSession().getUsuarioLogado());
 			endereco	= new Endereco(getSession().getUsuarioLogado());
 			clientes 	= ruleCliente.findByEmpresa(getEmpresaLogada());
-			pFisica		= new PessoaFisica(getSession().getUsuarioLogado());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,14 +46,6 @@ public class BeanCliente extends SuperBean <Cliente>{
 	
 	public EnumTipoLograd[] getTpLogradouros() {
 		return EnumTipoLograd.values();
-	}
-
-	public PessoaFisica getpFisica() {
-		return pFisica;
-	}
-
-	public void setpFisica(PessoaFisica pFisica) {
-		this.pFisica = pFisica;
 	}
 
 	public Cliente getCliente() {
@@ -79,11 +68,7 @@ public class BeanCliente extends SuperBean <Cliente>{
 
 	@Override
 	public String salvar() throws Exception {
-		List<Endereco> listEnder = new ArrayList<Endereco>();
-		listEnder.add(endereco);
-		pFisica.setEnderecos(listEnder);
-		cliente.setPessoaFisica(pFisica);
-		endereco.setPessoa(pFisica);
+		cliente.setEndereco(endereco);
 		ruleCliente.insert(cliente);
 		HandleMessage.info("Salvo com sucesso!");
 		return null;

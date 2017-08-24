@@ -53,12 +53,6 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 		return daoNotaItens.delete(codigo);
 	}
 
-//	@Override
-//	public String update(Entidade entidade) throws Exception {
-//		// TODO Auto-generated method stub
-//		return daoNotaItens.update(entidade);
-//	}
-
 	@Override
 	public NotaItens find(long codigo) throws Exception {
 		// TODO Auto-generated method stub
@@ -76,7 +70,7 @@ public class RuleNotaItens extends RuleModelo<NotaItens> {
 		 Produto produto = (Produto) ruleProduto.find(codProduto);
 		 NotaItens item;
 		 if(produto != null){
-			 item = new NotaItens(nota.getLoja(),nota.getUsuario());
+			 item = new NotaItens(nota.getEmpresa(), nota.getLoja(), nota.getUsuario());
 			 item.setCdProd(produto.getCdProd());
 			 item.setDescricao(produto.getDescricao());
 			 item.setFlCancelado(EnumItemCancelado.N);

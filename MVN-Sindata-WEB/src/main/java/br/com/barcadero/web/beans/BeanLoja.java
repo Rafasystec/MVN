@@ -14,7 +14,6 @@ import br.com.barcadero.core.enums.EnumUF;
 import br.com.barcadero.rule.RuleLoja;
 import br.com.barcadero.tables.Endereco;
 import br.com.barcadero.tables.Loja;
-import br.com.barcadero.tables.PessoaJuridica;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.functions.HandleMessage;
 
@@ -23,14 +22,12 @@ import br.com.barcadero.web.functions.HandleMessage;
 public class BeanLoja extends SuperBean<Loja> {
 
 	private static final long serialVersionUID = 444117878813938158L;
-	private PessoaJuridica pj;
+	
 	@ManagedProperty("#{ruleLoja}")
 	private RuleLoja ruleLoja;
 	private Loja loja;
 	private Loja selectedLoja;
 	private Endereco endereco		= null;
-	private EnumRegimeTributario[] regime;
-	private EnumUF[] uf;
 	private long codEmpresa;
 	
 	@PostConstruct
@@ -40,33 +37,16 @@ public class BeanLoja extends SuperBean<Loja> {
 
 	private void novoRegistro() {
 		Usuario userLogado = getSession().getUsuarioLogado();
-		pj 			= new PessoaJuridica(userLogado);
 		endereco	= new Endereco(getUsuarioLogado());
 		loja		= new Loja(userLogado);
-	}
-	
-	public PessoaJuridica getPj() {
-		return pj;
-	}
-
-	public void setPj(PessoaJuridica pj) {
-		this.pj = pj;
 	}
 	
 	public EnumRegimeTributario[] getRegime() {
 		return EnumRegimeTributario.values();
 	}
 
-	public void setRegime(EnumRegimeTributario[] regime) {
-		this.regime = regime;
-	}
-	
 	public EnumUF[] getUf() {
 		return EnumUF.values();
-	}
-
-	public void setUf(EnumUF[] uf) {
-		this.uf = uf;
 	}
 
 	public Loja getLoja() {
@@ -81,12 +61,8 @@ public class BeanLoja extends SuperBean<Loja> {
 	public String salvar() throws Exception {
 		try {
 			System.out.println("Salvar method involked");
-			pj.setDtUltAlteracao(new Date());
-			endereco.setPessoa(pj);
-			List<Endereco> listEnder = new ArrayList<Endereco>();
-			listEnder.add(endereco);
-			pj.setEnderecos(listEnder);
-			loja.setPessoaJuridica(pj);
+			loja.setDtUltAlteracao(new Date());
+			loja.setEndereco(endereco);
 			loja.setEmpresa(getSession().getEmpresaLogada());
 			ruleLoja.insert(loja);
 			HandleMessage.info("Loja cadastrada com sucesso!");

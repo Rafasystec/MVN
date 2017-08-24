@@ -35,10 +35,7 @@ public class BeanFuncionario extends SuperBean<Funcionario> {
 	
 	@Override
 	public String salvar() throws Exception {
-		System.out.println("Salvar funcionario was called");
-		List<Endereco> listEnder = new ArrayList<Endereco>();
-		listEnder.add(endereco);
-		funcionario.getPessoaFisica().setEnderecos(listEnder);
+		funcionario.setEndereco(endereco);
 		ruleFuncionario.insert(funcionario);
 		novoFuncionario();
 		HandleMessage.info("Funcionário salvo com sucesso!");

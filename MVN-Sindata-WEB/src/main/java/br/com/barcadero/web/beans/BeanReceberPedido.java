@@ -12,8 +12,11 @@ import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
 
 import br.com.barcadero.core.util.FormasPagamento;
+import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.rule.RulePedido;
+import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Pedido;
+import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
@@ -27,10 +30,34 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 	private BigDecimal vlSubTotal = new BigDecimal(0.00);
 	@ManagedProperty("#{rulePedido}")
 	private RulePedido rulePedido;
+	@ManagedProperty("#{ruleCaixa}")
+	private RuleCaixa ruleCaixa;
+	private Caixa caixa;
 
 	@PostConstruct
 	private void init() {
 		formasPagamento = new FormasPagamento();
+		
+		obterCaixaDaEstacao();
+	}
+
+	private void obterCaixaDaEstacao() {
+		try {
+			this.caixa = ruleCaixa.findByIp(getLojaLogada(), HandleFaceContext.getIpAddress());
+			boolean isCaixa = true;
+			if(this.caixa != null){
+				if(this.caixa.getCodigo() == 0){
+					isCaixa = false;
+				}
+			}else{
+				isCaixa = false;
+			}
+			if(!isCaixa){
+				HandleMessage.error("Caixa não encontrado", "O IP " + HandleFaceContext.getIpAddress() + " não foi cadastrado como um caixa.");
+			}
+		} catch (Exception e) {
+			this.caixa = null;
+		}
 	}
 
 	@Override
@@ -82,7 +109,7 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 	public void faturarPedido() {
 		try {
 			if(selectedPedido != null){
-				String result = rulePedido.faturarPedido(selectedPedido, formasPagamento, getUsuarioLogado());
+				String result = rulePedido.faturarPedido(caixa,selectedPedido, formasPagamento, getUsuarioLogado());
 				HandleMessage.info("Pedido faturado com sucesso!","Pronto para o próximo");
 				HandleMessage.warn("ATENÇÃO: ", result);
 			}else{
@@ -159,6 +186,14 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 	public boolean validar(Pedido entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public RuleCaixa getRuleCaixa() {
+		return ruleCaixa;
+	}
+
+	public void setRuleCaixa(RuleCaixa ruleCaixa) {
+		this.ruleCaixa = ruleCaixa;
 	}
 	
 	

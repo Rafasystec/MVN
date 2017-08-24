@@ -64,8 +64,6 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 		try {
 			caixa			= obterCaixaDeVenda();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
@@ -142,7 +140,7 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 	}
 	
 	private Pedido createPedido() throws UnknownHostException, Exception {
-		return rulePedido.createPedido(getUsuarioLogado(), HandleFaceContext.getIpAddress());
+		return rulePedido.createPedido(getEmpresaLogada(),getLojaLogada() ,getUsuarioLogado(), HandleFaceContext.getIpAddress());
 	}
 
 	public void fecharPedido() {
@@ -210,6 +208,10 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 		setVlSubTotal(getVlSubTotal().add(item.getVlTotal()));
 	}
 	
+	private void totalizarSubtrairSubTotal(PedidoItens item) {
+		setVlSubTotal(getVlSubTotal().subtract(item.getVlTotal()));
+	}
+	
 	private PedidoItens createItem() {
 		return new PedidoItens(getEmpresaLogada(), getLojaLogada(), getUsuarioLogado());
 	}
@@ -266,5 +268,19 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 
 	public void setRuleCaixa(RuleCaixa ruleCaixa) {
 		this.ruleCaixa = ruleCaixa;
+	}
+	
+	public void excuirItem(PedidoItens item) {
+		if(item != null){
+			if(item.getCodigo() > 0){
+				try {
+					PedidoItens itemTemp = item;
+					rulePedidoItens.delete(item.getCodigo());
+					totalizarSubtrairSubTotal(itemTemp);
+					itemTemp = null;
+				} catch (Exception e) {
+				}
+			}
+		}
 	}
 }

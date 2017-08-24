@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import br.com.barcadero.rule.RuleUsuario;
+import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.tables.UsuarioPermissoes;
 import br.com.barcadero.web.functions.HandleMessage;
@@ -49,6 +50,9 @@ public class BeanUsuarios extends SuperBean<Usuario>{
 		permissoes	= new UsuarioPermissoes(getUsuarioLogado());
 		usuario.setPermissoes(permissoes);
 		usuario.setEmpresas(getUsuarioLogado().getEmpresas());
+		for (Empresa empresa : getUsuarioLogado().getEmpresas()) {
+			empresa.setUsuarios(usuarios);
+		}
 	}
 	
 	@Override
@@ -61,7 +65,7 @@ public class BeanUsuarios extends SuperBean<Usuario>{
 	public boolean validar(Usuario entidade) throws Exception {
 		if(usuario != null){
 			if(usuario.getCodigo() == 0){
-				if(!usuario.getPassWord().equals(getConfimSenha())){
+				if(!getSenha().equals(getConfimSenha())){
 					HandleMessage.errorValidacao("A senha não confere com a confirmação.");
 					return false;
 				}

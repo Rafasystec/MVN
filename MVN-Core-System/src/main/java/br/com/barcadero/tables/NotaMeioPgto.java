@@ -21,12 +21,11 @@ public class NotaMeioPgto extends SuperClassNota {
 	private static final long serialVersionUID = 1L;
 
 	public NotaMeioPgto() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
-	public NotaMeioPgto(Loja loja, Usuario usuario) {
-		super(loja, usuario);
-		// TODO Auto-generated constructor stub
+	public NotaMeioPgto(Empresa empresa, Loja loja, Usuario usuario) {
+		super(empresa, loja, usuario);
 	}
 
 	@Column

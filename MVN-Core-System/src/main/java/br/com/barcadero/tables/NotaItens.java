@@ -33,13 +33,10 @@ public class NotaItens extends SuperClassNota {
 	public NotaItens(){
 		
 	}
-	public NotaItens(Loja loja, Usuario usuario) {
-		super(loja, usuario);
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	public NotaItens(Empresa empresa, Loja loja, Usuario usuario) {
-		super(loja, usuario);
+		super(empresa, loja, usuario);
 		setEmpresa(empresa);
 	}
 	

@@ -240,7 +240,7 @@ public class ClientSocket {
 			//comando.setIpHost(client.getLocalSocketAddress().toString());
 			out.writeObject(comando);
 			System.out.println("Enviou comando");
-			server = new ServerSocket(PORT);
+			server = new ServerSocket(SocketServer.SERVER_PORT);
 			server.setSoTimeout(50000);
 			Socket cliente = server.accept();
 			SocketCommand comandoRet = SocketUtil.getObjectFromStream(cliente);
