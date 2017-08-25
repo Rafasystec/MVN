@@ -1,5 +1,6 @@
 package br.com.barcadero.rule;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
+import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.module.sat.socket.CmdAssociarAssinatura;
 import br.com.barcadero.module.sat.socket.CmdAtivarSAT;
 import br.com.barcadero.module.sat.socket.CmdAtualizarSoftwareSAT;
@@ -118,14 +120,19 @@ public class RuleCFeComandos {
 	 * @return
 	 * @throws Exception
 	 */
-	public String cancelarUltimaVenda(String codigoDeAtivacao, String chave, String dadosCancelamento)	throws Exception {
+	public String cancelarUltimaVenda(String codigoDeAtivacao, String chave, String dadosCancelamento)	throws SATException {
 		SocketCommand command = newSocketCommandSAT();
 		CmdCancelarUltimaVenda cancelarUltimaVenda = new CmdCancelarUltimaVenda();
 		cancelarUltimaVenda.setChave(chave);
 		cancelarUltimaVenda.setCodigoDeAtivacao(codigoDeAtivacao);
 		cancelarUltimaVenda.setDadosCancelamento(dadosCancelamento);
+		command.setModuloSAT(getCaixa().getTipoModuloSAT());
 		command.setDados(cancelarUltimaVenda);
-		command = client.callAndReceive(command);
+		try {
+			command = client.callAndReceive(command);
+		} catch (IOException e) {
+			throw new SATException("Erro ao enviar comando ao módulo local " + e.getMessage());
+		}
 		return command.getResponse();
 	}
 

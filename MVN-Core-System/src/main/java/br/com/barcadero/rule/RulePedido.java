@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoPedido;
+import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
@@ -27,6 +29,8 @@ public class RulePedido extends RuleModelo<Pedido> {
 	private RuleNota ruleNota;
 	@Autowired
 	private RuleGenarateCFe ruleGenarateCFe;
+	@Autowired
+	private RuleCupomEletronico ruleCupomEletronico;
 	
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -102,31 +106,58 @@ public class RulePedido extends RuleModelo<Pedido> {
 	public String faturarPedido(Caixa caixa, Pedido pedido, FormasPagamento formasPagamento, Usuario usuario) throws Exception{
 		if(pedido != null){
 			Nota nota 	= ruleNota.parse(caixa, pedido, usuario, formasPagamento);
-			if(caixa != null){
-				switch (caixa.getTipoNota()) {
-				case MOD_55:
-					return "Nota fiscal eletrônica ainda não implementada";
-				case MOD_57:
-					return "CT-e ainda não suportado";
-				case MOD_59:
-					//Venda com SAT ou MF-e
-					return ruleGenarateCFe.executarVendaSAT(caixa,nota, usuario);
-				case MOD_65:
-					//NFC-e
-					return "NFC-e ainda não implementado.";
-				default:
-					break;
-				}
-				pedido.setFlStPed(EnumStatusPedido.FATURADO);
-				daoPedido.update(pedido);
-				return "Pedido Faturado";
-			}else{
-				throw new Exception("Caixa não foi configurado");
-			}	
+			return faturarPedidoDeAcordoComModeloDeNota(caixa, pedido, usuario, nota);	
 		}else{
 			return "Nenhum produto para ser FATURADO.";
 		}
 	}
+
+	private String faturarPedidoDeAcordoComModeloDeNota(Caixa caixa, Pedido pedido, Usuario usuario, Nota nota) throws SATException, Exception {
+		if(caixa != null){
+			switch (caixa.getTipoNota()) {
+			case MOD_55:
+				return "Nota fiscal eletrônica ainda não implementada";
+			case MOD_57:
+				return "CT-e ainda não suportado";
+			case MOD_59:
+				return realizarVendaComCFe(caixa, usuario, nota);
+			case MOD_65:
+				//NFC-e
+				return "NFC-e ainda não implementado.";
+			default:
+				break;
+			}
+			pedido.setFlStPed(EnumStatusPedido.FATURADO);
+			daoPedido.update(pedido);
+			return "Pedido Faturado";
+		}else{
+			throw new Exception("Caixa não foi configurado");
+		}
+	}
+	/**
+	 * Realizar venda com CF-e
+	 * @param caixa
+	 * @param usuario
+	 * @param nota
+	 * @return
+	 * @throws SATException
+	 * @throws Exception
+	 */
+	private String realizarVendaComCFe(Caixa caixa, Usuario usuario, Nota nota) throws SATException, Exception {
+		String result 		= ruleGenarateCFe.executarVendaSAT(caixa,nota, usuario);
+		nota.setFlFaturado(EnumNotaFaturada.SIM);
+		nota = ruleNota.update(nota);
+		nota.getPedido().setFlStPed(EnumStatusPedido.FATURADO);
+		update(nota.getPedido());
+		String msgAdicional = "";
+		try {
+			ruleCupomEletronico.imprimirExtratoCFe(nota);
+		} catch (Exception e) {
+			msgAdicional = "Porém com erro de impressão :" + e.getMessage(); 
+		}
+		return result + msgAdicional;
+	}
+	
 
 	/**
 	 * Totaliza um pedido, pega todos os itens e soma o valor total um a um.

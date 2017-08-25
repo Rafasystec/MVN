@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
+<ui:composition template="../templates/main.xhtml">
+
+	<ui:param name="activeDashboard" value="active" />
+	<ui:param name="pageIcon" value="hand-o-right" />
+	<ui:param name="pageTitle" value="CANCELAR NOTAS EMITIDAS" />
+
+	<ui:define name="body">
+		<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade" severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade" appendToBody="true" ajax="false">
+	        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes btn btn-info btn-lg" icon="ui-icon-check" />
+	        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no btn btn-danger btn-lg" icon="ui-icon-close" />
+    	</p:confirmDialog>
+		<clx:buttonsCrud id="btnsUp" bean="#{beanCancelamentoNota}"></clx:buttonsCrud>
+		<p:dataTable id="grid" var="nota"
+				value="#{beanCancelamentoNota.notas}" resizableColumns="true"
+				style="margin-bottom:20px" selectionMode="single"
+				selection="#{beanCancelamentoNota.selectedNota}" rowKey="#{nota.codigo}" rows="10"
+				scrollable="true" paginator="true">
+	
+				<f:facet name="header">
+	            	Notas do dia.
+	        	</f:facet>
+				<p:column headerText="Nota">
+					<h:outputText value="#{nota.codigo}" />
+				</p:column>
+				<p:column headerText="Pedido">
+					<h:outputText value="#{nota.pedido}" />
+				</p:column>
+				<p:column headerText="Data emissão">
+					<h:outputText value="#{nota.dtCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Data emissão">
+					<h:outputText value="#{nota.hrCadastro}">
+						<f:convertDateTime pattern="HH:mm:ss" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Motivo do Cancelamento">
+					<p:selectOneMenu value="#{nota.motivoCancelamento}">
+						<f:selectItems value="#{beanCancelamentoNota.motivoCancelamento}"/>
+					</p:selectOneMenu>
+				</p:column>
+				<p:column headerText="Opções" style="text-align:center;width:20%">
+
+					<p:commandButton action="#{beanCancelamentoNota.cancelar(nota)}"
+						type="button" styleClass="btn btn-danger btn-lg"
+						title="Cancelar nota #{nota.codigo}" ajax="true"
+						process="@this" update="grid" value="Cancelar">
+						<f:ajax render="@form" />
+						<p:confirm header="Confirme o cancelamento"
+							message="Você tem certeza que deseja cancelar a nota #{nota.codigo} ?"
+							icon="fa fa-exclamation-triangle" />
+					</p:commandButton>
+				</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>

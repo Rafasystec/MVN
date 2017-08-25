@@ -21,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.barcadero.core.enums.EnumModeloNota;
+import br.com.barcadero.core.enums.EnumMotivoCancelamento;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.enums.EnumStatusCFeNota;
@@ -35,7 +36,8 @@ import br.com.barcadero.module.sat.enums.EnumCFeXMLVersion;
 
 @NamedQueries({
 		@NamedQuery(name=Nota.FIND_BY_CODE,query="FROM Nota WHERE empresa = :empresa AND loja = :loja AND codigo = :codigo"),
-		@NamedQuery(name=Nota.FIND_ALL,query="FROM Nota")
+		@NamedQuery(name=Nota.FIND_ALL,query="FROM Nota"),
+		@NamedQuery(name=Nota.FIND_DO_DIA_BY_EMP_LOJA,query="FROM Nota WHERE empresa = :empresa AND loja = :loja AND dtCadastro = :dtCadastro AND flNotaCancelada = :flNotaCancelada")
 })
 
 @Entity 
@@ -44,15 +46,14 @@ public class Nota extends EntidadeLoja {
 
 	private static final long serialVersionUID = -6879906509789228192L;
 	public Nota() {
-		// TODO Auto-generated constructor stub - Defult Constructor exigido pelo Hibernate
 	}
 
 	public Nota(Loja loja, Usuario usuario) {
 		super(loja, usuario);
-		// TODO Auto-generated constructor stub
 	}
-	public static final String FIND_BY_CODE = "Nota.findByCode";
-	public static final String FIND_ALL 	= "Nota.findAll";
+	public static final String FIND_BY_CODE 			= "Nota.findByCode";
+	public static final String FIND_ALL 				= "Nota.findAll";
+	public static final String FIND_DO_DIA_BY_EMP_LOJA 	= "br.com.barcadero.tables.Nota.findDoDiaByEmpLoja";
 	
 	@Column(name="DT_EMISSAO",nullable=false)
 	@Temporal(TemporalType.DATE)
@@ -81,7 +82,27 @@ public class Nota extends EntidadeLoja {
 	private EnumStatusCFeNota statusCFe = EnumStatusCFeNota.XML_NAO_GERADO;
 	@Column(name="VER_XML_CFE")
 	private EnumCFeXMLVersion verXMLCFe = EnumCFeXMLVersion.V_0_06;
+	@Column(name="MOTIVO_CANCELAMENTO")
+	@Enumerated(EnumType.STRING)
+	private EnumMotivoCancelamento motivoCancelamento;
+	@Column(name="FL_CANCELADA")
+	private boolean flNotaCancelada = false;
 	
+	public boolean isFlNotaCancelada() {
+		return flNotaCancelada;
+	}
+
+	public void setFlNotaCancelada(boolean flNotaCancelada) {
+		this.flNotaCancelada = flNotaCancelada;
+	}
+
+	public EnumMotivoCancelamento getMotivoCancelamento() {
+		return motivoCancelamento;
+	}
+
+	public void setMotivoCancelamento(EnumMotivoCancelamento motivoCancelamento) {
+		this.motivoCancelamento = motivoCancelamento;
+	}
 	@Column(name="NATUREZA_OPERACAO", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private EnumNaturezaOperacao naturezaOperacao;
@@ -109,7 +130,7 @@ public class Nota extends EntidadeLoja {
 	@JoinColumn(name="pedido",referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private Pedido pedido;
 	@OneToOne
-	@JoinColumn(name="cfe",referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
+	@JoinColumn(name="CFE",referencedColumnName=GlobalNameParam.PARAM_DEFAULT_CODE_COLUMN)
 	private CupomEletronico cfe;
 	
 	public String getSerieNota() {

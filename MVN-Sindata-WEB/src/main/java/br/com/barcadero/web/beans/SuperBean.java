@@ -2,18 +2,20 @@ package br.com.barcadero.web.beans;
 
 import java.io.Serializable;
 import java.net.UnknownHostException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Session;
-import br.com.barcadero.rule.RuleCaixa;
-import br.com.barcadero.tables.Caixa;
+
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Entidade;
 import br.com.barcadero.tables.Loja;
 import br.com.barcadero.tables.Usuario;
 import br.com.barcadero.web.attributes.Attributs;
+import br.com.barcadero.web.functions.HandleFaceContext;
 
 public abstract class SuperBean<T extends Entidade>  implements Serializable, IBeanClass<T>{
 	
@@ -23,7 +25,6 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 	abstract public String alterar()throws Exception;
 	abstract public String deletar()throws Exception;
 	abstract public String novo()throws Exception;
-	//private RuleCaixa ruleCaixa;
 	
 	public String validar() {
 		return "";
@@ -33,9 +34,7 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 	@SuppressWarnings("unused")
 	private HttpSession httpSession;
 	public SuperBean() {
-		// TODO Auto-generated constructor stub
 		this.session = SessionContext.getInstance();
-		//ruleCaixa    = new RuleCaixa(getEmpresaLogada(), getLojaLogada(), getDataBaseSession());
 	}
 	
 	public SessionContext getSession() {
@@ -101,6 +100,14 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 		getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
 		getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
 		getSession().setAttribute(Attributs.USER, usuario);
+	}
+	
+	public String getIp() {
+		try {
+			return HandleFaceContext.getIpAddress();
+		} catch (UnknownHostException e) {
+			return "";
+		}
 	}
 	
 	

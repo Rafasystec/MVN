@@ -1,11 +1,11 @@
 package br.com.barcadero.module.sat.handle;
 import java.io.File;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
+
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.loggin.LoggerFile;
 import br.com.barcadero.commons.util.HandleFiles;

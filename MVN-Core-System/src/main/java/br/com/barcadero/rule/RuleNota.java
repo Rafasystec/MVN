@@ -15,7 +15,6 @@ import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.core.enums.EnumNaturezaOperacao;
 import br.com.barcadero.core.enums.EnumNotaFaturada;
 import br.com.barcadero.core.enums.EnumStatusOrdemServico;
-import br.com.barcadero.core.enums.EnumStatusPedido;
 import br.com.barcadero.core.enums.EnumTipoMeioPgto;
 import br.com.barcadero.core.util.FormasPagamento;
 import br.com.barcadero.dao.DaoNota;
@@ -39,8 +38,6 @@ public class RuleNota extends RuleModelo<Nota> {
 
 	@Autowired
 	private DaoNota daoNota;
-//	@Autowired
-//	private DaoMeioPgto daoMeio;
 	@Autowired
 	private DaoPedido daoPedido;
 	@Autowired
@@ -52,13 +49,11 @@ public class RuleNota extends RuleModelo<Nota> {
 	
 	@Override
 	public String delete(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return daoNota.delete(codigo);
 	}
 
 	@Override
 	public Nota find(long codigo) throws Exception {
-		// TODO Auto-generated method stub
 		return (Nota)daoNota.find(codigo);
 	}
 	
@@ -195,6 +190,7 @@ public class RuleNota extends RuleModelo<Nota> {
 				nota.setModelo(caixa.getTipoNota());
 				nota.setNaturezaOperacao(EnumNaturezaOperacao.SAIDA);
 				nota.setSerieNota(String.valueOf(getSerie(caixa)));
+				nota.setPedido(pedido);
 				//------------------------------------------
 				//Montando a lista de itens para a nota
 				//------------------------------------------
@@ -204,9 +200,8 @@ public class RuleNota extends RuleModelo<Nota> {
 				//------------------------------------------
 				 nota.setMeiosPgto(getMeiosPagamento(nota, formasPagamento, usuario));
 				 nota.setItens(itens);
-				 nota.setFlFaturado(EnumNotaFaturada.SIM);
+				 nota.setFlFaturado(EnumNotaFaturada.NAO);
 				 nota = insert(nota);
-				 pedido.setFlStPed(EnumStatusPedido.FATURADO);
 				 daoPedido.update(pedido);
 				 result = nota;
 			}
@@ -396,4 +391,7 @@ public class RuleNota extends RuleModelo<Nota> {
 		return daoNota.update(nota);
 	}
 
+	public List<Nota> obterNotasFaturadasDoDia(Empresa empresa, Loja loja) {
+		return daoNota.findNotasFaturadasDoDia(empresa, loja);
+	}
 }

@@ -9,6 +9,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Ide
 {
+	/**
+	 * Informar o CNPJ da empresa desenvolvedora do Aplicativo Comercial, com os
+	 * zeros não significativos.
+	 */
 	@XmlElement(required=true)
 	private String CNPJ;
 	@XmlElement(required=true)

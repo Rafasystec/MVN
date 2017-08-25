@@ -5,6 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -58,7 +61,26 @@ public class CupomEletronico extends SuperClassNota {
 	private BigDecimal valorTotal = new BigDecimal(0.00);
 	@Column(name="ASSINATURA_QRCODE", length=10000)
 	private String assinaturaQRCode = "";
+	@Column(name="XML_BASE_64_CANCEL", length=100000)
+	private String xmlBase64Cancel = "";
 	
+	public String getXmlBase64Cancel() {
+		return xmlBase64Cancel;
+	}
+	public void setXmlBase64Cancel(String xmlBase64Cancel) {
+		this.xmlBase64Cancel = xmlBase64Cancel;
+	}
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="NOTA", referencedColumnName="CODIGO")
+	private Nota nota;
+	
+	
+	public Nota getNota() {
+		return nota;
+	}
+	public void setNota(Nota nota) {
+		this.nota = nota;
+	}
 	public String getChvAcesso() {
 		return chvAcesso;
 	}

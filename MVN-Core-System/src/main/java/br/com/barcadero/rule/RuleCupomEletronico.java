@@ -13,19 +13,24 @@ import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.tables.CupomEletronico;
 import br.com.barcadero.tables.Empresa;
 import br.com.barcadero.tables.Loja;
+import br.com.barcadero.tables.Nota;
 import br.com.barcadero.tables.Usuario;
 
 @Service
 public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 
-	private DaoCupomEletronico daoCupomEletronico;
-	
 	@Autowired
-	public RuleCupomEletronico(DaoCupomEletronico daoCupomEletronico) {
-		// TODO Auto-generated constructor stub
-		this.daoCupomEletronico = daoCupomEletronico;
+	private DaoCupomEletronico daoCupomEletronico;
+	@Autowired
+	private RuleNota ruleNota;
+
+	public RuleNota getRuleNota() {
+		return ruleNota;
 	}
 
+	public void setRuleNota(RuleNota ruleNota) {
+		this.ruleNota = ruleNota;
+	}
 
 	@Override
 	public String delete(long codigo) throws Exception {
@@ -50,7 +55,7 @@ public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	public void insert(Loja loja, Empresa empresa, HandleRetornoSAT retornoSAT,Usuario usuario) throws SATException, Exception{
+	public void insert(Loja loja, Empresa empresa, HandleRetornoSAT retornoSAT,Nota nota,Usuario usuario) throws SATException, Exception{
 		CupomEletronico cupomEletronico = null;
 		if(retornoSAT != null){
 			cupomEletronico = new CupomEletronico(empresa, loja, usuario);
@@ -62,12 +67,14 @@ public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 			cupomEletronico.setMensagem(retornoSAT.getMensagem());
 			cupomEletronico.setMsgSefaz(retornoSAT.getMensagemSEFAZ());
 			cupomEletronico.setNrExtrato(HandleNumericFormat.parseLong(retornoSAT.getUltimoCFeSat()));
-			//cupomEletronico.setNrSerieEquipamento(retornoSAT.getNSerie());
 			cupomEletronico.setNrSessaoSat(retornoSAT.getNumeroSessao());
 			cupomEletronico.setXmlBase64(retornoSAT.getArquivoCFeSAT());
 			cupomEletronico.setValorTotal(HandleNumericFormat.parseBigDecimal(retornoSAT.getValorTotaldoCupom()));
 			cupomEletronico.setAssinaturaQRCode(retornoSAT.getSignatureValue());
-			insert(cupomEletronico);
+			cupomEletronico.setNota(nota);
+			cupomEletronico = insert(cupomEletronico);
+			nota.setCfe(cupomEletronico);
+			ruleNota.update(nota);
 		}
 	}
 
@@ -91,8 +98,11 @@ public class RuleCupomEletronico extends RuleModelo<CupomEletronico> {
 
 	@Override
 	public CupomEletronico update(CupomEletronico entidade) throws Exception {
-		
 		return daoCupomEletronico.update(entidade);
+	}
+	
+	public void imprimirExtratoCFe(Nota nota) {
+		
 	}
 
 }

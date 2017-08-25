@@ -2,6 +2,8 @@ package br.com.barcadero.module.sat.retornos;
 
 public class RetCancelarUltimaVenda extends RetEnvioVenda {
 	
+	public static final String RETORNO_COM_SUCESSO = "07000";
+	
 	/**
 	 * Obtem o objeto de retorno de acordo com o que veio do SAT 
 	 * @param retornoSAT

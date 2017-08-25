@@ -110,12 +110,13 @@ public class RuleGenarateCFe {
 		RuleCFeComandos cfeComandos = null;
 		if(nota != null){
 			if(nota.getStatusCFe().equals(EnumStatusCFeNota.XML_NAO_GERADO) || nota.getStatusCFe().equals(EnumStatusCFeNota.REJEITADO)){
-				String xml 		= genarateXML(nota);
+System.out.println("Gerando o XML da nota CF-e");				
+				String xml 		= gerarXMLDeVendaCFe(nota);
 				cfeComandos		= new RuleCFeComandos(nota.getCaixa());
 				String result 	= cfeComandos.enviarDadosVenda(caixa.getCodAtivCfe(), xml);
 				System.out.println("Resultado >>>> " + result);
+				cfeResult.setDescription(tratarRetorno(nota.getEmpresa(),nota.getLoja(),EnumCFeTipoFuncao.CFE_ENVIAR_DADOS_VENDA, result,nota, usuario));
 				cfeResult.setCodeExecution(CODE_STATUS_OK);
-				cfeResult.setDescription(tratarRetorno(nota.getEmpresa(),nota.getLoja(),EnumCFeTipoFuncao.CFE_ENVIAR_DADOS_VENDA, result, usuario));
 			}else{
 				cfeResult.setCodeExecution(CODE_STATUS_INVALIDO);
 				cfeResult.setDescription("Staus permitido para emitir CF-e : " + EnumStatusCFeNota.XML_NAO_GERADO + " ou " + EnumStatusCFeNota.REJEITADO + " mas veio " + nota.getStatusCFe());
@@ -134,7 +135,7 @@ public class RuleGenarateCFe {
 	 * @return
 	 * @throws SATException
 	 */
-	private String genarateXML(Nota nota) throws SATException {
+	private String gerarXMLDeVendaCFe(Nota nota) throws SATException {
 		String xml 		= "";
 		CFe cfe 		= new CFe();
 		InfCFe infCFe 	= new InfCFe();
@@ -614,7 +615,7 @@ public class RuleGenarateCFe {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	private String tratarRetorno(Empresa empresa, Loja loja,EnumCFeTipoFuncao type,String retorno, Usuario usuario) throws SATException, Exception {
+	private String tratarRetorno(Empresa empresa, Loja loja,EnumCFeTipoFuncao type,String retorno,Nota nota, Usuario usuario) throws SATException, Exception {
 		String result			= "";
 		switch (type) {
 		case CFE_ATIVA_SAT:
@@ -645,7 +646,7 @@ public class RuleGenarateCFe {
 			
 			break;
 		case CFE_ENVIAR_DADOS_VENDA:
-			result = tratarRetornoVenda(empresa,loja, retorno, usuario);
+			result = tratarRetornoVenda(empresa,loja, retorno,nota, usuario);
 			break;
 		case CFE_EXTRAIR_LOGS:
 			
@@ -669,16 +670,16 @@ public class RuleGenarateCFe {
 	 * @throws SATException
 	 * @throws Exception
 	 */
-	private String tratarRetornoVenda(Empresa empresa, Loja loja, String retorno, Usuario usuario) throws SATException, Exception {
+	private String tratarRetornoVenda(Empresa empresa, Loja loja, String retorno,Nota nota, Usuario usuario) throws SATException, Exception {
 		HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(retorno);
 		if(retornoSAT.getCodigoRetorno1().trim().equals("06000")){
 			//------------------------------------------------
 			//OK venda realizada com sucesso
 			//------------------------------------------------
-			ruleCupomEletronico.insert(loja,empresa,retornoSAT, usuario);
+			ruleCupomEletronico.insert(loja,empresa,retornoSAT,nota, usuario);
 			return RuleCFeUtil.getMessage(retornoSAT);
 		}else{
-			throw new SATException("Não foi possível realizar a venda.");
+			throw new SATException("Não foi possível realizar a venda. Erro retornado do módulo: " + retornoSAT.getCodigoRetorno1() + " - " + retornoSAT.getMensagem());
 		}
 	}
 	
@@ -699,6 +700,8 @@ public class RuleGenarateCFe {
 			return "Erro: " + cfeResult.getCodeExecution() + " - " + cfeResult.getDescription() ;
 		}
 	}
+	
+	
 
 	public Session getSession() {
 		return session;

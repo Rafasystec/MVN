@@ -1,7 +1,10 @@
 package br.com.barcadero.dao;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 import br.com.barcadero.core.util.GlobalNameParam;
 import br.com.barcadero.tables.Empresa;
@@ -17,11 +20,6 @@ public class DaoNota extends DaoModelo<Nota> {
 	public DaoNota() {
 		System.out.println("Auto-generated constructor stub for DaoNota");
 	}
-	
-//	public DaoNota(Empresa empresa, Loja loja, Session session) {
-//		super(empresa, loja, session);
-//		// TODO Auto-generated constructor stub
-//	}
 
 	@Override
 	public Nota find(long codigo) throws Exception {
@@ -31,7 +29,7 @@ public class DaoNota extends DaoModelo<Nota> {
 
 	@Override
 	public List<Nota> findAll() throws Exception {
-		Query qry = manager.createNamedQuery(Nota.FIND_ALL);
+		TypedQuery<Nota> qry = manager.createNamedQuery(Nota.FIND_ALL,Nota.class);
 		return qry.getResultList();
 	}
 	
@@ -72,5 +70,14 @@ public class DaoNota extends DaoModelo<Nota> {
 	public List<Nota> findByEmpresaELoja(Empresa empresa, Loja loja) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public List<Nota> findNotasFaturadasDoDia(Empresa empresa, Loja loja) {
+		TypedQuery<Nota> qry = getManager().createNamedQuery(Nota.FIND_DO_DIA_BY_EMP_LOJA, Nota.class)
+				.setParameter("empresa", empresa)
+				.setParameter("loja", loja)
+				.setParameter("dtCadastro", new Date())
+				.setParameter("flNotaCancelada", false);
+		return qry.getResultList();
 	}
 }
