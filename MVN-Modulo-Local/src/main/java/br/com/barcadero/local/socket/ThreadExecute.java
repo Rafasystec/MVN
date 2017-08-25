@@ -25,9 +25,11 @@ public class ThreadExecute implements Callable<String> {
 	private String execute(SocketCommand command) throws Exception {
 		switch (command.getTipoComando()) {
 		case CMD_FOR_ECF:
+			System.out.println("COmunicaoca com o ECF nao implementado");
 			return "ECF não implementado.";
 		case CMD_FOR_SAT:
 			return executarComandoSAT(command);
+			//return "Comando Executado sat executado";
 		default:
 			return "Tipo de comando não implementado : " + command.getTipoComando().toString() ;
 		}
