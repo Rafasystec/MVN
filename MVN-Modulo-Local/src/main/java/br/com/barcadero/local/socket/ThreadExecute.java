@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.socket.SocketDados;
 import br.com.barcadero.module.sat.handle.HandleSAT;
+import br.com.barcadero.module.sat.socket.CmdCancelarUltimaVenda;
 import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
 import br.com.barcadero.module.sat.socket.CmdEnviarDadosVenda;
 
@@ -57,6 +58,9 @@ public class ThreadExecute implements Callable<String> {
 		}else if(dados instanceof CmdEnviarDadosVenda){
 			CmdEnviarDadosVenda dadosVenda = (CmdEnviarDadosVenda) dados;
 			result = handleSAT.enviarDadosVenda(dadosVenda.getDadosVenda(), dadosVenda.getCodigoDeAtivacao());
+		}else if(dados instanceof CmdCancelarUltimaVenda){
+			CmdCancelarUltimaVenda cancelarUltimaVenda = (CmdCancelarUltimaVenda) dados;
+			result = handleSAT.cancelarUltimaVenda(cancelarUltimaVenda.getChave(), cancelarUltimaVenda.getCodigoDeAtivacao(),cancelarUltimaVenda.getDadosCancelamento());
 		}else{
 			result = "Comando não configurado!";
 		}
