@@ -1,8 +1,8 @@
 package br.com.barcadero.commons.socket;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -21,12 +21,17 @@ public class ThreadSocket implements Runnable {
 	@Override
 	public void run() {
 		try {
+			ObjectOutputStream	out = null;
 			if(cliente != null){
 				SocketCommand cmd = SocketUtil.getObjectFromStream(cliente);
 				System.out.println("OK - Solicitacao de comunicacao do Host: " + cmd.getIpHost());
 				System.out.println("Descricao do Comando : " + cmd.getCommand());
 				cmd = enviarComando(cmd);
-				enviarResposta(cmd);
+				out 	= new ObjectOutputStream(cliente.getOutputStream());
+				out.flush();
+				out.writeObject(cmd);
+				//enviarResposta(cmd);
+				
 			}else{
 				System.out.println("Cliente nulo nao sera inserido no escalonador");
 			}
@@ -35,6 +40,7 @@ public class ThreadSocket implements Runnable {
 		}finally {
 			System.out.println("Terminou a execucao do comando.");
 			try {
+				
 				cliente.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -72,20 +78,20 @@ public class ThreadSocket implements Runnable {
 		return comando;
 	}
 	
-	/**
-	 * 
-	 * @param comando
-	 * @throws UnknownHostException
-	 * @throws IOException
-	 */
-	private void enviarResposta(SocketCommand comando) throws UnknownHostException, IOException {
-		System.out.println("Enviar resposta para o cliente socket que chamou");
-		System.out.println("IP host solicitante: " + comando.getIpHost());
-		ClientSocket host = new ClientSocket();
-		//comando.setResposta("Resposta para o Host : " + comando.getIpHost() + " - Vinda do servidor");
-		host.setIpServidor(comando.getIpHost());
-		host.send(comando);
-	}
+//	/**
+//	 * 
+//	 * @param comando
+//	 * @throws UnknownHostException
+//	 * @throws IOException
+//	 */
+//	private void enviarResposta(SocketCommand comando) throws UnknownHostException, IOException {
+//		System.out.println("Enviar resposta para o cliente socket que chamou");
+//		System.out.println("IP host solicitante: " + comando.getIpHost());
+//		ClientSocket host = new ClientSocket();
+//		//comando.setResposta("Resposta para o Host : " + comando.getIpHost() + " - Vinda do servidor");
+//		host.setIpServidor(comando.getIpHost());
+//		host.send(comando);
+//	}
 	
 
 }

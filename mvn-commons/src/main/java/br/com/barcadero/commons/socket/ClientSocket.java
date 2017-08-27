@@ -229,15 +229,15 @@ public class ClientSocket {
 	 * @throws UnknownHostException
 	 * @throws IOException
 	 */
-	public SocketCommand callAndReceive(SocketCommand comando) throws UnknownHostException, IOException {
+	public SocketCommand callAndReceive(SocketCommand comando) throws IOException {
 		//PrintStream saida	 	= null;
 		Socket client	  		= null;
 		ObjectOutputStream	out = null;
 		ServerSocket server		= null;
 		try{
+			System.out.println("Enviando comando para o ip " + getIpServidor());
 			client	= new Socket(getIpServidor(), SocketServer.SERVER_PORT);
 			out 	= new ObjectOutputStream(client.getOutputStream());
-			//comando.setIpHost(client.getLocalSocketAddress().toString());
 			out.writeObject(comando);
 			System.out.println("Enviou comando");
 			server = new ServerSocket(SocketServer.SERVER_PORT);
@@ -245,9 +245,10 @@ public class ClientSocket {
 			Socket cliente = server.accept();
 			SocketCommand comandoRet = SocketUtil.getObjectFromStream(cliente);
 			return comandoRet;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new SocketCommand();
 		}finally{
-			//if(saida != null)saida.close();
-			//if(client != null)client.close();
 			if(out != null){
 				out.flush();
 				out.reset();

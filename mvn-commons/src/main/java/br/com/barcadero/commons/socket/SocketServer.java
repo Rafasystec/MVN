@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class SocketServer {
 	
-	public static int SERVER_PORT 						= 9922;
+	public static int SERVER_PORT 						= 6667;
 	static{
 		java.lang.System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
 	}
