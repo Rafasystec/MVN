@@ -2,6 +2,7 @@ package br.com.barcadero.local.main;
 
 import org.hibernate.Session;
 
+
 import br.com.barcadero.local.persistence.HibernateHelper;
 import br.com.barcadero.local.socket.SocketServer;
 import br.com.barcadero.local.views.JFMain;
