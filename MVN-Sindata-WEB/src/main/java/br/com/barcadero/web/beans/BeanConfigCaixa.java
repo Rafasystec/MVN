@@ -14,6 +14,7 @@ import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
+import br.com.barcadero.commons.util.HandleRealIpUtil;
 import br.com.barcadero.core.enums.EnumModeloNota;
 import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.tables.Caixa;
@@ -40,6 +41,7 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	@PostConstruct
 	public void init() {
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
+		System.out.println(HandleRealIpUtil.getRealIP());
 		//callClient();
 	}
 	

@@ -43,7 +43,7 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 
 	private void obterCaixaDaEstacao() {
 		try {
-			this.caixa = ruleCaixa.findByIp(getLojaLogada(), HandleFaceContext.getIpAddress());
+			this.caixa = ruleCaixa.findByIp(getLojaLogada(), getSession().getIpAddress());
 			boolean isCaixa = true;
 			if(this.caixa != null){
 				if(this.caixa.getCodigo() == 0){
@@ -53,7 +53,7 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 				isCaixa = false;
 			}
 			if(!isCaixa){
-				HandleMessage.error("Caixa não encontrado", "O IP " + HandleFaceContext.getIpAddress() + " não foi cadastrado como um caixa.");
+				HandleMessage.error("Caixa não encontrado", "O IP " + getSession().getIpAddress() + " não foi cadastrado como um caixa.");
 			}
 		} catch (Exception e) {
 			this.caixa = null;

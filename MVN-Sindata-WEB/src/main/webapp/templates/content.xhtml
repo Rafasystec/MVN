@@ -4,16 +4,35 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
  	 	
-    <ui:composition>
+    <ui:composition
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    >
+    <script type="text/javascript">
+
+    $.getJSON('http://ip.jsontest.com/?callback=?', function(data) {
+    	  console.log(JSON.stringify(data, null, 2));
+    	  document.getElementById('formMain:ip-address').value = JSON.stringify(data, null, 2)
+    	});
+          
+	</script>
+		 
         <div id="content">                            
 	        <h:form id="formMain">
+	          <f:metadata>
+				  <f:param name="ipAddress" />
+		          
+		      </f:metadata>
+	        <p:inputText id="ip-address" value="#{beanContent.realIp}" immediate="true"/>
+	        
+	      
 	        	<div class="header">
 		        	<div class="row">
 		   				<div class="col-md-6">
 		        			<span class="titulo"><i class="fa fa-#{pageIcon}"></i> #{pageTitle}</span>
 		        		</div>
 		        		<div class="col-md-6">
-		        			<span>  #{beanContent.loja}</span>
+		        			<span> </span>
 		        		</div>
 		        		<div class="col-md-6 text-right">
 			        		<ui:insert name="header" />			        		

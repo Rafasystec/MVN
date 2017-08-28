@@ -108,7 +108,12 @@ public class SessionContext {
 //		}else{
 //			return "127.0.0.1";
 //		}
-		return HandleFaceContext.getIpAddress();
+		if(false){
+			return (String) getAttribute(Attributs.IP_ADDRESS);
+		}else{
+			//TODO por parametro no lugar do true para saber se ele vai funcionar só na rede local
+			return HandleFaceContext.getIpAddress();
+		}
 	}
 	
 	public void setIpAddress(String ipAddress) {
