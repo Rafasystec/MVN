@@ -31,6 +31,7 @@ public class BeanUsuarioLogin extends SuperBean<Usuario>{
 	private Usuario user;
 	private String login;
 	private String senha;
+	private String ipAddress;
 	private static Logger logger = Logger.getLogger(BeanUsuarioLogin.class);
 	
 	public boolean isAutorizado() {
@@ -62,7 +63,7 @@ public class BeanUsuarioLogin extends SuperBean<Usuario>{
 		try {	
 			usuario = ruleUsuario.login(getLogin(), getSenha());
 			if(usuario != null){
-				autorizarLogin(usuario);
+				autorizarLogin(usuario,getIpFromJSON(getIpAddress()));
 				return "/private/PagEscolherEmpresa.xhtml?faces-redirect=true";
 			}else{
 				autorizado = false;
@@ -172,5 +173,11 @@ public class BeanUsuarioLogin extends SuperBean<Usuario>{
 	public boolean validar(Usuario entidade) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public String getIpAddress() {
+		return ipAddress;
+	}
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 }

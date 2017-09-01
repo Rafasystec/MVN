@@ -13,6 +13,7 @@ import br.com.barcadero.web.attributes.Attributs;
 import br.com.barcadero.web.functions.HandleFaceContext; 
 public class SessionContext { 
 	private static SessionContext instance; 
+	
 	public static SessionContext getInstance(){ 
 		if (instance == null){ 
 			instance = new SessionContext(); 
@@ -20,7 +21,6 @@ public class SessionContext {
 	} 
 	
 	private SessionContext(){ 
-		
 	} 
 	private ExternalContext currentExternalContext(){ 
 		if (FacesContext.getCurrentInstance() == null){ 
@@ -102,13 +102,9 @@ public class SessionContext {
 		}
 	}
 	
-	public String getIpAddress() throws UnknownHostException {
-//		if(getAttribute(Attributs.IP_ADDRESS) != null){
-//			return getAttribute(Attributs.IP_ADDRESS).toString();
-//		}else{
-//			return "127.0.0.1";
-//		}
-		if(false){
+	public String getIpAddress(boolean usaRealIp) throws UnknownHostException {
+		
+		if(usaRealIp){
 			return (String) getAttribute(Attributs.IP_ADDRESS);
 		}else{
 			//TODO por parametro no lugar do true para saber se ele vai funcionar só na rede local

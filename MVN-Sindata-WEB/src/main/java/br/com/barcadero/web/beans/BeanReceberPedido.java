@@ -16,7 +16,6 @@ import br.com.barcadero.rule.RuleCaixa;
 import br.com.barcadero.rule.RulePedido;
 import br.com.barcadero.tables.Caixa;
 import br.com.barcadero.tables.Pedido;
-import br.com.barcadero.web.functions.HandleFaceContext;
 import br.com.barcadero.web.functions.HandleMessage;
 
 @ManagedBean
@@ -43,7 +42,7 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 
 	private void obterCaixaDaEstacao() {
 		try {
-			this.caixa = ruleCaixa.findByIp(getLojaLogada(), getSession().getIpAddress());
+			this.caixa = ruleCaixa.findByIp(getLojaLogada(), getSession().getIpAddress(isRealIp()));
 			boolean isCaixa = true;
 			if(this.caixa != null){
 				if(this.caixa.getCodigo() == 0){
@@ -53,7 +52,7 @@ public class BeanReceberPedido extends SuperBean<Pedido> {
 				isCaixa = false;
 			}
 			if(!isCaixa){
-				HandleMessage.error("Caixa não encontrado", "O IP " + getSession().getIpAddress() + " não foi cadastrado como um caixa.");
+				HandleMessage.error("Caixa não encontrado", "O IP " + getSession().getIpAddress(isRealIp()) + " não foi cadastrado como um caixa.");
 			}
 		} catch (Exception e) {
 			this.caixa = null;

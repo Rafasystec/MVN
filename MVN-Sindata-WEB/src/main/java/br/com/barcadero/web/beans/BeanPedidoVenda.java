@@ -225,7 +225,7 @@ public class BeanPedidoVenda extends SuperBean<Pedido>{
 	}
 	
 	public Caixa obterCaixaDeVenda() throws UnknownHostException {
-		caixa = ruleCaixa.getCaixaVenda(getLojaLogada(), getSession().getIpAddress());
+		caixa = ruleCaixa.getCaixaVenda(getLojaLogada(), getSession().getIpAddress(isRealIp()));
 		if(caixa == null){
 			HandleMessage.error("Sua estação não possui caixa", "Por favor cadastre um caixa primeiro.");
 		}

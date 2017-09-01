@@ -28,6 +28,12 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bootstrap</param-value>
 	</context-param>
+	<!-- Parametro para pegar o ip local da rede ou o real -->
+	<context-param>
+		<param-name>barcadero.REAL_IP</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
 	<resource-ref>
 		<description>Resource JNDI for Sindata</description>
 		<res-ref-name>jdbc/vendor</res-ref-name>

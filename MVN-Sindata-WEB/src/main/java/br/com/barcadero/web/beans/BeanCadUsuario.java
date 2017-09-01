@@ -69,7 +69,7 @@ public class BeanCadUsuario extends SuperBean<Usuario> {
 		
 		getSession().setLojaLogada(empresa.getLojas().get(0));
 		getSession().setEmpresa(empresa);
-		autorizarLogin(usuario);
+		autorizarLogin(usuario,"");
 		return "sucesso";
 	}
 

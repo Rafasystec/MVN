@@ -94,12 +94,13 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 	}
 	
-	protected void autorizarLogin(Usuario usuario) {
+	protected void autorizarLogin(Usuario usuario,String realIp) {
 		getSession().setAttribute("autorizado", true);
 		getSession().setAttribute(Attributs.USER_NOME,   usuario.getNome());
 		getSession().setAttribute(Attributs.USER_LOGIN,  usuario.getUsuario());
 		getSession().setAttribute(Attributs.USER_CODIGO, usuario.getCodigo());
 		getSession().setAttribute(Attributs.USER, usuario);
+		getSession().setAttribute(Attributs.IP_ADDRESS,realIp.trim());
 	}
 	
 	public String getIp() {
@@ -107,6 +108,25 @@ public abstract class SuperBean<T extends Entidade>  implements Serializable, IB
 			return HandleFaceContext.getIpAddress();
 		} catch (UnknownHostException e) {
 			return "";
+		}
+	}
+	
+	public String getIpFromJSON(String pIpJSON) {
+		String ipJSON = pIpJSON.replace("\"", "").replace("{", "").replace("}", "");
+		System.out.println(ipJSON);
+		String[] list = ipJSON.split(":");
+		for (String string : list) {
+			System.out.println(string);
+		}
+		return list[1];
+	}
+	
+	protected boolean isRealIp() {
+		String valueParamIpReal = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("barcadero.REAL_IP");
+		if(valueParamIpReal.trim().equals("true")){
+			return Boolean.parseBoolean(valueParamIpReal);
+		}else{
+			return false;
 		}
 	}
 	

@@ -213,10 +213,9 @@ public class BeanVendaRapida extends SuperBean <VendaRapida>{
 	}
 	
 	private Nota createNota() throws UnknownHostException, Exception {
-		this.nota = ruleNota.createNota(getSession().getLojaLogada(), getSession().getUsuarioLogado(), getSession().getIpAddress());
+		this.nota = ruleNota.createNota(getSession().getLojaLogada(), getSession().getUsuarioLogado(), getSession().getIpAddress(isRealIp()));
 		return nota;
 	}
-
 
 	public long getCodNota() {
 		return codNota;

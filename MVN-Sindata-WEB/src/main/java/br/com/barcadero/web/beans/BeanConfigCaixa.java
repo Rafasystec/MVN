@@ -1,15 +1,11 @@
 package br.com.barcadero.web.beans;
 
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-
 import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.socket.ClientSocket;
@@ -40,15 +36,16 @@ public class BeanConfigCaixa extends SuperBean<Caixa> {
 	
 	@PostConstruct
 	public void init() {
+		
 		caixa 		= new Caixa(getEmpresaLogada(),getLojaLogada(),getUsuarioLogado());
-		System.out.println(HandleRealIpUtil.getRealIP());
+		//System.out.println(HandleRealIpUtil.getRealIP());
 		//callClient();
 	}
 	
 	@Override
 	public String salvar() {
 		try{
-			caixa.setIp(getSession().getIpAddress());
+			caixa.setIp(getSession().getIpAddress(isRealIp()));
 			ruleCaixa.insert(caixa);			
 		}catch(Exception e){
 			HandleMessage.error("Erro ao tentar salvar o caixa: ", e.getMessage());
