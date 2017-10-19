@@ -1,9 +1,5 @@
 package br.com.barcadero.local.main;
 
-import org.hibernate.Session;
-
-
-import br.com.barcadero.local.persistence.HibernateHelper;
 import br.com.barcadero.local.socket.SocketServer;
 import br.com.barcadero.local.views.JFMain;
 
@@ -15,7 +11,7 @@ import br.com.barcadero.local.views.JFMain;
  */
 public class Main {
 
-	private static Session session;
+	
 	public static final String APP_NAME 	= "Nautilus";
 	public static final String APP_VERSION	= "1.0 - DesckTop";
 	private JFMain jfMain;
@@ -28,6 +24,7 @@ public class Main {
 			//Invocando Interface grafica
 			//----------------------------------------
 			invokMainInterface();
+			System.out.println("Arquitetura JVM:"+System.getProperty("sun.arch.data.model") );
 			//----------------------------------------
 			//Iniciando Socket
 			//----------------------------------------
@@ -39,22 +36,8 @@ public class Main {
 		
 	}
 
-	public static Session getSession() {
-		return session;
-	}
 
-	public static void setSession(Session session) {
-		Main.session = session;
-	}
-	/**
-	 * 
-	 */
-	private static void iniciarPersistencia() {
-		System.out.println("--------------------------------------------");
-		System.out.println("INICIANDO PERSISTENCIA LOCAL");
-		System.out.println("--------------------------------------------");
-		Main.session = HibernateHelper.getSession();
-	}
+	
 	/**
 	 * 
 	 */
@@ -69,21 +52,6 @@ public class Main {
 		return jFMain;
 	}
 	
-	public static void beginTransaction() {
-		if(getSession() != null){
-			getSession().beginTransaction();
-		}
-	}
 	
-	public static void commit() {
-		if(getSession() != null){
-			getSession().getTransaction().commit();
-		}
-	}
-	public static void roolBack() {
-		if(getSession() != null){
-			getSession().getTransaction().rollback();
-		}
-	}
 
 }

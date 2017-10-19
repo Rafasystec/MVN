@@ -1,6 +1,7 @@
 package br.com.barcadero.local.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,25 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import org.jfree.layout.CenterLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 import br.com.barcadero.commons.enuns.EnumDateHourFormat;
 import br.com.barcadero.commons.util.HandleDateHour;
 import br.com.barcadero.local.main.Main;
 import br.com.barcadero.local.main.TextAreaOutputStream;
-import br.com.barcadero.local.persistence.StartH2Engine;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.Timer;
-
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.GridBagConstraints;
 
 public class JFMain extends JFrame {
 
@@ -91,13 +81,6 @@ public class JFMain extends JFrame {
 		taOutputStream = new TextAreaOutputStream( textArea, "["+HandleDateHour.format(new Date(), EnumDateHourFormat.CURRENT_DATE_TIME)+"]");
 		invocarTextAreaInterativoConsole();
 		
-	}
-	
-	private void invokVendaConsumidor() {
-		JFVendaConsumidor consumidor = new JFVendaConsumidor();
-		consumidor.setFocusable(true);
-		consumidor.setDefaultCloseOperation(JFVendaConsumidor.DISPOSE_ON_CLOSE);
-		consumidor.setVisible(true);
 	}
 	
 	public void setTextAreaAction(String text) {

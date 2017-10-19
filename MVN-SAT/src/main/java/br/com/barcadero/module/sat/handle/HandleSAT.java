@@ -82,11 +82,13 @@ public HandleSAT() {
 	
 }
 
-public HandleSAT(EnumTipoModuloSAT typeModule) {
+public HandleSAT(EnumTipoModuloSAT typeModule) throws UnsatisfiedLinkError,Exception {
 	try {
 		definirModulo(typeModule);
+	}catch(UnsatisfiedLinkError linkErro){ 
+		throw linkErro;
 	} catch (Exception e) {
-		e.printStackTrace();
+		throw e;
 	}
 }
 
@@ -866,25 +868,31 @@ public String cancelarUltimaVenda(String chave, String codigoAtivacao, String da
  * @param typeMode
  * @throws Exception
  */
-public void definirModulo(EnumTipoModuloSAT typeMode) throws Exception {
-	switch (typeMode) {
-	case BEMATECH:
-		configurarBematechRB1000("");
-		break;
-	case DIMEP:
-		configurarDimep("");
-		break;
-	case TANCA:
-		configurarTancaTs1000("");
-		break;
-	case INTEGRADOR:
-		configurarIntegradorFiscalSEFAZ();
-		break;
-	case MFE_DLL:
-		configurarComunicaoMFe();
-	default:
-		configurarEmulador();
-		break;
+public void definirModulo(EnumTipoModuloSAT typeMode) throws UnsatisfiedLinkError, Exception {
+	try{
+		switch (typeMode) {
+		case BEMATECH:
+			configurarBematechRB1000("");
+			break;
+		case DIMEP:
+			configurarDimep("");
+			break;
+		case TANCA:
+			configurarTancaTs1000("");
+			break;
+		case INTEGRADOR:
+			configurarIntegradorFiscalSEFAZ();
+			break;
+		case MFE_DLL:
+			configurarComunicaoMFe();
+		default:
+			configurarEmulador();
+			break;
+		}
+	}catch(UnsatisfiedLinkError linkErro){ 
+		throw linkErro;
+	}catch(Exception e){
+		throw new Exception("Erro ao tentar definir o módulo:"+e.getMessage());
 	}
 }
 
@@ -923,14 +931,16 @@ private void configurarDimep(String porta) throws Exception{
  * @param porta
  * @throws Exception
  */
-private void configurarEmulador() throws Exception{
+private void configurarEmulador() throws UnsatisfiedLinkError,Exception{
 	SATEmuladorSP satEmulador = null;
 	try {
 		satEmulador	 = new SATEmuladorSP("");
 		this.iSatMfe = satEmulador;
 		this.aSatMfe = satEmulador;
-	} catch (Exception e) {
-		e.printStackTrace();
+	}catch(UnsatisfiedLinkError linkErro){ 
+		throw linkErro;
+	}catch (Exception e) {
+		throw e;
 	}
 }
 

@@ -2,6 +2,7 @@ package br.com.barcadero.commons.socket;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -85,7 +86,23 @@ public class ClientSocket {
 		Socket client	  		= null;
 		ObjectOutputStream	out = null;
 		try{
-			client	= new Socket(getIpServidor(), SocketServer.SERVER_PORT);
+			client	= new Socket(getIpServidor(), SocketServer.CLIENT_PORT);
+			out 	= new ObjectOutputStream(client.getOutputStream());
+			out.writeObject(comando);
+			System.out.println("Enviou comando");
+		}finally{
+			if(out != null){
+				out.flush();
+				out.reset();
+				out.close();
+			}
+			if(client != null)client.close();
+		}
+	}
+	
+	public static void respondeToServer(SocketCommand comando, Socket client) throws UnknownHostException, IOException {
+		ObjectOutputStream	out = null;
+		try{
 			out 	= new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(comando);
 			System.out.println("Enviou comando");
@@ -230,7 +247,6 @@ public class ClientSocket {
 	 * @throws IOException
 	 */
 	public SocketCommand callAndReceive(SocketCommand comando) throws IOException {
-		//PrintStream saida	 	= null;
 		Socket client	  		= null;
 		ObjectOutputStream	out = null;
 		ServerSocket server		= null;
@@ -240,7 +256,7 @@ public class ClientSocket {
 			out 	= new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(comando);
 			System.out.println("Enviou comando");
-			server = new ServerSocket(SocketServer.SERVER_PORT);
+			server = new ServerSocket(SocketServer.CLIENT_PORT);
 			server.setSoTimeout(50000);
 			Socket cliente = server.accept();
 			SocketCommand comandoRet = SocketUtil.getObjectFromStream(cliente);

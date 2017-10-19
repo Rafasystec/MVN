@@ -12,13 +12,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>br.com.barcadero</groupId>
-			<artifactId>MVN-SAT</artifactId>
+			<artifactId>mvn-persistence</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.barcadero</groupId>
-			<artifactId>Core-System</artifactId>
-			<version>1.0.1</version>
+			<artifactId>MVN-SAT</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
