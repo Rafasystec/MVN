@@ -18,22 +18,12 @@ public class LogFactory implements ILogger{
 	private static int contLinhasNaoSalvas 					= 0;
 	private static final int NUM_LINHAS_DISPARA_GRAVACAO_LOG= 1;
 	private static boolean gravarLogEventos 				= true;
-	private static final String PREFIXO_ARQUIVO_LOG			= "LogEventos";
+	private static final String PREFIXO_ARQUIVO_LOG			= "LogDeEventos";
 	private static final String EXTENSAO_ARQUIVO_LOG		= ".log";
-	public static final String LOG_DIRECTORY				= obterCaminhoRaiz() + "logs" + File.separator + "COMUM" + File.separator;
+	public static final String LOG_DIRECTORY				= obterCaminhoRaiz() + "logs" + File.separator;
 	public static final String DEFAULT_MNEMO_SAT			= "MSF";
 	public static String localLog							= "";
 	private static String ulltimoLogGerado					= ""; //Guarda o valor do ultimo log gerado.
-	
-	/**
-	 * 1.	Cada registro do arquivo de log ter� o formato descrito abaixo, com os campos do registro separados pelo 'caractere' 'TAB'(\t para o java, c e c++)
-	 * 2.	Colunas:
-	 *		a.	Data e Hora
-	 *		b.	Opera��o
-	 *		c.	Mensagem e/ou conte�do
-	 * adicionar evento a lista de eventos
-	 * @param descricao
-	 */
 	
 	public LogFactory(String realPath){
 		LogFactory.localLog = realPath;
@@ -56,7 +46,6 @@ public class LogFactory implements ILogger{
 		try {
 			LogFactory.adicionar(evento, true, getFileName(), LOG_DIRECTORY);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
@@ -92,7 +81,7 @@ public class LogFactory implements ILogger{
 			/**
 			 * ---------------------------------------------------------------------------------
 			 * Aconselhamos que seja feita uma abstracao da utilizacao de quem for utilizar,
-			 * criando por exemplo um metodo adcicionar passando somente o evento e s� no corpo
+			 * criando por exemplo um metodo adcicionar passando somente o evento e so no corpo
 			 * passar o diretorio. Veja como foi utilizado na classe LogArqAtualizados.
 			 * ----------------------------------------------------------------------------------
 			 */
@@ -148,7 +137,7 @@ public class LogFactory implements ILogger{
 	}
 	
 	/**
-	 * Retorna o stacktrace completo da Exce��o.
+	 * Retorna o stacktrace completo da Excecao.
 	 * @param element
 	 * @return String
 	 * @author Rafael Rocha
@@ -163,13 +152,8 @@ public class LogFactory implements ILogger{
 			return fullStackTrace;
 		} catch (Exception e) {
 			// TODO: handle exception
-			return "Erro ao obter o StackTrace da Exce��o: " + e.getMessage() + " .";
+			return "Erro ao obter o StackTrace da Excecao: " + e.getMessage() + " .";
 		}
-	}
-	
-	private static String formatar(Date data, String formato) {
-		SimpleDateFormat sdf = new SimpleDateFormat(formato);
-		return sdf.format(data);
 	}
 	
 	private static String getFileName() {
@@ -215,18 +199,27 @@ public class LogFactory implements ILogger{
 	}
 
 
-	public void infor(String infor) {
-		// TODO Auto-generated method stub
+	public  void infor(String infor) {
+		adicionar(infor);
+	}
+	
+	public  static void addInfor(String infor) {
 		adicionar(infor);
 	}
 
 	public void error(String error) {
-		// TODO Auto-generated method stub
 		adicionar("ERROR --->>>> " + error);
 	}
 
+	public  static void addError(String error) {
+		adicionar("ERROR --->>>> " + error);
+	}
+	
 	public void error(Throwable throwable) {
-		// TODO Auto-generated method stub
+		adicionar(throwable);
+	}
+	
+	public static void addError(Throwable throwable) {
 		adicionar(throwable);
 	}
 }

@@ -2,19 +2,11 @@ package br.com.barcadero.module.sat.devices.sefaz;
 
 import java.io.File;
 
-import br.com.barcadero.module.sat.enums.EnumStatusPorta;
-import br.com.barcadero.module.sat.handle.AbstractSATSuperClass;
-import br.com.barcadero.module.sat.handle.HendleFile;
-import br.com.barcadero.module.sat.handle.HandleSAT;
-//import br.com.secrel.sat.logs.LogFactory;
-//import br.com.secrel.sat.properties.ConfigSat;
-//import br.com.secrel.sat.properties.ConfigSat.Propriedades;
-//import br.com.secrel.sat.util.FileHelper;
-//import br.com.secrel.util.StringHelper;
-
-
-
 import com.sun.jna.Native;
+
+import br.com.barcadero.module.sat.handle.AbstractSATSuperClass;
+import br.com.barcadero.module.sat.handle.HandleSAT;
+import br.com.barcadero.module.sat.handle.HendleFile;
 
 public class MFeSEFAZ extends AbstractSATSuperClass {
 	private static Functions library			= null;

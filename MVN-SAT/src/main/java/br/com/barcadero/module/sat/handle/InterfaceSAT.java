@@ -33,7 +33,7 @@ public interface InterfaceSAT {
 	 */
 	public String getModuleName()throws Exception;
 	/**
-	 * Retornara o caminho completo da classe. Exemplo: br.com.secrel.sat.MySat
+	 * Retornara o caminho completo da classe.(package + class_name)
 	 * @return
 	 * @throws Exception
 	 */

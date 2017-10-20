@@ -8,7 +8,6 @@ import com.sun.jna.Native;
 
 import br.com.barcadero.module.sat.handle.AbstractSATSuperClass;
 import br.com.barcadero.module.sat.handle.HandleSAT;
-//import br.com.secrel.sat.logs.LogFactory;
 import br.com.barcadero.module.sat.handle.HendleFile;
 
 

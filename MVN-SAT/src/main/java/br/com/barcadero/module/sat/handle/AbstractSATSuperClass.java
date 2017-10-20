@@ -215,9 +215,9 @@ public abstract class AbstractSATSuperClass implements InterfaceSAT{
 	
 	public void detectOS() {
 		if(osName.equalsIgnoreCase(OS_LINUX)){
-			//LogFactory.adicionar("Plataforma Linux. Distribuicao : " + osName);
+	
 		}else{
-			//LogFactory.adicionar("Provavelmente plataforma Windows. Nome: " + osName);
+			
 		}
 	}
 

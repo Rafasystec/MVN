@@ -2,6 +2,7 @@ package br.com.barcadero.sat.tests;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
@@ -13,7 +14,9 @@ import br.com.barcadero.module.sat.enums.EnumMeioPagamento;
 import br.com.barcadero.module.sat.enums.EnumOrigICMS;
 import br.com.barcadero.module.sat.enums.EnumRegimeTributarioISSQN;
 import br.com.barcadero.module.sat.enums.EnumUF;
+import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.module.sat.socket.CFeComandosSokect;
+import br.com.barcadero.module.sat.xml.cancelamento.CFeCanc;
 import br.com.barcadero.module.sat.xml.envio.CFe;
 import br.com.barcadero.module.sat.xml.envio.COFINS;
 import br.com.barcadero.module.sat.xml.envio.COFINSAliq;
@@ -39,7 +42,12 @@ public class TestEnviarComandoVendaSocket {
 	public static void main(String[] args) {
 		CFeComandosSokect comandosSokect = new CFeComandosSokect("localhost", EnumTipoModuloSAT.EMULADOR);
 		try {
-			comandosSokect.enviarDadosVenda("12345678", gerarCFeDeTeste());
+			HandleRetornoSAT handleRetornoVendaSAT = comandosSokect.enviarDadosVenda("12345678", gerarCFeDeTeste());
+			if(handleRetornoVendaSAT.getCodigoRetorno1().equals("06000")){
+				System.out.println("Chave venda: " + handleRetornoVendaSAT.getChaveDeConsulta());
+				HandleRetornoSAT handleRetornoCanceSAT = comandosSokect.cancelarUltimaVenda("12345678", handleRetornoVendaSAT.getChaveDeConsulta(), getCfeCanc(handleRetornoVendaSAT.getChaveDeConsulta()));
+				System.out.println("Cancalamento: "+handleRetornoCanceSAT.getCodigoRetorno1());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -179,5 +187,48 @@ public class TestEnviarComandoVendaSocket {
 			e.printStackTrace();
 		}
 		return cfe;
+	}
+	/**
+	 * 
+	 * @param cfeChave
+	 * @return
+	 */
+	public static CFeCanc getCfeCanc(String cfeChave) {
+		CFeCanc cFeCanc = new CFeCanc();
+		br.com.barcadero.module.sat.xml.cancelamento.InfCFe infCFe	= new br.com.barcadero.module.sat.xml.cancelamento.InfCFe();
+		//infCFe.setChCanc("CFe35160608723218000186599000025910004973807404");
+		infCFe.setChCanc(cfeChave);
+		//--------------------------------------------------------
+		//NOTE: B - Identificacao do Cupom Fiscal Eletronico
+		//--------------------------------------------------------
+		br.com.barcadero.module.sat.xml.cancelamento.Ide ide = new br.com.barcadero.module.sat.xml.cancelamento.Ide();
+		ide.setCNPJ("16716114000172");
+		ide.setNumeroCaixa("001");
+		ide.setSignAC("SGR-SAT SISTEMA DE GESTAO E RETAGUARDA DO SAT");
+		infCFe.setIde(ide);
+		//---------------------------------------------------------------
+		//NOTE: C - Identificacao do Emitente do Cupom Fiscal eletronico
+		//---------------------------------------------------------------
+		br.com.barcadero.module.sat.xml.cancelamento.Emit emit = new br.com.barcadero.module.sat.xml.cancelamento.Emit();
+		infCFe.setEmit(emit);
+		//---------------------------------------------------------------
+		//NOTE: E - Identificacao do Destinatario do Cupom Fiscal eletronco
+		//---------------------------------------------------------------
+		br.com.barcadero.module.sat.xml.cancelamento.Dest dest = new br.com.barcadero.module.sat.xml.cancelamento.Dest();
+		dest.setCpfCnpj(new CNPJ("46541673000150"));
+		infCFe.setDest(dest);
+		//---------------------------------------------------------------
+		//NOTE: W - Valores Totais do CF-e
+		//---------------------------------------------------------------
+		br.com.barcadero.module.sat.xml.cancelamento.Total total = new br.com.barcadero.module.sat.xml.cancelamento.Total();
+		infCFe.setTotal(total);
+		//---------------------------------------------------------------
+		//Z - Informacoes Adicionais do CF-e
+		//---------------------------------------------------------------
+//		InfAdic infAdic = new InfAdic();
+//		infCFe.setInfAdic(infAdic);
+		
+		cFeCanc.setInfCFe(infCFe);
+		return cFeCanc;
 	}
 }

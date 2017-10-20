@@ -4,7 +4,9 @@ import java.util.concurrent.Callable;
 
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.socket.SocketDados;
+import br.com.barcadero.local.persistence.dao.DaoCFeCancelamento;
 import br.com.barcadero.local.persistence.dao.DaoCFeVendas;
+import br.com.barcadero.local.persistence.model.CFeCancelamento;
 import br.com.barcadero.local.persistence.model.CFeVenda;
 import br.com.barcadero.local.persistence.model.SuperCFeEntidade;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
@@ -79,6 +81,7 @@ public class ThreadExecute implements Callable<String> {
 				}else if(dados instanceof CmdCancelarUltimaVenda){
 					CmdCancelarUltimaVenda cancelarUltimaVenda = (CmdCancelarUltimaVenda) dados;
 					result = handleSAT.cancelarUltimaVenda(cancelarUltimaVenda.getChave(), cancelarUltimaVenda.getCodigoDeAtivacao(),cancelarUltimaVenda.getDadosCancelamento());
+					salvarCancelamento(result);
 				}else{
 					result = "Comando não configurado!";
 				}
@@ -87,6 +90,31 @@ public class ThreadExecute implements Callable<String> {
 			}
 		}
 		return result;
+	}
+
+	private void salvarCancelamento(String result) {
+		try {
+			HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(result);
+			CFeCancelamento cFeCancelamento = new CFeCancelamento();
+			cFeCancelamento.setArquivoBase64(retornoSAT.getArquivoCFeSAT());
+			cFeCancelamento.setAssinaturaQrcode(retornoSAT.getDigestValue());
+			cFeCancelamento.setChaveConsulta(retornoSAT.getChaveDeConsulta());
+			cFeCancelamento.setCpfCnpjValue(retornoSAT.getSignatureValue());
+			SuperCFeEntidade superCFeEntidade = new SuperCFeEntidade();
+			superCFeEntidade.setCodCCCC(retornoSAT.getCod());
+			superCFeEntidade.setCodErroSAT(retornoSAT.getCodigoRetorno1());
+			superCFeEntidade.setCodSEFAZ(retornoSAT.getCodigoRetorno2());
+			superCFeEntidade.setMensagemSAT(retornoSAT.getMensagem());
+			superCFeEntidade.setNumeroSessao(retornoSAT.getNumeroSessao());
+			cFeCancelamento.setSuperCFeEntidade(superCFeEntidade );
+			cFeCancelamento.setTimeStamp(retornoSAT.getTimeStamp());
+			cFeCancelamento.setValorTotalCFe(retornoSAT.getValorTotaldoCupom());
+			DaoCFeCancelamento daoCFeCancelamento = new DaoCFeCancelamento();
+			daoCFeCancelamento.insert(cFeCancelamento);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void salvarRetornoVenda(String retorno) {
@@ -99,7 +127,7 @@ public class ThreadExecute implements Callable<String> {
 				SuperCFeEntidade cFeEntidade = new SuperCFeEntidade();
 				cFeEntidade.setCodCCCC(retornoSAT.getCodigoRetorno2());
 				cFeEntidade.setCodErroSAT(retornoSAT.getCodigoRetorno1());
-				cFeEntidade.setCodSEFAZ("0");
+				cFeEntidade.setCodSEFAZ(retornoSAT.getCod());
 				cFeEntidade.setMensagemSAT(retornoSAT.getMensagem());
 				cFeEntidade.setMensagemSEFAZ(retornoSAT.getMensagemSEFAZ());
 				cFeEntidade.setNumeroSessao(retornoSAT.getNumeroSessao());

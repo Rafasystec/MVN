@@ -44,7 +44,7 @@ public class HandleSignatureSAT {
 	}
 	
 	/**
-	 * Instancia do assinador secrel
+	 * Instancia padrao para assinar digitalmente
 	 * @param fileName : Caminho completo onde se encontra o e-CNPJ exceto o nome pois eh posto aqui.
 	 */
 	public HandleSignatureSAT(String fileName){

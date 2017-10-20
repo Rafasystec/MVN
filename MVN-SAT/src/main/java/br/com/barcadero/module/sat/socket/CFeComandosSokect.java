@@ -4,12 +4,14 @@ import java.io.IOException;
 
 import br.com.barcadero.commons.enuns.EnumTipoComandoSocket;
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
+import br.com.barcadero.commons.loggin.LogFactory;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
+import br.com.barcadero.module.sat.xml.cancelamento.CFeCanc;
 import br.com.barcadero.module.sat.xml.envio.CFe;
 
 
@@ -88,6 +90,7 @@ public class CFeComandosSokect {
 	 * @throws Exception
 	 */
 	private String enviarDadosVenda(String codigoDeAtivacao, String dadosVenda) throws Exception {
+		LogFactory.addInfor("Enviar dados de venda");
 		SocketCommand command = newSocketCommandSAT();
 		CmdEnviarDadosVenda enviarDadosVenda = new CmdEnviarDadosVenda();
 		enviarDadosVenda.setCodigoDeAtivacao(codigoDeAtivacao);
@@ -95,7 +98,14 @@ public class CFeComandosSokect {
 		enviarDadosVenda.setNumeroSessao(0);
 		command.setModuloSAT(moduloSAT);
 		command.setDados(enviarDadosVenda);
+		LogFactory.addInfor("Enviando comando de venda ao SAT");
 		command = client.callAndReceive(command);
+		LogFactory.addInfor("Comando retornado. Verificando o conteudo.");
+		if(command != null){
+			if(command.getResponse() != null){
+				LogFactory.addInfor(command.getResponse().trim().replace("\n", "").replace("\r", ""));
+			}
+		}
 		return command.getResponse();
 	}
 	
@@ -128,7 +138,7 @@ public class CFeComandosSokect {
 	 * @return
 	 * @throws Exception
 	 */
-	public String cancelarUltimaVenda(String codigoDeAtivacao, String chave, String dadosCancelamento)	throws SATException {
+	private String cancelarUltimaVenda(String codigoDeAtivacao, String chave, String dadosCancelamento)	throws SATException {
 		SocketCommand command = newSocketCommandSAT();
 		CmdCancelarUltimaVenda cancelarUltimaVenda = new CmdCancelarUltimaVenda();
 		cancelarUltimaVenda.setChave(chave);
@@ -142,6 +152,13 @@ public class CFeComandosSokect {
 			throw new SATException("Erro ao enviar comando ao módulo local " + e.getMessage());
 		}
 		return command.getResponse();
+	}
+	
+	public HandleRetornoSAT cancelarUltimaVenda(String codigoDeAtivacao, String chave, CFeCanc cFeCanc)	throws SATException,Exception {
+		String xmlCanc 	= HandleXML.normalize(HandleXML.getXMLFromObject(cFeCanc));
+		String result 	= cancelarUltimaVenda(codigoDeAtivacao, chave, xmlCanc);
+		HandleRetornoSAT handleRetornoSAT = HandleSAT.tratarRetornoVenda(result);
+		return handleRetornoSAT;
 	}
 
 	/**
