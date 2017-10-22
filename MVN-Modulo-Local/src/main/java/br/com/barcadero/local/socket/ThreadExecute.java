@@ -2,6 +2,7 @@ package br.com.barcadero.local.socket;
 
 import java.util.concurrent.Callable;
 
+import br.com.barcadero.commons.loggin.LogFactory;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.socket.SocketDados;
 import br.com.barcadero.local.persistence.dao.DaoCFeCancelamento;
@@ -66,8 +67,11 @@ public class ThreadExecute implements Callable<String> {
 		try{
 			handleSAT = new HandleSAT(command.getModuloSAT());
 		}catch(UnsatisfiedLinkError linkErro){ 
+			LogFactory.addInfor(result);
+			LogFactory.addError(linkErro);
 			result = "Erro ao carregar a DLL/SO: "+linkErro.getMessage();
 		}catch(Exception e){
+			LogFactory.addInfor("ERRO GRAVE: " + result);
 			result = "Erro ao tentar instanciar SAT"+e.getMessage();
 		}
 		if(result.trim().isEmpty()){
@@ -76,11 +80,11 @@ public class ThreadExecute implements Callable<String> {
 					result = handleSAT.consultarSAT();
 				}else if(dados instanceof CmdEnviarDadosVenda){
 					CmdEnviarDadosVenda dadosVenda = (CmdEnviarDadosVenda) dados;
-					result = handleSAT.enviarDadosVenda(dadosVenda.getDadosVenda(), dadosVenda.getCodigoDeAtivacao());
+					result = handleSAT.enviarDadosVenda(dadosVenda.getNumeroSessao(), dadosVenda.getDadosVenda(), dadosVenda.getCodigoDeAtivacao());
 					salvarRetornoVenda(result);
 				}else if(dados instanceof CmdCancelarUltimaVenda){
 					CmdCancelarUltimaVenda cancelarUltimaVenda = (CmdCancelarUltimaVenda) dados;
-					result = handleSAT.cancelarUltimaVenda(cancelarUltimaVenda.getChave(), cancelarUltimaVenda.getCodigoDeAtivacao(),cancelarUltimaVenda.getDadosCancelamento());
+					result = handleSAT.cancelarUltimaVenda(cancelarUltimaVenda.getNumeroSessao(), cancelarUltimaVenda.getChave(), cancelarUltimaVenda.getCodigoDeAtivacao(),cancelarUltimaVenda.getDadosCancelamento());
 					salvarCancelamento(result);
 				}else{
 					result = "Comando não configurado!";
@@ -94,6 +98,7 @@ public class ThreadExecute implements Callable<String> {
 
 	private void salvarCancelamento(String result) {
 		try {
+			LogFactory.addInfor("Preparando para gravar o cancelamento na base de dadso local.");
 			HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(result);
 			CFeCancelamento cFeCancelamento = new CFeCancelamento();
 			cFeCancelamento.setArquivoBase64(retornoSAT.getArquivoCFeSAT());
@@ -111,6 +116,7 @@ public class ThreadExecute implements Callable<String> {
 			cFeCancelamento.setValorTotalCFe(retornoSAT.getValorTotaldoCupom());
 			DaoCFeCancelamento daoCFeCancelamento = new DaoCFeCancelamento();
 			daoCFeCancelamento.insert(cFeCancelamento);
+			LogFactory.addInfor("OK, comando e insecao executado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,6 +125,7 @@ public class ThreadExecute implements Callable<String> {
 
 	private void salvarRetornoVenda(String retorno) {
 		try {
+			LogFactory.addInfor("Prepara para gravar a venda no banco de dados");
 			HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(retorno);
 			if(retornoSAT.getCodigoRetorno1().equals("06000")){
 				CFeVenda cFeVenda = new CFeVenda();
@@ -138,6 +145,7 @@ public class ThreadExecute implements Callable<String> {
 				cFeVenda.setValorTotalCFe(retornoSAT.getValorTotaldoCupom());
 				DaoCFeVendas daoCFeVendas = new DaoCFeVendas();
 				daoCFeVendas.insert(cFeVenda);
+				LogFactory.addInfor("OK comando de insercao executado");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

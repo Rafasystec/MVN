@@ -69,7 +69,7 @@ public class TestCancelamento {
 	public void transmitirCancelamento(String xml) throws Exception {
 		HandleSAT sat = new HandleSAT();
 		sat.definirModulo(EnumTipoModuloSAT.TANCA);
-		String result = sat.cancelarUltimaVenda("CFe35160608723218000186599000025910004973807404","12345678", xml );
+		String result = sat.cancelarUltimaVenda(151351531,"CFe35160608723218000186599000025910004973807404","12345678", xml );
 		System.out.println(result);
 	}
 	

@@ -40,17 +40,17 @@ import br.com.barcadero.module.sat.xml.util.CNPJ;
 public class TestEnviarComandoVendaSocket {
 	
 	public static void main(String[] args) {
-		CFeComandosSokect comandosSokect = new CFeComandosSokect("localhost", EnumTipoModuloSAT.EMULADOR);
-		try {
-			HandleRetornoSAT handleRetornoVendaSAT = comandosSokect.enviarDadosVenda("12345678", gerarCFeDeTeste());
-			if(handleRetornoVendaSAT.getCodigoRetorno1().equals("06000")){
-				System.out.println("Chave venda: " + handleRetornoVendaSAT.getChaveDeConsulta());
-				HandleRetornoSAT handleRetornoCanceSAT = comandosSokect.cancelarUltimaVenda("12345678", handleRetornoVendaSAT.getChaveDeConsulta(), getCfeCanc(handleRetornoVendaSAT.getChaveDeConsulta()));
-				System.out.println("Cancalamento: "+handleRetornoCanceSAT.getCodigoRetorno1());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		CFeComandosSokect comandosSokect = new CFeComandosSokect("localhost", EnumTipoModuloSAT.EMULADOR);
+//		try {
+//			HandleRetornoSAT handleRetornoVendaSAT = comandosSokect.enviarDadosVenda("12345678", gerarCFeDeTeste());
+//			if(handleRetornoVendaSAT.getCodigoRetorno1().equals("06000")){
+//				System.out.println("Chave venda: " + handleRetornoVendaSAT.getChaveDeConsulta());
+//				HandleRetornoSAT handleRetornoCanceSAT = comandosSokect.cancelarUltimaVenda("12345678", handleRetornoVendaSAT.getChaveDeConsulta(), getCfeCanc(handleRetornoVendaSAT.getChaveDeConsulta()));
+//				System.out.println("Cancalamento: "+handleRetornoCanceSAT.getCodigoRetorno1());
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public static String getCNPJSWEmuladorSP() {

@@ -1,6 +1,5 @@
 package br.com.barcadero.sat.tests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
 import br.com.barcadero.module.sat.enums.EnumIndRatISSQN;
 import br.com.barcadero.module.sat.enums.EnumIndRegra;
 import br.com.barcadero.module.sat.enums.EnumMeioPagamento;
-import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.enums.EnumOrigICMS;
 import br.com.barcadero.module.sat.enums.EnumRegimeTributarioISSQN;
 import br.com.barcadero.module.sat.enums.EnumUF;
@@ -219,7 +217,7 @@ public class MainTest {
 		
 		HandleSAT sat = new HandleSAT();
 		sat.definirModulo(EnumTipoModuloSAT.TANCA);
-		String result = sat.enviarDadosVenda(xml,"12345678");
+		String result = sat.enviarDadosVenda(123456,xml,"12345678");
 		System.out.println(result);
 	}
 	
@@ -227,7 +225,7 @@ public class MainTest {
 		System.out.println("Transmissao Integrador");
 		HandleSAT sat = new HandleSAT();
 		sat.definirModulo(EnumTipoModuloSAT.INTEGRADOR);
-		String result = sat.enviarDadosVenda(xml,"12345678");
+		String result = sat.enviarDadosVenda(165461561,xml,"12345678");
 		System.out.println(result);
 	}
 	
@@ -236,7 +234,7 @@ public class MainTest {
 		HandleSAT sat = new HandleSAT();
 		sat.definirModulo(EnumTipoModuloSAT.EMULADOR);
 		//sat.definirSatByClasse(EnumModulosSAT.TANCA.getClassName(), "");
-		String result = sat.enviarDadosVenda(xml,"12345678");
+		String result = sat.enviarDadosVenda(1561651,xml,"12345678");
 		System.out.println(result);
 	}
 	

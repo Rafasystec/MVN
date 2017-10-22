@@ -89,13 +89,13 @@ public class CFeComandosSokect {
 	 * @return
 	 * @throws Exception
 	 */
-	private String enviarDadosVenda(String codigoDeAtivacao, String dadosVenda) throws Exception {
-		LogFactory.addInfor("Enviar dados de venda");
+	private String enviarDadosVenda(int numeroDeSessao, String codigoDeAtivacao, String dadosVenda) throws Exception {
+		LogFactory.addInfor("Enviar dados de venda SOCKET");
 		SocketCommand command = newSocketCommandSAT();
 		CmdEnviarDadosVenda enviarDadosVenda = new CmdEnviarDadosVenda();
 		enviarDadosVenda.setCodigoDeAtivacao(codigoDeAtivacao);
 		enviarDadosVenda.setDadosVenda(dadosVenda);
-		enviarDadosVenda.setNumeroSessao(0);
+		enviarDadosVenda.setNumeroSessao(numeroDeSessao);
 		command.setModuloSAT(moduloSAT);
 		command.setDados(enviarDadosVenda);
 		LogFactory.addInfor("Enviando comando de venda ao SAT");
@@ -109,8 +109,8 @@ public class CFeComandosSokect {
 		return command.getResponse();
 	}
 	
-	public HandleRetornoSAT enviarDadosVenda(String codigoDeAtivacao,CFe cfe) throws Exception {
-		String retorno = enviarDadosVenda(codigoDeAtivacao, gerarXMLDeVendaCFe(cfe));
+	public HandleRetornoSAT enviarDadosVenda(int numeroDeSessao, String codigoDeAtivacao,CFe cfe) throws Exception {
+		String retorno = enviarDadosVenda(numeroDeSessao,codigoDeAtivacao, gerarXMLDeVendaCFe(cfe));
 		HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(retorno);
 		if(retornoSAT == null){
 			throw new Exception("Retorno inválido: " + retorno);
@@ -135,18 +135,21 @@ public class CFeComandosSokect {
 	 * @param codigoDeAtivacao
 	 * @param chave
 	 * @param dadosCancelamento
+	 * @param numeroSessao 
 	 * @return
 	 * @throws Exception
 	 */
-	private String cancelarUltimaVenda(String codigoDeAtivacao, String chave, String dadosCancelamento)	throws SATException {
+	private String cancelarUltimaVenda(int numeroSessao,String codigoDeAtivacao, String chave, String dadosCancelamento)	throws SATException {
 		SocketCommand command = newSocketCommandSAT();
 		CmdCancelarUltimaVenda cancelarUltimaVenda = new CmdCancelarUltimaVenda();
 		cancelarUltimaVenda.setChave(chave);
 		cancelarUltimaVenda.setCodigoDeAtivacao(codigoDeAtivacao);
 		cancelarUltimaVenda.setDadosCancelamento(dadosCancelamento);
+		cancelarUltimaVenda.setNumeroSessao(numeroSessao);
 		command.setModuloSAT(moduloSAT);
 		command.setDados(cancelarUltimaVenda);
 		try {
+			LogFactory.addInfor("Enviando comando de cancelamento via SOCKET");
 			command = client.callAndReceive(command);
 		} catch (IOException e) {
 			throw new SATException("Erro ao enviar comando ao módulo local " + e.getMessage());
@@ -154,9 +157,9 @@ public class CFeComandosSokect {
 		return command.getResponse();
 	}
 	
-	public HandleRetornoSAT cancelarUltimaVenda(String codigoDeAtivacao, String chave, CFeCanc cFeCanc)	throws SATException,Exception {
+	public HandleRetornoSAT cancelarUltimaVenda(int numeroSessao, String codigoDeAtivacao, String chave, CFeCanc cFeCanc)	throws SATException,Exception {
 		String xmlCanc 	= HandleXML.normalize(HandleXML.getXMLFromObject(cFeCanc));
-		String result 	= cancelarUltimaVenda(codigoDeAtivacao, chave, xmlCanc);
+		String result 	= cancelarUltimaVenda(numeroSessao,codigoDeAtivacao, chave, xmlCanc);
 		HandleRetornoSAT handleRetornoSAT = HandleSAT.tratarRetornoVenda(result);
 		return handleRetornoSAT;
 	}

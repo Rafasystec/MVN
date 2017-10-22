@@ -2,18 +2,20 @@ package br.com.barcadero.commons.socket;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.KeyStore;
+
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
+
+import br.com.barcadero.commons.loggin.LogFactory;
 
 
 public class ClientSocket {
@@ -251,15 +253,18 @@ public class ClientSocket {
 		ObjectOutputStream	out = null;
 		ServerSocket server		= null;
 		try{
-			System.out.println("Enviando comando para o ip " + getIpServidor());
+			LogFactory.addInfor("Enviando comando para o ip " + getIpServidor());
 			client	= new Socket(getIpServidor(), SocketServer.SERVER_PORT);
 			out 	= new ObjectOutputStream(client.getOutputStream());
 			out.writeObject(comando);
-			System.out.println("Enviou comando");
+			LogFactory.addInfor("Enviou comando: " + comando.getTipoComando().name());
 			server = new ServerSocket(SocketServer.CLIENT_PORT);
 			server.setSoTimeout(50000);
 			Socket cliente = server.accept();
 			SocketCommand comandoRet = SocketUtil.getObjectFromStream(cliente);
+			if(comandoRet != null){
+				LogFactory.addInfor("Retorno do Socket: " + comandoRet.getResponse());
+			}
 			return comandoRet;
 		} catch (IOException e) {
 			e.printStackTrace();

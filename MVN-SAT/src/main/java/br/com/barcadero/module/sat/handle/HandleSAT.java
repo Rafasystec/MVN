@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
+import br.com.barcadero.commons.loggin.LogFactory;
 import br.com.barcadero.commons.loggin.LoggerFile;
 import br.com.barcadero.commons.util.HandleFiles;
 import br.com.barcadero.module.sat.devices.bematech.SATBematech;
@@ -153,56 +154,6 @@ public String ativarSat(int subComando, String cnpj, int cUF) throws Exception, 
 	}	
 }
 
-
-/**
- * Esta função faz parte do processo de envio dos dados de venda do AC para o Equipamento
- * SAT.
- * @param dadosVenda :
- * <p>Os campos obrigat�rios, bem como os tamanhos e formatos de cada um, devem seguir a</p>
- * <p>especificação do leiaute do arquivo de venda <strong>(vide Cap�tulo 4)</strong>. O AC deverão enviar os</p>
- * <p>dados em formato XML com suas respectivas tags.</p>
- * @return
- * @throws Exception
- * @author Rafael Rocha
- */
-@Deprecated
-public String enviarDadosVenda(String dadosVenda) throws Exception
-{
-	String retorno	 = "";
-	int numeroSessao = 0;
-	int retry        = 1;
-	Thread thread	 = null;
-	String codAtivacao="";
-	try {
-		numeroSessao = getNumeroSessao();	
-		while (retry <= numberOfRetry) {
-			thread 		 = iniciarTimeout(2000);
-			retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, codAtivacao, dadosVenda);
-			if (!verificarTimeout(thread)) {
-				try {					
-					consultarNumeroSessao();
-					break;
-				} catch (SATException mfe) {								
-					if (retry == numberOfRetry) {
-						throw new SATException("N�mero de tentativas excedido - M�dulo n�o Responde");
-					}					
-					retry++;
-					numeroSessao = getNumeroSessao();
-				}						
-			} else {
-				break;
-			}
-		}
-		verificarRetorno(retorno, thread);
-		retorno = tratarRetornoCaracteresEspeciais(retorno);
-		return retorno;
-	} catch (Exception e) {
-		
-		throw e;
-	}
-	
-}
-
 /**
  * Enviar dados da venda para o SAT
  * @param dadosVenda
@@ -210,13 +161,14 @@ public String enviarDadosVenda(String dadosVenda) throws Exception
  * @return
  * @throws Exception
  */
-public String enviarDadosVenda(String dadosVenda, String codigoAtivacao) throws Exception{
+public String enviarDadosVenda(int numeroSessao, String dadosVenda, String codigoAtivacao) throws Exception{
 	String retorno	 = "";
-	int numeroSessao = 0;
 	Thread thread	 = null;
-	numeroSessao = getNumeroSessao();
-	thread 		 = iniciarTimeout(2000);
-	retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, codigoAtivacao, dadosVenda);	
+	LogFactory.addInfor("Enviar os dados de venda ao modulo");
+	LogFactory.addInfor("VENDA XML: " + dadosVenda);
+	thread 		 = iniciarTimeout(4000);
+	retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, codigoAtivacao, dadosVenda);
+	LogFactory.addInfor("RETORNO: " + dadosVenda);
 	verificarRetorno(retorno, thread);
 	retorno = tratarRetornoCaracteresEspeciais(retorno);	
 	return retorno;
@@ -669,11 +621,10 @@ public static HandleRetornoSAT tratarRetornoStatusOperacional(String pRetorno) t
 public static HandleRetornoSAT tratarRetornoConsultaSat(String pRetorno) throws Exception
 {	
 	try {
-		HandleRetornoSAT retornoSatVO 	= null;
-		String[] camposRetorno 		= null;
+		HandleRetornoSAT retornoSatVO = null;
+		String[] camposRetorno 		  = null;
 		if (temCamposRetorno(pRetorno))	{
-			camposRetorno = ajustarRetorno(pRetorno);
-			// numeroSessao|EEEEE|mensagem|cod|mensagemSEFAZ							
+			camposRetorno = ajustarRetorno(pRetorno);							
 			return tratarRetornoSat(camposRetorno);
 		}	
 		return retornoSatVO;
@@ -692,7 +643,6 @@ private static HandleRetornoSAT tratarRetornoSat(String[] pCamposRetorno) throws
 {	
 	try {
 		HandleRetornoSAT retornoSatVO = new HandleRetornoSAT();
-		// numeroSessao|EEEEE|mensagem|cod|mensagemSEFAZ
 		retornoSatVO.setNumeroSessao(ajustarCampoRetorno(pCamposRetorno, 0));
 		retornoSatVO.setCodigoRetorno1(ajustarCampoRetorno(pCamposRetorno, 1));
 		retornoSatVO.setMensagem(ajustarCampoRetorno(pCamposRetorno, 2));
@@ -781,7 +731,6 @@ private static void finalizarTimeout(Thread t)
 			throw new InterruptedException();
 		}
 	}catch (InterruptedException e)	{
-		//e.printStackTrace();
 	}
 }
 
@@ -812,7 +761,6 @@ public Integer getNumeroSessao()throws Exception{
 			return getNumeroSessao();
 		}
 		numeroAleatorio = new BigDecimal(numeroAleatorio*Math.pow(10, 5)).add(new BigDecimal(Math.random()*Math.pow(10, 5))).intValue();
-		//guardarNumeroSessao(numeroAleatorio);
 		return numeroAleatorio;
 	} catch (Exception e) {
 		throw e;
@@ -827,34 +775,14 @@ public Integer getNumeroSessao()throws Exception{
  * @throws Exception
  * @author Rafael Rocha
  */
-public String cancelarUltimaVenda(String chave, String codigoAtivacao, String dadosCancelamento) throws Exception
+public String cancelarUltimaVenda(int numeroDeSessao,String chave, String codigoAtivacao, String dadosCancelamento) throws Exception
 {
-	int numeroSessao	= 0;
-	Thread thread  		= null;	
 	String retorno		= "";
-	int retry      		= 1;
 	try {
-		while (retry <= numberOfRetry) {
-			numeroSessao = getNumeroSessao();
-			thread  = iniciarTimeout(3000);
-			retorno = this.iSatMfe.CancelarUltimaVenda(numeroSessao, codigoAtivacao, chave, dadosCancelamento);
-			if (!verificarTimeout(thread)) {
-				try {					
-					consultarNumeroSessao();
-					break;
-				} catch (SATException mfe) {								
-					if (retry == numberOfRetry) {
-						String msg = "Número de tentativas excedido - Módulo não Responde";
-						throw new SATException(msg);
-					}					
-					retry++;
-					numeroSessao = getNumeroSessao();
-				}						
-			} else {
-				break;
-			}
-		}
-		verificarRetorno(retorno, thread);
+		LogFactory.addInfor("Cancelar ultima venda");
+		LogFactory.addInfor(dadosCancelamento.trim().replace("\n", "").replace("\r",""));
+		retorno = this.iSatMfe.CancelarUltimaVenda(numeroDeSessao, codigoAtivacao, chave, dadosCancelamento);
+		LogFactory.addInfor("RETORNO: " + retorno);
 		retorno = ajustarRetornoSatMfe(retorno);
 		return retorno;
 	} catch (Exception e) {
@@ -870,6 +798,7 @@ public String cancelarUltimaVenda(String chave, String codigoAtivacao, String da
  */
 public void definirModulo(EnumTipoModuloSAT typeMode) throws UnsatisfiedLinkError, Exception {
 	try{
+		LogFactory.addInfor("Definindo modulo: " + typeMode.name());
 		switch (typeMode) {
 		case BEMATECH:
 			configurarBematechRB1000("");
@@ -946,6 +875,7 @@ private void configurarEmulador() throws UnsatisfiedLinkError,Exception{
 
 private void configurarIntegradorFiscalSEFAZ() throws Exception{
 	try {
+		LogFactory.addInfor("Iniciando Integrador Fiscal SEFAZ.");
 		this.iSatMfe = new IntegradorMFeImpl(new File("C:\\Integrador\\Input"), new File("C:\\Integrador\\Output"));
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -1148,14 +1078,13 @@ public String verificarSeVendaFoiOK()throws Exception {
  * @return
  * @throws Exception
  */
-public String reEnviarDadosVenda(String dadosVenda) throws Exception
+public String reEnviarDadosVenda(int numeroSessao, String dadosVenda) throws Exception
 {
 	String retorno	 = "";
-	int numeroSessao = 0;
 	int retry        = 1;
 	Thread thread	 = null;
 	try {
-		
+		LogFactory.addInfor("Reenviar dados da venda: " + dadosVenda);
 		while (retry <= numberOfRetry) {
 			try{
 				String retVerificacao = verificarSeVendaFoiOK();
@@ -1166,7 +1095,6 @@ public String reEnviarDadosVenda(String dadosVenda) throws Exception
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			numeroSessao = getNumeroSessao();	
 			thread 		 = iniciarTimeout(2000);
 			retorno 	 = this.iSatMfe.EnviarDadosVenda(numeroSessao, "", dadosVenda);
 			if (!verificarTimeout(thread)) {
