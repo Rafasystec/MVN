@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamento;
 import br.com.barcadero.module.sat.devices.integrador.xml.Componente;
 import br.com.barcadero.module.sat.devices.integrador.xml.Identificador;
 import br.com.barcadero.module.sat.devices.integrador.xml.IntegradorRoot;
@@ -385,6 +386,16 @@ public class IntegradorMFeImpl implements InterfaceSAT{
 			return ERROR_CODE+" TrocarCodigoDeAtivacao " + e.getMessage();
 		}
 	}
+	/**
+	 * 
+	 * @param enviarPagamento
+	 * @return
+	 */
+	public String EnviarPagamento(VFPeEnviarPagamento enviarPagamento) {
+		String fileName = "EnviarPagamento.xml";
+		String result 	= writeAndRead(enviarPagamento.getIntegrador(), fileName );
+		return result;
+	}
 
 	public File getDirInputIntegrador() {
 		return dirInputIntegrador;
@@ -403,7 +414,7 @@ public class IntegradorMFeImpl implements InterfaceSAT{
 	}
 	
 	
-	private String writeAndRead(IntegradorRoot integradorRoot,String fileName) {
+	private String writeAndRead(Object integradorRoot,String fileName) {
 		try {
 			deleteFiles(getDirInputIntegrador().getAbsolutePath(), "xml");
 			if(!getDirInputIntegrador().exists()){
@@ -430,7 +441,9 @@ public class IntegradorMFeImpl implements InterfaceSAT{
 				qtdTentativas++;
 				if(qtdTentativas > 60){
 					System.out.println("Time Out : Integrador SEFAZ não responde.Por favor verifique se o mesmo está funcionando corretamente.");
-					return handleTimeOut(integradorRoot);
+					if(integradorRoot instanceof IntegradorRoot){
+						return handleTimeOut((IntegradorRoot)integradorRoot);
+					}
 				}
 			} while (isIntegradorRespondeu == false);
 		} catch (Exception e) {

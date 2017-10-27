@@ -14,10 +14,12 @@ import br.com.barcadero.module.sat.devices.bematech.SATBematech;
 import br.com.barcadero.module.sat.devices.dimep.SATDimep;
 import br.com.barcadero.module.sat.devices.emulador.SATEmuladorSP;
 import br.com.barcadero.module.sat.devices.integrador.IntegradorMFeImpl;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.HelperEnviarPagamento;
 import br.com.barcadero.module.sat.devices.sefaz.MFeSEFAZ;
 import br.com.barcadero.module.sat.devices.tanca.ts1000.SATTanca;
 import br.com.barcadero.module.sat.enums.EnumModulosSAT;
 import br.com.barcadero.module.sat.exceptions.SATException;
+import br.com.barcadero.module.sat.socket.CmdEnviarPagamentoVFe;
 
 
 
@@ -1151,6 +1153,14 @@ public String associarAssinatura(String cnpjSoftwareHouse, String cnpjContribuin
 	} catch (Exception e) {
 		throw e;
 	}
+}
+
+public String executarEnviarPagamentoVFe(CmdEnviarPagamentoVFe cmdEnviarPagamentoVFe) {
+	LogFactory.addInfor("Enviar pagamento ao Validador Fiscal");
+	IntegradorMFeImpl integrador = new IntegradorMFeImpl(new File(""), new File(""));
+	String result = integrador.EnviarPagamento(HelperEnviarPagamento.buildXML(cmdEnviarPagamentoVFe.getPagamentoVFPe()));
+	LogFactory.addInfor("Retorno: " + result);
+	return result;
 }
 
 

@@ -1,7 +1,6 @@
 package br.com.barcadero.local.socket;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.Callable;
@@ -14,7 +13,10 @@ import java.util.concurrent.TimeoutException;
 
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
+import br.com.barcadero.commons.socket.SocketDados;
 import br.com.barcadero.commons.socket.SocketUtil;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.HelperEnviarPagamento;
+import br.com.barcadero.module.sat.socket.CmdEnviarPagamentoVFe;
 
 public class ThreadSocket implements Runnable {
 
@@ -68,6 +70,15 @@ public class ThreadSocket implements Runnable {
 		try {
 			try {
 				comando.setResponse(future.get(20, TimeUnit.SECONDS));
+				
+				if(comando != null){
+					SocketDados dados =comando.getDados();
+					if(dados instanceof CmdEnviarPagamentoVFe){
+						CmdEnviarPagamentoVFe cmdEnviarPagamentoVFe = (CmdEnviarPagamentoVFe) dados;
+						cmdEnviarPagamentoVFe.setRetornoParaAplicacao(HelperEnviarPagamento.gerarRetornoParaAplicacao(comando.getResponse()));
+						comando.setDados(cmdEnviarPagamentoVFe);
+					}
+				}
 			} catch (TimeoutException e) {
 				comando.setResponse("Socket não responde.");
 			}

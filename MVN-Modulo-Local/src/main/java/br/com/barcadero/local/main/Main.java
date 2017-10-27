@@ -11,10 +11,8 @@ import br.com.barcadero.local.views.JFMain;
  */
 public class Main {
 
-	
-	public static final String APP_NAME 	= "Nautilus";
+	public static final String APP_NAME 	= "Módulo Local";
 	public static final String APP_VERSION	= "1.0 - DesckTop";
-	private JFMain jfMain;
 	public static void main(String[] args) {
 			//----------------------------------------
 			//Iniciando a persistencia da aplicacao

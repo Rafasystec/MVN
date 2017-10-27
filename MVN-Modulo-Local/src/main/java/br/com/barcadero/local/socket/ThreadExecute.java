@@ -15,6 +15,7 @@ import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.socket.CmdCancelarUltimaVenda;
 import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
 import br.com.barcadero.module.sat.socket.CmdEnviarDadosVenda;
+import br.com.barcadero.module.sat.socket.CmdEnviarPagamentoVFe;
 
 public class ThreadExecute implements Callable<String> {
 
@@ -38,7 +39,6 @@ public class ThreadExecute implements Callable<String> {
 				return "ECF não implementado.";
 			case CMD_FOR_SAT:
 				return executarComandoSAT(command);
-				//return "Comando Executado sat executado";
 			default:
 				return "Tipo de comando não implementado : " + command.getTipoComando().toString() ;
 			}
@@ -86,6 +86,9 @@ public class ThreadExecute implements Callable<String> {
 					CmdCancelarUltimaVenda cancelarUltimaVenda = (CmdCancelarUltimaVenda) dados;
 					result = handleSAT.cancelarUltimaVenda(cancelarUltimaVenda.getNumeroSessao(), cancelarUltimaVenda.getChave(), cancelarUltimaVenda.getCodigoDeAtivacao(),cancelarUltimaVenda.getDadosCancelamento());
 					salvarCancelamento(result);
+				}else if(dados instanceof CmdEnviarPagamentoVFe){
+					CmdEnviarPagamentoVFe cmdEnviarPagamentoVFe = (CmdEnviarPagamentoVFe) dados;
+					result = handleSAT.executarEnviarPagamentoVFe(cmdEnviarPagamentoVFe);
 				}else{
 					result = "Comando não configurado!";
 				}
