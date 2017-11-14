@@ -108,13 +108,11 @@ public class ThreadExecute implements Callable<String> {
 			cFeCancelamento.setAssinaturaQrcode(retornoSAT.getDigestValue());
 			cFeCancelamento.setChaveConsulta(retornoSAT.getChaveDeConsulta());
 			cFeCancelamento.setCpfCnpjValue(retornoSAT.getSignatureValue());
-			SuperCFeEntidade superCFeEntidade = new SuperCFeEntidade();
-			superCFeEntidade.setCodCCCC(retornoSAT.getCod());
-			superCFeEntidade.setCodErroSAT(retornoSAT.getCodigoRetorno1());
-			superCFeEntidade.setCodSEFAZ(retornoSAT.getCodigoRetorno2());
-			superCFeEntidade.setMensagemSAT(retornoSAT.getMensagem());
-			superCFeEntidade.setNumeroSessao(retornoSAT.getNumeroSessao());
-			cFeCancelamento.setSuperCFeEntidade(superCFeEntidade );
+			cFeCancelamento.setCodCCCC(retornoSAT.getCod());
+			cFeCancelamento.setCodErroSAT(retornoSAT.getCodigoRetorno1());
+			cFeCancelamento.setCodSEFAZ(retornoSAT.getCodigoRetorno2());
+			cFeCancelamento.setMensagemSAT(retornoSAT.getMensagem());
+			cFeCancelamento.setNumeroSessao(retornoSAT.getNumeroSessao());
 			cFeCancelamento.setTimeStamp(retornoSAT.getTimeStamp());
 			cFeCancelamento.setValorTotalCFe(retornoSAT.getValorTotaldoCupom());
 			DaoCFeCancelamento daoCFeCancelamento = new DaoCFeCancelamento();
@@ -134,14 +132,14 @@ public class ThreadExecute implements Callable<String> {
 				CFeVenda cFeVenda = new CFeVenda();
 				cFeVenda.setArquivoBase64(retornoSAT.getArquivoCFeSAT());
 				cFeVenda.setAssinaturaQrcode(retornoSAT.getDigestValue());
-				SuperCFeEntidade cFeEntidade = new SuperCFeEntidade();
-				cFeEntidade.setCodCCCC(retornoSAT.getCodigoRetorno2());
-				cFeEntidade.setCodErroSAT(retornoSAT.getCodigoRetorno1());
-				cFeEntidade.setCodSEFAZ(retornoSAT.getCod());
-				cFeEntidade.setMensagemSAT(retornoSAT.getMensagem());
-				cFeEntidade.setMensagemSEFAZ(retornoSAT.getMensagemSEFAZ());
-				cFeEntidade.setNumeroSessao(retornoSAT.getNumeroSessao());
-				cFeVenda.setcFeEntidade(cFeEntidade );
+
+				cFeVenda.setCodCCCC(retornoSAT.getCodigoRetorno2());
+				cFeVenda.setCodErroSAT(retornoSAT.getCodigoRetorno1());
+				cFeVenda.setCodSEFAZ(retornoSAT.getCod());
+				cFeVenda.setMensagemSAT(retornoSAT.getMensagem());
+				cFeVenda.setMensagemSEFAZ(retornoSAT.getMensagemSEFAZ());
+				cFeVenda.setNumeroSessao(retornoSAT.getNumeroSessao());
+				
 				cFeVenda.setChaveConsulta(retornoSAT.getChaveDeConsulta());
 				cFeVenda.setCpfCnpjValue(retornoSAT.getSignatureValue());
 				cFeVenda.setTimeStamp(retornoSAT.getTimeStamp());
