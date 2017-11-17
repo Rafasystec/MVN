@@ -1123,7 +1123,7 @@ public String reEnviarDadosVenda(int numeroSessao, String dadosVenda) throws Exc
 }
 
 /**
- * A Associacao da assinatura do AC serah realizada atrav�s da funcao AssociarAssinatura.
+ * A Associacao da assinatura do AC serah realizada através da funcao AssociarAssinatura.
  * Segue a estrutura da funcao.
  * @param cnpjSoftwareHouse
  * @param cnpjContribuinte

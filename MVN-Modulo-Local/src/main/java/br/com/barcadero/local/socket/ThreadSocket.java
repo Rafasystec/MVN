@@ -69,7 +69,7 @@ public class ThreadSocket implements Runnable {
 		Future<String> future 		= poolMFe.submit(callable);
 		try {
 			try {
-				comando.setResponse(future.get(20, TimeUnit.SECONDS));
+				comando.setResponse(future.get(60, TimeUnit.SECONDS));
 				
 				if(comando != null){
 					SocketDados dados =comando.getDados();

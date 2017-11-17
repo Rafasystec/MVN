@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.xml.HandleXML;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.ParametrosPagamentoVFPe;
 import br.com.barcadero.module.sat.enums.EnumCFeCSTPISAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTCOFINSAliq;
 import br.com.barcadero.module.sat.enums.EnumCSTICMS00;
@@ -40,17 +41,41 @@ import br.com.barcadero.module.sat.xml.util.CNPJ;
 public class TestEnviarComandoVendaSocket {
 	
 	public static void main(String[] args) {
-//		CFeComandosSokect comandosSokect = new CFeComandosSokect("localhost", EnumTipoModuloSAT.EMULADOR);
-//		try {
-//			HandleRetornoSAT handleRetornoVendaSAT = comandosSokect.enviarDadosVenda("12345678", gerarCFeDeTeste());
-//			if(handleRetornoVendaSAT.getCodigoRetorno1().equals("06000")){
-//				System.out.println("Chave venda: " + handleRetornoVendaSAT.getChaveDeConsulta());
-//				HandleRetornoSAT handleRetornoCanceSAT = comandosSokect.cancelarUltimaVenda("12345678", handleRetornoVendaSAT.getChaveDeConsulta(), getCfeCanc(handleRetornoVendaSAT.getChaveDeConsulta()));
-//				System.out.println("Cancalamento: "+handleRetornoCanceSAT.getCodigoRetorno1());
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		CFeComandosSokect comandosSokect = new CFeComandosSokect("localhost", EnumTipoModuloSAT.EMULADOR);
+		try {
+			HandleRetornoSAT handleRetornoVendaSAT = comandosSokect.enviarDadosVenda(123,"12345678", gerarCFeDeTeste());
+			if(handleRetornoVendaSAT.getCodigoRetorno1().equals("06000")){
+				System.out.println("Chave venda: " + handleRetornoVendaSAT.getChaveDeConsulta());
+				HandleRetornoSAT handleRetornoCanceSAT = comandosSokect.cancelarUltimaVenda(1232456,"12345678", handleRetornoVendaSAT.getChaveDeConsulta(), getCfeCanc(handleRetornoVendaSAT.getChaveDeConsulta()));
+				System.out.println("Cancalamento: "+handleRetornoCanceSAT.getCodigoRetorno1());
+			}
+			enviarPagamentoAoValidadorFiscalViaSocket(comandosSokect);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Realiza a operação de EnviarPagamento ao validador Fiscal.
+	 * @param comandosSokect
+	 * @throws Exception
+	 */
+	private static void enviarPagamentoAoValidadorFiscalViaSocket(CFeComandosSokect comandosSokect) throws Exception {
+		ParametrosPagamentoVFPe pagamentoVFPe = new ParametrosPagamentoVFPe();
+		pagamentoVFPe.setChaveAcessoValidador("");
+		pagamentoVFPe.setChaveRequisicao("");
+		pagamentoVFPe.setCNPJ("");
+		pagamentoVFPe.setCodigoMoeda("");
+		pagamentoVFPe.setEmitirCupomNFCE("");
+		pagamentoVFPe.setEstabelecimento("");
+		pagamentoVFPe.setHabilitarControleAntiFraude("");
+		pagamentoVFPe.setHabilitarMultiplosPagamentos("");
+		pagamentoVFPe.setIcmsBase("");
+		pagamentoVFPe.setIdentificador("");
+		pagamentoVFPe.setOrigemPagamento("");
+		pagamentoVFPe.setSerialPOS("");
+		pagamentoVFPe.setValorTotalVenda("");
+		//Enviar EnviarPagamento VFPe fiscal
+		comandosSokect.enviarPagamentoValidador(pagamentoVFPe);
 	}
 
 	public static String getCNPJSWEmuladorSP() {

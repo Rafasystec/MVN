@@ -8,6 +8,9 @@ import br.com.barcadero.commons.loggin.LogFactory;
 import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.xml.HandleXML;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.ParametrosPagamentoVFPe;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamento;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamentoResposta;
 import br.com.barcadero.module.sat.exceptions.SATException;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
@@ -342,6 +345,18 @@ public class CFeComandosSokect {
 		command.setDados(trocarCodigoDeAtivacao);
 		command = client.callAndReceive(command);
 		return command.getResponse();
+	}
+	
+	public VFPeEnviarPagamentoResposta enviarPagamentoValidador(ParametrosPagamentoVFPe pagamentoVFPe) throws Exception {
+		SocketCommand command = newSocketCommandSAT();
+		CmdEnviarPagamentoVFe pagamentoVPe = new CmdEnviarPagamentoVFe();
+		pagamentoVPe.setPagamentoVFPe(pagamentoVFPe);
+		
+		command.setDados(pagamentoVPe);
+		command = client.callAndReceive(command);
+		 String response = command.getResponse();
+		 System.out.println(response);
+		 return null;
 	}
 	/**
 	 * 
