@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import javax.xml.bind.JAXBException;
+
 import org.apache.log4j.Logger;
 
 import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
@@ -15,6 +17,9 @@ import br.com.barcadero.module.sat.devices.dimep.SATDimep;
 import br.com.barcadero.module.sat.devices.emulador.SATEmuladorSP;
 import br.com.barcadero.module.sat.devices.integrador.IntegradorMFeImpl;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.HelperEnviarPagamento;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidador;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorDadosParaEnviar;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorResposta;
 import br.com.barcadero.module.sat.devices.sefaz.MFeSEFAZ;
 import br.com.barcadero.module.sat.devices.tanca.ts1000.SATTanca;
 import br.com.barcadero.module.sat.enums.EnumModulosSAT;
@@ -1163,5 +1168,10 @@ public String executarEnviarPagamentoVFe(CmdEnviarPagamentoVFe cmdEnviarPagament
 	return result;
 }
 
+public String executarVerificarStatusValidador(VFPeVerificarStatusValidadorDadosParaEnviar dadosParaEnviar ) throws JAXBException, Exception {
+	IntegradorMFeImpl integrador = new IntegradorMFeImpl(new File(""), new File(""));
+	String result  = integrador.executarVerificarStatusValidador(dadosParaEnviar);
+	return result;
+}
 
 } /** End Class */

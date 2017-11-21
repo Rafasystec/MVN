@@ -26,7 +26,6 @@ public class VFPeVerificarStatusValidador {
 		metodo.setNome("VFP-e");
 		componente.setMetodo(metodo);
 		integrador.setComponente(componente );
-		
 		identificador.setValor(dadosParaEnviar.getValorIdentificador());
 		integrador.setIdentificador(identificador );
 		return integrador;

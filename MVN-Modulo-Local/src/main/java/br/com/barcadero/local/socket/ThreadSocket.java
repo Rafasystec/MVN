@@ -15,8 +15,11 @@ import br.com.barcadero.commons.socket.ClientSocket;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.socket.SocketDados;
 import br.com.barcadero.commons.socket.SocketUtil;
+import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.HelperEnviarPagamento;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorResposta;
 import br.com.barcadero.module.sat.socket.CmdEnviarPagamentoVFe;
+import br.com.barcadero.module.sat.socket.CmdVerificarStatusValidador;
 
 public class ThreadSocket implements Runnable {
 
@@ -77,6 +80,16 @@ public class ThreadSocket implements Runnable {
 						CmdEnviarPagamentoVFe cmdEnviarPagamentoVFe = (CmdEnviarPagamentoVFe) dados;
 						cmdEnviarPagamentoVFe.setRetornoParaAplicacao(HelperEnviarPagamento.gerarRetornoParaAplicacao(comando.getResponse()));
 						comando.setDados(cmdEnviarPagamentoVFe);
+					}else if(dados instanceof CmdVerificarStatusValidador) {
+						CmdVerificarStatusValidador cmdVerificarStatusValidador = (CmdVerificarStatusValidador) dados;
+						VFPeVerificarStatusValidadorResposta response = new VFPeVerificarStatusValidadorResposta();
+						try {
+							response = (VFPeVerificarStatusValidadorResposta) HandleXML.unMarshal(comando.getResponse(), VFPeVerificarStatusValidadorResposta.class);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						cmdVerificarStatusValidador.setResponse(response);
+						comando.setDados(cmdVerificarStatusValidador);
 					}
 				}
 			} catch (TimeoutException e) {
@@ -98,7 +111,6 @@ public class ThreadSocket implements Runnable {
 		System.out.println("Enviar resposta para o cliente socket que chamou");
 		System.out.println("IP host solicitante: " + comando.getIpHost());
 		ClientSocket host = new ClientSocket();
-		//comando.setResposta("Resposta para o Host : " + comando.getIpHost() + " - Vinda do servidor");
 		host.setIpServidor(comando.getIpHost());
 		host.sendForRemoteServer(comando);
 	}

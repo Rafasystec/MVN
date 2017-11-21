@@ -9,13 +9,13 @@ import br.com.barcadero.local.persistence.dao.DaoCFeCancelamento;
 import br.com.barcadero.local.persistence.dao.DaoCFeVendas;
 import br.com.barcadero.local.persistence.model.CFeCancelamento;
 import br.com.barcadero.local.persistence.model.CFeVenda;
-import br.com.barcadero.local.persistence.model.SuperCFeEntidade;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.socket.CmdCancelarUltimaVenda;
 import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
 import br.com.barcadero.module.sat.socket.CmdEnviarDadosVenda;
 import br.com.barcadero.module.sat.socket.CmdEnviarPagamentoVFe;
+import br.com.barcadero.module.sat.socket.CmdVerificarStatusValidador;
 
 public class ThreadExecute implements Callable<String> {
 
@@ -38,6 +38,7 @@ public class ThreadExecute implements Callable<String> {
 				System.out.println("Comunicacao com o ECF nao implementado");
 				return "ECF não implementado.";
 			case CMD_FOR_SAT:
+				LogFactory.addInfor("Executar comando SAT: "+command.getCommand());
 				return executarComandoSAT(command);
 			default:
 				return "Tipo de comando não implementado : " + command.getTipoComando().toString() ;
@@ -80,15 +81,23 @@ public class ThreadExecute implements Callable<String> {
 					result = handleSAT.consultarSAT();
 				}else if(dados instanceof CmdEnviarDadosVenda){
 					CmdEnviarDadosVenda dadosVenda = (CmdEnviarDadosVenda) dados;
+					CFeVenda cFeVenda = salvarVendaInicial(dadosVenda.getNumeroSessao(), dadosVenda.getDadosVenda());
 					result = handleSAT.enviarDadosVenda(dadosVenda.getNumeroSessao(), dadosVenda.getDadosVenda(), dadosVenda.getCodigoDeAtivacao());
-					salvarRetornoVenda(result);
+					salvarRetornoVenda(result,cFeVenda);
 				}else if(dados instanceof CmdCancelarUltimaVenda){
 					CmdCancelarUltimaVenda cancelarUltimaVenda = (CmdCancelarUltimaVenda) dados;
+					CFeCancelamento cancelamentoInicial = salvarCancelamentoInicial(cancelarUltimaVenda.getNumeroSessao(), cancelarUltimaVenda.getDadosCancelamento(),cancelarUltimaVenda.getChave());
 					result = handleSAT.cancelarUltimaVenda(cancelarUltimaVenda.getNumeroSessao(), cancelarUltimaVenda.getChave(), cancelarUltimaVenda.getCodigoDeAtivacao(),cancelarUltimaVenda.getDadosCancelamento());
-					salvarCancelamento(result);
+					salvarCancelamento(result,cancelamentoInicial);
 				}else if(dados instanceof CmdEnviarPagamentoVFe){
 					CmdEnviarPagamentoVFe cmdEnviarPagamentoVFe = (CmdEnviarPagamentoVFe) dados;
 					result = handleSAT.executarEnviarPagamentoVFe(cmdEnviarPagamentoVFe);
+				}else if(dados instanceof CmdVerificarStatusValidador) {
+					LogFactory.addInfor("Verificar Status validador Fiscal:");
+					CmdVerificarStatusValidador cmdVerificarStatusValidador = (CmdVerificarStatusValidador) dados;
+					result = handleSAT.executarVerificarStatusValidador(cmdVerificarStatusValidador.getDadosParaEnviarAoValidador());
+					LogFactory.addInfor("Retorno do Integrador: ");
+					LogFactory.addInfor(result);
 				}else{
 					result = "Comando não configurado!";
 				}
@@ -99,11 +108,27 @@ public class ThreadExecute implements Callable<String> {
 		return result;
 	}
 
-	private void salvarCancelamento(String result) {
+	private CFeCancelamento salvarCancelamentoInicial(int numeroSessao, String dadosCancelamento, String chaveCFeACancelar) {
+		CFeCancelamento cFeCancelamento = new CFeCancelamento();
+		cFeCancelamento.setXml(dadosCancelamento);
+		cFeCancelamento.setNumeroSessao(""+numeroSessao);
+		cFeCancelamento.setChaveASerCancelada(chaveCFeACancelar);
+		DaoCFeCancelamento daoCFeCancelamento = new DaoCFeCancelamento();
+		try {
+			return daoCFeCancelamento.insert(cFeCancelamento);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new CFeCancelamento();
+		}
+		
+	}
+	private void salvarCancelamento(String result,CFeCancelamento cFeCancelamento) {
 		try {
 			LogFactory.addInfor("Preparando para gravar o cancelamento na base de dadso local.");
 			HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(result);
-			CFeCancelamento cFeCancelamento = new CFeCancelamento();
+			if(cFeCancelamento == null) {
+				cFeCancelamento = new CFeCancelamento();
+			}
 			cFeCancelamento.setArquivoBase64(retornoSAT.getArquivoCFeSAT());
 			cFeCancelamento.setAssinaturaQrcode(retornoSAT.getDigestValue());
 			cFeCancelamento.setChaveConsulta(retornoSAT.getChaveDeConsulta());
@@ -124,12 +149,14 @@ public class ThreadExecute implements Callable<String> {
 		
 	}
 
-	private void salvarRetornoVenda(String retorno) {
+	private void salvarRetornoVenda(String retorno,CFeVenda cFeVenda) {
 		try {
 			LogFactory.addInfor("Prepara para gravar a venda no banco de dados");
 			HandleRetornoSAT retornoSAT = HandleSAT.tratarRetornoVenda(retorno);
 			if(retornoSAT.getCodigoRetorno1().equals("06000")){
-				CFeVenda cFeVenda = new CFeVenda();
+				if(cFeVenda == null) {
+					cFeVenda = new CFeVenda();
+				}
 				cFeVenda.setArquivoBase64(retornoSAT.getArquivoCFeSAT());
 				cFeVenda.setAssinaturaQrcode(retornoSAT.getDigestValue());
 
@@ -145,13 +172,26 @@ public class ThreadExecute implements Callable<String> {
 				cFeVenda.setTimeStamp(retornoSAT.getTimeStamp());
 				cFeVenda.setValorTotalCFe(retornoSAT.getValorTotaldoCupom());
 				DaoCFeVendas daoCFeVendas = new DaoCFeVendas();
-				daoCFeVendas.insert(cFeVenda);
+				daoCFeVendas.update(cFeVenda);
 				LogFactory.addInfor("OK comando de insercao executado");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private CFeVenda salvarVendaInicial(int numeroSessao, String dadosVenda) {
+		CFeVenda cFeVenda = new CFeVenda();
+		cFeVenda.setNumeroSessao(""+numeroSessao);
+		cFeVenda.setXml(dadosVenda);
+		DaoCFeVendas daoCFeVendas = new DaoCFeVendas();
+		try {
+			return daoCFeVendas.insert(cFeVenda);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new CFeVenda();
+		}
 	}
 
 }
