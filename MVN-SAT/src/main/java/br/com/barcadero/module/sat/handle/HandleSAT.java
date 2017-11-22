@@ -12,11 +12,14 @@ import br.com.barcadero.commons.enuns.EnumTipoModuloSAT;
 import br.com.barcadero.commons.loggin.LogFactory;
 import br.com.barcadero.commons.loggin.LoggerFile;
 import br.com.barcadero.commons.util.HandleFiles;
+import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.module.sat.devices.bematech.SATBematech;
 import br.com.barcadero.module.sat.devices.dimep.SATDimep;
 import br.com.barcadero.module.sat.devices.emulador.SATEmuladorSP;
 import br.com.barcadero.module.sat.devices.integrador.IntegradorMFeImpl;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.HelperEnviarPagamento;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamento;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamentoResposta;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidador;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorDadosParaEnviar;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorResposta;
@@ -1167,6 +1170,8 @@ public String executarEnviarPagamentoVFe(CmdEnviarPagamentoVFe cmdEnviarPagament
 	LogFactory.addInfor("Retorno: " + result);
 	return result;
 }
+
+
 
 public String executarVerificarStatusValidador(VFPeVerificarStatusValidadorDadosParaEnviar dadosParaEnviar ) throws JAXBException, Exception {
 	IntegradorMFeImpl integrador = new IntegradorMFeImpl(new File(""), new File(""));

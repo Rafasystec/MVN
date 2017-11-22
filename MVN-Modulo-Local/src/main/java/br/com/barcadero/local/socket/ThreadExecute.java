@@ -5,10 +5,15 @@ import java.util.concurrent.Callable;
 import br.com.barcadero.commons.loggin.LogFactory;
 import br.com.barcadero.commons.socket.SocketCommand;
 import br.com.barcadero.commons.socket.SocketDados;
+import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.local.persistence.dao.DaoCFeCancelamento;
 import br.com.barcadero.local.persistence.dao.DaoCFeVendas;
+import br.com.barcadero.local.persistence.dao.DaoEnviarPagamento;
 import br.com.barcadero.local.persistence.model.CFeCancelamento;
 import br.com.barcadero.local.persistence.model.CFeVenda;
+import br.com.barcadero.local.persistence.model.VFPeEnviarPagamento;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.IntegradorRetorno;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamentoResposta;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.socket.CmdCancelarUltimaVenda;
@@ -92,6 +97,7 @@ public class ThreadExecute implements Callable<String> {
 				}else if(dados instanceof CmdEnviarPagamentoVFe){
 					CmdEnviarPagamentoVFe cmdEnviarPagamentoVFe = (CmdEnviarPagamentoVFe) dados;
 					result = handleSAT.executarEnviarPagamentoVFe(cmdEnviarPagamentoVFe);
+					salvarRetornoEnviarPagamento(result);
 				}else if(dados instanceof CmdVerificarStatusValidador) {
 					LogFactory.addInfor("Verificar Status validador Fiscal:");
 					CmdVerificarStatusValidador cmdVerificarStatusValidador = (CmdVerificarStatusValidador) dados;
@@ -106,6 +112,33 @@ public class ThreadExecute implements Callable<String> {
 			}
 		}
 		return result;
+	}
+	
+	private void salvarRetornoEnviarPagamento(String xmlDeRetorno) {
+		if(xmlDeRetorno != null && !xmlDeRetorno.trim().isEmpty()) {
+			try {
+				VFPeEnviarPagamentoResposta pagamentoResposta = (VFPeEnviarPagamentoResposta) HandleXML.unMarshal(xmlDeRetorno, VFPeEnviarPagamentoResposta.class);
+				if(pagamentoResposta != null) {
+					IntegradorRetorno integrador = pagamentoResposta.getIntegrador();
+					if(integrador != null) {
+						String identificador = integrador.getIdentificador().getValor();
+						String idPagamento 	 = integrador.getIdPagamento();
+						String codigo 		 = integrador.getIntegradorResposta().getCodigo();
+						String valor 		 = integrador.getIntegradorResposta().getValor();
+						VFPeEnviarPagamento enviarPagamento = new VFPeEnviarPagamento();
+						enviarPagamento.setIdentificador(identificador);
+						enviarPagamento.setIdPagamento(idPagamento);
+						enviarPagamento.setMensagem(valor);
+						enviarPagamento.setCodigo(codigo);
+						DaoEnviarPagamento daoEnviarPagamento = new DaoEnviarPagamento();
+						daoEnviarPagamento.insert(enviarPagamento);
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private CFeCancelamento salvarCancelamentoInicial(int numeroSessao, String dadosCancelamento, String chaveCFeACancelar) {

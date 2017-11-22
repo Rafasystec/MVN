@@ -351,12 +351,12 @@ public class CFeComandosSokect {
 		SocketCommand command = newSocketCommandSAT();
 		CmdEnviarPagamentoVFe pagamentoVPe = new CmdEnviarPagamentoVFe();
 		pagamentoVPe.setPagamentoVFPe(pagamentoVFPe);
-		
+
 		command.setDados(pagamentoVPe);
 		command = client.callAndReceive(command);
-		 String response = command.getResponse();
-		 System.out.println(response);
-		 return null;
+		String response = command.getResponse();
+		System.out.println(response);
+		return null;
 	}
 	/**
 	 * 
