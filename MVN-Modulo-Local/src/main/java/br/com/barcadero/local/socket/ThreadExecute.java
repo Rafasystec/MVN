@@ -12,8 +12,12 @@ import br.com.barcadero.local.persistence.dao.DaoEnviarPagamento;
 import br.com.barcadero.local.persistence.model.CFeCancelamento;
 import br.com.barcadero.local.persistence.model.CFeVenda;
 import br.com.barcadero.local.persistence.model.VFPeEnviarPagamento;
+import br.com.barcadero.local.persistence.model.VFPeVerificarStatusValidadorResp;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.IntegradorRetorno;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamentoResposta;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorResposta;
+import br.com.barcadero.module.sat.devices.integrador.xml.Identificador;
+import br.com.barcadero.module.sat.devices.integrador.xml.IntegradorResposta;
 import br.com.barcadero.module.sat.handle.HandleRetornoSAT;
 import br.com.barcadero.module.sat.handle.HandleSAT;
 import br.com.barcadero.module.sat.socket.CmdCancelarUltimaVenda;
@@ -112,6 +116,26 @@ public class ThreadExecute implements Callable<String> {
 			}
 		}
 		return result;
+	}
+	
+	private void salvarStatusValidador(String xml) {
+		VFPeVerificarStatusValidadorResposta statusValidador = null;
+		VFPeVerificarStatusValidadorResp validadorResp       = new VFPeVerificarStatusValidadorResp();
+		try {
+			statusValidador = (VFPeVerificarStatusValidadorResposta) HandleXML.unMarshal(xml, VFPeVerificarStatusValidadorResposta.class);
+			if(statusValidador != null) {
+				Identificador identificador = statusValidador.getIdentificador();
+				if(identificador != null) {
+					validadorResp.setValor( identificador.getValor());
+				}
+				IntegradorResposta integradorResposta = statusValidador.getIntegradorResposta();
+				if(integradorResposta != null) {
+					
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	private void salvarRetornoEnviarPagamento(String xmlDeRetorno) {
