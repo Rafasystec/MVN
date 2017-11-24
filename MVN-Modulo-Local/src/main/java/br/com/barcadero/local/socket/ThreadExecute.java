@@ -9,11 +9,13 @@ import br.com.barcadero.commons.xml.HandleXML;
 import br.com.barcadero.local.persistence.dao.DaoCFeCancelamento;
 import br.com.barcadero.local.persistence.dao.DaoCFeVendas;
 import br.com.barcadero.local.persistence.dao.DaoEnviarPagamento;
+import br.com.barcadero.local.persistence.dao.DaoStatusValidadorFiscal;
 import br.com.barcadero.local.persistence.model.CFeCancelamento;
 import br.com.barcadero.local.persistence.model.CFeVenda;
 import br.com.barcadero.local.persistence.model.VFPeEnviarPagamento;
 import br.com.barcadero.local.persistence.model.VFPeVerificarStatusValidadorResp;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.IntegradorRetorno;
+import br.com.barcadero.module.sat.devices.integrador.vfpe.Resposta;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeEnviarPagamentoResposta;
 import br.com.barcadero.module.sat.devices.integrador.vfpe.VFPeVerificarStatusValidadorResposta;
 import br.com.barcadero.module.sat.devices.integrador.xml.Identificador;
@@ -24,6 +26,7 @@ import br.com.barcadero.module.sat.socket.CmdCancelarUltimaVenda;
 import br.com.barcadero.module.sat.socket.CmdConsultarSAT;
 import br.com.barcadero.module.sat.socket.CmdEnviarDadosVenda;
 import br.com.barcadero.module.sat.socket.CmdEnviarPagamentoVFe;
+import br.com.barcadero.module.sat.socket.CmdRespostaFiscal;
 import br.com.barcadero.module.sat.socket.CmdVerificarStatusValidador;
 
 public class ThreadExecute implements Callable<String> {
@@ -108,6 +111,9 @@ public class ThreadExecute implements Callable<String> {
 					result = handleSAT.executarVerificarStatusValidador(cmdVerificarStatusValidador.getDadosParaEnviarAoValidador());
 					LogFactory.addInfor("Retorno do Integrador: ");
 					LogFactory.addInfor(result);
+					salvarStatusValidador(result);
+				}else if(dados instanceof CmdRespostaFiscal){
+					//TODO: proceder com a resposta fiscal.
 				}else{
 					result = "Comando não configurado!";
 				}
@@ -118,7 +124,12 @@ public class ThreadExecute implements Callable<String> {
 		return result;
 	}
 	
+	/**
+	 * Salva os dados da resposta ao comando StatusValidadorFiscal
+	 * @param xml
+	 */
 	private void salvarStatusValidador(String xml) {
+		LogFactory.addInfor("Preparando para salvar a resposta do Integrador ao comando StatusValidadorFiscal");
 		VFPeVerificarStatusValidadorResposta statusValidador = null;
 		VFPeVerificarStatusValidadorResp validadorResp       = new VFPeVerificarStatusValidadorResp();
 		try {
@@ -130,11 +141,37 @@ public class ThreadExecute implements Callable<String> {
 				}
 				IntegradorResposta integradorResposta = statusValidador.getIntegradorResposta();
 				if(integradorResposta != null) {
-					
+					String codigo = integradorResposta.getCodigo();
+					if(!codigo.equalsIgnoreCase("AP")) {
+						LogFactory.addInfor("Erro retornado do Integrador: "+ codigo);
+						String valor = integradorResposta.getValor();
+						if(valor != null && !valor.trim().isEmpty()) {
+							LogFactory.addError(valor);
+						}
+					}else {
+						Resposta resposta = statusValidador.getResposta();
+						if(resposta != null) {
+							validadorResp.setBin(resposta.getBin());
+							validadorResp.setCodigoAutorizacao(resposta.getCodigoAutorizacao());
+							validadorResp.setCodigoPagamento(resposta.getCodigoPagamento());
+							validadorResp.setDataExpiracao(resposta.getDataExpiracao());
+							validadorResp.setDonoCartao(resposta.getDonoCartao());
+							validadorResp.setIdFila(resposta.getIdFila());
+							validadorResp.setInstituicaoFinanceira(resposta.getInstituicaoFinanceira());
+							validadorResp.setParcelas(resposta.getParcelas());
+							validadorResp.setTipo(resposta.getTipo());
+							validadorResp.setUltimos4digitos(resposta.getUltimosQuatroDigitos());
+							validadorResp.setValor(resposta.getValorPagamento());
+							DaoStatusValidadorFiscal daoStatusValidadorFiscal = new DaoStatusValidadorFiscal();
+							daoStatusValidadorFiscal.insert(validadorResp);
+						}else {
+							LogFactory.addInfor("Os dados de resposta não vieram do Integrador - Comando: StatusValidadorFiscal");
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			LogFactory.addError(e);
 		}
 	}
 	
